@@ -1,0 +1,3 @@
+ablation,position_mode,clean_logit_diff,drop_primary,drop_backup,drop_both,additive_prediction,interaction,relative_interaction,go_threshold,diagnose_threshold,decision
+mean,end,3.7487902641296387,0.4630000591278076,0.3502368927001953,1.868523120880127,0.8132369518280029,1.055286169052124,2.279235495217983,0.3,0.1,GO: build Stage-2 IOI ObserverBench task
+zero,end,3.7487902641296387,-0.0040128231048583984,0.3287348747253418,1.6041369438171387,0.3247220516204834,1.2794148921966553,318.8316202245856,0.3,0.1,GO: build Stage-2 IOI ObserverBench task

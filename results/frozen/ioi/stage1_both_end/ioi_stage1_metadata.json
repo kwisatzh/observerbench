@@ -1,0 +1,78 @@
+{
+  "args": {
+    "outdir": "runs/ioi_stage1_both_end",
+    "model": "gpt2-small",
+    "device": "auto",
+    "n_prompts": 256,
+    "n_reference": 512,
+    "batch_size": 32,
+    "seed": 0,
+    "template": "When {io} and {s} went to the store, {s} gave a bottle of milk to",
+    "primary_heads": "9.9,9.6,10.0",
+    "backup_heads": "9.0,9.7,10.1,10.2,10.6,10.10,11.2,11.9",
+    "ablation": "both",
+    "positions": "end",
+    "go_threshold": 0.3,
+    "diagnose_threshold": 0.1,
+    "names": ""
+  },
+  "device": "mps",
+  "model": "gpt2-small",
+  "primary_heads": [
+    [
+      9,
+      9
+    ],
+    [
+      9,
+      6
+    ],
+    [
+      10,
+      0
+    ]
+  ],
+  "backup_heads": [
+    [
+      9,
+      0
+    ],
+    [
+      9,
+      7
+    ],
+    [
+      10,
+      1
+    ],
+    [
+      10,
+      2
+    ],
+    [
+      10,
+      6
+    ],
+    [
+      10,
+      10
+    ],
+    [
+      11,
+      2
+    ],
+    [
+      11,
+      9
+    ]
+  ],
+  "n_prompts": 256,
+  "n_reference": 512,
+  "token_length": 16,
+  "sign_convention": "effects are positive drops: clean_logit_diff - ablated_logit_diff",
+  "go_rule": {
+    "go": "relative_interaction >= 0.3",
+    "diagnose": "0.1 <= relative_interaction < 0.3",
+    "stop_redesign": "relative_interaction < 0.1"
+  }
+}

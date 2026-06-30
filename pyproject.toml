@@ -27,3 +27,6 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+markers = [
+  "slow: local full/smoke reruns that may train tiny models; skipped by default unless --runslow is passed",
+]

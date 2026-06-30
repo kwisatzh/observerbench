@@ -1,0 +1,32 @@
+{
+  "ablation": "mean",
+  "position_mode": "end",
+  "n_subsets": 160,
+  "n_heads": 13,
+  "n_prompts": 256,
+  "eval_nonclean_only": true,
+  "clean_logit_diff": 3.7487902641296387,
+  "models": [
+    "additive_head",
+    "pb_group_interaction",
+    "group_interaction"
+  ],
+  "drop_P": 0.46300008893013,
+  "drop_B": 0.35023680329322815,
+  "drop_E": -2.1500723361968994,
+  "drop_P+B": 1.8685230016708374,
+  "drop_P+E": 0.16123811900615692,
+  "drop_B+E": -1.3794432878494263,
+  "drop_P+B+E": 2.3267788887023926,
+  "pb_interaction_group_mask": 1.055286169052124,
+  "pb_interaction_fraction_of_joint_group_mask": 0.5647702319470966,
+  "backup_effect_primary_intact_group_mask": 0.35023680329322815,
+  "backup_effect_primary_ablated_group_mask": 1.4055229425430298,
+  "backup_conditional_amplification_group_mask": 4.013064861297607,
+  "additive_head_mae": 0.32485067776187204,
+  "group_interaction_mae": 0.307642604311447,
+  "pb_group_interaction_mae": 0.32389653010012415,
+  "group_interaction_improves_over_additive": true,
+  "pb_group_interaction_improves_over_additive": true,
+  "mae_reduction_group_vs_additive": 0.052972256573339205
+}

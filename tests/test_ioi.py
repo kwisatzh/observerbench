@@ -5,7 +5,8 @@ from pathlib import Path
 import pandas as pd
 
 from observerbench.tasks.ioi.heads import BACKUP_NAME_MOVERS, NAME_MOVERS, NEGATIVE_NAME_MOVERS
-from observerbench.tasks.ioi.stage2d import STAGE2D_MODELS, available_design_columns
+from observerbench.tasks.ioi.stage2c import write_stage2c_fixture
+from observerbench.tasks.ioi.stage2d import IOIStage2dConfig, STAGE2D_MODELS, available_design_columns, run_ioi_stage2d
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -63,3 +64,48 @@ def test_stage2d_direct_group_mask_fixture_pe_exceeds_pb() -> None:
     interactions = pd.read_csv(ROOT / "tests/fixtures/ioi_stage2d/ioi_stage2d_group_interactions.csv").set_index("pair")
 
     assert interactions.loc["PE", "interaction"] > interactions.loc["PB", "interaction"]
+
+
+def test_stage2d_runs_on_tiny_synthetic_csv_fixture(tmp_path: Path) -> None:
+    input_run = write_stage2c_fixture(tmp_path / "stage2c_fixture", n_prompts=8, seed=0)
+    outdir = tmp_path / "stage2d"
+
+    run_ioi_stage2d(
+        IOIStage2dConfig(k_folds=3, bootstrap_repeats=8, seed=0),
+        outdir,
+        input_run=input_run,
+    )
+
+    comparison_path = outdir / "ioi_stage2d_model_comparison.csv"
+    assert comparison_path.exists()
+    comparison = pd.read_csv(comparison_path)
+    assert set(comparison["model"]) == set(STAGE2D_MODELS)
+    for column in [
+        "delta_mae_vs_additive_mean",
+        "delta_mae_vs_additive_q05",
+        "delta_mae_vs_additive_q95",
+        "p_delta_vs_additive_gt_0",
+        "delta_mae_vs_count_additive_mean",
+        "delta_mae_vs_count_additive_q05",
+        "delta_mae_vs_count_additive_q95",
+        "p_delta_vs_count_additive_gt_0",
+        "main_success",
+    ]:
+        assert column in comparison.columns
+    assert (outdir / "ioi_stage2d_group_interactions.csv").exists()
+
+
+def test_stage2d_frozen_fixture_pins_pe_dominance_and_success_rule() -> None:
+    frozen = ROOT / "results/frozen/ioi/stage2d_per_pair/ioi_stage2d_model_comparison.csv"
+    assert frozen.exists()
+    comparison = pd.read_csv(frozen).set_index("model")
+
+    pb = float(comparison.loc["count_plus_PB_count", "delta_mae_vs_additive_mean"])
+    pe = float(comparison.loc["count_plus_PE_count", "delta_mae_vs_additive_mean"])
+    be = comparison.loc["count_plus_BE_count"]
+
+    assert pe > pb
+    assert pb > 0.0
+    assert pb < 0.10 * pe
+    if not bool(be["beats_additive_head"]):
+        assert not bool(be["main_success"])

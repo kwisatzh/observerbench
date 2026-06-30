@@ -2,8 +2,11 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
+import pytest
 
+from observerbench.tasks.trained_ctl2 import TrainedTransformerCtl2Config, _rollout_observer
 from observerbench.tasks.registry import run_registered_task
 
 
@@ -11,7 +14,7 @@ def tiny_ctl2_config(**overrides):
     config = {
         "task": "trained_ctl2",
         "mode": "quick",
-        "quick": False,
+        "quick": True,
         "seed": 0,
         "device": "cpu",
         "n_train": 160,
@@ -39,6 +42,129 @@ def run_ctl2(tmp_path: Path, **overrides) -> Path:
     return outdir
 
 
+def synthetic_ctl2_env() -> dict:
+    h_test = np.asarray(
+        [
+            [0.0, 0.0],
+            [0.2, -0.1],
+            [-0.2, 0.2],
+            [0.4, 0.1],
+        ],
+        dtype=float,
+    )
+    target_vec = np.asarray([1.0, 0.0], dtype=float)
+    target = h_test @ target_vec
+    first_direction = np.asarray([0.5, 0.1], dtype=float)
+    lifted_direction = first_direction.copy()
+    return {
+        "test": {"target": target.copy(), "target_clean": target.copy()},
+        "test_pred": target.copy(),
+        "h_test": h_test,
+        "target_vec": target_vec,
+        "target_bias": 0.0,
+        "nuisance_vec": np.asarray([0.0, 1.0], dtype=float),
+        "nuisance_bias": 0.0,
+        "probe_x1": np.asarray([0.0, 1.0, 0.0], dtype=float),
+        "probe_x2": np.asarray([0.0, 0.0, 1.0], dtype=float),
+        "probe_int": np.asarray([0.0, 0.5, 0.5], dtype=float),
+        "observers": {
+            "first_order": {
+                "coef": np.asarray([0.0, 1.0, 0.0], dtype=float),
+                "direction": first_direction,
+                "raw_direction": first_direction,
+                "raw_target_gain": 0.5,
+                "norm_diag": {},
+            },
+            "lifted_interaction": {
+                "coef": np.asarray([0.0, 1.0, 0.0, 0.0], dtype=float),
+                "direction": lifted_direction,
+                "raw_direction": lifted_direction,
+                "raw_target_gain": 0.5,
+                "norm_diag": {},
+            },
+            "oracle_target": {
+                "coef": None,
+                "direction": np.asarray([1.0, 0.0], dtype=float),
+                "raw_direction": np.asarray([1.0, 0.0], dtype=float),
+                "raw_target_gain": 1.0,
+                "norm_diag": {},
+            },
+        },
+    }
+
+
+def synthetic_ctl2_config(**overrides) -> TrainedTransformerCtl2Config:
+    cfg = TrainedTransformerCtl2Config(
+        seed=0,
+        n_train=4,
+        n_test=4,
+        train_steps=0,
+        device="cpu",
+        loop_steps=4,
+        controller_gain=0.5,
+        max_strength=1.0,
+        target_ref=1.0,
+        gamma=0.0,
+    )
+    for key, value in overrides.items():
+        setattr(cfg, key, value)
+    return cfg
+
+
+def rollout_synthetic(observer: str, **overrides):
+    return _rollout_observer(synthetic_ctl2_config(**overrides), synthetic_ctl2_env(), observer)
+
+
+def test_ctl2_synthetic_quick_smoke_no_training() -> None:
+    metrics, traj, per_example, per_step = rollout_synthetic("first_order")
+
+    assert metrics["loop_steps"] == 4.0
+    assert set(traj["step"]) == {0, 1, 2, 3, 4}
+    assert per_example["integrated_squared_error"].notna().all()
+    assert per_step.groupby("example_idx")["step"].nunique().min() == 5
+
+
+def test_ctl2_genuine_loop_without_training_reads_current_state() -> None:
+    _metrics, _traj, _per_example, per_step = rollout_synthetic("first_order")
+    step0 = per_step[per_step["step"] == 0].set_index("example_idx")
+    step1 = per_step[per_step["step"] == 1].set_index("example_idx")
+    joined = step0.join(step1, lsuffix="_0", rsuffix="_1")
+    controlled = joined["next_control_strength_0"].abs() > 1e-8
+
+    assert controlled.any()
+    assert (joined.loc[controlled, "residual_l2_delta_from_prev_step_1"] > 1e-8).all()
+    assert (joined.loc[controlled, "target_1"] - joined.loc[controlled, "target_0"]).abs().min() > 1e-8
+    assert (
+        joined.loc[controlled, "observer_estimate_1"] - joined.loc[controlled, "observer_estimate_0"]
+    ).abs().min() > 1e-8
+    assert np.allclose(joined.loc[controlled, "observer_estimate_1"], joined.loc[controlled, "target_1"])
+
+
+def test_ctl2_oracle_remains_stable_without_training() -> None:
+    _metrics, _traj, _per_example, per_step = rollout_synthetic("oracle_target")
+    oracle = per_step.sort_values(["example_idx", "step"])
+
+    for _example_idx, group in oracle.groupby("example_idx"):
+        after_first = group.query("step >= 1")["target_abs_error"].to_numpy()
+        assert (after_first[1:] <= after_first[:-1] + 1e-12).all()
+
+
+def test_ctl2_gamma_zero_first_order_and_lifted_match_without_training() -> None:
+    fo_metrics, *_ = rollout_synthetic("first_order", gamma=0.0)
+    li_metrics, *_ = rollout_synthetic("lifted_interaction", gamma=0.0)
+
+    for metric in [
+        "integrated_squared_error",
+        "final_target_mse",
+        "cumulative_collateral_abs",
+        "divergence_rate",
+        "divergence_rate_mse_growth",
+        "target_error_worsened_rate",
+    ]:
+        assert abs(float(fo_metrics[metric]) - float(li_metrics[metric])) < 1e-12
+
+
+@pytest.mark.slow
 def test_ctl2_genuine_loop_reads_current_edited_state(tmp_path: Path) -> None:
     outdir = run_ctl2(tmp_path, dirname="loop")
     per_step = pd.read_csv(outdir / "trained_transformer_ctl2_per_step_examples.csv")
@@ -57,6 +183,7 @@ def test_ctl2_genuine_loop_reads_current_edited_state(tmp_path: Path) -> None:
     ).abs().max() > 1e-8
 
 
+@pytest.mark.slow
 def test_ctl2_oracle_target_is_stable_at_configured_gain(tmp_path: Path) -> None:
     outdir = run_ctl2(tmp_path, dirname="oracle")
     per_step = pd.read_csv(outdir / "trained_transformer_ctl2_per_step_examples.csv")
@@ -68,6 +195,7 @@ def test_ctl2_oracle_target_is_stable_at_configured_gain(tmp_path: Path) -> None
             assert (after_first[1:] <= after_first[:-1] + 1e-8).all()
 
 
+@pytest.mark.slow
 def test_ctl2_gamma_zero_first_order_and_lifted_match(tmp_path: Path) -> None:
     outdir = run_ctl2(
         tmp_path,
@@ -93,6 +221,7 @@ def test_ctl2_gamma_zero_first_order_and_lifted_match(tmp_path: Path) -> None:
         assert abs(float(first_order[metric]) - float(lifted[metric])) / denom < 0.35
 
 
+@pytest.mark.slow
 def test_ctl2_per_step_outputs_have_multiple_steps_per_example(tmp_path: Path) -> None:
     outdir = run_ctl2(tmp_path, dirname="outputs")
     per_step_path = outdir / "trained_transformer_ctl2_per_step_examples.csv"

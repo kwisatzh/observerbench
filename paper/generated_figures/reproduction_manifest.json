@@ -1,0 +1,84 @@
+{
+  "schema": "observerbench.paper_reproduction_fast.v0",
+  "frozen_dir": "results/frozen",
+  "outdir": "paper/generated_figures",
+  "generated": [
+    {
+      "result_id": "figure_01",
+      "paths": [
+        "paper/generated_figures/figure_01_ctl1_analytic_interaction_sweep.png"
+      ]
+    },
+    {
+      "result_id": "figure_02",
+      "paths": [
+        "paper/generated_figures/figure_02_ctl1_analytic_nuisance_sweep.png"
+      ]
+    },
+    {
+      "result_id": "figure_03",
+      "paths": [
+        "paper/generated_figures/figure_03_trained_ctl1_interaction_sweep.png"
+      ]
+    },
+    {
+      "result_id": "figure_04",
+      "paths": [
+        "paper/generated_figures/figure_04_trained_ctl1_nuisance_sweep.png"
+      ]
+    },
+    {
+      "result_id": "figure_05",
+      "paths": [
+        "paper/generated_figures/figure_05_ctl2_closed_loop_trajectories.png"
+      ]
+    },
+    {
+      "result_id": "figure_06",
+      "paths": [
+        "paper/generated_figures/figure_06_ctl2_divergence_rate_delta.png"
+      ]
+    },
+    {
+      "result_id": "figure_07",
+      "paths": [
+        "paper/generated_figures/figure_07_ctl2_collateral_trajectories.png"
+      ]
+    },
+    {
+      "result_id": "figure_08",
+      "paths": [
+        "paper/generated_figures/figure_08_ioi_stage1_self_repair.png"
+      ]
+    },
+    {
+      "result_id": "figure_09",
+      "paths": [
+        "paper/generated_figures/figure_09_ioi_stage2b_random_subsets.png"
+      ]
+    },
+    {
+      "result_id": "figure_10",
+      "paths": [
+        "paper/generated_figures/figure_10_ioi_stage2c_primary_stratified.png"
+      ]
+    },
+    {
+      "result_id": "table_01",
+      "paths": [
+        "paper/generated_figures/table_01_ctl2_interaction_sweep.csv",
+        "paper/generated_figures/table_01_ctl2_interaction_sweep.md"
+      ]
+    },
+    {
+      "result_id": "table_02",
+      "paths": [
+        "paper/generated_figures/table_02_ioi_stage2d_per_pair.csv",
+        "paper/generated_figures/table_02_ioi_stage2d_per_pair.md"
+      ]
+    }
+  ],
+  "cpu_only": true,
+  "downloads_models": false,
+  "trains_models": false
+}
