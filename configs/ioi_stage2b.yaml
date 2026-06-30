@@ -1,0 +1,11 @@
+{
+  "task": "ioi_stage2b",
+  "mode": "placeholder",
+  "description": "IOI Stage 2b random head-subset prediction config placeholder.",
+  "full_rerun_requires": {
+    "torch": true,
+    "transformerlens": true,
+    "gpu_or_mps": true,
+    "training": false
+  }
+}

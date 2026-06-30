@@ -1,0 +1,7 @@
+PRIVATE_MIGRATION_NOTES.md
+__pycache__/
+.pytest_cache/
+*.egg-info/
+.venv/
+build/
+dist/

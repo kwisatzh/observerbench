@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "observerbench"
+version = "0.0.0"
+description = "Reproduction CLI skeleton for the ObserverBench paper"
+readme = "REPO_MIGRATION_PLAN.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+torch = ["torch>=2"]
+ioi = ["torch>=2", "transformer-lens>=2"]
+dev = ["pytest>=8"]
+
+[project.scripts]
+observerbench = "observerbench.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

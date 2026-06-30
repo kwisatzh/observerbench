@@ -1,0 +1,11 @@
+{
+  "task": "ioi_stage1",
+  "mode": "placeholder",
+  "description": "IOI Stage 1 whole-group self-repair diagnostic config placeholder.",
+  "full_rerun_requires": {
+    "torch": true,
+    "transformerlens": true,
+    "gpu_or_mps": true,
+    "training": false
+  }
+}

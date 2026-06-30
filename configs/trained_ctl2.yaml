@@ -1,0 +1,11 @@
+{
+  "task": "trained_ctl2",
+  "mode": "placeholder",
+  "description": "Trained-transformer Ctl-2 closed-loop observer-control config placeholder.",
+  "full_rerun_requires": {
+    "torch": true,
+    "transformerlens": false,
+    "gpu_or_mps": true,
+    "training": true
+  }
+}
