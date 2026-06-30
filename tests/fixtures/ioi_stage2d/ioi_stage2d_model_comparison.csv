@@ -1,0 +1,7 @@
+model,delta_mae_vs_additive_mean,delta_mae_vs_additive_q05,delta_mae_vs_additive_q95,p_delta_vs_additive_gt_0,delta_mae_vs_count_additive_mean,delta_mae_vs_count_additive_q05,delta_mae_vs_count_additive_q95,p_delta_vs_count_additive_gt_0,beats_additive_head,beats_count_additive,main_success
+additive_head,0.0,0.0,0.0,0.0,0.003089,0.002331,0.003837,1.0,False,True,False
+count_additive,-0.003089,-0.003837,-0.002331,0.0,0.0,0.0,0.0,0.0,False,False,False
+count_plus_BE_count,-0.000052,-0.001704,0.001378,0.506,0.003037,0.001892,0.003979,1.0,False,True,False
+count_plus_PB_count,0.006965,0.004951,0.008883,1.0,0.010054,0.008246,0.011929,1.0,True,True,True
+count_plus_PE_count,0.126863,0.120847,0.132715,1.0,0.129952,0.123367,0.136173,1.0,True,True,True
+count_plus_all_pairs,0.153931,0.147118,0.160411,1.0,0.157020,0.149691,0.163706,1.0,True,True,True

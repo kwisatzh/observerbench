@@ -1,11 +1,17 @@
 {
   "task": "trained_ctl1",
-  "mode": "placeholder",
-  "description": "Trained-transformer Ctl-1 one-shot observer geometry config placeholder.",
-  "full_rerun_requires": {
-    "torch": true,
-    "transformerlens": false,
-    "gpu_or_mps": true,
-    "training": true
-  }
+  "mode": "quick",
+  "quick": true,
+  "seed": 0,
+  "device": "cpu",
+  "n_train": 256,
+  "n_test": 128,
+  "train_steps": 20,
+  "d_model": 12,
+  "n_heads": 2,
+  "n_layers": 1,
+  "d_mlp": 32,
+  "batch_size": 64,
+  "gamma": 1.15,
+  "nuisance_interaction_weight": 0.0
 }

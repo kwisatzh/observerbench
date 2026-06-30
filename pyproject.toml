@@ -8,10 +8,14 @@ version = "0.0.0"
 description = "Reproduction CLI skeleton for the ObserverBench paper"
 readme = "REPO_MIGRATION_PLAN.md"
 requires-python = ">=3.10"
-dependencies = []
+dependencies = [
+  "matplotlib>=3.8",
+  "numpy>=1.26",
+  "pandas>=2.0",
+  "torch>=2.0",
+]
 
 [project.optional-dependencies]
-torch = ["torch>=2"]
 ioi = ["torch>=2", "transformer-lens>=2"]
 dev = ["pytest>=8"]
 

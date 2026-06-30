@@ -8,8 +8,9 @@ import sys
 from pathlib import Path
 from typing import Sequence
 
+from observerbench.cards import write_observer_card_bundle
 from observerbench.config import load_config
-from observerbench.tasks.registry import TASKS, run_stub_task
+from observerbench.tasks.registry import TASKS, run_registered_task
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -23,15 +24,17 @@ def build_parser() -> argparse.ArgumentParser:
 
     run_parser = subparsers.add_parser(
         "run",
-        help="Run a registered paper task. Current implementation writes stub metadata.",
+        help="Run a registered paper task.",
     )
     run_parser.add_argument("task_name", choices=sorted(TASKS))
     run_parser.add_argument("--config", required=True, type=Path)
     run_parser.add_argument("--outdir", required=True, type=Path)
+    run_parser.add_argument("--quick", action="store_true", help="Force the task's quick/smoke mode.")
+    run_parser.add_argument("--input-run", type=Path, default=None, help="Existing run directory for postprocess tasks.")
 
     card_parser = subparsers.add_parser(
         "make-card",
-        help="Generate placeholder ObserverCard files from an existing result path.",
+        help="Generate ObserverCard JSON and Markdown from an existing result path.",
     )
     card_parser.add_argument("--results", required=True, type=Path)
     card_parser.add_argument("--outdir", required=True, type=Path)
@@ -54,24 +57,7 @@ def list_tasks() -> int:
 
 
 def make_card(results: Path, outdir: Path) -> int:
-    outdir.mkdir(parents=True, exist_ok=True)
-    payload = {
-        "schema": "observerbench.observer_cards.placeholder.v0",
-        "source_results": str(results),
-        "status": "placeholder",
-        "note": (
-            "ObserverCard generation is scaffolded only; metric-derived cards "
-            "will be wired when frozen outputs are migrated."
-        ),
-    }
-    json_path = outdir / "observer_cards.json"
-    md_path = outdir / "observer_cards.md"
-    json_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
-    md_path.write_text(
-        "# ObserverCards\n\n"
-        "Placeholder card scaffold for the ObserverBench reproduction CLI.\n",
-        encoding="utf-8",
-    )
+    json_path, md_path = write_observer_card_bundle(results, outdir)
     print(json_path)
     print(md_path)
     return 0
@@ -94,10 +80,15 @@ def make_figures(results: Path, outdir: Path) -> int:
     return 0
 
 
-def run_task(task_name: str, config_path: Path, outdir: Path) -> int:
+def run_task(task_name: str, config_path: Path, outdir: Path, quick: bool = False, input_run: Path | None = None) -> int:
     config = load_config(config_path)
-    metadata_path = run_stub_task(task_name, config, config_path, outdir)
-    print(metadata_path)
+    if quick:
+        config["quick"] = True
+        config["mode"] = "quick"
+    if input_run is not None:
+        config["input_run"] = str(input_run)
+    run_registered_task(task_name, config, config_path, outdir)
+    print(outdir)
     return 0
 
 
@@ -108,7 +99,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.command == "list-tasks":
         return list_tasks()
     if args.command == "run":
-        return run_task(args.task_name, args.config, args.outdir)
+        return run_task(args.task_name, args.config, args.outdir, quick=args.quick, input_run=args.input_run)
     if args.command == "make-card":
         return make_card(args.results, args.outdir)
     if args.command == "make-figures":

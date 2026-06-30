@@ -1,11 +1,9 @@
 {
   "task": "ctl1_analytic",
-  "mode": "placeholder",
-  "description": "Analytic Ctl-1 collateral geometry reproduction config placeholder.",
-  "full_rerun_requires": {
-    "torch": false,
-    "transformerlens": false,
-    "gpu_or_mps": false,
-    "training": false
-  }
+  "mode": "quick",
+  "seed": 0,
+  "n_train": 512,
+  "n_test": 512,
+  "gamma": 1.15,
+  "nuisance_interaction_weight": 0.0
 }

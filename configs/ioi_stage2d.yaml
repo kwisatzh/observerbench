@@ -1,11 +1,11 @@
 {
   "task": "ioi_stage2d",
-  "mode": "placeholder",
-  "description": "IOI Stage 2d per-pair decomposition with count-additive control config placeholder.",
-  "full_rerun_requires": {
-    "torch": false,
-    "transformerlens": false,
-    "gpu_or_mps": false,
-    "training": false
-  }
+  "mode": "quick",
+  "quick": true,
+  "input_run": "",
+  "k_folds": 3,
+  "bootstrap_repeats": 20,
+  "ridge": 0.000001,
+  "seed": 0,
+  "eval_nonclean_only": true
 }

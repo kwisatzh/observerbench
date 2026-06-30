@@ -16,7 +16,7 @@ def test_all_config_files_parse() -> None:
     for path in config_paths:
         data = load_config(path)
         assert data["task"] == path.stem
-        assert data["mode"] == "placeholder"
+        assert "mode" in data
 
 
 def test_task_registry_contains_expected_task_names() -> None:
