@@ -1,0 +1,68 @@
+{
+  "schema": "observerbench.qwen_induction_phase09.v1",
+  "status": "engineering_smoke_only",
+  "scientific_status": "never_use_for_paper_claims",
+  "model": {
+    "id": "Qwen/Qwen2.5-0.5B",
+    "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+    "dtype": "float16",
+    "quantization": null
+  },
+  "token_pool": {
+    "seed": 9071,
+    "per_split_size": 512,
+    "require_printable": true,
+    "require_roundtrip": true,
+    "exclude_special": true
+  },
+  "sequence_design": {
+    "seed": 9103,
+    "families": [
+      {"sequence_length": 32, "repeat_gap": 8},
+      {"sequence_length": 32, "repeat_gap": 16},
+      {"sequence_length": 64, "repeat_gap": 8},
+      {"sequence_length": 64, "repeat_gap": 16}
+    ],
+    "prompts_per_family": {
+      "reference": 2,
+      "discovery": 2,
+      "head_fit": 2,
+      "head_confirmation": 2,
+      "calibration": 2,
+      "locked_test": 2
+    },
+    "n_key_value_pairs": 3
+  },
+  "head_discovery": {
+    "attention_shortlist": 4,
+    "selected_heads": 2,
+    "matched_controls": 2,
+    "attention_score": "target_value_attention_minus_mean_distractor_value_attention",
+    "maximum_selected_per_layer": 1,
+    "minimum_selected_layers": 2
+  },
+  "intervention": {
+    "primary": "family_conditioned_mean_ablation",
+    "position": "final_query",
+    "hook_point": "attention_z_before_output_projection"
+  },
+  "mask_design": {
+    "n_components": 2,
+    "universe_size": 4,
+    "calibration_masks": 2,
+    "locked_test_masks": 2,
+    "measurement_budgets": [2],
+    "candidate_pools": 1,
+    "masks_per_pool_excluding_noop": 2,
+    "include_analytic_noop_in_every_pool": true,
+    "seed": 9151
+  },
+  "runtime": {
+    "device": "auto",
+    "discovery_attention_implementation": "eager",
+    "measurement_attention_implementation": "sdpa",
+    "discovery_batch_size": 1,
+    "measurement_batch_size": 2,
+    "checkpoint_after_each": "head_or_mask"
+  }
+}

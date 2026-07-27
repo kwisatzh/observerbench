@@ -1,3 +1,8 @@
+"""Baseline observer implementations.
+
+Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex
+"""
+
 from __future__ import annotations
 from dataclasses import dataclass
 from typing import Callable, Optional

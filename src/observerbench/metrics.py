@@ -1,3 +1,8 @@
+"""Metrics used by ObserverBench tasks.
+
+Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex
+"""
+
 from __future__ import annotations
 import numpy as np
 

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+# Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex
+
 import argparse
 import json
 import sys
@@ -10,7 +12,12 @@ from typing import Sequence
 
 from observerbench.cards import write_observer_card_bundle
 from observerbench.config import load_config
-from observerbench.tasks.registry import TASKS, run_registered_task
+from observerbench.effect_prediction import EffectObserverCard, evaluate_effect_prediction_csv
+from observerbench.tasks.effect_registry import (
+    finite_effect_task_specs,
+    load_finite_effect_task,
+)
+from observerbench.tasks.registry import run_registered_task, task_names, task_specs
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -21,12 +28,31 @@ def build_parser() -> argparse.ArgumentParser:
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     subparsers.add_parser("list-tasks", help="List paper reproduction tasks.")
+    subparsers.add_parser(
+        "list-effect-tasks",
+        help="List exact inference-free finite-effect task versions.",
+    )
+
+    effect_parser = subparsers.add_parser(
+        "evaluate-effect-csv",
+        help="Evaluate an outside finite-effect prediction table.",
+    )
+    effect_parser.add_argument("task_id")
+    effect_parser.add_argument("--artifacts-root", required=True, type=Path)
+    effect_parser.add_argument("--predictions", required=True, type=Path)
+    effect_parser.add_argument("--observer-card", required=True, type=Path)
+    effect_parser.add_argument("--outdir", required=True, type=Path)
+    effect_parser.add_argument(
+        "--no-verify-hashes",
+        action="store_true",
+        help="Check required files and schemas but skip SHA-256 verification.",
+    )
 
     run_parser = subparsers.add_parser(
         "run",
         help="Run a registered paper task.",
     )
-    run_parser.add_argument("task_name", choices=sorted(TASKS))
+    run_parser.add_argument("task_name", choices=task_names())
     run_parser.add_argument("--config", required=True, type=Path)
     run_parser.add_argument("--outdir", required=True, type=Path)
     run_parser.add_argument("--quick", action="store_true", help="Force the task's quick/smoke mode.")
@@ -50,10 +76,47 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def list_tasks() -> int:
-    for name in sorted(TASKS):
-        spec = TASKS[name]
-        print(f"{spec.name}\t{spec.summary}")
+    for spec in task_specs():
+        capability = "\texternal-observer:v0" if spec.supports_external_observer else ""
+        print(f"{spec.name}\t{spec.summary}{capability}")
     return 0
+
+
+def list_effect_tasks() -> int:
+    for spec in finite_effect_task_specs():
+        print(
+            f"{spec.task_id}\tbudget:{spec.measurement_budget}\t{spec.summary}"
+        )
+    return 0
+
+
+def evaluate_effect_csv(
+    task_id: str,
+    artifacts_root: Path,
+    predictions: Path,
+    observer_card_path: Path,
+    outdir: Path,
+    *,
+    verify_hashes: bool,
+) -> int:
+    payload = json.loads(observer_card_path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError("observer card must be a JSON object")
+    payload.pop("schema_version", None)
+    observer_card = EffectObserverCard(**payload)
+    task = load_finite_effect_task(
+        task_id,
+        artifacts_root=artifacts_root,
+        verify_hashes=verify_hashes,
+    )
+    result = evaluate_effect_prediction_csv(
+        task,
+        predictions,
+        observer_card,
+        outdir=outdir,
+    )
+    print(outdir / "effect_evaluation.json")
+    return 0 if result.n_queries == len(task.queries) else 1
 
 
 def make_card(results: Path, outdir: Path) -> int:
@@ -98,6 +161,17 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     if args.command == "list-tasks":
         return list_tasks()
+    if args.command == "list-effect-tasks":
+        return list_effect_tasks()
+    if args.command == "evaluate-effect-csv":
+        return evaluate_effect_csv(
+            args.task_id,
+            args.artifacts_root,
+            args.predictions,
+            args.observer_card,
+            args.outdir,
+            verify_hashes=not args.no_verify_hashes,
+        )
     if args.command == "run":
         return run_task(args.task_name, args.config, args.outdir, quick=args.quick, input_run=args.input_run)
     if args.command == "make-card":

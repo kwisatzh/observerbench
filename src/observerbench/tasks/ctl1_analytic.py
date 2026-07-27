@@ -1,4 +1,7 @@
 from __future__ import annotations
+
+# Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex
+
 from dataclasses import dataclass, asdict
 from pathlib import Path
 from typing import Dict, List, Tuple
@@ -15,11 +18,15 @@ from observerbench.observers import LinearObserver, first_order_features, lifted
 class CollateralTaskConfig:
     """Configuration for the ObserverBench collateral-control task.
 
-    The task uses one fixed actuator geometry over latent activation coordinates
-    [x1, x2, x1*x2]. Observers differ only in the basis they use to estimate the
-    target and therefore in the actuation direction they ask the fixed actuator to
-    apply. Collateral is induced by the overlap between the observer-derived
-    direction and a fixed nuisance readout.
+    The primary task uses common lifted intervention coordinates
+    [x1, x2, x1*x2] and one controller. Observers differ in both their estimate
+    and their derived direction within those coordinates. Collateral is induced
+    by the overlap between that direction and a fixed nuisance readout.
+
+    Clean states satisfy h3=x1*x2, but the primary lifted-coordinate edit treats
+    h3 as free.  It is an exact omitted-coordinate geometry check, not nonlinear
+    plant dynamics.  ``include_manifold_respecting`` adds a separate check that
+    edits x1,x2 and recomputes their product.
 
     The important control condition is ``normalize_direction_to_target_gain``:
     every observer-derived direction is scaled to have the same linearized target
@@ -56,6 +63,7 @@ class CollateralTaskConfig:
     nuisance_interaction_unit: float = 1.0
 
     include_interaction_only: bool = False
+    include_manifold_respecting: bool = False
 
     # Normalize every observer-derived actuation direction to have this target
     # gain. This keeps the actuator/controller fair.
@@ -192,18 +200,126 @@ def evaluate_observer(name: str, observer: LinearObserver, train: dict, test: di
         "collateral_per_target_gain": collateral_per_target_gain,
     }
     return ObserverResult(
-        task="collateral_interaction_control",
+        task="collateral_lifted_coordinate_control",
         observer=name,
-        access_regime="white-box or supervised observer; fixed vector actuator and fixed controller",
+        access_regime="white-box or supervised observer; common lifted coordinates and fixed controller",
         observer_family="linear observer over first-order or lifted basis",
         metrics=metrics,
         metadata={
-            "estimand": "finite-control target state with a configurable interactional component",
-            "measurement_design": "fit observer on target labels; convert observer coefficients to a direction in a fixed activation space; validate target and collateral under the same actuator geometry",
+            "estimand": "finite-control target state in a lifted coordinate representation",
+            "measurement_design": "fit observer labels, derive a direction in common lifted coordinates, and edit the lifted interaction coordinate independently of its clean-manifold definition",
             "validation_target": "target tracking under a fixed controller with low movement of a fixed nuisance readout",
-            "notes": "Collateral emerges from observer coefficient geometry. Directions are normalized to equal linearized target gain; there are no observer-specific collateral gains.",
+            "notes": "Clean states obey h3=x1*x2; the edit frees h3. This isolates omitted-coordinate direction geometry and is not a nonlinear plant claim.",
         },
     )
+
+
+def _base_manifold_direction(name: str, observer: LinearObserver, test: dict) -> np.ndarray:
+    """Pull an observer gradient back to the clean (x1,x2) coordinates."""
+
+    if observer.coef_ is None:
+        raise RuntimeError("Observer must be fit before extracting direction")
+    coef = np.asarray(observer.coef_[1:], dtype=float)
+    x1 = np.asarray(test["x1"], dtype=float)
+    x2 = np.asarray(test["x2"], dtype=float)
+    if name == "first_order":
+        return np.repeat(coef[None, :2], len(x1), axis=0)
+    if name == "lifted_interaction":
+        return np.c_[coef[0] + coef[2] * x2, coef[1] + coef[2] * x1]
+    if name == "interaction_only":
+        return np.c_[coef[0] * x2, coef[0] * x1]
+    raise ValueError(f"Unknown observer name: {name}")
+
+
+def evaluate_observer_on_base_manifold(
+    name: str,
+    observer: LinearObserver,
+    test: dict,
+    cfg: CollateralTaskConfig,
+) -> tuple[ObserverResult, pd.DataFrame]:
+    """Apply a one-shot edit to x1,x2 and recompute the interaction."""
+
+    zhat = observer.predict(test)
+    raw_direction = _base_manifold_direction(name, observer, test)
+    true_gradient = np.c_[
+        cfg.beta1 + cfg.gamma * test["x2"],
+        cfg.beta2 + cfg.gamma * test["x1"],
+    ]
+    raw_gain = np.sum(true_gradient * raw_direction, axis=1)
+    feasible = np.abs(raw_gain) > 1e-12
+    scales = np.zeros_like(raw_gain)
+    if cfg.normalize_direction_to_target_gain:
+        scales[feasible] = cfg.target_actuation_gain / raw_gain[feasible]
+    else:
+        scales[feasible] = 1.0
+    direction = raw_direction * scales[:, None]
+    local_target_gain = np.sum(true_gradient * direction, axis=1)
+
+    strength = np.clip(
+        cfg.controller_gain * (cfg.target_ref - zhat),
+        -cfg.max_strength,
+        cfg.max_strength,
+    )
+    x_before = np.c_[test["x1"], test["x2"]]
+    x_after = x_before + strength[:, None] * direction
+    interaction_after = x_after[:, 0] * x_after[:, 1]
+    h_after = np.c_[x_after, interaction_after]
+    target_clean_after = h_after @ target_readout(cfg)
+    nuisance_clean_after = h_after @ nuisance_readout(cfg)
+    # Preserve each example's original observation noise while changing the
+    # clean state through the nonlinear manifold map.
+    target_after = test["target"] + (target_clean_after - test["target_clean"])
+    nuisance_after = test["nuisance"] + (nuisance_clean_after - test["nuisance_clean"])
+    target_delta = target_clean_after - test["target_clean"]
+
+    baseline_target_mse = mse(np.full_like(test["target"], cfg.target_ref), test["target"])
+    control_target_mse = mse(np.full_like(target_after, cfg.target_ref), target_after)
+    metrics = {
+        "observer_r2": r2_score(test["target"], zhat),
+        "observer_mae": mae(test["target"], zhat),
+        "baseline_target_mse": baseline_target_mse,
+        "control_target_mse": control_target_mse,
+        "target_improvement_mse": baseline_target_mse - control_target_mse,
+        "collateral_abs_delta": float(np.mean(np.abs(nuisance_after - test["nuisance"]))),
+        "actuation_energy_l1": float(np.mean(np.sum(np.abs(x_after - x_before), axis=1))),
+        "mean_abs_strength": float(np.mean(np.abs(strength))),
+        "mean_strength": float(np.mean(strength)),
+        "effective_target_gain": float(np.mean(local_target_gain[feasible])) if np.any(feasible) else float("nan"),
+        "finite_target_delta_abs_mean": float(np.mean(np.abs(target_delta))),
+        "direction_norm_mean": float(np.mean(np.linalg.norm(direction, axis=1))),
+        "direction_feasible_fraction": float(np.mean(feasible)),
+        "states_outside_unit_square_fraction": float(np.mean(np.any((x_after < 0.0) | (x_after > 1.0), axis=1))),
+        "manifold_constraint_error_max": float(np.max(np.abs(h_after[:, 2] - h_after[:, 0] * h_after[:, 1]))),
+        "nuisance_interaction_weight": float(cfg.nuisance_interaction_weight),
+        "gamma": float(cfg.gamma),
+    }
+    examples = pd.DataFrame({
+        "observer": name,
+        "example_idx": np.arange(len(x_after)),
+        "x1_before": x_before[:, 0],
+        "x2_before": x_before[:, 1],
+        "x1_after": x_after[:, 0],
+        "x2_after": x_after[:, 1],
+        "interaction_after": interaction_after,
+        "target_after": target_after,
+        "nuisance_after": nuisance_after,
+        "control_strength": strength,
+        "local_target_gain": local_target_gain,
+        "direction_feasible": feasible,
+    })
+    return ObserverResult(
+        task="collateral_base_manifold_control",
+        observer=name,
+        access_regime="white-box or supervised observer; continuous base-coordinate intervention",
+        observer_family="linear observer with gradient pulled back through x1*x2",
+        metrics=metrics,
+        metadata={
+            "estimand": "finite target response under a manifold-respecting base-coordinate edit",
+            "measurement_design": "edit x1,x2 along the observer gradient and recompute the product coordinate exactly",
+            "validation_target": "target tracking and nuisance movement under the nonlinear clean-manifold map",
+            "notes": "This is a robustness check for the lifted-coordinate geometry task; it does not make the binary inputs continuously realizable tokens.",
+        },
+    ), examples
 
 
 def _derive_result_level_metrics(results: List[ObserverResult]) -> None:
@@ -228,10 +344,27 @@ def run_task(cfg: CollateralTaskConfig, outdir: str | Path) -> List[ObserverResu
         observers.append(("interaction_only", LinearObserver("interaction_only", interaction_only_features, ridge=cfg.ridge)))
     results = [evaluate_observer(name, obs, train, test, cfg) for name, obs in observers]
     _derive_result_level_metrics(results)
+    manifold_results: List[ObserverResult] = []
+    manifold_examples: list[pd.DataFrame] = []
+    if cfg.include_manifold_respecting:
+        for name, observer in observers:
+            result, examples = evaluate_observer_on_base_manifold(name, observer, test, cfg)
+            manifold_results.append(result)
+            manifold_examples.append(examples)
+        _derive_result_level_metrics(manifold_results)
 
     # Outputs.
     df = pd.DataFrame([{"observer": r.observer, **r.metrics} for r in results])
     df.to_csv(out / "collateral_task_results.csv", index=False)
+    if manifold_results:
+        pd.DataFrame([{"observer": r.observer, **r.metrics} for r in manifold_results]).to_csv(
+            out / "collateral_task_manifold_results.csv",
+            index=False,
+        )
+        pd.concat(manifold_examples, ignore_index=True).to_csv(
+            out / "collateral_task_manifold_examples.csv",
+            index=False,
+        )
     write_json(out / "collateral_task_config.json", asdict(cfg))
 
     fig, ax = plt.subplots(figsize=(8.0, 4.8))
@@ -242,7 +375,7 @@ def run_task(cfg: CollateralTaskConfig, outdir: str | Path) -> List[ObserverResu
     ax.axhline(results[0].metrics["baseline_target_mse"], linestyle="--", linewidth=1, label="baseline target MSE")
     ax.set_xticks(x)
     ax.set_xticklabels([r.observer for r in results], rotation=20, ha="right")
-    ax.set_title("ObserverBench Ctl-1: fixed actuator, observer-induced collateral")
+    ax.set_title("ObserverBench Ctl-1: lifted-coordinate target and collateral")
     ax.legend()
     fig.tight_layout()
     fig.savefig(out / "collateral_task_target_vs_collateral.png", dpi=180)
@@ -255,8 +388,32 @@ def run_task(cfg: CollateralTaskConfig, outdir: str | Path) -> List[ObserverResu
     ax.axhline(0, linestyle="--", linewidth=1)
     ax.set_xlabel("target gain of observer-derived actuation direction")
     ax.set_ylabel("collateral gain of same direction")
-    ax.set_title("Fixed actuator geometry: collateral emerges from direction overlap")
+    ax.set_title("Lifted-coordinate geometry: collateral follows direction overlap")
     fig.tight_layout()
     fig.savefig(out / "collateral_task_direction_geometry.png", dpi=180)
     plt.close(fig)
-    return results
+
+    if manifold_results:
+        fig, ax = plt.subplots(figsize=(8.0, 4.8))
+        x = np.arange(len(manifold_results))
+        width = 0.35
+        ax.bar(
+            x - width / 2,
+            [r.metrics["control_target_mse"] for r in manifold_results],
+            width,
+            label="target MSE after control",
+        )
+        ax.bar(
+            x + width / 2,
+            [r.metrics["collateral_abs_delta"] for r in manifold_results],
+            width,
+            label="collateral |Δ|",
+        )
+        ax.set_xticks(x)
+        ax.set_xticklabels([r.observer for r in manifold_results], rotation=20, ha="right")
+        ax.set_title("Ctl-1 robustness: manifold-respecting base-coordinate edit")
+        ax.legend()
+        fig.tight_layout()
+        fig.savefig(out / "collateral_task_manifold_target_vs_collateral.png", dpi=180)
+        plt.close(fig)
+    return results + manifold_results

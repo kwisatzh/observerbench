@@ -6,10 +6,14 @@ dispatches migrated Ctl implementations. It is not a plugin API.
 
 from __future__ import annotations
 
+# Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex
+
 import json
 from dataclasses import asdict, dataclass, fields
 from pathlib import Path
 from typing import Any, Callable
+
+from observerbench.core import API_CONTRACT_VERSION, ObserverTask
 
 
 @dataclass(frozen=True)
@@ -18,7 +22,9 @@ class TaskSpec:
     summary: str
     config: str
     status: str = "stub"
-    runner: Callable[[dict[str, Any], Path], Any] | None = None
+    supports_external_observer: bool = False
+    external_observer_contract: str | None = None
+    external_observer_factory: str | None = None
 
 
 TASKS: dict[str, TaskSpec] = {
@@ -27,6 +33,9 @@ TASKS: dict[str, TaskSpec] = {
         summary="Analytic Ctl-1 collateral geometry reproduction task.",
         config="configs/ctl1_analytic.yaml",
         status="migrated",
+        supports_external_observer=True,
+        external_observer_contract=API_CONTRACT_VERSION,
+        external_observer_factory="observerbench.tasks.make_observer_task",
     ),
     "trained_ctl1": TaskSpec(
         name="trained_ctl1",
@@ -44,21 +53,25 @@ TASKS: dict[str, TaskSpec] = {
         name="ioi_stage1",
         summary="IOI Stage 1 whole-group self-repair diagnostic.",
         config="configs/ioi_stage1.yaml",
+        status="wired",
     ),
     "ioi_stage2b": TaskSpec(
         name="ioi_stage2b",
         summary="IOI Stage 2b random head-subset prediction diagnostic.",
         config="configs/ioi_stage2b.yaml",
+        status="wired",
     ),
     "ioi_stage2c": TaskSpec(
         name="ioi_stage2c",
         summary="IOI Stage 2c primary-stratified head-subset diagnostic.",
         config="configs/ioi_stage2c.yaml",
+        status="wired",
     ),
     "ioi_stage2d": TaskSpec(
         name="ioi_stage2d",
         summary="IOI Stage 2d per-pair decomposition diagnostic.",
         config="configs/ioi_stage2d.yaml",
+        status="wired",
     ),
 }
 
@@ -82,6 +95,7 @@ def _apply_quick_ctl1(cfg: Any) -> None:
 def _apply_quick_ctl2(cfg: Any) -> None:
     _apply_quick_ctl1(cfg)
     cfg.loop_steps = min(cfg.loop_steps, 8)
+    cfg.n_calibration = min(cfg.n_calibration, 128)
 
 
 def _run_ctl1_analytic(config: dict[str, Any], outdir: Path) -> Any:
@@ -148,10 +162,51 @@ RUNNERS: dict[str, Callable[[dict[str, Any], Path], Any]] = {
 }
 
 
+def task_names() -> tuple[str, ...]:
+    """Return built-in paper-task names in deterministic order."""
+
+    return tuple(sorted(TASKS))
+
+
+def get_task_spec(task_name: str) -> TaskSpec:
+    """Return one built-in paper-task specification."""
+
+    try:
+        return TASKS[task_name]
+    except KeyError as exc:
+        known = ", ".join(task_names())
+        raise KeyError(f"Unknown ObserverBench task {task_name!r}; choose one of: {known}") from exc
+
+
+def task_specs() -> tuple[TaskSpec, ...]:
+    """Return built-in paper-task specifications in deterministic order."""
+
+    return tuple(get_task_spec(name) for name in task_names())
+
+
+def observer_task_names() -> tuple[str, ...]:
+    """Return tasks with a public external-observer composition adapter."""
+
+    return tuple(name for name in task_names() if TASKS[name].supports_external_observer)
+
+
+def make_observer_task(task_name: str) -> ObserverTask:
+    """Construct one discoverable external-observer task without registry mutation."""
+
+    if task_name == "ctl1_analytic":
+        from observerbench.tasks.ctl1_adapter import make_ctl1_analytic_task
+
+        return make_ctl1_analytic_task()
+    supported = ", ".join(observer_task_names()) or "none"
+    raise KeyError(
+        f"Task {task_name!r} has no external-observer adapter; supported tasks: {supported}"
+    )
+
+
 def _write_stub_task(task_name: str, config: dict[str, Any], config_path: Path, outdir: Path) -> Path:
     """Write run metadata for a registered task without scientific execution."""
 
-    spec = TASKS[task_name]
+    spec = get_task_spec(task_name)
     outdir.mkdir(parents=True, exist_ok=True)
     payload = {
         "schema": "observerbench.task_run.stub.v0",
@@ -177,6 +232,7 @@ def run_registered_task(
 ) -> Any:
     """Run a paper task, using a stub only for tasks not yet migrated."""
 
+    get_task_spec(task_name)
     runner = RUNNERS.get(task_name)
     if runner is None:
         return _write_stub_task(task_name, config, config_path, outdir)

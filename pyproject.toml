@@ -5,8 +5,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "observerbench"
 version = "0.0.0"
-description = "Reproduction CLI skeleton for the ObserverBench paper"
-readme = "REPO_MIGRATION_PLAN.md"
+description = "Bounded v0 workbench for observer-control experiments and paper reproduction"
+readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
   "matplotlib>=3.8",
@@ -17,6 +17,7 @@ dependencies = [
 
 [project.optional-dependencies]
 ioi = ["torch>=2", "transformer-lens>=2"]
+qwen = ["transformers==5.14.1", "accelerate==1.14.0"]
 dev = ["pytest>=8"]
 
 [project.scripts]
