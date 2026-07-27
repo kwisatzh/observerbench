@@ -27,6 +27,7 @@ from observerbench.provenance import file_sha256
 
 QWEN_INDUCTION_EFFECT_TASK_NAME = "induction-qwen2-5-7b-finite-effects"
 QWEN_INDUCTION_EFFECT_DATA_VERSION = "copy-v1"
+QWEN_INDUCTION_EFFECT_DATA_VERSIONS = ("copy-v1", "copy-v2")
 QWEN_INDUCTION_EFFECT_MEASUREMENT_BUDGETS: tuple[int, ...] = (16, 40, 64, 128)
 QWEN_INDUCTION_MODEL_NAME = "Qwen/Qwen2.5-7B"
 QWEN_INDUCTION_MODEL_REVISION = "d149729398750b98c0af14eb82c78cfe92750796"
@@ -44,6 +45,14 @@ _REPO_ROOT = Path(__file__).resolve().parents[4]
 DEFAULT_QWEN_INDUCTION_EFFECT_ARTIFACT_ROOT = (
     _REPO_ROOT / "results" / "revision" / "qwen_induction" / "copy_v1"
 )
+DEFAULT_QWEN_INDUCTION_EFFECT_ARTIFACT_ROOTS = {
+    "copy-v1": DEFAULT_QWEN_INDUCTION_EFFECT_ARTIFACT_ROOT,
+    "copy-v2": _REPO_ROOT
+    / "results"
+    / "revision"
+    / "phase10"
+    / "qwen_induction_copy_v2",
+}
 
 _SELECTED_HEAD_COLUMNS = (
     "component_index",
@@ -99,7 +108,11 @@ _EFFECT_COLUMNS = (
 )
 
 
-def qwen_induction_effect_task_version(measurement_budget: int) -> str:
+def qwen_induction_effect_task_version(
+    measurement_budget: int,
+    *,
+    data_version: str = QWEN_INDUCTION_EFFECT_DATA_VERSION,
+) -> str:
     """Return the stable task version for one nested measurement budget."""
 
     budget = int(measurement_budget)
@@ -108,7 +121,9 @@ def qwen_induction_effect_task_version(measurement_budget: int) -> str:
         raise ValueError(
             f"unsupported Qwen induction measurement budget {budget}; choose {supported}"
         )
-    return f"{QWEN_INDUCTION_EFFECT_DATA_VERSION}-b{budget:03d}"
+    if data_version not in QWEN_INDUCTION_EFFECT_DATA_VERSIONS:
+        raise ValueError(f"unsupported Qwen induction data version: {data_version}")
+    return f"{data_version}-b{budget:03d}"
 
 
 @dataclass(frozen=True)
@@ -542,6 +557,7 @@ def _checked_manifests(
     effects_dir: Path,
     *,
     verify_hashes: bool,
+    require_scientific_claim: bool = True,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     design_path = design_dir / "design_manifest.json"
     design = _read_json(design_path)
@@ -549,7 +565,7 @@ def _checked_manifests(
         raise ValueError("unexpected Qwen induction design manifest schema")
     if design.get("status") != "frozen_before_outcomes":
         raise ValueError("Qwen induction design is not marked frozen before outcomes")
-    if design.get("data_version") != QWEN_INDUCTION_EFFECT_DATA_VERSION:
+    if design.get("data_version") not in QWEN_INDUCTION_EFFECT_DATA_VERSIONS:
         raise ValueError("Qwen induction design has an unexpected data version")
     if not design.get("all_design_gates_pass"):
         raise ValueError("Qwen induction design did not pass its frozen design gates")
@@ -566,13 +582,26 @@ def _checked_manifests(
     design_hashes = design.get("artifact_hashes")
     if not isinstance(design_hashes, Mapping):
         raise ValueError("Qwen induction design manifest has no artifact hashes")
+    required_gate_labels = {"discovery_gate", "confirmation_gate"}
+    if design.get("data_version") == "copy-v2":
+        required_gate_labels.update(
+            {
+                "eligibility_gate",
+                "reference_discovery_gate",
+                "reference_confirmation_gate",
+            }
+        )
+        if (
+            require_scientific_claim
+            and design.get("scientific_claim_allowed") is not True
+        ):
+            raise ValueError("Copy-v2 design is not eligible for scientific claims")
     gate_hashes = design.get("gate_artifact_hashes")
-    if not isinstance(gate_hashes, Mapping) or not {
-        "discovery_gate",
-        "confirmation_gate",
-    }.issubset(gate_hashes):
+    if not isinstance(gate_hashes, Mapping) or not required_gate_labels.issubset(
+        gate_hashes
+    ):
         raise ValueError("Qwen induction design has no causal-gate proofs")
-    for gate_label in ("discovery_gate", "confirmation_gate"):
+    for gate_label in sorted(required_gate_labels):
         gate_record = gate_hashes[gate_label]
         if not isinstance(gate_record, Mapping):
             raise ValueError(f"invalid causal-gate proof record: {gate_label}")
@@ -589,6 +618,17 @@ def _checked_manifests(
         raise ValueError("unexpected Qwen induction effect manifest schema")
     if effect.get("status") != "complete_locked_test_outcomes":
         raise ValueError("Qwen induction effect table is not complete and locked")
+    effect_data_version = effect.get(
+        "data_version", QWEN_INDUCTION_EFFECT_DATA_VERSION
+    )
+    if effect_data_version != design.get("data_version"):
+        raise ValueError("Qwen induction effect and design data versions differ")
+    if (
+        require_scientific_claim
+        and design.get("data_version") == "copy-v2"
+        and effect.get("scientific_claim_allowed") is not True
+    ):
+        raise ValueError("Copy-v2 effects are not eligible for scientific claims")
     if effect.get("design_manifest_sha256") != file_sha256(design_path):
         raise ValueError("Qwen induction effect table does not match the frozen design")
     effect_model = effect.get("model")
@@ -634,15 +674,23 @@ def load_qwen_induction_effect_prediction_task(
     *,
     measurement_budget: int = 128,
     verify_hashes: bool = True,
+    expected_data_version: str | None = None,
+    require_scientific_claim: bool = True,
 ) -> FiniteEffectPredictionTask[InductionMaskFeatures]:
     """Load one checked Qwen task from cached tables; never run model inference."""
 
     budget = int(measurement_budget)
-    version = qwen_induction_effect_task_version(budget)
-    root = (
-        Path(artifacts_root)
-        if artifacts_root is not None
-        else DEFAULT_QWEN_INDUCTION_EFFECT_ARTIFACT_ROOT
+    if (
+        expected_data_version is not None
+        and expected_data_version not in QWEN_INDUCTION_EFFECT_DATA_VERSIONS
+    ):
+        raise ValueError(
+            f"unsupported Qwen induction data version: {expected_data_version}"
+        )
+    root = Path(artifacts_root) if artifacts_root is not None else (
+        DEFAULT_QWEN_INDUCTION_EFFECT_ARTIFACT_ROOTS[
+            expected_data_version or QWEN_INDUCTION_EFFECT_DATA_VERSION
+        ]
     )
     design_dir = root / "design"
     effects_dir = root / "effects"
@@ -650,6 +698,15 @@ def load_qwen_induction_effect_prediction_task(
         design_dir,
         effects_dir,
         verify_hashes=verify_hashes,
+        require_scientific_claim=require_scientific_claim,
+    )
+    data_version = str(design_manifest["data_version"])
+    if expected_data_version is not None and data_version != expected_data_version:
+        raise ValueError(
+            "Qwen induction artifact data version differs from the requested task"
+        )
+    version = qwen_induction_effect_task_version(
+        budget, data_version=data_version
     )
     head_metadata = _load_selected_heads(design_dir)
     calibration, candidates = _load_masks(
@@ -760,7 +817,7 @@ def load_qwen_induction_effect_prediction_task(
         ),
         metadata={
             "task_id": task_id,
-            "data_version": QWEN_INDUCTION_EFFECT_DATA_VERSION,
+            "data_version": data_version,
             "feature_schema": QWEN_INDUCTION_MASK_FEATURE_SCHEMA,
             "measurement_budget": budget,
             "supported_measurement_budgets": QWEN_INDUCTION_EFFECT_MEASUREMENT_BUDGETS,
@@ -792,10 +849,12 @@ def load_qwen_induction_effect_prediction_task(
 
 __all__ = [
     "DEFAULT_QWEN_INDUCTION_EFFECT_ARTIFACT_ROOT",
+    "DEFAULT_QWEN_INDUCTION_EFFECT_ARTIFACT_ROOTS",
     "InductionMaskFeatures",
     "QWEN_INDUCTION_ADDITIVE_BASELINE_NAME",
     "QWEN_INDUCTION_ADDITIVE_BASELINE_VERSION",
     "QWEN_INDUCTION_EFFECT_DATA_VERSION",
+    "QWEN_INDUCTION_EFFECT_DATA_VERSIONS",
     "QWEN_INDUCTION_EFFECT_MEASUREMENT_BUDGETS",
     "QWEN_INDUCTION_EFFECT_TASK_NAME",
     "QWEN_INDUCTION_MASK_FEATURE_SCHEMA",

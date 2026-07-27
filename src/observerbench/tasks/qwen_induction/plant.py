@@ -51,6 +51,7 @@ class CleanScore:
     target_token_id: int
     candidate_predicted_token_id: int
     predicted_token_id: int
+    candidate_logits_finite: bool
 
 
 @dataclass(frozen=True)
@@ -514,6 +515,7 @@ class Qwen2InductionPlant:
         )
         candidate_tokens = torch.column_stack([targets, distractors])
         candidate_logits = final_logits.gather(1, candidate_tokens)
+        candidate_logits_finite = torch.isfinite(candidate_logits).all(dim=1)
         target_logits = candidate_logits[:, 0]
         distractor_logits = candidate_logits[:, 1:]
         margins = target_logits - (
@@ -537,8 +539,9 @@ class Qwen2InductionPlant:
                 target_token_id=int(target.detach().cpu()),
                 candidate_predicted_token_id=int(candidate_prediction_token.detach().cpu()),
                 predicted_token_id=int(prediction.detach().cpu()),
+                candidate_logits_finite=bool(finite.detach().cpu()),
             )
-            for record, margin, candidate, correct, loss, target, candidate_prediction_token, prediction in zip(
+            for record, margin, candidate, correct, loss, target, candidate_prediction_token, prediction, finite in zip(
                 records,
                 margins,
                 candidate_correct,
@@ -547,6 +550,7 @@ class Qwen2InductionPlant:
                 targets,
                 candidate_prediction,
                 predicted,
+                candidate_logits_finite,
             )
         ]
 

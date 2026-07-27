@@ -40,6 +40,7 @@ def test_list_effect_tasks_includes_both_model_families() -> None:
     assert result.returncode == 0, result.stderr
     assert "ioi-gpt2-small-finite-effects@phase5-test-v1-b020" in result.stdout
     assert "induction-qwen2-5-7b-finite-effects@copy-v1-b016" in result.stdout
+    assert "induction-qwen2-5-7b-finite-effects@copy-v2-b016" in result.stdout
     assert "budget:128" in result.stdout
 
 

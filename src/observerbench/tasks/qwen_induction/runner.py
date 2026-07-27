@@ -14,6 +14,7 @@ import argparse
 from dataclasses import asdict, dataclass, is_dataclass
 import gc
 import json
+import platform
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any, Callable, Iterable, Mapping, Sequence
@@ -225,6 +226,8 @@ class Phase09Runner:
         tokenizer_factory: Callable[[Mapping[str, Any]], Any] | None = None,
         plant_factory: Callable[[str, Mapping[str, Any]], Any] | None = None,
         collateral_iterator: Callable[..., Iterable[tuple[str, list[Any]]]] | None = None,
+        resume: bool = False,
+        allow_injected_test_runtime: bool = False,
     ) -> None:
         if isinstance(config, (str, Path)):
             self.config = load_phase09_config(config)
@@ -234,24 +237,48 @@ class Phase09Runner:
         self.root = Path(artifacts_root)
         self.device = device
         self.local_files_only = bool(local_files_only)
+        self.resume = bool(resume)
         self.tokenizer_factory = tokenizer_factory
         self.plant_factory = plant_factory
         self.collateral_iterator = (
             collateral_iterator or iter_collateral_distribution_shifts
         )
-        self.scientific = self.config.get("status") == "frozen_before_qwen_outcomes"
+        self.scientific = self.config.get("status") in {
+            "frozen_before_qwen_outcomes",
+            "frozen_before_copy_v2_outcomes",
+        }
         self.injected_runtime = (
             tokenizer_factory is not None
             or plant_factory is not None
             or collateral_iterator is not None
         )
-        if self.scientific and not self.injected_runtime:
+        if self.scientific and self.injected_runtime and not allow_injected_test_runtime:
+            raise ValueError(
+                "frozen scientific runs forbid injected factories; use the explicit "
+                "test-only runtime flag for model-free tests"
+            )
+        self.scientific_claim_allowed = bool(
+            self.scientific and not self.injected_runtime
+        )
+        self.run_mode = (
+            "scientific"
+            if self.scientific_claim_allowed
+            else (
+                "injected_test_only"
+                if self.scientific and self.injected_runtime
+                else "engineering_smoke_only"
+            )
+        )
+        if self.scientific_claim_allowed:
             validate_exact_scientific_config(self.config)
             self._validate_frozen_source_bundle()
+            self._configure_torch_runtime()
+            self._validate_environment_gate()
         self.smoke_root = self.root / "engineering_smoke"
         self.work = self.root / "work" if self.scientific else self.smoke_root / "work"
         self.audit_path = self.work / "stage_audit.json"
         self._active_stage: str | None = None
+        self._resuming_stage = False
         self._stage_plant_audits: list[dict[str, Any]] = []
 
     def _producer_source_hashes(self) -> dict[str, str]:
@@ -325,6 +352,15 @@ class Phase09Runner:
             device = getattr(plant, "device", None)
             device_type = getattr(device, "type", str(device))
             record["torch_version"] = str(torch.__version__)
+            record["torch_cuda_version"] = str(torch.version.cuda)
+            record["cudnn_version"] = torch.backends.cudnn.version()
+            record["matmul_allow_tf32"] = bool(
+                torch.backends.cuda.matmul.allow_tf32
+            )
+            record["cudnn_allow_tf32"] = bool(torch.backends.cudnn.allow_tf32)
+            record["deterministic_algorithms_enabled"] = bool(
+                torch.are_deterministic_algorithms_enabled()
+            )
             if device_type == "cuda" and torch.cuda.is_available():
                 index = 0 if getattr(device, "index", None) is None else int(device.index)
                 properties = torch.cuda.get_device_properties(index)
@@ -360,10 +396,60 @@ class Phase09Runner:
             **provenance["dependencies"],
             **{
                 name: package_version(name)
-                for name in ("transformers", "accelerate", "huggingface-hub")
+                for name in (
+                    "transformers",
+                    "accelerate",
+                    "huggingface-hub",
+                    "tokenizers",
+                    "safetensors",
+                )
             },
         }
         return provenance
+
+    def _configure_torch_runtime(self) -> None:
+        environment = self.config.get("environment", {})
+        try:
+            import torch
+        except ImportError as error:  # pragma: no cover - production dependency
+            raise ImportError("scientific Qwen execution requires torch") from error
+        torch.backends.cuda.matmul.allow_tf32 = bool(
+            environment.get("matmul_allow_tf32", False)
+        )
+        torch.backends.cudnn.allow_tf32 = bool(
+            environment.get("cudnn_allow_tf32", False)
+        )
+
+    def _validate_environment_gate(self) -> None:
+        environment = self.config.get("environment")
+        if not isinstance(environment, Mapping):
+            raise ValueError("scientific Qwen config lacks an environment gate")
+        repo = Path(__file__).resolve().parents[4]
+        constraints = repo / str(environment.get("constraints_path", ""))
+        if (
+            not constraints.is_file()
+            or file_sha256(constraints) != environment.get("constraints_sha256")
+        ):
+            raise ValueError("scientific Colab constraints snapshot changed")
+        if platform.python_version() != str(environment.get("python_version")):
+            raise ValueError("scientific Python version differs from the frozen runtime")
+        expected_packages = environment.get("package_versions")
+        if not isinstance(expected_packages, Mapping) or any(
+            package_version(str(name)) != str(version)
+            for name, version in expected_packages.items()
+        ):
+            raise ValueError("scientific package versions differ from the frozen runtime")
+        import torch
+
+        if (
+            str(torch.__version__) != str(environment.get("torch_version"))
+            or str(torch.version.cuda) != str(environment.get("cuda_version"))
+            or bool(torch.backends.cuda.matmul.allow_tf32)
+            is not bool(environment.get("matmul_allow_tf32"))
+            or bool(torch.backends.cudnn.allow_tf32)
+            is not bool(environment.get("cudnn_allow_tf32"))
+        ):
+            raise ValueError("scientific torch/CUDA precision runtime changed")
 
     def _tokenizer(self) -> Any:
         if self.tokenizer_factory is not None:
@@ -473,11 +559,13 @@ class Phase09Runner:
     def _new_audit(self) -> dict[str, Any]:
         return {
             "schema": RUN_AUDIT_SCHEMA,
-            "mode": "scientific" if self.scientific else "engineering_smoke_only",
+            "mode": self.run_mode,
+            "scientific_claim_allowed": self.scientific_claim_allowed,
             "config_sha256": json_sha256(self.config),
             "completed_stages": [],
             "stages": {},
             "terminal_status": None,
+            "active_stage": None,
         }
 
     def _audit(self) -> dict[str, Any]:
@@ -488,9 +576,10 @@ class Phase09Runner:
             raise ValueError("unexpected Phase-09 run-audit schema")
         if payload.get("config_sha256") != json_sha256(self.config):
             raise ValueError("Phase-09 run root already belongs to a different config")
-        expected_mode = "scientific" if self.scientific else "engineering_smoke_only"
-        if payload.get("mode") != expected_mode:
+        if payload.get("mode") != self.run_mode:
             raise ValueError("Phase-09 run root mixes scientific and smoke modes")
+        if payload.get("scientific_claim_allowed") is not self.scientific_claim_allowed:
+            raise ValueError("Phase-09 run root mixes claim-eligible and test-only modes")
         return payload
 
     def _write_audit(self, audit: Mapping[str, Any]) -> None:
@@ -511,6 +600,67 @@ class Phase09Runner:
                 raise ValueError(f"completed stage artifact changed: {path}")
         return outputs
 
+    def _stage_input_identity(
+        self,
+        stage: str,
+        prerequisite_names: Sequence[str],
+        audit: Mapping[str, Any],
+    ) -> dict[str, Any]:
+        return {
+            "name": stage,
+            "config_sha256": json_sha256(self.config),
+            "producer_source_hashes_sha256": json_sha256(
+                self._producer_source_hashes()
+            ),
+            "prerequisite_stage_hashes": {
+                name: json_sha256(audit["stages"][name]["artifact_hashes"])
+                for name in prerequisite_names
+            },
+        }
+
+    def _begin_ordered_stage(
+        self,
+        stage: str,
+        ordered_stages: Sequence[str],
+    ) -> StageResult | None:
+        audit = self._audit()
+        if stage in audit["completed_stages"]:
+            index = ordered_stages.index(stage)
+            for prerequisite in ordered_stages[:index]:
+                self._verify_stage_outputs(audit["stages"][prerequisite])
+            outputs = self._verify_stage_outputs(audit["stages"][stage])
+            return StageResult(stage, str(audit["stages"][stage]["status"]), outputs)
+        if audit.get("terminal_status") is not None:
+            raise RuntimeError(
+                f"run stopped after a preregistered gate: {audit['terminal_status']}"
+            )
+        index = ordered_stages.index(stage)
+        prerequisites = tuple(ordered_stages[:index])
+        missing = [name for name in prerequisites if name not in audit["completed_stages"]]
+        if missing:
+            raise RuntimeError(
+                f"stage {stage} is out of order; complete {', '.join(missing)} first"
+            )
+        for prerequisite in prerequisites:
+            self._verify_stage_outputs(audit["stages"][prerequisite])
+        identity = self._stage_input_identity(stage, prerequisites, audit)
+        active = audit.get("active_stage")
+        if active is not None:
+            if active != identity:
+                raise ValueError("incomplete stage input identity changed")
+            if not self.resume:
+                raise RuntimeError(
+                    f"stage {stage} was interrupted; rerun explicitly with resume enabled"
+                )
+            self._resuming_stage = True
+        else:
+            audit["active_stage"] = identity
+            self._write_audit(audit)
+            self._resuming_stage = False
+        self._active_stage = stage
+        self._stage_plant_audits = []
+        return None
+
     def _begin(self, stage: str) -> StageResult | None:
         if stage not in ALL_STAGES:
             raise ValueError(f"unknown Phase-09 stage: {stage}")
@@ -518,33 +668,10 @@ class Phase09Runner:
             raise ValueError("engineering-smoke requires the non-scientific smoke config")
         if not self.scientific and stage != "engineering-smoke":
             raise ValueError("smoke config may run only the engineering-smoke stage")
-        audit = self._audit()
-        if stage in audit["completed_stages"]:
-            if self.scientific:
-                index = SCIENTIFIC_STAGES.index(stage)
-                for prerequisite in SCIENTIFIC_STAGES[:index]:
-                    self._verify_stage_outputs(audit["stages"][prerequisite])
-            outputs = self._verify_stage_outputs(audit["stages"][stage])
-            return StageResult(stage, str(audit["stages"][stage]["status"]), outputs)
-        if audit.get("terminal_status") is not None:
-            raise RuntimeError(
-                f"run stopped after a preregistered gate: {audit['terminal_status']}"
-            )
-        if self.scientific:
-            index = SCIENTIFIC_STAGES.index(stage)
-            missing = [name for name in SCIENTIFIC_STAGES[:index] if name not in audit["completed_stages"]]
-            if missing:
-                raise RuntimeError(
-                    f"stage {stage} is out of order; complete {', '.join(missing)} first"
-                )
-            for prerequisite in SCIENTIFIC_STAGES[:index]:
-                self._verify_stage_outputs(audit["stages"][prerequisite])
-        elif audit["completed_stages"]:
+        if not self.scientific and self._audit()["completed_stages"]:
             raise RuntimeError("engineering smoke has already completed")
-        self._active_stage = stage
-        self._stage_plant_audits = []
-        self._write_audit(audit)
-        return None
+        ordered = SCIENTIFIC_STAGES if self.scientific else ("engineering-smoke",)
+        return self._begin_ordered_stage(stage, ordered)
 
     def _finish(
         self,
@@ -557,6 +684,24 @@ class Phase09Runner:
         audit = self._audit()
         if self._active_stage != stage:
             raise RuntimeError("stage runtime audit was not initialized")
+        active = audit.get("active_stage")
+        if not isinstance(active, Mapping) or active.get("name") != stage:
+            raise RuntimeError("stage input identity is missing")
+        if self.scientific_claim_allowed:
+            self._validate_frozen_source_bundle()
+        if active.get("producer_source_hashes_sha256") != json_sha256(
+            self._producer_source_hashes()
+        ):
+            raise ValueError("producer source changed while the stage was running")
+        for prerequisite, expected in active.get(
+            "prerequisite_stage_hashes", {}
+        ).items():
+            self._verify_stage_outputs(audit["stages"][prerequisite])
+            if (
+                json_sha256(audit["stages"][prerequisite]["artifact_hashes"])
+                != expected
+            ):
+                raise ValueError("prerequisite stage identity changed during execution")
         runtime_path = self.work / "runtime" / f"{stage}.json"
         _write_json_atomic(
             {
@@ -566,6 +711,10 @@ class Phase09Runner:
                 "runtime": self._qwen_runtime_provenance(),
                 "plant_audits": self._stage_plant_audits,
                 "producer_source_hashes": self._producer_source_hashes(),
+                "run_mode": self.run_mode,
+                "scientific_claim_allowed": self.scientific_claim_allowed,
+                "stage_input_identity": dict(active),
+                "stage_input_identity_sha256": json_sha256(active),
             },
             runtime_path,
         )
@@ -577,6 +726,7 @@ class Phase09Runner:
                 raise FileNotFoundError(f"stage output was not written: {path}")
         audit["stages"][stage] = {
             "status": status,
+            "stage_input_identity_sha256": json_sha256(active),
             "artifact_hashes": {
                 self._relative(path): file_sha256(path) for path in unique
             },
@@ -584,8 +734,10 @@ class Phase09Runner:
         audit["completed_stages"].append(stage)
         if terminal_status is not None:
             audit["terminal_status"] = terminal_status
+        audit["active_stage"] = None
         self._write_audit(audit)
         self._active_stage = None
+        self._resuming_stage = False
         self._stage_plant_audits = []
         return StageResult(stage, status, unique)
 
@@ -693,13 +845,8 @@ class Phase09Runner:
         rows_path = output_dir / f"clean_{bank}.csv"
         gate_path = output_dir / f"clean_{bank}_gate.json"
         records = self._load_prompts(bank)
-        if rows_path.exists():
-            rows = _read_csv(rows_path, strings=("prompt_id", "family_id"))
-            if set(rows["prompt_id"].astype(str)) != {row.prompt_id for row in records}:
-                raise ValueError(f"cached clean scores do not match {bank} prompts")
-        else:
-            rows = _records_frame(plant.score_clean(records, batch_size=batch_size))
-            _write_csv_atomic(rows, rows_path)
+        rows = _records_frame(plant.score_clean(records, batch_size=batch_size))
+        _write_csv_atomic(rows, rows_path)
         gate_config = self.config["clean_gate"]
         gate = evaluate_clean_gate(
             rows,
@@ -817,6 +964,10 @@ class Phase09Runner:
             "producer_source_hashes": self._producer_source_hashes(),
         }
         if checkpoint_manifest_path.exists():
+            if not self._resuming_stage:
+                raise ValueError(
+                    "checkpoint manifest exists outside an explicit stage resume"
+                )
             checkpoint_manifest = json.loads(
                 checkpoint_manifest_path.read_text(encoding="utf-8")
             )
@@ -842,17 +993,28 @@ class Phase09Runner:
             path = checkpoint_dir / f"{mask.mask_id}.csv"
             if not path.exists():
                 return None
+            registered = checkpoint_manifest["checkpoint_hashes"].get(mask.mask_id)
+            if registered is None:
+                raise ValueError(f"unregistered checkpoint file: {path}")
+            if file_sha256(path) != registered:
+                raise ValueError(f"checkpoint hash changed after registration: {path}")
             frame = _read_csv(
                 path,
                 strings=("prompt_id", "family_id", "mask_id", "mask_bits"),
             )
             if "cluster_id" not in frame:
+                if self.config.get("data_version") == "copy-v2":
+                    raise ValueError(f"checkpoint lacks frozen cluster IDs: {path}")
                 frame.insert(
                     2,
                     "cluster_id",
                     frame["prompt_id"].astype(str).map(cluster_by_prompt),
                 )
                 _write_csv_atomic(frame, path)
+                checkpoint_manifest["checkpoint_hashes"][mask.mask_id] = file_sha256(
+                    path
+                )
+                _write_json_atomic(checkpoint_manifest, checkpoint_manifest_path)
             required = {
                 "prompt_id",
                 "family_id",
@@ -932,7 +1094,9 @@ class Phase09Runner:
                     "cluster_id",
                     frame["prompt_id"].astype(str).map(cluster_by_prompt),
                 )
-                _write_csv_atomic(frame, checkpoint_dir / f"{yielded_id}.csv")
+                path = checkpoint_dir / f"{yielded_id}.csv"
+                _write_csv_atomic(frame, path)
+                register_checkpoint(path, yielded_id)
                 read_checkpoint(expected[yielded_id])
 
         frames: list[pd.DataFrame] = []
@@ -1069,6 +1233,10 @@ class Phase09Runner:
             "producer_source_hashes": self._producer_source_hashes(),
         }
         if manifest_path.exists():
+            if not self._resuming_stage:
+                raise ValueError(
+                    "collateral checkpoint manifest exists outside an explicit resume"
+                )
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
             for key, value in identity.items():
                 if manifest.get(key) != value:
@@ -1094,6 +1262,11 @@ class Phase09Runner:
             path = checkpoint_dir / f"{mask.mask_id}.csv"
             if not path.exists():
                 return None
+            registered = manifest["checkpoint_hashes"].get(mask.mask_id)
+            if registered is None:
+                raise ValueError(f"unregistered collateral checkpoint file: {path}")
+            if file_sha256(path) != registered:
+                raise ValueError(f"collateral checkpoint hash changed: {path}")
             frame = _read_csv(
                 path,
                 strings=(
@@ -1176,6 +1349,7 @@ class Phase09Runner:
                 )
                 path = checkpoint_dir / f"{yielded_id}.csv"
                 _write_csv_atomic(frame, path)
+                register(path, yielded_id)
                 read(expected[yielded_id])
 
         order = {control.prompt_id: index for index, control in enumerate(controls)}
@@ -1222,16 +1396,13 @@ class Phase09Runner:
                     terminal_status="clean_gate_failed:discovery",
                 )
             discovery_path = output / "attention_scan.csv"
-            if discovery_path.exists():
-                discovery = _read_csv(discovery_path)
-            else:
-                discovery = _records_frame(
-                    plant.scan_attention(
-                        self._load_prompts("discovery"),
-                        batch_size=discovery_batch_size,
-                    )
+            discovery = _records_frame(
+                plant.scan_attention(
+                    self._load_prompts("discovery"),
+                    batch_size=discovery_batch_size,
                 )
-                _write_csv_atomic(discovery, discovery_path)
+            )
+            _write_csv_atomic(discovery, discovery_path)
             artifacts.append(discovery_path)
         finally:
             self._release_plant(plant)
@@ -1261,18 +1432,27 @@ class Phase09Runner:
                     status="gate_failed",
                     terminal_status="clean_gate_failed:head_fit",
                 )
-            means_path = output / "reference_shortlist_means_sdpa.npz"
-            if means_path.exists():
-                means = _load_means(means_path)
-                if means.heads != shortlist_heads:
-                    raise ValueError("cached shortlist means use a different head order")
-            else:
-                means = plant.capture_reference_means(
-                    self._load_prompts("reference"),
-                    shortlist_heads,
-                    batch_size=measurement_batch_size,
+            reference_gate, paths = self._clean_gate(
+                plant,
+                "reference",
+                batch_size=measurement_batch_size,
+                output_dir=output,
+            )
+            artifacts.extend(paths)
+            if not reference_gate["passed"]:
+                return self._finish(
+                    "discover",
+                    artifacts,
+                    status="gate_failed",
+                    terminal_status="clean_gate_failed:reference_discovery",
                 )
-                _save_means(means_path, means)
+            means_path = output / "reference_shortlist_means_sdpa.npz"
+            means = plant.capture_reference_means(
+                self._load_prompts("reference"),
+                shortlist_heads,
+                batch_size=measurement_batch_size,
+            )
+            _save_means(means_path, means)
             artifacts.append(means_path)
             noop_path = output / "head_fit_noop_parity.json"
             noop = self._noop_gate(
@@ -1346,7 +1526,15 @@ class Phase09Runner:
                 failure_path = output / "discovery_gate.json"
                 write_json(
                     failure_path,
-                    {"passed": False, "reason": str(error), "scientific_result": "negative"},
+                    {
+                        "passed": False,
+                        "reason": str(error),
+                        "scientific_result": (
+                            "negative"
+                            if self.scientific_claim_allowed
+                            else "test_only_unclassified"
+                        ),
+                    },
                 )
                 artifacts.append(failure_path)
                 return self._finish(
@@ -1367,7 +1555,11 @@ class Phase09Runner:
                     "passed": bool(noop["passed"]),
                     "selected_heads": len(selected),
                     "selected_layers": int(selected["layer"].nunique()),
-                    "scientific_result": "unclassified_until_confirmation",
+                    "scientific_result": (
+                        "unclassified_until_confirmation"
+                        if self.scientific_claim_allowed
+                        else "test_only_unclassified"
+                    ),
                 },
             )
             artifacts.append(gate_path)
@@ -1413,16 +1605,22 @@ class Phase09Runner:
                     status="gate_failed",
                     terminal_status="clean_gate_failed:head_confirmation",
                 )
-            combined_means_path = output / "reference_selected_and_control_means.npz"
-            if combined_means_path.exists():
-                means = _load_means(combined_means_path)
-                if means.heads != all_heads:
-                    raise ValueError("cached confirmation means use a different head order")
-            else:
-                means = plant.capture_reference_means(
-                    self._load_prompts("reference"), all_heads, batch_size=batch_size
+            reference_gate, paths = self._clean_gate(
+                plant, "reference", batch_size=batch_size, output_dir=output
+            )
+            artifacts.extend(paths)
+            if not reference_gate["passed"]:
+                return self._finish(
+                    "confirm",
+                    artifacts,
+                    status="gate_failed",
+                    terminal_status="clean_gate_failed:reference_confirmation",
                 )
-                _save_means(combined_means_path, means)
+            combined_means_path = output / "reference_selected_and_control_means.npz"
+            means = plant.capture_reference_means(
+                self._load_prompts("reference"), all_heads, batch_size=batch_size
+            )
+            _save_means(combined_means_path, means)
             artifacts.append(combined_means_path)
             selected_means = HeadAblationMeans(
                 means.family_ids,
@@ -1479,7 +1677,11 @@ class Phase09Runner:
             )
             fractions = tuple(map(float, self.config["targets"]["fractions"]))
             gate["targets"] = [float(gate["selected_mean_effect"]) * value for value in fractions]
-            gate["scientific_result"] = "positive" if gate["passed"] else "negative"
+            gate["scientific_result"] = (
+                ("positive" if gate["passed"] else "negative")
+                if self.scientific_claim_allowed
+                else "test_only_unclassified"
+            )
             gate_path = output / "confirmation_gate.json"
             write_json(gate_path, gate)
             artifacts.append(gate_path)
@@ -1542,31 +1744,61 @@ class Phase09Runner:
             return previous
         selected, _ = self._selected_tables()
         mask_design = self._mask_design(selected)
+        gate_artifacts = {
+            "discovery_gate": self.work / "discovery" / "discovery_gate.json",
+            "confirmation_gate": self.work / "confirmation" / "confirmation_gate.json",
+            "confirmation_cells": self.work / "confirmation" / "confirmation_cells.csv",
+            "zero_confirmation_cells": self.work
+            / "confirmation"
+            / "zero_confirmation_cells.csv",
+            "zero_confirmation_summary": self.work
+            / "confirmation"
+            / "zero_confirmation_summary.json",
+            "head_fit_noop_parity": self.work
+            / "discovery"
+            / "head_fit_noop_parity.json",
+            "head_confirmation_noop_parity": self.work
+            / "confirmation"
+            / "head_confirmation_noop_parity.json",
+            "discovery_runtime": self.work / "runtime" / "discover.json",
+            "confirmation_runtime": self.work / "runtime" / "confirm.json",
+        }
+        if self.config.get("schema") == "observerbench.qwen_induction_phase10.v1":
+            gate_artifacts.update(
+                {
+                    "eligibility_gate": self.root
+                    / "design"
+                    / "eligibility"
+                    / "eligibility_manifest.json",
+                    "eligibility_coverage": self.root
+                    / "design"
+                    / "eligibility"
+                    / "coverage.csv",
+                    "eligibility_decisions": self.root
+                    / "design"
+                    / "eligibility"
+                    / "candidate_decisions.csv",
+                    "eligibility_diagnostics": self.work
+                    / "eligibility"
+                    / "coverage_diagnostics.json",
+                    "eligibility_runtime": self.work
+                    / "runtime"
+                    / "eligibility.json",
+                    "reference_discovery_gate": self.work
+                    / "discovery"
+                    / "clean_reference_gate.json",
+                    "reference_confirmation_gate": self.work
+                    / "confirmation"
+                    / "clean_reference_gate.json",
+                }
+            )
         manifest = write_frozen_design_artifacts(
             mask_design,
             selected.to_dict("records"),
             self.config,
             self.root,
             all_design_gates_pass=True,
-            gate_artifacts={
-                "discovery_gate": self.work / "discovery" / "discovery_gate.json",
-                "confirmation_gate": self.work / "confirmation" / "confirmation_gate.json",
-                "confirmation_cells": self.work / "confirmation" / "confirmation_cells.csv",
-                "zero_confirmation_cells": self.work
-                / "confirmation"
-                / "zero_confirmation_cells.csv",
-                "zero_confirmation_summary": self.work
-                / "confirmation"
-                / "zero_confirmation_summary.json",
-                "head_fit_noop_parity": self.work
-                / "discovery"
-                / "head_fit_noop_parity.json",
-                "head_confirmation_noop_parity": self.work
-                / "confirmation"
-                / "head_confirmation_noop_parity.json",
-                "discovery_runtime": self.work / "runtime" / "discover.json",
-                "confirmation_runtime": self.work / "runtime" / "confirm.json",
-            },
+            gate_artifacts=gate_artifacts,
             exact_scientific_config=not self.injected_runtime,
         )
         return self._finish(
@@ -2130,7 +2362,10 @@ class Phase09Runner:
             self.root,
             exact_scientific_config=not self.injected_runtime,
         )
-        validate_effect_artifacts(self.root)
+        validate_effect_artifacts(
+            self.root,
+            require_scientific_claim=self.scientific_claim_allowed,
+        )
         effect_payload = json.loads(effect_manifest.read_text(encoding="utf-8"))
         effect_paths = tuple(
             self.root / "effects" / relative
@@ -2325,10 +2560,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         args.artifacts_root,
         device=args.device,
         local_files_only=args.local_files_only,
+        resume=args.resume,
     )
-    # Resume is intrinsically safe and always enabled; the explicit switch is
-    # retained for notebooks and batch scripts to document their intent.
-    del args.resume
     result = runner.run(args.stage)
     if isinstance(result, tuple):
         payload = [asdict(item) for item in result]

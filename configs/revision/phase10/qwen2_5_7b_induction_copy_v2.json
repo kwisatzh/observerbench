@@ -1,0 +1,229 @@
+{
+  "schema": "observerbench.qwen_induction_phase10.v1",
+  "data_version": "copy-v2",
+  "status": "frozen_before_copy_v2_outcomes",
+  "scientific_status": "prospective_second_model_second_mechanism_conditional_population",
+  "authorship": "Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex",
+  "artifact_root": "results/revision/phase10/qwen_induction_copy_v2",
+  "predecessor": {
+    "data_version": "copy-v1",
+    "terminal_result": "negative_clean_gate_failed",
+    "continue_predecessor_run": false,
+    "reuse_predecessor_prompts": false
+  },
+  "model": {
+    "id": "Qwen/Qwen2.5-7B",
+    "revision": "d149729398750b98c0af14eb82c78cfe92750796",
+    "dtype": "bfloat16",
+    "quantization": null,
+    "expected_layers": 28,
+    "expected_query_heads": 28,
+    "expected_kv_heads": 4
+  },
+  "token_pool": {
+    "seed": 12071,
+    "per_split_size": 4096,
+    "require_printable": true,
+    "require_roundtrip": true,
+    "exclude_special": true,
+    "exclude_copy_v1_allocated_tokens": {
+      "required": true,
+      "source_data_version": "copy-v1",
+      "source_artifact": "configs/revision/phase10/copy_v1_token_banks.json",
+      "source_artifact_sha256": "f599a958e310fdf9cedd52f92c77555cfd57b58fc117536781c21101f5786c91",
+      "source_token_pool_size": 24576,
+      "source_token_pool_sha256": "34f3ef26314647c4df54e4c8a8a80888f5663b1dbce64a7234d35a9c1f90cf33",
+      "banks": [
+        "reference",
+        "discovery",
+        "head_fit",
+        "head_test",
+        "calibration",
+        "locked_test"
+      ],
+      "operation": "exclude_union_of_all_allocated_token_ids",
+      "require_source_hash_before_config_seal": true
+    }
+  },
+  "sequence_design": {
+    "seed": 12103,
+    "families": [
+      {"sequence_length": 32, "repeat_gap": 8},
+      {"sequence_length": 32, "repeat_gap": 16},
+      {"sequence_length": 64, "repeat_gap": 8},
+      {"sequence_length": 64, "repeat_gap": 16}
+    ],
+    "final_prompts_per_family": {
+      "reference": 32,
+      "discovery": 32,
+      "head_fit": 64,
+      "head_confirmation": 64,
+      "calibration": 64,
+      "locked_test": 128
+    },
+    "reservoir_prompts_per_family": {
+      "reference": 64,
+      "discovery": 64,
+      "head_fit": 128,
+      "head_confirmation": 128,
+      "calibration": 128,
+      "locked_test": 256
+    },
+    "reservoir_multiplier": 2,
+    "assign_bank_and_family_before_clean_scoring": true,
+    "require_globally_unique_prompt_ids": true,
+    "require_disjoint_token_banks": true,
+    "n_key_value_pairs": 3
+  },
+  "clean_eligibility": {
+    "stage": "clean_only_before_attention_or_intervention",
+    "primary_attention_implementation": "sdpa",
+    "candidate_correct_required": true,
+    "minimum_candidate_margin": 1.3862943611198906,
+    "minimum_candidate_margin_name": "ln_4",
+    "candidate_probability_interpretation": "at_least_two_thirds_under_the_three_candidate_softmax",
+    "finite_target_nll_required": true,
+    "full_vocabulary_top1_used_for_eligibility": false,
+    "dual_implementation_banks_requiring_candidate_prediction_agreement": [
+      "discovery"
+    ],
+    "dual_implementation_minimum_margin_required_under_both": true,
+    "coverage_gate": {
+      "minimum_overall": 0.80,
+      "minimum_per_family_pooled_across_banks": 0.75,
+      "minimum_per_bank_family": 0.70,
+      "require_enough_eligible_for_every_final_cell": true,
+      "failure_is_terminal": true,
+      "do_not_lower_thresholds_after_scores": true,
+      "do_not_expand_or_regenerate_failed_reservoir": true,
+      "do_not_drop_failed_family_or_bank": true
+    },
+    "selection": {
+      "seed": 12119,
+      "method": "ascending_sha256_of_selection_seed_colon_prompt_id_then_prompt_id",
+      "sample_exact_final_count_within_each_bank_family": true,
+      "rank_by_margin": false,
+      "rank_by_target_nll": false,
+      "rank_by_top1": false,
+      "rank_by_token_identity": false,
+      "freeze_and_hash_before_attention_or_intervention": true
+    },
+    "rescore_gate": {
+      "require_exact_candidate_prediction_agreement": true,
+      "minimum_candidate_margin": 1.3862943611198906,
+      "report_margin_difference_without_gating": true
+    },
+    "coverage_reporting": {
+      "denominator": "complete_preassigned_reservoir",
+      "interval": "wilson_95_descriptive",
+      "slices": [
+        "overall",
+        "family",
+        "bank_family"
+      ],
+      "report_candidate_accuracy_before_filter": true,
+      "report_margin_quantiles": true,
+      "report_full_vocabulary_top1": true,
+      "report_target_nll": true,
+      "compare_included_and_excluded_token_properties": true
+    }
+  },
+  "clean_gate": {
+    "minimum_candidate_accuracy_overall": 0.95,
+    "minimum_candidate_accuracy_per_family": 0.90,
+    "minimum_median_candidate_margin": 0.0,
+    "maximum_noop_hook_margin_error": 0.00001,
+    "require_exact_candidate_prediction_parity": true
+  },
+  "head_discovery": {
+    "attention_shortlist": 32,
+    "selected_heads": 8,
+    "matched_controls": 8,
+    "attention_score": "target_value_attention_minus_mean_distractor_value_attention",
+    "maximum_selected_per_layer": 2,
+    "minimum_selected_layers": 4,
+    "selection_score": "paired_bootstrap_lower_95_bound",
+    "bootstrap_repeats": 5000,
+    "bootstrap_seed": 9127,
+    "confirmation_rule": "selected_minus_matched_control_effect_lower_95_bound_gt_zero"
+  },
+  "intervention": {
+    "primary": "family_conditioned_mean_ablation",
+    "position": "final_query",
+    "hook_point": "attention_z_before_output_projection",
+    "zero_ablation_status": "robustness_only",
+    "zero_ablation_scope": "selected_vs_matched_control_full_panels_on_head_confirmation_after_primary_gate"
+  },
+  "mask_design": {
+    "n_components": 8,
+    "universe_size": 256,
+    "calibration_masks": 128,
+    "locked_test_masks": 128,
+    "measurement_budgets": [16, 40, 64, 128],
+    "candidate_pools": 16,
+    "masks_per_pool_excluding_noop": 8,
+    "include_analytic_noop_in_every_pool": true,
+    "seed": 9151
+  },
+  "models": {
+    "primary_prediction_budget": 128,
+    "primary_prediction_contrast": "additive_mae_minus_quadratic_mae",
+    "ridge_grid": [0.000001, 0.0001, 0.01, 0.1, 1.0, 10.0],
+    "mean_effect_families": ["no_effect", "additive", "quadratic"],
+    "action_selectors": ["natural_mean", "transformed_mean", "direct_risk", "exact_noop"]
+  },
+  "targets": {
+    "source": "head_confirmation_selected_full_mask_mean_effect",
+    "fractions": [0.25, 0.5, 0.75],
+    "report_equal_weight_aggregate": true
+  },
+  "collateral_diagnostic": {
+    "status": "secondary_not_gate",
+    "prompt_bank": "locked_test",
+    "control_transform": "deterministic_exact_multiset_final_key_filler_swap",
+    "action_scope": "unique_masks_selected_by_frozen_actions_plus_analytic_noop",
+    "intervention": "same_family_conditioned_mean_ablation",
+    "kl_direction": "clean_to_intervened",
+    "report_total_variation": true,
+    "aggregation": [
+      "mask_overall",
+      "mask_by_family",
+      "frozen_action"
+    ],
+    "affects_primary_gate": false
+  },
+  "uncertainty": {
+    "bootstrap_repeats": 5000,
+    "bootstrap_seed": 9173,
+    "interval": 0.95,
+    "resampling_units": ["prompt_cluster", "mask_or_action_pool"]
+  },
+  "environment": {
+    "constraints_path": "configs/revision/phase10/colab_constraints.txt",
+    "constraints_sha256": "7404a300376c24ca0139532d438b8e10f3dc4b564354db4e8cfc86cc46dc7922",
+    "python_version": "3.12.13",
+    "package_versions": {
+      "accelerate": "1.14.0",
+      "huggingface-hub": "1.23.0",
+      "matplotlib": "3.10.0",
+      "numpy": "2.0.2",
+      "pandas": "2.2.2",
+      "safetensors": "0.8.0",
+      "tokenizers": "0.22.2",
+      "transformers": "5.14.1"
+    },
+    "torch_version": "2.11.0+cu128",
+    "cuda_version": "12.8",
+    "matmul_allow_tf32": true,
+    "cudnn_allow_tf32": true
+  },
+  "runtime": {
+    "device": "cuda",
+    "eligibility_attention_implementation": "sdpa",
+    "discovery_attention_implementation": "eager",
+    "measurement_attention_implementation": "sdpa",
+    "discovery_batch_size": 4,
+    "measurement_batch_size": 16,
+    "checkpoint_after_each": "head_or_mask"
+  }
+}

@@ -44,6 +44,7 @@ class FakePlant:
     yielded_masks: list[str] = []
     implementations: list[str] = []
     events: list[str] = []
+    clean_calls: list[tuple[str, tuple[str, ...], int]] = []
 
     def __init__(self, attention_implementation: str):
         self.attention_implementation = attention_implementation
@@ -68,7 +69,13 @@ class FakePlant:
         return dict(expected)
 
     def score_clean(self, records, *, batch_size):
-        del batch_size
+        type(self).clean_calls.append(
+            (
+                self.attention_implementation,
+                tuple(sorted({str(row.bank) for row in records})),
+                int(batch_size),
+            )
+        )
         return [
             SimpleNamespace(
                 prompt_id=row.prompt_id,
@@ -80,6 +87,7 @@ class FakePlant:
                 target_token_id=row.target_value_token,
                 candidate_predicted_token_id=row.target_value_token,
                 predicted_token_id=row.target_value_token,
+                candidate_logits_finite=True,
             )
             for row in records
         ]
@@ -233,28 +241,31 @@ def _smoke_config() -> dict:
     return config
 
 
-def _runner(config, root):
+def _runner(config, root, *, resume: bool = False):
     return Phase09Runner(
         config,
         root,
         tokenizer_factory=lambda _config: FakeTokenizer(),
         plant_factory=lambda implementation, _config: FakePlant(implementation),
         collateral_iterator=_fake_collateral_iterator,
+        allow_injected_test_runtime=True,
+        resume=resume,
     )
 
 
 def test_production_runner_accepts_only_the_frozen_config_and_source_seal(
     tmp_path: Path,
 ) -> None:
-    runner = Phase09Runner(
-        FULL_CONFIG,
-        tmp_path,
-        device="cpu",
-        local_files_only=True,
-    )
-
-    assert runner.scientific is True
-    assert len(runner._producer_source_hashes()) == 27
+    # Copy-v1 remains executable only from its immutable preregistration tag.
+    # The Copy-v2 branch changes transitive producers and must fail closed if
+    # someone tries to present it as the sealed Copy-v1 implementation.
+    with pytest.raises(ValueError, match="producer source differs"):
+        Phase09Runner(
+            FULL_CONFIG,
+            tmp_path,
+            device="cpu",
+            local_files_only=True,
+        )
 
 
 def test_scientific_stage_order_resume_blind_freeze_and_complete_evaluation(
@@ -303,12 +314,14 @@ def test_scientific_stage_order_resume_blind_freeze_and_complete_evaluation(
     }.issubset(retained)
     retained.loc[0, "ablated_target_nll"] = -1.0
     retained.to_csv(retained_path, index=False)
-    with pytest.raises(ValueError, match="invalid target NLL"):
-        runner.measure_calibration()
+    resume_runner = _runner(_scientific_config(), tmp_path, resume=True)
+    with pytest.raises(ValueError, match="checkpoint hash changed"):
+        resume_runner.measure_calibration()
     retained_path.write_bytes(retained_original)
 
     FakePlant.fail_after = None
-    assert runner.measure_calibration().status == "complete"
+    assert resume_runner.measure_calibration().status == "complete"
+    runner = resume_runner
     for mask_id in completed_before_resume:
         assert FakePlant.yielded_masks.count(mask_id) == 1
 
