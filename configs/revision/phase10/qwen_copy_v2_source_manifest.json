@@ -26,7 +26,7 @@
     "src/observerbench/tasks/qwen_induction/analysis.py": "de50f7d8a1e17d2bdb06350aefaf7750356f79aaa51001016f14fb533caad726",
     "src/observerbench/tasks/qwen_induction/artifacts.py": "918b10ac651a1dd6905be98a58c14cf6821925b984ed6bdc56c05a0352a199a9",
     "src/observerbench/tasks/qwen_induction/collateral.py": "fb3bebf79a827e1af9dc38998e1d7bfc89ab97ccac010db336abfb0daccecdd7",
-    "src/observerbench/tasks/qwen_induction/copy_v2_artifacts.py": "3ec7c723665fdc3fd47604f64d2bfb547412921029cc55e133ca65f22228cfa6",
+    "src/observerbench/tasks/qwen_induction/copy_v2_artifacts.py": "3dcf508eda303d2c1988da2694f6eed5f6b45e84208430b11ac09dbebb10dc93",
     "src/observerbench/tasks/qwen_induction/copy_v2_runner.py": "7992c60aa12290fae4ebef54324907899c2fc9b3c13f3bd7577aa5e2d1b37872",
     "src/observerbench/tasks/qwen_induction/design.py": "95161576c7bf627c966fdb62faca14a6ca3c2edac2b4be3754151abae9d262ff",
     "src/observerbench/tasks/qwen_induction/effect_task.py": "d763aa705552decf192799196c5ed4501b523ce8b402534e311acc9db5969c5b",
@@ -37,7 +37,15 @@
     "src/observerbench/tasks/registry.py": "874cedbbab5591c258dafe894ceb3132bf93205072852655716d588851804c8a"
   },
   "config_sha256": "d55b416eda85087da7ec4ef9e1249333c954e2576fb8749719f8bb7d7be55f4f",
+  "continuation": {
+    "attention_or_intervention_outcomes_observed_before_fix": false,
+    "change": "read serialized clean-score floats with pandas round-trip precision",
+    "clean_eligibility_observed_before_fix": "passed_all_preregistered_thresholds",
+    "failed_run_artifact_archive_sha256": "c1fd906a58f20feb3b69b4558b805cfd71559bbff7df4f3d13f7f22b04ba46b7",
+    "from_commit": "99ed877ce44f0a7c2d7b83197c881801d64acc11",
+    "protocol_threshold_or_selection_change": false
+  },
   "schema": "observerbench.qwen_induction_phase10.source_manifest.v1",
-  "source_bundle_sha256": "ca98cee12b53a0844761618f1c7a74fbba08d1a106a5a064a2ff2ea957cee9a9",
+  "source_bundle_sha256": "2bc5e0491ec9eb0c5dfa611d755b260ebbc22c23156405e974fc77d09d9edfb8",
   "status": "frozen_before_copy_v2_outcomes"
 }

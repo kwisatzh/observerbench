@@ -1023,7 +1023,8 @@ def verify_copy_v2_preselection_artifacts(
     )
     candidates = load_copy_v2_candidate_reservoir(root, frozen)
     decision_frame = pd.read_csv(
-        output / "eligibility" / "candidate_decisions.csv"
+        output / "eligibility" / "candidate_decisions.csv",
+        float_precision="round_trip",
     )
     selected_frame = pd.read_csv(
         output / "eligibility" / "selected_prompt_ids.csv"

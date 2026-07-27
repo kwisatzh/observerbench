@@ -260,6 +260,45 @@ def test_passed_clean_result_freezes_existing_prompt_schemas_and_bindings(
         verify_copy_v2_preselection_artifacts(root, config)
 
 
+def test_preselection_round_trips_clean_score_floats_exactly(
+    tmp_path: Path,
+) -> None:
+    config, _sequence_design, root, _manifest = _candidate_bundle(tmp_path)
+    candidates = load_copy_v2_candidate_reservoir(root, config)
+    scores = pd.DataFrame(
+        {
+            "prompt_id": candidates["prompt_id"],
+            "candidate_correct": True,
+            "candidate_margin": 12.38647747039795,
+            "eager_sdpa_candidate_prediction_agreement": True,
+            "finite_candidate_logits": True,
+            "finite_target_nll": True,
+            "target_nll": 2.0866472721099854,
+        }
+    )
+    result = evaluate_copy_v2_clean_eligibility(
+        candidates,
+        scores,
+        required_counts={bank: 1 for bank in SEQUENCE_BANKS},
+    )
+    write_copy_v2_preselection_artifacts(
+        result,
+        config,
+        root,
+        runtime_record={
+            "runtime": "test",
+            "scientific_claim_allowed": True,
+        },
+        source_hashes={"copy_v2_artifacts.py": "a" * 64},
+    )
+
+    manifest = verify_copy_v2_preselection_artifacts(root, config)
+    assert (
+        manifest["clean_eligibility"]["clean_scores_canonical_sha256"]
+        == result.summary["input_hashes"]["clean_scores_sha256"]
+    )
+
+
 @pytest.mark.parametrize(
     ("column", "replacement", "message"),
     (
