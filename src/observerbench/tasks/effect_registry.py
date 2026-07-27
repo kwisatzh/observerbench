@@ -16,6 +16,7 @@ from observerbench.tasks.ioi.effect_task import (
     load_ioi_effect_prediction_task,
 )
 from observerbench.tasks.qwen_induction.effect_task import (
+    QWEN_INDUCTION_EFFECT_DATA_VERSIONS,
     QWEN_INDUCTION_EFFECT_MEASUREMENT_BUDGETS,
     QWEN_INDUCTION_EFFECT_TASK_NAME,
     load_qwen_induction_effect_prediction_task,
@@ -52,13 +53,21 @@ _IOI_FINITE_EFFECT_TASK_SPECS: tuple[FiniteEffectTaskSpec, ...] = tuple(
 _QWEN_INDUCTION_FINITE_EFFECT_TASK_SPECS: tuple[FiniteEffectTaskSpec, ...] = tuple(
     FiniteEffectTaskSpec(
         name=QWEN_INDUCTION_EFFECT_TASK_NAME,
-        version=qwen_induction_effect_task_version(budget),
+        version=qwen_induction_effect_task_version(
+            budget, data_version=data_version
+        ),
         measurement_budget=budget,
         summary=(
-            "Checked Qwen2.5-7B induction-copy finite-effect prediction from "
-            "cached exact-label mean-ablation tables."
+            "Checked Qwen2.5-7B clean-eligible induction-copy finite-effect "
+            "prediction from cached exact-label mean-ablation tables."
+            if data_version == "copy-v2"
+            else (
+                "Checked Qwen2.5-7B induction-copy finite-effect prediction "
+                "from cached exact-label mean-ablation tables."
+            )
         ),
     )
+    for data_version in QWEN_INDUCTION_EFFECT_DATA_VERSIONS
     for budget in QWEN_INDUCTION_EFFECT_MEASUREMENT_BUDGETS
 )
 _FINITE_EFFECT_TASK_SPECS = (
@@ -101,9 +110,13 @@ def finite_effect_measurement_budgets(task_name: str) -> tuple[int, ...]:
 
     finite_effect_task_versions(task_name)
     return tuple(
-        spec.measurement_budget
-        for spec in finite_effect_task_specs()
-        if spec.name == task_name
+        sorted(
+            {
+                spec.measurement_budget
+                for spec in finite_effect_task_specs()
+                if spec.name == task_name
+            }
+        )
     )
 
 
@@ -139,6 +152,7 @@ def load_finite_effect_task(
             artifacts_root,
             measurement_budget=spec.measurement_budget,
             verify_hashes=verify_hashes,
+            expected_data_version=spec.version.rsplit("-b", 1)[0],
         )
     else:  # pragma: no cover - every closed-registry spec has a loader
         raise KeyError(f"no loader is available for finite-effect task {task_id!r}")

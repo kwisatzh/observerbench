@@ -41,10 +41,14 @@ from observerbench.tasks.qwen_induction.effect_task import (
 
 
 PHASE09_CONFIG_SCHEMA = "observerbench.qwen_induction_phase09.v1"
+PHASE10_CONFIG_SCHEMA = "observerbench.qwen_induction_phase10.v1"
 TOKEN_BANKS_SCHEMA = "observerbench.qwen_induction_token_banks.v1"
 PRESELECTION_MANIFEST_SCHEMA = "observerbench.qwen_induction_preselection.v1"
 QWEN_INDUCTION_SCIENTIFIC_CONFIG_SHA256 = (
     "ec2835be61a85c6f963cab901c1de17f512e9fa08d5983c79bd14874000bdb77"
+)
+QWEN_INDUCTION_COPY_V2_CONFIG_SHA256 = (
+    "d55b416eda85087da7ec4ef9e1249333c954e2576fb8749719f8bb7d7be55f4f"
 )
 
 _CONFIG_BANK_TO_DESIGN_BANK = {
@@ -134,18 +138,33 @@ def validate_phase09_config(
     analysis, or audit settings beyond this module's model-free boundary.
     """
 
-    config = _mapping(config, "Phase-09 config")
-    if config.get("schema") != PHASE09_CONFIG_SCHEMA:
-        raise ValueError("unexpected Phase-09 config schema")
+    config = _mapping(config, "Qwen induction config")
+    schema = config.get("schema")
+    if schema not in {PHASE09_CONFIG_SCHEMA, PHASE10_CONFIG_SCHEMA}:
+        raise ValueError("unexpected Qwen induction config schema")
+    copy_v2 = schema == PHASE10_CONFIG_SCHEMA
     status = _nonempty(config.get("status"), "status")
     scientific_status = _nonempty(
         config.get("scientific_status"), "scientific_status"
     )
+    expected_status = (
+        "frozen_before_copy_v2_outcomes"
+        if copy_v2
+        else "frozen_before_qwen_outcomes"
+    )
+    expected_scientific_status = (
+        "prospective_second_model_second_mechanism_conditional_population"
+        if copy_v2
+        else "prospective_second_model_second_mechanism"
+    )
     if require_scientific and (
-        status != "frozen_before_qwen_outcomes"
-        or scientific_status != "prospective_second_model_second_mechanism"
+        status != expected_status
+        or scientific_status != expected_scientific_status
     ):
-        raise ValueError("scientific Phase-09 status is not frozen and prospective")
+        label = "Phase-10" if copy_v2 else "Phase-09"
+        raise ValueError(
+            f"scientific {label} status is not frozen and prospective"
+        )
 
     model = _mapping(config.get("model"), "model")
     model_id = _nonempty(model.get("id"), "model.id")
@@ -191,14 +210,37 @@ def validate_phase09_config(
         raise ValueError("sequence families must be unique")
     if not set(family_pairs).issubset(_expected_family_pairs()):
         raise ValueError("sequence config contains an unsupported length/gap family")
+    count_field = "final_prompts_per_family" if copy_v2 else "prompts_per_family"
     prompts_per_family = _mapping(
-        sequence.get("prompts_per_family"),
-        "sequence_design.prompts_per_family",
+        sequence.get(count_field),
+        f"sequence_design.{count_field}",
     )
     if set(prompts_per_family) != set(_CONFIG_BANK_TO_DESIGN_BANK):
-        raise ValueError("prompts_per_family must define the six frozen banks")
+        raise ValueError(f"{count_field} must define the six frozen banks")
     for bank, count in prompts_per_family.items():
-        _integer(count, f"sequence_design.prompts_per_family.{bank}", minimum=1)
+        _integer(count, f"sequence_design.{count_field}.{bank}", minimum=1)
+    if copy_v2:
+        reservoir = _mapping(
+            sequence.get("reservoir_prompts_per_family"),
+            "sequence_design.reservoir_prompts_per_family",
+        )
+        if set(reservoir) != set(_CONFIG_BANK_TO_DESIGN_BANK):
+            raise ValueError(
+                "reservoir_prompts_per_family must define the six frozen banks"
+            )
+        if _integer(
+            sequence.get("reservoir_multiplier"),
+            "sequence_design.reservoir_multiplier",
+            minimum=1,
+        ) != 2:
+            raise ValueError("Copy-v2 reservoir multiplier must equal two")
+        for bank, final_count in prompts_per_family.items():
+            if _integer(
+                reservoir[bank],
+                f"sequence_design.reservoir_prompts_per_family.{bank}",
+                minimum=1,
+            ) != 2 * int(final_count):
+                raise ValueError("every Copy-v2 reservoir must be exactly two-times final")
     if _integer(
         sequence.get("n_key_value_pairs"),
         "sequence_design.n_key_value_pairs",
@@ -254,6 +296,44 @@ def validate_phase09_config(
         raise ValueError("Phase-09 config has an unexpected primary intervention")
 
     collateral = config.get("collateral_diagnostic")
+    if copy_v2:
+        if config.get("data_version") != "copy-v2":
+            raise ValueError("Phase-10 config must declare data_version copy-v2")
+        eligibility = _mapping(config.get("clean_eligibility"), "clean_eligibility")
+        if eligibility.get("candidate_correct_required") is not True:
+            raise ValueError("Copy-v2 eligibility must require candidate correctness")
+        if not math.isclose(
+            _finite(
+                eligibility.get("minimum_candidate_margin"),
+                "clean_eligibility.minimum_candidate_margin",
+            ),
+            math.log(4.0),
+            rel_tol=0.0,
+            abs_tol=1e-15,
+        ):
+            raise ValueError("Copy-v2 eligibility margin must equal ln(4)")
+        coverage = _mapping(
+            eligibility.get("coverage_gate"), "clean_eligibility.coverage_gate"
+        )
+        expected_coverage = {
+            "minimum_overall": 0.80,
+            "minimum_per_family_pooled_across_banks": 0.75,
+            "minimum_per_bank_family": 0.70,
+        }
+        for field, expected in expected_coverage.items():
+            if not math.isclose(
+                _finite(coverage.get(field), f"clean_eligibility.coverage_gate.{field}"),
+                expected,
+                rel_tol=0.0,
+                abs_tol=1e-15,
+            ):
+                raise ValueError(f"Copy-v2 coverage threshold changed: {field}")
+        selection = _mapping(
+            eligibility.get("selection"), "clean_eligibility.selection"
+        )
+        _integer(selection.get("seed"), "clean_eligibility.selection.seed")
+        if selection.get("rank_by_margin") is not False:
+            raise ValueError("Copy-v2 selection must not rank prompts by margin")
     if require_scientific:
         models = _mapping(config.get("models"), "models")
         if (
@@ -305,13 +385,24 @@ def validate_phase09_config(
             "uncertainty",
             "runtime",
         }
+        if copy_v2:
+            required.update(
+                {
+                    "data_version",
+                    "artifact_root",
+                    "predecessor",
+                    "clean_eligibility",
+                    "environment",
+                }
+            )
         missing = sorted(required - set(config))
         if missing:
             raise ValueError(f"scientific Phase-09 config lacks fields: {missing}")
-        if status != "frozen_before_qwen_outcomes" or scientific_status != (
-            "prospective_second_model_second_mechanism"
-        ):
-            raise ValueError("scientific Phase-09 status is not frozen and prospective")
+        if status != expected_status or scientific_status != expected_scientific_status:
+            label = "Phase-10" if copy_v2 else "Phase-09"
+            raise ValueError(
+                f"scientific {label} status is not frozen and prospective"
+            )
         if model_id != QWEN_INDUCTION_MODEL_NAME or model_revision != (
             QWEN_INDUCTION_MODEL_REVISION
         ):
@@ -356,9 +447,14 @@ def validate_exact_scientific_config(config: Mapping[str, Any]) -> Mapping[str, 
 
     checked = validate_phase09_config(config, require_scientific=True)
     observed = json_sha256(checked)
-    if observed != QWEN_INDUCTION_SCIENTIFIC_CONFIG_SHA256:
+    expected = (
+        QWEN_INDUCTION_COPY_V2_CONFIG_SHA256
+        if checked.get("schema") == PHASE10_CONFIG_SCHEMA
+        else QWEN_INDUCTION_SCIENTIFIC_CONFIG_SHA256
+    )
+    if not expected or observed != expected:
         raise ValueError(
-            "scientific Phase-09 config differs from the frozen production digest"
+            "scientific Qwen config differs from the frozen production digest"
         )
     return checked
 
@@ -463,7 +559,12 @@ def _validate_sequence_against_config(
     actual_families = {example.family_id for example in design.examples}
     if actual_families != configured_families:
         raise ValueError("sequence design and config contain different families")
-    counts = _mapping(sequence["prompts_per_family"], "prompts_per_family")
+    count_field = (
+        "final_prompts_per_family"
+        if config.get("schema") == PHASE10_CONFIG_SCHEMA
+        else "prompts_per_family"
+    )
+    counts = _mapping(sequence[count_field], count_field)
     for config_bank, design_bank in _CONFIG_BANK_TO_DESIGN_BANK.items():
         if getattr(design.bank_counts, design_bank) != int(counts[config_bank]):
             raise ValueError(f"sequence count differs for {config_bank}")
@@ -661,6 +762,14 @@ def write_frozen_design_artifacts(
     if all_design_gates_pass is not True:
         raise ValueError("a frozen scientific design requires passed causal gates")
     required_gate_labels = {"discovery_gate", "confirmation_gate"}
+    if frozen.get("schema") == PHASE10_CONFIG_SCHEMA:
+        required_gate_labels.update(
+            {
+                "eligibility_gate",
+                "reference_discovery_gate",
+                "reference_confirmation_gate",
+            }
+        )
     if not isinstance(gate_artifacts, Mapping) or not required_gate_labels.issubset(
         gate_artifacts
     ):
@@ -749,7 +858,10 @@ def write_frozen_design_artifacts(
         "schema": QWEN_INDUCTION_DESIGN_SCHEMA,
         "status": "frozen_before_outcomes",
         "design_id": f"qwen_induction_{json_sha256(identity)[:16]}",
-        "data_version": QWEN_INDUCTION_EFFECT_DATA_VERSION,
+        "data_version": str(
+            frozen.get("data_version", QWEN_INDUCTION_EFFECT_DATA_VERSION)
+        ),
+        "scientific_claim_allowed": bool(exact_scientific_config),
         "all_design_gates_pass": bool(all_design_gates_pass),
         "measurement_budgets": list(QWEN_INDUCTION_EFFECT_MEASUREMENT_BUDGETS),
         "model": {
@@ -935,6 +1047,10 @@ def write_effect_artifacts(
     manifest = {
         "schema": QWEN_INDUCTION_EFFECT_RUN_SCHEMA,
         "status": "complete_locked_test_outcomes",
+        "data_version": str(
+            frozen.get("data_version", QWEN_INDUCTION_EFFECT_DATA_VERSION)
+        ),
+        "scientific_claim_allowed": bool(exact_scientific_config),
         "design_manifest_sha256": file_sha256(design_manifest_path),
         "model": {
             "requested_name": QWEN_INDUCTION_MODEL_NAME,
@@ -952,12 +1068,16 @@ def write_effect_artifacts(
         },
     }
     write_json(effects_dir / "effect_manifest.json", manifest)
-    validate_effect_artifacts(root)
+    validate_effect_artifacts(
+        root, require_scientific_claim=bool(exact_scientific_config)
+    )
     return effects_dir / "effect_manifest.json"
 
 
 def validate_effect_artifacts(
     artifacts_root: str | Path,
+    *,
+    require_scientific_claim: bool = True,
 ) -> None:
     """Verify effect hashes, shard reconstruction, and adapter compatibility."""
 
@@ -993,12 +1113,15 @@ def validate_effect_artifacts(
         root,
         measurement_budget=max(QWEN_INDUCTION_EFFECT_MEASUREMENT_BUDGETS),
         verify_hashes=True,
+        require_scientific_claim=require_scientific_claim,
     )
 
 
 __all__ = [
     "PHASE09_CONFIG_SCHEMA",
+    "PHASE10_CONFIG_SCHEMA",
     "PRESELECTION_MANIFEST_SCHEMA",
+    "QWEN_INDUCTION_COPY_V2_CONFIG_SHA256",
     "QWEN_INDUCTION_SCIENTIFIC_CONFIG_SHA256",
     "TOKEN_BANKS_SCHEMA",
     "load_phase09_config",

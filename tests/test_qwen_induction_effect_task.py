@@ -116,7 +116,7 @@ def _effect(bits: str) -> float:
     return sum(coefficient * int(bit) for coefficient, bit in zip(coefficients, bits))
 
 
-def _make_artifacts(root: Path) -> Path:
+def _make_artifacts(root: Path, *, data_version: str = "copy-v1") -> Path:
     design = root / "design"
     effects = root / "effects"
 
@@ -196,6 +196,13 @@ def _make_artifacts(root: Path) -> Path:
     confirmation_gate = gate_dir / "confirmation_gate.json"
     discovery_gate.write_text('{"passed": true}\n', encoding="utf-8")
     confirmation_gate.write_text('{"passed": true}\n', encoding="utf-8")
+    eligibility_gate = gate_dir / "eligibility_gate.json"
+    reference_discovery_gate = gate_dir / "reference_discovery_gate.json"
+    reference_confirmation_gate = gate_dir / "reference_confirmation_gate.json"
+    if data_version == "copy-v2":
+        eligibility_gate.write_text('{"passed": true}\n', encoding="utf-8")
+        reference_discovery_gate.write_text('{"passed": true}\n', encoding="utf-8")
+        reference_confirmation_gate.write_text('{"passed": true}\n', encoding="utf-8")
 
     design_artifacts = (
         design / "selected_heads.csv",
@@ -204,28 +211,52 @@ def _make_artifacts(root: Path) -> Path:
         design / "prompts.csv",
         discovery_gate,
         confirmation_gate,
+        *(
+            (
+                eligibility_gate,
+                reference_discovery_gate,
+                reference_confirmation_gate,
+            )
+            if data_version == "copy-v2"
+            else ()
+        ),
     )
+    gate_artifact_hashes = {
+        "discovery_gate": {
+            "path": "gates/discovery_gate.json",
+            "sha256": file_sha256(discovery_gate),
+        },
+        "confirmation_gate": {
+            "path": "gates/confirmation_gate.json",
+            "sha256": file_sha256(confirmation_gate),
+        },
+    }
+    if data_version == "copy-v2":
+        gate_artifact_hashes["eligibility_gate"] = {
+            "path": "gates/eligibility_gate.json",
+            "sha256": file_sha256(eligibility_gate),
+        }
+        gate_artifact_hashes["reference_discovery_gate"] = {
+            "path": "gates/reference_discovery_gate.json",
+            "sha256": file_sha256(reference_discovery_gate),
+        }
+        gate_artifact_hashes["reference_confirmation_gate"] = {
+            "path": "gates/reference_confirmation_gate.json",
+            "sha256": file_sha256(reference_confirmation_gate),
+        }
     design_manifest = {
         "schema": "observerbench.qwen_induction_design_manifest.v1",
         "status": "frozen_before_outcomes",
         "design_id": "qwen_induction_fixture_v1",
-        "data_version": "copy-v1",
+        "data_version": data_version,
+        "scientific_claim_allowed": True,
         "all_design_gates_pass": True,
         "measurement_budgets": list(QWEN_INDUCTION_EFFECT_MEASUREMENT_BUDGETS),
         "model": {
             "requested_name": QWEN_INDUCTION_MODEL_NAME,
             "requested_revision": QWEN_INDUCTION_MODEL_REVISION,
         },
-        "gate_artifact_hashes": {
-            "discovery_gate": {
-                "path": "gates/discovery_gate.json",
-                "sha256": file_sha256(discovery_gate),
-            },
-            "confirmation_gate": {
-                "path": "gates/confirmation_gate.json",
-                "sha256": file_sha256(confirmation_gate),
-            },
-        },
+        "gate_artifact_hashes": gate_artifact_hashes,
         "artifact_hashes": {
             path.relative_to(design).as_posix(): file_sha256(path)
             for path in design_artifacts
@@ -268,6 +299,8 @@ def _make_artifacts(root: Path) -> Path:
     effect_manifest = {
         "schema": "observerbench.qwen_induction_effect_run.v1",
         "status": "complete_locked_test_outcomes",
+        "data_version": data_version,
+        "scientific_claim_allowed": True,
         "design_manifest_sha256": file_sha256(design / "design_manifest.json"),
         "model": {
             "requested_name": QWEN_INDUCTION_MODEL_NAME,
@@ -301,6 +334,9 @@ def test_versions_are_exact_and_reject_unknown_budget() -> None:
     )
     with pytest.raises(ValueError, match="unsupported Qwen induction measurement budget"):
         qwen_induction_effect_task_version(32)
+    assert qwen_induction_effect_task_version(16, data_version="copy-v2") == (
+        "copy-v2-b016"
+    )
 
 
 def test_closed_registry_exposes_qwen_versions_and_loads_tables(tmp_path: Path) -> None:
@@ -308,7 +344,14 @@ def test_closed_registry_exposes_qwen_versions_and_loads_tables(tmp_path: Path) 
         qwen_induction_effect_task_version(budget)
         for budget in QWEN_INDUCTION_EFFECT_MEASUREMENT_BUDGETS
     )
-    assert finite_effect_task_versions(QWEN_INDUCTION_EFFECT_TASK_NAME) == versions
+    v2_versions = tuple(
+        qwen_induction_effect_task_version(budget, data_version="copy-v2")
+        for budget in QWEN_INDUCTION_EFFECT_MEASUREMENT_BUDGETS
+    )
+    assert finite_effect_task_versions(QWEN_INDUCTION_EFFECT_TASK_NAME) == (
+        *versions,
+        *v2_versions,
+    )
     assert finite_effect_measurement_budgets(QWEN_INDUCTION_EFFECT_TASK_NAME) == (
         QWEN_INDUCTION_EFFECT_MEASUREMENT_BUDGETS
     )
@@ -318,6 +361,58 @@ def test_closed_registry_exposes_qwen_versions_and_loads_tables(tmp_path: Path) 
     task = load_finite_effect_task(task_id, artifacts_root=root)
     assert task.name == QWEN_INDUCTION_EFFECT_TASK_NAME
     assert task.measurement_budget == 16
+
+
+def test_registry_loads_copy_v2_tables(tmp_path: Path) -> None:
+    root = _make_artifacts(tmp_path / "qwen_registry_v2", data_version="copy-v2")
+    version = qwen_induction_effect_task_version(16, data_version="copy-v2")
+    task = load_finite_effect_task(
+        f"{QWEN_INDUCTION_EFFECT_TASK_NAME}@{version}", artifacts_root=root
+    )
+    assert task.version == "copy-v2-b016"
+
+    with pytest.raises(ValueError, match="differs from the requested task"):
+        load_finite_effect_task(
+            f"{QWEN_INDUCTION_EFFECT_TASK_NAME}@copy-v1-b016",
+            artifacts_root=root,
+        )
+
+
+def test_legacy_copy_v1_effect_manifest_without_data_version_still_loads(
+    tmp_path: Path,
+) -> None:
+    root = _make_artifacts(tmp_path / "qwen_legacy_v1")
+    path = root / "effects/effect_manifest.json"
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    payload.pop("data_version")
+    path.write_text(json.dumps(payload, sort_keys=True), encoding="utf-8")
+
+    direct = load_qwen_induction_effect_prediction_task(
+        root, measurement_budget=16
+    )
+    registered = load_finite_effect_task(
+        f"{QWEN_INDUCTION_EFFECT_TASK_NAME}@copy-v1-b016",
+        artifacts_root=root,
+    )
+    assert direct.version == registered.version == "copy-v1-b016"
+
+
+@pytest.mark.parametrize("effect_data_version", [None, "copy-v1"])
+def test_copy_v2_rejects_missing_or_mismatched_effect_data_version(
+    tmp_path: Path,
+    effect_data_version: str | None,
+) -> None:
+    root = _make_artifacts(tmp_path / "qwen_bad_v2", data_version="copy-v2")
+    path = root / "effects/effect_manifest.json"
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if effect_data_version is None:
+        payload.pop("data_version")
+    else:
+        payload["data_version"] = effect_data_version
+    path.write_text(json.dumps(payload, sort_keys=True), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="data versions differ"):
+        load_qwen_induction_effect_prediction_task(root, measurement_budget=16)
 
 
 def test_checked_loader_exposes_eight_head_features_and_targets(tmp_path: Path) -> None:

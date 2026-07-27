@@ -1,0 +1,10 @@
+# Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex
+# Colab package snapshot recorded before Copy-v2 outcomes on 2026-07-27.
+accelerate==1.14.0
+huggingface-hub==1.23.0
+matplotlib==3.10.0
+numpy==2.0.2
+pandas==2.2.2
+safetensors==0.8.0
+tokenizers==0.22.2
+transformers==5.14.1
