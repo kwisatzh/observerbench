@@ -1,0 +1,15 @@
+{
+  "schema_version": "observerbench.safety_observer_card.v0",
+  "observer_name": "my-observer",
+  "observer_version": "1.0.0",
+  "observer_family": "activation risk probe",
+  "observer_input": "frozen task activation features",
+  "fit_procedure": "ridge fit on the public fit split",
+  "implementation": "https://example.org/my-observer",
+  "risk_score_meaning": "larger values indicate greater loss if allowed",
+  "known_failure_modes": [],
+  "access_regime": "cached white-box activation",
+  "requires_white_box_access": true,
+  "additional_forward_passes": 0,
+  "metadata": {}
+}

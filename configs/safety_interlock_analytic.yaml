@@ -1,0 +1,18 @@
+{
+  "task": "safety_interlock_analytic",
+  "mode": "full",
+  "quick": false,
+  "seed": 0,
+  "n_train_pairs": 256,
+  "n_test_pairs": 512,
+  "activation_dim": 12,
+  "activation_noise": 0.02,
+  "ridge": 0.0001,
+  "block_budget_fraction": 0.10,
+  "escalation_budget_fraction": 0.10,
+  "violation_cost": 1.0,
+  "false_block_cost": 1.0,
+  "escalation_cost": 0.05,
+  "cvar_alpha": 0.90,
+  "heldout_operation": "delete"
+}

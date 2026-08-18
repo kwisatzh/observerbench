@@ -1,0 +1,52 @@
+{
+  "artifact_hashes": {
+    "fixed_action_prompt_losses.csv.gz": "4498f46d759555e15ba684641355dbe2e552f33fe0658c53cf761a219dbbf9e6",
+    "observer_summary.csv": "abcd52a570b5780490476b39d9a1e60a6d34d8168c58d3f5762b5f7f12870fe1",
+    "pair_pool_differences.csv": "0cea844793a8f2d55ca330adaca86c7cebcdb0a4d4042a88f9408fe19129d925",
+    "pool_signs.csv": "179db074a4344f4195c586352a442a3359deed5e6d55b62e61f207fd8c4a6020",
+    "prediction_diagnostics.csv": "12b6c71c38c202db7ce2acc62e6a6af9acf3226a669c5711596dddd020a871d5",
+    "result_digest.json": "849932cca2a57ff116f00a6d967d093f6dcde00f4f0e6d53372f8d72e4f4ea38",
+    "secondary_contrasts.csv": "347319c8928ef9d80a4faba7660ac6a7d771f0bad36b830621572e7089af33c0"
+  },
+  "freeze_manifest_sha256": "3792abb1d1e674d27d5d9742244a87efd54a59eb24c21879b7b380c609bd4bad",
+  "phase7_measurement_manifest_sha256": "6681b04b114b4aba1129edf9d73e5197426213130ae44b21333c859a2bed7a9e",
+  "phase7_shard_hashes": {
+    "shards/test/effects_0000_0016.csv": "b14e7319940a5a71c73b2e83164105ade23a9f01e9e713ab09841d723303cc5e",
+    "shards/test/effects_0016_0032.csv": "922ee5a634f38d19a08546cec2cae7c7d552e675f07ed95f94c60c383a52ab6e",
+    "shards/test/effects_0032_0048.csv": "074e71ea2e0662fc12d522183550ddf7c612a348404de95dd7ff4fd4e26aac4a",
+    "shards/test/effects_0048_0064.csv": "1511a70bed284caf5ccf6bd759e0f8aced3da4c43a03058ca4fccf11dfd02ac7",
+    "shards/test/effects_0064_0080.csv": "7aec331158169846ac49b277006a271f664aae7d4455f31efeed983a139526b2",
+    "shards/test/effects_0080_0089.csv": "45f17fdcf177e211778d15d8f26a0b711895e844acaee9f57ee709972b8395c7"
+  },
+  "phase8_measurement_manifest_sha256": "c14cb5e1143f36ed300e61516b26a6de3aa7c43bb76844ebe6ec5c8d2b3e1b66",
+  "phase8_shard_hashes": {
+    "shards/test/effects_0000_0016.csv": "0986bbf27f2021e5e0fa273fd032c030bae9a1cc4ec4a2d56cd00b0438f17a09",
+    "shards/test/effects_0016_0032.csv": "edbef8419b41cd6fe1089c0cc1aed9345073b03491b1818d583beda2f74e64af",
+    "shards/test/effects_0032_0048.csv": "970cbdc66d5404ffbb7b760ce4167472b4f7de302ab7784e8c41a95f42dac857",
+    "shards/test/effects_0048_0064.csv": "f0c239d661d8cb25afd4dc5808b68c6e903c185fb3c2e25b89e719ec027bf8ab",
+    "shards/test/effects_0064_0080.csv": "1c4ad25f227a512b072e6de334b695fd36f5c5f136685fe631c6c4eea144b1f0",
+    "shards/test/effects_0080_0096.csv": "fe348c68e66af2873da724335bc987d40a74c2b9dd86281f528dc53cb49fbf71",
+    "shards/test/effects_0096_0112.csv": "6153a06c0290831ba96fd919ea5ff2e77fa57aed1e9dfb6372696161fa4b2386",
+    "shards/test/effects_0112_0128.csv": "6969fef496d2e0fb26283a873390ec91e9fe42fcd4f12e17e655213b3bbdde28",
+    "shards/test/effects_0128_0144.csv": "68fc8e73a921a05374eb217f3f09ad1ec5c57611e4eeba625a161ba7c77c4add",
+    "shards/test/effects_0144_0148.csv": "8af38a479875bf63f2f41d48e061c564143b174f59aeac2ffb62458cc7839fbe"
+  },
+  "preoutcome_audit_sha256": "a95c8b2b065704e4dc654f17799acb062170b101c7590142d9744155e1ad0f13",
+  "protocol_sha256": "d22614d2deecf3818e0765a2851a8bd38151ed7c9ecedef7e619810fea537508",
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.1",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.14.2",
+    "source_dirty": true,
+    "source_revision": "0cec2c4ef17d9c3b0ef3fea8fdf15347ee4e28cb"
+  },
+  "schema": "observerbench.ioi_phase08_evaluation.v1",
+  "scientific_status": "post_review_post_confirmatory_target_sensitivity",
+  "secondary_no_success_gate": true,
+  "status": "post_confirmatory_secondary_sensitivity_complete"
+}

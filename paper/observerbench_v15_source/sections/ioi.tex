@@ -1,0 +1,319 @@
+\section{GPT-2 IOI: predicting an effect is not choosing an action}
+\label{sec:ioi}
+
+The nonlinear-suffix experiment used a small model with a known mechanism. We
+now turn to a documented
+circuit in GPT-2-small. Consider the prompt ``When Alice and Bob went to the
+store, Alice gave a book to.'' The correct next name is Bob, not the repeated
+subject Alice. Prior work identifies three relevant head groups: primary Name
+Movers promote Bob, Backup Name Movers compensate when that path is weakened,
+and Negative Name Movers suppress the competing name
+\cite{wang2023ioi,mcgrath2023hydra,mcdougall2023copy,rushing2024selfrepair}.
+These known groups let us test observers on a real intervention surface. We do
+not claim to discover a new circuit.
+
+The section follows three successive tests:
+
+\begin{enumerate}[leftmargin=1.5em,itemsep=0.15em,topsep=0.25em]
+  \item \textbf{Mean effect.} Do pairwise terms better predict unseen
+  ablations, and does that improve the fixed action?
+  \item \textbf{Direct loss.} Does an observer trained on prompt-level loss
+  choose a better action from the same interventions?
+  \item \textbf{Clean confirmation.} Repeat the comparison after the baseline
+  task check passes and include the exact do-nothing action.
+\end{enumerate}
+
+We write the three published head groups as
+\[
+\begin{aligned}
+P &= (9.9,9.6,10.0),\\
+B &= (9.0,9.7,10.1,10.2,10.6,10.10,11.2,11.9),\\
+E &= (10.7,11.10).
+\end{aligned}
+\]
+An ablation mask $m$ is the set of heads removed together. For prompt $i$ and
+mask $m$, define
+\[
+Y_i(m)=LD_{i,\mathrm{clean}}-LD_{i,\mathrm{ablate}(m)},
+\]
+where $LD$ is the logit for the indirect object minus the logit for the
+subject. Thus $Y_i(m)=1$ means that ablating mask $m$ reduces Bob's advantage
+over Alice by one logit on prompt $i$. At the final token, mean ablation
+replaces each selected head's output with an average from reference prompts of
+the same template. Whole-group ablations first reproduce known backup behavior.
+This is a check that the intervention works as intended, not a new mechanistic
+result.
+
+\subsection{A fixed test of effect prediction and action selection}
+
+We freeze the test before measuring candidate effects:
+
+\begin{itemize}
+  \item \textbf{Prompts and splits.} We pin GPT-2-small and generate 1,024
+  prompts from eight templates and 64 names. Separate 16-name banks supply 512
+  reference, 192 training, 64 validation, and 256 test prompts. Reference
+  prompts define the ablation means.
+
+  \item \textbf{Measurements and actions.} We use 160 calibration masks to
+  fit each observer. The observer then chooses from 320 previously unseen
+  candidate masks, divided into ten action pools of 32. Each mask contains
+  4--10 heads. Budgets 20, 40, 80, and 160 use nested prefixes of one
+  calibration sequence.
+
+  \item \textbf{Observers.} Four ridge models move from 13 independent head
+  effects, to group-count features, to a capacity-matched $P\times E$ term,
+  and finally to all three group-pair interactions. Each measurement is one
+  mask's average effect over the training prompts.
+
+  \item \textbf{Fixed action.} For each observer, budget, pool, and target
+  $t\in\{0.5,1.0,1.5\}$, the observer chooses one mask that is applied to every
+  held-out prompt. It cannot choose one mask for Alice--Bob and another for
+  Carol--David.
+\end{itemize}
+
+We freeze all candidate predictions before validation or test effects are
+measured. An audit found that an earlier metric had accidentally allowed a
+different, outcome-informed choice for each prompt. We corrected the metric
+before opening the outcomes, without changing the prompts, masks, observers,
+targets, or predictions.
+
+\subsection{Interaction terms improve mean-effect prediction}
+
+Let
+\[
+\mu(m)=\mathbb E_i[Y_i(m)]
+\]
+be a mask's average effect over held-out prompts. At the primary budget of 160
+measurements, the all-pairs observer lowers candidate-mask MAE from $0.486$ for
+per-head additivity and $0.473$ for count additivity to $0.395$, reductions of
+18.8\% and 16.7\%. Both improvements hold in all ten candidate pools.
+
+The $P\times E$ and all-pairs observers are effectively tied, with MAEs
+$0.3940$ and $0.3945$. This replaces an earlier exploratory ranking of the
+pairs. The result supports interaction-aware prediction, but it does not show
+that one pair uniquely explains the intervention surface. The gain appears at
+budgets 40, 80, and 160. With only 20 measurements, the richer designs have
+more coefficients than the data can identify. That cell is therefore an
+underdetermined fit, not evidence about sample efficiency.
+
+\subsection{The better mean predictor does not choose a better action}
+
+A mean-effect observer chooses
+\[
+\widehat m(t)=\arg\min_m |\widehat\mu(m)-t|.
+\]
+For $t=1$, for example, it selects the mask whose predicted average drop is
+closest to one logit. The benchmark instead scores the prompt-level loss of
+that fixed mask,
+\[
+R_t(m)=\mathbb E_i\left[|Y_i(m)-t|\right].
+\]
+Two masks can have the same average and different losses. A mask that reliably
+reduces the margin by one logit is better than one that alternates between zero
+and two, even though both average to one. Mean-effect prediction and action
+selection are therefore different tasks.
+
+The same prediction--decision gap appears in traffic engineering, where the
+most accurate traffic-matrix estimate need not produce the best routing
+decision~\cite{roughan2003te}. Here the controller cares not only about a
+mask's average effect, but also about how that effect varies across prompts.
+
+Table~\ref{tab:ioi-phase5} reports both outcomes at budget 160. The all-pairs
+model has the best $R^2$ and nearly the best mean-effect MAE, but its action
+loss is $1.015$, compared with $1.016$ for per-head additivity and $1.040$ for
+count additivity. Using unrounded losses, its reductions are 0.10\% and 2.34\%;
+the paired intervals $[-0.087,0.100]$ and $[-0.063,0.128]$ cross zero. The
+prespecified size-matched, cost-aware, tolerance, and name-pair checks also fail
+to establish a reliable action gain.
+
+\begin{table}[H]
+\centering
+\scriptsize
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+Observer & MAE & $R^2$ & $|\mu-t|$ & $J_t$ & $R_t$ & Within $0.25$ \\
+\midrule
+Per-head additive & 0.4860 & 0.7629 & 0.4910 & 0.5252 & 1.0163 & 15.42\% \\
+Count additive & 0.4734 & 0.7718 & 0.3476 & 0.6920 & 1.0396 & 14.62\% \\
+Count plus $P\!\times\!E$ & 0.3940 & 0.8365 & 0.3561 & 0.6703 & 1.0265 & 15.44\% \\
+Count plus all pairs & 0.3945 & 0.8387 & 0.3498 & 0.6655 & 1.0152 & 15.76\% \\
+\bottomrule
+\end{tabular}
+\caption{Held-out IOI results at 160 measurements. MAE and $R^2$
+score the prompt-averaged effect over candidate masks. The remaining columns
+score the masks selected for 30 pool--target cells. Values may differ slightly
+under rounding because $R_t=|\mu-t|+J_t$ is computed before aggregation.}
+\label{tab:ioi-phase5}
+\end{table}
+
+The reason can be written exactly. Define the target-dependent dispersion
+penalty
+\[
+J_t(m)=\mathbb E_i|Y_i(m)-t|-|\mathbb E_i[Y_i(m)]-t|.
+\]
+This nonnegative term is the extra action loss caused by prompt-to-prompt
+variation hidden by the mean. Therefore
+\begin{equation}
+\label{eq:dispersion}
+R_t(m)=|\mu(m)-t|+J_t(m).
+\end{equation}
+The interaction-aware observers choose masks whose averages are closer to the
+target, but those masks vary more across prompts. The second effect cancels the
+first. Even perfect knowledge of each mask's test-set mean chooses the
+lowest-loss mask in only 3 of 30 pool--target cells. Its loss is $0.927$,
+compared with $0.749$ when the full prompt-level action loss is known.
+Mean-effect prediction works as intended; the mean is simply the wrong
+quantity for this action rule.
+
+\subsection{Predict the loss used to choose the action}
+\label{sec:phase6-estimand}
+
+Equation~\ref{eq:dispersion} tells us what to try next: keep the measurements
+and action rule fixed, but predict the action loss $R_t(m)$ instead of the mean
+effect $\mu(m)$. We designed this test after the frozen mean-effect comparison
+and an exploratory pilot. Before measuring the new test effects, we fix the
+protocol, predictions, and actions. The resulting local record documents the
+order of data access; it is not an independent preregistration.
+
+The comparison holds the measurement basis and action rule fixed:
+
+\begin{itemize}[itemsep=0.15em,topsep=0.25em]
+  \item eight new templates, 192 training prompts, 512 test prompts, and
+  targets $t\in\{0.5,1.0\}$;
+  \item the same 160 calibration masks and 1,536 candidate masks in 48 pools;
+  \item one pairwise (quadratic) basis with an intercept, 13 head indicators,
+  and 78 head-pair products.
+\end{itemize}
+
+The direct-loss observer, called direct risk in the tables, fits
+\[
+\frac{1}{192}\sum_i |Y_i(m)-t|.
+\]
+The natural-mean observer predicts the average effect and chooses the mask
+closest to the target. A transformed-mean control predicts that distance
+directly with the same 92-column basis. The observers therefore see the same
+masks and features; only the quantity they learn differs. We freeze every
+prediction and choice before measuring 786,432 test prompt--mask outcomes.
+
+The mean observer remains strong at its own task: held-out mean-effect MAE is
+$0.128$, $R^2$ is $0.844$, and rank correlation is $0.938$. The direct-loss
+observer nevertheless reduces action loss from $1.076$ to $0.833$, a 22.6\%
+reduction. It reduces loss by 22.7\% against the same-feature transformed-mean
+control. Table~\ref{tab:phase6-ioi-confirmation} reports the paired intervals
+and all prespecified checks.
+
+The decomposition explains why. The direct-loss observer matches the mean less
+closely: $0.550$ instead of $0.433$. But it lowers the prompt-variation term
+from $0.643$ to $0.283$. That $0.360$ reduction is larger than the $0.117$ loss
+in mean matching. Extra pairwise features alone do not explain the gain:
+pairwise direct loss improves only 3.0\% over additive direct loss and 3.5\%
+over count-additive direct loss, with both intervals crossing zero. On this
+surface, predicting the right quantity matters more than adding features.
+
+\input{../generated_phase06/ioi_confirmation/ioi_confirmation_table}
+
+Two failed checks limit this result:
+
+\begin{itemize}[itemsep=0.2em,topsep=0.25em]
+  \item \textbf{The do-nothing action was absent.} Every candidate mask
+  removes 4--9 heads. Since $Y_i(\varnothing)=0$, no-op loss is exactly $t$.
+  Averaged over the two targets, no-op loss is $0.750$, below the direct-loss
+  observer at $0.833$.
+  \item \textbf{The baseline task check failed.} Overall IO-versus-subject accuracy is
+  0.867 rather than 0.900, and the worst template reaches 0.578 rather than
+  0.750.
+\end{itemize}
+
+We remove no rows. This test shows better ranking among forced nonempty actions
+on this surface. It does not show improvement over no-op or a new IOI
+mechanism.
+
+\subsection{At a one-logit target, direct loss beats the mean observer and exact no-op}
+\label{sec:phase7-confirmation}
+
+The failed checks determine the confirmation:
+
+\begin{itemize}
+  \item We return to the eight canonical templates and generate 512 new prompts
+  from 32 new name-pair clusters. Clean IO-versus-subject accuracy is 0.977
+  overall and at least 0.953 for every template, so the baseline task check
+  passes.
+  \item We use $t=1$, the only screened target whose pilot estimates favored
+  the direct-loss observer over both the same-feature mean observer and exact
+  no-op. This is a disclosed pilot-informed choice, not an independent
+  preregistration.
+  \item Each of 48 action pools contains 30 fresh nonempty masks plus exact
+  no-op. Both observers use the same 92-column quadratic basis and the same
+  frozen training and calibration outcomes.
+  \item We freeze every action before measuring candidate effects. The two
+  observers select 89 distinct nonnoop masks, so we measure only the
+  corresponding $512\times89=45{,}568$ prompt--mask cells.
+\end{itemize}
+
+A provenance check stopped an initial run before its values were inspected.
+The corrected run kept the target, prompts, masks, fits, and actions fixed, and
+an independent recomputation matched the coefficients, predictions, and
+choices. Appendix~\ref{app:earlier-diagnostics} records the details.
+
+Both required comparisons pass:
+
+\begin{itemize}
+  \item Against the same-feature mean observer, direct loss falls from $1.093$
+  to $0.891$, an 18.5\% reduction with absolute reduction $0.202$ and interval
+  $[0.115,0.293]$.
+  \item Against exact no-op, the reduction is 10.9\%, or $0.109$, with interval
+  $[0.012,0.196]$.
+\end{itemize}
+
+The fresh result retains the direction of the pilot: the gain against the mean
+observer grows from 9.2\% to 18.5\%, while the gain against no-op falls from
+17.7\% to 10.9\%.
+
+\input{../generated_phase07/ioi_confirmation/ioi_confirmation_table}
+
+The decomposition shows the same tradeoff. The direct-loss observer has a worse
+mean-to-target term, $0.397$ rather than $0.286$, but lowers the dispersion
+penalty from $0.807$ to $0.494$. It beats the mean observer on all eight
+templates and no-op on six. The pooled no-op comparison passes, but the gain is
+not uniform across templates.
+
+\paragraph{How the target changes the value of acting.}
+After the primary result, we freeze a secondary analysis over all three
+screened targets. It keeps the prompts, pools, quadratic basis, and calibration
+outcomes fixed. It compares the direct-loss observer with the natural mean plug-in, the
+same-basis transformed-mean score, and exact no-op. We measure new outcomes
+only for additional selected masks. This analysis has no success gate and does
+not change the baseline-checked result.\footnote{At $t=1$, the confirmation and this sensitivity
+use the same loss cells but separate fixed bootstrap seeds. Their point
+estimate is identical; lower limits $0.012$ and $0.015$ differ only through
+Monte Carlo resampling.}
+
+\input{../generated_phase08/ioi_sensitivity/ioi_target_sensitivity_table}
+
+The direct-loss observer beats both mean-based controls at every target. Relative to the
+natural mean plug-in, the reduction ranges from 10.7\% to 29.4\%; relative to
+the transformed-mean score, it ranges from 9.3\% to 20.8\%. Every paired
+interval excludes zero. No-op follows a simpler rule. Its effect is zero, so
+its loss is exactly $R_t(\varnothing)=t$. Doing nothing becomes harder to beat
+when the requested change is small. The data follow this pattern: direct loss
+loses to no-op at $t=0.5$ and beats it at $t=1$ and $t=1.5$.
+
+The transformed-mean control also selects raw negative loss predictions in 44,
+44, and 16 pools across the three targets; the direct-loss observer does so in
+4, 0, and 0.
+We keep the frozen raw-score rule rather than clip scores after seeing the
+outcomes.
+
+\begin{samepage}
+Together the IOI tests show:
+
+\begin{itemize}
+  \item pairwise terms improve prediction of a mask's mean effect;
+  \item predicting action loss improves fixed-action choice; and
+  \item even a better chosen intervention can lose to doing nothing when the
+  requested change is small.
+\end{itemize}
+
+These claims apply only to GPT-2-small, the declared templates and masks, and
+the measured action losses.
+\end{samepage}

@@ -1,0 +1,64 @@
+{
+  "artifact_hashes": {
+    "all_selected_masks.csv": "c0e27f97100c288958125b8c76b4dad2b6f5d6276defbc3dfd5b2a97554a79ce",
+    "candidate_predictions.csv": "8ecae40aeafd01851fb6fa4afaba78e22c04b0b053e0a6eb9052b04698d3083d",
+    "fit_diagnostics.csv": "d5bcc482affaecb240be982f81394f996aa4f2f5ba84be5c2f465fd507220961",
+    "fixed_actions.csv": "b4287522fc4691210982b99a6fec3b7a3890b4bf4ddcb5b19f7e1eac427831b1",
+    "new_measurement_masks.csv": "667bb263d4e25f3d4bdcf3b3f877797bee0bfc0270a673987f9069422dfd2032",
+    "observer_coefficients.csv": "cafbb901fee004d8a8d8a210ae22951e32bf7dd74e9b1862f1e49986b368f2bc",
+    "reused_phase7_masks.csv": "a3e93f8811f6ffacb9a8c064f148420f4847b18c696a05457c856c2832e8bc60"
+  },
+  "basis_columns": 92,
+  "counts": {
+    "candidate_prediction_rows": 13392,
+    "fixed_actions": 576,
+    "exact_noop_baseline_action_rows": 144,
+    "fitted_selector_noop_selections": 12,
+    "new_effect_cells_to_measure": 75776,
+    "new_selected_masks_to_measure": 148,
+    "reused_phase7_measured_masks": 89,
+    "selected_unique_nonnoop_masks": 237,
+    "total_selected_noop_action_rows": 156
+  },
+  "design_id": "ioi_phase07_design_f7c5a0ec88a44fd3",
+  "fit_outcomes": "Phase-5 train/calibration only",
+  "new_candidate_outcomes_loaded": false,
+  "next_allowed_stage": "Run the deterministic pre-outcome audit, then measure only new_measurement_masks.csv.",
+  "phase7_outcome_values_loaded_during_fit": false,
+  "protocol_sha256": "d22614d2deecf3818e0765a2851a8bd38151ed7c9ecedef7e619810fea537508",
+  "ridge": 1e-06,
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.1",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.14.2",
+    "source_dirty": true,
+    "source_revision": "0cec2c4ef17d9c3b0ef3fea8fdf15347ee4e28cb"
+  },
+  "schema": "observerbench.ioi_phase08_prediction_action_freeze.v1",
+  "scientific_status": "post_review_post_confirmatory_target_sensitivity",
+  "selectors": [
+    "direct_risk_head_pair_quadratic",
+    "natural_mean_effect_head_pair_quadratic",
+    "transformed_mean_head_pair_quadratic"
+  ],
+  "source_bindings": {
+    "phase5_design_manifest": "5f9aedda456048378d318537b4099bf28d09991fd40a18004f71d82075075922",
+    "phase5_effect_manifest": "fb3e807ea52d27dd7da58d49e2b6fa4a9d4c425bdb8e9a999cf240bdcb1ff80f",
+    "phase7_design_manifest": "3dfa6352524c66b6b57794ec9ed2c89a900afd7df3d9879cd7f21cb0686feee5",
+    "phase7_freeze_manifest": "fce0b027f232841653d5b7f24f3254243a71d3fbd282cc9c468c4781eab334e5",
+    "phase7_measurement_manifest": "6681b04b114b4aba1129edf9d73e5197426213130ae44b21333c859a2bed7a9e",
+    "phase7_pretest_manifest": "7c148b1137460fa7d4674f97f3984ce8a39068cd1dbe394852fed2f9141ae2a2",
+    "phase7_selected_masks": "7f843bc5c2649ca2e84a52dccb6a7fc12330fbeab586186e4ad766517b9869eb"
+  },
+  "status": "all_sensitivity_actions_frozen_before_new_outcomes",
+  "targets": [
+    0.5,
+    1.0,
+    1.5
+  ]
+}

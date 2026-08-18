@@ -1,56 +1,109 @@
 # ObserverBench Paper Reproduction Map
 
-ObserverBench v0 is a reproduction artifact and diagnostic workbench for the paper. It is not a general benchmark platform, not a plugin system, and not a place to add new experiments or revise scientific claims.
+ObserverBench v0 is a bounded paper-reproduction artifact and observer-control
+workbench. It is not a plugin system or a bring-your-own-model API. The tested
+external composition points are the analytic Ctl-1 adapter and the
+inference-free IOI finite-effect registry. Trained Ctl-1 and Ctl-2 remain
+registered reproduction tasks.
 
-Paper source used for this map: `observerbench_paper_v9.pdf` (13 pages, generated June 29, 2026).
+The current manuscript source is under `paper/observerbench_v15_source/`. This
+map names results by stable reproduction ID rather than by typeset figure
+number, because figure numbers can move during revision.
 
-Fast reproduction is CPU-only:
+## Fast Path
+
+Both commands below run the same CPU-only renderer:
 
 ```bash
 python scripts/reproduce_paper_fast.py
+observerbench make-figures --outdir paper/generated_current
 ```
 
-It reads frozen CSV/JSON summaries under `results/frozen/`, writes `paper/generated_figures/`, does not download GPT-2, does not import TransformerLens, and does not train models.
+The renderer reads legacy summaries from `results/frozen/` and checked review
+outputs from `results/revision/`. It writes only to the requested output
+directory. It does not change either input tree, download GPT-2, import
+TransformerLens, or train a model.
 
-Full reruns are routed through:
+The default IDs match the current manuscript:
+
+```text
+figure_01  figure_02  figure_03  figure_04  figure_08
+revision_ctl2_factorial  revision_ctl2_calibration  revision_ctl2_table
+revision_ioi_stage2b  revision_ioi_stage2c  revision_ioi_mobius
+revision_ioi_table  revision_observer_cards
+```
+
+Generate one checked result with:
 
 ```bash
-python scripts/reproduce_paper_full.py
+python scripts/reproduce_paper_fast.py --only revision_ctl2_factorial
+observerbench make-figures \
+  --only revision_ioi_stage2c \
+  --outdir paper/generated_current
 ```
 
-The full script refuses selected training, TransformerLens, or GPT-2 runs unless `--yes-run-expensive` is passed. The IOI full GPT-2/TransformerLens runners are documented as expensive optional reruns; the migrated base package currently supports CPU smoke fixtures and Stage 2d CPU postprocessing.
+## Current checked manuscript artifacts
 
-| Figure/Table | Paper section | Result claim | Command to regenerate from frozen outputs | Command to rerun full experiment | Expected output files | Approx runtime | Requires GPU/MPS? | Requires TransformerLens/GPT-2? | Frozen result path |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Figure 1 | Sec. 4.2, Analytic Ctl-1 interaction strength | First-order remains target-competitive while paying extra collateral as interaction strength grows. | `python scripts/reproduce_paper_fast.py --only figure_01` | `python scripts/reproduce_paper_full.py --only ctl1_analytic` | `paper/generated_figures/figure_01_ctl1_analytic_interaction_sweep.png` | fast <5s; full analytic <1m CPU | No | No | `results/frozen/ctl1_analytic/collateral_sweeps_v2/` |
-| Figure 2 | Sec. 4.3, Analytic nuisance placement | Collateral burden is geometry-dependent: first-order pays more when nuisance lies in the main-effect steering subspace, lifted pays more as nuisance moves toward the interaction coordinate. | `python scripts/reproduce_paper_fast.py --only figure_02` | `python scripts/reproduce_paper_full.py --only ctl1_analytic` | `paper/generated_figures/figure_02_ctl1_analytic_nuisance_sweep.png` | fast <5s; full analytic <1m CPU | No | No | `results/frozen/ctl1_analytic/collateral_sweeps_v2/` |
-| Figure 3 | Sec. 5, Trained-transformer Ctl-1 interaction strength | The learned residual-space task preserves the Ctl-1 directionality: first-order is target-useful but increasingly worse than lifted as interaction strength grows. | `python scripts/reproduce_paper_fast.py --only figure_03` | `python scripts/reproduce_paper_full.py --only trained_ctl1 --yes-run-expensive` | `paper/generated_figures/figure_03_trained_ctl1_interaction_sweep.png` | fast <5s; full 1-3h paper-scale, longer on CPU | Recommended | No | `results/frozen/trained_ctl1/trained_transformer_sweeps_v5_clean/` |
-| Figure 4 | Sec. 5, Trained-transformer Ctl-1 nuisance placement | Learned residual geometry preserves the qualitative nuisance-placement crossover; observer name alone does not determine collateral. | `python scripts/reproduce_paper_fast.py --only figure_04` | `python scripts/reproduce_paper_full.py --only trained_ctl1 --yes-run-expensive` | `paper/generated_figures/figure_04_trained_ctl1_nuisance_sweep.png` | fast <5s; full 1-3h paper-scale, longer on CPU | Recommended | No | `results/frozen/trained_ctl1/trained_transformer_sweeps_v5_clean/` |
-| Figure 5 | Sec. 6, Ctl-2 closed-loop default trajectories | With controller and plant fixed, first-order observer bias compounds through the loop; lifted attenuates the instability and oracle_target verifies the gain is stable for an accurate observer. | `python scripts/reproduce_paper_fast.py --only figure_05` | `python scripts/reproduce_paper_full.py --only trained_ctl2 --yes-run-expensive` | `paper/generated_figures/figure_05_ctl2_closed_loop_trajectories.png` | fast <5s; full 30-90m paper-scale MPS/GPU, longer on CPU | Recommended | No | `results/frozen/ctl2/default_v7_clean/` |
-| Table 1 | Sec. 6, Ctl-2 interaction-strength sweep | At gamma=0 first-order and lifted tie; in the interactional regime first-order has higher integrated error, collateral, divergence rate, and final target MSE than lifted. | `python scripts/reproduce_paper_fast.py --only table_01` | `python scripts/reproduce_paper_full.py --only trained_ctl2 --yes-run-expensive` | `paper/generated_figures/table_01_ctl2_interaction_sweep.csv`; `paper/generated_figures/table_01_ctl2_interaction_sweep.md` | fast <5s; full 2-5h sweep paper-scale MPS/GPU, longer on CPU | Recommended | No | `results/frozen/ctl2/sweeps_v7/` |
-| Figure 6 | Sec. 6, Ctl-2 divergence-rate delta | Divergence-rate delta is near zero at the null and positive in the interactional regime, exposing observer-induced feedback failure. | `python scripts/reproduce_paper_fast.py --only figure_06` | `python scripts/reproduce_paper_full.py --only trained_ctl2 --yes-run-expensive` | `paper/generated_figures/figure_06_ctl2_divergence_rate_delta.png` | fast <5s; full 2-5h sweep paper-scale MPS/GPU, longer on CPU | Recommended | No | `results/frozen/ctl2/sweeps_v7/` |
-| Figure 7 | Sec. 6, Ctl-2 collateral trajectories | First-order accumulates more collateral at the default nuisance placement; the nuisance sweep keeps the geometric caveat explicit. | `python scripts/reproduce_paper_fast.py --only figure_07` | `python scripts/reproduce_paper_full.py --only trained_ctl2 --yes-run-expensive` | `paper/generated_figures/figure_07_ctl2_collateral_trajectories.png` | fast <5s; full 30-90m paper-scale MPS/GPU, longer on CPU | Recommended | No | `results/frozen/ctl2/default_v7_clean/`; `results/frozen/ctl2/sweeps_v7/` |
-| Figure 8 | Sec. 7.1, IOI Stage 1 whole-group self-repair diagnostic | Mean ablation reproduces a large conditional self-repair diagnostic: the joint primary+backup drop exceeds the singleton-additive prediction. | `python scripts/reproduce_paper_fast.py --only figure_08` | `python scripts/reproduce_paper_full.py --only ioi_stage1 --yes-run-expensive` | `paper/generated_figures/figure_08_ioi_stage1_self_repair.png` | fast <5s; full 10-30m after GPT-2 is cached | Recommended | Yes | `results/frozen/ioi/stage1_both_end/` |
-| Figure 9 | Sec. 7.3, IOI Stage 2b random head-level subsets | Over broad random head subsets, the per-head additive observer is already strong; the cheap observer is mostly sufficient under this intervention distribution. | `python scripts/reproduce_paper_fast.py --only figure_09` | `python scripts/reproduce_paper_full.py --only ioi_stage2b --yes-run-expensive` | `paper/generated_figures/figure_09_ioi_stage2b_random_subsets.png` | fast <5s; full 1-3h after GPT-2 is cached | Recommended | Yes | `results/frozen/ioi/stage2b_mean_end/` |
-| Figure 10 | Sec. 7.4, IOI Stage 2c primary-stratified subsets | Under primary-stratified interventions, count interactions matter; the bundled win should not be assigned to P x B alone. | `python scripts/reproduce_paper_fast.py --only figure_10` | `python scripts/reproduce_paper_full.py --only ioi_stage2c --yes-run-expensive` | `paper/generated_figures/figure_10_ioi_stage2c_primary_stratified.png` | fast <5s; full 2-4h after GPT-2 is cached | Recommended | Yes | `results/frozen/ioi/stage2c_primary_stratified_mean_end/` |
-| Table 2 | Sec. 7.5, IOI Stage 2d per-pair decomposition | The Stage 2c win is real cross-group signal dominated by P x E rather than P x B; count_additive alone does not recover the all-pairs gain. | `python scripts/reproduce_paper_fast.py --only table_02` | `python scripts/reproduce_paper_full.py --only ioi_stage2d` | `paper/generated_figures/table_02_ioi_stage2d_per_pair.csv`; `paper/generated_figures/table_02_ioi_stage2d_per_pair.md` | fast <5s; full postprocess <2m CPU if Stage 2c outputs exist | No | No for Stage 2d postprocess; yes for full Stage 2c rerun | `results/frozen/ioi/stage2d_per_pair/` |
+| Study | Claim supported | Paper artifact builder | Checked inputs |
+| --- | --- | --- | --- |
+| Study 1 | The affine certificate predicts error after each edit traverses a learned nonlinear Transformer suffix. The diagonal lifted pair helps for the interactional target; the crossed pairs fail conditioning and support only a compatibility claim. | `python scripts/build_phase05_nonlinear_suffix_artifact.py` | `results/revision/phase05/nonlinear_suffix_v3_support/` |
+| Study 2 | Interaction-aware models improve held-out mean-effect prediction, but that improvement does not reliably lower fixed-action loss. | Included in the checked IOI registry and manuscript source | `results/revision/phase05/ioi_confirmatory/` |
+| Study 3 | Direct-risk fitting beats same-basis mean controls in forced choice, while the missing no-op and failed clean gate bound the result. | `python scripts/build_phase06_ioi_confirmation_artifact.py` | `results/revision/phase06/ioi_fresh_confirmation/` |
+| Study 4 | On clean-gated canonical prompts at the pilot-informed target, direct risk beats the natural-mean plug-in and exact no action. | `python scripts/build_phase07_ioi_confirmation_artifact.py` | `results/revision/phase07/ioi_canonical_noop_confirmation_v2/` |
+| Study-4 sensitivity | Direct risk beats natural-mean and transformed-mean controls at all three targets; its value against no action is target-dependent. | `python scripts/build_phase08_ioi_sensitivity_artifact.py` | `results/revision/phase08/ioi_target_sensitivity/` |
+| External APPS safety monitor | A neutral-context activation probe outperforms the declared output-distribution and supervised-text controls; rare-prevalence resampling removes the balanced-panel audit floor. | `python scripts/plot_controlarena_prevalence_sensitivity.py` | `results/revision/ai_control/controlarena_apps_qwen_followup_v1/` |
+| APPS post-outcome diagnostics | Within-group separation remains high, but global audit allocation drifts across dataset families and neutral-input-length quartiles. Cached verdict layers do not explain the neutral-context gap. | `python scripts/analyze_controlarena_apps_strata.py`; `python scripts/analyze_controlarena_verdict_layers.py` | `results/revision/ai_control/controlarena_apps_qwen_followup_v1/` |
 
-## Frozen Inputs
+The full manuscript command validates all of these before compiling the PDF:
 
-Fast reproduction expects these frozen summaries:
+```bash
+make -C paper/observerbench_v15_source
+```
 
-- `results/frozen/ctl1_analytic/collateral_sweeps_v2/gamma_sweep_pairwise_summary.csv`
-- `results/frozen/ctl1_analytic/collateral_sweeps_v2/nuisance_weight_pairwise_summary.csv`
-- `results/frozen/trained_ctl1/trained_transformer_sweeps_v5_clean/gamma_sweep_pairwise_summary.csv`
-- `results/frozen/trained_ctl1/trained_transformer_sweeps_v5_clean/nuisance_weight_pairwise_summary.csv`
-- `results/frozen/ctl2/default_v7_clean/ctl2_trajectory_quantiles.csv`
-- `results/frozen/ctl2/sweeps_v7/gamma_sweep_pairwise_summary.csv`
-- `results/frozen/ioi/stage1_both_end/ioi_stage1_summary.csv`
-- `results/frozen/ioi/stage2b_mean_end/ioi_stage2b_bootstrap_summary.csv`
-- `results/frozen/ioi/stage2b_mean_end/ioi_stage2b_kfold_predictions.csv`
-- `results/frozen/ioi/stage2c_primary_stratified_mean_end/ioi_stage2c_paired_delta_mae.csv`
-- `results/frozen/ioi/stage2c_primary_stratified_mean_end/ioi_stage2c_primary_count_errors.csv`
-- `results/frozen/ioi/stage2d_per_pair/ioi_stage2d_bootstrap_summary.csv`
-- `results/frozen/ioi/stage2d_per_pair/ioi_stage2d_model_comparison.csv`
+## Earlier checked revision results
 
-The frozen files are summaries and diagnostics only. They do not include model weights, GPT-2 caches, Python virtual environments, or private local paths.
+| Reproduction ID | Claim supported | Fast output | Scientific rerun or audit | Checked inputs |
+| --- | --- | --- | --- | --- |
+| `revision_ctl2_factorial` | The 2x2 estimator-by-direction design separates estimator error from direction geometry. For every nonzero interaction strength, first-order ISE exceeds lifted ISE in all six training seeds with either direction held fixed. Bands are seed min--max, not percentile intervals. | `revision_ctl2_factorial_ise_by_gamma.png` | Current-code 30-cell sweep followed by `scripts/audit_ctl2_phase01.py` with the Phase-4 paths | `results/revision/phase04/ctl2_multiseed_sweep_current/phase01_sweep_results.csv`; `results/revision/phase04/ctl2_phase04_audit.json` |
+| `revision_ctl2_calibration` | Held-out scalar response calibration corrects local response gain in the affine fixture, but does not remove estimation bias and can be ill-conditioned. | `revision_ctl2_response_calibration_by_gamma.png` | Same current-code sweep and audit as above | Same checked Phase-4 Ctl-2 inputs as above |
+| `revision_ctl2_table` | Fixed-direction Ctl-2 effects used in the manuscript table. | `revision_ctl2_factorial_table.csv`; `.md`; `.tex` | `python scripts/build_phase04_artifact.py` | `results/revision/phase04/ctl2_phase04_audit.json` |
+| `revision_ioi_stage2b` | Per-head additivity remains strong, but equal-capacity count interactions improve held-out prediction under the anchored broad-random mask design. PE is largest in both add-one and leave-one-out analyses; PB contributes conditionally. | `revision_ioi_stage2b_capacity_matched.png` | `python scripts/run_ioi_phase2_capacity.py` | `results/revision/phase02/ioi_stage2b_capacity/` |
+| `revision_ioi_stage2c` | Primary-stratified masks increase the value of interaction-aware prediction. With four added degrees of freedom per pair, PE dominates; PB is weak in add-one analysis but positive when removed from the full pair model. | `revision_ioi_stage2c_capacity_matched.png` | `python scripts/run_ioi_phase2_capacity.py` | `results/revision/phase02/ioi_stage2c_capacity/` |
+| `revision_ioi_mobius` | Direct group-mask interactions corroborate the predictive ranking: PE exceeds PB, with a prompt-bootstrap interval for PE-minus-PB that stays above zero. | `revision_ioi_mobius_intervals.png` | `python scripts/run_ioi_phase2_capacity.py` | `results/revision/phase02/ioi_stage2c_capacity/mobius_bootstrap_summary.csv` |
+| `revision_ioi_table` | Capacity-matched add-one, leave-one-out, and direct-interaction estimates with prompt-bootstrap 5--95% intervals. | `revision_ioi_capacity_contrasts.csv`; `.md`; `.tex`; `revision_ioi_mobius_intervals.csv`; `.md` | `python scripts/run_ioi_phase2_capacity.py` | `results/revision/phase02/ioi_stage2b_capacity/`; `results/revision/phase02/ioi_stage2c_capacity/` |
+| `revision_observer_cards` | Five checked cards record the estimand, measurement design, metrics, thresholds, recommendation, scope, status, and source hashes. The Ctl-2 card is typeset in the paper. | `observer_cards/observer_card.json`; `.md`; `ctl2_observer_card.tex` | `python scripts/build_phase04_artifact.py` | `results/revision/phase04/observer_cards/`; `results/revision/phase04/phase04_manifest.json` |
+
+The combined IOI claim gate is
+`results/revision/phase02/ioi_phase02_claim_audit.json`. The current Ctl-2
+claim gate is `results/revision/phase04/ctl2_phase04_audit.json`. The combined
+Phase-4 gate is `results/revision/phase04/phase04_claim_audit.json`.
+
+## Legacy Frozen Results
+
+The following superseded IDs remain available through `--only` or as part of
+`--legacy`:
+
+```text
+figure_05  figure_06  figure_07  figure_09  figure_10
+table_01   table_02
+```
+
+They read only from `results/frozen/`. Their pre-review Ctl-2 attribution and
+single-product IOI pair ranking are superseded by the checked revision results
+above. Frozen IDs `figure_01`--`figure_04` and `figure_08` remain in the current
+paper.
+
+## Input Boundary
+
+Frozen and checked inputs contain result summaries, diagnostics, and the
+prompt-level values required for the checked bootstrap. They do not contain
+model weights, GPT-2 caches, virtual environments, or private local paths.
+
+Expensive model and training reruns remain outside the fast renderer:
+
+```bash
+python scripts/reproduce_paper_full.py --yes-run-expensive
+```
+
+The full dispatcher requires explicit acknowledgement before selected training
+or TransformerLens/GPT-2 tasks.

@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use ObserverBench, please cite the paper and this repository."
+title: "ObserverBench"
+type: software
+authors:
+  - name: "ObserverBench authors"
+    email: "evijay@gmail.com"
+abstract: "A reproduction artifact and diagnostic workbench for evaluating observers in control-oriented interpretability."
+keywords:
+  - interpretability
+  - observer evaluation
+  - control
+  - mechanistic interpretability
+license: MIT
+version: "0.0.0"
+date-released: "2026-06-30"

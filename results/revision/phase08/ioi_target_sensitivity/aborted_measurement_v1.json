@@ -1,0 +1,25 @@
+{
+  "schema": "observerbench.ioi_phase08_aborted_measurement.v1",
+  "status": "aborted_after_complete_measurement_before_value_inspection_or_evaluation",
+  "reason": "The post-run source-closure audit found that heads.py, which maps mask bits to GPT-2 heads, was not named explicitly in the pre-outcome transitive source seal. The file was unchanged, but this run is not used for any result.",
+  "candidate_outcome_values_inspected": false,
+  "evaluation_run": false,
+  "actions_or_measurement_union_changed_for_replacement": false,
+  "preservation_rule": "Keep this record, the first audit, and the first measurement unchanged as audit evidence. Evaluate only a replacement run made after the expanded source seal.",
+  "artifact_hashes": {
+    "preoutcome_audit/preoutcome_audit.json": "a44db6cde52abcf810e55fbc5e983d7ce272be0f8056f1dc7d5e71f74c7bc69a",
+    "new_measurement/measurement_run_spec.json": "8a4554d6278fa74ce1d5e52bfe940f947a34ec4eb9188370dede4d40e578c7b1",
+    "new_measurement/measurement_progress.json": "9ff94e1bffa7855a8ab4a3562cd07071fcf9c7e77bc20822692e8f6702ea5206",
+    "new_measurement/measurement_manifest.json": "7125e91e63e5f0389cffb769f3aec91b3f317b1ae208c22438bfb0d3984e31fe",
+    "new_measurement/shards/test/effects_0000_0016.csv": "0986bbf27f2021e5e0fa273fd032c030bae9a1cc4ec4a2d56cd00b0438f17a09",
+    "new_measurement/shards/test/effects_0016_0032.csv": "edbef8419b41cd6fe1089c0cc1aed9345073b03491b1818d583beda2f74e64af",
+    "new_measurement/shards/test/effects_0032_0048.csv": "970cbdc66d5404ffbb7b760ce4167472b4f7de302ab7784e8c41a95f42dac857",
+    "new_measurement/shards/test/effects_0048_0064.csv": "f0c239d661d8cb25afd4dc5808b68c6e903c185fb3c2e25b89e719ec027bf8ab",
+    "new_measurement/shards/test/effects_0064_0080.csv": "1c4ad25f227a512b072e6de334b695fd36f5c5f136685fe631c6c4eea144b1f0",
+    "new_measurement/shards/test/effects_0080_0096.csv": "fe348c68e66af2873da724335bc987d40a74c2b9dd86281f528dc53cb49fbf71",
+    "new_measurement/shards/test/effects_0096_0112.csv": "6153a06c0290831ba96fd919ea5ff2e77fa57aed1e9dfb6372696161fa4b2386",
+    "new_measurement/shards/test/effects_0112_0128.csv": "6969fef496d2e0fb26283a873390ec91e9fe42fcd4f12e17e655213b3bbdde28",
+    "new_measurement/shards/test/effects_0128_0144.csv": "68fc8e73a921a05374eb217f3f09ad1ec5c57611e4eeba625a161ba7c77c4add",
+    "new_measurement/shards/test/effects_0144_0148.csv": "8af38a479875bf63f2f41d48e061c564143b174f59aeac2ffb62458cc7839fbe"
+  }
+}

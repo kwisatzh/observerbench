@@ -1,0 +1,36 @@
+name: Queue sealed evaluation
+
+on:
+  workflow_run:
+    workflows: ["Submission preflight"]
+    types: [completed]
+
+permissions:
+  contents: read
+
+jobs:
+  dispatch:
+    if: >-
+      ${{ github.event.workflow_run.conclusion == 'success' &&
+          vars.SEALED_EVALUATOR_ENABLED == 'true' &&
+          github.event.workflow_run.event == 'pull_request' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send the immutable submission reference to the private evaluator
+        env:
+          GH_TOKEN: ${{ secrets.SEALED_EVALUATOR_TOKEN }}
+          EVALUATOR_REPOSITORY: ${{ vars.SEALED_EVALUATOR_REPOSITORY }}
+          SOURCE_REPOSITORY: ${{ github.repository }}
+          SOURCE_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          SOURCE_RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          test -n "$GH_TOKEN"
+          test -n "$EVALUATOR_REPOSITORY"
+          payload=$(python -c 'import json, os; print(json.dumps({"event_type": "observer-submission", "client_payload": {"source_repository": os.environ["SOURCE_REPOSITORY"], "head_sha": os.environ["SOURCE_HEAD_SHA"], "preflight_run_id": os.environ["SOURCE_RUN_ID"]}}))')
+          curl --fail-with-body --silent --show-error \
+            --request POST \
+            --header "Accept: application/vnd.github+json" \
+            --header "Authorization: Bearer $GH_TOKEN" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/$EVALUATOR_REPOSITORY/dispatches" \
+            --data "$payload"

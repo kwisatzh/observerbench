@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\footnotesize
+\begin{tabular}{@{}p{0.22\linewidth}p{0.70\linewidth}@{}}
+\toprule
+Task / observer & Ctl-2 / first-order estimator factorial evaluation \\
+Estimand & target-head state along a repeated additive residual intervention \\
+Measurement design & hold direction fixed while comparing estimators, then hold estimator fixed while comparing directions across interaction strengths and model seeds \\
+Validation target & integrated true target error, observer self-gain, clipping, fitted nuisance movement, and distance from clean residual states \\
+Result status & Checked revision; source files and hashes are in the JSON card. \\
+Primary result & FO ISE exceeds lifted ISE in 48/48 seed-level contrasts across four nonzero interaction strengths with each direction held fixed. \\
+Diagnostics & Gain-matched target MSE: 0.0001 to 0.170; projected direction norm ratio: 7.47; maximum response-calibration scale: 1146. \\
+Recommendation & Do not use the uncalibrated first-order estimator for this control target. If response calibration is used, report its conditioning and validate true-target tracking; treat affine-span projection as a diagnostic only. \\
+Scope & The plant is an additive final-residual loop, not a rerun Transformer. The local convergence condition applies only to the unsaturated scalar observer-error mode. \\
+\bottomrule
+\end{tabular}
+\caption{A checked ObserverCard generated from the Ctl-2 audit. The full JSON and Markdown bundle contains the remaining task cards, thresholds, and source hashes.}
+\label{tab:observercard}
+\end{table}

@@ -43,6 +43,47 @@ def test_list_effect_tasks_includes_both_model_families() -> None:
     assert "budget:128" in result.stdout
 
 
+def test_list_safety_tasks_includes_paired_interlock() -> None:
+    result = run_cli("list-safety-tasks")
+
+    assert result.returncode == 0, result.stderr
+    assert "safety_interlock_analytic@paired-scope-v0" in result.stdout
+
+
+def test_list_safety_results_includes_checked_qwen_observers() -> None:
+    result = run_cli("list-safety-results")
+
+    assert result.returncode == 0, result.stderr
+    assert "Activation label x severity" in result.stdout
+    assert "Qwen output margin x severity" in result.stdout
+
+
+def test_list_ai_control_results_includes_external_monitors() -> None:
+    result = run_cli("list-ai-control-results")
+
+    assert result.returncode == 0, result.stderr
+    assert "Qwen verdict-adjacent activation probe" in result.stdout
+    assert "Qwen neutral-context activation probe" in result.stdout
+    assert "Qwen + ControlArena basic prompt" in result.stdout
+    assert "0.953" in result.stdout
+
+
+def test_make_figures_runs_checked_fast_reproduction(tmp_path: Path) -> None:
+    outdir = tmp_path / "figures"
+    result = run_cli(
+        "make-figures",
+        "--only",
+        "revision_ioi_mobius",
+        "--outdir",
+        str(outdir),
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert (outdir / "revision_ioi_mobius_intervals.png").exists()
+    assert (outdir / "reproduction_manifest.json").exists()
+    assert not (outdir / "figures_manifest.json").exists()
+
+
 def test_installed_console_script_lists_tasks() -> None:
     executable = Path(sys.executable).with_name("observerbench")
     if not executable.exists():

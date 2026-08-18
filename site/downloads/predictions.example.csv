@@ -1,0 +1,4 @@
+schema_version,query_id,predicted_risk
+observerbench.safety_predictions.v0,test-query-00001,0.12
+observerbench.safety_predictions.v0,test-query-00002,3.48
+

@@ -1,0 +1,113 @@
+{
+  "all_design_gates_pass": true,
+  "artifact_hashes": {
+    "calibration_masks.csv": "dd4ddcaf19bbe1c2d42d239bde235ab84cfe861a3f0fae2da7f708fb4b46b974",
+    "gates/confirmation_cells.csv": "ab6448b758af9def690603316b77a61f5dd6a03c3ba9ae6cd06220e63148daae",
+    "gates/confirmation_gate.json": "51448397a19303c186070dcacc2e17b545d996ef1170a1f46ef1758bafde03f6",
+    "gates/confirmation_runtime.json": "57f11242bb090a18c700479cdfe05382d6b3d68787f75da7dc8a0b16bd822c6f",
+    "gates/discovery_gate.json": "064b707edb134afd58c02a630ef64e702cc3eaf72485472bf55726fe40f30504",
+    "gates/discovery_runtime.json": "dbc92a444ce06371bac993ccc8b8c127c0606c642e302aeaed5f5c641309f39a",
+    "gates/eligibility_coverage.csv": "c06b1bc6bdf5ecd601e7ae7cfb0a9b7ec786fa86614d71dbff4877e174d37730",
+    "gates/eligibility_decisions.csv": "957bc2814a4438f2d62dc9f9e5bb06d07b6efe49bb0b54ebff165e988b710a6f",
+    "gates/eligibility_diagnostics.json": "0579ad8a23d3189d6a4b386cbdf7b43d8d4a280746ef30fabd015597a12ba44b",
+    "gates/eligibility_gate.json": "3cbd52e1b964e570012e71fb0a5379af3c8afb940f402cac4e0c46bd77b163fe",
+    "gates/eligibility_runtime.json": "db8be7a60a7ca99ffcfe27affabbce754da9f600081123e0f4eb657cd88732d8",
+    "gates/head_confirmation_noop_parity.json": "c9d14b82a9af1e77969f5778291d2bdc191c5e32ec2a79b4061ab2ddf81d2f08",
+    "gates/head_fit_noop_parity.json": "c9d14b82a9af1e77969f5778291d2bdc191c5e32ec2a79b4061ab2ddf81d2f08",
+    "gates/reference_confirmation_gate.json": "dd3d875ae495ba5de2169121d2c7fd795e253d24c6adcb63fe54c2986e7d2f6a",
+    "gates/reference_discovery_gate.json": "dd3d875ae495ba5de2169121d2c7fd795e253d24c6adcb63fe54c2986e7d2f6a",
+    "gates/zero_confirmation_cells.csv": "018eff96631853c57ff8fe3365157c750b77b3705514d9abd4a2a93b892ff693",
+    "gates/zero_confirmation_summary.json": "1602cc5c412d1c4f337e4db2cb4a2b58a85969ef80f6ee19316e3b22f7938052",
+    "preselection_manifest.json": "168502f0b4a94f3f3ce0e01d59462e2db1f0352b14d35a9d3edcd87140215b68",
+    "prompts.csv": "02beb94be4b57a4af68f4dde97404fda6af07105f7cb42b3b9a2665f683b1321",
+    "prompts_all.csv": "50b44ea7fee388d957c79af9213bd53b25c99c08c9209b9933cce87d4f473e09",
+    "selected_heads.csv": "f0edb7aa9a899b87e3eaa76c5d31af6962fbd5626a26141b8b16f7c8cfa89900",
+    "test_masks.csv": "e0e65c430943fb4a2260a00bc4f7c82b0b63cd29633ea311b408f64a1b6e70bd",
+    "token_banks.json": "078dc1fe1c8d9790b5d61645a7511f3af00775c82e5349c657074d308893182e"
+  },
+  "config_sha256": "d55b416eda85087da7ec4ef9e1249333c954e2576fb8749719f8bb7d7be55f4f",
+  "data_version": "copy-v2",
+  "design_id": "qwen_induction_a80172ccd3034115",
+  "gate_artifact_hashes": {
+    "confirmation_cells": {
+      "path": "gates/confirmation_cells.csv",
+      "sha256": "ab6448b758af9def690603316b77a61f5dd6a03c3ba9ae6cd06220e63148daae"
+    },
+    "confirmation_gate": {
+      "path": "gates/confirmation_gate.json",
+      "sha256": "51448397a19303c186070dcacc2e17b545d996ef1170a1f46ef1758bafde03f6"
+    },
+    "confirmation_runtime": {
+      "path": "gates/confirmation_runtime.json",
+      "sha256": "57f11242bb090a18c700479cdfe05382d6b3d68787f75da7dc8a0b16bd822c6f"
+    },
+    "discovery_gate": {
+      "path": "gates/discovery_gate.json",
+      "sha256": "064b707edb134afd58c02a630ef64e702cc3eaf72485472bf55726fe40f30504"
+    },
+    "discovery_runtime": {
+      "path": "gates/discovery_runtime.json",
+      "sha256": "dbc92a444ce06371bac993ccc8b8c127c0606c642e302aeaed5f5c641309f39a"
+    },
+    "eligibility_coverage": {
+      "path": "gates/eligibility_coverage.csv",
+      "sha256": "c06b1bc6bdf5ecd601e7ae7cfb0a9b7ec786fa86614d71dbff4877e174d37730"
+    },
+    "eligibility_decisions": {
+      "path": "gates/eligibility_decisions.csv",
+      "sha256": "957bc2814a4438f2d62dc9f9e5bb06d07b6efe49bb0b54ebff165e988b710a6f"
+    },
+    "eligibility_diagnostics": {
+      "path": "gates/eligibility_diagnostics.json",
+      "sha256": "0579ad8a23d3189d6a4b386cbdf7b43d8d4a280746ef30fabd015597a12ba44b"
+    },
+    "eligibility_gate": {
+      "path": "gates/eligibility_gate.json",
+      "sha256": "3cbd52e1b964e570012e71fb0a5379af3c8afb940f402cac4e0c46bd77b163fe"
+    },
+    "eligibility_runtime": {
+      "path": "gates/eligibility_runtime.json",
+      "sha256": "db8be7a60a7ca99ffcfe27affabbce754da9f600081123e0f4eb657cd88732d8"
+    },
+    "head_confirmation_noop_parity": {
+      "path": "gates/head_confirmation_noop_parity.json",
+      "sha256": "c9d14b82a9af1e77969f5778291d2bdc191c5e32ec2a79b4061ab2ddf81d2f08"
+    },
+    "head_fit_noop_parity": {
+      "path": "gates/head_fit_noop_parity.json",
+      "sha256": "c9d14b82a9af1e77969f5778291d2bdc191c5e32ec2a79b4061ab2ddf81d2f08"
+    },
+    "reference_confirmation_gate": {
+      "path": "gates/reference_confirmation_gate.json",
+      "sha256": "dd3d875ae495ba5de2169121d2c7fd795e253d24c6adcb63fe54c2986e7d2f6a"
+    },
+    "reference_discovery_gate": {
+      "path": "gates/reference_discovery_gate.json",
+      "sha256": "dd3d875ae495ba5de2169121d2c7fd795e253d24c6adcb63fe54c2986e7d2f6a"
+    },
+    "zero_confirmation_cells": {
+      "path": "gates/zero_confirmation_cells.csv",
+      "sha256": "018eff96631853c57ff8fe3365157c750b77b3705514d9abd4a2a93b892ff693"
+    },
+    "zero_confirmation_summary": {
+      "path": "gates/zero_confirmation_summary.json",
+      "sha256": "1602cc5c412d1c4f337e4db2cb4a2b58a85969ef80f6ee19316e3b22f7938052"
+    }
+  },
+  "mask_design_sha256": "ef03e31bc43d51b6d883a05cf0adfbc314f66e2eef6a5590f9d50dd5f7ffccde",
+  "measurement_budgets": [
+    16,
+    40,
+    64,
+    128
+  ],
+  "model": {
+    "requested_name": "Qwen/Qwen2.5-7B",
+    "requested_revision": "d149729398750b98c0af14eb82c78cfe92750796"
+  },
+  "panel_sha256": "36ff029ff8babf4a66d869b82d5dc5e112d2d84d0083debd2b5d0b635ef827d2",
+  "schema": "observerbench.qwen_induction_design_manifest.v1",
+  "scientific_claim_allowed": true,
+  "sequence_design_sha256": "d62573e0cea6d7e57a67fe1a41297c695ca958ba9e8b9d6dae1a441c63141b72",
+  "status": "frozen_before_outcomes"
+}

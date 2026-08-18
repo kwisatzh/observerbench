@@ -1,0 +1,18 @@
+{
+  "all_effects_finite": true,
+  "model": {
+    "dtype": "float16",
+    "id": "Qwen/Qwen2.5-0.5B",
+    "quantization": null,
+    "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987"
+  },
+  "n_discovery_heads": 336,
+  "n_measured_masks": 4,
+  "primary_zero_mask_parity": {
+    "maximum_margin_error": 0.0,
+    "passed": true,
+    "prediction_parity": true
+  },
+  "scientific_claim_allowed": false,
+  "status": "engineering_smoke_only"
+}

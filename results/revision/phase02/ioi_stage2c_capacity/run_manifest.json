@@ -1,0 +1,35 @@
+{
+  "analysis_schema": "observerbench.ioi.phase2.capacity.v1",
+  "bootstrap_interpretation": "prompt bootstrap conditional on fixed intervention masks and ten fixed repeated-CV partitions",
+  "config": {
+    "bootstrap_repeats": 1000,
+    "cv_repeats": 10,
+    "eval_nonclean_only": true,
+    "k_folds": 5,
+    "ridge": 1e-06,
+    "seed": 0,
+    "whole_group_pb_interaction": 1.055
+  },
+  "input_hashes": {
+    "results/frozen/ioi/stage2c_primary_stratified_mean_end/ioi_stage2c_head_records.csv": "828f5bc0c5762a82beb9c7898128a779c29cfac43e4cb8d0ecc2065a1da67c31",
+    "results/frozen/ioi/stage2c_primary_stratified_mean_end/ioi_stage2c_per_prompt_drops.csv": "77d21af30fb6840a54b114645833bdff851c28de8c9baca985a28a06dfea7d32",
+    "results/frozen/ioi/stage2c_primary_stratified_mean_end/ioi_stage2c_subset_design.csv": "7aefa21bba51137afe9718e693d8daad713eaf4375d828c7a2011eee1f530816"
+  },
+  "input_run": "results/frozen/ioi/stage2c_primary_stratified_mean_end",
+  "label": "Stage 2c primary-stratified design",
+  "n_heads": 13,
+  "n_prompts": 256,
+  "n_subsets": 240,
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.1",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.14.2",
+    "source_dirty": true,
+    "source_revision": "0cec2c4ef17d9c3b0ef3fea8fdf15347ee4e28cb"
+  }
+}

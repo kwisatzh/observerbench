@@ -1,0 +1,11 @@
+{
+  "attention_implementation": "sdpa",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "n_kv_heads": 4,
+  "n_layers": 28,
+  "n_query_heads": 28,
+  "parameter_dtype": "bfloat16",
+  "quantized": false,
+  "requested_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+  "resolved_revision": "a09a35458c702b33eeacc393d103063234e8bc28"
+}

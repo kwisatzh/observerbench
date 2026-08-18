@@ -1,0 +1,14 @@
+{
+  "affects_primary_gate": false,
+  "contrast": 3.55247413367033,
+  "contrast_ci_lower": 3.3060655715176837,
+  "contrast_ci_upper": 3.801217871234985,
+  "control_mean_effect": 0.5278330803848803,
+  "intervention": "final_query_head_zeroing",
+  "passed": true,
+  "robustness_only": true,
+  "selected_mean_effect": 4.08030721405521,
+  "target_025": 1.0200768035138026,
+  "target_050": 2.040153607027605,
+  "target_075": 3.0602304105414078
+}

@@ -1,4 +1,7 @@
-"""IOI Stage 1 whole-group self-repair diagnostic."""
+"""IOI Stage 1 whole-group self-repair diagnostic.
+
+Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex
+"""
 
 from __future__ import annotations
 

@@ -1,0 +1,25 @@
+{
+  "access_regime": "forward template-conditioned mean ablations",
+  "estimand": "clean-minus-ablated IOI logit-difference response",
+  "evaluation_split": "frozen test names/prompts and candidate masks",
+  "intervention_family": "13 published IOI heads under frozen subset masks",
+  "known_scope_limits": [
+    "One model, head family, position, and ablation convention.",
+    "Templates occur in every split; this is name and prompt holdout, not unseen-template generalization."
+  ],
+  "measurement_design": "160 calibration masks and ten disjoint 32-mask candidate pools",
+  "metadata": {
+    "design_id": "ioi_phase05_design_37dff29fb2338e1f"
+  },
+  "model_or_substrate": "GPT-2 small IOI",
+  "primary_metrics": [
+    "fixed_action_target_loss",
+    "within_0.25"
+  ],
+  "schema_version": "observerbench.effect_task_card.v0",
+  "summary": "Predict finite IOI head-subset effects and select a held-out intervention.",
+  "task_name": "ioi-heldout-effect-selection",
+  "task_version": "1.0",
+  "train_split": "frozen train names/prompts and calibration masks",
+  "validation_target": "mean held-out per-prompt target loss of one fixed selected mask"
+}

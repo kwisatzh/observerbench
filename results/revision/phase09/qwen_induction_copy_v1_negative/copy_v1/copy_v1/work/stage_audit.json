@@ -1,0 +1,30 @@
+{
+  "completed_stages": [
+    "prepare",
+    "discover"
+  ],
+  "config_sha256": "ec2835be61a85c6f963cab901c1de17f512e9fa08d5983c79bd14874000bdb77",
+  "mode": "scientific",
+  "schema": "observerbench.qwen_induction_phase09.run_audit.v1",
+  "stages": {
+    "discover": {
+      "artifact_hashes": {
+        "work/discovery/clean_discovery.csv": "9432b8d3fef265ecefa58f7be291093c2ca1d9033f454e83c1e030edece5e04a",
+        "work/discovery/clean_discovery_gate.json": "e104bbcc66438b206c6d33c3fdb7d917131e5f7038ddd17f8156aa40a8c9bddb",
+        "work/runtime/discover.json": "010faaf7376074411b502dc57e83c5f64155f50902a2c2365661d36215e3e7fd"
+      },
+      "status": "gate_failed"
+    },
+    "prepare": {
+      "artifact_hashes": {
+        "design/preselection_manifest.json": "1cdf4f2cad9f0cf9ab76d4514099342ea4e29a179b04a418908ce9cd5b176f9b",
+        "design/prompts.csv": "020ed513602ab497b5e864faea771dc552e915d09a5f39790fba4fc8132975f8",
+        "design/prompts_all.csv": "860715745084001c988c61570f5a2a5ce1cd7c83429c6f52507d7ccc72bf8666",
+        "design/token_banks.json": "f599a958e310fdf9cedd52f92c77555cfd57b58fc117536781c21101f5786c91",
+        "work/runtime/prepare.json": "bba5b2370bb954c27356855e4e65fad3f959f980e5e9143c52ba92a613650d5d"
+      },
+      "status": "complete"
+    }
+  },
+  "terminal_status": "clean_gate_failed:discovery"
+}

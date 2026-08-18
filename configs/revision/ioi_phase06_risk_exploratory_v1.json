@@ -1,0 +1,62 @@
+{
+  "schema": "observerbench.ioi_risk_exploratory.v1",
+  "status": "exploratory_post_outcome_not_confirmatory",
+  "post_outcome_disclosure": "This analysis was conceived after Phase-5 test outcomes were opened. It can generate a hypothesis but cannot rescue or amend the Phase-5 confirmatory claim.",
+  "source_design": "results/revision/phase05/design",
+  "source_effects": "results/revision/phase05/ioi_effects",
+  "source_mean_effect_fit": "results/revision/phase05/ioi_fit",
+  "changed_estimand": "For each target and calibration mask, fit the mean over train prompts of absolute finite-effect target loss.",
+  "retained_from_phase5": [
+    "prompt and name splits",
+    "calibration masks and nested order",
+    "candidate masks and ten candidate pools",
+    "structural model bases",
+    "measurement budgets",
+    "targets",
+    "ridge value",
+    "target tolerance",
+    "head-cost penalty"
+  ],
+  "measurement_budgets": [
+    20,
+    40,
+    80,
+    160
+  ],
+  "primary_budget": 160,
+  "targets": [
+    0.5,
+    1.0,
+    1.5
+  ],
+  "models": [
+    "additive_head",
+    "count_additive",
+    "count_plus_PE_bin4",
+    "count_plus_all_bin4"
+  ],
+  "ridge": 1e-06,
+  "target_tolerance": 0.25,
+  "head_cost_penalty": 0.02,
+  "selection_policies": [
+    "minimum predicted expected absolute target loss",
+    "minimum predicted expected absolute target loss plus 0.02 per ablated head"
+  ],
+  "primary_descriptive_comparison": "At 160 measurements, compare the all-pairs direct-risk selector with the all-pairs mean-effect selector using paired test-prompt by candidate-pool differences.",
+  "sensitivity_intervals": [
+    "ordered IO-subject name-pair cluster by candidate pool",
+    "unordered IO-subject name-pair cluster by candidate pool"
+  ],
+  "bootstrap_repeats": 2000,
+  "seed": 26061,
+  "claim_rule": "No result from this file is confirmatory because the analysis is post-outcome.",
+  "bounded_posthoc_screen": {
+    "status": "conceived_after_initial_direct-risk results",
+    "basis": "intercept plus 13 head indicators plus all 78 distinct head-pair products",
+    "measurement_budget": 160,
+    "ridge": 1e-06,
+    "ridge_tuning": "none; retain the Phase-5 ridge value",
+    "capacity_matched_control": "Fit the same 92-column basis to mean train-prompt effect and select by absolute predicted target error.",
+    "purpose": "Check whether the coarse group-pair basis is the apparent bottleneck."
+  }
+}

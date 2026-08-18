@@ -1,0 +1,5 @@
+prompt_id,split,template_id,structure,clean_ld
+prompt_1d9445e5e3e812b1,validation,abba_meeting,ABBA,3.8667917
+prompt_69c6cc282473e733,validation,abba_meeting,ABBA,2.6430817
+prompt_71ad1b4bdaece2a0,validation,abba_meeting,ABBA,2.9202929
+prompt_7e135ddb1dd4b323,validation,abba_meeting,ABBA,3.5239058

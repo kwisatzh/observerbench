@@ -1,0 +1,29 @@
+{
+  "comparisons": {
+    "H1a_estimand": {
+      "absolute_loss_reduction": 0.2021368011677017,
+      "checks": {
+        "paired_cluster_pool_interval_lower_strictly_positive": true,
+        "relative_reduction_at_least_five_percent": true
+      },
+      "passed": true,
+      "q025": 0.11496571685759895,
+      "q975": 0.29256013182554524,
+      "relative_loss_reduction": 0.18497829277234798
+    },
+    "H1b_intervention_value": {
+      "absolute_loss_reduction": 0.10937722306698561,
+      "checks": {
+        "paired_cluster_pool_interval_lower_strictly_positive": true,
+        "relative_reduction_at_least_five_percent": true
+      },
+      "passed": true,
+      "q025": 0.01246399262114816,
+      "q975": 0.1955910766065547,
+      "relative_loss_reduction": 0.10937722306698561
+    }
+  },
+  "joint_primary_passed": true,
+  "joint_success_rule": "Primary success requires both H1a and H1b. Neither comparison can rescue the other. H1b concerns target-tracking loss at t=1.0, not broad task utility or safety.",
+  "licensed_claim": "On these eight validated canonical templates and new prompt strings, the direct-risk observer selected fixed interventions with lower finite-effect target loss than both the same-basis mean-effect plug-in observer and exact no-op at the pilot-informed target t=1.0."
+}

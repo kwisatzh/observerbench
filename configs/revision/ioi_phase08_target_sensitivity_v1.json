@@ -1,0 +1,62 @@
+{
+  "schema": "observerbench.ioi_phase08_target_sensitivity.v1",
+  "status": "post_review_post_confirmatory_target_sensitivity",
+  "disclosure": "This sensitivity study was designed after the Phase-7 t=1.0 result and reviewer feedback were known. It cannot alter or rescue the Phase-7 primary claim. It reuses the frozen canonical prompt surface and action pools, fits only on Phase-5 train/calibration outcomes, freezes all target-specific predictions and actions before any new outcome is read, and reports all targets and references together.",
+  "purpose": "Test target heterogeneity on fresh canonical prompt strings and restore the same-basis target-specific transformed-mean control used in Phase 6.",
+  "model": "gpt2-small",
+  "huggingface_model": "gpt2",
+  "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+  "intervention": "final-position Phase-5-template-conditioned mean ablation",
+  "targets": [0.5, 1.0, 1.5],
+  "selectors": [
+    "direct_risk_head_pair_quadratic",
+    "natural_mean_effect_head_pair_quadratic",
+    "transformed_mean_head_pair_quadratic"
+  ],
+  "analytic_reference": "exact_noop",
+  "measurement_budget": 160,
+  "ridge": 0.000001,
+  "observer_basis": "intercept, 13 head indicators, and all 78 distinct head-pair products (92 columns)",
+  "direct_risk_response": "For each target, fit the calibration-mask train-prompt mean of |Y-t|.",
+  "natural_mean_response": "Fit the calibration-mask train-prompt mean of Y once, then select by |predicted mean-t|.",
+  "transformed_mean_response": "For each target, fit |train-prompt mean(Y)-t| with the same 92-column basis and raw, unclipped prediction rule used by the Phase-6 target-specific Jensen-score sensitivity.",
+  "noop_rule": "Set the exact no-op finite effect to zero and target loss to |t| for every selector and target; never run a no-op ablation.",
+  "selection_rule": "Within each inherited Phase-7 pool, lexicographically minimize (raw predicted target loss, ablated-head count, action id).",
+  "candidate_pool_count": 48,
+  "candidate_pool_size_including_noop": 31,
+  "test_prompt_count": 512,
+  "test_pair_clusters": 32,
+  "templates": 8,
+  "bootstrap": {
+    "repeats": 5000,
+    "seed": 2808101,
+    "axes": ["32 unordered name-pair clusters", "48 action pools"],
+    "comparisons": [
+      "direct risk versus natural mean plug-in",
+      "direct risk versus transformed mean",
+      "direct risk versus exact no-op"
+    ],
+    "reporting": "Report each target separately and an equal-target pooled descriptive contrast. No Phase-8 threshold licenses a primary claim."
+  },
+  "new_outcome_access_rule": "Freeze predictions, actions, and the new selected-mask union before reading any newly measured outcome.",
+  "reuse_rule": "Reuse a Phase-7 selected-mask outcome only after validating the Phase-7 measurement manifest, selected-mask hash, shard hashes, prompt bank, mask mapping, and clean scores. Measure only the frozen set difference between the Phase-8 selected union and the 89-mask Phase-7 measured union.",
+  "claim_boundary": "All results are labeled post-confirmatory secondary sensitivity analyses. The t=1.0 Phase-7 joint primary result remains unchanged. Results at t=0.5 or t=1.5 establish target dependence only on this frozen action family and prompt surface.",
+  "forbidden_after_freeze": [
+    "change targets, observers, ridge, basis, prompts, masks, pools, or selection rule",
+    "read a newly measured outcome before the pre-outcome audit passes",
+    "measure a mask outside new_measurement_masks.csv",
+    "suppress an unfavorable target or reference",
+    "describe this post-review sensitivity as preregistered or primary"
+  ],
+  "source_hashes": {
+    "configs/revision/ioi_phase07_canonical_noop_confirmation_v2.json": "198a1d30a61e9463863a7597becc7973c7f7a2ee8a915962d12b6612e194befb",
+    "results/revision/phase07/ioi_canonical_noop_confirmation_v2/design/design_manifest.json": "3dfa6352524c66b6b57794ec9ed2c89a900afd7df3d9879cd7f21cb0686feee5",
+    "results/revision/phase07/ioi_canonical_noop_confirmation_v2/clean_pretest/pretest_manifest.json": "7c148b1137460fa7d4674f97f3984ce8a39068cd1dbe394852fed2f9141ae2a2",
+    "results/revision/phase07/ioi_canonical_noop_confirmation_v2/prediction_freeze/prediction_action_manifest.json": "fce0b027f232841653d5b7f24f3254243a71d3fbd282cc9c468c4781eab334e5",
+    "results/revision/phase07/ioi_canonical_noop_confirmation_v2/prediction_freeze/selected_measurement_masks.csv": "7f843bc5c2649ca2e84a52dccb6a7fc12330fbeab586186e4ad766517b9869eb",
+    "results/revision/phase07/ioi_canonical_noop_confirmation_v2/selected_measurement/measurement_manifest.json": "6681b04b114b4aba1129edf9d73e5197426213130ae44b21333c859a2bed7a9e",
+    "results/revision/phase05/design/design_manifest.json": "5f9aedda456048378d318537b4099bf28d09991fd40a18004f71d82075075922",
+    "results/revision/phase05/ioi_effects/effect_manifest.json": "fb3e807ea52d27dd7da58d49e2b6fa4a9d4c425bdb8e9a999cf240bdcb1ff80f"
+  },
+  "seed": 28081
+}

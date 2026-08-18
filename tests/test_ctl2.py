@@ -1,12 +1,24 @@
 from __future__ import annotations
 
+# Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex
+
 from pathlib import Path
+from copy import deepcopy
 
 import numpy as np
 import pandas as pd
 import pytest
 
-from observerbench.tasks.trained_ctl2 import TrainedTransformerCtl2Config, _rollout_observer
+from observerbench.control import AffineStateEstimator, fit_affine_support
+from observerbench.tasks.trained_ctl2 import (
+    Ctl2Arm,
+    GainMatchIneligible,
+    TrainedTransformerCtl2Config,
+    _response_gain_calibration,
+    _rollout_arm,
+    _rollout_observer,
+    enumerate_ctl2_arms,
+)
 from observerbench.tasks.registry import run_registered_task
 
 
@@ -56,10 +68,33 @@ def synthetic_ctl2_env() -> dict:
     target = h_test @ target_vec
     first_direction = np.asarray([0.5, 0.1], dtype=float)
     lifted_direction = first_direction.copy()
+    oracle_direction = np.asarray([1.0, 0.0], dtype=float)
+    estimators = {
+        "first_order": AffineStateEstimator("first_order", 0.0, target_vec),
+        "lifted_interaction": AffineStateEstimator("lifted_interaction", 0.0, target_vec),
+        "oracle_target": AffineStateEstimator("oracle_target", 0.0, target_vec),
+    }
+    support = fit_affine_support(h_test, relative_tolerance=1e-8)
+
+    def direction_record(estimator_name: str, vector: np.ndarray) -> dict:
+        return {
+            "coef": None,
+            "estimator": estimators[estimator_name],
+            "direction": vector,
+            "directions": {"unprojected": vector, "projected": vector},
+            "raw_direction": vector,
+            "raw_target_gain": float(target_vec @ vector),
+            "norm_diag": {},
+            "projected_direction_scale": 1.0,
+            "projected_direction_error": "",
+        }
+
     return {
         "test": {"target": target.copy(), "target_clean": target.copy()},
+        "calibration": {"target": target.copy(), "target_clean": target.copy()},
         "test_pred": target.copy(),
         "h_test": h_test,
+        "h_calibration": h_test.copy(),
         "target_vec": target_vec,
         "target_bias": 0.0,
         "nuisance_vec": np.asarray([0.0, 1.0], dtype=float),
@@ -68,28 +103,13 @@ def synthetic_ctl2_env() -> dict:
         "probe_x2": np.asarray([0.0, 0.0, 1.0], dtype=float),
         "probe_int": np.asarray([0.0, 0.5, 0.5], dtype=float),
         "observers": {
-            "first_order": {
-                "coef": np.asarray([0.0, 1.0, 0.0], dtype=float),
-                "direction": first_direction,
-                "raw_direction": first_direction,
-                "raw_target_gain": 0.5,
-                "norm_diag": {},
-            },
-            "lifted_interaction": {
-                "coef": np.asarray([0.0, 1.0, 0.0, 0.0], dtype=float),
-                "direction": lifted_direction,
-                "raw_direction": lifted_direction,
-                "raw_target_gain": 0.5,
-                "norm_diag": {},
-            },
-            "oracle_target": {
-                "coef": None,
-                "direction": np.asarray([1.0, 0.0], dtype=float),
-                "raw_direction": np.asarray([1.0, 0.0], dtype=float),
-                "raw_target_gain": 1.0,
-                "norm_diag": {},
-            },
+            "first_order": direction_record("first_order", first_direction),
+            "lifted_interaction": direction_record("lifted_interaction", lifted_direction),
+            "oracle_target": direction_record("oracle_target", oracle_direction),
         },
+        "estimators": estimators,
+        "support": support,
+        "clean_residual_centroids": h_test.copy(),
     }
 
 
@@ -122,6 +142,186 @@ def test_ctl2_synthetic_quick_smoke_no_training() -> None:
     assert set(traj["step"]) == {0, 1, 2, 3, 4}
     assert per_example["integrated_squared_error"].notna().all()
     assert per_step.groupby("example_idx")["step"].nunique().min() == 5
+    assert metrics["observer_self_gain"] == pytest.approx(0.5)
+    assert metrics["observer_error_pole_unsaturated"] == pytest.approx(0.75)
+    assert metrics["control_clip_fraction"] == 0.0
+    assert metrics["final_residual_delta_from_initial_l2"] >= 0.0
+    assert metrics["final_nearest_clean_residual_l2"] >= 0.0
+    assert metrics["final_convex_hull_extrapolation_mass"] >= 0.0
+
+
+def test_ctl2_factorial_arm_enumeration_is_exact() -> None:
+    cfg = synthetic_ctl2_config(arm_design="factorial_3x3", direction_support_mode="both")
+    arms = enumerate_ctl2_arms(cfg)
+
+    assert len(arms) == 18
+    assert len({arm.arm_id for arm in arms}) == 18
+    assert Ctl2Arm("first_order", "lifted_interaction", "projected") in arms
+
+    calibrated = enumerate_ctl2_arms(
+        synthetic_ctl2_config(
+            arm_design="factorial_2x2",
+            include_response_gain_calibration=True,
+        )
+    )
+    assert len(calibrated) == 8
+    assert Ctl2Arm(
+        "first_order",
+        "lifted_interaction",
+        estimator_calibration="response_gain",
+    ) in calibrated
+
+
+def test_ctl2_response_calibration_fits_deltas_and_preserves_initial_estimate() -> None:
+    env = synthetic_ctl2_env()
+    estimator = AffineStateEstimator(
+        "first_order",
+        0.3,
+        np.asarray([0.25, 1.0]),
+    )
+    env["estimators"]["first_order"] = estimator
+    direction = env["observers"]["first_order"]["direction"]
+    fitted = _response_gain_calibration(
+        synthetic_ctl2_config(),
+        env,
+        estimator,
+        direction,
+    )
+
+    expected_scale = float((env["target_vec"] @ direction) / (estimator.gradient @ direction))
+    assert fitted["response_calibration_scale"] == pytest.approx(expected_scale)
+    assert fitted["response_calibration_corrected_mae"] < 1e-12
+
+    raw_metrics, _raw_traj, _raw_examples, raw_steps = _rollout_arm(
+        synthetic_ctl2_config(loop_steps=2),
+        env,
+        Ctl2Arm("first_order", "first_order"),
+    )
+    calibrated_metrics, _cal_traj, _cal_examples, calibrated_steps = _rollout_arm(
+        synthetic_ctl2_config(loop_steps=2),
+        env,
+        Ctl2Arm("first_order", "first_order", estimator_calibration="response_gain"),
+    )
+
+    raw_initial = raw_steps[raw_steps["step"] == 0]["observer_estimate"].to_numpy()
+    calibrated_initial = calibrated_steps[calibrated_steps["step"] == 0]["observer_estimate"].to_numpy()
+    assert np.allclose(raw_initial, calibrated_initial)
+    assert raw_metrics["observer_self_gain"] == pytest.approx(estimator.gradient @ direction)
+    assert calibrated_metrics["observer_self_gain"] == pytest.approx(env["target_vec"] @ direction)
+
+
+def test_ctl2_crossed_estimator_and_direction_are_independent() -> None:
+    env = synthetic_ctl2_env()
+    env["estimators"]["first_order"] = AffineStateEstimator(
+        "first_order",
+        0.0,
+        np.asarray([-1.0, 0.0]),
+    )
+    metrics, *_ = _rollout_arm(
+        synthetic_ctl2_config(loop_steps=1),
+        env,
+        Ctl2Arm("first_order", "oracle_target"),
+    )
+
+    assert metrics["effective_target_gain"] == pytest.approx(1.0)
+    assert metrics["observer_self_gain"] == pytest.approx(-1.0)
+    assert metrics["observer_direction_sign_compatible"] is False
+    assert metrics["observer_error_pole_unsaturated"] == pytest.approx(1.5)
+
+
+def test_ctl2_unsaturated_observer_error_follows_reported_pole() -> None:
+    metrics, _traj, _per_example, per_step = rollout_synthetic("first_order", loop_steps=3)
+    pole = float(metrics["observer_error_pole_unsaturated"])
+    one = per_step[per_step["example_idx"] == 0].sort_values("step")
+    errors = (one["target_ref"] - one["observer_estimate"]).to_numpy()
+
+    assert np.allclose(errors[1:], pole * errors[:-1])
+
+
+def test_ctl2_omitted_response_condition_matches_affine_rollout() -> None:
+    observer_errors = []
+    target_changes = {}
+    for rho in (-1.5, -1.0, 0.0, 0.5):
+        env = deepcopy(synthetic_ctl2_env())
+        env["h_test"][:, 1] = 0.0
+        env["h_calibration"] = env["h_test"].copy()
+        env["target_vec"] = np.asarray([1.0, 1.0])
+        env["target_bias"] = 0.0
+        target = env["h_test"] @ env["target_vec"]
+        env["test"] = {"target": target.copy(), "target_clean": target.copy()}
+        env["calibration"] = {"target": target.copy(), "target_clean": target.copy()}
+        env["test_pred"] = target.copy()
+        env["estimators"]["first_order"] = AffineStateEstimator(
+            "first_order",
+            0.0,
+            np.asarray([1.0, 0.0]),
+        )
+        direction = np.asarray([1.0, rho])
+        record = env["observers"]["first_order"]
+        record["estimator"] = env["estimators"]["first_order"]
+        record["direction"] = direction
+        record["directions"] = {"unprojected": direction, "projected": direction}
+        record["raw_direction"] = direction
+        record["raw_target_gain"] = float(env["target_vec"] @ direction)
+        env["support"] = fit_affine_support(env["h_test"], relative_tolerance=1e-8)
+        env["clean_residual_centroids"] = env["h_test"].copy()
+
+        metrics, _traj, _examples, per_step = _rollout_arm(
+            synthetic_ctl2_config(
+                loop_steps=12,
+                controller_gain=0.5,
+                max_strength=10.0,
+                use_relative_target=True,
+                relative_target_offset=1.0,
+            ),
+            env,
+            Ctl2Arm("first_order", "first_order"),
+        )
+        one = per_step[per_step["example_idx"] == 0].sort_values("step")
+        observer_errors.append(
+            (one["target_ref"] - one["observer_estimate"]).to_numpy()
+        )
+        target_changes[rho] = float(one["target"].iloc[-1] - one["target"].iloc[0])
+
+        assert metrics["normalized_omitted_response"] == pytest.approx(rho)
+        assert metrics["true_to_observer_response_ratio"] == pytest.approx(1.0 + rho)
+        assert metrics["affine_true_error_prediction_residual_mae"] < 1e-12
+        assert metrics["control_clip_fraction"] == 0.0
+
+    assert all(np.allclose(observer_errors[0], errors) for errors in observer_errors[1:])
+    assert abs(target_changes[-1.0]) < 1e-12
+    assert target_changes[-1.5] < 0.0
+
+
+def test_ctl2_negative_self_gain_is_ineligible_for_gain_matching() -> None:
+    env = synthetic_ctl2_env()
+    env["estimators"]["first_order"] = AffineStateEstimator(
+        "first_order",
+        0.0,
+        np.asarray([-1.0, 0.0]),
+    )
+    with pytest.raises(GainMatchIneligible, match="non-positive"):
+        _rollout_arm(
+            synthetic_ctl2_config(loop_steps=1),
+            env,
+            Ctl2Arm("first_order", "oracle_target", controller_mode="gain_matched"),
+        )
+
+
+def test_ctl2_clipping_fraction_excludes_terminal_record() -> None:
+    metrics, _traj, _per_example, per_step = rollout_synthetic(
+        "first_order",
+        loop_steps=2,
+        controller_gain=10.0,
+        max_strength=0.05,
+    )
+    transitions = per_step[per_step["step"] < 2]
+    terminal = per_step[per_step["step"] == 2]
+
+    assert metrics["control_clip_fraction"] == pytest.approx(
+        transitions["next_control_clipped"].astype(float).mean()
+    )
+    assert not terminal["next_control_clipped"].any()
 
 
 def test_ctl2_genuine_loop_without_training_reads_current_state() -> None:
@@ -232,3 +432,24 @@ def test_ctl2_per_step_outputs_have_multiple_steps_per_example(tmp_path: Path) -
     assert (outdir / "ctl2_target_mse_fan.png").exists()
     assert (outdir / "ctl2_collateral_fan.png").exists()
     assert (outdir / "ctl2_observer_bias_fan.png").exists()
+
+
+@pytest.mark.slow
+def test_ctl2_compact_sweep_outputs_keep_summaries_and_provenance(tmp_path: Path) -> None:
+    outdir = run_ctl2(
+        tmp_path,
+        dirname="compact",
+        arm_design="factorial_2x2",
+        direction_support_mode="both",
+        include_oracle=False,
+        write_per_example_outputs=False,
+        write_per_step_examples=False,
+        write_observer_cards=False,
+        write_plots=False,
+    )
+
+    assert not (outdir / "trained_transformer_ctl2_per_example.csv").exists()
+    assert not (outdir / "trained_transformer_ctl2_per_step_examples.csv").exists()
+    assert (outdir / "trained_transformer_ctl2_state_archetypes.csv").exists()
+    assert (outdir / "trained_transformer_ctl2_factorial_paired_summary.csv").exists()
+    assert (outdir / "trained_transformer_ctl2_run_manifest.json").exists()

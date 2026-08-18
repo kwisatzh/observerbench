@@ -1,0 +1,15 @@
+{
+  "completed_effect_cells": 45568,
+  "completed_selected_masks": 89,
+  "noop_ablation_forward_passes": 0,
+  "shard_hashes": {
+    "shards/test/effects_0000_0016.csv": "b14e7319940a5a71c73b2e83164105ade23a9f01e9e713ab09841d723303cc5e",
+    "shards/test/effects_0016_0032.csv": "922ee5a634f38d19a08546cec2cae7c7d552e675f07ed95f94c60c383a52ab6e",
+    "shards/test/effects_0032_0048.csv": "074e71ea2e0662fc12d522183550ddf7c612a348404de95dd7ff4fd4e26aac4a",
+    "shards/test/effects_0048_0064.csv": "1511a70bed284caf5ccf6bd759e0f8aced3da4c43a03058ca4fccf11dfd02ac7",
+    "shards/test/effects_0064_0080.csv": "7aec331158169846ac49b277006a271f664aae7d4455f31efeed983a139526b2",
+    "shards/test/effects_0080_0089.csv": "45f17fdcf177e211778d15d8f26a0b711895e844acaee9f57ee709972b8395c7"
+  },
+  "status": "complete",
+  "unselected_candidate_masks_measured": 0
+}

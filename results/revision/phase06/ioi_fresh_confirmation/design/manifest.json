@@ -1,0 +1,34 @@
+{
+  "all_design_gates_pass": true,
+  "artifact_hashes": {
+    "calibration_masks.csv": "e18eed47e08dee9289af8ff95db3377f5a40c35818657f3caaa9714ad8f88c00",
+    "candidate_masks.csv": "1e921f79ae34a472183a318b97e25765cb86467ed4fd49924bdc34a9d937b3d0",
+    "leakage_audit.json": "6d7b88392ccff354344e975922b72d6b304d4b817c5933ed2ad1ad39fe794cf8",
+    "masks.csv": "583edd359c333961a7b1c0ae31d4af0e4566bbdcb4dfbbd26c4e577695be1dcc",
+    "names.csv": "33a89ba5ffcfabe26a55dc34335a7eb97ee397ea40279fb0fb8200da8536f019",
+    "pair_clusters.csv": "2d97c65897d3855f3e3dde7218a67d55a642ccdd46883464d06e0b51233a19cb",
+    "prompts.csv": "627c9c25f550e2b74cb0ea7f61ce93601ec0d894113e151fda8ea837a94f6c6e",
+    "templates.csv": "4daa4528076c7dd17d1830f30235d348f88884686d0dbe6fd97795b226478a12"
+  },
+  "contains_model_outcomes": false,
+  "design_id": "ioi_phase06_design_2044e2b9b97cb658",
+  "exclusion_source_hashes": {
+    "ioi_stage2b_subset_design.csv": "29c4d7377b3897f9b8b2bd947694d2e676971df6d2e23adbfde67b1ec10e4d60",
+    "ioi_stage2c_subset_design.csv": "7aefa21bba51137afe9718e693d8daad713eaf4375d828c7a2011eee1f530816"
+  },
+  "locked_sources": {
+    "calibration_masks.csv": "e18eed47e08dee9289af8ff95db3377f5a40c35818657f3caaa9714ad8f88c00",
+    "candidate_masks.csv": "1e921f79ae34a472183a318b97e25765cb86467ed4fd49924bdc34a9d937b3d0",
+    "prompts.csv": "627c9c25f550e2b74cb0ea7f61ce93601ec0d894113e151fda8ea837a94f6c6e"
+  },
+  "next_allowed_stage": "Measure new template-conditioned reference means and only the 160 calibration masks on train prompts; freeze predictions and actions before measuring any candidate mask on test prompts.",
+  "phase5_calibration_masks_sha256": "99bafd5d48ec945402e9a8202c5c9e3c88167f52316019f0cc87570d111ce980",
+  "phase5_design_manifest_sha256": "5f9aedda456048378d318537b4099bf28d09991fd40a18004f71d82075075922",
+  "phase6_forward_passes_performed": false,
+  "predictions_frozen": false,
+  "protocol_sha256": "b6d44ac16c88a48c738416a18abb205771598ae713f7d44bf0dfdc73f3dff099",
+  "schema": "observerbench.ioi_phase06_design_manifest.v1",
+  "scientific_status": "pilot_informed_prospective_fresh_template_name_mask_confirmation",
+  "status": "frozen_before_phase6_forward_passes",
+  "tokenization_validated": true
+}

@@ -1,0 +1,3 @@
+selector_family,model,measurement_budget,candidate_count,heldout_mean_effect_mae,heldout_mean_effect_rmse,heldout_mean_effect_r2,heldout_mean_effect_rank_correlation,descriptive_non_gating
+natural_mean_effect,count_plus_all_bin4,160,1536,0.17686858671830388,0.22620523608100127,0.6913228501700867,0.8443785875388623,True
+natural_mean_effect,head_pair_quadratic_screen,160,1536,0.12849992265111734,0.1607022884733953,0.8442086655989596,0.9378843706488591,True

@@ -1,0 +1,15 @@
+{
+  "schema_version": "observerbench.safety_observer_card.v0",
+  "observer_name": "replace-with-observer-name",
+  "observer_version": "0.1.0",
+  "observer_family": "replace-with-method-family",
+  "observer_input": "replace-with-information-used",
+  "fit_procedure": "replace-with-fit-procedure",
+  "implementation": "https://example.org/replace-me",
+  "risk_score_meaning": "larger values indicate greater expected loss if allowed",
+  "known_failure_modes": [],
+  "access_regime": "replace-with-access-regime",
+  "requires_white_box_access": false,
+  "additional_forward_passes": 0,
+  "metadata": {}
+}

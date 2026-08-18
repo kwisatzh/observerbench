@@ -1,0 +1,58 @@
+name: Observer evaluation job
+description: Submit an inert prediction table for automatic ObserverBench evaluation.
+title: "[observer job] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This form requests a data-only evaluation. Do not attach executable code,
+        credentials, private model data, or evaluator targets. A routine job can
+        validate and score automatically; flagged jobs are quarantined for review.
+
+  - type: dropdown
+    id: task
+    attributes:
+      label: Task and version
+      description: Results only compare within this exact task version.
+      options:
+        - safety-interlock-qwen2-5-7b-instruct@paired-scope-v1
+    validations:
+      required: true
+
+  - type: input
+    id: observer
+    attributes:
+      label: Observer name and version
+      placeholder: my-observer@1.0.0
+    validations:
+      required: true
+
+  - type: input
+    id: predictions
+    attributes:
+      label: Prediction-table URL
+      description: Link to a public, immutable CSV file that follows the task schema.
+      placeholder: https://raw.githubusercontent.com/.../predictions.csv
+    validations:
+      required: true
+
+  - type: textarea
+    id: card
+    attributes:
+      label: ObserverCard JSON
+      description: Paste the complete card, including access and cost fields.
+      render: json
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: attestations
+    attributes:
+      label: Submission attestations
+      options:
+        - label: The linked artifact contains prediction data only and no executable code.
+          required: true
+        - label: I understand that access and provenance claims may be audited.
+          required: true
+        - label: I agree that accepted scores and the ObserverCard may be published.
+          required: true

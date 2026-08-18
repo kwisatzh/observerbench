@@ -1,0 +1,90 @@
+{
+  "args": {
+    "outdir": "runs/ioi_stage2b_mean_end",
+    "model": "gpt2-small",
+    "device": "auto",
+    "n_prompts": 256,
+    "n_reference": 512,
+    "batch_size": 32,
+    "seed": 0,
+    "template": "When {io} and {s} went to the store, {s} gave a bottle of milk to",
+    "names": "",
+    "primary_heads": "9.9,9.6,10.0",
+    "backup_heads": "9.0,9.7,10.1,10.2,10.6,10.10,11.2,11.9",
+    "extra_heads": "10.7,11.10",
+    "ablation": "mean",
+    "positions": "end",
+    "n_subsets": 160,
+    "p_include": 0.35,
+    "k_folds": 5,
+    "ridge": 1e-06,
+    "bootstrap_repeats": 200,
+    "eval_nonclean_only": true,
+    "include_clean_in_eval": false,
+    "include_head_pairs": false,
+    "quick": false
+  },
+  "device": "mps",
+  "model": "gpt2-small",
+  "primary_heads": [
+    [
+      9,
+      9
+    ],
+    [
+      9,
+      6
+    ],
+    [
+      10,
+      0
+    ]
+  ],
+  "backup_heads": [
+    [
+      9,
+      0
+    ],
+    [
+      9,
+      7
+    ],
+    [
+      10,
+      1
+    ],
+    [
+      10,
+      2
+    ],
+    [
+      10,
+      6
+    ],
+    [
+      10,
+      10
+    ],
+    [
+      11,
+      2
+    ],
+    [
+      11,
+      9
+    ]
+  ],
+  "extra_heads": [
+    [
+      10,
+      7
+    ],
+    [
+      11,
+      10
+    ]
+  ],
+  "sign_convention": "effects are positive drops: clean_logit_diff - ablated_logit_diff",
+  "primary_comparison": "per-head additive observer vs per-head-plus-group-interaction observer on held-out random head subsets",
+  "note": "This is the powered Stage-2 design. The earlier 8-condition group-subset task is only a diagnostic panel."
+}

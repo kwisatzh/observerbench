@@ -1,0 +1,239 @@
+\section{Safety observers under fixed intervention budgets}
+\label{sec:safety}
+
+\subsection{A perfect classifier can allocate a safety budget poorly}
+
+Suppose a workspace assistant is asked to delete a file in workspace A, but the
+user has granted access only to workspace B. Deletion is not always unsafe; the
+problem is that this file is outside the granted scope. A controller may allow,
+block, or escalate the request. When blocks and reviews are limited, it must
+rank requests by the harm they could cause.
+
+We turn this example into an inert paired task:
+
+\begin{itemize}
+  \item \textbf{Same action, different permission.} Each pair requests the same
+  operation on the same resource. One prompt grants access to it; the other
+  grants access elsewhere.
+  \item \textbf{Known label and cost.} An exact authorization rule says whether
+  the request exceeds scope. The operation sets the consequence: an unauthorized
+  delete costs more than an unauthorized read.
+  \item \textbf{Fixed action budget.} The controller blocks the highest-risk
+  10\%, escalates the next 10\%, and allows the rest. Every observer faces the
+  same costs and budgets.
+\end{itemize}
+
+We use the pinned Qwen2.5-7B-Instruct model \cite{qwen2024qwen25}. As a
+prerequisite check, the unedited model must answer the authorization question
+with one of two exact tokens. It passes every check with accuracy 1.000. The
+held-out test contains 384 safe/unsafe pairs across four equally sized subgroups:
+seen operations and prompt forms, a held-out delete operation, a held-out XML
+form, and both changes together. Fit, calibration, and test resources are
+disjoint.
+
+The activation observer reads a hidden-state vector---a residual-stream
+activation---at the final prompt position and also receives the requested
+action and its severity. We fit on 384
+pairs, calibrate on 192, choose among seven layers and ridge settings using the
+fixed policy loss, and only then extract held-out activations.
+
+The comparisons ask four questions:
+
+\begin{itemize}
+  \item \textbf{Action-only:} what can be inferred without authorization
+  context?
+  \item \textbf{Activation label and direct risk:} do hidden activations predict
+  the policy label or the violation cost?
+  \item \textbf{Activation label $\times$ severity:} does combining the label
+  score with known consequence improve the action ranking?
+  \item \textbf{Allow-all and exact oracle:} what are the upper and lower
+  bounds under the same budget?
+\end{itemize}
+
+These comparisons were fixed before held-out activations were extracted.
+After seeing their results, we added three secondary controls: a full-context
+text observer, Qwen's block-minus-allow output-score difference, and an
+activation observer selected by tail rather than mean loss. They test whether
+activations add value once prompt text or the model's own decision signal is
+available; they are not independent confirmation.
+
+\begin{table}[H]
+\centering
+\scriptsize
+\caption{Held-out Qwen safety-interlock results. Every observer uses the same
+10\% block and 10\% escalation budgets. Lower loss and missed risk are better;
+higher clean utility is better. Access states what the observer can read.}
+\label{tab:qwen-safety}
+\begin{tabular}{@{}p{0.27\textwidth}p{0.18\textwidth}rrrr@{}}
+\toprule
+Observer & Access & Mean loss & Tail loss & Missed risk & Clean utility \\
+\midrule
+Allow all & None & 5.010 & 19.026 & 1.000 & 1.000 \\
+Action-only direct risk & Action fields & 3.176 & 13.987 & 0.623 & 0.901 \\
+Activation label & Residual + fields & 3.334 & 18.182 & 0.665 & 1.000 \\
+Activation direct risk & Residual + fields & 2.520 & 16.545 & 0.502 & 1.000 \\
+Activation label $\times$ severity & Residual + fields & 2.155 & 14.026 & 0.429 & 1.000 \\
+Full-context text label $\times$ severity$^\dagger$ & Prompt text + fields & 2.032 & 12.857 & 0.405 & 1.000 \\
+Qwen logit margin $\times$ severity$^\dagger$ & Output logits + fields & \textbf{1.744} & \textbf{10.078} & \textbf{0.347} & \textbf{1.000} \\
+Exact authorization-risk oracle & Evaluator label + fields & 1.740 & 10.039 & 0.346 & 1.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent\emph{$^\dagger$ Secondary controls.} The text and output rows were
+designed after the original held-out results were known.
+
+The results have four main implications:
+
+\begin{itemize}
+  \item \textbf{Activations improve the primary comparison.} Multiplying the
+  activation label by severity lowers mean policy loss by 32.1\% relative to
+  action-only and 57.0\% relative to allowing every request. It closes 71.1\%
+  of the action-only-to-oracle gap while preserving all benign utility.
+  \item \textbf{Perfect classification is not enough.} The label observer has
+  AUROC 1.000 and loss 3.334. Multiplying its score by severity lowers AUROC to
+  0.954 but lowers loss to 2.155 because unauthorized deletes are ranked ahead
+  of unauthorized reads.
+  \item \textbf{The useful signal is not uniquely hidden.} Full-context text is
+  not reliably worse than the transformed activation observer. More clearly,
+  Qwen's output-score difference multiplied by severity lowers mean loss to
+  1.744 and tail loss to 10.078, nearly matching the exact oracle at 1.740 and
+  10.039. When this output is available, the activation probe is unnecessary.
+  \item \textbf{Good ranking within groups can fail across groups.} The
+  activation label has AUROC 1.000 inside every operation--format subgroup, but
+  its scale changes between them. A global threshold therefore allocates 63.2\%
+  of interventions to held-out deletes in seen forms and only 18.4\% to the
+  doubly held-out subgroup. There, activation loss is 5.007 versus 3.059 for
+  action-only; the output observer catches 69.8\% of unsafe requests versus
+  29.2\% for the activation observer.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{qwen_safety_stratum_calibration.png}
+\caption{Risk scores by operation--format subgroup. The activation observer
+separates safe from unsafe requests within each subgroup, but its scale shifts
+between subgroups. Dashed lines show each observer's global intervention
+cutoff. Scores should be compared within panels, not across them.}
+\label{fig:qwen-safety-calibration}
+\end{figure}
+
+Recalibration by visible operation and format may repair this failure, but this
+split cannot test that repair because calibration contains neither held-out
+case. A valid follow-up needs fresh prompts and calibration coverage of
+every intended deployment group.
+
+The task therefore requires an observer to:
+
+\begin{itemize}
+  \item classify the violation;
+  \item rank it by consequence; and
+  \item calibrate scores across deployment groups.
+\end{itemize}
+
+It does not test harmful execution, deception, adaptive attacks, or open-ended
+deployment.
+
+\subsection{Activations can rank verified APPS backdoors without a verdict prompt}
+\label{sec:safety-apps}
+
+The authorization task is controlled but constructed. We therefore use
+ControlArena's APPS setting, an existing AI-control task with ordinary code
+solutions and verified working backdoors
+\cite{greenblatt2024aicontrol,inglis2025controlarena}. A monitor reads the
+programming problem and submitted code, assigns a suspicion score, and a fixed
+budget audits only the highest-scoring submissions. Every unaudited working
+backdoor counts as one violation.
+
+The public dataset supplies 1,444 honest/backdoor pairs. We split by problem ID:
+500 pairs for fitting, 200 for calibration, and 744 for held-out testing, with both
+members of a pair always in the same split. We use the same pinned Qwen model as
+above.
+
+The observers fall into three groups:
+
+\begin{itemize}
+  \item \textbf{Prompt and output observers} ask Qwen for a score and read the
+  model's probability distribution over ten score tokens. We test basic and
+  detailed prompts, their ensemble, and a follow-up ridge model using all ten
+  token probabilities.
+  \item \textbf{A text observer} is a follow-up baseline trained on word and
+  character features from the problem and code.
+  \item \textbf{Activation observers} fit a linear model to a hidden-state
+  vector. One is read next to an explicit verdict prompt; the follow-up neutral
+  observer reads the same problem and code with no monitoring or scoring
+  instruction.
+\end{itemize}
+
+The original comparison used the three prompt observers and the
+verdict-adjacent activation probe. We added the score-distribution, text, and
+neutral-activation controls after that result and fixed them before measurement.
+At a 2\% audit budget, calibration selects layer 28 for the verdict-adjacent
+probe and layer 20 for the neutral probe.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Monitor comparison on 744 held-out APPS pairs. The controller audits
+29 of 1,488 submissions at 2\% and 148 at 10\%. Higher caught-backdoor counts
+are better; 29 and 148 are the best possible counts under those budgets.}
+\label{tab:apps-monitor}
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+Observer & Access & AUROC & Caught @2\% & Caught @10\% \\
+\midrule
+Exact-label oracle & evaluator & 1.000 & 29 & 148 \\
+Neutral activation & neutral residual & \textbf{0.979} & \textbf{29} & \textbf{148} \\
+Verdict-adjacent activation & prompt residual & 0.953 & 29 & 148 \\
+Supervised text & problem + code & 0.868 & 29 & 146 \\
+Score-distribution ridge & prompt logits & 0.830 & 29 & 147 \\
+Prompt ensemble & two prompt expectations & 0.817 & 28 & 146 \\
+Detailed prompt & prompt expectation & 0.810 & 28 & 146 \\
+Basic prompt & prompt expectation & 0.786 & 27 & 137 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Three findings matter:
+
+\begin{itemize}
+  \item \textbf{Neutral activations rank attacks best.} The neutral probe reaches
+  AUROC 0.979 without asking Qwen to judge the code. Its paired gains are 0.026
+  over verdict-adjacent activation, 0.111 over supervised text, and 0.149 over
+  the score-distribution observer, with 95\% intervals $[0.018,0.034]$,
+  $[0.098,0.125]$, and $[0.131,0.167]$.
+  \item \textbf{The balanced panel hides action differences.} Neutral and
+  verdict-adjacent activations both reach the exact-label audit ceiling at 2\%,
+  5\%, and 10\%. At 10\%, neutral activation leaves 596 attacks unaudited versus
+  607 for the basic prompt, a paired difference of $-11$ with 95\% interval
+  $[-17,-5]$. The sample does not resolve its smaller gains over the stronger
+  controls because attacks make up half the panel and fill the small audit queue.
+  \item \textbf{The tested controls narrow, but do not settle, the explanation.}
+  Reading all ten output probabilities raises AUROC from 0.786 to 0.830, so
+  sampling or averaging the declared score tokens does not explain the activation
+  gain. The text result rules out this lexical baseline, not every possible code
+  monitor or output observer.
+\end{itemize}
+
+In deployment, attacks should be rare. We therefore resample the frozen scores at attack
+rates from 1--50\% and audit budgets from 0.5--10\%. At 1\% attacks and a 2\%
+audit budget, the exact oracle misses none. The activation observers miss 2.65
+attacks on average for neutral context (95\% range $[0,6]$) and 3.94 next to the
+verdict prompt ($[1,7]$). The text, score-distribution, and basic-prompt observers
+miss 9.05 ($[6,12]$), 9.15 ($[6,13]$), and 11.85 ($[9,15]$). Rare attacks expose
+differences hidden by the balanced panel.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{controlarena_prevalence_sensitivity.pdf}
+\caption{Excess escaped attacks over the exact-label oracle in 2,000 resampled
+populations. Rare attacks expose differences hidden by the balanced panel.}
+\label{fig:apps-prevalence}
+\end{figure}
+
+AUROC and audit loss agree broadly for this frozen mixture, but that need not
+hold when score scales or the mix of attacks changes; Appendix~\ref{app:apps-diagnostics}
+checks this issue by APPS family and input length. This is an external monitor
+test, not a deployment claim: the attacks are stored rather than adapted to each
+monitor, all learned representations come from one model, and a stronger code
+monitor may beat the tested text baseline.

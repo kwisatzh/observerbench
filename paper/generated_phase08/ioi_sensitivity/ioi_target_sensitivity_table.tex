@@ -1,0 +1,17 @@
+\begin{table}[H]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Target & Direct loss & Gain vs. mean & Gain vs. transformed mean & Gain vs. no action \\
+\midrule
+$0.5$ & 0.731 & +29.4\% [0.209, 0.405] & +20.8\% [0.102, 0.288] & \textbf{$-$46.2\% [-0.314, -0.161]} \\
+$1.0$ & 0.891 & +18.5\% [0.115, 0.293] & +15.9\% [0.089, 0.253] & +10.9\% [0.015, 0.196] \\
+$1.5$ & 1.070 & +10.7\% [0.020, 0.243] & +9.3\% [0.011, 0.217] & +28.6\% [0.321, 0.525] \\
+Equal-target mean & 0.897 & +19.1\% [0.141, 0.287] & +14.9\% [0.091, 0.225] & +10.3\% [0.021, 0.177] \\
+\bottomrule
+\end{tabular}
+\caption{Post-confirmatory target sensitivity. This secondary analysis was designed after the $t=1$ confirmation and has no success gate. Each gain cell reports the relative loss change and, in brackets, a 95\% paired bootstrap interval for the absolute reference-minus-direct loss difference. The three targets share 512 prompts and 48 frozen action pools; the last row weights the targets equally. The negative no-action result at $t=0.5$ is retained.}
+\label{tab:phase8-ioi-sensitivity}
+\end{table}

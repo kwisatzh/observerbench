@@ -1,0 +1,43 @@
+{
+  "artifact_hashes": {
+    "fixed_action_prompt_losses.csv.gz": "7633ca90d531812d129a13598bb667b71794aa8d64a26230d914f4eb63a09c0e",
+    "hypothesis_audit.json": "0eff4ab684557f6c6b6ae591708e32cf038408bd1ddfc524f64751db14e683ed",
+    "observer_summary.csv": "902e019f4a782df724c26010ec339479f8f158c0885629003f56edf989ecbc78",
+    "pair_pool_cells.csv": "b6526adce50e167d7b065f95eb7600b13672d2031c7489be312023830c0a2ff4",
+    "pool_signs.csv": "e8c7001f093c99b8407684681312a38b0d01491e40a56131e233d48471eb4c70",
+    "primary_contrasts.csv": "e46d31d6f85d2acd2b66f256ba8f7bea22c89c828252722180e406082485b45f",
+    "result_digest.json": "384c52005128490e9d05835969d8d30f6c5d76c3f2972b68e3957f3a24b22322",
+    "template_sensitivity.csv": "a0018a60054dd16a67512942fef15eb3020afbdeaf5ff14328048c74355c6a12"
+  },
+  "design_id": "ioi_phase07_design_f7c5a0ec88a44fd3",
+  "design_manifest_sha256": "3dfa6352524c66b6b57794ec9ed2c89a900afd7df3d9879cd7f21cb0686feee5",
+  "joint_primary_passed": true,
+  "measured_shard_hashes": {
+    "shards/test/effects_0000_0016.csv": "b14e7319940a5a71c73b2e83164105ade23a9f01e9e713ab09841d723303cc5e",
+    "shards/test/effects_0016_0032.csv": "922ee5a634f38d19a08546cec2cae7c7d552e675f07ed95f94c60c383a52ab6e",
+    "shards/test/effects_0032_0048.csv": "074e71ea2e0662fc12d522183550ddf7c612a348404de95dd7ff4fd4e26aac4a",
+    "shards/test/effects_0048_0064.csv": "1511a70bed284caf5ccf6bd759e0f8aced3da4c43a03058ca4fccf11dfd02ac7",
+    "shards/test/effects_0064_0080.csv": "7aec331158169846ac49b277006a271f664aae7d4455f31efeed983a139526b2",
+    "shards/test/effects_0080_0089.csv": "45f17fdcf177e211778d15d8f26a0b711895e844acaee9f57ee709972b8395c7"
+  },
+  "measurement_manifest_sha256": "6681b04b114b4aba1129edf9d73e5197426213130ae44b21333c859a2bed7a9e",
+  "prediction_action_manifest_sha256": "fce0b027f232841653d5b7f24f3254243a71d3fbd282cc9c468c4781eab334e5",
+  "preoutcome_audit_sha256": "738063c000b2b38ea77ab9135bdd1e2f0fe9c04165c57e9637bf8a518b0865cf",
+  "pretest_manifest_sha256": "7c148b1137460fa7d4674f97f3984ce8a39068cd1dbe394852fed2f9141ae2a2",
+  "protocol_sha256": "198a1d30a61e9463863a7597becc7973c7f7a2ee8a915962d12b6612e194befb",
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.1",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.14.2",
+    "source_dirty": true,
+    "source_revision": "0cec2c4ef17d9c3b0ef3fea8fdf15347ee4e28cb"
+  },
+  "schema": "observerbench.ioi_phase07_evaluation.v1",
+  "scientific_status": "pilot_informed_outcome_sealed_canonical_template_confirmation",
+  "status": "frozen_joint_primary_evaluation_complete"
+}

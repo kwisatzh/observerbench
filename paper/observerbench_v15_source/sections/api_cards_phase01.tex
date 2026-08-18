@@ -1,0 +1,44 @@
+\section{Artifact contract and ObserverCards}
+
+The workbench needs a reusable boundary if researchers are to evaluate their
+own observers without rebuilding each fixture. ObserverBench v0 exposes a small
+Python composition contract with version identifier
+\texttt{observerbench.api.v0}. It separates four responsibilities:
+
+\begin{itemize}
+  \item a state estimator returns the task-defined estimate;
+  \item an actuation-direction provider returns a direction but not an action
+  magnitude;
+  \item a controller maps target and estimate to a scalar action;
+  \item a task owns the plant, intervention rule, controller settings, and
+  metrics.
+\end{itemize}
+
+The task registry reports which bundled tasks accept this interface. At v0,
+only analytic Ctl-1 has a tested external-observer adapter. Its benchmark-facing
+wrapper constructs the controller internally and reuses the existing data
+generator, readouts, normalization, and metrics. A lower-level composition may
+use a custom controller, but the output is marked non-comparable. Runs use
+strict JSON and record the contract and result-schema versions, component
+classes and parameters, package and dependency versions, source revision,
+configuration and result hashes, and caller-supplied observer provenance.
+
+This is a bounded claim. The contract proves that an outside observer can run
+unchanged against one existing fixture. The trained and IOI tasks remain fixed
+reproduction tasks. v0 does not provide dynamic plugin discovery, a fitting or
+split lifecycle, remote execution, or a universal bring-your-own-model API.
+
+ObserverCards summarize the scientific result. A card records the task,
+observer components, access regime, estimand, measurement design, validation
+target, main metrics, detected failure modes, recommendation, and scope limits.
+Recommendations are metric-derived rather than observer-name-derived. Two
+observer names with the same metrics receive the same recommendation; the same
+name can receive different recommendations under different intervention
+distributions.
+
+For Ctl-2, the card now distinguishes estimator from direction, reports the
+observer self-gain and conditioning diagnostics, and uses ``sign-incompatible
+feedback'' or ``sustained target-error growth'' rather than unqualified
+``instability.'' For the IOI random-subset task, it can recommend the additive
+observer. For the primary-stratified task, its final recommendation waits for
+the capacity-matched pair analysis.

@@ -1,0 +1,44 @@
+\section{Limitations and next steps}
+
+Ctl-2 studies an additive edit to a final residual with affine readouts. It does
+not rerun the Transformer, and its nuisance measure is a fitted probe. The four
+binary inputs yield four trajectories per trained model, so training seed is
+the statistical unit. Affine-span projection is only a geometry diagnostic.
+These choices make the gain and bias mechanisms inspectable, but they limit
+claims about semantic behavior under real token-level interventions.
+
+The IOI analysis uses a known small circuit and one intervention convention.
+The current pair ranking is confounded by unequal group sizes and unequal
+functional form. The next analysis must match pair-model capacity, report
+leave-one-pair-out contributions, attach prompt-level uncertainty to direct
+M\"obius effects, and quantify the power of the random-subset design for the
+known whole-group interaction.
+
+Artifact adoption also remains bounded. A versioned contract and one external
+adapter are a necessary first step, not evidence that researchers will adopt a
+general benchmark. The stronger adoption gate is a second adapter on a trained
+or IOI task together with baseline observers from the literature. Those are
+future extensions rather than claims of the v0 release.
+
+The cyber fixture should not be iterated by rewriting the same intent clauses.
+A useful future security task would make authorization depend on context, use
+policy or rule systems as first-class baselines, and break lexical shortcuts
+through cross-context splits.
+
+\section{Conclusion}
+
+ObserverBench asks a systems question: which estimate and actuation direction
+is a controller allowed to trust? The answer is not global. In first-order
+regimes a cheap estimator may suffice. In one-shot interactional regimes its
+direction can move collateral state. In an affine closed loop, estimation bias
+can drive sustained target-error growth even when direction is held fixed.
+Response calibration can repair the dynamic gain and still leave the initial
+state wrong.
+
+The workbench must therefore report more than a method name. It must say what
+was estimated, which factors changed, what the intervention distribution
+covered, how well the measurements conditioned the estimate, and whether the
+estimate was adequate for the stated use. The Phase 0--1 results establish that
+discipline for the control tasks and make the artifact boundary executable. The
+remaining IOI analysis asks whether the same discipline survives a fair
+comparison of interaction models.

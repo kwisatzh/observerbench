@@ -1,0 +1,4 @@
+analysis_status,screen_status,target,model,measurement_budget,ridge,design_rank,n_columns,condition_nonzero,calibration_fit_mae,candidate_negative_prediction_fraction
+exploratory_post_outcome_not_confirmatory,bounded_posthoc_screen_no_ridge_tuning,0.5,head_pair_quadratic_screen,160,1e-06,92,92,49.524965576343924,0.09268046501904084,0.0
+exploratory_post_outcome_not_confirmatory,bounded_posthoc_screen_no_ridge_tuning,1.0,head_pair_quadratic_screen,160,1e-06,92,92,49.524965576343924,0.0724488775191052,0.0
+exploratory_post_outcome_not_confirmatory,bounded_posthoc_screen_no_ridge_tuning,1.5,head_pair_quadratic_screen,160,1e-06,92,92,49.524965576343924,0.06432050972499471,0.0

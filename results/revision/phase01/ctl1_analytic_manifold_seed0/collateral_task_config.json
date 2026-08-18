@@ -1,0 +1,23 @@
+{
+  "beta1": 0.35,
+  "beta2": 0.25,
+  "collateral_noise": 0.03,
+  "controller_gain": 0.8,
+  "gamma": 1.15,
+  "include_interaction_only": false,
+  "include_manifold_respecting": true,
+  "max_strength": 2.0,
+  "n_test": 4000,
+  "n_train": 4000,
+  "normalize_direction_to_target_gain": true,
+  "nuisance_interaction_unit": 1.0,
+  "nuisance_interaction_weight": 0.0,
+  "nuisance_x1": 0.9,
+  "nuisance_x2": -0.25,
+  "p_feature": 0.35,
+  "ridge": 1e-06,
+  "seed": 0,
+  "target_actuation_gain": 0.85,
+  "target_noise": 0.03,
+  "target_ref": 1.0
+}

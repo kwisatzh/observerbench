@@ -1,0 +1,61 @@
+{
+  "accessed_mask_banks": [
+    "candidate"
+  ],
+  "accessed_prompt_splits": [
+    "test"
+  ],
+  "candidate_order_sha256": "5c48cf5e9771622235560ef85bbdcff8d457707e0144b6210ff47cd28fe96147",
+  "config": {
+    "clean_batch_size": 64,
+    "device": "mps",
+    "mask_shard_size": 16,
+    "model_name": "gpt2-small",
+    "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "pair_batch_size": 128,
+    "seed": 26062
+  },
+  "counts": {
+    "candidate_effect_cells": 786432,
+    "candidate_masks": 1536,
+    "candidate_pools": 48,
+    "mask_shards": 96,
+    "test_prompts": 512
+  },
+  "design_id": "ioi_phase06_design_2044e2b9b97cb658",
+  "forbidden_operations": {
+    "change_targets_or_models": true,
+    "filter_prompts_or_masks": true,
+    "refit_observers": true,
+    "reselect_actions": true
+  },
+  "measurement_scope": "One clean score for each frozen test prompt and the complete Cartesian product of all frozen test prompts and candidate masks.",
+  "policy_hierarchy": {
+    "primary": "target_loss",
+    "secondary": "cost_aware",
+    "secondary_cannot_rescue_primary": true
+  },
+  "reused_calibration_artifacts": [
+    "template_head_means.npz"
+  ],
+  "schema": "observerbench.ioi_phase06_test_measurement_spec.v1",
+  "scientific_status": "pilot_informed_prospective_fresh_template_name_mask_confirmation",
+  "source_hashes": {
+    "calibration_manifest": "54a606bbd008f1f135f60b3da5119cb6b716801598a59de9c726b13dc82655d3",
+    "design_manifest": "68d6220ef3f4b96993940a42711f97dacc6b7356e9a15df7424e1e174e40df2a",
+    "prediction_action_manifest": "f0e16559df6f7043ca5ce2147406c1e9bf4810d0baad2918c7526b01f1c88c86",
+    "protocol": "b6d44ac16c88a48c738416a18abb205771598ae713f7d44bf0dfdc73f3dff099",
+    "template_head_means": "f1695fa1308c3a58a3016b679bdaa44859dc950f7f00816a47f388384355478b"
+  },
+  "status": "sealed_sources_verified_before_test_measurement",
+  "template_order": [
+    "p6_abba_kitchen",
+    "p6_abba_library",
+    "p6_abba_museum",
+    "p6_abba_train",
+    "p6_baba_kitchen",
+    "p6_baba_library",
+    "p6_baba_museum",
+    "p6_baba_train"
+  ]
+}

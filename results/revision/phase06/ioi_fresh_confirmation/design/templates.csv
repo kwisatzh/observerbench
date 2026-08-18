@@ -1,0 +1,9 @@
+template_id,structure,template,template_hash
+p6_abba_museum,ABBA,"At the museum, {io} spoke with {s}. Later, {s} offered the exhibit guide to",71d2683738350cba914ca43a5d3869e11695982fef88a833709b30d8f192d922
+p6_abba_train,ABBA,"During the train ride, {io} sat beside {s}. Before leaving, {s} returned the travel journal to",693903d5823e0858afc353e6bdbf6964cde98ef46117e5421bf0598101888fb4
+p6_abba_kitchen,ABBA,"In the kitchen, {io} worked with {s}. After dinner, {s} passed the recipe card to",a67999b1e9e456e1d7197b2760fe9861859c19d1a8aa1605b37e4213d0403a00
+p6_abba_library,ABBA,"At the library, {io} met {s}. When the doors closed, {s} handed the borrowed novel to",649ee14b0645cc0aa6356cb3d6540d973431b9708bcd7dc8dc1aa6c9e3349134
+p6_baba_museum,BABA,"At the museum, {s} spoke with {io}. Later, {s} offered the exhibit guide to",eda019878606b698ae2fbeb575e1721ac6fdc8395e774a2e02f2ce9584a920a1
+p6_baba_train,BABA,"During the train ride, {s} sat beside {io}. Before leaving, {s} returned the travel journal to",720e31564b621adf74ed4bd0766ee867fb7029e5419f7b176646e9e1954a37cf
+p6_baba_kitchen,BABA,"In the kitchen, {s} worked with {io}. After dinner, {s} passed the recipe card to",f3044ef36728d69bf4d9c6bc4fd2820ba4bc3e19a4a73aa68607512800be23f9
+p6_baba_library,BABA,"At the library, {s} met {io}. When the doors closed, {s} handed the borrowed novel to",c8e18d769903d2bcb0e806d525e69468ea0906cf7a65b63b143c0bdf12823f16

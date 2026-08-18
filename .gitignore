@@ -1,9 +1,40 @@
 PRIVATE_MIGRATION_NOTES.md
+.DS_Store
+.env
+.env.*
+!.env.example
 __pycache__/
 .pytest_cache/
 *.egg-info/
 .venv/
+.venv-ioi/
+.ipynb_checkpoints/
 .matplotlib-cache/
+*.log
+*session*.jsonl
 runs/
 build/
 dist/
+paper/**/tmp/
+
+# Internal revision notes are kept outside the release repository.
+SCIENTIFIC_REVISION*.md
+
+# Raw experiment material is retained locally and will be archived separately.
+# The repository keeps the code, configurations, manifests, compact summaries,
+# checked tables, and figures required to understand and reproduce the results.
+results/revision/**/shards/
+results/revision/**/*.npz
+results/revision/**/*.tar.gz
+results/revision/**/test_prompt_outcomes.csv
+results/revision/**/size_matched_selection_rows.csv
+results/revision/**/fixed_action_prompt_losses.csv.gz
+
+# Superseded Phase-1 exploratory runs retained locally for audit only. Their
+# per-step CSVs exceed 500 MB each. Checked compact outputs use the v3/sweep
+# directories documented in results/revision/phase01/README.md.
+results/revision/phase01/ctl2_gamma0_seed0/
+results/revision/phase01/ctl2_gamma115_seed0/
+results/revision/phase01/ctl2_gamma0_seed0_v2/
+results/revision/phase01/ctl2_gamma115_seed0_v2/
+results/revision/phase01/ctl2_gamma0_gainmatch_small_offset_seed0/

@@ -1,0 +1,65 @@
+\section{ObserverBench design}
+
+An observer in ObserverBench connects a measurement procedure to a downstream
+use. For a task state $h$, we write the estimator and direction provider as
+\[
+E(h)=\widehat z,
+\qquad
+D(h)=d.
+\]
+The controller receives the target and estimate and returns an action magnitude,
+\[
+u=C(y^\star,\widehat z).
+\]
+The task owns the plant or intervention rule, initial conditions, measurement
+design, and validation metric. This division makes the experimental factors
+explicit. A fixed-direction comparison changes only $E$. A fixed-estimator
+comparison changes only $D$. A factorial study changes both and reports both
+main effects and their interaction.
+
+The earlier diagonal comparison changed $E$ and $D$ together and called the
+pair an observer. That composition remains useful operationally, but it cannot
+support a causal statement about estimation alone. We therefore use
+``estimator--direction pair'' for diagonal arms and reserve ``estimator effect''
+for a contrast with direction held fixed.
+
+\paragraph{Fixed task and controller.}
+For a benchmark-comparable run, the task fixes the plant, controller settings,
+initial-state distribution, intervention operator, admissible direction space,
+and normalization. Direction is an experimental factor; it is not silently
+treated as part of a fixed actuator. Custom controllers are permitted by the
+lower-level composition interface, but those runs are marked non-comparable to
+the bundled benchmark arm.
+
+\paragraph{Known or borrowed validation targets.}
+Synthetic tasks are useful when they isolate a mechanism. Real-model tasks are
+useful when the target is specified before looking at the result. Ctl-2 uses the
+trained model's target head as its plant readout. IOI uses published head groups
+as borrowed structure. The fitted nuisance probe in Ctl-2 is reported as a
+probe displacement, not as independent ground truth.
+
+\paragraph{Held-out validation.}
+A diagnostic intervention can show that an interaction exists. It does not show
+that an observer predicts new interventions. IOI therefore moves from
+whole-group diagnostics to held-out head subsets. Ctl-2 calibrates finite
+responses on a separate split before evaluating the closed loop. Holding data
+out prevents the recovery method from being judged on the measurements used to
+fit it.
+
+\paragraph{Continuous errors before threshold flags.}
+Thresholded divergence rates are easy to read, but a trajectory can cross or
+miss a threshold because of a small numerical change. Ctl-2 therefore uses
+integrated squared error and final target error as primary outcomes. Threshold
+rates remain secondary descriptions of the clipped rollout.
+
+\paragraph{Report conditioning and support.}
+Identifiability is not enough when the required calibration gain or projected
+direction is very large. Every Ctl-2 arm reports the target gain, observer
+self-gain, local pole, direction norm, projection scale, clipping, displacement
+from the initial state, nearest-clean distance, affine-span distance, and
+convex-hull extrapolation. Membership in a clean-state affine span is not called
+on-manifold behavior.
+
+\paragraph{Report nulls.}
+A workbench must be allowed to recommend the cheap observer. The $\gamma=0$
+control null and the IOI random-subset result test that rule directly.

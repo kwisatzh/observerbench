@@ -1,0 +1,9 @@
+analysis_status,model,measurement_budget,policy,mean_objective_loss_reduction,reduction_fraction,positive_pool_count,pool_count
+exploratory_post_outcome_not_confirmatory,count_plus_all_bin4,20,cost_aware,-0.06861616322646538,-0.06061151425564139,4,10
+exploratory_post_outcome_not_confirmatory,count_plus_all_bin4,20,target_loss,-0.04525682001064221,-0.04333137245098267,5,10
+exploratory_post_outcome_not_confirmatory,count_plus_all_bin4,40,cost_aware,-0.06497506548712649,-0.0541604981551068,5,10
+exploratory_post_outcome_not_confirmatory,count_plus_all_bin4,40,target_loss,-0.06835528059552114,-0.06330368397785492,4,10
+exploratory_post_outcome_not_confirmatory,count_plus_all_bin4,80,cost_aware,0.06446680096288523,0.05875322816892136,7,10
+exploratory_post_outcome_not_confirmatory,count_plus_all_bin4,80,target_loss,0.03971359853943189,0.041073327173926,6,10
+exploratory_post_outcome_not_confirmatory,count_plus_all_bin4,160,cost_aware,0.1037531451160709,0.09078352415189178,6,10
+exploratory_post_outcome_not_confirmatory,count_plus_all_bin4,160,target_loss,0.08221514007697503,0.08098062500382106,6,10

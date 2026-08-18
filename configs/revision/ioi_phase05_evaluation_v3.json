@@ -1,0 +1,88 @@
+{
+  "schema": "observerbench.ioi_evaluation_protocol.v3",
+  "status": "frozen_after_measurement_before_heldout_open",
+  "frozen_date": "2026-07-26",
+  "supersedes_evaluation_fields_in": "configs/revision/ioi_phase05_confirmatory_v2.json",
+  "reason": "The v2 observer predicts a prompt-averaged finite effect and therefore selects one fixed mask per model, measurement budget, candidate pool, and target. Its prespecified prompt-specific oracle regret compared that fixed action with an unattainable oracle that could choose a different mask for every prompt. This amendment aligns the primary estimand with the action the observer actually takes. It does not change prompts, masks, measurements, fitted observers, candidate pools, targets, or predictions.",
+  "outcome_access_at_freeze": {
+    "measurement_complete": true,
+    "train_only_fit_complete": true,
+    "validation_outcomes_opened": false,
+    "test_outcomes_opened": false
+  },
+  "frozen_inputs": {
+    "design_protocol": {
+      "path": "configs/revision/ioi_phase05_confirmatory_v2.json",
+      "sha256": "daa1e170eb4b8f01d0c98deeaa0ba85d7ea4f21c6582d2ddf97c5bd04711c8b6"
+    },
+    "design_manifest": {
+      "path": "results/revision/phase05/design/design_manifest.json",
+      "sha256": "5f9aedda456048378d318537b4099bf28d09991fd40a18004f71d82075075922"
+    },
+    "effect_manifest": {
+      "path": "results/revision/phase05/ioi_effects/effect_manifest.json",
+      "sha256": "fb3e807ea52d27dd7da58d49e2b6fa4a9d4c425bdb8e9a999cf240bdcb1ff80f"
+    },
+    "fit_manifest": {
+      "path": "results/revision/phase05/ioi_fit/fit_manifest.json",
+      "sha256": "dc619423f60827c9d1f37cf0bb776772e9d42c240ff651ca16bdad69cfe43623"
+    },
+    "candidate_predictions": {
+      "path": "results/revision/phase05/ioi_fit/candidate_predictions.csv",
+      "sha256": "b9853631d45fa45cc56ecef9afac4000cb359ffd76c923a05363f64e567ff4d6"
+    }
+  },
+  "pinned_model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+  "selection_rule": "For each observer, measurement budget, candidate pool, and target, select one mask from the prompt-averaged train-fit prediction. Apply that same mask to every held-out prompt in the pool-target cell.",
+  "primary_metric": "mean_per_prompt_fixed_action_absolute_target_loss",
+  "primary_budget": 160,
+  "targets": [
+    0.5,
+    1.0,
+    1.5
+  ],
+  "target_tolerance": 0.25,
+  "head_cost_penalty": 0.02,
+  "bootstrap_repeats": 2000,
+  "bootstrap_axes": [
+    "test_prompts",
+    "candidate_pools"
+  ],
+  "secondary_cluster_sensitivity": {
+    "contrasts": "fixed_action_target_loss_reduction",
+    "clusterings": [
+      "ordered_name_pair_id",
+      "unordered_name_pair_id"
+    ],
+    "second_axis": "candidate_pools",
+    "cluster_weighting": "Standard cluster bootstrap: sample name-pair clusters with replacement, retain all prompt rows and original within-cluster sizes for each sampled cluster, and independently sample candidate pools with replacement.",
+    "report": "Report whether each 95% interval preserves the positive direction. These sensitivity intervals do not replace the prespecified prompt-by-pool interval or alter the success gate."
+  },
+  "secondary_metrics": [
+    "fraction_within_tolerance",
+    "selected_head_count",
+    "cost_aware_fixed_action_loss",
+    "size_matched_fixed_action_loss",
+    "best_fixed_action_oracle_regret_point_only"
+  ],
+  "best_fixed_action_oracle_scope": "Secondary point estimate only. It chooses one mask per candidate pool and target by minimizing mean test-prompt target loss. It is not used in a percentage denominator, bootstrap success gate, or fitted-baseline comparison.",
+  "success": {
+    "fixed_action_loss_reduction_fraction_min": 0.15,
+    "paired_interval_excludes_zero": true,
+    "within_tolerance_improvement_min": 0.05,
+    "requires_size_matched_direction": true,
+    "requires_cost_aware_direction": true
+  },
+  "budget_reporting": {
+    "report_all_budgets": [
+      20,
+      40,
+      80,
+      160
+    ],
+    "primary_budget": 160,
+    "low_budget_interpretation": "Design-specific diagnostic curves only; no general sample-efficiency claim."
+  },
+  "pair_claim_boundary": "Compare the frozen PE-only observer with all-pairs only to assess whether PE recovers most of the all-pairs predictive benefit under this design. Do not infer a unique pair ranking from this confirmatory candidate set; pair ranking remains an earlier Phase-2 result.",
+  "seed": 25051
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": "observerbench.effect_observer_card.v0",
+  "observer_name": "replace-with-observer-name",
+  "observer_version": "0.1.0",
+  "observer_family": "replace-with-method-family",
+  "access_regime": "replace-with-access-regime",
+  "measurement_basis": "replace-with-basis",
+  "fit_procedure": "replace-with-fit-procedure",
+  "implementation": "https://example.org/replace-me",
+  "known_failure_modes": [],
+  "metadata": {}
+}

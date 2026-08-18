@@ -1,0 +1,178 @@
+{
+  "bounded_posthoc_screen": {
+    "basis": "intercept + 13 head indicators + 78 distinct head-pair products",
+    "capacity_matched_mean_effect_control": true,
+    "measurement_budget": 160,
+    "model": "head_pair_quadratic_screen",
+    "ridge": 1e-06,
+    "ridge_tuned_on_test": false,
+    "screen_status": "conceived_after_initial_direct_risk_results"
+  },
+  "changed_estimand": {
+    "new_response": "mean_train_prompt_absolute_target_loss",
+    "new_response_is_target_specific": true,
+    "old_response": "mean_train_prompt_effect"
+  },
+  "config": {
+    "bootstrap_repeats": 2000,
+    "budgets": [
+      20,
+      40,
+      80,
+      160
+    ],
+    "head_cost_penalty": 0.02,
+    "models": [
+      "additive_head",
+      "count_additive",
+      "count_plus_PE_bin4",
+      "count_plus_all_bin4"
+    ],
+    "primary_budget": 160,
+    "ridge": 1e-06,
+    "seed": 26061,
+    "target_tolerance": 0.25,
+    "targets": [
+      0.5,
+      1.0,
+      1.5
+    ]
+  },
+  "config_sha256": "7a12be8ecd3eda051f8a0932dfe3fc730edf3f8cf71695cfd3634826d1c82497",
+  "inputs": {
+    "design_manifest": "5f9aedda456048378d318537b4099bf28d09991fd40a18004f71d82075075922",
+    "effect_manifest": "fb3e807ea52d27dd7da58d49e2b6fa4a9d4c425bdb8e9a999cf240bdcb1ff80f",
+    "effect_manifest_status": "complete_unopened_confirmatory_outcomes",
+    "mean_fit_manifest": "dc619423f60827c9d1f37cf0bb776772e9d42c240ff651ca16bdad69cfe43623",
+    "phase5_confirmatory_manifest": "0c56ee7996b09425161487ae54a37ba12e7a9a980a612a15a9461ebe3cd57d3b",
+    "test_effect_sources": {
+      "shards/test/effects_0000_0016.csv": "c4d88a0be0a359190d268a8d6fb6bc3629c12a1ae2e6ef52c175df9d47e581a5",
+      "shards/test/effects_0016_0032.csv": "2f367071271283c59de8f0ed3efef5b1b247a27b28a6c794a77a192f7dea5b50",
+      "shards/test/effects_0032_0048.csv": "eabd71223621cac75ba0ec53502e3afcdb4cce1a0feaa04720b82c0a84d04f6b",
+      "shards/test/effects_0048_0064.csv": "94600f53f24b2ba9153cba7a2d4cdc31b032a2c0709f20b76faad4f7547c6659",
+      "shards/test/effects_0064_0080.csv": "b0bc4820534ab5211eda4112a61697043583ff4a16394b826756c9e6b226c2ee",
+      "shards/test/effects_0080_0096.csv": "c16e9f6f390cf778e8db0d14a1aebaee0c20701b1c362c37a804493b8425f4a6",
+      "shards/test/effects_0096_0112.csv": "c3553114f2ba9bef62fb9a1702ec2ccdf522b4a33e597f9412ee716faf8bb003",
+      "shards/test/effects_0112_0128.csv": "963104b23f36aac015688491e024fd90bce07cb207e262172e571b08a7eedd79",
+      "shards/test/effects_0128_0144.csv": "1b722bcba852e9c6a114d42816767186c16021d193494e7a186e632194b41aba",
+      "shards/test/effects_0144_0160.csv": "cfe36b8b83daff28090a8c05fb8b9d5519f1ab4e02facbb0cdb4799c09bb798a",
+      "shards/test/effects_0160_0176.csv": "5f1612584a83288cb42bc904d261a391f0becdca607d3c2983c94d7807fb98b2",
+      "shards/test/effects_0176_0192.csv": "2fb5510a3503ef02b079289677fed969e1fbbd22670e75572c9ffb0d136e6c3f",
+      "shards/test/effects_0192_0208.csv": "2df5f67ff6fa9c0759015494a78d80bc519b4d77e102ec014bb5a59cb10313b1",
+      "shards/test/effects_0208_0224.csv": "79d5d2e817f726ea224ad30bcc0196d282ec7feb7f019e325987c917c7ed70e8",
+      "shards/test/effects_0224_0240.csv": "0546e439e825c2b6e07d01e5b7e25550a24bdaa9892431078749800795654a31",
+      "shards/test/effects_0240_0256.csv": "295aadfa3c1802ec31ff37308de8ba5ecc8e4b644d30652452f72f10ad1a3660",
+      "shards/test/effects_0256_0272.csv": "c2e8517f2f0f9781418eeadce92290cd8f6f701c6b3dc5a53e8905e741c90d1f",
+      "shards/test/effects_0272_0288.csv": "dda1c555866080259e99c880f91ff424463e3fd82e531c507851fe0df2263638",
+      "shards/test/effects_0288_0304.csv": "5c8169445a240e1de1d47b1f688242e0cf450cf2264c3c8e4113f047a22730d4",
+      "shards/test/effects_0304_0320.csv": "97692acc90fd9c9730f3ae262446329d348b7fe5c85db0c4aca1d207dd1f92a1",
+      "shards/test/effects_0320_0336.csv": "4b27311ff932210c9b536ec4f1a7e9b2d4593d8a19335ac7e51d61060f4793cc",
+      "shards/test/effects_0336_0352.csv": "825f757df47480093468c6254c857a2aadce00da84576ab6c3371993ba7724c3",
+      "shards/test/effects_0352_0368.csv": "0589b703a58f3a631488f3566042a4db77c27554cf02041a6696216d2ed81b68",
+      "shards/test/effects_0368_0384.csv": "30e936c581d057eecd3ab846a6c17d0ad647d3786e601e5a045f57516339148a",
+      "shards/test/effects_0384_0400.csv": "b9d4bded527ec0ea1d41687b3fe590c76c2ce17b1a07aa00fce0658647357f04",
+      "shards/test/effects_0400_0416.csv": "02d5279418a39814172cc2300faa7237c159c25c9ee483bb039a8c37de9a5f7a",
+      "shards/test/effects_0416_0432.csv": "969e5ec707d541312bb7993d0d6afcdc3ea70fa75f7452fe38b201e5d1dda1e9",
+      "shards/test/effects_0432_0448.csv": "ad774461924fed7d2667be686ba5eff8714c364589555b580fcc217d44abe0b5",
+      "shards/test/effects_0448_0464.csv": "c1729d80804a608bad880c181822b8967059bbfef4793605c3b22c21a4ced992",
+      "shards/test/effects_0464_0480.csv": "c29d4b44fb8a51c3307026d3f87953dd972306770fbb749904441e307b037db6"
+    },
+    "train_effect_sources": {
+      "shards/train/effects_0000_0016.csv": "f08f5e28e5fa513c4cef7d897a3bfe56edfc052aeeedf59e118ec3f51abaec12",
+      "shards/train/effects_0016_0032.csv": "f79aeac723c4bfd34018926b85c0aee1812703ca72cf35d3b3567047b5f5681d",
+      "shards/train/effects_0032_0048.csv": "80d784e65b549c6a76510bf0e5675c0486940d6f7b5d775416eaeb3bcfe130ea",
+      "shards/train/effects_0048_0064.csv": "a6189109ca6791e09a9f79b76ac12e9b568b73050b7c1fd6db93b57141b3af5a",
+      "shards/train/effects_0064_0080.csv": "664cb7b99453433e079c2ef6cf30253ae134e65dda9b4af6162d86a9bcb1c4fc",
+      "shards/train/effects_0080_0096.csv": "298fa0a48ca8ff000538d4cb0350457b77b5dcc80c2e26078fc3ecbedada7b3b",
+      "shards/train/effects_0096_0112.csv": "31a952e52d381d1a1e28796295bf1d2d28d8d7b5780370c22a6d7cc255ce4132",
+      "shards/train/effects_0112_0128.csv": "712dfd6aa327c8d24dd35250082191ae7df2646def7ad4eba1f1112f73b547de",
+      "shards/train/effects_0128_0144.csv": "1579bc07ad00d56ee660293d9e20c9e321095be79147915f742cea66bd48450c",
+      "shards/train/effects_0144_0160.csv": "017f69ac943ac5172f976aaec4a7eca50fca2da4e37d61be840cd6d24c0aabf9",
+      "shards/train/effects_0160_0176.csv": "2dd85da3a90b3dc5689071be67dca9791b98e73911ee936fb797e192a4bcd45d",
+      "shards/train/effects_0176_0192.csv": "fe470a8c9ddf6a1a9c3b5b94897256474882011433bb61e3447151d2f5c14449",
+      "shards/train/effects_0192_0208.csv": "1608c6ce80f86a799ff4331450c3052affba526901b552abfdc2d81ea871d84c",
+      "shards/train/effects_0208_0224.csv": "2300a3ad8d04df82b726d856743ddcbe5086d48db33bf8dd8219a8f00d83cb54",
+      "shards/train/effects_0224_0240.csv": "3a881ff14858d4a007dfd6bad303cbb0e16faa86f33d75ca8244f7a60ba2aea4",
+      "shards/train/effects_0240_0256.csv": "d3d31663778ef16a4824ccf73dd9a317d1d474d0208be2ccdcda6e6631f3ffa2",
+      "shards/train/effects_0256_0272.csv": "ac4d29df4c574eee5054724613062b4fa9dcaa2295b23ee12a8addda18e1c047",
+      "shards/train/effects_0272_0288.csv": "8837ec093298d9cf02e6a9cdffcb6a780e084bce3433ecbf419242756efad22d",
+      "shards/train/effects_0288_0304.csv": "032a9bda70b673f5952f3bfec9f7771f346bf62abdc2657b690c784fa1e3a305",
+      "shards/train/effects_0304_0320.csv": "b5b4857c3878fe6b0fa8ca966a9bce1075534917ac5b42770d9b1c1d6e7ea93b",
+      "shards/train/effects_0320_0336.csv": "bce16a1bd3765438ec07f1308d01dbc6020470a01a221f612fc38faca62865ad",
+      "shards/train/effects_0336_0352.csv": "3640dd1f0585be2e07f2400a19e92a7783e499f36b2401bd5f8cf3f874d905da",
+      "shards/train/effects_0352_0368.csv": "dc766c49c23f58ee6648e5b243f11ef20110b0be8e9f71c1ec49088f0c9d8abe",
+      "shards/train/effects_0368_0384.csv": "f2e0027f5becd31a862fc361085c5a5858597fec629148ee371bb3a438e47adb",
+      "shards/train/effects_0384_0400.csv": "29fc6ea7f50312dccecf2faa82d1be310c86062aefe9169ec547833cab217062",
+      "shards/train/effects_0400_0416.csv": "6ac48632a85f0095eca52c80aa32407a0b7d447c8d6939c890414e607fc415b3",
+      "shards/train/effects_0416_0432.csv": "e46a0f0d843a4835bdfcebd84dfcce25a3931ea3ca8d44925dfb2a7b39a43560",
+      "shards/train/effects_0432_0448.csv": "555f11df4c211d3ce2a7b677edd7ad5481d290dab92e11fe6660696ff38a0411",
+      "shards/train/effects_0448_0464.csv": "87d970f991311b36fe95cb96e85d4eb4eb9a4db4b4e4b735bb2c40ea705ef771",
+      "shards/train/effects_0464_0480.csv": "d0f60c874214b44daf815cf3cfd09c40ea26c2bbfea2db1753048a3c0b1c8aeb"
+    }
+  },
+  "outputs": {
+    "README.md": "3abacca8ca356d7777a901e8fbc49c0d92b9668277e5529abae44994238db1af",
+    "all_selector_predictions.csv": "903c5f84a5733b24c92f077488ad3b22f1c55904324b060226a16a2af1ca4814",
+    "budget_descriptives.csv": "a5da72c6d9afdf6369794039f9a22857bfe4877880149c325bb4c004158ded4b",
+    "decision_quality.csv": "e67750cd9a78717d1f8df0e0fc8ca23a905df475a75ad657577f5571e5c17347",
+    "direct_risk_coefficients.csv": "01f2c0c9423a687bc0338df29ce224fa2d97fdb356c728e8dd83ad27a4520fdc",
+    "direct_risk_predictions.csv": "b99fdf41a7f99f47f6fd9c493fce904a8c42d367a1a67abd4dd9fa70ddeb2e57",
+    "fit_diagnostics.csv": "8c1a19832747f8db8c35a68045b039e0286d8e2d397e7e3de3af799e4ea385f6",
+    "fixed_action_oracle.csv": "d7c508fcb89010f11cab07227ab0e2335ae05bbafe62b1ea4659e5148f696e35",
+    "fixed_mask_decisions.csv": "95b860ca64ec128ff88a8b8a51ad2e5aa5eccf208e73f7cbf70af4b7cc5dbfb7",
+    "paired_contrasts.csv": "dea9e07c52c252c736f17fcb78aa0670fbab46bdf55c046218e3d89fbdf6623a",
+    "pool_contrasts.csv": "ef53bf2c94f7fe62110a089124ec529781895689d965e999e9b3e19ff40fb61a",
+    "quadratic_screen_coefficients.csv": "ea86897e578410d7108afef4bf3a471b1f37ebde18ccb5e177a7dafcd94a3a14",
+    "quadratic_screen_fit_diagnostics.csv": "e8aad827d84b0780cf061aa351d9b228c1b26bff5e49c8e71a534fd40e295ddf",
+    "quadratic_screen_mean_effect_coefficients.csv": "88bad7c65a87fb2da8ac3e3872a1a9fa70a158f284c1d53d8c6d0bf88294a3c1",
+    "quadratic_screen_mean_effect_fit_diagnostics.csv": "0ccf90170cd49ff9d05eedbf09b40750b1e038cf88cac218927ba1a1b28a2ebd",
+    "quadratic_screen_mean_effect_predictions.csv": "1ae70a4527ce9f270dd16b99cf700207d8d15121f6f3b18a92895647cbd05878",
+    "quadratic_screen_predictions.csv": "4dffb1ab6b651bb61438255e61f6a9dffc67f8ecfb642c2afbf84c81b6bea47c",
+    "result_digest.json": "896bcd4a19b1c9665a15936396d454e21d3d07b00c83eec56a79bbc89a422b78",
+    "risk_prediction_metrics.csv": "bef21bfe612ba10adb1807405e2ffc20a91ec07ac6656f2c5b5b0823536fe4ea",
+    "selection_change_summary.csv": "18375d44406008dbf6d986f6d4d7cdc6822a6eff0d292a9eee083ae0ce4b1c06",
+    "selector_summary.csv": "3b018d29affe94bc208c848bb6803d5a74cd86b4fe76080430ac47d2a4e07b57",
+    "test_prompt_outcomes.csv": "1e535dc8cc17c40b6d64ef527910977bcdc3f9df22bb15e4172269e0c72599f6"
+  },
+  "post_outcome_disclosure": {
+    "claim_status": "hypothesis_generating_only",
+    "phase5_confirmatory_manifest": "0c56ee7996b09425161487ae54a37ba12e7a9a980a612a15a9461ebe3cd57d3b",
+    "phase5_test_already_opened": true
+  },
+  "retained_decision_problem": {
+    "candidate_masks": 320,
+    "candidate_pools": 10,
+    "design_id": "ioi_phase05_design_37dff29fb2338e1f",
+    "measurement_budgets": [
+      20,
+      40,
+      80,
+      160
+    ],
+    "models": [
+      "additive_head",
+      "count_additive",
+      "count_plus_PE_bin4",
+      "count_plus_all_bin4"
+    ],
+    "targets": [
+      0.5,
+      1.0,
+      1.5
+    ]
+  },
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.1",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.14.2",
+    "source_dirty": true,
+    "source_revision": "0cec2c4ef17d9c3b0ef3fea8fdf15347ee4e28cb"
+  },
+  "schema": "observerbench.ioi_risk_exploratory_run.v1",
+  "status": "exploratory_post_outcome_not_confirmatory"
+}

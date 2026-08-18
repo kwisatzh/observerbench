@@ -1,0 +1,35 @@
+{
+  "checkpoint_hashes": {
+    "smoke_mask_00": "0a266b5e5ff8e92bd5a163dea708af8a707cda2e40cc1c827d75626a485ed965",
+    "smoke_mask_01": "404755694520476f7553c429f17e2237c5149bb8ac6cd046c9c2d79b3c518430",
+    "smoke_mask_10": "2325d6d077400b0bc9c259a1512b053630a154a4572b7605bc47038e3f1c4abe",
+    "smoke_mask_11": "431ba250917d491640c7199aee0ca55ae8de514f15b91609db1591b64510e667"
+  },
+  "config_sha256": "5c3a44e3a758a11bcf8fa18e60abeceed43ef6f1e1a51ac21bc19304d6192a2d",
+  "heads_sha256": "584329d9412e1670387809b3faade54d2512e0a448b319c05c7a437851b78f04",
+  "intervention_mode": "mean",
+  "masks_sha256": "8344435fd7ead2aa6135e1f492a0c92b3cad13c6992c1843cba25ed5b8f6b302",
+  "partition": "engineering_smoke",
+  "position_scope": "final",
+  "producer_source_hashes": {
+    "pyproject.toml": "9115540a3233107e12cd1317c24c82caeaeefd8221e363a595ac802ad1240a5b",
+    "scripts/run_qwen_induction_phase09.py": "cfea527b7b867f16a478562ffc9a3426eeae9738f73608806735427a4b1f8cd8",
+    "src/observerbench/core.py": "69334fa4fd8f36367c2bab709931a85bd82b585c34f9cb6d82625354c97c33b4",
+    "src/observerbench/effect_prediction.py": "38670e17e470a96259edce697130c748c6f3751b788bd9010583856def229537",
+    "src/observerbench/provenance.py": "8683bca7bac91de5037765983a566720c732b8308534a5b366c6f2f4162d8403",
+    "src/observerbench/tasks/ioi/stage2d.py": "70c3dc698f74835fbfc5baae55e3164a5c5653b33fd336bebe700f59bcb11f31",
+    "src/observerbench/tasks/qwen_induction/__init__.py": "29dc0a0a94ac9603442e3eb1606b583f9479c8c77a12441d5c650ced9ade01ae",
+    "src/observerbench/tasks/qwen_induction/analysis.py": "de50f7d8a1e17d2bdb06350aefaf7750356f79aaa51001016f14fb533caad726",
+    "src/observerbench/tasks/qwen_induction/artifacts.py": "58a10bd8b37c50cafdad15a6ee5b28fa9321a640b0627d72de531c21baa5bab8",
+    "src/observerbench/tasks/qwen_induction/collateral.py": "fb3bebf79a827e1af9dc38998e1d7bfc89ab97ccac010db336abfb0daccecdd7",
+    "src/observerbench/tasks/qwen_induction/design.py": "95161576c7bf627c966fdb62faca14a6ca3c2edac2b4be3754151abae9d262ff",
+    "src/observerbench/tasks/qwen_induction/effect_task.py": "f171081e9824f3a86090527757ddcb4a66e714324e1aef3929e6245a9de6f36e",
+    "src/observerbench/tasks/qwen_induction/plant.py": "86abd26eb8d98ce7699af9288fdcf9d328101a4ea2629577de29df044f028c68",
+    "src/observerbench/tasks/qwen_induction/runner.py": "17be7d56c956785531c23de0314c4d662e324f27ad7b553f28087e7df81d60b5",
+    "src/observerbench/tasks/qwen_induction/selection.py": "f3a13b11c47db82d04c9774396ad5c11204afcd61d2ddfe4889d8b61b0d8f98f"
+  },
+  "prompt_ids_sha256": "1174fc8c2694e7b3b6e926a32f29d4fe67bcd1640450e9807b5f017df13c56e9",
+  "reference_means_sha256": "1143a96b76c1a8da705f01de0057cba1cb081119631128358ea4e9d94ee24ba3",
+  "runtime_identity_sha256": "784703405efef0a37a66066a16e0ea581aaeac14ab59a832732ee79d6abc708f",
+  "schema": "observerbench.qwen_induction.mask_checkpoints.v1"
+}

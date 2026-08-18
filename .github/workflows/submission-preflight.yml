@@ -1,0 +1,45 @@
+name: Submission preflight
+
+on:
+  pull_request:
+    paths:
+      - "submissions/pending/**"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-data-only-submission:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out trusted validator from the base branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: trusted
+
+      - name: Check out only submitted data
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: incoming
+          sparse-checkout: submissions/pending
+          sparse-checkout-cone-mode: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate the submission as data
+        run: |
+          python trusted/scripts/validate_public_submission.py \
+            --root incoming/submissions/pending \
+            --output submission-preflight.json
+
+      - name: Upload the preflight report
+        uses: actions/upload-artifact@v4
+        with:
+          name: submission-preflight
+          path: submission-preflight.json
+          if-no-files-found: error

@@ -1,0 +1,28 @@
+{
+  "completed_stages": [
+    "engineering-smoke"
+  ],
+  "config_sha256": "5c3a44e3a758a11bcf8fa18e60abeceed43ef6f1e1a51ac21bc19304d6192a2d",
+  "mode": "engineering_smoke_only",
+  "schema": "observerbench.qwen_induction_phase09.run_audit.v1",
+  "stages": {
+    "engineering-smoke": {
+      "artifact_hashes": {
+        "engineering_smoke/design/preselection_manifest.json": "3a8384be611c2f71657a73a9c49dc8ddc25534be9f79b29d2be8256ca21058b0",
+        "engineering_smoke/design/prompts.csv": "c9bb3dc17c30632b2a36ca6fdf142abf3f154cbfabb10d21ed0ac2ebf3d9c9de",
+        "engineering_smoke/design/prompts_all.csv": "43fd4568371fc10852e7d519da819d8d79a25ccc1ac9d3325babf000a81cbe2d",
+        "engineering_smoke/design/token_banks.json": "4c0a6f12092a0d8360c035c898ee4424e8beb4ef51361d9d38db9b57e6204b3a",
+        "engineering_smoke/smoke_outputs/attention_scan.csv": "012ec859d9e3b61383405302bc4be7a15a11a2be739337a9ef6f72308147f408",
+        "engineering_smoke/smoke_outputs/attention_shortlist.csv": "807f7d4de5739ab42bcf7a010a7a99407c2995f16d7433dde5611d57f35f422d",
+        "engineering_smoke/smoke_outputs/clean_scores.csv": "0a93aa0591a8ff3531135cb631a40855903815aaae5e9c0f3659f12977eb6748",
+        "engineering_smoke/smoke_outputs/effects.csv": "3873a6ee87962fff71324020a600ddd38ab2878eb7755963999fba252c3376c8",
+        "engineering_smoke/smoke_outputs/measurement_clean_scores.csv": "11b53de8e953dd7b180f5b70a7ecc95d8d1d58bc882f7e59eeef62f4cc6840d4",
+        "engineering_smoke/smoke_outputs/noop_parity.json": "c9d14b82a9af1e77969f5778291d2bdc191c5e32ec2a79b4061ab2ddf81d2f08",
+        "engineering_smoke/smoke_outputs/summary.json": "96193529a7068b74c706c1ff38ece964fce5dfadf686b7d561a1d5fc8e300aa6",
+        "engineering_smoke/work/runtime/engineering-smoke.json": "9e8427ac60fdc1c602cfde56ddb97d5c035cf8dc4af19aee5dc724b5b3083516"
+      },
+      "status": "complete"
+    }
+  },
+  "terminal_status": null
+}

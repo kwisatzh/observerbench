@@ -1,0 +1,89 @@
+{
+  "artifact_hashes": {
+    "work/observer_freeze/action_candidate_predictions.csv": "cc865d3a8f056dabb8f520684243b2249abeb174b73738f80967652131c655b2",
+    "work/observer_freeze/action_coefficients.csv": "6acb409c64ebf781a8618f93f6165373574cea47bf1d0ab719bac4c8c548e50d",
+    "work/observer_freeze/action_ridge_diagnostics.csv": "82de1373bfd2f3d17c7a81b75cebb6a23b26233cccac3107c343867fb5917c5c",
+    "work/observer_freeze/fixed_actions.csv": "ae63723b4860dfcf86fa03e20b079e194c45976d3aa5f7779e50c9c7c53c198e",
+    "work/observer_freeze/mean_effect_coefficients.csv": "7581cdae693fdc8020c7e1f1fcc6f9a32550a5952fdf9c9d8e60adeb3c4b50ef",
+    "work/observer_freeze/mean_effect_predictions.csv": "94db30458af374b0f119e5f05e4c4979eaa91ae17fa8d80aaba1f00e1c2c3ac1",
+    "work/observer_freeze/mean_effect_ridge_diagnostics.csv": "8fdc12102448561dd8a58b1a12b9c9ed4c56e21929f96e1c1fc4cbb9eabbb487"
+  },
+  "config_sha256": "d55b416eda85087da7ec4ef9e1249333c954e2576fb8749719f8bb7d7be55f4f",
+  "locked_outcomes_read": false,
+  "runtime": {
+    "dependencies": {
+      "accelerate": "1.14.0",
+      "huggingface-hub": "1.23.0",
+      "matplotlib": "3.10.0",
+      "numpy": "2.0.2",
+      "pandas": "2.2.2",
+      "safetensors": "0.8.0",
+      "tokenizers": "0.22.2",
+      "torch": "2.11.0+cu128",
+      "transformers": "5.14.1"
+    },
+    "package_version": "0.0.0",
+    "plant_runtime_audit_hashes": {
+      "work/runtime/confirm.json": "57f11242bb090a18c700479cdfe05382d6b3d68787f75da7dc8a0b16bd822c6f",
+      "work/runtime/discover.json": "dbc92a444ce06371bac993ccc8b8c127c0606c642e302aeaed5f5c641309f39a",
+      "work/runtime/measure-calibration.json": "61616f6905d19d5ead0732a3cff47ab41c6cc04206c8ca4269a4e75e3ea4be47"
+    },
+    "producer_source_hashes": {
+      "configs/revision/phase10/colab_constraints.txt": "7404a300376c24ca0139532d438b8e10f3dc4b564354db4e8cfc86cc46dc7922",
+      "docs/QWEN_INDUCTION_COPY_V2_PREREGISTRATION.md": "5e83b1ae1522549a4d4210f2568c2b01ad5694bc72de6e345cf8800db14c4961",
+      "notebooks/qwen_induction_copy_v2_colab.ipynb": "fe0aad2e5be15828a796f74547bfb9b945a93efae239fc618b68d719f9e897d7",
+      "pyproject.toml": "9115540a3233107e12cd1317c24c82caeaeefd8221e363a595ac802ad1240a5b",
+      "scripts/build_qwen_phase10_source_archive.py": "54b85d9054ceda41be1a1022d59aef1413d734273437d0fd297392907d069976",
+      "scripts/run_qwen_induction_phase09.py": "cfea527b7b867f16a478562ffc9a3426eeae9738f73608806735427a4b1f8cd8",
+      "scripts/run_qwen_induction_phase10.py": "65bd7f7a8135881d36b20ad463d08f3b21718d5b83acda66942c8c459cda8c6b",
+      "src/observerbench/__init__.py": "b8a6d790b05b5458b268353c3bbc9570bd47cb7a51faadb4cdeed39a94cb6993",
+      "src/observerbench/control.py": "978d0d19229d2342eadc20cf0b368de3e686711994fefc892c7fd6f3c33d09d2",
+      "src/observerbench/core.py": "69334fa4fd8f36367c2bab709931a85bd82b585c34f9cb6d82625354c97c33b4",
+      "src/observerbench/effect_prediction.py": "38670e17e470a96259edce697130c748c6f3751b788bd9010583856def229537",
+      "src/observerbench/metrics.py": "11dcebff6669084b5b53ce22a6a7711ec1cc849355cb556770dae37e9ef3515e",
+      "src/observerbench/observers.py": "b0e63a52f7cddb990385a4182412f53a0370f429a9b15cff22df69d2e9fea3be",
+      "src/observerbench/provenance.py": "8683bca7bac91de5037765983a566720c732b8308534a5b366c6f2f4162d8403",
+      "src/observerbench/tasks/__init__.py": "ad8b9a8707f121dd61da355e0cb96520ed44c116e5fd8cf939236cba3e9c0eec",
+      "src/observerbench/tasks/ctl1_adapter.py": "8b43f04493b50dd0566e8261127b347ffd8159642d3a93bed9cd8b6637678c29",
+      "src/observerbench/tasks/ctl1_analytic.py": "0b764ddf29166afba87ec01c103eb0a83af03ebc50b2cccbe864d97ba86ef773",
+      "src/observerbench/tasks/effect_registry.py": "da15531eafdaa09c380f23a66edb834844b463d17912b8ecda4a875565928825",
+      "src/observerbench/tasks/ioi/__init__.py": "64d8f57b3c02cf53bb485c456be1cce0435ae6d175e21cd15b7e8cf931037d05",
+      "src/observerbench/tasks/ioi/effect_task.py": "c127942808be136edf1e8a5171bb8b3173ba5f551645b6fddd6d1adba04767d8",
+      "src/observerbench/tasks/ioi/heads.py": "915fbac6137d063b1d8ca5d52ace3486315c27b7d58908ae07d1fce620ded7ed",
+      "src/observerbench/tasks/ioi/stage2d.py": "70c3dc698f74835fbfc5baae55e3164a5c5653b33fd336bebe700f59bcb11f31",
+      "src/observerbench/tasks/qwen_induction/__init__.py": "29dc0a0a94ac9603442e3eb1606b583f9479c8c77a12441d5c650ced9ade01ae",
+      "src/observerbench/tasks/qwen_induction/analysis.py": "de50f7d8a1e17d2bdb06350aefaf7750356f79aaa51001016f14fb533caad726",
+      "src/observerbench/tasks/qwen_induction/artifacts.py": "918b10ac651a1dd6905be98a58c14cf6821925b984ed6bdc56c05a0352a199a9",
+      "src/observerbench/tasks/qwen_induction/collateral.py": "fb3bebf79a827e1af9dc38998e1d7bfc89ab97ccac010db336abfb0daccecdd7",
+      "src/observerbench/tasks/qwen_induction/copy_v2_artifacts.py": "3dcf508eda303d2c1988da2694f6eed5f6b45e84208430b11ac09dbebb10dc93",
+      "src/observerbench/tasks/qwen_induction/copy_v2_runner.py": "7992c60aa12290fae4ebef54324907899c2fc9b3c13f3bd7577aa5e2d1b37872",
+      "src/observerbench/tasks/qwen_induction/design.py": "95161576c7bf627c966fdb62faca14a6ca3c2edac2b4be3754151abae9d262ff",
+      "src/observerbench/tasks/qwen_induction/effect_task.py": "d763aa705552decf192799196c5ed4501b523ce8b402534e311acc9db5969c5b",
+      "src/observerbench/tasks/qwen_induction/eligibility.py": "80baf402c75fba4af1116b985da00f0c0a01a5e85db452e241dfcacd0432a6f8",
+      "src/observerbench/tasks/qwen_induction/plant.py": "28a7df3326670459667edb8b050aa4c7cdf796ee463523ab177a21e8dcdfb7b6",
+      "src/observerbench/tasks/qwen_induction/runner.py": "effef692ca7cec8ebc22dfc1a8927abb2d6c1e2ec710a1b00cc073fcbde21be1",
+      "src/observerbench/tasks/qwen_induction/selection.py": "f3a13b11c47db82d04c9774396ad5c11204afcd61d2ddfe4889d8b61b0d8f98f",
+      "src/observerbench/tasks/registry.py": "874cedbbab5591c258dafe894ceb3132bf93205072852655716d588851804c8a"
+    },
+    "python_version": "3.12.13",
+    "source_dirty": null,
+    "source_revision": "unknown"
+  },
+  "schema": "observerbench.qwen_induction_phase09.observer_freeze.v1",
+  "source_hashes": {
+    "design/calibration_masks.csv": "dd4ddcaf19bbe1c2d42d239bde235ab84cfe861a3f0fae2da7f708fb4b46b974",
+    "design/design_manifest.json": "f721ba756ecd7a91808c50e73d7e9792b2e81b2a8589e406af82b191534cf0a0",
+    "design/test_masks.csv": "e0e65c430943fb4a2260a00bc4f7c82b0b63cd29633ea311b408f64a1b6e70bd",
+    "work/confirmation/confirmation_gate.json": "51448397a19303c186070dcacc2e17b545d996ef1170a1f46ef1758bafde03f6",
+    "work/measurements/calibration_effects_raw.csv": "7ee3892e97b2961f538b2c3b2877ed7906a2e9bb3aad1b4db4f3fe621fcffd78",
+    "work/runtime/confirm.json": "57f11242bb090a18c700479cdfe05382d6b3d68787f75da7dc8a0b16bd822c6f",
+    "work/runtime/discover.json": "dbc92a444ce06371bac993ccc8b8c127c0606c642e302aeaed5f5c641309f39a",
+    "work/runtime/measure-calibration.json": "61616f6905d19d5ead0732a3cff47ab41c6cc04206c8ca4269a4e75e3ea4be47"
+  },
+  "status": "sealed_before_locked_test_outcomes",
+  "targets": [
+    0.8634306868771091,
+    1.7268613737542182,
+    2.5902920606313273
+  ]
+}

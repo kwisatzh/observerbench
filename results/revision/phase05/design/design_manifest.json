@@ -1,0 +1,27 @@
+{
+  "all_design_gates_pass": true,
+  "artifact_hashes": {
+    "calibration_masks.csv": "99bafd5d48ec945402e9a8202c5c9e3c88167f52316019f0cc87570d111ce980",
+    "candidate_masks.csv": "a1be51ceab178828b6dd6308a89ac56be7e94f6259b3864974e3e5c8a23c37e1",
+    "leakage_audit.json": "b53cc5fc88801e2435c050bec82ecb1a78f9ae6b51d4071a1e09323f65659639",
+    "masks.csv": "1f65da7fdac34fec2e6dcbc700d7200d4180c7dafc4d28a2a45a3df0293f8826",
+    "names.csv": "d32f5343e9ad825d7687d09f93721987f1635ca0c0789c10d86921d6bb60f124",
+    "prompts.csv": "20ba51d8a0464f23949ebb4a27aa29658a7504da42c1fb1743f5aa194cf1c92b",
+    "rank_diagnostics.csv": "d6766cfbbc4ac787e17b5ff818f4d111fdcbe29b61ceff12a9d1493613624c73",
+    "templates.csv": "aa2bd9dfdbabdaae78d671db51e93767b6ef75e3a0b447254cafecf9f98bc035"
+  },
+  "contains_model_outcomes": false,
+  "design_id": "ioi_phase05_design_37dff29fb2338e1f",
+  "legacy_mask_source_hashes": {
+    "ioi_stage2b_subset_design.csv": "29c4d7377b3897f9b8b2bd947694d2e676971df6d2e23adbfde67b1ec10e4d60",
+    "ioi_stage2c_subset_design.csv": "7aefa21bba51137afe9718e693d8daad713eaf4375d828c7a2011eee1f530816"
+  },
+  "protocol_hash": "daa1e170eb4b8f01d0c98deeaa0ba85d7ea4f21c6582d2ddf97c5bd04711c8b6",
+  "schema": "observerbench.ioi_phase5_design_manifest.v1",
+  "source_hashes": {
+    "masks.csv": "1f65da7fdac34fec2e6dcbc700d7200d4180c7dafc4d28a2a45a3df0293f8826",
+    "prompts.csv": "20ba51d8a0464f23949ebb4a27aa29658a7504da42c1fb1743f5aa194cf1c92b"
+  },
+  "status": "frozen_before_outcomes",
+  "tokenization_validated": true
+}

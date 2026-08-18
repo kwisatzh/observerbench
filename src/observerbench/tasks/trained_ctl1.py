@@ -8,6 +8,8 @@ control the target with low collateral.
 
 The task is intentionally small: it is a bridge from the analytic Ctl-1 geometry
 to learned residual directions, not a language-model benchmark.
+
+Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex
 """
 from __future__ import annotations
 
@@ -121,19 +123,48 @@ class TinyTransformerRegressor(nn.Module):
         self.target_head = nn.Linear(cfg.d_model, 1)
         self.feature_head = nn.Linear(cfg.d_model, 3)
 
-    def encode(self, tokens: torch.Tensor) -> torch.Tensor:
-        x = self.token(tokens) + self.pos[None, :, :]
-        for block in self.blocks:
-            x = block(x)
-        return self.ln(x[:, -1, :])
+    def encode_prefix(self, tokens: torch.Tensor, completed_blocks: int) -> torch.Tensor:
+        """Return the full residual stream after ``completed_blocks`` blocks.
 
-    def forward(self, tokens: torch.Tensor, return_h: bool = False):
-        h = self.encode(tokens)
+        Keeping the sequence dimension is important for intervention tests: a
+        readout-position edit after block 0 must still pass through block 1's
+        attention over the complete prefix.
+        """
+
+        if not 0 <= completed_blocks <= len(self.blocks):
+            raise ValueError("completed_blocks must be between zero and the model depth")
+        x = self.token(tokens) + self.pos[None, :, :]
+        for block in self.blocks[:completed_blocks]:
+            x = block(x)
+        return x
+
+    def decode_suffix(
+        self,
+        residual: torch.Tensor,
+        completed_blocks: int,
+        return_h: bool = False,
+    ):
+        """Run the uncomputed blocks and readout heads from a residual stream."""
+
+        if not 0 <= completed_blocks <= len(self.blocks):
+            raise ValueError("completed_blocks must be between zero and the model depth")
+        x = residual
+        for block in self.blocks[completed_blocks:]:
+            x = block(x)
+        h = self.ln(x[:, -1, :])
         y = self.target_head(h).squeeze(-1)
         feats = self.feature_head(h)
         if return_h:
             return y, feats, h
         return y, feats
+
+    def encode(self, tokens: torch.Tensor) -> torch.Tensor:
+        x = self.encode_prefix(tokens, completed_blocks=len(self.blocks))
+        return self.ln(x[:, -1, :])
+
+    def forward(self, tokens: torch.Tensor, return_h: bool = False):
+        residual = self.encode_prefix(tokens, completed_blocks=0)
+        return self.decode_suffix(residual, completed_blocks=0, return_h=return_h)
 
 
 def target_readout(cfg: TrainedTransformerCtl1Config) -> np.ndarray:

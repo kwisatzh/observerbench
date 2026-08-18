@@ -1,0 +1,35 @@
+{
+  "banks": {
+    "calibration": {
+      "token_count": 4096,
+      "token_ids_sha256": "97bd6b8e0376ad79fd0e8ba90ed04e2288b310caf93f9dc0702e244f875f4c33"
+    },
+    "discovery": {
+      "token_count": 4096,
+      "token_ids_sha256": "26c1a7a483487cdc0c8f6dba562aed1dff3b8456e2f56d459af902f06ec99864"
+    },
+    "head_fit": {
+      "token_count": 4096,
+      "token_ids_sha256": "e7f981d47353de24aec151c887e84d18ca83933a6dd043f229376f64f562faad"
+    },
+    "head_test": {
+      "token_count": 4096,
+      "token_ids_sha256": "0eac2ef317aaad5972367b3eff9756919a86d427e2b150731f470996aa0aa22e"
+    },
+    "locked_test": {
+      "token_count": 4096,
+      "token_ids_sha256": "066dd1f657c3d654331d7961fbfddb5fc7471ee4e6b136fc61ddc9ccb22e94f8"
+    },
+    "reference": {
+      "token_count": 4096,
+      "token_ids_sha256": "69563226bd6518d6d228d09884c95bf9cf430c462e4659e2458a902b5918e77b"
+    }
+  },
+  "candidate_overlap_count": 0,
+  "excluded_token_count": 24576,
+  "excluded_token_ids_sha256": "34f3ef26314647c4df54e4c8a8a80888f5663b1dbce64a7234d35a9c1f90cf33",
+  "schema": "observerbench.qwen_induction.copy_v2.copy_v1_token_exclusion.v1",
+  "source_artifact_sha256": "f599a958e310fdf9cedd52f92c77555cfd57b58fc117536781c21101f5786c91",
+  "source_data_version": "copy-v1",
+  "status": "copy_v1_allocated_tokens_excluded_before_candidate_generation"
+}

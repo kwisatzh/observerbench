@@ -1,0 +1,10 @@
+{
+  "completed_effect_cells": 8192,
+  "completed_selected_masks": 16,
+  "noop_ablation_forward_passes": 0,
+  "shard_hashes": {
+    "shards/test/effects_0000_0016.csv": "b14e7319940a5a71c73b2e83164105ade23a9f01e9e713ab09841d723303cc5e"
+  },
+  "status": "partial",
+  "unselected_candidate_masks_measured": 0
+}

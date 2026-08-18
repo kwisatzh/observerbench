@@ -1,0 +1,18 @@
+{
+  "access_regime": "forward measurements",
+  "fit_procedure": "sum of singleton effects",
+  "implementation": "observerbench.tasks.ioi.phase5_analysis",
+  "known_failure_modes": [
+    "Predictions depend on the frozen mask distribution and ablation basis."
+  ],
+  "measurement_basis": "singleton_sum",
+  "metadata": {
+    "measurement_budgets": [
+      14
+    ]
+  },
+  "observer_family": "finite head-subset effect predictor",
+  "observer_name": "singleton_sum",
+  "observer_version": "1.0",
+  "schema_version": "observerbench.effect_observer_card.v0"
+}

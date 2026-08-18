@@ -1,0 +1,19 @@
+{
+  "access_regime": "action fields",
+  "additional_forward_passes": 0,
+  "fit_procedure": "ridge fit to severity-weighted violation risk",
+  "implementation": "ObserverBench checked baseline",
+  "known_failure_modes": [
+    "Cannot distinguish paired prompts with identical requested actions."
+  ],
+  "metadata": {
+    "result_status": "prespecified locked test"
+  },
+  "observer_family": "action-feature ridge",
+  "observer_input": "requested operation and declared severity",
+  "observer_name": "action-only-direct-risk",
+  "observer_version": "qwen-paired-scope-v0",
+  "requires_white_box_access": false,
+  "risk_score_meaning": "larger values indicate larger loss if allowed",
+  "schema_version": "observerbench.safety_observer_card.v0"
+}

@@ -1,0 +1,52 @@
+% Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex
+\documentclass[10pt]{article}
+
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{flafter}
+\usepackage{float}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{subcaption}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{../generated_current/}{../generated_phase05/nonlinear_suffix/}{figures/}}
+\setlist[itemize]{leftmargin=1.5em,itemsep=0.35em,topsep=0.4em}
+\setlength{\emergencystretch}{2em}
+\newtheorem{proposition}{Proposition}
+
+\title{ObserverBench: Testing Mechanistic Estimates for Intervention and Control\\[0.25em]
+\large Working draft v23}
+\author{Vijay Erramilli\\\texttt{evijay@gmail.com}}
+\date{August 2, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+\input{sections/introduction}
+\input{sections/design}
+\input{sections/nonlinear_suffix}
+\input{sections/ioi}
+\input{sections/qwen_induction}
+\input{sections/safety_interlock}
+\input{sections/api_cards}
+\input{sections/related_alignment_phase01}
+\input{sections/limitations_conclusion}
+\clearpage
+\input{sections/references_phase01}
+
+\clearpage
+\appendix
+\input{sections/superseded_diagnostics}
+\input{sections/apps_diagnostics_appendix}
+\input{sections/rejected_fixture_appendix}
+
+\end{document}

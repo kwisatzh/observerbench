@@ -1,0 +1,3 @@
+selector,target,design_rank,n_columns,train_calibration_mae,candidate_negative_prediction_fraction_before_noop_override
+direct_risk_head_pair_quadratic,1.0,92,92,0.0724488775191052,0.0
+natural_mean_effect_head_pair_quadratic,1.0,92,92,0.07355751589913002,0.0

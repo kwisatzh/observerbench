@@ -1,0 +1,8 @@
+task: ioi_phase2_capacity
+k_folds: 5
+cv_repeats: 10
+bootstrap_repeats: 1000
+ridge: 1.0e-6
+seed: 0
+eval_nonclean_only: true
+whole_group_pb_interaction: 1.055

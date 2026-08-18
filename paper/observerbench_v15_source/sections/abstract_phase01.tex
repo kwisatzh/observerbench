@@ -1,0 +1,33 @@
+A controller is only as good as the state estimate on which it acts. This
+paper builds ObserverBench, a small measurement workbench for control-facing
+interpretability. Given a model, target, intervention operator, access regime,
+and intervention distribution, it asks whether a cheap observer is adequate
+for a stated use or whether the use requires a richer measurement design.
+
+The central control experiment separates two quantities that the earlier
+version changed together: the state estimate and the actuation direction. In a
+trained residual-space task, we cross first-order and interaction-aware
+estimators with first-order and interaction-aware directions. With either
+direction held fixed, first-order estimation produces greater integrated
+target error at every nonzero interaction strength in all six training seeds.
+Direction geometry changes the size of the error, but it does not explain the
+estimator effect. Matching the controller's local gain without clipping does
+not repair target tracking. A held-out scalar response calibration repairs the
+local feedback gain in this affine fixture, but it leaves initial estimation
+bias and can be badly conditioned.
+
+On GPT-2-small IOI, whole-group mean ablation reproduces conditional backup
+behavior. Broad random head subsets give a useful null: per-head additive
+prediction is already strong. Under primary-stratified interventions, the
+current analysis assigns most of the predictive interaction gain to Name
+Movers with Negative Name Movers rather than to Backup Name Movers. We examine
+the fairness of that comparison separately in the next phase of the study.
+
+ObserverBench is also an artifact contract. It separates estimators,
+actuation-direction providers, controllers, and tasks, records provenance, and
+lets an outside observer run against an existing analytic fixture. The v0
+contract is deliberately small: it demonstrates one end-to-end extension
+point rather than claiming a universal plugin platform. The contribution is
+an evaluation protocol for deciding what an observer estimates, what remains
+fixed in a comparison, and whether the observer is adequate for its intended
+intervention or control task.

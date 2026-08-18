@@ -1,0 +1,47 @@
+{
+  "all_checks_pass": true,
+  "checks": {
+    "analysis_and_every_preregistered_gate_pass": true,
+    "analysis_schema_is_v3": true,
+    "certificate_metrics_recompute_exactly": true,
+    "factorial_cells_contrasts_and_intervals_recompute_exactly": true,
+    "first_order_null_factorial_is_well_conditioned": true,
+    "interaction_crossed_arms_are_flagged_not_claimed": true,
+    "natural_effects_and_bootstrap_intervals_recompute_exactly": true,
+    "natural_gamma_values_match_protocol": true,
+    "no_manipulability_failure_is_recorded": true,
+    "protocol_hash_matches_recorded_provenance": true,
+    "protocol_is_frozen_v2": true,
+    "source_row_counts_match_analysis": true,
+    "source_seed_sets_match_protocol": true,
+    "support_diagnostic_is_present_and_bounded": true
+  },
+  "code_hashes": {
+    "scripts/build_phase05_nonlinear_suffix_artifact.py": "c94db09bdee1254b7a284ce9b42db49de30da2f802eb1c6480b2d244e78267e5"
+  },
+  "commands_to_reproduce": [
+    "python scripts/build_phase05_nonlinear_suffix_artifact.py"
+  ],
+  "contains_private_local_path": false,
+  "input_hashes": {
+    "configs/revision/ctl2_phase05_nonlinear_suffix_v2.json": "ab044169a672405cf626ed6e5614a0a440f90e59a2d15f507e2e29044fb84121",
+    "results/revision/phase05/nonlinear_suffix_v3_support/analysis.json": "0b90751c57dcdfab04e50b835e932d1ef8f0de67abf1b4286fee8858af26392f",
+    "results/revision/phase05/nonlinear_suffix_v3_support/controlled_conditions.csv": "8f5da932b94e926f0812b0d5c55d6e45521e25aa0f1b34ac2714a1bfd695bf06",
+    "results/revision/phase05/nonlinear_suffix_v3_support/leave_one_seed_out_metrics.csv": "59fecf860fbdbc5921fbfd2005b1ee7d47e44c921e418ac118f6126036274062",
+    "results/revision/phase05/nonlinear_suffix_v3_support/manipulability_failures.csv": "7cee541d85fc768c08ce472b8ff53ecf578838fee4a7ca63c8855bdc2288b74f",
+    "results/revision/phase05/nonlinear_suffix_v3_support/natural_factorial_conditions.csv": "afa27336bdaee6643febd06927e6c1a929d4acb32969ccbd79b4654a1510c318",
+    "results/revision/phase05/nonlinear_suffix_v3_support/provenance.json": "0e1c7029506c274addc3bfc0104325bff094b5a3dd387ba54a83f48fe13432c9",
+    "results/revision/phase05/nonlinear_suffix_v3_support/residual_displacement_summary.csv": "229b753de93adb3666693a81519921abf563899492688c6359a0764caec0ca5a"
+  },
+  "output_hashes": {
+    "paper/generated_phase05/nonlinear_suffix/nonlinear_suffix_certificate_and_control.pdf": "81201131d36dce2fc87e17c70acc406693ebdd4f6831b4a89853f5238efaaf1e",
+    "paper/generated_phase05/nonlinear_suffix/nonlinear_suffix_certificate_and_control.png": "ef4f6a22894535a2c6965b5ee4686ec1d390e33736c5920da9d56d6b73a13fe5",
+    "paper/generated_phase05/nonlinear_suffix/nonlinear_suffix_factorial.tex": "dc7a494cc9918fd1a62c555347b52390ae4ddca29d428fd2995dd94476bc3950",
+    "paper/generated_phase05/nonlinear_suffix/nonlinear_suffix_factorial_cells.csv": "72417f3ae02d401ff348d22f98ea7a9d513f74624a82bf34293db9697695ffb1",
+    "paper/generated_phase05/nonlinear_suffix/nonlinear_suffix_factorial_contrasts.csv": "6b5bf7637c719f7e40fec908e0f639b50e7c4bf65b9db90c41ecfbefe031aaf2",
+    "paper/generated_phase05/nonlinear_suffix/nonlinear_suffix_summary.csv": "cf6c9f50673dbb4acd3e6cf9d5139596d68a4c181226bca735866891dc0f82f7",
+    "paper/generated_phase05/nonlinear_suffix/nonlinear_suffix_summary.tex": "c506b4ade44c028a79285e8de4665e4f1f22af49050aca93fb414a0923c7266f"
+  },
+  "result_status": "preregistered_primary_gates_pass_secondary_factorial_attribution_negative",
+  "schema": "observerbench.phase05.nonlinear_suffix_artifact.v2"
+}

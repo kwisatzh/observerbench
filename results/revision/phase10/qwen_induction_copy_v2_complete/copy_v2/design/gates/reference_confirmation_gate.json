@@ -1,0 +1,22 @@
+{
+  "bank": "reference",
+  "eligibility_rescore": {
+    "all_candidate_correct": true,
+    "all_margins_remain_eligible": true,
+    "exact_candidate_prediction_agreement": true,
+    "margin_difference_is_gate": false,
+    "maximum_margin_difference": 0.0,
+    "passed": true
+  },
+  "failures": [],
+  "family_accuracy": {
+    "length_32_gap_16": 1.0,
+    "length_32_gap_8": 1.0,
+    "length_64_gap_16": 1.0,
+    "length_64_gap_8": 1.0
+  },
+  "median_candidate_margin": 7.123010873794556,
+  "overall_candidate_accuracy": 1.0,
+  "passed": true,
+  "worst_family_candidate_accuracy": 1.0
+}

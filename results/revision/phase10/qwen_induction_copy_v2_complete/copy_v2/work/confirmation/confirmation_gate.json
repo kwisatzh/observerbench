@@ -1,0 +1,17 @@
+{
+  "contrast": 3.2840693569742143,
+  "contrast_ci_lower": 3.0531946625676936,
+  "contrast_ci_upper": 3.5204807652102317,
+  "control_mean_effect": 0.16965339053422213,
+  "passed": true,
+  "scientific_result": "positive",
+  "selected_mean_effect": 3.4537227475084364,
+  "target_025": 0.8634306868771091,
+  "target_050": 1.7268613737542182,
+  "target_075": 2.5902920606313273,
+  "targets": [
+    0.8634306868771091,
+    1.7268613737542182,
+    2.5902920606313273
+  ]
+}

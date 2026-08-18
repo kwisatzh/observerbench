@@ -1,0 +1,119 @@
+{
+  "accessed_mask_banks_for_outcomes": [
+    "calibration"
+  ],
+  "accessed_prompt_splits": [
+    "reference",
+    "train"
+  ],
+  "artifact_hashes": {
+    "candidate_predictions.csv": "75881b6f70a3f9305c80a4f4d131bfcb85fb7e9c143f2a0970e1c59bdde0971f",
+    "fit_diagnostics.csv": "8de543eb628d9cd34204871ef206decc1f8793bb339d8f30c0907ba43fcef9e2",
+    "fixed_actions.csv": "d59b01f0c7a035b668178280476c627dbcc69f20f629fefad2fb2368c36fb63b",
+    "observer_coefficients.csv": "4cb2ccd27099dbfe586d7b897e0e76d7aa239e437f2ec9c2df5d10cf4b8a769a"
+  },
+  "calibration_manifest_sha256": "54a606bbd008f1f135f60b3da5119cb6b716801598a59de9c726b13dc82655d3",
+  "candidate_mask_forward_passes": 0,
+  "contains_phase6_test_outcomes": false,
+  "counts": {
+    "candidate_masks": 1536,
+    "candidate_pools": 48,
+    "coefficient_rows": 976,
+    "diagnostic_rows": 24,
+    "fixed_action_rows": 2304,
+    "prediction_rows": 36864,
+    "train_calibration_effect_cells": 30720
+  },
+  "design_id": "ioi_phase06_design_2044e2b9b97cb658",
+  "design_manifest_sha256": "68d6220ef3f4b96993940a42711f97dacc6b7356e9a15df7424e1e174e40df2a",
+  "hypotheses": {
+    "H1_primary_estimand": {
+      "candidate": "head_pair_quadratic_screen direct-risk observer",
+      "licenses_only_if_passed": "A decision-risk estimand improves fixed-action selection over the natural mean-effect plug-in observer using the same 92-column quadratic basis.",
+      "minimum_loss_reduction_fraction": 0.05,
+      "paired_cluster_interval_lower_bound_strictly_positive": true,
+      "per_primary_target_point_direction_nonnegative": true,
+      "reference": "natural mean-effect plug-in observer using the same 92-column quadratic basis",
+      "target_scope": "pooled targets 0.5 and 1.0"
+    },
+    "H2_secondary_structure": {
+      "candidate": "head_pair_quadratic_screen direct-risk observer",
+      "licenses_only_if_passed": "A pairwise risk basis improves fixed-action selection over additive and count-additive risk observers. This does not establish an estimand advantage.",
+      "minimum_loss_reduction_fraction_against_each": 0.1,
+      "paired_cluster_interval_lower_bound_strictly_positive_against_each": true,
+      "per_primary_target_point_direction_nonnegative_against_each": true,
+      "references": [
+        "additive_head direct-risk observer",
+        "count_additive direct-risk observer"
+      ],
+      "target_scope": "pooled targets 0.5 and 1.0"
+    }
+  },
+  "models": {
+    "direct_risk": [
+      "additive_head",
+      "count_additive",
+      "count_plus_PE_bin4",
+      "count_plus_all_bin4",
+      "head_pair_quadratic_screen"
+    ],
+    "natural_mean_effect": [
+      "count_plus_all_bin4",
+      "head_pair_quadratic_screen"
+    ],
+    "target_specific_jensen_score": [
+      "head_pair_quadratic_screen"
+    ]
+  },
+  "multiplicity_boundary": "H1 alone defines primary success. H2 is a separately prespecified secondary structural claim and cannot rescue a failed H1. H1 alone can license an estimand claim; H2 can license only the stated interaction-aware risk-basis claim.",
+  "next_allowed_stage": "After a separate blind audit verifies this manifest, measure clean test scores and only the frozen candidate masks selected or required by the prespecified evaluation. No design, fit, prediction, or action may change.",
+  "protocol_sha256": "b6d44ac16c88a48c738416a18abb205771598ae713f7d44bf0dfdc73f3dff099",
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.1",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.14.2",
+    "source_dirty": true,
+    "source_revision": "0cec2c4ef17d9c3b0ef3fea8fdf15347ee4e28cb"
+  },
+  "schema": "observerbench.ioi_phase06_prediction_action_freeze.v1",
+  "scientific_status": "pilot_informed_prospective_fresh_template_name_mask_confirmation",
+  "selection_rule": {
+    "deterministic_tie_break": "Lexicographically minimize (raw predicted objective, number of ablated heads, mask_id).",
+    "fixed_action": "Freeze one mask per observer, pool, target, and policy before any Phase-6 test candidate effect is measured.",
+    "negative_predictions": "Do not clip negative fitted risk predictions. Record their frequency and use the raw value so no post-fit transformation is introduced.",
+    "objective": "Select the candidate mask with minimum raw predicted target loss within each candidate pool and target."
+  },
+  "source_seals": {
+    "calibration": {
+      "clean_scores_train.csv": "87220d9baff19c2272e5c08dc2ea5704156c51bf703df912c94463b1df49be67",
+      "shards/train/effects_0000_0016.csv": "cc76e57d297e75da7fbf046562c935eadb34c5a9b12fcb7d74c83709dd74cdad",
+      "shards/train/effects_0016_0032.csv": "87bafa05a1e21ab5412f6bf32b049e657af3cc3f294e3aa67f1cb32d60790ebe",
+      "shards/train/effects_0032_0048.csv": "8cdf12bb374a2054c127dafedbda57c3feb5770bca8877884bbb8e9c1baf965a",
+      "shards/train/effects_0048_0064.csv": "15b4d3a388e12fee93edf7f3cc31b22793a80d3f5817ab12e2e953d4cc6edeff",
+      "shards/train/effects_0064_0080.csv": "bce5a6b37cbb8bb7b4fb37f8c62665802afeb386d9a85f4f278a427d32f51557",
+      "shards/train/effects_0080_0096.csv": "d8184dc824fde5e1532e05ed25df54ce538c5220f4bb4e8d39ef234dd1eaf327",
+      "shards/train/effects_0096_0112.csv": "f0e211ec70a62cd504395baff59a4cc0b3e25c029f5aa5e9a8fe3028536a93c1",
+      "shards/train/effects_0112_0128.csv": "b1ec6cefb3ffb1291c4e8f15ac2f6a1bcf7d050e6156f7705361a4898736bf66",
+      "shards/train/effects_0128_0144.csv": "83832c11e2aa3c92d40ab788f3735281e7dae6b1f8093a55fcee2c1a2d99f120",
+      "shards/train/effects_0144_0160.csv": "b58a127ecdd8e4fd1d5f0f80bae8881ea1463510498f9c6ec2d6e71ad4da65e2",
+      "template_head_means.npz": "f1695fa1308c3a58a3016b679bdaa44859dc950f7f00816a47f388384355478b"
+    },
+    "design": {
+      "calibration_masks.csv": "e18eed47e08dee9289af8ff95db3377f5a40c35818657f3caaa9714ad8f88c00",
+      "candidate_masks.csv": "1e921f79ae34a472183a318b97e25765cb86467ed4fd49924bdc34a9d937b3d0",
+      "leakage_audit.json": "6d7b88392ccff354344e975922b72d6b304d4b817c5933ed2ad1ad39fe794cf8",
+      "masks.csv": "583edd359c333961a7b1c0ae31d4af0e4566bbdcb4dfbbd26c4e577695be1dcc",
+      "names.csv": "33a89ba5ffcfabe26a55dc34335a7eb97ee397ea40279fb0fb8200da8536f019",
+      "pair_clusters.csv": "2d97c65897d3855f3e3dde7218a67d55a642ccdd46883464d06e0b51233a19cb",
+      "prompts.csv": "627c9c25f550e2b74cb0ea7f61ce93601ec0d894113e151fda8ea837a94f6c6e",
+      "templates.csv": "4daa4528076c7dd17d1830f30235d348f88884686d0dbe6fd97795b226478a12"
+    }
+  },
+  "status": "predictions_and_actions_frozen_before_phase6_test_outcomes",
+  "test_prompt_forward_passes": 0
+}

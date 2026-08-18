@@ -1,0 +1,46 @@
+{
+  "config": {
+    "device": "mps",
+    "mask_shard_size": 16,
+    "model_name": "gpt2-small",
+    "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "pair_batch_size": 128,
+    "seed": 28081
+  },
+  "counts": {
+    "mask_shards": 10,
+    "new_effect_cells": 75776,
+    "new_selected_unique_nonnoop_masks": 148,
+    "noop_ablation_forward_passes": 0,
+    "reused_phase7_masks_remeasured": 0,
+    "test_prompts": 512,
+    "unselected_candidate_masks_measured": 0
+  },
+  "design_id": "ioi_phase07_design_f7c5a0ec88a44fd3",
+  "forbidden_operations": {
+    "filter_prompts": true,
+    "measure_inherited_masks_again": true,
+    "measure_unselected_masks": true,
+    "refit_observers": true,
+    "reselect_actions": true
+  },
+  "schema": "observerbench.ioi_phase08_selected_measurement_spec.v1",
+  "scientific_status": "post_review_post_confirmatory_target_sensitivity",
+  "selected_mask_order_sha256": "436f916f59ed5fc0919fd18d23c639de7a7b6de8f6edfc72d070f0b53b747bdd",
+  "source_hashes": {
+    "clean_scores_test": "fc64b8a5c458b8b565619543953e0703c38d93d929b7574e85d7d8b7d17a8d2d",
+    "evaluation_source": "03160bd09e81a197987ac4645df4175284ce473be58ed4a107d8397b3445f95f",
+    "measurement_source": "a1c8bb13c5db4d994c4224533cdf877bea663b2c78ac02f5bc8ba8b353c5cb7e",
+    "phase7_design_manifest": "3dfa6352524c66b6b57794ec9ed2c89a900afd7df3d9879cd7f21cb0686feee5",
+    "phase7_freeze_manifest": "fce0b027f232841653d5b7f24f3254243a71d3fbd282cc9c468c4781eab334e5",
+    "phase7_measurement_manifest": "6681b04b114b4aba1129edf9d73e5197426213130ae44b21333c859a2bed7a9e",
+    "phase7_pretest_manifest": "7c148b1137460fa7d4674f97f3984ce8a39068cd1dbe394852fed2f9141ae2a2",
+    "phase7_selected_masks": "7f843bc5c2649ca2e84a52dccb6a7fc12330fbeab586186e4ad766517b9869eb",
+    "phase8_freeze_manifest": "3792abb1d1e674d27d5d9742244a87efd54a59eb24c21879b7b380c609bd4bad",
+    "phase8_new_measurement_masks": "667bb263d4e25f3d4bdcf3b3f877797bee0bfc0270a673987f9069422dfd2032",
+    "phase8_preoutcome_audit": "a44db6cde52abcf810e55fbc5e983d7ce272be0f8056f1dc7d5e71f74c7bc69a",
+    "protocol": "d22614d2deecf3818e0765a2851a8bd38151ed7c9ecedef7e619810fea537508",
+    "template_head_means": "42b36bd7d846c36f8abda56df2d517954458eb005a2fc93082d0c0875e9da566"
+  },
+  "status": "sealed_before_new_outcomes"
+}

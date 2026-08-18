@@ -1,4 +1,7 @@
-"""IOI Stage 2c primary-stratified fixture generation and optional runner."""
+"""IOI Stage 2c primary-stratified fixture generation and optional runner.
+
+Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex
+"""
 
 from __future__ import annotations
 

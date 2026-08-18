@@ -1,0 +1,18 @@
+{
+  "absolute_tolerance": 7.556024705912741e-06,
+  "clean_centroid_pairwise_rms": 8.36555290222168,
+  "clean_residual_norm_max": 6.321515083312988,
+  "clean_residual_norm_mean": 5.984141826629639,
+  "clean_residual_norm_min": 5.809903621673584,
+  "clean_residual_norm_std": 0.20603378117084503,
+  "clean_rms_radius": 5.122832870112398,
+  "n_centroids": 4,
+  "rank": 3,
+  "relative_tolerance": 1e-06,
+  "singular_values": [
+    7.5560247059127414,
+    6.806680611888246,
+    1.244691187321992,
+    7.220993787948474e-16
+  ]
+}

@@ -1,0 +1,86 @@
+name: Automatic observer job
+
+on:
+  issues:
+    types: [opened, reopened]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  preflight-and-queue:
+    if: startsWith(github.event.issue.title, '[observer job]')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out trusted evaluator boundary
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate the issue and immutable prediction table
+        id: preflight
+        run: |
+          python scripts/prepare_issue_submission.py \
+            --event "$GITHUB_EVENT_PATH" \
+            --output build/issue-submission
+
+      - name: Upload the inert request bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: observer-job-${{ github.event.issue.number }}
+          path: build/issue-submission
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Queue the sealed evaluator
+        if: vars.SEALED_EVALUATOR_ENABLED == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.SEALED_EVALUATOR_TOKEN }}
+          EVALUATOR_REPOSITORY: ${{ vars.SEALED_EVALUATOR_REPOSITORY }}
+          SOURCE_REPOSITORY: ${{ github.repository }}
+          SOURCE_ISSUE: ${{ github.event.issue.number }}
+          SOURCE_RUN_ID: ${{ github.run_id }}
+        run: |
+          test -n "$GH_TOKEN"
+          test -n "$EVALUATOR_REPOSITORY"
+          payload=$(python -c 'import json, os; print(json.dumps({"event_type": "observer-submission", "client_payload": {"source_repository": os.environ["SOURCE_REPOSITORY"], "issue_number": os.environ["SOURCE_ISSUE"], "preflight_run_id": os.environ["SOURCE_RUN_ID"]}}))')
+          curl --fail-with-body --silent --show-error \
+            --request POST \
+            --header "Accept: application/vnd.github+json" \
+            --header "Authorization: Bearer $GH_TOKEN" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/$EVALUATOR_REPOSITORY/dispatches" \
+            --data "$payload"
+
+      - name: Confirm automatic preflight
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const enabled = process.env.SEALED_EVALUATOR_ENABLED === 'true';
+            const message = enabled
+              ? 'Preflight passed. This data-only job was queued for sealed evaluation; no maintainer review was required.'
+              : 'Preflight passed. The sealed evaluator is not enabled yet, so this job has not been scored.';
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: message,
+            });
+        env:
+          SEALED_EVALUATOR_ENABLED: ${{ vars.SEALED_EVALUATOR_ENABLED }}
+
+      - name: Explain a failed preflight
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `Automatic preflight failed. The job was not sent to the sealed evaluator. See the workflow run for the exact schema or artifact error: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });

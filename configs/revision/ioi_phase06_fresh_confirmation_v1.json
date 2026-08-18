@@ -1,0 +1,227 @@
+{
+  "schema": "observerbench.ioi_phase06_fresh_confirmation.v1",
+  "status": "pilot_informed_prospective_fresh_template_name_mask_confirmation",
+  "post_outcome_disclosure": "Phase 6 was designed after Phase 5 failed its fixed-action gate and after a post-outcome Phase-6 pilot. The estimand, primary target strata, sample size, model comparisons, and thresholds below are therefore pilot-informed. All candidate-mask effects on the fresh test prompts remain sealed until the design, fits, predictions, and fixed actions are frozen.",
+  "model": "gpt2-small",
+  "huggingface_model": "gpt2",
+  "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+  "intervention": "final-position template-conditioned mean ablation",
+  "surface_template_relation_to_phase5": "All eight Phase-6 templates are new. Phase-5 templates are not a Phase-6 outcome arm.",
+  "templates": [
+    {
+      "template_id": "p6_abba_museum",
+      "structure": "ABBA",
+      "template": "At the museum, {io} spoke with {s}. Later, {s} offered the exhibit guide to"
+    },
+    {
+      "template_id": "p6_abba_train",
+      "structure": "ABBA",
+      "template": "During the train ride, {io} sat beside {s}. Before leaving, {s} returned the travel journal to"
+    },
+    {
+      "template_id": "p6_abba_kitchen",
+      "structure": "ABBA",
+      "template": "In the kitchen, {io} worked with {s}. After dinner, {s} passed the recipe card to"
+    },
+    {
+      "template_id": "p6_abba_library",
+      "structure": "ABBA",
+      "template": "At the library, {io} met {s}. When the doors closed, {s} handed the borrowed novel to"
+    },
+    {
+      "template_id": "p6_baba_museum",
+      "structure": "BABA",
+      "template": "At the museum, {s} spoke with {io}. Later, {s} offered the exhibit guide to"
+    },
+    {
+      "template_id": "p6_baba_train",
+      "structure": "BABA",
+      "template": "During the train ride, {s} sat beside {io}. Before leaving, {s} returned the travel journal to"
+    },
+    {
+      "template_id": "p6_baba_kitchen",
+      "structure": "BABA",
+      "template": "In the kitchen, {s} worked with {io}. After dinner, {s} passed the recipe card to"
+    },
+    {
+      "template_id": "p6_baba_library",
+      "structure": "BABA",
+      "template": "At the library, {s} met {io}. When the doors closed, {s} handed the borrowed novel to"
+    }
+  ],
+  "name_candidates": [
+    "Mary", "John", "Michael", "Jennifer", "Elizabeth", "Thomas", "Charles", "Christopher",
+    "Joseph", "Margaret", "Lisa", "Mark", "Donald", "Steven", "Paul", "Andrew", "Joshua",
+    "Kenneth", "Kimberly", "Emily", "Amanda", "Melissa", "Stephanie", "Rebecca", "Virginia",
+    "Kathleen", "Catherine", "Shirley", "Judy", "Teresa", "Marie", "Heather", "Diane", "Julie",
+    "Joyce", "Victoria", "Kelly", "Christina", "Joan", "Lauren", "Judith", "Megan", "Cheryl",
+    "Olivia", "Emma", "Sophia", "Mia", "Charlotte", "Amelia", "Harper", "Madison", "Avery",
+    "Scarlett", "Lily", "Chloe", "Nora", "Hazel", "Ellie", "Lucy", "Anna", "Sarah", "Monica",
+    "Wendy", "Erica", "Bonnie", "April", "Holly", "Amber", "Crystal", "Leslie", "Natalie",
+    "Valerie", "Lydia", "Naomi", "Brooke", "Paige", "Claire", "Zoe", "Maya", "Leah", "Ruby",
+    "Eva", "Rosa", "Rita", "Anne", "Martha", "Jill", "Dawn", "Sylvia", "June", "Nina", "Gina",
+    "Tina", "Robin", "Peggy"
+  ],
+  "name_count_by_split": {
+    "reference": 16,
+    "train": 12,
+    "test": 64
+  },
+  "name_selection_rule": "Tokenizer-only preprocessing: every candidate must be a unique single GPT-2 token when encoded with a leading space, its token id and surface name must be absent from Phase 5, and all candidates are ranked once by the frozen SHA-256 seed key. Assign the first 16 to reference, next 12 to train, and next 64 to test. No model score or alternate seed may affect assignment or pairing.",
+  "prompt_counts_by_split": {
+    "reference": 512,
+    "train": 192,
+    "test": 512
+  },
+  "test_pairing_method": "Sort the 64 test names by the frozen SHA-256 key and pair adjacent names once; use both IO/subject orientations under every template. No seed search is permitted.",
+  "test_unordered_pair_cluster_count": 32,
+  "test_prompts_per_pair_cluster": 16,
+  "phase5_calibration_mask_count": 160,
+  "candidate_pool_count": 48,
+  "candidate_pool_size": 32,
+  "new_candidate_mask_count": 1536,
+  "candidate_head_counts": [4, 5, 6, 7, 8, 9],
+  "candidate_masks_per_stratum_by_head_count": {
+    "4": 1,
+    "5": 3,
+    "6": 4,
+    "7": 4,
+    "8": 3,
+    "9": 1
+  },
+  "candidate_strata": [
+    "broad:n_P<=1",
+    "primary_heavy:n_P>=2"
+  ],
+  "exclude_all_phase5_masks": true,
+  "exclude_recorded_legacy_masks": true,
+  "measurement_budget": 160,
+  "targets": [0.5, 1.0, 1.5],
+  "primary_targets": [0.5, 1.0],
+  "stress_test_targets": [1.5],
+  "ridge": 1e-06,
+  "direct_risk_models": [
+    "additive_head",
+    "count_additive",
+    "count_plus_PE_bin4",
+    "count_plus_all_bin4",
+    "head_pair_quadratic_screen"
+  ],
+  "mean_effect_models": [
+    "count_plus_all_bin4",
+    "head_pair_quadratic_screen"
+  ],
+  "jensen_score_sensitivity_models": [
+    "head_pair_quadratic_screen"
+  ],
+  "target_tolerance": 0.25,
+  "head_cost_penalty": 0.02,
+  "bootstrap_repeats": 5000,
+  "bootstrap_seed": 2606201,
+  "bootstrap_interval": {
+    "algorithm": "Compute a paired loss-difference cell for each unordered test-name pair and candidate pool by equally averaging both orientations, all eight templates, and both primary targets. For each of 5,000 draws, independently sample 32 pair clusters and 48 candidate pools with replacement, retain their Cartesian cell table, and take its unweighted mean.",
+    "quantiles": [0.025, 0.975],
+    "quantile_method": "linear",
+    "point_estimate": "Unweighted mean of the 32 by 48 pair-cluster/pool cell means.",
+    "relative_reduction": "mean(reference fixed-action absolute loss minus candidate fixed-action absolute loss) divided by mean(reference fixed-action absolute loss) on the same rows."
+  },
+  "bootstrap_axes": [
+    "unordered_test_name_pair_clusters",
+    "candidate_pools"
+  ],
+  "bootstrap_target_pooling": "For H1 and H2, targets 0.5 and 1.0 remain together within every resampled name-pair-cluster by candidate-pool draw; targets are not independently resampled.",
+  "selection_rule": {
+    "objective": "Select the candidate mask with minimum raw predicted target loss within each candidate pool and target.",
+    "negative_predictions": "Do not clip negative fitted risk predictions. Record their frequency and use the raw value so no post-fit transformation is introduced.",
+    "deterministic_tie_break": "Lexicographically minimize (raw predicted objective, number of ablated heads, mask_id).",
+    "fixed_action": "Freeze one mask per observer, pool, target, and policy before any Phase-6 test candidate effect is measured."
+  },
+  "hypotheses": {
+    "H1_primary_estimand": {
+      "candidate": "head_pair_quadratic_screen direct-risk observer",
+      "reference": "natural mean-effect plug-in observer using the same 92-column quadratic basis",
+      "target_scope": "pooled targets 0.5 and 1.0",
+      "minimum_loss_reduction_fraction": 0.05,
+      "paired_cluster_interval_lower_bound_strictly_positive": true,
+      "per_primary_target_point_direction_nonnegative": true,
+      "licenses_only_if_passed": "A decision-risk estimand improves fixed-action selection over the natural mean-effect plug-in observer using the same 92-column quadratic basis."
+    },
+    "H2_secondary_structure": {
+      "candidate": "head_pair_quadratic_screen direct-risk observer",
+      "references": [
+        "additive_head direct-risk observer",
+        "count_additive direct-risk observer"
+      ],
+      "target_scope": "pooled targets 0.5 and 1.0",
+      "minimum_loss_reduction_fraction_against_each": 0.10,
+      "paired_cluster_interval_lower_bound_strictly_positive_against_each": true,
+      "per_primary_target_point_direction_nonnegative_against_each": true,
+      "licenses_only_if_passed": "A pairwise risk basis improves fixed-action selection over additive and count-additive risk observers. This does not establish an estimand advantage."
+    }
+  },
+  "multiplicity_boundary": "H1 alone defines primary success. H2 is a separately prespecified secondary structural claim and cannot rescue a failed H1. H1 alone can license an estimand claim; H2 can license only the stated interaction-aware risk-basis claim.",
+  "prespecified_sensitivities": {
+    "target_specific_jensen_score": "For each target, fit the same 92-column ridge basis to the absolute difference between each calibration mask's train-prompt mean effect and the target. This matches the direct-risk observer's target-specific parameter count and differs in |E[Y]-t| versus E|Y-t|.",
+    "target_1.5": "Prespecified stress test; it is excluded from H1 and H2 because the post-outcome pilot showed target heterogeneity.",
+    "all_three_targets_pooled": "Report alongside the primary target regime.",
+    "jensen_interpretation_rule": "Only if the direct-risk quadratic observer has nonnegative point direction and a paired interval lower bound above zero against the target-specific Jensen-score control may the result be described as surviving the target-specific parameter-count sensitivity. Otherwise H1 is described only as a same-basis comparison to the natural plug-in mean observer.",
+    "pool_signs": "Report as a diagnostic; do not use as a gate.",
+    "leave_one_cluster_out": "Report the H1 and H2 point estimate after omitting each independent test-name pair in turn. Leave-one-name-out is identical to omitting its sole pair and will be reported with that equivalence stated.",
+    "leave_one_template_out": "Report the H1 and H2 point estimate after omitting each of the eight templates in turn.",
+    "within_tolerance": "Secondary, with no gate.",
+    "cost_aware": "Secondary, with no gate.",
+    "direct_risk_PE_and_coarse_all_pairs": "Structural diagnostics, not headline gates."
+  },
+  "clean_template_validity": {
+    "measure_only_after_prediction_action_manifest_is_hashed": true,
+    "metrics": [
+      "clean logit difference by template",
+      "IO-vs-subject pairwise accuracy, defined as clean IO logit minus subject logit greater than zero, overall and by template",
+      "reference prompt count by template",
+      "train prompt count by template",
+      "test prompt count by template"
+    ],
+    "claim_gate": {
+      "overall_IO_vs_subject_pairwise_accuracy_min": 0.90,
+      "every_template_IO_vs_subject_pairwise_accuracy_min": 0.75,
+      "every_template_mean_clean_logit_difference_strictly_positive": true
+    },
+    "failure_rule": "A failed clean-task gate never removes, replaces, or suppresses any row and never changes H1 or H2 computation. It bars IOI-mechanism and fresh-template generalization language and requires the result to be reported as a template-distribution task-validity failure.",
+    "exclusion_rule": "No prompt, template, calibration mask, candidate mask, pool, or target may be removed or replaced after any Phase-6 model forward pass. Clean-performance results qualify interpretation rather than trigger filtering, and must be reported overall and per template."
+  },
+  "access_sequence": [
+    "Freeze and hash protocol, templates, disjoint name splits, prompts, the inherited 160-mask calibration bank, and all 48 fresh candidate pools.",
+    "Run reference prompts only to measure the eight new template-conditioned head means.",
+    "Run train prompts on the 160 calibration masks only. Candidate masks may not be evaluated on train prompts.",
+    "Fit all frozen observer bases, write and hash coefficients, predictions for every candidate mask, deterministic fixed actions, diagnostics, and the prediction/action manifest.",
+    "Only after that manifest exists and verifies may any Phase-6 test-prompt forward pass occur, including clean scoring. No prompt, template, mask, pool, target, or outcome row may then be excluded or replaced."
+  ],
+  "estimands_and_metrics": {
+    "finite_effect": "For prompt i and mask m, Y_i(m)=LD_i(clean)-LD_i(ablated m), where LD is the final-token IO logit minus subject logit.",
+    "direct_risk_response": "For each target t and calibration mask m, R_train,t(m)=(1/192) sum over the frozen train prompts of |Y_i(m)-t|.",
+    "mean_effect_response": "For each calibration mask m, mu_train(m)=(1/192) sum over the frozen train prompts of Y_i(m); the natural plug-in score is |mu_hat(m)-t|.",
+    "jensen_score_response": "For each target t and calibration mask m, J_train,t(m)=|mu_train(m)-t|; fit a separate 92-coefficient quadratic model for each target.",
+    "fixed_action_loss": "After selecting one mask m_hat(o,p,t) for observer o, candidate pool p, and target t, L(o,p,t)=(1/512) sum over all frozen test prompts of |Y_i(m_hat)-t|.",
+    "primary_weighting": "H1 and H2 equally weight the two primary targets, 32 independent name-pair clusters, 48 candidate pools, both pair orientations, and all eight templates."
+  },
+  "pilot_planning_audit": {
+    "status": "post-outcome inputs used only to plan Phase 6",
+    "source_hashes": {
+      "configs/revision/ioi_phase06_risk_exploratory_v1.json": "7a12be8ecd3eda051f8a0932dfe3fc730edf3f8cf71695cfd3634826d1c82497",
+      "results/revision/phase06/ioi_risk_exploratory/result_digest.json": "896bcd4a19b1c9665a15936396d454e21d3d07b00c83eec56a79bbc89a422b78",
+      "results/revision/phase06/ioi_risk_exploratory/paired_contrasts.csv": "dea9e07c52c252c736f17fcb78aa0670fbab46bdf55c046218e3d89fbdf6623a"
+    },
+    "quadratic_risk_minus_quadratic_mean_primary_target_pool_mean": 0.07918,
+    "pilot_pool_standard_deviation": 0.18243,
+    "rough_two_sided_95pct_80pct_power_pool_count": 42,
+    "frozen_candidate_pool_count": 48
+  },
+  "legacy_mask_exclusions": {
+    "results/revision/phase02/inputs/stage2b_mean_end/ioi_stage2b_subset_design.csv": "29c4d7377b3897f9b8b2bd947694d2e676971df6d2e23adbfde67b1ec10e4d60",
+    "results/frozen/ioi/stage2c_primary_stratified_mean_end/ioi_stage2c_subset_design.csv": "7aefa21bba51137afe9718e693d8daad713eaf4375d828c7a2011eee1f530816"
+  },
+  "mask_selection_rule": "Generate the candidate bank once from the frozen seed and stated strata after excluding all Phase-5 and recorded legacy masks. No alternate seed, prediction-based pool selection, rank-based candidate pruning, or outcome-driven stop/redesign is permitted.",
+  "quadratic_rank_gate": "The inherited 160-row calibration design must have rank 92 for the intercept, 13 head indicators, and 78 distinct head-pair products before any fit or test forward pass.",
+  "power_disclosure": "The 48-pool design and the primary 0.5/1.0 target regime were chosen after the recorded pilot-informed power audit. Pool signs are diagnostic because the pilot did not support a defensible sign-count gate.",
+  "seed": 26062
+}

@@ -1,0 +1,187 @@
+\section{Ctl-2: separating estimation from actuation}
+
+Ctl-1 is a one-shot intervention. Ctl-2 asks what happens when the estimate is
+used repeatedly. The trained model produces a clean final residual state
+$h_0\in\mathbb{R}^d$. The plant readout is the model's affine target head,
+\[
+z(h)=b_T+\beta_T^\top h.
+\]
+The controller uses an affine observer,
+\[
+\widehat z_E(h)=b_E+\beta_E^\top h,
+\qquad
+\widehat e_t=y^\star-\widehat z_E(h_t),
+\qquad
+u_t=\operatorname{clip}(K\widehat e_t,-u_{\max},u_{\max}),
+\]
+and the implemented plant update is
+\[
+h_{t+1}=h_t+u_td_D.
+\]
+
+This is an additive final-residual loop. It does not rerun the Transformer after
+each edit. The target $z(h_t)$ is the model's actual target head evaluated on
+the edited residual. The collateral readout is a ridge probe fit on clean
+residuals; we therefore call its change a fitted nuisance-probe displacement,
+not ground truth away from the clean states.
+
+\subsection{Why the original normalization was incomplete}
+
+Let
+\[
+g_T=\beta_T^\top d_D
+\qquad\text{and}\qquad
+g_E=\beta_E^\top d_D
+\]
+be the true target gain and the observer's self-consistent gain. The original
+normalization fixes $g_T=g_0$. In an unclipped affine rollout, however, the
+observer error follows
+\[
+\widehat e_{t+1}=\widehat e_t(1-Kg_E).
+\]
+Thus equal target authority does not imply equal loop gain. The two gains agree
+only under additional geometric conditions. We report both gains and the local
+pole $1-Kg_E$ for every arm.
+
+Before clipping, this scalar observer-error mode converges if and only if
+$0<Kg_E<2$. This condition does not establish full-state stability, clipped-loop
+stability, or true-target tracking. Let
+\[
+\beta_M=\beta_T-\beta_E,
+\qquad
+g_M=\beta_M^\top d_D,
+\qquad
+\rho=\frac{g_M}{g_E},
+\]
+and let $m_t=z(h_t)-\widehat z_E(h_t)$. If the observer-error mode converges,
+the true target error $e_t=y^\star-z(h_t)$ approaches
+\[
+e_\infty=-m_0-\rho\widehat e_0.
+\]
+For an initially calibrated step, $|\rho|$ is the relative steady tracking
+error. At $\rho=-1$, the actuator has no true-target authority; below $-1$,
+it moves the target opposite to the response seen by the observer. A stable
+observer pole therefore does not suffice. The actuation direction must also
+have little response along what the observer omits.
+
+When $g_E>0$, a gain-matched controller can set
+\[
+K'=\frac{1-p_0}{g_E}
+\]
+for a chosen pole $p_0$. Arms with $g_E\leq0$ are reported as
+sign-incompatible with a positive-gain controller; we do not conceal the problem
+by reversing control authority with a negative $K$.
+
+\subsection{Factorial design}
+
+The primary design crosses two estimators with two directions:
+\[
+\{E_{\mathrm{FO}},E_{\mathrm{lifted}}\}
+\times
+\{D_{\mathrm{FO}},D_{\mathrm{lifted}}\}.
+\]
+Oracle rows and columns serve as calibration checks. For a fixed direction, the
+FO-minus-lifted contrast isolates estimation. For a fixed estimator, the
+FO-minus-lifted direction contrast isolates direction geometry. The diagonal
+comparison remains operationally useful, but it changes both quantities.
+
+We run unprojected directions and a diagnostic projection into the affine span
+of the four clean residual-state centroids. The projection tests whether an
+off-span component explains a result. It is not a manifold-preserving
+intervention: the span contains arbitrary affine combinations, and a rescaling
+can move far from every observed clean state.
+
+The four binary inputs produce four distinct trajectories per training seed.
+Repeated test rows are not independent observations. We use six independently
+trained models as the uncertainty unit and report their minimum and maximum,
+not a nominal percentile interval.
+
+\subsection{Estimator effect with direction held fixed}
+
+Integrated squared target error is the primary outcome,
+\[
+\operatorname{ISE}=\sum_{t=0}^{T}\bigl(y^\star-z(h_t)\bigr)^2.
+\]
+Table~\ref{tab:ctl2-factorial} gives unprojected fixed-direction contrasts. At
+every nonzero interaction strength, FO ISE exceeds lifted ISE in all six seeds
+with either direction fixed. Direction geometry changes the size of the effect,
+especially under the first-order estimator, but it does not remove the
+estimator effect.
+
+\input{../generated_current/revision_ctl2_factorial_table}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.98\linewidth]{revision_ctl2_factorial_ise_by_gamma.png}
+  \caption{Ctl-2 factorial ISE effects. Bands are the minimum and maximum over
+  six training seeds. The projected panel is a support diagnostic, not an
+  on-manifold result.}
+  \label{fig:ctl2-factorial}
+\end{figure}
+
+The old thresholded divergence flag gives a different impression at
+$\gamma=0.5$. In the unprojected diagonal comparison, its mean FO-minus-lifted
+rate is $-0.151$, with seed values from $-0.456$ to $0.451$. The continuous
+ISE difference is positive in all six seeds, with mean $6.71$ and range
+$1.13$--$26.20$. The sign flip is a threshold artifact in a coarse flag.
+We retain the flag as a secondary summary and do not describe the clipped loop
+as unbounded instability.
+
+\subsection{Gain matching and response calibration}
+
+The no-clipping gain-matched control isolates controller gain from target
+tracking. At $\gamma=0$ and a relative setpoint offset of $0.01$, the
+first-order arm uses $K'\approx14.67$, realizes local pole $0.7025$, and has
+zero clipping. Its target MSE nevertheless grows from $0.0001$ to $0.170$,
+with ISE $1.92$. Matching the observer-error pole is not enough because it
+does not correct initial bias or the relationship between observer response and
+true target response.
+
+We therefore calibrate finite responses separately from absolute levels. For
+held-out probes anchored at a clean baseline $h_0$, define
+\[
+\delta\widehat z=\widehat z(h_0+\delta h)-\widehat z(h_0),
+\qquad
+\delta z=z(h_0+\delta h)-z(h_0).
+\]
+A through-origin scalar fit estimates the response gain, and the calibrated
+observer preserves the initial estimate while scaling only its response:
+\[
+\widehat z_{\mathrm{cal}}(h)=\widehat z(h_0)
++a\left[\widehat z(h)-\widehat z(h_0)\right].
+\]
+In this affine fixture, response calibration aligns $g_E$ with $g_T$ and
+removes the dynamic sign/gain error. At $\gamma=1.15$, seed 0, the calibrated
+unprojected FO/FO arm ends at target MSE $0.069$ from initial MSE $0.720$.
+The remaining error follows the initial estimation bias.
+
+The calibration can be ill-conditioned. At $\gamma=0$, unprojected
+first-order response scales range from about 24 to 73 across seeds. At other
+interaction strengths, some estimator--direction pairs are nearly
+response-orthogonal and require gains above $10^3$ or a sign reversal. A
+statement that one scalar identifies the response is incomplete without the
+conditioning of that scalar.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.98\linewidth]{revision_ctl2_response_calibration_by_gamma.png}
+  \caption{Response calibration. Scalar calibration repairs the local response
+  mismatch in the affine fixture, while initial estimation bias remains.}
+  \label{fig:ctl2-calibration}
+\end{figure}
+
+\subsection{Affine-span projection is not a global repair}
+
+At $\gamma=0$, affine-span projection repairs target tracking in seed 0, but
+it multiplies direction norm by about $7.5$. Cumulative fitted nuisance-probe
+displacement rises from about $0.87$ to $13.36$, and the trajectory remains
+farther than one clean-state RMS radius from the nearest observed residual on
+average. The result diagnoses an off-span target-head component. It does not
+establish a safe or on-manifold actuator.
+
+The Ctl-2 result is therefore precise. The original diagonal comparison mixes
+estimation and direction. The factorial shows that estimation misspecification
+drives the main error at nonzero interaction, while direction geometry changes
+its severity. In this affine plant, a held-out scalar response gain repairs the
+dynamic mismatch but not initial bias, and the required gain may be poorly
+conditioned.

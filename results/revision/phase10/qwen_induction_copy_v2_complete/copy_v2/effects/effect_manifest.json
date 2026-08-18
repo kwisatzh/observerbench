@@ -1,0 +1,30 @@
+{
+  "artifacts": {
+    "shards/test/effects_000000_016384.csv": "f5772dd9b3caf3667d981e25bcb5971d0be99908c077589025f4033008037dc9",
+    "shards/test/effects_016384_032768.csv": "f940296009aac827c582dfaa9d04ac3dd7cfaf674163a671d3a3ab8d87b2bcd5",
+    "shards/test/effects_032768_049152.csv": "c3bf48ac932c091bc3e826c0841dc77c93bdacc3f76308d035cb3316f7d203da",
+    "shards/test/effects_049152_065536.csv": "3660054056302d0362349cfc6a85b89311be3ad3593baf0e5b0776b3b0f5564c",
+    "shards/train/effects_000000_016384.csv": "eb578c1ac82b2663de64ba8aa77820ef0d419e8c9d082772dafb03791ee7f39e",
+    "shards/train/effects_016384_032768.csv": "5d96d434b2ae33d2e7cab4876bab2bffea60c2a79d77c8193bf968944cdc0b22",
+    "test_effects.csv": "5f487b48ec440ffa3d060c37e70eebddc4f00ceea844a40d9ee45ff7315bbfa0",
+    "train_effects.csv": "0aeef307887e3e744b86b4b7534f0210e2bde47ca46d8b09324ce7ef6117d082"
+  },
+  "data_version": "copy-v2",
+  "design_manifest_sha256": "f721ba756ecd7a91808c50e73d7e9792b2e81b2a8589e406af82b191534cf0a0",
+  "intervention": {
+    "n_selected_heads": 8,
+    "replacement": "family_conditioned_reference_mean",
+    "site": "final_query_head_z"
+  },
+  "measurement_rows": {
+    "test": 65536,
+    "train": 32768
+  },
+  "model": {
+    "requested_name": "Qwen/Qwen2.5-7B",
+    "requested_revision": "d149729398750b98c0af14eb82c78cfe92750796"
+  },
+  "schema": "observerbench.qwen_induction_effect_run.v1",
+  "scientific_claim_allowed": true,
+  "status": "complete_locked_test_outcomes"
+}

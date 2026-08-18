@@ -1,0 +1,13 @@
+{
+  "task": "ctl1_analytic",
+  "mode": "full",
+  "seed": 0,
+  "n_train": 4000,
+  "n_test": 4000,
+  "gamma": 1.15,
+  "nuisance_interaction_weight": 0.0,
+  "include_interaction_only": false,
+  "include_manifold_respecting": true,
+  "normalize_direction_to_target_gain": true,
+  "target_actuation_gain": 0.85
+}

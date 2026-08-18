@@ -1,0 +1,10 @@
+{
+  "arm_design": "factorial_3x3",
+  "continuous_errors_are_primary": true,
+  "n_completed_arms": 54,
+  "n_skipped_arms": 0,
+  "primary_contrasts_file": "trained_transformer_ctl2_factorial_contrasts.csv",
+  "residual_support_rank": 3,
+  "schema": "observerbench.ctl2.phase01.v2",
+  "thresholded_large_error_rates_are_secondary": true
+}

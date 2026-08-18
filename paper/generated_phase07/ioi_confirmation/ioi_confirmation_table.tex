@@ -1,0 +1,14 @@
+\begin{table}[H]
+\centering
+\scriptsize
+\begin{tabular}{@{}lrrrrl@{}}
+\toprule
+Reference & Ref. loss & Risk loss & Reduction & 95\% interval & Templates \\
+\midrule
+Same-basis mean-effect plug-in & 1.093 & 0.891 & 18.5\% & [0.115, 0.293] & 8/8 \\
+Exact no action & 1.000 & 0.891 & 10.9\% & [0.012, 0.196] & 6/8 \\
+\bottomrule
+\end{tabular}
+\caption{Fixed-action target tracking at the pilot-informed target $t=1.0$. On 512 new prompt strings from eight fixed canonical templates, intervals resample 32 name-pair clusters and 48 frozen action pools (5,000 draws). Intervals are absolute loss reductions; the Reduction column is relative. The last column is descriptive and shows templates with the same direction. The clean IO-versus-subject gate passed before measurement (97.7\% overall; 95.3\% worst template).}
+\label{tab:phase7-ioi-confirmation}
+\end{table}

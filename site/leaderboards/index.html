@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Checked ObserverBench baseline panels and task-relative comparisons.">
+  <title>Leaderboards — ObserverBench</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+  <script src="../assets/site.js" defer></script>
+</head>
+<body data-page="leaderboards" data-site-root="..">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="../"><span class="brand-mark">OB</span><span>ObserverBench</span></a>
+    <nav aria-label="Primary navigation">
+      <a href="../">Overview</a>
+      <a aria-current="page" href="./">Leaderboards</a>
+      <a href="../submit/">Submit</a>
+      <a href="https://github.com/kwisatzh/observerbench">GitHub</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="page-hero narrow">
+      <p class="eyebrow">Checked results</p>
+      <h1>Compare observers inside a declared task.</h1>
+      <p class="lede">The tables preserve access, provenance, and result status. They do not collapse unlike tasks into one headline number.</p>
+    </section>
+
+    <section class="section leaderboard-shell" aria-labelledby="table-heading">
+      <div class="controls" aria-label="Leaderboard controls">
+        <label>Task panel
+          <select id="task-select"><option>Loading checked panels…</option></select>
+        </label>
+        <label>Metric
+          <select id="metric-select"><option>Loading metrics…</option></select>
+        </label>
+        <label>Rows
+          <select id="status-select">
+            <option value="all">All checked rows</option>
+            <option value="eligible">Prespecified / rank-eligible rows</option>
+            <option value="secondary">Secondary analyses only</option>
+            <option value="reference">Reference bounds only</option>
+          </select>
+        </label>
+      </div>
+
+      <div id="leaderboard-summary" class="panel-summary" aria-live="polite"></div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">Order</th><th scope="col">Observer</th><th scope="col">Status</th><th scope="col">Access</th><th id="metric-heading" scope="col">Metric</th></tr>
+          </thead>
+          <tbody id="leaderboard-body"><tr><td colspan="5">Loading checked results…</td></tr></tbody>
+        </table>
+      </div>
+      <p class="table-note"><strong>Order is not automatically an official rank.</strong> Reference bounds receive no position. A submitted result receives a rank only within a track that fixes task version, access boundary, budget, controller, and loss.</p>
+      <div id="leaderboard-error" class="error-box" hidden></div>
+    </section>
+
+    <section class="section split-explainer">
+      <div><p class="eyebrow">Read two numbers</p><h2>Prediction quality and action quality answer different questions.</h2></div>
+      <div>
+        <p><strong>Prediction metrics</strong> ask whether an observer ranks or estimates held-out cases accurately.</p>
+        <p><strong>Action metrics</strong> ask what happens after the fixed controller spends its limited intervention or audit budget on that ranking.</p>
+        <p>A method can improve one and lose on the other. ObserverBench reports both.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer><div><strong>ObserverBench</strong><p>Task-relative evidence, not one universal score.</p></div><div class="footer-links"><a href="../">Overview</a><a href="../submit/">Submit</a></div></footer>
+</body>
+</html>

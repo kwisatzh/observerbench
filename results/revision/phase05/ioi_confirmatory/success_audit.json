@@ -1,0 +1,44 @@
+{
+  "all_gates_pass": false,
+  "comparisons": [
+    {
+      "all_gates_pass": false,
+      "gates": {
+        "cost_aware_direction": false,
+        "fixed_action_loss_reduction_fraction": false,
+        "fixed_action_loss_reduction_interval": false,
+        "size_matched_direction": false,
+        "within_tolerance_improvement": false
+      },
+      "reference": "additive_head",
+      "secondary_name_pair_sensitivity": {
+        "ordered_pair_ci_direction_positive": false,
+        "unordered_pair_ci_direction_positive": false
+      }
+    },
+    {
+      "all_gates_pass": false,
+      "gates": {
+        "cost_aware_direction": true,
+        "fixed_action_loss_reduction_fraction": false,
+        "fixed_action_loss_reduction_interval": false,
+        "size_matched_direction": false,
+        "within_tolerance_improvement": false
+      },
+      "reference": "count_additive",
+      "secondary_name_pair_sensitivity": {
+        "ordered_pair_ci_direction_positive": false,
+        "unordered_pair_ci_direction_positive": false
+      }
+    }
+  ],
+  "primary_estimand": "mean_per_prompt_fixed_action_target_loss",
+  "schema": "observerbench.ioi_phase5_success_audit.v2",
+  "thresholds": {
+    "fixed_action_loss_reduction_fraction_min": 0.15,
+    "paired_interval_excludes_zero": true,
+    "requires_cost_aware_direction": true,
+    "requires_size_matched_direction": true,
+    "within_tolerance_improvement_min": 0.05
+  }
+}

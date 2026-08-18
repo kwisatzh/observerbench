@@ -1,0 +1,172 @@
+\section{What an observer must preserve}
+\label{sec:design}
+
+An observer turns a model measurement into information that can guide an
+intervention. The distinction between the estimate and the intervention is
+important. An observer may correctly report how far the model is from a target
+while pointing the controller in an unhelpful direction; conversely, a useful
+direction can be paired with a poor estimate.
+
+For model state $h$, let the observer estimate a quantity $\widehat z$ and let
+$d$ denote the proposed intervention direction:
+\[
+E(h)=\widehat z,
+\qquad
+D(h)=d.
+\]
+The controller uses the estimate to choose an action magnitude,
+\[
+u=C(y^\star,\widehat z).
+\]
+The task fixes the controlled model, intervention rule, initial states,
+controller, and loss. This lets us change one part at a time. To test an
+estimator, we keep the direction fixed and change only $E$. To test a
+direction, we keep the estimate fixed and change only $D$. If both change, we
+can judge only the combined system.
+
+An observer need not be correct on every possible model state. It needs to be
+correct on the states that the allowed interventions can reach. To state this
+concretely, suppose an activation has three coordinates but the controller can
+move only the first two. A wrong coefficient on the third coordinate cannot
+affect this controller. A wrong coefficient on the first can.
+
+To state the same idea precisely, consider an affine---linear plus an
+offset---target and observer:
+\[
+z(h)=b_T+\beta_T^\top h,
+\qquad
+\widehat z(h)=b_E+\beta_E^\top h.
+\]
+Let $h_0$ be the starting state. Let the columns of $B$ span the allowed edit
+directions. From $h_0$, the controller can reach only
+\[
+\mathcal H_R=h_0+\mathcal U,
+\qquad
+\mathcal U=\operatorname{span}(B).
+\]
+The observer only has to match the target on this reachable set. With one fixed
+direction $d$, this means that its error along $d$ must be zero.
+
+\begin{proposition}[Reachable-subspace adequacy]
+\label{prop:reachable}
+Define
+\[
+\delta_0=z(h_0)-\widehat z(h_0),
+\qquad
+\delta_\beta=\beta_T-\beta_E.
+\]
+Then
+\[
+z(h)=\widehat z(h)\quad\text{for every }h\in\mathcal H_R
+\]
+if and only if
+\[
+\delta_0=0
+\qquad\text{and}\qquad
+P_{\mathcal U}\delta_\beta=0,
+\]
+where $P_{\mathcal U}$ is the orthogonal projector onto $\mathcal U$.
+\end{proposition}
+
+\begin{proof}
+Every reachable state has the form $h=h_0+Bv$. The readout difference is
+$\delta_0+\delta_\beta^\top Bv$. It is zero for every $v$ exactly when
+$\delta_0=0$ and $B^\top\delta_\beta=0$, which is equivalent to
+$P_{\mathcal U}\delta_\beta=0$.
+\end{proof}
+
+The proposition separates errors that can affect an action from errors that
+cannot. In the three-coordinate example, it ignores the coefficient error on
+the coordinate the controller cannot change. With one fixed direction $d$,
+adequacy reduces to $(\beta_T-\beta_E)^\top d=0$.
+
+\subsection{Why a convergent observer can still miss the target}
+
+The proposition tells us where an observer must agree with the target. The
+next question is what happens when its remaining error enters a feedback loop.
+Consider an unclipped controller that repeatedly edits along one direction:
+\[
+h_{t+1}=h_t+K\widehat e_t d,
+\qquad
+\widehat e_t=y^\star-\widehat z(h_t).
+\]
+Here $y^\star$ is the desired value, $K$ sets the edit size, and
+$\widehat e_t$ is the error reported by the observer. Three quantities govern
+the loop:
+\[
+g_E=\beta_E^\top d,
+\qquad
+g_T=\beta_T^\top d,
+\qquad
+p=1-Kg_E.
+\]
+The response $g_E$ is what the observer expects along the edit direction, while
+$g_T$ is the target's actual response. The convergence factor $p$---called the
+closed-loop pole in control theory---says how quickly the error reported by the
+observer shrinks. After $T$ steps, the total action is
+\[
+A_T=
+\begin{cases}
+\widehat e_0(1-p^T)/g_E, & g_E\neq0,\\
+TK\widehat e_0, & g_E=0,
+\end{cases}
+\]
+and the two errors are exactly
+\[
+\widehat e_T=p^T\widehat e_0,
+\qquad
+e_T=e_0-g_T A_T,
+\]
+where $e_t=y^\star-z(h_t)$. For $g_E\neq0$, define
+\[
+m_0=z(h_0)-\widehat z(h_0),
+\qquad
+\rho=\frac{g_T-g_E}{g_E}.
+\]
+Substitution gives the finite-horizon certificate
+\begin{equation}
+\label{eq:certificate}
+e_T=p^T\widehat e_0-m_0-\rho(1-p^T)\widehat e_0.
+\end{equation}
+
+The equation separates three sources of error:
+
+\begin{itemize}
+  \item $p^T\widehat e_0$ is the error the observer still reports after $T$
+  steps;
+  \item $m_0$ is a mismatch at the starting state; and
+  \item $\rho(1-p^T)\widehat e_0$ is the mismatch between the response the
+  observer expects and the response the target actually has.
+\end{itemize}
+
+The observer's reported error converges when $|p|<1$, or $0<Kg_E<2$ for
+positive $K$, but this controls only the first term. For example, if $p^T$ is
+nearly zero and $m_0=0.2$, the observer reports success while the true target
+remains off by about $0.2$, even before response mismatch is counted. A
+convergent observer is not necessarily tracking the true target.
+
+\subsection{Rules for a fair observer comparison}
+
+These results give four practical rules:
+
+\begin{enumerate}[leftmargin=1.5em,itemsep=0.2em,topsep=0.3em]
+  \item \textbf{Fix the rest of the loop.} Hold the model, controller,
+  intervention family, starting-state distribution, and loss fixed while
+  comparing observers. If the estimator and direction both change, report a
+  result for the pair.
+
+  \item \textbf{Separate construction from evaluation.} Fix targets, masks,
+  and splits before measuring held-out effects. First check that the unedited
+  model performs the base task overall and in every required group. We call
+  this the \emph{clean stop gate}.
+
+  \item \textbf{Make the comparison measurable.} Check that the measurement
+  design can expose the terms being compared. An interaction cannot be judged
+  if it is almost never measured. For repeated control, record error across the
+  trajectory rather than only a threshold crossing.
+
+  \item \textbf{Train on the quantity used to choose the action.} Predicting an
+  average effect and choosing a mask with low prompt-level loss are different
+  tasks. Section~\ref{sec:ioi} tests both with the same interventions and the
+  exact do-nothing action, or no-op.
+\end{enumerate}

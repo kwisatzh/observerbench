@@ -1,0 +1,19 @@
+\begin{table}[H]
+\centering
+\scriptsize
+\begin{tabular}{@{}llrl@{}}
+\toprule
+Check & Status & Point statistic & 95\% interval \\
+\midrule
+H1: risk vs. natural mean & Pass & 22.61\% reduction & [0.114, 0.402] \\
+H2: risk basis vs. additive & Fail & 3.03\% reduction & [-0.025, 0.076] \\
+H2: risk basis vs. count-additive & Fail & 3.54\% reduction & [-0.021, 0.079] \\
+Target-specific transformed-mean sensitivity & Pass & 22.67\% reduction & [0.119, 0.399] \\
+Natural-mean own-estimand diagnostic & Descriptive & MAE 0.128; $R^2$ 0.844 & -- \\
+No-action audit & Limitation & loss 0.750 vs. risk 0.833 & not prespecified \\
+Clean-task validity & Fail & overall 0.867 $<$ 0.900 & worst template 0.578 $<$ 0.750 \\
+\bottomrule
+\end{tabular}
+\caption{Pilot-informed, outcome-sealed fixed-action comparison. H1 passes; H2 fails; the target-specific transformed-mean sensitivity passes; and the clean-task gate fails. Contrast point statistics are relative fixed-action loss reductions, while intervals are paired absolute loss reductions from the frozen pair-cluster-by-pool bootstrap. The nonempty candidate family excluded no action; its exact pooled loss is lower than the selected direct-risk loss. The clean-gate failure bars IOI-mechanism and fresh-template-generalization language.}
+\label{tab:phase6-ioi-confirmation}
+\end{table}

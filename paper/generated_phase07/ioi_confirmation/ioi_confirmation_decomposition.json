@@ -1,0 +1,26 @@
+{
+  "direct_risk_head_pair_quadratic": {
+    "dispersion": 0.4936678969534114,
+    "mean_effect": 0.683923326122264,
+    "mean_to_target": 0.396954879979603,
+    "total_loss": 0.8906227769330144
+  },
+  "exact_noop": {
+    "dispersion": 0.0,
+    "mean_effect": 0.0,
+    "mean_to_target": 1.0,
+    "total_loss": 1.0
+  },
+  "interpretation": {
+    "direct_risk_accepts_larger_mean_to_target_term": true,
+    "direct_risk_reduces_dispersion_more_than_the_mean_term_worsens": true,
+    "phase6_pattern_repeated": true,
+    "status": "descriptive"
+  },
+  "natural_mean_effect_head_pair_quadratic": {
+    "dispersion": 0.8067980604634309,
+    "mean_effect": 0.7708828156270707,
+    "mean_to_target": 0.2859615176372851,
+    "total_loss": 1.092759578100716
+  }
+}

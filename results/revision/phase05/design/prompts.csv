@@ -1,0 +1,1025 @@
+prompt_id,split,template_id,structure,io_name,s_name,prompt,answer,counterfactual_answer,answer_token_id,counterfactual_token_id
+prompt_07ab3ebd485cf369,reference,abba_meeting,ABBA,Frances,Sandra,"Because Frances and Sandra attended the meeting, Sandra sent a short note to",Frances,Sandra,27025,32464
+prompt_0d0e8e379a2e1bed,reference,abba_meeting,ABBA,Amy,Nancy,"Because Amy and Nancy attended the meeting, Nancy sent a short note to",Amy,Nancy,14235,18496
+prompt_0d674700873c11ae,reference,abba_meeting,ABBA,Frances,Ryan,"Because Frances and Ryan attended the meeting, Ryan sent a short note to",Frances,Ryan,27025,6047
+prompt_0df090409b8c6665,reference,abba_meeting,ABBA,Frances,Jason,"Because Frances and Jason attended the meeting, Jason sent a short note to",Frances,Jason,27025,8982
+prompt_112c5eb06e4ce081,reference,abba_meeting,ABBA,Sandra,Nancy,"Because Sandra and Nancy attended the meeting, Nancy sent a short note to",Sandra,Nancy,32464,18496
+prompt_14fd88d0e9528873,reference,abba_meeting,ABBA,Frances,Anthony,"Because Frances and Anthony attended the meeting, Anthony sent a short note to",Frances,Anthony,27025,9953
+prompt_1deb30c97c5cd81c,reference,abba_meeting,ABBA,Helen,Nancy,"Because Helen and Nancy attended the meeting, Nancy sent a short note to",Helen,Nancy,22695,18496
+prompt_1f4a589d1a70383d,reference,abba_meeting,ABBA,Carol,Sandra,"Because Carol and Sandra attended the meeting, Sandra sent a short note to",Carol,Sandra,5074,32464
+prompt_26b223e1d0d5ac7f,reference,abba_meeting,ABBA,Donna,Nancy,"Because Donna and Nancy attended the meeting, Nancy sent a short note to",Donna,Nancy,29216,18496
+prompt_3056062bcf547fc9,reference,abba_meeting,ABBA,Anthony,Susan,"Because Anthony and Susan attended the meeting, Susan sent a short note to",Anthony,Susan,9953,14919
+prompt_32fd24c77ec186f4,reference,abba_meeting,ABBA,Carol,Amy,"Because Carol and Amy attended the meeting, Amy sent a short note to",Carol,Amy,5074,14235
+prompt_3625fbc44c080223,reference,abba_meeting,ABBA,Ryan,Helen,"Because Ryan and Helen attended the meeting, Helen sent a short note to",Ryan,Helen,6047,22695
+prompt_4054c2c42c0248a5,reference,abba_meeting,ABBA,Nancy,Ruth,"Because Nancy and Ruth attended the meeting, Ruth sent a short note to",Nancy,Ruth,18496,22132
+prompt_40762793289ec7d6,reference,abba_meeting,ABBA,Sandra,Ruth,"Because Sandra and Ruth attended the meeting, Ruth sent a short note to",Sandra,Ruth,32464,22132
+prompt_4200437e74cc992c,reference,abba_meeting,ABBA,Benjamin,Frances,"Because Benjamin and Frances attended the meeting, Frances sent a short note to",Benjamin,Frances,14533,27025
+prompt_44110805068cd8b4,reference,abba_meeting,ABBA,Nancy,Jason,"Because Nancy and Jason attended the meeting, Jason sent a short note to",Nancy,Jason,18496,8982
+prompt_4fd3feb5736472aa,reference,abba_meeting,ABBA,Nancy,Helen,"Because Nancy and Helen attended the meeting, Helen sent a short note to",Nancy,Helen,18496,22695
+prompt_57e1a42dff897e9a,reference,abba_meeting,ABBA,Patricia,Pamela,"Because Patricia and Pamela attended the meeting, Pamela sent a short note to",Patricia,Pamela,30223,43341
+prompt_58cb0a3b30559177,reference,abba_meeting,ABBA,Amy,Sandra,"Because Amy and Sandra attended the meeting, Sandra sent a short note to",Amy,Sandra,14235,32464
+prompt_5e1d2904609e7c92,reference,abba_meeting,ABBA,Susan,Ryan,"Because Susan and Ryan attended the meeting, Ryan sent a short note to",Susan,Ryan,14919,6047
+prompt_5fae55447d55ad60,reference,abba_meeting,ABBA,Carol,Anthony,"Because Carol and Anthony attended the meeting, Anthony sent a short note to",Carol,Anthony,5074,9953
+prompt_618fa0989683e87a,reference,abba_meeting,ABBA,Michelle,Sandra,"Because Michelle and Sandra attended the meeting, Sandra sent a short note to",Michelle,Sandra,16738,32464
+prompt_6b57a24b0332b1a7,reference,abba_meeting,ABBA,Helen,Susan,"Because Helen and Susan attended the meeting, Susan sent a short note to",Helen,Susan,22695,14919
+prompt_73cd8e50fedefcb5,reference,abba_meeting,ABBA,Amy,Donna,"Because Amy and Donna attended the meeting, Donna sent a short note to",Amy,Donna,14235,29216
+prompt_754072eacf079d2e,reference,abba_meeting,ABBA,Ryan,Benjamin,"Because Ryan and Benjamin attended the meeting, Benjamin sent a short note to",Ryan,Benjamin,6047,14533
+prompt_783b73950864c647,reference,abba_meeting,ABBA,Anthony,Michelle,"Because Anthony and Michelle attended the meeting, Michelle sent a short note to",Anthony,Michelle,9953,16738
+prompt_790bb30802f22951,reference,abba_meeting,ABBA,Amy,Benjamin,"Because Amy and Benjamin attended the meeting, Benjamin sent a short note to",Amy,Benjamin,14235,14533
+prompt_794e2be5cfded243,reference,abba_meeting,ABBA,Jason,Pamela,"Because Jason and Pamela attended the meeting, Pamela sent a short note to",Jason,Pamela,8982,43341
+prompt_79ed9f326824a8ce,reference,abba_meeting,ABBA,Ryan,Jason,"Because Ryan and Jason attended the meeting, Jason sent a short note to",Ryan,Jason,6047,8982
+prompt_7c625ac23da62a65,reference,abba_meeting,ABBA,Susan,Sandra,"Because Susan and Sandra attended the meeting, Sandra sent a short note to",Susan,Sandra,14919,32464
+prompt_7dc8f703014c0e24,reference,abba_meeting,ABBA,Frances,Ruth,"Because Frances and Ruth attended the meeting, Ruth sent a short note to",Frances,Ruth,27025,22132
+prompt_7f1cb4bc10113f35,reference,abba_meeting,ABBA,Susan,Patricia,"Because Susan and Patricia attended the meeting, Patricia sent a short note to",Susan,Patricia,14919,30223
+prompt_86b529106d214c55,reference,abba_meeting,ABBA,Pamela,Sandra,"Because Pamela and Sandra attended the meeting, Sandra sent a short note to",Pamela,Sandra,43341,32464
+prompt_9216c94e8dcd4874,reference,abba_meeting,ABBA,Ruth,Frances,"Because Ruth and Frances attended the meeting, Frances sent a short note to",Ruth,Frances,22132,27025
+prompt_947c6d95cdfb7e05,reference,abba_meeting,ABBA,Patricia,Helen,"Because Patricia and Helen attended the meeting, Helen sent a short note to",Patricia,Helen,30223,22695
+prompt_951168fefbfb2ca5,reference,abba_meeting,ABBA,Helen,Ruth,"Because Helen and Ruth attended the meeting, Ruth sent a short note to",Helen,Ruth,22695,22132
+prompt_992ead9cc8657d47,reference,abba_meeting,ABBA,Amy,Carol,"Because Amy and Carol attended the meeting, Carol sent a short note to",Amy,Carol,14235,5074
+prompt_9d55db72660c61b4,reference,abba_meeting,ABBA,Benjamin,Ryan,"Because Benjamin and Ryan attended the meeting, Ryan sent a short note to",Benjamin,Ryan,14533,6047
+prompt_a555b5b72181cdcb,reference,abba_meeting,ABBA,Susan,Helen,"Because Susan and Helen attended the meeting, Helen sent a short note to",Susan,Helen,14919,22695
+prompt_a879b2493af534d3,reference,abba_meeting,ABBA,Pamela,Amy,"Because Pamela and Amy attended the meeting, Amy sent a short note to",Pamela,Amy,43341,14235
+prompt_afd04d0704279cd3,reference,abba_meeting,ABBA,Ruth,Amy,"Because Ruth and Amy attended the meeting, Amy sent a short note to",Ruth,Amy,22132,14235
+prompt_b1cd58490ecfa898,reference,abba_meeting,ABBA,Susan,Benjamin,"Because Susan and Benjamin attended the meeting, Benjamin sent a short note to",Susan,Benjamin,14919,14533
+prompt_b72425d76a121445,reference,abba_meeting,ABBA,Ryan,Donna,"Because Ryan and Donna attended the meeting, Donna sent a short note to",Ryan,Donna,6047,29216
+prompt_b91325e42deafa70,reference,abba_meeting,ABBA,Frances,Pamela,"Because Frances and Pamela attended the meeting, Pamela sent a short note to",Frances,Pamela,27025,43341
+prompt_bad8e4e6518652fa,reference,abba_meeting,ABBA,Frances,Helen,"Because Frances and Helen attended the meeting, Helen sent a short note to",Frances,Helen,27025,22695
+prompt_be72c5634f0120a0,reference,abba_meeting,ABBA,Sandra,Pamela,"Because Sandra and Pamela attended the meeting, Pamela sent a short note to",Sandra,Pamela,32464,43341
+prompt_bf228c1a67317a64,reference,abba_meeting,ABBA,Nancy,Frances,"Because Nancy and Frances attended the meeting, Frances sent a short note to",Nancy,Frances,18496,27025
+prompt_bf9958256dd13eca,reference,abba_meeting,ABBA,Benjamin,Sandra,"Because Benjamin and Sandra attended the meeting, Sandra sent a short note to",Benjamin,Sandra,14533,32464
+prompt_c4e8c73664fe0924,reference,abba_meeting,ABBA,Anthony,Ryan,"Because Anthony and Ryan attended the meeting, Ryan sent a short note to",Anthony,Ryan,9953,6047
+prompt_c61bac35bed1fdf2,reference,abba_meeting,ABBA,Michelle,Nancy,"Because Michelle and Nancy attended the meeting, Nancy sent a short note to",Michelle,Nancy,16738,18496
+prompt_ca775b3853200fef,reference,abba_meeting,ABBA,Susan,Nancy,"Because Susan and Nancy attended the meeting, Nancy sent a short note to",Susan,Nancy,14919,18496
+prompt_cad5525c447e5076,reference,abba_meeting,ABBA,Pamela,Nancy,"Because Pamela and Nancy attended the meeting, Nancy sent a short note to",Pamela,Nancy,43341,18496
+prompt_cb5f20bdadfc5205,reference,abba_meeting,ABBA,Patricia,Donna,"Because Patricia and Donna attended the meeting, Donna sent a short note to",Patricia,Donna,30223,29216
+prompt_cf924f4f187657e7,reference,abba_meeting,ABBA,Michelle,Anthony,"Because Michelle and Anthony attended the meeting, Anthony sent a short note to",Michelle,Anthony,16738,9953
+prompt_d0bf40ba850426c5,reference,abba_meeting,ABBA,Donna,Ryan,"Because Donna and Ryan attended the meeting, Ryan sent a short note to",Donna,Ryan,29216,6047
+prompt_da73242f7901dd44,reference,abba_meeting,ABBA,Helen,Michelle,"Because Helen and Michelle attended the meeting, Michelle sent a short note to",Helen,Michelle,22695,16738
+prompt_db84ce56e8e867ac,reference,abba_meeting,ABBA,Pamela,Benjamin,"Because Pamela and Benjamin attended the meeting, Benjamin sent a short note to",Pamela,Benjamin,43341,14533
+prompt_e4b982e6e50b62b0,reference,abba_meeting,ABBA,Ryan,Ruth,"Because Ryan and Ruth attended the meeting, Ruth sent a short note to",Ryan,Ruth,6047,22132
+prompt_e6417ec2be85cdce,reference,abba_meeting,ABBA,Patricia,Jason,"Because Patricia and Jason attended the meeting, Jason sent a short note to",Patricia,Jason,30223,8982
+prompt_ea43fda18d54f702,reference,abba_meeting,ABBA,Michelle,Frances,"Because Michelle and Frances attended the meeting, Frances sent a short note to",Michelle,Frances,16738,27025
+prompt_ead10749f7911f82,reference,abba_meeting,ABBA,Donna,Ruth,"Because Donna and Ruth attended the meeting, Ruth sent a short note to",Donna,Ruth,29216,22132
+prompt_ee2c2b0990f4218f,reference,abba_meeting,ABBA,Ruth,Jason,"Because Ruth and Jason attended the meeting, Jason sent a short note to",Ruth,Jason,22132,8982
+prompt_f5302dd69b4d3704,reference,abba_meeting,ABBA,Jason,Michelle,"Because Jason and Michelle attended the meeting, Michelle sent a short note to",Jason,Michelle,8982,16738
+prompt_f81c821757e44cf2,reference,abba_meeting,ABBA,Frances,Nancy,"Because Frances and Nancy attended the meeting, Nancy sent a short note to",Frances,Nancy,27025,18496
+prompt_080beb3c86e08ce7,reference,abba_office,ABBA,Nancy,Helen,"While Nancy and Helen worked in the office, Helen passed a blue folder to",Nancy,Helen,18496,22695
+prompt_088bc63a301a955b,reference,abba_office,ABBA,Anthony,Nancy,"While Anthony and Nancy worked in the office, Nancy passed a blue folder to",Anthony,Nancy,9953,18496
+prompt_09b10f9b786246e1,reference,abba_office,ABBA,Ryan,Ruth,"While Ryan and Ruth worked in the office, Ruth passed a blue folder to",Ryan,Ruth,6047,22132
+prompt_0a70ec85ca503b45,reference,abba_office,ABBA,Patricia,Michelle,"While Patricia and Michelle worked in the office, Michelle passed a blue folder to",Patricia,Michelle,30223,16738
+prompt_0cabb751286667d3,reference,abba_office,ABBA,Donna,Michelle,"While Donna and Michelle worked in the office, Michelle passed a blue folder to",Donna,Michelle,29216,16738
+prompt_0fda4fd51a922147,reference,abba_office,ABBA,Amy,Frances,"While Amy and Frances worked in the office, Frances passed a blue folder to",Amy,Frances,14235,27025
+prompt_13f276ce077077af,reference,abba_office,ABBA,Pamela,Carol,"While Pamela and Carol worked in the office, Carol passed a blue folder to",Pamela,Carol,43341,5074
+prompt_1814e596ee0fae4d,reference,abba_office,ABBA,Jason,Benjamin,"While Jason and Benjamin worked in the office, Benjamin passed a blue folder to",Jason,Benjamin,8982,14533
+prompt_2205fb8eeaa2bc9d,reference,abba_office,ABBA,Carol,Frances,"While Carol and Frances worked in the office, Frances passed a blue folder to",Carol,Frances,5074,27025
+prompt_23277e0f52f10c02,reference,abba_office,ABBA,Ryan,Sandra,"While Ryan and Sandra worked in the office, Sandra passed a blue folder to",Ryan,Sandra,6047,32464
+prompt_24d78a2d4d6eecba,reference,abba_office,ABBA,Helen,Susan,"While Helen and Susan worked in the office, Susan passed a blue folder to",Helen,Susan,22695,14919
+prompt_27da6c5bdb09c45e,reference,abba_office,ABBA,Pamela,Helen,"While Pamela and Helen worked in the office, Helen passed a blue folder to",Pamela,Helen,43341,22695
+prompt_2b43b12203cc1cd6,reference,abba_office,ABBA,Benjamin,Donna,"While Benjamin and Donna worked in the office, Donna passed a blue folder to",Benjamin,Donna,14533,29216
+prompt_31297d90fac11ab5,reference,abba_office,ABBA,Ryan,Patricia,"While Ryan and Patricia worked in the office, Patricia passed a blue folder to",Ryan,Patricia,6047,30223
+prompt_33dd94e3086f6022,reference,abba_office,ABBA,Michelle,Jason,"While Michelle and Jason worked in the office, Jason passed a blue folder to",Michelle,Jason,16738,8982
+prompt_3e66404de1568774,reference,abba_office,ABBA,Patricia,Donna,"While Patricia and Donna worked in the office, Donna passed a blue folder to",Patricia,Donna,30223,29216
+prompt_3e9c45c4e2475650,reference,abba_office,ABBA,Amy,Jason,"While Amy and Jason worked in the office, Jason passed a blue folder to",Amy,Jason,14235,8982
+prompt_3fed9f2f95ee6191,reference,abba_office,ABBA,Amy,Pamela,"While Amy and Pamela worked in the office, Pamela passed a blue folder to",Amy,Pamela,14235,43341
+prompt_4059068e51976a88,reference,abba_office,ABBA,Pamela,Benjamin,"While Pamela and Benjamin worked in the office, Benjamin passed a blue folder to",Pamela,Benjamin,43341,14533
+prompt_44da243e79eb161a,reference,abba_office,ABBA,Michelle,Amy,"While Michelle and Amy worked in the office, Amy passed a blue folder to",Michelle,Amy,16738,14235
+prompt_49d14f4d188d9c45,reference,abba_office,ABBA,Carol,Ryan,"While Carol and Ryan worked in the office, Ryan passed a blue folder to",Carol,Ryan,5074,6047
+prompt_4de3da9670b6a554,reference,abba_office,ABBA,Pamela,Susan,"While Pamela and Susan worked in the office, Susan passed a blue folder to",Pamela,Susan,43341,14919
+prompt_548a8fd4a37c1f95,reference,abba_office,ABBA,Jason,Nancy,"While Jason and Nancy worked in the office, Nancy passed a blue folder to",Jason,Nancy,8982,18496
+prompt_5cefd330eb9f67b6,reference,abba_office,ABBA,Donna,Frances,"While Donna and Frances worked in the office, Frances passed a blue folder to",Donna,Frances,29216,27025
+prompt_61613a73416bf41c,reference,abba_office,ABBA,Pamela,Ruth,"While Pamela and Ruth worked in the office, Ruth passed a blue folder to",Pamela,Ruth,43341,22132
+prompt_61dffaea6ee7da8a,reference,abba_office,ABBA,Pamela,Amy,"While Pamela and Amy worked in the office, Amy passed a blue folder to",Pamela,Amy,43341,14235
+prompt_6277655878379b83,reference,abba_office,ABBA,Ruth,Ryan,"While Ruth and Ryan worked in the office, Ryan passed a blue folder to",Ruth,Ryan,22132,6047
+prompt_65b0cd571e3c7d01,reference,abba_office,ABBA,Frances,Ryan,"While Frances and Ryan worked in the office, Ryan passed a blue folder to",Frances,Ryan,27025,6047
+prompt_6a1c7fd6ce6f7b77,reference,abba_office,ABBA,Donna,Nancy,"While Donna and Nancy worked in the office, Nancy passed a blue folder to",Donna,Nancy,29216,18496
+prompt_6c2b963dbe99ba4b,reference,abba_office,ABBA,Donna,Sandra,"While Donna and Sandra worked in the office, Sandra passed a blue folder to",Donna,Sandra,29216,32464
+prompt_81e4c566d2e48848,reference,abba_office,ABBA,Carol,Michelle,"While Carol and Michelle worked in the office, Michelle passed a blue folder to",Carol,Michelle,5074,16738
+prompt_829fa7738597205c,reference,abba_office,ABBA,Ryan,Helen,"While Ryan and Helen worked in the office, Helen passed a blue folder to",Ryan,Helen,6047,22695
+prompt_89d43589af28e0d8,reference,abba_office,ABBA,Ryan,Frances,"While Ryan and Frances worked in the office, Frances passed a blue folder to",Ryan,Frances,6047,27025
+prompt_8f5baa0eb99defab,reference,abba_office,ABBA,Susan,Ruth,"While Susan and Ruth worked in the office, Ruth passed a blue folder to",Susan,Ruth,14919,22132
+prompt_908571b3ddaf91df,reference,abba_office,ABBA,Patricia,Amy,"While Patricia and Amy worked in the office, Amy passed a blue folder to",Patricia,Amy,30223,14235
+prompt_90f455d101b22a48,reference,abba_office,ABBA,Ruth,Michelle,"While Ruth and Michelle worked in the office, Michelle passed a blue folder to",Ruth,Michelle,22132,16738
+prompt_945f7978bd160805,reference,abba_office,ABBA,Sandra,Frances,"While Sandra and Frances worked in the office, Frances passed a blue folder to",Sandra,Frances,32464,27025
+prompt_94aa5801d2c7392f,reference,abba_office,ABBA,Frances,Amy,"While Frances and Amy worked in the office, Amy passed a blue folder to",Frances,Amy,27025,14235
+prompt_9926161f422cae3c,reference,abba_office,ABBA,Susan,Michelle,"While Susan and Michelle worked in the office, Michelle passed a blue folder to",Susan,Michelle,14919,16738
+prompt_a0853a8100d55cce,reference,abba_office,ABBA,Ryan,Susan,"While Ryan and Susan worked in the office, Susan passed a blue folder to",Ryan,Susan,6047,14919
+prompt_a4be66e1abb8d8ca,reference,abba_office,ABBA,Susan,Patricia,"While Susan and Patricia worked in the office, Patricia passed a blue folder to",Susan,Patricia,14919,30223
+prompt_a713d8fcc26c643f,reference,abba_office,ABBA,Benjamin,Ryan,"While Benjamin and Ryan worked in the office, Ryan passed a blue folder to",Benjamin,Ryan,14533,6047
+prompt_b144730f5c86c949,reference,abba_office,ABBA,Michelle,Patricia,"While Michelle and Patricia worked in the office, Patricia passed a blue folder to",Michelle,Patricia,16738,30223
+prompt_b6dfcb813ca4f48a,reference,abba_office,ABBA,Donna,Anthony,"While Donna and Anthony worked in the office, Anthony passed a blue folder to",Donna,Anthony,29216,9953
+prompt_b908d9d0a761d482,reference,abba_office,ABBA,Jason,Donna,"While Jason and Donna worked in the office, Donna passed a blue folder to",Jason,Donna,8982,29216
+prompt_bb71b8a060c89217,reference,abba_office,ABBA,Ruth,Donna,"While Ruth and Donna worked in the office, Donna passed a blue folder to",Ruth,Donna,22132,29216
+prompt_bbb15d1d930a3422,reference,abba_office,ABBA,Carol,Jason,"While Carol and Jason worked in the office, Jason passed a blue folder to",Carol,Jason,5074,8982
+prompt_be1c9480150b381f,reference,abba_office,ABBA,Patricia,Ryan,"While Patricia and Ryan worked in the office, Ryan passed a blue folder to",Patricia,Ryan,30223,6047
+prompt_c11d05058efbd470,reference,abba_office,ABBA,Anthony,Ruth,"While Anthony and Ruth worked in the office, Ruth passed a blue folder to",Anthony,Ruth,9953,22132
+prompt_c4267f0b23544f67,reference,abba_office,ABBA,Michelle,Ryan,"While Michelle and Ryan worked in the office, Ryan passed a blue folder to",Michelle,Ryan,16738,6047
+prompt_c8fd82969ec8111c,reference,abba_office,ABBA,Patricia,Anthony,"While Patricia and Anthony worked in the office, Anthony passed a blue folder to",Patricia,Anthony,30223,9953
+prompt_cff99c0896df77ac,reference,abba_office,ABBA,Carol,Sandra,"While Carol and Sandra worked in the office, Sandra passed a blue folder to",Carol,Sandra,5074,32464
+prompt_d22d80d4779121ca,reference,abba_office,ABBA,Amy,Susan,"While Amy and Susan worked in the office, Susan passed a blue folder to",Amy,Susan,14235,14919
+prompt_d30c2637bb0b0afa,reference,abba_office,ABBA,Benjamin,Ruth,"While Benjamin and Ruth worked in the office, Ruth passed a blue folder to",Benjamin,Ruth,14533,22132
+prompt_d316ee9bed87a646,reference,abba_office,ABBA,Susan,Sandra,"While Susan and Sandra worked in the office, Sandra passed a blue folder to",Susan,Sandra,14919,32464
+prompt_e5ba3bd0025d99cb,reference,abba_office,ABBA,Sandra,Patricia,"While Sandra and Patricia worked in the office, Patricia passed a blue folder to",Sandra,Patricia,32464,30223
+prompt_e5d7a2292fdc6c00,reference,abba_office,ABBA,Jason,Ruth,"While Jason and Ruth worked in the office, Ruth passed a blue folder to",Jason,Ruth,8982,22132
+prompt_e8c89b156e5e589c,reference,abba_office,ABBA,Ryan,Jason,"While Ryan and Jason worked in the office, Jason passed a blue folder to",Ryan,Jason,6047,8982
+prompt_ed244ada7b2540b6,reference,abba_office,ABBA,Ryan,Benjamin,"While Ryan and Benjamin worked in the office, Benjamin passed a blue folder to",Ryan,Benjamin,6047,14533
+prompt_f1c298ae66405f07,reference,abba_office,ABBA,Jason,Frances,"While Jason and Frances worked in the office, Frances passed a blue folder to",Jason,Frances,8982,27025
+prompt_f5d575253296a481,reference,abba_office,ABBA,Helen,Amy,"While Helen and Amy worked in the office, Amy passed a blue folder to",Helen,Amy,22695,14235
+prompt_fa26897d6b1972f9,reference,abba_office,ABBA,Anthony,Susan,"While Anthony and Susan worked in the office, Susan passed a blue folder to",Anthony,Susan,9953,14919
+prompt_fd73311396d12416,reference,abba_office,ABBA,Nancy,Jason,"While Nancy and Jason worked in the office, Jason passed a blue folder to",Nancy,Jason,18496,8982
+prompt_fe9931162bbbfd17,reference,abba_office,ABBA,Patricia,Ruth,"While Patricia and Ruth worked in the office, Ruth passed a blue folder to",Patricia,Ruth,30223,22132
+prompt_0521ccb1e9a47682,reference,abba_park,ABBA,Patricia,Helen,"After Patricia and Helen visited the park, Helen handed a folded map to",Patricia,Helen,30223,22695
+prompt_0f1ba4d7a35689fa,reference,abba_park,ABBA,Pamela,Carol,"After Pamela and Carol visited the park, Carol handed a folded map to",Pamela,Carol,43341,5074
+prompt_0f2b3bff2ad716cf,reference,abba_park,ABBA,Patricia,Sandra,"After Patricia and Sandra visited the park, Sandra handed a folded map to",Patricia,Sandra,30223,32464
+prompt_0fae608419574fa0,reference,abba_park,ABBA,Benjamin,Carol,"After Benjamin and Carol visited the park, Carol handed a folded map to",Benjamin,Carol,14533,5074
+prompt_184d17c6c51fcc8f,reference,abba_park,ABBA,Ryan,Michelle,"After Ryan and Michelle visited the park, Michelle handed a folded map to",Ryan,Michelle,6047,16738
+prompt_18e1f589ceaa95dd,reference,abba_park,ABBA,Patricia,Carol,"After Patricia and Carol visited the park, Carol handed a folded map to",Patricia,Carol,30223,5074
+prompt_1954d77229f2452c,reference,abba_park,ABBA,Carol,Benjamin,"After Carol and Benjamin visited the park, Benjamin handed a folded map to",Carol,Benjamin,5074,14533
+prompt_1a824952230f02b9,reference,abba_park,ABBA,Helen,Anthony,"After Helen and Anthony visited the park, Anthony handed a folded map to",Helen,Anthony,22695,9953
+prompt_2009629a5c43fe66,reference,abba_park,ABBA,Donna,Benjamin,"After Donna and Benjamin visited the park, Benjamin handed a folded map to",Donna,Benjamin,29216,14533
+prompt_230fe556e05d61e7,reference,abba_park,ABBA,Amy,Pamela,"After Amy and Pamela visited the park, Pamela handed a folded map to",Amy,Pamela,14235,43341
+prompt_255539b4d84e3664,reference,abba_park,ABBA,Donna,Pamela,"After Donna and Pamela visited the park, Pamela handed a folded map to",Donna,Pamela,29216,43341
+prompt_27f28e726f86c24b,reference,abba_park,ABBA,Ryan,Frances,"After Ryan and Frances visited the park, Frances handed a folded map to",Ryan,Frances,6047,27025
+prompt_2a225c0850a06d46,reference,abba_park,ABBA,Ryan,Donna,"After Ryan and Donna visited the park, Donna handed a folded map to",Ryan,Donna,6047,29216
+prompt_2a6622828b6fe761,reference,abba_park,ABBA,Helen,Frances,"After Helen and Frances visited the park, Frances handed a folded map to",Helen,Frances,22695,27025
+prompt_332a1162056fc9e6,reference,abba_park,ABBA,Nancy,Jason,"After Nancy and Jason visited the park, Jason handed a folded map to",Nancy,Jason,18496,8982
+prompt_380bd438b6186af7,reference,abba_park,ABBA,Ruth,Nancy,"After Ruth and Nancy visited the park, Nancy handed a folded map to",Ruth,Nancy,22132,18496
+prompt_3bddd6dfc055178e,reference,abba_park,ABBA,Nancy,Patricia,"After Nancy and Patricia visited the park, Patricia handed a folded map to",Nancy,Patricia,18496,30223
+prompt_3da015403dbe97a3,reference,abba_park,ABBA,Donna,Helen,"After Donna and Helen visited the park, Helen handed a folded map to",Donna,Helen,29216,22695
+prompt_3f92f623b0f8aac2,reference,abba_park,ABBA,Benjamin,Donna,"After Benjamin and Donna visited the park, Donna handed a folded map to",Benjamin,Donna,14533,29216
+prompt_46951dae7ed2ed96,reference,abba_park,ABBA,Jason,Carol,"After Jason and Carol visited the park, Carol handed a folded map to",Jason,Carol,8982,5074
+prompt_47c8e148808e697b,reference,abba_park,ABBA,Michelle,Frances,"After Michelle and Frances visited the park, Frances handed a folded map to",Michelle,Frances,16738,27025
+prompt_48c795f19c74cde3,reference,abba_park,ABBA,Susan,Michelle,"After Susan and Michelle visited the park, Michelle handed a folded map to",Susan,Michelle,14919,16738
+prompt_529892f98335208d,reference,abba_park,ABBA,Jason,Benjamin,"After Jason and Benjamin visited the park, Benjamin handed a folded map to",Jason,Benjamin,8982,14533
+prompt_57a8b543c280b044,reference,abba_park,ABBA,Anthony,Patricia,"After Anthony and Patricia visited the park, Patricia handed a folded map to",Anthony,Patricia,9953,30223
+prompt_5c174788d07b2ad5,reference,abba_park,ABBA,Pamela,Nancy,"After Pamela and Nancy visited the park, Nancy handed a folded map to",Pamela,Nancy,43341,18496
+prompt_5d89f4387fe70c7f,reference,abba_park,ABBA,Jason,Sandra,"After Jason and Sandra visited the park, Sandra handed a folded map to",Jason,Sandra,8982,32464
+prompt_62f54bb276367ca1,reference,abba_park,ABBA,Amy,Nancy,"After Amy and Nancy visited the park, Nancy handed a folded map to",Amy,Nancy,14235,18496
+prompt_6d98901b1890cf40,reference,abba_park,ABBA,Donna,Amy,"After Donna and Amy visited the park, Amy handed a folded map to",Donna,Amy,29216,14235
+prompt_6da002ea69fad8e5,reference,abba_park,ABBA,Ryan,Jason,"After Ryan and Jason visited the park, Jason handed a folded map to",Ryan,Jason,6047,8982
+prompt_6f6d2143a319f8f3,reference,abba_park,ABBA,Pamela,Donna,"After Pamela and Donna visited the park, Donna handed a folded map to",Pamela,Donna,43341,29216
+prompt_72f78b8e9547db6f,reference,abba_park,ABBA,Anthony,Carol,"After Anthony and Carol visited the park, Carol handed a folded map to",Anthony,Carol,9953,5074
+prompt_75731f459df85eef,reference,abba_park,ABBA,Carol,Patricia,"After Carol and Patricia visited the park, Patricia handed a folded map to",Carol,Patricia,5074,30223
+prompt_79ef0b47409ac1f5,reference,abba_park,ABBA,Benjamin,Amy,"After Benjamin and Amy visited the park, Amy handed a folded map to",Benjamin,Amy,14533,14235
+prompt_838a265161798e6f,reference,abba_park,ABBA,Sandra,Pamela,"After Sandra and Pamela visited the park, Pamela handed a folded map to",Sandra,Pamela,32464,43341
+prompt_8714df8ac6cf6674,reference,abba_park,ABBA,Sandra,Frances,"After Sandra and Frances visited the park, Frances handed a folded map to",Sandra,Frances,32464,27025
+prompt_94a7bc846241d42f,reference,abba_park,ABBA,Pamela,Helen,"After Pamela and Helen visited the park, Helen handed a folded map to",Pamela,Helen,43341,22695
+prompt_951c6ceb9219d793,reference,abba_park,ABBA,Nancy,Sandra,"After Nancy and Sandra visited the park, Sandra handed a folded map to",Nancy,Sandra,18496,32464
+prompt_96e435eac1688d0f,reference,abba_park,ABBA,Sandra,Amy,"After Sandra and Amy visited the park, Amy handed a folded map to",Sandra,Amy,32464,14235
+prompt_98c9c57ad1d278dc,reference,abba_park,ABBA,Benjamin,Ryan,"After Benjamin and Ryan visited the park, Ryan handed a folded map to",Benjamin,Ryan,14533,6047
+prompt_991e5f89fb18d03c,reference,abba_park,ABBA,Susan,Ruth,"After Susan and Ruth visited the park, Ruth handed a folded map to",Susan,Ruth,14919,22132
+prompt_9a04218af374e531,reference,abba_park,ABBA,Susan,Nancy,"After Susan and Nancy visited the park, Nancy handed a folded map to",Susan,Nancy,14919,18496
+prompt_a0df960c144ca501,reference,abba_park,ABBA,Nancy,Anthony,"After Nancy and Anthony visited the park, Anthony handed a folded map to",Nancy,Anthony,18496,9953
+prompt_a5361d5819153003,reference,abba_park,ABBA,Michelle,Anthony,"After Michelle and Anthony visited the park, Anthony handed a folded map to",Michelle,Anthony,16738,9953
+prompt_a5807067a7367bcc,reference,abba_park,ABBA,Benjamin,Ruth,"After Benjamin and Ruth visited the park, Ruth handed a folded map to",Benjamin,Ruth,14533,22132
+prompt_a8cf685b7164dbaf,reference,abba_park,ABBA,Amy,Carol,"After Amy and Carol visited the park, Carol handed a folded map to",Amy,Carol,14235,5074
+prompt_a955caab8acc4b50,reference,abba_park,ABBA,Susan,Ryan,"After Susan and Ryan visited the park, Ryan handed a folded map to",Susan,Ryan,14919,6047
+prompt_aa75127e00828c07,reference,abba_park,ABBA,Sandra,Susan,"After Sandra and Susan visited the park, Susan handed a folded map to",Sandra,Susan,32464,14919
+prompt_b0cb5e93738202a8,reference,abba_park,ABBA,Helen,Amy,"After Helen and Amy visited the park, Amy handed a folded map to",Helen,Amy,22695,14235
+prompt_b83037848f9b323e,reference,abba_park,ABBA,Ruth,Pamela,"After Ruth and Pamela visited the park, Pamela handed a folded map to",Ruth,Pamela,22132,43341
+prompt_b84f73e16f80a469,reference,abba_park,ABBA,Carol,Anthony,"After Carol and Anthony visited the park, Anthony handed a folded map to",Carol,Anthony,5074,9953
+prompt_b94d72ade074c108,reference,abba_park,ABBA,Sandra,Anthony,"After Sandra and Anthony visited the park, Anthony handed a folded map to",Sandra,Anthony,32464,9953
+prompt_bc33599fd78b046f,reference,abba_park,ABBA,Michelle,Jason,"After Michelle and Jason visited the park, Jason handed a folded map to",Michelle,Jason,16738,8982
+prompt_be33b0fcd7fae4e6,reference,abba_park,ABBA,Patricia,Ryan,"After Patricia and Ryan visited the park, Ryan handed a folded map to",Patricia,Ryan,30223,6047
+prompt_c1c4d6dd22f53f39,reference,abba_park,ABBA,Frances,Sandra,"After Frances and Sandra visited the park, Sandra handed a folded map to",Frances,Sandra,27025,32464
+prompt_cacd5029cd386429,reference,abba_park,ABBA,Frances,Benjamin,"After Frances and Benjamin visited the park, Benjamin handed a folded map to",Frances,Benjamin,27025,14533
+prompt_cc284fcc36439307,reference,abba_park,ABBA,Carol,Sandra,"After Carol and Sandra visited the park, Sandra handed a folded map to",Carol,Sandra,5074,32464
+prompt_cede8abfd909432d,reference,abba_park,ABBA,Frances,Helen,"After Frances and Helen visited the park, Helen handed a folded map to",Frances,Helen,27025,22695
+prompt_d13ce821ebe09cb9,reference,abba_park,ABBA,Ryan,Amy,"After Ryan and Amy visited the park, Amy handed a folded map to",Ryan,Amy,6047,14235
+prompt_de72cc2ba6174632,reference,abba_park,ABBA,Donna,Nancy,"After Donna and Nancy visited the park, Nancy handed a folded map to",Donna,Nancy,29216,18496
+prompt_de9c9cd607c184cd,reference,abba_park,ABBA,Anthony,Jason,"After Anthony and Jason visited the park, Jason handed a folded map to",Anthony,Jason,9953,8982
+prompt_e67a11cd7c5172d2,reference,abba_park,ABBA,Ruth,Anthony,"After Ruth and Anthony visited the park, Anthony handed a folded map to",Ruth,Anthony,22132,9953
+prompt_e9c40b105ae67d84,reference,abba_park,ABBA,Michelle,Susan,"After Michelle and Susan visited the park, Susan handed a folded map to",Michelle,Susan,16738,14919
+prompt_f09a0963493085a6,reference,abba_park,ABBA,Susan,Anthony,"After Susan and Anthony visited the park, Anthony handed a folded map to",Susan,Anthony,14919,9953
+prompt_fac8741f336806ed,reference,abba_park,ABBA,Pamela,Ryan,"After Pamela and Ryan visited the park, Ryan handed a folded map to",Pamela,Ryan,43341,6047
+prompt_0122f1957ba4fcd2,reference,abba_store,ABBA,Patricia,Ryan,"When Patricia and Ryan went to the store, Ryan gave a bottle of milk to",Patricia,Ryan,30223,6047
+prompt_026d41a31d14612c,reference,abba_store,ABBA,Patricia,Carol,"When Patricia and Carol went to the store, Carol gave a bottle of milk to",Patricia,Carol,30223,5074
+prompt_0768545ae18acaf0,reference,abba_store,ABBA,Susan,Helen,"When Susan and Helen went to the store, Helen gave a bottle of milk to",Susan,Helen,14919,22695
+prompt_0d1c7d70abefced2,reference,abba_store,ABBA,Frances,Carol,"When Frances and Carol went to the store, Carol gave a bottle of milk to",Frances,Carol,27025,5074
+prompt_11c78cfebc73e6dd,reference,abba_store,ABBA,Nancy,Ruth,"When Nancy and Ruth went to the store, Ruth gave a bottle of milk to",Nancy,Ruth,18496,22132
+prompt_1881f31d88fff5ce,reference,abba_store,ABBA,Anthony,Sandra,"When Anthony and Sandra went to the store, Sandra gave a bottle of milk to",Anthony,Sandra,9953,32464
+prompt_1db46eaf66a99c66,reference,abba_store,ABBA,Sandra,Benjamin,"When Sandra and Benjamin went to the store, Benjamin gave a bottle of milk to",Sandra,Benjamin,32464,14533
+prompt_243d1597a70be3d2,reference,abba_store,ABBA,Amy,Ruth,"When Amy and Ruth went to the store, Ruth gave a bottle of milk to",Amy,Ruth,14235,22132
+prompt_28da4a2e1fe430aa,reference,abba_store,ABBA,Frances,Amy,"When Frances and Amy went to the store, Amy gave a bottle of milk to",Frances,Amy,27025,14235
+prompt_2b47a4c764eff82a,reference,abba_store,ABBA,Susan,Benjamin,"When Susan and Benjamin went to the store, Benjamin gave a bottle of milk to",Susan,Benjamin,14919,14533
+prompt_2cb07a4ce55207b9,reference,abba_store,ABBA,Donna,Carol,"When Donna and Carol went to the store, Carol gave a bottle of milk to",Donna,Carol,29216,5074
+prompt_2cd7cb9c219b2e1b,reference,abba_store,ABBA,Jason,Pamela,"When Jason and Pamela went to the store, Pamela gave a bottle of milk to",Jason,Pamela,8982,43341
+prompt_33120e5c23a47c35,reference,abba_store,ABBA,Donna,Sandra,"When Donna and Sandra went to the store, Sandra gave a bottle of milk to",Donna,Sandra,29216,32464
+prompt_35d89ca9e0d32a7c,reference,abba_store,ABBA,Susan,Jason,"When Susan and Jason went to the store, Jason gave a bottle of milk to",Susan,Jason,14919,8982
+prompt_36fbfe0b5e61ae01,reference,abba_store,ABBA,Susan,Ruth,"When Susan and Ruth went to the store, Ruth gave a bottle of milk to",Susan,Ruth,14919,22132
+prompt_3a81bc50e939f5d8,reference,abba_store,ABBA,Jason,Carol,"When Jason and Carol went to the store, Carol gave a bottle of milk to",Jason,Carol,8982,5074
+prompt_3b9a5c0f036fb145,reference,abba_store,ABBA,Anthony,Carol,"When Anthony and Carol went to the store, Carol gave a bottle of milk to",Anthony,Carol,9953,5074
+prompt_3f48be67e275474b,reference,abba_store,ABBA,Helen,Carol,"When Helen and Carol went to the store, Carol gave a bottle of milk to",Helen,Carol,22695,5074
+prompt_41ed32663a5f36ed,reference,abba_store,ABBA,Carol,Frances,"When Carol and Frances went to the store, Frances gave a bottle of milk to",Carol,Frances,5074,27025
+prompt_48110901e99fdf05,reference,abba_store,ABBA,Anthony,Helen,"When Anthony and Helen went to the store, Helen gave a bottle of milk to",Anthony,Helen,9953,22695
+prompt_4acb7b01dbb4fad3,reference,abba_store,ABBA,Helen,Donna,"When Helen and Donna went to the store, Donna gave a bottle of milk to",Helen,Donna,22695,29216
+prompt_4da654d3de23b46b,reference,abba_store,ABBA,Susan,Michelle,"When Susan and Michelle went to the store, Michelle gave a bottle of milk to",Susan,Michelle,14919,16738
+prompt_4ef7339800c12a8d,reference,abba_store,ABBA,Sandra,Nancy,"When Sandra and Nancy went to the store, Nancy gave a bottle of milk to",Sandra,Nancy,32464,18496
+prompt_4f6f728a058c0689,reference,abba_store,ABBA,Michelle,Carol,"When Michelle and Carol went to the store, Carol gave a bottle of milk to",Michelle,Carol,16738,5074
+prompt_508780c6d3ce237e,reference,abba_store,ABBA,Frances,Helen,"When Frances and Helen went to the store, Helen gave a bottle of milk to",Frances,Helen,27025,22695
+prompt_5290f71dda08be69,reference,abba_store,ABBA,Pamela,Donna,"When Pamela and Donna went to the store, Donna gave a bottle of milk to",Pamela,Donna,43341,29216
+prompt_5a53593e51c7d1b2,reference,abba_store,ABBA,Benjamin,Sandra,"When Benjamin and Sandra went to the store, Sandra gave a bottle of milk to",Benjamin,Sandra,14533,32464
+prompt_5c4f72e5b6176d53,reference,abba_store,ABBA,Carol,Michelle,"When Carol and Michelle went to the store, Michelle gave a bottle of milk to",Carol,Michelle,5074,16738
+prompt_6626d9629e9d574f,reference,abba_store,ABBA,Anthony,Pamela,"When Anthony and Pamela went to the store, Pamela gave a bottle of milk to",Anthony,Pamela,9953,43341
+prompt_698dff24b5435b14,reference,abba_store,ABBA,Nancy,Donna,"When Nancy and Donna went to the store, Donna gave a bottle of milk to",Nancy,Donna,18496,29216
+prompt_6b9000c6932ed325,reference,abba_store,ABBA,Amy,Nancy,"When Amy and Nancy went to the store, Nancy gave a bottle of milk to",Amy,Nancy,14235,18496
+prompt_6ca3da6e2ca9a4ae,reference,abba_store,ABBA,Jason,Benjamin,"When Jason and Benjamin went to the store, Benjamin gave a bottle of milk to",Jason,Benjamin,8982,14533
+prompt_7a00e36acbd64f37,reference,abba_store,ABBA,Patricia,Pamela,"When Patricia and Pamela went to the store, Pamela gave a bottle of milk to",Patricia,Pamela,30223,43341
+prompt_7b0899082d4ba77c,reference,abba_store,ABBA,Anthony,Patricia,"When Anthony and Patricia went to the store, Patricia gave a bottle of milk to",Anthony,Patricia,9953,30223
+prompt_7f38ceb69b6d4745,reference,abba_store,ABBA,Benjamin,Susan,"When Benjamin and Susan went to the store, Susan gave a bottle of milk to",Benjamin,Susan,14533,14919
+prompt_80a99a7385dd7a3d,reference,abba_store,ABBA,Donna,Amy,"When Donna and Amy went to the store, Amy gave a bottle of milk to",Donna,Amy,29216,14235
+prompt_82cd9ccbbcb08b6b,reference,abba_store,ABBA,Nancy,Jason,"When Nancy and Jason went to the store, Jason gave a bottle of milk to",Nancy,Jason,18496,8982
+prompt_8345fd10d03423cd,reference,abba_store,ABBA,Donna,Ruth,"When Donna and Ruth went to the store, Ruth gave a bottle of milk to",Donna,Ruth,29216,22132
+prompt_89c1908fcb0ec1cc,reference,abba_store,ABBA,Ruth,Frances,"When Ruth and Frances went to the store, Frances gave a bottle of milk to",Ruth,Frances,22132,27025
+prompt_8a8ee9b913759d82,reference,abba_store,ABBA,Frances,Michelle,"When Frances and Michelle went to the store, Michelle gave a bottle of milk to",Frances,Michelle,27025,16738
+prompt_903093c607318a69,reference,abba_store,ABBA,Nancy,Michelle,"When Nancy and Michelle went to the store, Michelle gave a bottle of milk to",Nancy,Michelle,18496,16738
+prompt_909395ff910749c3,reference,abba_store,ABBA,Ryan,Sandra,"When Ryan and Sandra went to the store, Sandra gave a bottle of milk to",Ryan,Sandra,6047,32464
+prompt_90fec43dc247c7ed,reference,abba_store,ABBA,Anthony,Ruth,"When Anthony and Ruth went to the store, Ruth gave a bottle of milk to",Anthony,Ruth,9953,22132
+prompt_91ae32346bcdbebd,reference,abba_store,ABBA,Ruth,Carol,"When Ruth and Carol went to the store, Carol gave a bottle of milk to",Ruth,Carol,22132,5074
+prompt_97105a9ed0b60430,reference,abba_store,ABBA,Nancy,Susan,"When Nancy and Susan went to the store, Susan gave a bottle of milk to",Nancy,Susan,18496,14919
+prompt_a309205a5108c62a,reference,abba_store,ABBA,Ryan,Susan,"When Ryan and Susan went to the store, Susan gave a bottle of milk to",Ryan,Susan,6047,14919
+prompt_a43afafc927f4534,reference,abba_store,ABBA,Pamela,Frances,"When Pamela and Frances went to the store, Frances gave a bottle of milk to",Pamela,Frances,43341,27025
+prompt_a58be9d90a8e16b7,reference,abba_store,ABBA,Anthony,Frances,"When Anthony and Frances went to the store, Frances gave a bottle of milk to",Anthony,Frances,9953,27025
+prompt_ab8afac25d6f8d5c,reference,abba_store,ABBA,Frances,Susan,"When Frances and Susan went to the store, Susan gave a bottle of milk to",Frances,Susan,27025,14919
+prompt_bc6bbfc5acbf4ea0,reference,abba_store,ABBA,Amy,Patricia,"When Amy and Patricia went to the store, Patricia gave a bottle of milk to",Amy,Patricia,14235,30223
+prompt_bd5e169ba658eba6,reference,abba_store,ABBA,Helen,Amy,"When Helen and Amy went to the store, Amy gave a bottle of milk to",Helen,Amy,22695,14235
+prompt_c67e76632d41ff00,reference,abba_store,ABBA,Sandra,Amy,"When Sandra and Amy went to the store, Amy gave a bottle of milk to",Sandra,Amy,32464,14235
+prompt_cd3c262d292c7325,reference,abba_store,ABBA,Pamela,Benjamin,"When Pamela and Benjamin went to the store, Benjamin gave a bottle of milk to",Pamela,Benjamin,43341,14533
+prompt_cfaa10304da94db5,reference,abba_store,ABBA,Pamela,Nancy,"When Pamela and Nancy went to the store, Nancy gave a bottle of milk to",Pamela,Nancy,43341,18496
+prompt_d38b1982f70d7d33,reference,abba_store,ABBA,Michelle,Ryan,"When Michelle and Ryan went to the store, Ryan gave a bottle of milk to",Michelle,Ryan,16738,6047
+prompt_d4094093d1a191d6,reference,abba_store,ABBA,Donna,Benjamin,"When Donna and Benjamin went to the store, Benjamin gave a bottle of milk to",Donna,Benjamin,29216,14533
+prompt_dbe95f88d37d0f7e,reference,abba_store,ABBA,Carol,Donna,"When Carol and Donna went to the store, Donna gave a bottle of milk to",Carol,Donna,5074,29216
+prompt_dff64045cddea31a,reference,abba_store,ABBA,Susan,Amy,"When Susan and Amy went to the store, Amy gave a bottle of milk to",Susan,Amy,14919,14235
+prompt_e04c84e29da73ee5,reference,abba_store,ABBA,Patricia,Sandra,"When Patricia and Sandra went to the store, Sandra gave a bottle of milk to",Patricia,Sandra,30223,32464
+prompt_e4e0c042be52ebee,reference,abba_store,ABBA,Ruth,Amy,"When Ruth and Amy went to the store, Amy gave a bottle of milk to",Ruth,Amy,22132,14235
+prompt_e96e384beedccbcc,reference,abba_store,ABBA,Amy,Helen,"When Amy and Helen went to the store, Helen gave a bottle of milk to",Amy,Helen,14235,22695
+prompt_eec3908413eaa808,reference,abba_store,ABBA,Michelle,Benjamin,"When Michelle and Benjamin went to the store, Benjamin gave a bottle of milk to",Michelle,Benjamin,16738,14533
+prompt_f3147b868eabb14d,reference,abba_store,ABBA,Helen,Anthony,"When Helen and Anthony went to the store, Anthony gave a bottle of milk to",Helen,Anthony,22695,9953
+prompt_f62cd79473e683b4,reference,abba_store,ABBA,Nancy,Benjamin,"When Nancy and Benjamin went to the store, Benjamin gave a bottle of milk to",Nancy,Benjamin,18496,14533
+prompt_02459edf5767fa8b,reference,baba_meeting,BABA,Donna,Anthony,"Because Anthony and Donna attended the meeting, Anthony sent a short note to",Donna,Anthony,29216,9953
+prompt_055777c34c290fbf,reference,baba_meeting,BABA,Ryan,Helen,"Because Helen and Ryan attended the meeting, Helen sent a short note to",Ryan,Helen,6047,22695
+prompt_0c36430e305f39ed,reference,baba_meeting,BABA,Patricia,Sandra,"Because Sandra and Patricia attended the meeting, Sandra sent a short note to",Patricia,Sandra,30223,32464
+prompt_1209d98fab9f97d2,reference,baba_meeting,BABA,Amy,Jason,"Because Jason and Amy attended the meeting, Jason sent a short note to",Amy,Jason,14235,8982
+prompt_1316ae000e9b8998,reference,baba_meeting,BABA,Susan,Benjamin,"Because Benjamin and Susan attended the meeting, Benjamin sent a short note to",Susan,Benjamin,14919,14533
+prompt_134830ecf55cd8d7,reference,baba_meeting,BABA,Patricia,Anthony,"Because Anthony and Patricia attended the meeting, Anthony sent a short note to",Patricia,Anthony,30223,9953
+prompt_136f880d624fbea3,reference,baba_meeting,BABA,Pamela,Ryan,"Because Ryan and Pamela attended the meeting, Ryan sent a short note to",Pamela,Ryan,43341,6047
+prompt_1572d4890cc4fee6,reference,baba_meeting,BABA,Nancy,Carol,"Because Carol and Nancy attended the meeting, Carol sent a short note to",Nancy,Carol,18496,5074
+prompt_1625ea0adcd931e0,reference,baba_meeting,BABA,Patricia,Helen,"Because Helen and Patricia attended the meeting, Helen sent a short note to",Patricia,Helen,30223,22695
+prompt_16c61a4c89084694,reference,baba_meeting,BABA,Frances,Susan,"Because Susan and Frances attended the meeting, Susan sent a short note to",Frances,Susan,27025,14919
+prompt_1a963b5ca3544c7f,reference,baba_meeting,BABA,Frances,Anthony,"Because Anthony and Frances attended the meeting, Anthony sent a short note to",Frances,Anthony,27025,9953
+prompt_1cd01f9e09558d43,reference,baba_meeting,BABA,Pamela,Helen,"Because Helen and Pamela attended the meeting, Helen sent a short note to",Pamela,Helen,43341,22695
+prompt_246099434496d15c,reference,baba_meeting,BABA,Patricia,Jason,"Because Jason and Patricia attended the meeting, Jason sent a short note to",Patricia,Jason,30223,8982
+prompt_24f5deb7e40150d2,reference,baba_meeting,BABA,Susan,Michelle,"Because Michelle and Susan attended the meeting, Michelle sent a short note to",Susan,Michelle,14919,16738
+prompt_25f55fa17d97bd4e,reference,baba_meeting,BABA,Amy,Helen,"Because Helen and Amy attended the meeting, Helen sent a short note to",Amy,Helen,14235,22695
+prompt_2710fb2e34ea3fc9,reference,baba_meeting,BABA,Pamela,Amy,"Because Amy and Pamela attended the meeting, Amy sent a short note to",Pamela,Amy,43341,14235
+prompt_2b806387a6e80a9a,reference,baba_meeting,BABA,Donna,Sandra,"Because Sandra and Donna attended the meeting, Sandra sent a short note to",Donna,Sandra,29216,32464
+prompt_3367fedd6019fab0,reference,baba_meeting,BABA,Frances,Sandra,"Because Sandra and Frances attended the meeting, Sandra sent a short note to",Frances,Sandra,27025,32464
+prompt_36b59d9efdfc179b,reference,baba_meeting,BABA,Donna,Amy,"Because Amy and Donna attended the meeting, Amy sent a short note to",Donna,Amy,29216,14235
+prompt_3e7aa10eece761cc,reference,baba_meeting,BABA,Helen,Anthony,"Because Anthony and Helen attended the meeting, Anthony sent a short note to",Helen,Anthony,22695,9953
+prompt_48841ab4deffdf2f,reference,baba_meeting,BABA,Ruth,Ryan,"Because Ryan and Ruth attended the meeting, Ryan sent a short note to",Ruth,Ryan,22132,6047
+prompt_4eb4ad8776340c11,reference,baba_meeting,BABA,Amy,Benjamin,"Because Benjamin and Amy attended the meeting, Benjamin sent a short note to",Amy,Benjamin,14235,14533
+prompt_4f7c9121f0566c1d,reference,baba_meeting,BABA,Carol,Michelle,"Because Michelle and Carol attended the meeting, Michelle sent a short note to",Carol,Michelle,5074,16738
+prompt_522f9c964b1c1f96,reference,baba_meeting,BABA,Nancy,Ruth,"Because Ruth and Nancy attended the meeting, Ruth sent a short note to",Nancy,Ruth,18496,22132
+prompt_560bbf8f7edf9bdd,reference,baba_meeting,BABA,Ryan,Susan,"Because Susan and Ryan attended the meeting, Susan sent a short note to",Ryan,Susan,6047,14919
+prompt_5bc667e78666b482,reference,baba_meeting,BABA,Sandra,Ryan,"Because Ryan and Sandra attended the meeting, Ryan sent a short note to",Sandra,Ryan,32464,6047
+prompt_5ed112cd9893ac76,reference,baba_meeting,BABA,Benjamin,Amy,"Because Amy and Benjamin attended the meeting, Amy sent a short note to",Benjamin,Amy,14533,14235
+prompt_622de76b1a21d5c8,reference,baba_meeting,BABA,Jason,Michelle,"Because Michelle and Jason attended the meeting, Michelle sent a short note to",Jason,Michelle,8982,16738
+prompt_6268bd586a48bbce,reference,baba_meeting,BABA,Sandra,Ruth,"Because Ruth and Sandra attended the meeting, Ruth sent a short note to",Sandra,Ruth,32464,22132
+prompt_676b3aeaf9ab308b,reference,baba_meeting,BABA,Ryan,Jason,"Because Jason and Ryan attended the meeting, Jason sent a short note to",Ryan,Jason,6047,8982
+prompt_6b1c01ec155518c8,reference,baba_meeting,BABA,Ryan,Benjamin,"Because Benjamin and Ryan attended the meeting, Benjamin sent a short note to",Ryan,Benjamin,6047,14533
+prompt_6ba4a7da64a65898,reference,baba_meeting,BABA,Nancy,Jason,"Because Jason and Nancy attended the meeting, Jason sent a short note to",Nancy,Jason,18496,8982
+prompt_78dcbc32fe52ae9a,reference,baba_meeting,BABA,Sandra,Frances,"Because Frances and Sandra attended the meeting, Frances sent a short note to",Sandra,Frances,32464,27025
+prompt_7b89c2bb50c53b9b,reference,baba_meeting,BABA,Michelle,Anthony,"Because Anthony and Michelle attended the meeting, Anthony sent a short note to",Michelle,Anthony,16738,9953
+prompt_7cd93ddaa2e1f6ba,reference,baba_meeting,BABA,Sandra,Pamela,"Because Pamela and Sandra attended the meeting, Pamela sent a short note to",Sandra,Pamela,32464,43341
+prompt_81cc815b53dba878,reference,baba_meeting,BABA,Jason,Helen,"Because Helen and Jason attended the meeting, Helen sent a short note to",Jason,Helen,8982,22695
+prompt_828c1c1860707ffe,reference,baba_meeting,BABA,Carol,Nancy,"Because Nancy and Carol attended the meeting, Nancy sent a short note to",Carol,Nancy,5074,18496
+prompt_8847668f09e28013,reference,baba_meeting,BABA,Jason,Nancy,"Because Nancy and Jason attended the meeting, Nancy sent a short note to",Jason,Nancy,8982,18496
+prompt_89f9a05060da0f55,reference,baba_meeting,BABA,Ryan,Pamela,"Because Pamela and Ryan attended the meeting, Pamela sent a short note to",Ryan,Pamela,6047,43341
+prompt_9c57602157997906,reference,baba_meeting,BABA,Ruth,Amy,"Because Amy and Ruth attended the meeting, Amy sent a short note to",Ruth,Amy,22132,14235
+prompt_9caba9f31863099c,reference,baba_meeting,BABA,Nancy,Sandra,"Because Sandra and Nancy attended the meeting, Sandra sent a short note to",Nancy,Sandra,18496,32464
+prompt_9cee8404f2334ce8,reference,baba_meeting,BABA,Frances,Ryan,"Because Ryan and Frances attended the meeting, Ryan sent a short note to",Frances,Ryan,27025,6047
+prompt_a7952ac20fd0f889,reference,baba_meeting,BABA,Amy,Michelle,"Because Michelle and Amy attended the meeting, Michelle sent a short note to",Amy,Michelle,14235,16738
+prompt_ad09e3e7dc823e58,reference,baba_meeting,BABA,Carol,Susan,"Because Susan and Carol attended the meeting, Susan sent a short note to",Carol,Susan,5074,14919
+prompt_b4505c7cfecf5036,reference,baba_meeting,BABA,Amy,Carol,"Because Carol and Amy attended the meeting, Carol sent a short note to",Amy,Carol,14235,5074
+prompt_b60af9989c9801a4,reference,baba_meeting,BABA,Sandra,Michelle,"Because Michelle and Sandra attended the meeting, Michelle sent a short note to",Sandra,Michelle,32464,16738
+prompt_b94f07d68cc641a1,reference,baba_meeting,BABA,Anthony,Helen,"Because Helen and Anthony attended the meeting, Helen sent a short note to",Anthony,Helen,9953,22695
+prompt_cf076ecf4af51f23,reference,baba_meeting,BABA,Benjamin,Susan,"Because Susan and Benjamin attended the meeting, Susan sent a short note to",Benjamin,Susan,14533,14919
+prompt_d0c10a8ba488afff,reference,baba_meeting,BABA,Susan,Amy,"Because Amy and Susan attended the meeting, Amy sent a short note to",Susan,Amy,14919,14235
+prompt_d6a40a72835d4a7f,reference,baba_meeting,BABA,Ruth,Donna,"Because Donna and Ruth attended the meeting, Donna sent a short note to",Ruth,Donna,22132,29216
+prompt_e44c056c4abb375c,reference,baba_meeting,BABA,Carol,Benjamin,"Because Benjamin and Carol attended the meeting, Benjamin sent a short note to",Carol,Benjamin,5074,14533
+prompt_e4f91cc206b44b62,reference,baba_meeting,BABA,Amy,Frances,"Because Frances and Amy attended the meeting, Frances sent a short note to",Amy,Frances,14235,27025
+prompt_e748d6cf27c1a5bc,reference,baba_meeting,BABA,Ruth,Nancy,"Because Nancy and Ruth attended the meeting, Nancy sent a short note to",Ruth,Nancy,22132,18496
+prompt_e77c361d4b3663c8,reference,baba_meeting,BABA,Anthony,Ruth,"Because Ruth and Anthony attended the meeting, Ruth sent a short note to",Anthony,Ruth,9953,22132
+prompt_ebfb8d81e7c4dbbb,reference,baba_meeting,BABA,Patricia,Susan,"Because Susan and Patricia attended the meeting, Susan sent a short note to",Patricia,Susan,30223,14919
+prompt_eee7e7b0143051a9,reference,baba_meeting,BABA,Patricia,Ruth,"Because Ruth and Patricia attended the meeting, Ruth sent a short note to",Patricia,Ruth,30223,22132
+prompt_f00660307db0c3e0,reference,baba_meeting,BABA,Pamela,Frances,"Because Frances and Pamela attended the meeting, Frances sent a short note to",Pamela,Frances,43341,27025
+prompt_f033b95a489be944,reference,baba_meeting,BABA,Susan,Ryan,"Because Ryan and Susan attended the meeting, Ryan sent a short note to",Susan,Ryan,14919,6047
+prompt_f3d17232591b05dc,reference,baba_meeting,BABA,Helen,Michelle,"Because Michelle and Helen attended the meeting, Michelle sent a short note to",Helen,Michelle,22695,16738
+prompt_f4d2c987eb958f4f,reference,baba_meeting,BABA,Donna,Benjamin,"Because Benjamin and Donna attended the meeting, Benjamin sent a short note to",Donna,Benjamin,29216,14533
+prompt_f66c2e2524085534,reference,baba_meeting,BABA,Susan,Patricia,"Because Patricia and Susan attended the meeting, Patricia sent a short note to",Susan,Patricia,14919,30223
+prompt_f8720e99fa08e232,reference,baba_meeting,BABA,Donna,Pamela,"Because Pamela and Donna attended the meeting, Pamela sent a short note to",Donna,Pamela,29216,43341
+prompt_fc65aa8f8903521a,reference,baba_meeting,BABA,Anthony,Benjamin,"Because Benjamin and Anthony attended the meeting, Benjamin sent a short note to",Anthony,Benjamin,9953,14533
+prompt_ffb6cad1d59574b2,reference,baba_meeting,BABA,Sandra,Jason,"Because Jason and Sandra attended the meeting, Jason sent a short note to",Sandra,Jason,32464,8982
+prompt_068ed049c74a71ce,reference,baba_office,BABA,Amy,Anthony,"While Anthony and Amy worked in the office, Anthony passed a blue folder to",Amy,Anthony,14235,9953
+prompt_0af3d19899d845f1,reference,baba_office,BABA,Donna,Pamela,"While Pamela and Donna worked in the office, Pamela passed a blue folder to",Donna,Pamela,29216,43341
+prompt_0b4a0031d08f140e,reference,baba_office,BABA,Susan,Anthony,"While Anthony and Susan worked in the office, Anthony passed a blue folder to",Susan,Anthony,14919,9953
+prompt_0cb698d0cfb51d86,reference,baba_office,BABA,Helen,Anthony,"While Anthony and Helen worked in the office, Anthony passed a blue folder to",Helen,Anthony,22695,9953
+prompt_0cf941646f0e792e,reference,baba_office,BABA,Anthony,Pamela,"While Pamela and Anthony worked in the office, Pamela passed a blue folder to",Anthony,Pamela,9953,43341
+prompt_0cfe01e6e8b6b943,reference,baba_office,BABA,Michelle,Amy,"While Amy and Michelle worked in the office, Amy passed a blue folder to",Michelle,Amy,16738,14235
+prompt_10a2245748c1bda4,reference,baba_office,BABA,Ruth,Carol,"While Carol and Ruth worked in the office, Carol passed a blue folder to",Ruth,Carol,22132,5074
+prompt_112a4625de3b774d,reference,baba_office,BABA,Susan,Amy,"While Amy and Susan worked in the office, Amy passed a blue folder to",Susan,Amy,14919,14235
+prompt_1323a042a03243e6,reference,baba_office,BABA,Patricia,Donna,"While Donna and Patricia worked in the office, Donna passed a blue folder to",Patricia,Donna,30223,29216
+prompt_14e36dd45be160fd,reference,baba_office,BABA,Sandra,Carol,"While Carol and Sandra worked in the office, Carol passed a blue folder to",Sandra,Carol,32464,5074
+prompt_19ff9829d9c8e3b8,reference,baba_office,BABA,Patricia,Frances,"While Frances and Patricia worked in the office, Frances passed a blue folder to",Patricia,Frances,30223,27025
+prompt_1a46b34e80c70d73,reference,baba_office,BABA,Jason,Sandra,"While Sandra and Jason worked in the office, Sandra passed a blue folder to",Jason,Sandra,8982,32464
+prompt_1be924a49306c595,reference,baba_office,BABA,Anthony,Nancy,"While Nancy and Anthony worked in the office, Nancy passed a blue folder to",Anthony,Nancy,9953,18496
+prompt_2009e142bd4af8eb,reference,baba_office,BABA,Ryan,Anthony,"While Anthony and Ryan worked in the office, Anthony passed a blue folder to",Ryan,Anthony,6047,9953
+prompt_20f286807b0cc646,reference,baba_office,BABA,Ruth,Michelle,"While Michelle and Ruth worked in the office, Michelle passed a blue folder to",Ruth,Michelle,22132,16738
+prompt_21c21909b36e5e0a,reference,baba_office,BABA,Nancy,Sandra,"While Sandra and Nancy worked in the office, Sandra passed a blue folder to",Nancy,Sandra,18496,32464
+prompt_24c41d27dc023b19,reference,baba_office,BABA,Carol,Ruth,"While Ruth and Carol worked in the office, Ruth passed a blue folder to",Carol,Ruth,5074,22132
+prompt_2541c3c94a8da878,reference,baba_office,BABA,Helen,Benjamin,"While Benjamin and Helen worked in the office, Benjamin passed a blue folder to",Helen,Benjamin,22695,14533
+prompt_291aeac0c821ad29,reference,baba_office,BABA,Frances,Amy,"While Amy and Frances worked in the office, Amy passed a blue folder to",Frances,Amy,27025,14235
+prompt_2aa393b1cd9603bb,reference,baba_office,BABA,Sandra,Michelle,"While Michelle and Sandra worked in the office, Michelle passed a blue folder to",Sandra,Michelle,32464,16738
+prompt_36d9b94e75d0c680,reference,baba_office,BABA,Amy,Michelle,"While Michelle and Amy worked in the office, Michelle passed a blue folder to",Amy,Michelle,14235,16738
+prompt_378a911c2c6ef7b4,reference,baba_office,BABA,Carol,Nancy,"While Nancy and Carol worked in the office, Nancy passed a blue folder to",Carol,Nancy,5074,18496
+prompt_3890497012df0511,reference,baba_office,BABA,Anthony,Donna,"While Donna and Anthony worked in the office, Donna passed a blue folder to",Anthony,Donna,9953,29216
+prompt_3c9534bf7db7464f,reference,baba_office,BABA,Jason,Anthony,"While Anthony and Jason worked in the office, Anthony passed a blue folder to",Jason,Anthony,8982,9953
+prompt_3d6e4783168de204,reference,baba_office,BABA,Benjamin,Anthony,"While Anthony and Benjamin worked in the office, Anthony passed a blue folder to",Benjamin,Anthony,14533,9953
+prompt_3f617bd12bcc301f,reference,baba_office,BABA,Susan,Sandra,"While Sandra and Susan worked in the office, Sandra passed a blue folder to",Susan,Sandra,14919,32464
+prompt_44c177fd97f6f21d,reference,baba_office,BABA,Amy,Benjamin,"While Benjamin and Amy worked in the office, Benjamin passed a blue folder to",Amy,Benjamin,14235,14533
+prompt_458921abb6fd764b,reference,baba_office,BABA,Anthony,Ruth,"While Ruth and Anthony worked in the office, Ruth passed a blue folder to",Anthony,Ruth,9953,22132
+prompt_46a5f1698a5f240e,reference,baba_office,BABA,Frances,Anthony,"While Anthony and Frances worked in the office, Anthony passed a blue folder to",Frances,Anthony,27025,9953
+prompt_4b473042a102ddb1,reference,baba_office,BABA,Frances,Nancy,"While Nancy and Frances worked in the office, Nancy passed a blue folder to",Frances,Nancy,27025,18496
+prompt_4f71423eca64fbe5,reference,baba_office,BABA,Carol,Anthony,"While Anthony and Carol worked in the office, Anthony passed a blue folder to",Carol,Anthony,5074,9953
+prompt_52c7153210915009,reference,baba_office,BABA,Pamela,Ruth,"While Ruth and Pamela worked in the office, Ruth passed a blue folder to",Pamela,Ruth,43341,22132
+prompt_64ac5ad820a23241,reference,baba_office,BABA,Sandra,Amy,"While Amy and Sandra worked in the office, Amy passed a blue folder to",Sandra,Amy,32464,14235
+prompt_6525b0e758bb716e,reference,baba_office,BABA,Sandra,Donna,"While Donna and Sandra worked in the office, Donna passed a blue folder to",Sandra,Donna,32464,29216
+prompt_688628d824552fde,reference,baba_office,BABA,Anthony,Susan,"While Susan and Anthony worked in the office, Susan passed a blue folder to",Anthony,Susan,9953,14919
+prompt_703e3a6284316a96,reference,baba_office,BABA,Michelle,Ryan,"While Ryan and Michelle worked in the office, Ryan passed a blue folder to",Michelle,Ryan,16738,6047
+prompt_709c4f7655a1f19c,reference,baba_office,BABA,Anthony,Frances,"While Frances and Anthony worked in the office, Frances passed a blue folder to",Anthony,Frances,9953,27025
+prompt_72274732e8772d6e,reference,baba_office,BABA,Frances,Helen,"While Helen and Frances worked in the office, Helen passed a blue folder to",Frances,Helen,27025,22695
+prompt_7ce2d9314fbe3ec6,reference,baba_office,BABA,Nancy,Jason,"While Jason and Nancy worked in the office, Jason passed a blue folder to",Nancy,Jason,18496,8982
+prompt_7d0ac6bad788f98a,reference,baba_office,BABA,Ryan,Patricia,"While Patricia and Ryan worked in the office, Patricia passed a blue folder to",Ryan,Patricia,6047,30223
+prompt_7dec7d1ffcf1d405,reference,baba_office,BABA,Frances,Benjamin,"While Benjamin and Frances worked in the office, Benjamin passed a blue folder to",Frances,Benjamin,27025,14533
+prompt_88cbcdefac7d2b62,reference,baba_office,BABA,Susan,Carol,"While Carol and Susan worked in the office, Carol passed a blue folder to",Susan,Carol,14919,5074
+prompt_8986da77f295acc1,reference,baba_office,BABA,Jason,Helen,"While Helen and Jason worked in the office, Helen passed a blue folder to",Jason,Helen,8982,22695
+prompt_8cc48136ef9534e1,reference,baba_office,BABA,Frances,Carol,"While Carol and Frances worked in the office, Carol passed a blue folder to",Frances,Carol,27025,5074
+prompt_950f261b541af448,reference,baba_office,BABA,Ruth,Susan,"While Susan and Ruth worked in the office, Susan passed a blue folder to",Ruth,Susan,22132,14919
+prompt_998a0c7c1f0f8fd5,reference,baba_office,BABA,Ryan,Jason,"While Jason and Ryan worked in the office, Jason passed a blue folder to",Ryan,Jason,6047,8982
+prompt_a99279ea146d966c,reference,baba_office,BABA,Jason,Donna,"While Donna and Jason worked in the office, Donna passed a blue folder to",Jason,Donna,8982,29216
+prompt_ac97a45ac8bd8db1,reference,baba_office,BABA,Frances,Sandra,"While Sandra and Frances worked in the office, Sandra passed a blue folder to",Frances,Sandra,27025,32464
+prompt_ae2aa93525b97b81,reference,baba_office,BABA,Amy,Patricia,"While Patricia and Amy worked in the office, Patricia passed a blue folder to",Amy,Patricia,14235,30223
+prompt_b5c89913db52294c,reference,baba_office,BABA,Donna,Ryan,"While Ryan and Donna worked in the office, Ryan passed a blue folder to",Donna,Ryan,29216,6047
+prompt_bf431df2d3e9f8b6,reference,baba_office,BABA,Helen,Jason,"While Jason and Helen worked in the office, Jason passed a blue folder to",Helen,Jason,22695,8982
+prompt_c1ea1ffaee198340,reference,baba_office,BABA,Carol,Ryan,"While Ryan and Carol worked in the office, Ryan passed a blue folder to",Carol,Ryan,5074,6047
+prompt_c52511bcb26db3d7,reference,baba_office,BABA,Jason,Michelle,"While Michelle and Jason worked in the office, Michelle passed a blue folder to",Jason,Michelle,8982,16738
+prompt_c94d2c97f643b9e6,reference,baba_office,BABA,Patricia,Benjamin,"While Benjamin and Patricia worked in the office, Benjamin passed a blue folder to",Patricia,Benjamin,30223,14533
+prompt_d140a1ecce068060,reference,baba_office,BABA,Ryan,Ruth,"While Ruth and Ryan worked in the office, Ruth passed a blue folder to",Ryan,Ruth,6047,22132
+prompt_d5b3d2c0b6e0d87a,reference,baba_office,BABA,Susan,Patricia,"While Patricia and Susan worked in the office, Patricia passed a blue folder to",Susan,Patricia,14919,30223
+prompt_d781ee0f033ac9a7,reference,baba_office,BABA,Ruth,Patricia,"While Patricia and Ruth worked in the office, Patricia passed a blue folder to",Ruth,Patricia,22132,30223
+prompt_db70267f001a9e98,reference,baba_office,BABA,Patricia,Ruth,"While Ruth and Patricia worked in the office, Ruth passed a blue folder to",Patricia,Ruth,30223,22132
+prompt_df025f4343033942,reference,baba_office,BABA,Sandra,Jason,"While Jason and Sandra worked in the office, Jason passed a blue folder to",Sandra,Jason,32464,8982
+prompt_ecd8f895e891de3d,reference,baba_office,BABA,Michelle,Donna,"While Donna and Michelle worked in the office, Donna passed a blue folder to",Michelle,Donna,16738,29216
+prompt_f4d6474e17b6a0d1,reference,baba_office,BABA,Nancy,Anthony,"While Anthony and Nancy worked in the office, Anthony passed a blue folder to",Nancy,Anthony,18496,9953
+prompt_f5bd437cc7e15ef0,reference,baba_office,BABA,Michelle,Sandra,"While Sandra and Michelle worked in the office, Sandra passed a blue folder to",Michelle,Sandra,16738,32464
+prompt_fe78daa560a73828,reference,baba_office,BABA,Nancy,Frances,"While Frances and Nancy worked in the office, Frances passed a blue folder to",Nancy,Frances,18496,27025
+prompt_ff3c3addc34d78fb,reference,baba_office,BABA,Ruth,Frances,"While Frances and Ruth worked in the office, Frances passed a blue folder to",Ruth,Frances,22132,27025
+prompt_0211af86ed7488d6,reference,baba_park,BABA,Pamela,Carol,"After Carol and Pamela visited the park, Carol handed a folded map to",Pamela,Carol,43341,5074
+prompt_04428b39542cdd80,reference,baba_park,BABA,Jason,Sandra,"After Sandra and Jason visited the park, Sandra handed a folded map to",Jason,Sandra,8982,32464
+prompt_0bcfe33828d01ebe,reference,baba_park,BABA,Pamela,Jason,"After Jason and Pamela visited the park, Jason handed a folded map to",Pamela,Jason,43341,8982
+prompt_13d5a27962b8b907,reference,baba_park,BABA,Ryan,Carol,"After Carol and Ryan visited the park, Carol handed a folded map to",Ryan,Carol,6047,5074
+prompt_149c635b67de50be,reference,baba_park,BABA,Carol,Donna,"After Donna and Carol visited the park, Donna handed a folded map to",Carol,Donna,5074,29216
+prompt_1574aed6c6002df8,reference,baba_park,BABA,Amy,Frances,"After Frances and Amy visited the park, Frances handed a folded map to",Amy,Frances,14235,27025
+prompt_1736a6f67895ec3b,reference,baba_park,BABA,Sandra,Anthony,"After Anthony and Sandra visited the park, Anthony handed a folded map to",Sandra,Anthony,32464,9953
+prompt_201387c12e24e43f,reference,baba_park,BABA,Michelle,Amy,"After Amy and Michelle visited the park, Amy handed a folded map to",Michelle,Amy,16738,14235
+prompt_2e5b530dd7f447f2,reference,baba_park,BABA,Michelle,Helen,"After Helen and Michelle visited the park, Helen handed a folded map to",Michelle,Helen,16738,22695
+prompt_326f14f3ab6f52ad,reference,baba_park,BABA,Patricia,Ryan,"After Ryan and Patricia visited the park, Ryan handed a folded map to",Patricia,Ryan,30223,6047
+prompt_32c169136fd6d8c4,reference,baba_park,BABA,Ryan,Jason,"After Jason and Ryan visited the park, Jason handed a folded map to",Ryan,Jason,6047,8982
+prompt_34844de0a26475e4,reference,baba_park,BABA,Anthony,Amy,"After Amy and Anthony visited the park, Amy handed a folded map to",Anthony,Amy,9953,14235
+prompt_36187d067d36a497,reference,baba_park,BABA,Donna,Sandra,"After Sandra and Donna visited the park, Sandra handed a folded map to",Donna,Sandra,29216,32464
+prompt_39cf10c107f54876,reference,baba_park,BABA,Michelle,Ruth,"After Ruth and Michelle visited the park, Ruth handed a folded map to",Michelle,Ruth,16738,22132
+prompt_3a6175175b0004e9,reference,baba_park,BABA,Patricia,Pamela,"After Pamela and Patricia visited the park, Pamela handed a folded map to",Patricia,Pamela,30223,43341
+prompt_3fe035dc3bc3dacf,reference,baba_park,BABA,Patricia,Amy,"After Amy and Patricia visited the park, Amy handed a folded map to",Patricia,Amy,30223,14235
+prompt_4322bdc5e8056958,reference,baba_park,BABA,Carol,Sandra,"After Sandra and Carol visited the park, Sandra handed a folded map to",Carol,Sandra,5074,32464
+prompt_445b51096b1c169f,reference,baba_park,BABA,Ryan,Michelle,"After Michelle and Ryan visited the park, Michelle handed a folded map to",Ryan,Michelle,6047,16738
+prompt_4802d06ef55de3a0,reference,baba_park,BABA,Frances,Donna,"After Donna and Frances visited the park, Donna handed a folded map to",Frances,Donna,27025,29216
+prompt_4806f747da7f6d0e,reference,baba_park,BABA,Susan,Benjamin,"After Benjamin and Susan visited the park, Benjamin handed a folded map to",Susan,Benjamin,14919,14533
+prompt_4efabaf7eda68d3a,reference,baba_park,BABA,Frances,Ruth,"After Ruth and Frances visited the park, Ruth handed a folded map to",Frances,Ruth,27025,22132
+prompt_56f7ae0c2c2c6a0b,reference,baba_park,BABA,Anthony,Nancy,"After Nancy and Anthony visited the park, Nancy handed a folded map to",Anthony,Nancy,9953,18496
+prompt_586bd23c39e1918e,reference,baba_park,BABA,Ryan,Pamela,"After Pamela and Ryan visited the park, Pamela handed a folded map to",Ryan,Pamela,6047,43341
+prompt_5975422ba0bab7f8,reference,baba_park,BABA,Carol,Amy,"After Amy and Carol visited the park, Amy handed a folded map to",Carol,Amy,5074,14235
+prompt_5ba817dea98e73a9,reference,baba_park,BABA,Frances,Helen,"After Helen and Frances visited the park, Helen handed a folded map to",Frances,Helen,27025,22695
+prompt_5f5a862b3a838aec,reference,baba_park,BABA,Carol,Michelle,"After Michelle and Carol visited the park, Michelle handed a folded map to",Carol,Michelle,5074,16738
+prompt_60267c23afd77cc3,reference,baba_park,BABA,Michelle,Jason,"After Jason and Michelle visited the park, Jason handed a folded map to",Michelle,Jason,16738,8982
+prompt_690ebc56890219f4,reference,baba_park,BABA,Ruth,Pamela,"After Pamela and Ruth visited the park, Pamela handed a folded map to",Ruth,Pamela,22132,43341
+prompt_6a7de3e27d7fab92,reference,baba_park,BABA,Michelle,Sandra,"After Sandra and Michelle visited the park, Sandra handed a folded map to",Michelle,Sandra,16738,32464
+prompt_6d22d083494876ce,reference,baba_park,BABA,Nancy,Benjamin,"After Benjamin and Nancy visited the park, Benjamin handed a folded map to",Nancy,Benjamin,18496,14533
+prompt_710b9cc72485e20c,reference,baba_park,BABA,Anthony,Michelle,"After Michelle and Anthony visited the park, Michelle handed a folded map to",Anthony,Michelle,9953,16738
+prompt_7e55834f081f6106,reference,baba_park,BABA,Michelle,Susan,"After Susan and Michelle visited the park, Susan handed a folded map to",Michelle,Susan,16738,14919
+prompt_7eee1f0afcac8828,reference,baba_park,BABA,Jason,Helen,"After Helen and Jason visited the park, Helen handed a folded map to",Jason,Helen,8982,22695
+prompt_85d9f0ac8599364d,reference,baba_park,BABA,Frances,Benjamin,"After Benjamin and Frances visited the park, Benjamin handed a folded map to",Frances,Benjamin,27025,14533
+prompt_9213e3848668ac6c,reference,baba_park,BABA,Carol,Ruth,"After Ruth and Carol visited the park, Ruth handed a folded map to",Carol,Ruth,5074,22132
+prompt_93384cd4ad2efbfe,reference,baba_park,BABA,Amy,Benjamin,"After Benjamin and Amy visited the park, Benjamin handed a folded map to",Amy,Benjamin,14235,14533
+prompt_936428496b8e75d0,reference,baba_park,BABA,Sandra,Patricia,"After Patricia and Sandra visited the park, Patricia handed a folded map to",Sandra,Patricia,32464,30223
+prompt_968e75c95d0bf504,reference,baba_park,BABA,Susan,Sandra,"After Sandra and Susan visited the park, Sandra handed a folded map to",Susan,Sandra,14919,32464
+prompt_99ef21f335b718b8,reference,baba_park,BABA,Carol,Nancy,"After Nancy and Carol visited the park, Nancy handed a folded map to",Carol,Nancy,5074,18496
+prompt_a432810e0fa6f767,reference,baba_park,BABA,Pamela,Donna,"After Donna and Pamela visited the park, Donna handed a folded map to",Pamela,Donna,43341,29216
+prompt_a465a789394182d1,reference,baba_park,BABA,Helen,Sandra,"After Sandra and Helen visited the park, Sandra handed a folded map to",Helen,Sandra,22695,32464
+prompt_a4cfd18a4e6ecf8f,reference,baba_park,BABA,Donna,Anthony,"After Anthony and Donna visited the park, Anthony handed a folded map to",Donna,Anthony,29216,9953
+prompt_addaa2916560f240,reference,baba_park,BABA,Helen,Frances,"After Frances and Helen visited the park, Frances handed a folded map to",Helen,Frances,22695,27025
+prompt_af701a55f19e992b,reference,baba_park,BABA,Sandra,Frances,"After Frances and Sandra visited the park, Frances handed a folded map to",Sandra,Frances,32464,27025
+prompt_b11b036290bffbab,reference,baba_park,BABA,Anthony,Benjamin,"After Benjamin and Anthony visited the park, Benjamin handed a folded map to",Anthony,Benjamin,9953,14533
+prompt_b19ad7693365bcc2,reference,baba_park,BABA,Susan,Ryan,"After Ryan and Susan visited the park, Ryan handed a folded map to",Susan,Ryan,14919,6047
+prompt_b5555ac149948f0c,reference,baba_park,BABA,Susan,Anthony,"After Anthony and Susan visited the park, Anthony handed a folded map to",Susan,Anthony,14919,9953
+prompt_b6aa844801c41d78,reference,baba_park,BABA,Pamela,Michelle,"After Michelle and Pamela visited the park, Michelle handed a folded map to",Pamela,Michelle,43341,16738
+prompt_b94f78e51fa234fb,reference,baba_park,BABA,Carol,Anthony,"After Anthony and Carol visited the park, Anthony handed a folded map to",Carol,Anthony,5074,9953
+prompt_bccea2ce45a63d3b,reference,baba_park,BABA,Nancy,Amy,"After Amy and Nancy visited the park, Amy handed a folded map to",Nancy,Amy,18496,14235
+prompt_bfebd35f1783593f,reference,baba_park,BABA,Anthony,Frances,"After Frances and Anthony visited the park, Frances handed a folded map to",Anthony,Frances,9953,27025
+prompt_d0804b107f74cd8c,reference,baba_park,BABA,Benjamin,Jason,"After Jason and Benjamin visited the park, Jason handed a folded map to",Benjamin,Jason,14533,8982
+prompt_d13807ade6ffc6d4,reference,baba_park,BABA,Sandra,Nancy,"After Nancy and Sandra visited the park, Nancy handed a folded map to",Sandra,Nancy,32464,18496
+prompt_db755cb85c111b2f,reference,baba_park,BABA,Amy,Jason,"After Jason and Amy visited the park, Jason handed a folded map to",Amy,Jason,14235,8982
+prompt_db8b015304763249,reference,baba_park,BABA,Donna,Frances,"After Frances and Donna visited the park, Frances handed a folded map to",Donna,Frances,29216,27025
+prompt_e4acb09041e1586d,reference,baba_park,BABA,Jason,Patricia,"After Patricia and Jason visited the park, Patricia handed a folded map to",Jason,Patricia,8982,30223
+prompt_ea5cb518dd009aa1,reference,baba_park,BABA,Amy,Susan,"After Susan and Amy visited the park, Susan handed a folded map to",Amy,Susan,14235,14919
+prompt_f00bc884e50f3a9d,reference,baba_park,BABA,Nancy,Donna,"After Donna and Nancy visited the park, Donna handed a folded map to",Nancy,Donna,18496,29216
+prompt_f17eaa13e6d47f75,reference,baba_park,BABA,Donna,Helen,"After Helen and Donna visited the park, Helen handed a folded map to",Donna,Helen,29216,22695
+prompt_f359f2b9e7f7926c,reference,baba_park,BABA,Ruth,Sandra,"After Sandra and Ruth visited the park, Sandra handed a folded map to",Ruth,Sandra,22132,32464
+prompt_f570a329db3c55a7,reference,baba_park,BABA,Pamela,Amy,"After Amy and Pamela visited the park, Amy handed a folded map to",Pamela,Amy,43341,14235
+prompt_fcbc851ecedd2920,reference,baba_park,BABA,Frances,Sandra,"After Sandra and Frances visited the park, Sandra handed a folded map to",Frances,Sandra,27025,32464
+prompt_fe1f33d16bc96146,reference,baba_park,BABA,Jason,Ryan,"After Ryan and Jason visited the park, Ryan handed a folded map to",Jason,Ryan,8982,6047
+prompt_fe9fb909e300bca0,reference,baba_park,BABA,Patricia,Sandra,"After Sandra and Patricia visited the park, Sandra handed a folded map to",Patricia,Sandra,30223,32464
+prompt_05803aa5fdd13748,reference,baba_store,BABA,Anthony,Sandra,"When Sandra and Anthony went to the store, Sandra gave a bottle of milk to",Anthony,Sandra,9953,32464
+prompt_097d3727d5ee126d,reference,baba_store,BABA,Frances,Michelle,"When Michelle and Frances went to the store, Michelle gave a bottle of milk to",Frances,Michelle,27025,16738
+prompt_09ed89899b5d86d5,reference,baba_store,BABA,Carol,Donna,"When Donna and Carol went to the store, Donna gave a bottle of milk to",Carol,Donna,5074,29216
+prompt_0c89d61b1217f916,reference,baba_store,BABA,Pamela,Ruth,"When Ruth and Pamela went to the store, Ruth gave a bottle of milk to",Pamela,Ruth,43341,22132
+prompt_0db7ad8dc341bd0e,reference,baba_store,BABA,Patricia,Donna,"When Donna and Patricia went to the store, Donna gave a bottle of milk to",Patricia,Donna,30223,29216
+prompt_102dc4739a44334e,reference,baba_store,BABA,Sandra,Donna,"When Donna and Sandra went to the store, Donna gave a bottle of milk to",Sandra,Donna,32464,29216
+prompt_10da0b87e3d34eaf,reference,baba_store,BABA,Patricia,Sandra,"When Sandra and Patricia went to the store, Sandra gave a bottle of milk to",Patricia,Sandra,30223,32464
+prompt_128a0fb97a6f1f06,reference,baba_store,BABA,Ruth,Frances,"When Frances and Ruth went to the store, Frances gave a bottle of milk to",Ruth,Frances,22132,27025
+prompt_13e5777162d756bb,reference,baba_store,BABA,Benjamin,Susan,"When Susan and Benjamin went to the store, Susan gave a bottle of milk to",Benjamin,Susan,14533,14919
+prompt_15ff2a0472a94635,reference,baba_store,BABA,Frances,Carol,"When Carol and Frances went to the store, Carol gave a bottle of milk to",Frances,Carol,27025,5074
+prompt_1c60171fcaeb1d78,reference,baba_store,BABA,Helen,Amy,"When Amy and Helen went to the store, Amy gave a bottle of milk to",Helen,Amy,22695,14235
+prompt_1d8b0338ad4f7168,reference,baba_store,BABA,Jason,Nancy,"When Nancy and Jason went to the store, Nancy gave a bottle of milk to",Jason,Nancy,8982,18496
+prompt_1e4f11e26757c819,reference,baba_store,BABA,Frances,Nancy,"When Nancy and Frances went to the store, Nancy gave a bottle of milk to",Frances,Nancy,27025,18496
+prompt_23052c0e5b2bc4c2,reference,baba_store,BABA,Donna,Ruth,"When Ruth and Donna went to the store, Ruth gave a bottle of milk to",Donna,Ruth,29216,22132
+prompt_246ba1c1824864c0,reference,baba_store,BABA,Ryan,Michelle,"When Michelle and Ryan went to the store, Michelle gave a bottle of milk to",Ryan,Michelle,6047,16738
+prompt_2af33b4ca9b1dbe5,reference,baba_store,BABA,Nancy,Ruth,"When Ruth and Nancy went to the store, Ruth gave a bottle of milk to",Nancy,Ruth,18496,22132
+prompt_2d3d0c498346e757,reference,baba_store,BABA,Nancy,Susan,"When Susan and Nancy went to the store, Susan gave a bottle of milk to",Nancy,Susan,18496,14919
+prompt_3d88e83c09322340,reference,baba_store,BABA,Michelle,Carol,"When Carol and Michelle went to the store, Carol gave a bottle of milk to",Michelle,Carol,16738,5074
+prompt_3f10df26e99cfe58,reference,baba_store,BABA,Susan,Carol,"When Carol and Susan went to the store, Carol gave a bottle of milk to",Susan,Carol,14919,5074
+prompt_3fe8d3aec32bfbeb,reference,baba_store,BABA,Carol,Nancy,"When Nancy and Carol went to the store, Nancy gave a bottle of milk to",Carol,Nancy,5074,18496
+prompt_441b72deef604e20,reference,baba_store,BABA,Carol,Patricia,"When Patricia and Carol went to the store, Patricia gave a bottle of milk to",Carol,Patricia,5074,30223
+prompt_4a8cec920314d830,reference,baba_store,BABA,Anthony,Helen,"When Helen and Anthony went to the store, Helen gave a bottle of milk to",Anthony,Helen,9953,22695
+prompt_4dbd43ed4c99d528,reference,baba_store,BABA,Pamela,Susan,"When Susan and Pamela went to the store, Susan gave a bottle of milk to",Pamela,Susan,43341,14919
+prompt_4f9fc9d132c356b2,reference,baba_store,BABA,Benjamin,Amy,"When Amy and Benjamin went to the store, Amy gave a bottle of milk to",Benjamin,Amy,14533,14235
+prompt_55092b627dd100ed,reference,baba_store,BABA,Jason,Benjamin,"When Benjamin and Jason went to the store, Benjamin gave a bottle of milk to",Jason,Benjamin,8982,14533
+prompt_56c8647ffec46c39,reference,baba_store,BABA,Susan,Patricia,"When Patricia and Susan went to the store, Patricia gave a bottle of milk to",Susan,Patricia,14919,30223
+prompt_57bd35bb5a034cdc,reference,baba_store,BABA,Helen,Sandra,"When Sandra and Helen went to the store, Sandra gave a bottle of milk to",Helen,Sandra,22695,32464
+prompt_58b292b79bee9fcb,reference,baba_store,BABA,Donna,Sandra,"When Sandra and Donna went to the store, Sandra gave a bottle of milk to",Donna,Sandra,29216,32464
+prompt_5e694b6f755d913c,reference,baba_store,BABA,Carol,Pamela,"When Pamela and Carol went to the store, Pamela gave a bottle of milk to",Carol,Pamela,5074,43341
+prompt_625701836f1d8dce,reference,baba_store,BABA,Anthony,Nancy,"When Nancy and Anthony went to the store, Nancy gave a bottle of milk to",Anthony,Nancy,9953,18496
+prompt_6499fc0a6346313c,reference,baba_store,BABA,Ryan,Pamela,"When Pamela and Ryan went to the store, Pamela gave a bottle of milk to",Ryan,Pamela,6047,43341
+prompt_65b12cc769dc62d1,reference,baba_store,BABA,Sandra,Nancy,"When Nancy and Sandra went to the store, Nancy gave a bottle of milk to",Sandra,Nancy,32464,18496
+prompt_65db9ca8e11ae2be,reference,baba_store,BABA,Carol,Michelle,"When Michelle and Carol went to the store, Michelle gave a bottle of milk to",Carol,Michelle,5074,16738
+prompt_6c1bd8f818246599,reference,baba_store,BABA,Ruth,Susan,"When Susan and Ruth went to the store, Susan gave a bottle of milk to",Ruth,Susan,22132,14919
+prompt_6df159d047e38ebd,reference,baba_store,BABA,Ryan,Jason,"When Jason and Ryan went to the store, Jason gave a bottle of milk to",Ryan,Jason,6047,8982
+prompt_703367912bf2b6cc,reference,baba_store,BABA,Frances,Susan,"When Susan and Frances went to the store, Susan gave a bottle of milk to",Frances,Susan,27025,14919
+prompt_71468c85c81f4e61,reference,baba_store,BABA,Amy,Carol,"When Carol and Amy went to the store, Carol gave a bottle of milk to",Amy,Carol,14235,5074
+prompt_73a3a411d8667bed,reference,baba_store,BABA,Anthony,Ruth,"When Ruth and Anthony went to the store, Ruth gave a bottle of milk to",Anthony,Ruth,9953,22132
+prompt_7fef0cb9efb450e6,reference,baba_store,BABA,Sandra,Susan,"When Susan and Sandra went to the store, Susan gave a bottle of milk to",Sandra,Susan,32464,14919
+prompt_81f2ac93678f362c,reference,baba_store,BABA,Jason,Sandra,"When Sandra and Jason went to the store, Sandra gave a bottle of milk to",Jason,Sandra,8982,32464
+prompt_85cbeb7bb3112ee0,reference,baba_store,BABA,Pamela,Jason,"When Jason and Pamela went to the store, Jason gave a bottle of milk to",Pamela,Jason,43341,8982
+prompt_85e556d425ac3d5d,reference,baba_store,BABA,Carol,Frances,"When Frances and Carol went to the store, Frances gave a bottle of milk to",Carol,Frances,5074,27025
+prompt_8c1ac5b5bfe68909,reference,baba_store,BABA,Amy,Nancy,"When Nancy and Amy went to the store, Nancy gave a bottle of milk to",Amy,Nancy,14235,18496
+prompt_8ca8678e70c8277f,reference,baba_store,BABA,Benjamin,Donna,"When Donna and Benjamin went to the store, Donna gave a bottle of milk to",Benjamin,Donna,14533,29216
+prompt_91428d0139625ceb,reference,baba_store,BABA,Susan,Jason,"When Jason and Susan went to the store, Jason gave a bottle of milk to",Susan,Jason,14919,8982
+prompt_9239a6d10779a55f,reference,baba_store,BABA,Susan,Sandra,"When Sandra and Susan went to the store, Sandra gave a bottle of milk to",Susan,Sandra,14919,32464
+prompt_936a8a946f75aa6f,reference,baba_store,BABA,Ryan,Sandra,"When Sandra and Ryan went to the store, Sandra gave a bottle of milk to",Ryan,Sandra,6047,32464
+prompt_9c970d34b8863630,reference,baba_store,BABA,Amy,Ryan,"When Ryan and Amy went to the store, Ryan gave a bottle of milk to",Amy,Ryan,14235,6047
+prompt_a021fc3e09d154c1,reference,baba_store,BABA,Nancy,Benjamin,"When Benjamin and Nancy went to the store, Benjamin gave a bottle of milk to",Nancy,Benjamin,18496,14533
+prompt_aad3d2b52247041a,reference,baba_store,BABA,Michelle,Patricia,"When Patricia and Michelle went to the store, Patricia gave a bottle of milk to",Michelle,Patricia,16738,30223
+prompt_bc8ab674b4c8a053,reference,baba_store,BABA,Amy,Pamela,"When Pamela and Amy went to the store, Pamela gave a bottle of milk to",Amy,Pamela,14235,43341
+prompt_bee039a1fe9aa18c,reference,baba_store,BABA,Pamela,Patricia,"When Patricia and Pamela went to the store, Patricia gave a bottle of milk to",Pamela,Patricia,43341,30223
+prompt_c22ec25800fa76cd,reference,baba_store,BABA,Michelle,Pamela,"When Pamela and Michelle went to the store, Pamela gave a bottle of milk to",Michelle,Pamela,16738,43341
+prompt_c492044603685382,reference,baba_store,BABA,Carol,Benjamin,"When Benjamin and Carol went to the store, Benjamin gave a bottle of milk to",Carol,Benjamin,5074,14533
+prompt_d5cbd1333c2945cd,reference,baba_store,BABA,Benjamin,Carol,"When Carol and Benjamin went to the store, Carol gave a bottle of milk to",Benjamin,Carol,14533,5074
+prompt_d69bfff5a10e73ec,reference,baba_store,BABA,Nancy,Carol,"When Carol and Nancy went to the store, Carol gave a bottle of milk to",Nancy,Carol,18496,5074
+prompt_d9b441c6c9b01d82,reference,baba_store,BABA,Ryan,Frances,"When Frances and Ryan went to the store, Frances gave a bottle of milk to",Ryan,Frances,6047,27025
+prompt_de904616b3a53ef2,reference,baba_store,BABA,Carol,Sandra,"When Sandra and Carol went to the store, Sandra gave a bottle of milk to",Carol,Sandra,5074,32464
+prompt_e04667f38e2cd117,reference,baba_store,BABA,Sandra,Pamela,"When Pamela and Sandra went to the store, Pamela gave a bottle of milk to",Sandra,Pamela,32464,43341
+prompt_e86d46bd2c229cd8,reference,baba_store,BABA,Patricia,Nancy,"When Nancy and Patricia went to the store, Nancy gave a bottle of milk to",Patricia,Nancy,30223,18496
+prompt_e8a6ff6c70479b6f,reference,baba_store,BABA,Ruth,Sandra,"When Sandra and Ruth went to the store, Sandra gave a bottle of milk to",Ruth,Sandra,22132,32464
+prompt_e9371c2a536dce2d,reference,baba_store,BABA,Patricia,Jason,"When Jason and Patricia went to the store, Jason gave a bottle of milk to",Patricia,Jason,30223,8982
+prompt_f231a2f1f6625c2e,reference,baba_store,BABA,Pamela,Anthony,"When Anthony and Pamela went to the store, Anthony gave a bottle of milk to",Pamela,Anthony,43341,9953
+prompt_f958a0fb0e9f4913,reference,baba_store,BABA,Amy,Benjamin,"When Benjamin and Amy went to the store, Benjamin gave a bottle of milk to",Amy,Benjamin,14235,14533
+prompt_08c33ae6d131d57c,test,abba_meeting,ABBA,Alice,Erin,"Because Alice and Erin attended the meeting, Erin sent a short note to",Alice,Erin,14862,28894
+prompt_2042f7e3b89f8205,test,abba_meeting,ABBA,Brandon,Dorothy,"Because Brandon and Dorothy attended the meeting, Dorothy sent a short note to",Brandon,Dorothy,14328,40349
+prompt_24adba5060ef8482,test,abba_meeting,ABBA,Andrea,Daniel,"Because Andrea and Daniel attended the meeting, Daniel sent a short note to",Andrea,Daniel,23174,7806
+prompt_27c78865e1bf16a4,test,abba_meeting,ABBA,Ronald,Daniel,"Because Ronald and Daniel attended the meeting, Daniel sent a short note to",Ronald,Daniel,14430,7806
+prompt_2ab940c3ab99808a,test,abba_meeting,ABBA,Brenda,Sharon,"Because Brenda and Sharon attended the meeting, Sharon sent a short note to",Brenda,Sharon,49495,26918
+prompt_333c963488c1d536,test,abba_meeting,ABBA,Scott,Andrea,"Because Scott and Andrea attended the meeting, Andrea sent a short note to",Scott,Andrea,4746,23174
+prompt_33f62121dc858fcf,test,abba_meeting,ABBA,Justin,Cynthia,"Because Justin and Cynthia attended the meeting, Cynthia sent a short note to",Justin,Cynthia,10799,40897
+prompt_39d96985388539db,test,abba_meeting,ABBA,Brenda,Alice,"Because Brenda and Alice attended the meeting, Alice sent a short note to",Brenda,Alice,49495,14862
+prompt_3ecb4169e6726124,test,abba_meeting,ABBA,Andrea,Alice,"Because Andrea and Alice attended the meeting, Alice sent a short note to",Andrea,Alice,23174,14862
+prompt_47dd49f0daad486a,test,abba_meeting,ABBA,Cynthia,Brenda,"Because Cynthia and Brenda attended the meeting, Brenda sent a short note to",Cynthia,Brenda,40897,49495
+prompt_4d089867ff2f79ab,test,abba_meeting,ABBA,Liam,Justin,"Because Liam and Justin attended the meeting, Justin sent a short note to",Liam,Justin,31684,10799
+prompt_5db8f7abda110b9d,test,abba_meeting,ABBA,Erin,Brenda,"Because Erin and Brenda attended the meeting, Brenda sent a short note to",Erin,Brenda,28894,49495
+prompt_6201877897327878,test,abba_meeting,ABBA,Cynthia,Denise,"Because Cynthia and Denise attended the meeting, Denise sent a short note to",Cynthia,Denise,40897,43596
+prompt_6eec586eae287e10,test,abba_meeting,ABBA,Cynthia,Linda,"Because Cynthia and Linda attended the meeting, Linda sent a short note to",Cynthia,Linda,40897,21776
+prompt_700c59f457398b85,test,abba_meeting,ABBA,Liam,Daniel,"Because Liam and Daniel attended the meeting, Daniel sent a short note to",Liam,Daniel,31684,7806
+prompt_7c5aa0f88249da32,test,abba_meeting,ABBA,Cynthia,Alice,"Because Cynthia and Alice attended the meeting, Alice sent a short note to",Cynthia,Alice,40897,14862
+prompt_810f7f455cedf092,test,abba_meeting,ABBA,Brandon,Linda,"Because Brandon and Linda attended the meeting, Linda sent a short note to",Brandon,Linda,14328,21776
+prompt_8f00070c30b227f6,test,abba_meeting,ABBA,Justin,Christine,"Because Justin and Christine attended the meeting, Christine sent a short note to",Justin,Christine,10799,26088
+prompt_9542f0640181dbf7,test,abba_meeting,ABBA,Cynthia,Justin,"Because Cynthia and Justin attended the meeting, Justin sent a short note to",Cynthia,Justin,40897,10799
+prompt_9b6f32b6d24d81a7,test,abba_meeting,ABBA,Denise,Daniel,"Because Denise and Daniel attended the meeting, Daniel sent a short note to",Denise,Daniel,43596,7806
+prompt_a535eeaa28e28a55,test,abba_meeting,ABBA,Liam,Sharon,"Because Liam and Sharon attended the meeting, Sharon sent a short note to",Liam,Sharon,31684,26918
+prompt_ae7857076bae5d49,test,abba_meeting,ABBA,Erin,Brandon,"Because Erin and Brandon attended the meeting, Brandon sent a short note to",Erin,Brandon,28894,14328
+prompt_d2f05caf8ba3d6d3,test,abba_meeting,ABBA,Ronald,Justin,"Because Ronald and Justin attended the meeting, Justin sent a short note to",Ronald,Justin,14430,10799
+prompt_d6f79cac9eabdf6d,test,abba_meeting,ABBA,Andrea,Christine,"Because Andrea and Christine attended the meeting, Christine sent a short note to",Andrea,Christine,23174,26088
+prompt_e1e5bf9fbf115948,test,abba_meeting,ABBA,Linda,Brenda,"Because Linda and Brenda attended the meeting, Brenda sent a short note to",Linda,Brenda,21776,49495
+prompt_e65ea8c07e6d3abb,test,abba_meeting,ABBA,Brandon,Daniel,"Because Brandon and Daniel attended the meeting, Daniel sent a short note to",Brandon,Daniel,14328,7806
+prompt_ecd886bf154fa6dc,test,abba_meeting,ABBA,Justin,Brenda,"Because Justin and Brenda attended the meeting, Brenda sent a short note to",Justin,Brenda,10799,49495
+prompt_f01855146d9d2ac8,test,abba_meeting,ABBA,Christine,Dorothy,"Because Christine and Dorothy attended the meeting, Dorothy sent a short note to",Christine,Dorothy,26088,40349
+prompt_f61f656e8a95a249,test,abba_meeting,ABBA,Sharon,Liam,"Because Sharon and Liam attended the meeting, Liam sent a short note to",Sharon,Liam,26918,31684
+prompt_f63b7134d92c7f31,test,abba_meeting,ABBA,Brenda,Erin,"Because Brenda and Erin attended the meeting, Erin sent a short note to",Brenda,Erin,49495,28894
+prompt_f956ec78ac7450da,test,abba_meeting,ABBA,Justin,Linda,"Because Justin and Linda attended the meeting, Linda sent a short note to",Justin,Linda,10799,21776
+prompt_fd854f9fa8737fd2,test,abba_meeting,ABBA,Christine,Denise,"Because Christine and Denise attended the meeting, Denise sent a short note to",Christine,Denise,26088,43596
+prompt_01052903a2bdfa28,test,abba_office,ABBA,Liam,Justin,"While Liam and Justin worked in the office, Justin passed a blue folder to",Liam,Justin,31684,10799
+prompt_140544cd843ee9f4,test,abba_office,ABBA,Erin,Andrea,"While Erin and Andrea worked in the office, Andrea passed a blue folder to",Erin,Andrea,28894,23174
+prompt_1aa40794731a3cfa,test,abba_office,ABBA,Brandon,Linda,"While Brandon and Linda worked in the office, Linda passed a blue folder to",Brandon,Linda,14328,21776
+prompt_1d3cc914ba0699bf,test,abba_office,ABBA,Linda,Cynthia,"While Linda and Cynthia worked in the office, Cynthia passed a blue folder to",Linda,Cynthia,21776,40897
+prompt_28b494e64aa241ad,test,abba_office,ABBA,Liam,Scott,"While Liam and Scott worked in the office, Scott passed a blue folder to",Liam,Scott,31684,4746
+prompt_3d9d8431d8e34d61,test,abba_office,ABBA,Ronald,Justin,"While Ronald and Justin worked in the office, Justin passed a blue folder to",Ronald,Justin,14430,10799
+prompt_44c4b608c8a2b58f,test,abba_office,ABBA,Scott,Ronald,"While Scott and Ronald worked in the office, Ronald passed a blue folder to",Scott,Ronald,4746,14430
+prompt_44c8c1eb1ce8b56e,test,abba_office,ABBA,Sharon,Ronald,"While Sharon and Ronald worked in the office, Ronald passed a blue folder to",Sharon,Ronald,26918,14430
+prompt_5297c3bf378cc808,test,abba_office,ABBA,Dorothy,Denise,"While Dorothy and Denise worked in the office, Denise passed a blue folder to",Dorothy,Denise,40349,43596
+prompt_5b68d7953a68ba0e,test,abba_office,ABBA,Linda,Brenda,"While Linda and Brenda worked in the office, Brenda passed a blue folder to",Linda,Brenda,21776,49495
+prompt_6b8e7898a920a5bf,test,abba_office,ABBA,Christine,Sharon,"While Christine and Sharon worked in the office, Sharon passed a blue folder to",Christine,Sharon,26088,26918
+prompt_7203979547e477e7,test,abba_office,ABBA,Denise,Scott,"While Denise and Scott worked in the office, Scott passed a blue folder to",Denise,Scott,43596,4746
+prompt_7694a80bb6a16b75,test,abba_office,ABBA,Liam,Brandon,"While Liam and Brandon worked in the office, Brandon passed a blue folder to",Liam,Brandon,31684,14328
+prompt_798183fd7ce5c6f0,test,abba_office,ABBA,Brenda,Ronald,"While Brenda and Ronald worked in the office, Ronald passed a blue folder to",Brenda,Ronald,49495,14430
+prompt_8003434bffd7c358,test,abba_office,ABBA,Alice,Erin,"While Alice and Erin worked in the office, Erin passed a blue folder to",Alice,Erin,14862,28894
+prompt_803c40901dddef19,test,abba_office,ABBA,Linda,Daniel,"While Linda and Daniel worked in the office, Daniel passed a blue folder to",Linda,Daniel,21776,7806
+prompt_85b22c4454e382cb,test,abba_office,ABBA,Sharon,Brandon,"While Sharon and Brandon worked in the office, Brandon passed a blue folder to",Sharon,Brandon,26918,14328
+prompt_8e497cabe871a5da,test,abba_office,ABBA,Linda,Dorothy,"While Linda and Dorothy worked in the office, Dorothy passed a blue folder to",Linda,Dorothy,21776,40349
+prompt_8ead765048499a66,test,abba_office,ABBA,Justin,Daniel,"While Justin and Daniel worked in the office, Daniel passed a blue folder to",Justin,Daniel,10799,7806
+prompt_8fe40f560bb51091,test,abba_office,ABBA,Erin,Cynthia,"While Erin and Cynthia worked in the office, Cynthia passed a blue folder to",Erin,Cynthia,28894,40897
+prompt_90d95ea75890e8f0,test,abba_office,ABBA,Linda,Alice,"While Linda and Alice worked in the office, Alice passed a blue folder to",Linda,Alice,21776,14862
+prompt_a637562e934e5209,test,abba_office,ABBA,Dorothy,Scott,"While Dorothy and Scott worked in the office, Scott passed a blue folder to",Dorothy,Scott,40349,4746
+prompt_ad973bf7c0c2315e,test,abba_office,ABBA,Andrea,Brenda,"While Andrea and Brenda worked in the office, Brenda passed a blue folder to",Andrea,Brenda,23174,49495
+prompt_b3a7595ab45991f2,test,abba_office,ABBA,Andrea,Linda,"While Andrea and Linda worked in the office, Linda passed a blue folder to",Andrea,Linda,23174,21776
+prompt_b4ea29a659feca8d,test,abba_office,ABBA,Justin,Scott,"While Justin and Scott worked in the office, Scott passed a blue folder to",Justin,Scott,10799,4746
+prompt_c5348a317eb0c939,test,abba_office,ABBA,Alice,Scott,"While Alice and Scott worked in the office, Scott passed a blue folder to",Alice,Scott,14862,4746
+prompt_d0223c4818fe9677,test,abba_office,ABBA,Andrea,Daniel,"While Andrea and Daniel worked in the office, Daniel passed a blue folder to",Andrea,Daniel,23174,7806
+prompt_d251157b07403ae4,test,abba_office,ABBA,Denise,Christine,"While Denise and Christine worked in the office, Christine passed a blue folder to",Denise,Christine,43596,26088
+prompt_d2a92daf076d6f27,test,abba_office,ABBA,Scott,Dorothy,"While Scott and Dorothy worked in the office, Dorothy passed a blue folder to",Scott,Dorothy,4746,40349
+prompt_ece2590dcb7dd307,test,abba_office,ABBA,Justin,Erin,"While Justin and Erin worked in the office, Erin passed a blue folder to",Justin,Erin,10799,28894
+prompt_f7254560e0208df0,test,abba_office,ABBA,Denise,Cynthia,"While Denise and Cynthia worked in the office, Cynthia passed a blue folder to",Denise,Cynthia,43596,40897
+prompt_fba165955680798d,test,abba_office,ABBA,Sharon,Dorothy,"While Sharon and Dorothy worked in the office, Dorothy passed a blue folder to",Sharon,Dorothy,26918,40349
+prompt_1034ffafc1fbe751,test,abba_park,ABBA,Liam,Brenda,"After Liam and Brenda visited the park, Brenda handed a folded map to",Liam,Brenda,31684,49495
+prompt_207b14408bc23981,test,abba_park,ABBA,Erin,Denise,"After Erin and Denise visited the park, Denise handed a folded map to",Erin,Denise,28894,43596
+prompt_213cebbac5abe692,test,abba_park,ABBA,Linda,Denise,"After Linda and Denise visited the park, Denise handed a folded map to",Linda,Denise,21776,43596
+prompt_21f72ee7157d16df,test,abba_park,ABBA,Linda,Andrea,"After Linda and Andrea visited the park, Andrea handed a folded map to",Linda,Andrea,21776,23174
+prompt_226edfafe42922cd,test,abba_park,ABBA,Daniel,Linda,"After Daniel and Linda visited the park, Linda handed a folded map to",Daniel,Linda,7806,21776
+prompt_363e41f46d32b07a,test,abba_park,ABBA,Erin,Sharon,"After Erin and Sharon visited the park, Sharon handed a folded map to",Erin,Sharon,28894,26918
+prompt_4abbe089b4e5f1f9,test,abba_park,ABBA,Daniel,Cynthia,"After Daniel and Cynthia visited the park, Cynthia handed a folded map to",Daniel,Cynthia,7806,40897
+prompt_4ffa47115fce8b70,test,abba_park,ABBA,Alice,Cynthia,"After Alice and Cynthia visited the park, Cynthia handed a folded map to",Alice,Cynthia,14862,40897
+prompt_52c428741212a9c5,test,abba_park,ABBA,Ronald,Linda,"After Ronald and Linda visited the park, Linda handed a folded map to",Ronald,Linda,14430,21776
+prompt_5efa69f02dafa5e6,test,abba_park,ABBA,Denise,Linda,"After Denise and Linda visited the park, Linda handed a folded map to",Denise,Linda,43596,21776
+prompt_60a8b7ddf1f7d49a,test,abba_park,ABBA,Erin,Andrea,"After Erin and Andrea visited the park, Andrea handed a folded map to",Erin,Andrea,28894,23174
+prompt_6915e7685fc6eae7,test,abba_park,ABBA,Daniel,Liam,"After Daniel and Liam visited the park, Liam handed a folded map to",Daniel,Liam,7806,31684
+prompt_6ad3930d102d0130,test,abba_park,ABBA,Liam,Brandon,"After Liam and Brandon visited the park, Brandon handed a folded map to",Liam,Brandon,31684,14328
+prompt_703fc576aeadefed,test,abba_park,ABBA,Ronald,Erin,"After Ronald and Erin visited the park, Erin handed a folded map to",Ronald,Erin,14430,28894
+prompt_777c92fafa050af1,test,abba_park,ABBA,Dorothy,Liam,"After Dorothy and Liam visited the park, Liam handed a folded map to",Dorothy,Liam,40349,31684
+prompt_8121713de519dde8,test,abba_park,ABBA,Andrea,Cynthia,"After Andrea and Cynthia visited the park, Cynthia handed a folded map to",Andrea,Cynthia,23174,40897
+prompt_83a4505923fed526,test,abba_park,ABBA,Denise,Andrea,"After Denise and Andrea visited the park, Andrea handed a folded map to",Denise,Andrea,43596,23174
+prompt_9504bdd05083a56f,test,abba_park,ABBA,Dorothy,Cynthia,"After Dorothy and Cynthia visited the park, Cynthia handed a folded map to",Dorothy,Cynthia,40349,40897
+prompt_98f41fc6ca525824,test,abba_park,ABBA,Christine,Scott,"After Christine and Scott visited the park, Scott handed a folded map to",Christine,Scott,26088,4746
+prompt_9b024716e07d90e3,test,abba_park,ABBA,Brandon,Alice,"After Brandon and Alice visited the park, Alice handed a folded map to",Brandon,Alice,14328,14862
+prompt_a9f6fa6b4e41144a,test,abba_park,ABBA,Cynthia,Brenda,"After Cynthia and Brenda visited the park, Brenda handed a folded map to",Cynthia,Brenda,40897,49495
+prompt_ae5268260d09b9f3,test,abba_park,ABBA,Andrea,Alice,"After Andrea and Alice visited the park, Alice handed a folded map to",Andrea,Alice,23174,14862
+prompt_ae9b534a2ea98edb,test,abba_park,ABBA,Cynthia,Sharon,"After Cynthia and Sharon visited the park, Sharon handed a folded map to",Cynthia,Sharon,40897,26918
+prompt_aef40fae8994e554,test,abba_park,ABBA,Justin,Brenda,"After Justin and Brenda visited the park, Brenda handed a folded map to",Justin,Brenda,10799,49495
+prompt_bd7c0000336253c9,test,abba_park,ABBA,Justin,Cynthia,"After Justin and Cynthia visited the park, Cynthia handed a folded map to",Justin,Cynthia,10799,40897
+prompt_c5ef7565b262e593,test,abba_park,ABBA,Dorothy,Alice,"After Dorothy and Alice visited the park, Alice handed a folded map to",Dorothy,Alice,40349,14862
+prompt_c8271cde7662a06e,test,abba_park,ABBA,Justin,Ronald,"After Justin and Ronald visited the park, Ronald handed a folded map to",Justin,Ronald,10799,14430
+prompt_ccd8048a37dc307b,test,abba_park,ABBA,Brenda,Daniel,"After Brenda and Daniel visited the park, Daniel handed a folded map to",Brenda,Daniel,49495,7806
+prompt_d1761f527ce44748,test,abba_park,ABBA,Daniel,Sharon,"After Daniel and Sharon visited the park, Sharon handed a folded map to",Daniel,Sharon,7806,26918
+prompt_e4f847e38052f159,test,abba_park,ABBA,Liam,Andrea,"After Liam and Andrea visited the park, Andrea handed a folded map to",Liam,Andrea,31684,23174
+prompt_f2c4c648fc4d360c,test,abba_park,ABBA,Daniel,Christine,"After Daniel and Christine visited the park, Christine handed a folded map to",Daniel,Christine,7806,26088
+prompt_feb2f187233fc42d,test,abba_park,ABBA,Scott,Brenda,"After Scott and Brenda visited the park, Brenda handed a folded map to",Scott,Brenda,4746,49495
+prompt_00c75d5301db83a0,test,abba_store,ABBA,Christine,Liam,"When Christine and Liam went to the store, Liam gave a bottle of milk to",Christine,Liam,26088,31684
+prompt_0b54294ae933d520,test,abba_store,ABBA,Christine,Justin,"When Christine and Justin went to the store, Justin gave a bottle of milk to",Christine,Justin,26088,10799
+prompt_18dec8e15efd344c,test,abba_store,ABBA,Linda,Justin,"When Linda and Justin went to the store, Justin gave a bottle of milk to",Linda,Justin,21776,10799
+prompt_1b0779ff6783e037,test,abba_store,ABBA,Brandon,Liam,"When Brandon and Liam went to the store, Liam gave a bottle of milk to",Brandon,Liam,14328,31684
+prompt_217ed4a89d21c0d9,test,abba_store,ABBA,Brenda,Denise,"When Brenda and Denise went to the store, Denise gave a bottle of milk to",Brenda,Denise,49495,43596
+prompt_22dfb7040415a5ab,test,abba_store,ABBA,Scott,Justin,"When Scott and Justin went to the store, Justin gave a bottle of milk to",Scott,Justin,4746,10799
+prompt_28bda9298b5fa9d1,test,abba_store,ABBA,Sharon,Linda,"When Sharon and Linda went to the store, Linda gave a bottle of milk to",Sharon,Linda,26918,21776
+prompt_328690249a1f389f,test,abba_store,ABBA,Ronald,Erin,"When Ronald and Erin went to the store, Erin gave a bottle of milk to",Ronald,Erin,14430,28894
+prompt_368b57b43b7082c3,test,abba_store,ABBA,Cynthia,Erin,"When Cynthia and Erin went to the store, Erin gave a bottle of milk to",Cynthia,Erin,40897,28894
+prompt_462db6ec463a5162,test,abba_store,ABBA,Justin,Andrea,"When Justin and Andrea went to the store, Andrea gave a bottle of milk to",Justin,Andrea,10799,23174
+prompt_4fedb764334c9b9d,test,abba_store,ABBA,Christine,Denise,"When Christine and Denise went to the store, Denise gave a bottle of milk to",Christine,Denise,26088,43596
+prompt_5392fec870f184fc,test,abba_store,ABBA,Dorothy,Liam,"When Dorothy and Liam went to the store, Liam gave a bottle of milk to",Dorothy,Liam,40349,31684
+prompt_5c76105320bb5687,test,abba_store,ABBA,Erin,Linda,"When Erin and Linda went to the store, Linda gave a bottle of milk to",Erin,Linda,28894,21776
+prompt_85a2e037c2debdff,test,abba_store,ABBA,Erin,Brenda,"When Erin and Brenda went to the store, Brenda gave a bottle of milk to",Erin,Brenda,28894,49495
+prompt_93aed8a66273fe21,test,abba_store,ABBA,Ronald,Scott,"When Ronald and Scott went to the store, Scott gave a bottle of milk to",Ronald,Scott,14430,4746
+prompt_a272cf2a9287235b,test,abba_store,ABBA,Brenda,Brandon,"When Brenda and Brandon went to the store, Brandon gave a bottle of milk to",Brenda,Brandon,49495,14328
+prompt_a28e46e03a08fcba,test,abba_store,ABBA,Ronald,Dorothy,"When Ronald and Dorothy went to the store, Dorothy gave a bottle of milk to",Ronald,Dorothy,14430,40349
+prompt_a90511161fb37cc1,test,abba_store,ABBA,Justin,Erin,"When Justin and Erin went to the store, Erin gave a bottle of milk to",Justin,Erin,10799,28894
+prompt_af14fb0153109f65,test,abba_store,ABBA,Cynthia,Sharon,"When Cynthia and Sharon went to the store, Sharon gave a bottle of milk to",Cynthia,Sharon,40897,26918
+prompt_b2bf3984695493a3,test,abba_store,ABBA,Dorothy,Brandon,"When Dorothy and Brandon went to the store, Brandon gave a bottle of milk to",Dorothy,Brandon,40349,14328
+prompt_b8bc61447315ad9e,test,abba_store,ABBA,Cynthia,Brenda,"When Cynthia and Brenda went to the store, Brenda gave a bottle of milk to",Cynthia,Brenda,40897,49495
+prompt_baae560a09363998,test,abba_store,ABBA,Daniel,Scott,"When Daniel and Scott went to the store, Scott gave a bottle of milk to",Daniel,Scott,7806,4746
+prompt_c3cd376e22d5381a,test,abba_store,ABBA,Erin,Scott,"When Erin and Scott went to the store, Scott gave a bottle of milk to",Erin,Scott,28894,4746
+prompt_c622314cf7980312,test,abba_store,ABBA,Brenda,Ronald,"When Brenda and Ronald went to the store, Ronald gave a bottle of milk to",Brenda,Ronald,49495,14430
+prompt_c653a3d417eb2148,test,abba_store,ABBA,Justin,Ronald,"When Justin and Ronald went to the store, Ronald gave a bottle of milk to",Justin,Ronald,10799,14430
+prompt_c8a87bc1975fabc0,test,abba_store,ABBA,Christine,Alice,"When Christine and Alice went to the store, Alice gave a bottle of milk to",Christine,Alice,26088,14862
+prompt_cc00e6634d400015,test,abba_store,ABBA,Brenda,Linda,"When Brenda and Linda went to the store, Linda gave a bottle of milk to",Brenda,Linda,49495,21776
+prompt_d09a21e917b6c1ad,test,abba_store,ABBA,Scott,Dorothy,"When Scott and Dorothy went to the store, Dorothy gave a bottle of milk to",Scott,Dorothy,4746,40349
+prompt_d80af8d7be19b680,test,abba_store,ABBA,Justin,Linda,"When Justin and Linda went to the store, Linda gave a bottle of milk to",Justin,Linda,10799,21776
+prompt_e4a7dbe31285c33b,test,abba_store,ABBA,Andrea,Justin,"When Andrea and Justin went to the store, Justin gave a bottle of milk to",Andrea,Justin,23174,10799
+prompt_ec79d9bc96f6e888,test,abba_store,ABBA,Brenda,Alice,"When Brenda and Alice went to the store, Alice gave a bottle of milk to",Brenda,Alice,49495,14862
+prompt_f0d8575e3cc07c9c,test,abba_store,ABBA,Brandon,Denise,"When Brandon and Denise went to the store, Denise gave a bottle of milk to",Brandon,Denise,14328,43596
+prompt_0577dedad8813a82,test,baba_meeting,BABA,Ronald,Dorothy,"Because Dorothy and Ronald attended the meeting, Dorothy sent a short note to",Ronald,Dorothy,14430,40349
+prompt_0d3f4f55cb0ab353,test,baba_meeting,BABA,Liam,Justin,"Because Justin and Liam attended the meeting, Justin sent a short note to",Liam,Justin,31684,10799
+prompt_25b8ec50108c5e67,test,baba_meeting,BABA,Linda,Ronald,"Because Ronald and Linda attended the meeting, Ronald sent a short note to",Linda,Ronald,21776,14430
+prompt_2afb7081eddc696a,test,baba_meeting,BABA,Denise,Liam,"Because Liam and Denise attended the meeting, Liam sent a short note to",Denise,Liam,43596,31684
+prompt_2efec2c3f6cfaf72,test,baba_meeting,BABA,Cynthia,Daniel,"Because Daniel and Cynthia attended the meeting, Daniel sent a short note to",Cynthia,Daniel,40897,7806
+prompt_4932a4918164a4b0,test,baba_meeting,BABA,Scott,Christine,"Because Christine and Scott attended the meeting, Christine sent a short note to",Scott,Christine,4746,26088
+prompt_510c6bfd88350ec9,test,baba_meeting,BABA,Alice,Dorothy,"Because Dorothy and Alice attended the meeting, Dorothy sent a short note to",Alice,Dorothy,14862,40349
+prompt_563be1c591acd9b5,test,baba_meeting,BABA,Denise,Christine,"Because Christine and Denise attended the meeting, Christine sent a short note to",Denise,Christine,43596,26088
+prompt_64239d329c014e3c,test,baba_meeting,BABA,Daniel,Liam,"Because Liam and Daniel attended the meeting, Liam sent a short note to",Daniel,Liam,7806,31684
+prompt_69f388a55793589f,test,baba_meeting,BABA,Dorothy,Brandon,"Because Brandon and Dorothy attended the meeting, Brandon sent a short note to",Dorothy,Brandon,40349,14328
+prompt_75fe9f35c9776f31,test,baba_meeting,BABA,Brandon,Scott,"Because Scott and Brandon attended the meeting, Scott sent a short note to",Brandon,Scott,14328,4746
+prompt_781e1e2bb5d103ba,test,baba_meeting,BABA,Christine,Alice,"Because Alice and Christine attended the meeting, Alice sent a short note to",Christine,Alice,26088,14862
+prompt_79ba538d70417e43,test,baba_meeting,BABA,Dorothy,Linda,"Because Linda and Dorothy attended the meeting, Linda sent a short note to",Dorothy,Linda,40349,21776
+prompt_7b4e7bb825c3b9d0,test,baba_meeting,BABA,Daniel,Scott,"Because Scott and Daniel attended the meeting, Scott sent a short note to",Daniel,Scott,7806,4746
+prompt_83c2cfee3b6f16a5,test,baba_meeting,BABA,Scott,Liam,"Because Liam and Scott attended the meeting, Liam sent a short note to",Scott,Liam,4746,31684
+prompt_92c658f6be863c9f,test,baba_meeting,BABA,Justin,Brandon,"Because Brandon and Justin attended the meeting, Brandon sent a short note to",Justin,Brandon,10799,14328
+prompt_a6619078d3467a37,test,baba_meeting,BABA,Daniel,Dorothy,"Because Dorothy and Daniel attended the meeting, Dorothy sent a short note to",Daniel,Dorothy,7806,40349
+prompt_a8e82995a354adad,test,baba_meeting,BABA,Brenda,Scott,"Because Scott and Brenda attended the meeting, Scott sent a short note to",Brenda,Scott,49495,4746
+prompt_af147ac5989f1aa0,test,baba_meeting,BABA,Andrea,Denise,"Because Denise and Andrea attended the meeting, Denise sent a short note to",Andrea,Denise,23174,43596
+prompt_bc1b60845fcbeb0f,test,baba_meeting,BABA,Justin,Alice,"Because Alice and Justin attended the meeting, Alice sent a short note to",Justin,Alice,10799,14862
+prompt_be5991ec1bd02b8c,test,baba_meeting,BABA,Justin,Erin,"Because Erin and Justin attended the meeting, Erin sent a short note to",Justin,Erin,10799,28894
+prompt_c38bf51f796d9691,test,baba_meeting,BABA,Linda,Dorothy,"Because Dorothy and Linda attended the meeting, Dorothy sent a short note to",Linda,Dorothy,21776,40349
+prompt_c8610586d8634dc2,test,baba_meeting,BABA,Dorothy,Liam,"Because Liam and Dorothy attended the meeting, Liam sent a short note to",Dorothy,Liam,40349,31684
+prompt_cb51ec8d631ac917,test,baba_meeting,BABA,Alice,Cynthia,"Because Cynthia and Alice attended the meeting, Cynthia sent a short note to",Alice,Cynthia,14862,40897
+prompt_d374c2346ca240b4,test,baba_meeting,BABA,Ronald,Andrea,"Because Andrea and Ronald attended the meeting, Andrea sent a short note to",Ronald,Andrea,14430,23174
+prompt_d3ed7302fdec1a55,test,baba_meeting,BABA,Andrea,Dorothy,"Because Dorothy and Andrea attended the meeting, Dorothy sent a short note to",Andrea,Dorothy,23174,40349
+prompt_d661693303b529d1,test,baba_meeting,BABA,Brandon,Brenda,"Because Brenda and Brandon attended the meeting, Brenda sent a short note to",Brandon,Brenda,14328,49495
+prompt_d8540de9fc0be4dc,test,baba_meeting,BABA,Alice,Scott,"Because Scott and Alice attended the meeting, Scott sent a short note to",Alice,Scott,14862,4746
+prompt_dcf169a49441f80b,test,baba_meeting,BABA,Denise,Brandon,"Because Brandon and Denise attended the meeting, Brandon sent a short note to",Denise,Brandon,43596,14328
+prompt_dedd1efbd84e3f6a,test,baba_meeting,BABA,Alice,Daniel,"Because Daniel and Alice attended the meeting, Daniel sent a short note to",Alice,Daniel,14862,7806
+prompt_e578b4f9e2763f73,test,baba_meeting,BABA,Ronald,Daniel,"Because Daniel and Ronald attended the meeting, Daniel sent a short note to",Ronald,Daniel,14430,7806
+prompt_f30e51e922e0c0e6,test,baba_meeting,BABA,Scott,Dorothy,"Because Dorothy and Scott attended the meeting, Dorothy sent a short note to",Scott,Dorothy,4746,40349
+prompt_03ace31e8a205122,test,baba_office,BABA,Liam,Daniel,"While Daniel and Liam worked in the office, Daniel passed a blue folder to",Liam,Daniel,31684,7806
+prompt_12ed14e835a98933,test,baba_office,BABA,Brenda,Scott,"While Scott and Brenda worked in the office, Scott passed a blue folder to",Brenda,Scott,49495,4746
+prompt_3917670b0edee12b,test,baba_office,BABA,Alice,Daniel,"While Daniel and Alice worked in the office, Daniel passed a blue folder to",Alice,Daniel,14862,7806
+prompt_489e0853342c710a,test,baba_office,BABA,Erin,Denise,"While Denise and Erin worked in the office, Denise passed a blue folder to",Erin,Denise,28894,43596
+prompt_51795fbaf6c93878,test,baba_office,BABA,Erin,Andrea,"While Andrea and Erin worked in the office, Andrea passed a blue folder to",Erin,Andrea,28894,23174
+prompt_52d3e8ae4dddf45e,test,baba_office,BABA,Brenda,Andrea,"While Andrea and Brenda worked in the office, Andrea passed a blue folder to",Brenda,Andrea,49495,23174
+prompt_5365a92e0000e939,test,baba_office,BABA,Justin,Cynthia,"While Cynthia and Justin worked in the office, Cynthia passed a blue folder to",Justin,Cynthia,10799,40897
+prompt_5fab3da57fcbe7d9,test,baba_office,BABA,Andrea,Brenda,"While Brenda and Andrea worked in the office, Brenda passed a blue folder to",Andrea,Brenda,23174,49495
+prompt_64765ddf38c8f33c,test,baba_office,BABA,Christine,Brandon,"While Brandon and Christine worked in the office, Brandon passed a blue folder to",Christine,Brandon,26088,14328
+prompt_69765ce832b59e72,test,baba_office,BABA,Alice,Denise,"While Denise and Alice worked in the office, Denise passed a blue folder to",Alice,Denise,14862,43596
+prompt_6a84d6a5055a76ab,test,baba_office,BABA,Brandon,Brenda,"While Brenda and Brandon worked in the office, Brenda passed a blue folder to",Brandon,Brenda,14328,49495
+prompt_6c7812acb8453e8c,test,baba_office,BABA,Cynthia,Liam,"While Liam and Cynthia worked in the office, Liam passed a blue folder to",Cynthia,Liam,40897,31684
+prompt_735b3e530394fe3c,test,baba_office,BABA,Christine,Daniel,"While Daniel and Christine worked in the office, Daniel passed a blue folder to",Christine,Daniel,26088,7806
+prompt_7a8272f9eda73f5c,test,baba_office,BABA,Justin,Brandon,"While Brandon and Justin worked in the office, Brandon passed a blue folder to",Justin,Brandon,10799,14328
+prompt_7dde99aa3859dcec,test,baba_office,BABA,Brandon,Cynthia,"While Cynthia and Brandon worked in the office, Cynthia passed a blue folder to",Brandon,Cynthia,14328,40897
+prompt_7f018a0c2d3d9b24,test,baba_office,BABA,Justin,Erin,"While Erin and Justin worked in the office, Erin passed a blue folder to",Justin,Erin,10799,28894
+prompt_83a6cdf35ba842e5,test,baba_office,BABA,Ronald,Liam,"While Liam and Ronald worked in the office, Liam passed a blue folder to",Ronald,Liam,14430,31684
+prompt_876394361688fe0a,test,baba_office,BABA,Linda,Daniel,"While Daniel and Linda worked in the office, Daniel passed a blue folder to",Linda,Daniel,21776,7806
+prompt_88d761d3d263d81f,test,baba_office,BABA,Brenda,Dorothy,"While Dorothy and Brenda worked in the office, Dorothy passed a blue folder to",Brenda,Dorothy,49495,40349
+prompt_9a014299f2c33eb8,test,baba_office,BABA,Ronald,Dorothy,"While Dorothy and Ronald worked in the office, Dorothy passed a blue folder to",Ronald,Dorothy,14430,40349
+prompt_9f7d0e5ab066081e,test,baba_office,BABA,Daniel,Sharon,"While Sharon and Daniel worked in the office, Sharon passed a blue folder to",Daniel,Sharon,7806,26918
+prompt_a2eb71d030e8d16a,test,baba_office,BABA,Ronald,Erin,"While Erin and Ronald worked in the office, Erin passed a blue folder to",Ronald,Erin,14430,28894
+prompt_a68c18a3eff3e0e2,test,baba_office,BABA,Andrea,Dorothy,"While Dorothy and Andrea worked in the office, Dorothy passed a blue folder to",Andrea,Dorothy,23174,40349
+prompt_aea86a0a5d8f76a6,test,baba_office,BABA,Daniel,Alice,"While Alice and Daniel worked in the office, Alice passed a blue folder to",Daniel,Alice,7806,14862
+prompt_b1b6d316c9286120,test,baba_office,BABA,Linda,Alice,"While Alice and Linda worked in the office, Alice passed a blue folder to",Linda,Alice,21776,14862
+prompt_beaa79f0ff8d3f2f,test,baba_office,BABA,Brandon,Andrea,"While Andrea and Brandon worked in the office, Andrea passed a blue folder to",Brandon,Andrea,14328,23174
+prompt_c0ce0350c4f97947,test,baba_office,BABA,Daniel,Erin,"While Erin and Daniel worked in the office, Erin passed a blue folder to",Daniel,Erin,7806,28894
+prompt_c3109bd1afbac4ea,test,baba_office,BABA,Scott,Linda,"While Linda and Scott worked in the office, Linda passed a blue folder to",Scott,Linda,4746,21776
+prompt_e8deda435a10468f,test,baba_office,BABA,Brenda,Brandon,"While Brandon and Brenda worked in the office, Brandon passed a blue folder to",Brenda,Brandon,49495,14328
+prompt_e9a8f9f2b1848592,test,baba_office,BABA,Justin,Christine,"While Christine and Justin worked in the office, Christine passed a blue folder to",Justin,Christine,10799,26088
+prompt_fa392166b4dade7e,test,baba_office,BABA,Alice,Andrea,"While Andrea and Alice worked in the office, Andrea passed a blue folder to",Alice,Andrea,14862,23174
+prompt_ffe9ea4fadb01729,test,baba_office,BABA,Brenda,Liam,"While Liam and Brenda worked in the office, Liam passed a blue folder to",Brenda,Liam,49495,31684
+prompt_0e0628b39e6cdffc,test,baba_park,BABA,Brandon,Alice,"After Alice and Brandon visited the park, Alice handed a folded map to",Brandon,Alice,14328,14862
+prompt_1311c07d79aa9ed9,test,baba_park,BABA,Denise,Dorothy,"After Dorothy and Denise visited the park, Dorothy handed a folded map to",Denise,Dorothy,43596,40349
+prompt_184cc78f7d2b0e1e,test,baba_park,BABA,Sharon,Erin,"After Erin and Sharon visited the park, Erin handed a folded map to",Sharon,Erin,26918,28894
+prompt_1c6195da95e2bc46,test,baba_park,BABA,Brenda,Erin,"After Erin and Brenda visited the park, Erin handed a folded map to",Brenda,Erin,49495,28894
+prompt_35bdffbcb4c41e1f,test,baba_park,BABA,Alice,Cynthia,"After Cynthia and Alice visited the park, Cynthia handed a folded map to",Alice,Cynthia,14862,40897
+prompt_3b08d0991e9f8469,test,baba_park,BABA,Linda,Daniel,"After Daniel and Linda visited the park, Daniel handed a folded map to",Linda,Daniel,21776,7806
+prompt_3f7f040eb524f611,test,baba_park,BABA,Alice,Denise,"After Denise and Alice visited the park, Denise handed a folded map to",Alice,Denise,14862,43596
+prompt_4316cde9695677b9,test,baba_park,BABA,Justin,Dorothy,"After Dorothy and Justin visited the park, Dorothy handed a folded map to",Justin,Dorothy,10799,40349
+prompt_499f3ac52d214023,test,baba_park,BABA,Dorothy,Cynthia,"After Cynthia and Dorothy visited the park, Cynthia handed a folded map to",Dorothy,Cynthia,40349,40897
+prompt_4a7e959e0dee5dc4,test,baba_park,BABA,Denise,Brenda,"After Brenda and Denise visited the park, Brenda handed a folded map to",Denise,Brenda,43596,49495
+prompt_58f6c8931507f934,test,baba_park,BABA,Brenda,Dorothy,"After Dorothy and Brenda visited the park, Dorothy handed a folded map to",Brenda,Dorothy,49495,40349
+prompt_63f0a075216e2c6a,test,baba_park,BABA,Dorothy,Scott,"After Scott and Dorothy visited the park, Scott handed a folded map to",Dorothy,Scott,40349,4746
+prompt_79bb050867d5e8bc,test,baba_park,BABA,Brandon,Brenda,"After Brenda and Brandon visited the park, Brenda handed a folded map to",Brandon,Brenda,14328,49495
+prompt_7b8e9ca736758857,test,baba_park,BABA,Sharon,Daniel,"After Daniel and Sharon visited the park, Daniel handed a folded map to",Sharon,Daniel,26918,7806
+prompt_805c93eea7dd5538,test,baba_park,BABA,Dorothy,Andrea,"After Andrea and Dorothy visited the park, Andrea handed a folded map to",Dorothy,Andrea,40349,23174
+prompt_8a205950072d02ed,test,baba_park,BABA,Dorothy,Justin,"After Justin and Dorothy visited the park, Justin handed a folded map to",Dorothy,Justin,40349,10799
+prompt_8cf0cf3ed0ca1545,test,baba_park,BABA,Andrea,Liam,"After Liam and Andrea visited the park, Liam handed a folded map to",Andrea,Liam,23174,31684
+prompt_a14d1ca1ee81f5ac,test,baba_park,BABA,Alice,Dorothy,"After Dorothy and Alice visited the park, Dorothy handed a folded map to",Alice,Dorothy,14862,40349
+prompt_a956f93bd9585cef,test,baba_park,BABA,Daniel,Liam,"After Liam and Daniel visited the park, Liam handed a folded map to",Daniel,Liam,7806,31684
+prompt_aa323d1c2ff291ba,test,baba_park,BABA,Christine,Alice,"After Alice and Christine visited the park, Alice handed a folded map to",Christine,Alice,26088,14862
+prompt_ac1bc10d10ef1154,test,baba_park,BABA,Daniel,Brandon,"After Brandon and Daniel visited the park, Brandon handed a folded map to",Daniel,Brandon,7806,14328
+prompt_b1a2d1656cef9eab,test,baba_park,BABA,Brandon,Erin,"After Erin and Brandon visited the park, Erin handed a folded map to",Brandon,Erin,14328,28894
+prompt_b7ae4947d9fb0b12,test,baba_park,BABA,Denise,Justin,"After Justin and Denise visited the park, Justin handed a folded map to",Denise,Justin,43596,10799
+prompt_bc77704b85a5ad41,test,baba_park,BABA,Daniel,Christine,"After Christine and Daniel visited the park, Christine handed a folded map to",Daniel,Christine,7806,26088
+prompt_bdb69cedfc504029,test,baba_park,BABA,Justin,Cynthia,"After Cynthia and Justin visited the park, Cynthia handed a folded map to",Justin,Cynthia,10799,40897
+prompt_c1cb10c9c4b70729,test,baba_park,BABA,Justin,Liam,"After Liam and Justin visited the park, Liam handed a folded map to",Justin,Liam,10799,31684
+prompt_ec1e88287fc307fc,test,baba_park,BABA,Liam,Sharon,"After Sharon and Liam visited the park, Sharon handed a folded map to",Liam,Sharon,31684,26918
+prompt_ed494c8661de6e01,test,baba_park,BABA,Scott,Andrea,"After Andrea and Scott visited the park, Andrea handed a folded map to",Scott,Andrea,4746,23174
+prompt_f326790cd8012caf,test,baba_park,BABA,Ronald,Alice,"After Alice and Ronald visited the park, Alice handed a folded map to",Ronald,Alice,14430,14862
+prompt_f7b624bc764bebfd,test,baba_park,BABA,Scott,Brenda,"After Brenda and Scott visited the park, Brenda handed a folded map to",Scott,Brenda,4746,49495
+prompt_fd039184b7108951,test,baba_park,BABA,Brandon,Christine,"After Christine and Brandon visited the park, Christine handed a folded map to",Brandon,Christine,14328,26088
+prompt_fe7609fe878a4166,test,baba_park,BABA,Scott,Cynthia,"After Cynthia and Scott visited the park, Cynthia handed a folded map to",Scott,Cynthia,4746,40897
+prompt_157f731e39f2dc4c,test,baba_store,BABA,Justin,Cynthia,"When Cynthia and Justin went to the store, Cynthia gave a bottle of milk to",Justin,Cynthia,10799,40897
+prompt_1812fd0dabbecb76,test,baba_store,BABA,Cynthia,Brandon,"When Brandon and Cynthia went to the store, Brandon gave a bottle of milk to",Cynthia,Brandon,40897,14328
+prompt_198325629994c223,test,baba_store,BABA,Denise,Brandon,"When Brandon and Denise went to the store, Brandon gave a bottle of milk to",Denise,Brandon,43596,14328
+prompt_1bbe1353a42b521d,test,baba_store,BABA,Alice,Justin,"When Justin and Alice went to the store, Justin gave a bottle of milk to",Alice,Justin,14862,10799
+prompt_1fba0f1137ee9f76,test,baba_store,BABA,Sharon,Christine,"When Christine and Sharon went to the store, Christine gave a bottle of milk to",Sharon,Christine,26918,26088
+prompt_22db91b9e7790b2f,test,baba_store,BABA,Linda,Alice,"When Alice and Linda went to the store, Alice gave a bottle of milk to",Linda,Alice,21776,14862
+prompt_271a07e7862df7a0,test,baba_store,BABA,Daniel,Liam,"When Liam and Daniel went to the store, Liam gave a bottle of milk to",Daniel,Liam,7806,31684
+prompt_33bf574c7ad10677,test,baba_store,BABA,Sharon,Brandon,"When Brandon and Sharon went to the store, Brandon gave a bottle of milk to",Sharon,Brandon,26918,14328
+prompt_38636efa786c1640,test,baba_store,BABA,Christine,Alice,"When Alice and Christine went to the store, Alice gave a bottle of milk to",Christine,Alice,26088,14862
+prompt_3a07c03632cceaf1,test,baba_store,BABA,Denise,Justin,"When Justin and Denise went to the store, Justin gave a bottle of milk to",Denise,Justin,43596,10799
+prompt_3bf7d58acc9e3a48,test,baba_store,BABA,Liam,Daniel,"When Daniel and Liam went to the store, Daniel gave a bottle of milk to",Liam,Daniel,31684,7806
+prompt_4c7709c1dbff3554,test,baba_store,BABA,Alice,Sharon,"When Sharon and Alice went to the store, Sharon gave a bottle of milk to",Alice,Sharon,14862,26918
+prompt_4d18c8bafcdfd20f,test,baba_store,BABA,Dorothy,Scott,"When Scott and Dorothy went to the store, Scott gave a bottle of milk to",Dorothy,Scott,40349,4746
+prompt_51f79edbc8ba5e44,test,baba_store,BABA,Brenda,Denise,"When Denise and Brenda went to the store, Denise gave a bottle of milk to",Brenda,Denise,49495,43596
+prompt_560fc1b9a1807a03,test,baba_store,BABA,Brandon,Brenda,"When Brenda and Brandon went to the store, Brenda gave a bottle of milk to",Brandon,Brenda,14328,49495
+prompt_577198ff0bc474d3,test,baba_store,BABA,Denise,Cynthia,"When Cynthia and Denise went to the store, Cynthia gave a bottle of milk to",Denise,Cynthia,43596,40897
+prompt_68096ceec8ce8191,test,baba_store,BABA,Linda,Christine,"When Christine and Linda went to the store, Christine gave a bottle of milk to",Linda,Christine,21776,26088
+prompt_751fbbca04c5d59c,test,baba_store,BABA,Daniel,Dorothy,"When Dorothy and Daniel went to the store, Dorothy gave a bottle of milk to",Daniel,Dorothy,7806,40349
+prompt_754a415c5b4248c2,test,baba_store,BABA,Liam,Sharon,"When Sharon and Liam went to the store, Sharon gave a bottle of milk to",Liam,Sharon,31684,26918
+prompt_7679bfccb18031ad,test,baba_store,BABA,Linda,Cynthia,"When Cynthia and Linda went to the store, Cynthia gave a bottle of milk to",Linda,Cynthia,21776,40897
+prompt_8348829be23f58be,test,baba_store,BABA,Denise,Dorothy,"When Dorothy and Denise went to the store, Dorothy gave a bottle of milk to",Denise,Dorothy,43596,40349
+prompt_8c9907897f66cf81,test,baba_store,BABA,Dorothy,Alice,"When Alice and Dorothy went to the store, Alice gave a bottle of milk to",Dorothy,Alice,40349,14862
+prompt_9002a1392e526612,test,baba_store,BABA,Daniel,Justin,"When Justin and Daniel went to the store, Justin gave a bottle of milk to",Daniel,Justin,7806,10799
+prompt_944d0baf5b539dd8,test,baba_store,BABA,Ronald,Christine,"When Christine and Ronald went to the store, Christine gave a bottle of milk to",Ronald,Christine,14430,26088
+prompt_a17b295cbe724f8f,test,baba_store,BABA,Scott,Daniel,"When Daniel and Scott went to the store, Daniel gave a bottle of milk to",Scott,Daniel,4746,7806
+prompt_a180d9711ff1012b,test,baba_store,BABA,Ronald,Justin,"When Justin and Ronald went to the store, Justin gave a bottle of milk to",Ronald,Justin,14430,10799
+prompt_aab07ec0c85f7a42,test,baba_store,BABA,Linda,Erin,"When Erin and Linda went to the store, Erin gave a bottle of milk to",Linda,Erin,21776,28894
+prompt_d497365f0f82753e,test,baba_store,BABA,Ronald,Brandon,"When Brandon and Ronald went to the store, Brandon gave a bottle of milk to",Ronald,Brandon,14430,14328
+prompt_d6615813b16292d0,test,baba_store,BABA,Brenda,Dorothy,"When Dorothy and Brenda went to the store, Dorothy gave a bottle of milk to",Brenda,Dorothy,49495,40349
+prompt_ec796f0698f77c46,test,baba_store,BABA,Cynthia,Sharon,"When Sharon and Cynthia went to the store, Sharon gave a bottle of milk to",Cynthia,Sharon,40897,26918
+prompt_f65ce76a540465e0,test,baba_store,BABA,Brandon,Liam,"When Liam and Brandon went to the store, Liam gave a bottle of milk to",Brandon,Liam,14328,31684
+prompt_f812874cda9f3364,test,baba_store,BABA,Andrea,Dorothy,"When Dorothy and Andrea went to the store, Dorothy gave a bottle of milk to",Andrea,Dorothy,23174,40349
+prompt_10f3e65985220f46,train,abba_meeting,ABBA,Stephen,Angela,"Because Stephen and Angela attended the meeting, Angela sent a short note to",Stephen,Angela,7970,17799
+prompt_120ae0a15b0b4c49,train,abba_meeting,ABBA,Angela,Eric,"Because Angela and Eric attended the meeting, Eric sent a short note to",Angela,Eric,17799,7651
+prompt_23a88fa54bda51fc,train,abba_meeting,ABBA,Bob,Nicholas,"Because Bob and Nicholas attended the meeting, Nicholas sent a short note to",Bob,Nicholas,5811,20320
+prompt_2603c84f071ec05c,train,abba_meeting,ABBA,Janet,Stephen,"Because Janet and Stephen attended the meeting, Stephen sent a short note to",Janet,Stephen,28111,7970
+prompt_2995c155f2b81c31,train,abba_meeting,ABBA,Kevin,Larry,"Because Kevin and Larry attended the meeting, Larry sent a short note to",Kevin,Larry,7939,13633
+prompt_35ac770131df66dc,train,abba_meeting,ABBA,Angela,James,"Because Angela and James attended the meeting, James sent a short note to",Angela,James,17799,3700
+prompt_365d7a764459451a,train,abba_meeting,ABBA,Laura,Brian,"Because Laura and Brian attended the meeting, Brian sent a short note to",Laura,Brian,16753,8403
+prompt_41a009d06486c4a1,train,abba_meeting,ABBA,Edward,Robert,"Because Edward and Robert attended the meeting, Robert sent a short note to",Edward,Robert,10443,5199
+prompt_465b9bddfb2efb92,train,abba_meeting,ABBA,Ann,Edward,"Because Ann and Edward attended the meeting, Edward sent a short note to",Ann,Edward,5506,10443
+prompt_6f4a7f0b4a6e6c28,train,abba_meeting,ABBA,Stephen,Bob,"Because Stephen and Bob attended the meeting, Bob sent a short note to",Stephen,Bob,7970,5811
+prompt_9c891c99d090813b,train,abba_meeting,ABBA,Eric,Nicholas,"Because Eric and Nicholas attended the meeting, Nicholas sent a short note to",Eric,Nicholas,7651,20320
+prompt_9e16e79570b7cdcb,train,abba_meeting,ABBA,Larry,Janet,"Because Larry and Janet attended the meeting, Janet sent a short note to",Larry,Janet,13633,28111
+prompt_9ee10856923304f3,train,abba_meeting,ABBA,Edward,Kevin,"Because Edward and Kevin attended the meeting, Kevin sent a short note to",Edward,Kevin,10443,7939
+prompt_a00c0a153979b31f,train,abba_meeting,ABBA,James,Ann,"Because James and Ann attended the meeting, Ann sent a short note to",James,Ann,3700,5506
+prompt_a951fd5b4e7d2628,train,abba_meeting,ABBA,Laura,Robert,"Because Laura and Robert attended the meeting, Robert sent a short note to",Laura,Robert,16753,5199
+prompt_b4212c912f8aa8e2,train,abba_meeting,ABBA,Robert,Kevin,"Because Robert and Kevin attended the meeting, Kevin sent a short note to",Robert,Kevin,5199,7939
+prompt_bb58ac651fbb8861,train,abba_meeting,ABBA,Laura,Larry,"Because Laura and Larry attended the meeting, Larry sent a short note to",Laura,Larry,16753,13633
+prompt_d0e9dfd38a3c3d2a,train,abba_meeting,ABBA,Kevin,Angela,"Because Kevin and Angela attended the meeting, Angela sent a short note to",Kevin,Angela,7939,17799
+prompt_d18a8f7ff37fe6ef,train,abba_meeting,ABBA,Kevin,Eric,"Because Kevin and Eric attended the meeting, Eric sent a short note to",Kevin,Eric,7939,7651
+prompt_da706470c8843473,train,abba_meeting,ABBA,George,Laura,"Because George and Laura attended the meeting, Laura sent a short note to",George,Laura,4502,16753
+prompt_e707124aa857e47e,train,abba_meeting,ABBA,Stephen,George,"Because Stephen and George attended the meeting, George sent a short note to",Stephen,George,7970,4502
+prompt_e89ec6a22c3387e0,train,abba_meeting,ABBA,Robert,Ann,"Because Robert and Ann attended the meeting, Ann sent a short note to",Robert,Ann,5199,5506
+prompt_ed61d9b0bd958b4f,train,abba_meeting,ABBA,Larry,Brian,"Because Larry and Brian attended the meeting, Brian sent a short note to",Larry,Brian,13633,8403
+prompt_eef5bd66d780d8b2,train,abba_meeting,ABBA,Laura,Angela,"Because Laura and Angela attended the meeting, Angela sent a short note to",Laura,Angela,16753,17799
+prompt_0c885cce3d76f599,train,abba_office,ABBA,Larry,James,"While Larry and James worked in the office, James passed a blue folder to",Larry,James,13633,3700
+prompt_240838cba312d223,train,abba_office,ABBA,Edward,Ann,"While Edward and Ann worked in the office, Ann passed a blue folder to",Edward,Ann,10443,5506
+prompt_28b2ab12df0e886e,train,abba_office,ABBA,Angela,Brian,"While Angela and Brian worked in the office, Brian passed a blue folder to",Angela,Brian,17799,8403
+prompt_2b8eac598de9cdd0,train,abba_office,ABBA,Edward,Stephen,"While Edward and Stephen worked in the office, Stephen passed a blue folder to",Edward,Stephen,10443,7970
+prompt_41f8c7744978d2b3,train,abba_office,ABBA,Stephen,Kevin,"While Stephen and Kevin worked in the office, Kevin passed a blue folder to",Stephen,Kevin,7970,7939
+prompt_4d0c27e98935038d,train,abba_office,ABBA,James,Janet,"While James and Janet worked in the office, Janet passed a blue folder to",James,Janet,3700,28111
+prompt_4ec93a6ff50cd383,train,abba_office,ABBA,Kevin,Laura,"While Kevin and Laura worked in the office, Laura passed a blue folder to",Kevin,Laura,7939,16753
+prompt_5694eefdf1125068,train,abba_office,ABBA,Ann,Kevin,"While Ann and Kevin worked in the office, Kevin passed a blue folder to",Ann,Kevin,5506,7939
+prompt_5716cf8334cb0a81,train,abba_office,ABBA,Nicholas,Angela,"While Nicholas and Angela worked in the office, Angela passed a blue folder to",Nicholas,Angela,20320,17799
+prompt_69569cde299f2eba,train,abba_office,ABBA,Janet,Henry,"While Janet and Henry worked in the office, Henry passed a blue folder to",Janet,Henry,28111,8616
+prompt_6a4fd12b15d40780,train,abba_office,ABBA,George,James,"While George and James worked in the office, James passed a blue folder to",George,James,4502,3700
+prompt_6e30ab599ac8930e,train,abba_office,ABBA,James,Kevin,"While James and Kevin worked in the office, Kevin passed a blue folder to",James,Kevin,3700,7939
+prompt_721917517c46082f,train,abba_office,ABBA,Brian,Angela,"While Brian and Angela worked in the office, Angela passed a blue folder to",Brian,Angela,8403,17799
+prompt_8229209f43d016e5,train,abba_office,ABBA,Angela,Eric,"While Angela and Eric worked in the office, Eric passed a blue folder to",Angela,Eric,17799,7651
+prompt_8433587cc95c7d0c,train,abba_office,ABBA,Robert,Kevin,"While Robert and Kevin worked in the office, Kevin passed a blue folder to",Robert,Kevin,5199,7939
+prompt_8b6c112e26f93564,train,abba_office,ABBA,Laura,Janet,"While Laura and Janet worked in the office, Janet passed a blue folder to",Laura,Janet,16753,28111
+prompt_97ffcede70c31c67,train,abba_office,ABBA,Bob,Robert,"While Bob and Robert worked in the office, Robert passed a blue folder to",Bob,Robert,5811,5199
+prompt_9eaf1b436b38b5d5,train,abba_office,ABBA,Henry,Nicholas,"While Henry and Nicholas worked in the office, Nicholas passed a blue folder to",Henry,Nicholas,8616,20320
+prompt_a104026c50dc52a5,train,abba_office,ABBA,James,Larry,"While James and Larry worked in the office, Larry passed a blue folder to",James,Larry,3700,13633
+prompt_a1546cf8b5e350f2,train,abba_office,ABBA,George,Nicholas,"While George and Nicholas worked in the office, Nicholas passed a blue folder to",George,Nicholas,4502,20320
+prompt_aaaf5c2b5a867683,train,abba_office,ABBA,Edward,Janet,"While Edward and Janet worked in the office, Janet passed a blue folder to",Edward,Janet,10443,28111
+prompt_dd99e9e637e6535f,train,abba_office,ABBA,Edward,Eric,"While Edward and Eric worked in the office, Eric passed a blue folder to",Edward,Eric,10443,7651
+prompt_df4b93000b99fd11,train,abba_office,ABBA,Angela,Laura,"While Angela and Laura worked in the office, Laura passed a blue folder to",Angela,Laura,17799,16753
+prompt_e90e4b470eecea50,train,abba_office,ABBA,Eric,Kevin,"While Eric and Kevin worked in the office, Kevin passed a blue folder to",Eric,Kevin,7651,7939
+prompt_03c2cc92b3c4af97,train,abba_park,ABBA,James,Larry,"After James and Larry visited the park, Larry handed a folded map to",James,Larry,3700,13633
+prompt_0b4a606e686e16cd,train,abba_park,ABBA,Janet,George,"After Janet and George visited the park, George handed a folded map to",Janet,George,28111,4502
+prompt_0b7a95cb5bc2f264,train,abba_park,ABBA,Edward,Nicholas,"After Edward and Nicholas visited the park, Nicholas handed a folded map to",Edward,Nicholas,10443,20320
+prompt_1b38dd8782de55f1,train,abba_park,ABBA,Edward,Janet,"After Edward and Janet visited the park, Janet handed a folded map to",Edward,Janet,10443,28111
+prompt_2191f771cbfe55b7,train,abba_park,ABBA,Robert,George,"After Robert and George visited the park, George handed a folded map to",Robert,George,5199,4502
+prompt_3817aa98d9816869,train,abba_park,ABBA,Nicholas,Bob,"After Nicholas and Bob visited the park, Bob handed a folded map to",Nicholas,Bob,20320,5811
+prompt_4035ab5e6b42076a,train,abba_park,ABBA,Nicholas,Angela,"After Nicholas and Angela visited the park, Angela handed a folded map to",Nicholas,Angela,20320,17799
+prompt_41d456092bf8742b,train,abba_park,ABBA,Ann,George,"After Ann and George visited the park, George handed a folded map to",Ann,George,5506,4502
+prompt_4f2cb3493a1d4db2,train,abba_park,ABBA,Brian,Henry,"After Brian and Henry visited the park, Henry handed a folded map to",Brian,Henry,8403,8616
+prompt_6046138106bc1e87,train,abba_park,ABBA,Bob,Ann,"After Bob and Ann visited the park, Ann handed a folded map to",Bob,Ann,5811,5506
+prompt_64a1a0d989a75ae1,train,abba_park,ABBA,Kevin,Brian,"After Kevin and Brian visited the park, Brian handed a folded map to",Kevin,Brian,7939,8403
+prompt_6fc2c50498a538da,train,abba_park,ABBA,Angela,Henry,"After Angela and Henry visited the park, Henry handed a folded map to",Angela,Henry,17799,8616
+prompt_8432c882f29cad0d,train,abba_park,ABBA,Edward,Laura,"After Edward and Laura visited the park, Laura handed a folded map to",Edward,Laura,10443,16753
+prompt_90a6f4ecd7844a6e,train,abba_park,ABBA,Ann,Bob,"After Ann and Bob visited the park, Bob handed a folded map to",Ann,Bob,5506,5811
+prompt_972229987a42600c,train,abba_park,ABBA,Robert,Kevin,"After Robert and Kevin visited the park, Kevin handed a folded map to",Robert,Kevin,5199,7939
+prompt_a3dd993e12c62816,train,abba_park,ABBA,Stephen,Kevin,"After Stephen and Kevin visited the park, Kevin handed a folded map to",Stephen,Kevin,7970,7939
+prompt_af1127d82d4bac08,train,abba_park,ABBA,Eric,Stephen,"After Eric and Stephen visited the park, Stephen handed a folded map to",Eric,Stephen,7651,7970
+prompt_b6089e09068efd18,train,abba_park,ABBA,Nicholas,Janet,"After Nicholas and Janet visited the park, Janet handed a folded map to",Nicholas,Janet,20320,28111
+prompt_b6a9447e4a090fb4,train,abba_park,ABBA,Robert,Bob,"After Robert and Bob visited the park, Bob handed a folded map to",Robert,Bob,5199,5811
+prompt_baa295453883a92b,train,abba_park,ABBA,Bob,Janet,"After Bob and Janet visited the park, Janet handed a folded map to",Bob,Janet,5811,28111
+prompt_c808202af5317ffb,train,abba_park,ABBA,Henry,Kevin,"After Henry and Kevin visited the park, Kevin handed a folded map to",Henry,Kevin,8616,7939
+prompt_da13249de803f474,train,abba_park,ABBA,Stephen,James,"After Stephen and James visited the park, James handed a folded map to",Stephen,James,7970,3700
+prompt_ea5408ad8574b940,train,abba_park,ABBA,Brian,Laura,"After Brian and Laura visited the park, Laura handed a folded map to",Brian,Laura,8403,16753
+prompt_f0dc0c0ca345b5a2,train,abba_park,ABBA,Laura,James,"After Laura and James visited the park, James handed a folded map to",Laura,James,16753,3700
+prompt_082cd583e65ba522,train,abba_store,ABBA,Kevin,Henry,"When Kevin and Henry went to the store, Henry gave a bottle of milk to",Kevin,Henry,7939,8616
+prompt_175c9f41c77f7c8a,train,abba_store,ABBA,Janet,Brian,"When Janet and Brian went to the store, Brian gave a bottle of milk to",Janet,Brian,28111,8403
+prompt_232f47178a7a2086,train,abba_store,ABBA,Larry,Brian,"When Larry and Brian went to the store, Brian gave a bottle of milk to",Larry,Brian,13633,8403
+prompt_41b4bf9129fec0e1,train,abba_store,ABBA,Ann,James,"When Ann and James went to the store, James gave a bottle of milk to",Ann,James,5506,3700
+prompt_45f7220f5104f1e1,train,abba_store,ABBA,Janet,Nicholas,"When Janet and Nicholas went to the store, Nicholas gave a bottle of milk to",Janet,Nicholas,28111,20320
+prompt_48bd9f7be95f7a9f,train,abba_store,ABBA,Angela,James,"When Angela and James went to the store, James gave a bottle of milk to",Angela,James,17799,3700
+prompt_574c11f64315f17a,train,abba_store,ABBA,Brian,Angela,"When Brian and Angela went to the store, Angela gave a bottle of milk to",Brian,Angela,8403,17799
+prompt_5fa45a5453b67009,train,abba_store,ABBA,Kevin,Ann,"When Kevin and Ann went to the store, Ann gave a bottle of milk to",Kevin,Ann,7939,5506
+prompt_6fe06ce42dec5110,train,abba_store,ABBA,Bob,Edward,"When Bob and Edward went to the store, Edward gave a bottle of milk to",Bob,Edward,5811,10443
+prompt_743c532dde979864,train,abba_store,ABBA,Robert,Larry,"When Robert and Larry went to the store, Larry gave a bottle of milk to",Robert,Larry,5199,13633
+prompt_8b95f90971e6ca7d,train,abba_store,ABBA,James,Laura,"When James and Laura went to the store, Laura gave a bottle of milk to",James,Laura,3700,16753
+prompt_8c5e9acc66ccd832,train,abba_store,ABBA,Angela,Bob,"When Angela and Bob went to the store, Bob gave a bottle of milk to",Angela,Bob,17799,5811
+prompt_8f1d3d76cf333310,train,abba_store,ABBA,Stephen,Bob,"When Stephen and Bob went to the store, Bob gave a bottle of milk to",Stephen,Bob,7970,5811
+prompt_91299fd19d502ae2,train,abba_store,ABBA,Eric,Janet,"When Eric and Janet went to the store, Janet gave a bottle of milk to",Eric,Janet,7651,28111
+prompt_925794d21fd4d416,train,abba_store,ABBA,Janet,Robert,"When Janet and Robert went to the store, Robert gave a bottle of milk to",Janet,Robert,28111,5199
+prompt_9c81cf44e14faa0e,train,abba_store,ABBA,Laura,George,"When Laura and George went to the store, George gave a bottle of milk to",Laura,George,16753,4502
+prompt_a5912fbd45f5ac26,train,abba_store,ABBA,Stephen,Henry,"When Stephen and Henry went to the store, Henry gave a bottle of milk to",Stephen,Henry,7970,8616
+prompt_a7496f4d0d51de8d,train,abba_store,ABBA,Robert,Nicholas,"When Robert and Nicholas went to the store, Nicholas gave a bottle of milk to",Robert,Nicholas,5199,20320
+prompt_b0153651e2378ce0,train,abba_store,ABBA,Laura,Ann,"When Laura and Ann went to the store, Ann gave a bottle of milk to",Laura,Ann,16753,5506
+prompt_c59d2be2c44766aa,train,abba_store,ABBA,Stephen,Kevin,"When Stephen and Kevin went to the store, Kevin gave a bottle of milk to",Stephen,Kevin,7970,7939
+prompt_ce9044281f769855,train,abba_store,ABBA,Angela,Ann,"When Angela and Ann went to the store, Ann gave a bottle of milk to",Angela,Ann,17799,5506
+prompt_ea9b0516073efd2f,train,abba_store,ABBA,James,Bob,"When James and Bob went to the store, Bob gave a bottle of milk to",James,Bob,3700,5811
+prompt_fb1b66e40836b29d,train,abba_store,ABBA,Janet,Ann,"When Janet and Ann went to the store, Ann gave a bottle of milk to",Janet,Ann,28111,5506
+prompt_ff018caac0aeee6f,train,abba_store,ABBA,Edward,George,"When Edward and George went to the store, George gave a bottle of milk to",Edward,George,10443,4502
+prompt_06ba47cc91be578f,train,baba_meeting,BABA,Stephen,Ann,"Because Ann and Stephen attended the meeting, Ann sent a short note to",Stephen,Ann,7970,5506
+prompt_092bb7921d6d0ccf,train,baba_meeting,BABA,Eric,Janet,"Because Janet and Eric attended the meeting, Janet sent a short note to",Eric,Janet,7651,28111
+prompt_0bf3d5e7b5724610,train,baba_meeting,BABA,Stephen,Henry,"Because Henry and Stephen attended the meeting, Henry sent a short note to",Stephen,Henry,7970,8616
+prompt_1a157b68d3052e8c,train,baba_meeting,BABA,Ann,Kevin,"Because Kevin and Ann attended the meeting, Kevin sent a short note to",Ann,Kevin,5506,7939
+prompt_246ce7a746612ad4,train,baba_meeting,BABA,George,Henry,"Because Henry and George attended the meeting, Henry sent a short note to",George,Henry,4502,8616
+prompt_27404b8a619982e7,train,baba_meeting,BABA,Ann,James,"Because James and Ann attended the meeting, James sent a short note to",Ann,James,5506,3700
+prompt_28fdac515b273d8d,train,baba_meeting,BABA,Stephen,Edward,"Because Edward and Stephen attended the meeting, Edward sent a short note to",Stephen,Edward,7970,10443
+prompt_35cad693944053d4,train,baba_meeting,BABA,James,Laura,"Because Laura and James attended the meeting, Laura sent a short note to",James,Laura,3700,16753
+prompt_3fc7c55f47163bf4,train,baba_meeting,BABA,Edward,Laura,"Because Laura and Edward attended the meeting, Laura sent a short note to",Edward,Laura,10443,16753
+prompt_4154fe8b7e3a9074,train,baba_meeting,BABA,Bob,Brian,"Because Brian and Bob attended the meeting, Brian sent a short note to",Bob,Brian,5811,8403
+prompt_42d352af47ade278,train,baba_meeting,BABA,George,Edward,"Because Edward and George attended the meeting, Edward sent a short note to",George,Edward,4502,10443
+prompt_47b9ac820996358e,train,baba_meeting,BABA,Robert,George,"Because George and Robert attended the meeting, George sent a short note to",Robert,George,5199,4502
+prompt_5620743466d953be,train,baba_meeting,BABA,Ann,Nicholas,"Because Nicholas and Ann attended the meeting, Nicholas sent a short note to",Ann,Nicholas,5506,20320
+prompt_5d5470c07f34282d,train,baba_meeting,BABA,Larry,Bob,"Because Bob and Larry attended the meeting, Bob sent a short note to",Larry,Bob,13633,5811
+prompt_9a9229edb2c4e8bb,train,baba_meeting,BABA,Stephen,Robert,"Because Robert and Stephen attended the meeting, Robert sent a short note to",Stephen,Robert,7970,5199
+prompt_9e435258259f8c9c,train,baba_meeting,BABA,George,Kevin,"Because Kevin and George attended the meeting, Kevin sent a short note to",George,Kevin,4502,7939
+prompt_a12e70632fd17433,train,baba_meeting,BABA,Robert,Angela,"Because Angela and Robert attended the meeting, Angela sent a short note to",Robert,Angela,5199,17799
+prompt_aefaa4826ea56803,train,baba_meeting,BABA,George,Ann,"Because Ann and George attended the meeting, Ann sent a short note to",George,Ann,4502,5506
+prompt_b32c6091c9b5e1c0,train,baba_meeting,BABA,Bob,James,"Because James and Bob attended the meeting, James sent a short note to",Bob,James,5811,3700
+prompt_b7934fc729c54edd,train,baba_meeting,BABA,Janet,Eric,"Because Eric and Janet attended the meeting, Eric sent a short note to",Janet,Eric,28111,7651
+prompt_bbe9952b51401fed,train,baba_meeting,BABA,Brian,Larry,"Because Larry and Brian attended the meeting, Larry sent a short note to",Brian,Larry,8403,13633
+prompt_c4343166e8522d0f,train,baba_meeting,BABA,Bob,Robert,"Because Robert and Bob attended the meeting, Robert sent a short note to",Bob,Robert,5811,5199
+prompt_c92edeb80ff731e4,train,baba_meeting,BABA,George,James,"Because James and George attended the meeting, James sent a short note to",George,James,4502,3700
+prompt_f54dc58dbd24d459,train,baba_meeting,BABA,Kevin,Janet,"Because Janet and Kevin attended the meeting, Janet sent a short note to",Kevin,Janet,7939,28111
+prompt_02b8142a3986072c,train,baba_office,BABA,Janet,Robert,"While Robert and Janet worked in the office, Robert passed a blue folder to",Janet,Robert,28111,5199
+prompt_1d1c13a6c59fc438,train,baba_office,BABA,Brian,Edward,"While Edward and Brian worked in the office, Edward passed a blue folder to",Brian,Edward,8403,10443
+prompt_23e40b0ef2496b59,train,baba_office,BABA,James,Kevin,"While Kevin and James worked in the office, Kevin passed a blue folder to",James,Kevin,3700,7939
+prompt_2416c77d3d194003,train,baba_office,BABA,Edward,Larry,"While Larry and Edward worked in the office, Larry passed a blue folder to",Edward,Larry,10443,13633
+prompt_2434f8b08301e314,train,baba_office,BABA,Kevin,Laura,"While Laura and Kevin worked in the office, Laura passed a blue folder to",Kevin,Laura,7939,16753
+prompt_28263bb86c03107d,train,baba_office,BABA,Eric,Angela,"While Angela and Eric worked in the office, Angela passed a blue folder to",Eric,Angela,7651,17799
+prompt_2d0763c6242efa07,train,baba_office,BABA,James,Nicholas,"While Nicholas and James worked in the office, Nicholas passed a blue folder to",James,Nicholas,3700,20320
+prompt_2daa2d3708a0938c,train,baba_office,BABA,Ann,Angela,"While Angela and Ann worked in the office, Angela passed a blue folder to",Ann,Angela,5506,17799
+prompt_2f8eda391830bcdf,train,baba_office,BABA,Angela,James,"While James and Angela worked in the office, James passed a blue folder to",Angela,James,17799,3700
+prompt_330dd12092936c37,train,baba_office,BABA,Kevin,Angela,"While Angela and Kevin worked in the office, Angela passed a blue folder to",Kevin,Angela,7939,17799
+prompt_400b3556a1d5c57f,train,baba_office,BABA,Angela,Henry,"While Henry and Angela worked in the office, Henry passed a blue folder to",Angela,Henry,17799,8616
+prompt_404ec80f15bfe572,train,baba_office,BABA,Bob,Angela,"While Angela and Bob worked in the office, Angela passed a blue folder to",Bob,Angela,5811,17799
+prompt_49b17c4c439f4f80,train,baba_office,BABA,Larry,Eric,"While Eric and Larry worked in the office, Eric passed a blue folder to",Larry,Eric,13633,7651
+prompt_59f057187b3b2b14,train,baba_office,BABA,Eric,James,"While James and Eric worked in the office, James passed a blue folder to",Eric,James,7651,3700
+prompt_60cc1d0dc9ef45ba,train,baba_office,BABA,Brian,Eric,"While Eric and Brian worked in the office, Eric passed a blue folder to",Brian,Eric,8403,7651
+prompt_6f019220e5d05793,train,baba_office,BABA,Edward,Bob,"While Bob and Edward worked in the office, Bob passed a blue folder to",Edward,Bob,10443,5811
+prompt_729e98df166fc62b,train,baba_office,BABA,Ann,Edward,"While Edward and Ann worked in the office, Edward passed a blue folder to",Ann,Edward,5506,10443
+prompt_7503710b414c5037,train,baba_office,BABA,Larry,Angela,"While Angela and Larry worked in the office, Angela passed a blue folder to",Larry,Angela,13633,17799
+prompt_92ccb96e72369588,train,baba_office,BABA,Ann,Bob,"While Bob and Ann worked in the office, Bob passed a blue folder to",Ann,Bob,5506,5811
+prompt_a4fcc4ca5e1529ae,train,baba_office,BABA,Brian,Henry,"While Henry and Brian worked in the office, Henry passed a blue folder to",Brian,Henry,8403,8616
+prompt_ce069e8e027cbb67,train,baba_office,BABA,Henry,Angela,"While Angela and Henry worked in the office, Angela passed a blue folder to",Henry,Angela,8616,17799
+prompt_e23727e1d1a6e952,train,baba_office,BABA,Henry,Stephen,"While Stephen and Henry worked in the office, Stephen passed a blue folder to",Henry,Stephen,8616,7970
+prompt_f807e331582f9b25,train,baba_office,BABA,George,James,"While James and George worked in the office, James passed a blue folder to",George,James,4502,3700
+prompt_fbd22e8ca45b956e,train,baba_office,BABA,Angela,Laura,"While Laura and Angela worked in the office, Laura passed a blue folder to",Angela,Laura,17799,16753
+prompt_0ad4ccbcb832a46a,train,baba_park,BABA,Stephen,Ann,"After Ann and Stephen visited the park, Ann handed a folded map to",Stephen,Ann,7970,5506
+prompt_0ae86ee8d1056640,train,baba_park,BABA,Nicholas,George,"After George and Nicholas visited the park, George handed a folded map to",Nicholas,George,20320,4502
+prompt_196251653b8bc37d,train,baba_park,BABA,Janet,Brian,"After Brian and Janet visited the park, Brian handed a folded map to",Janet,Brian,28111,8403
+prompt_1f87b7ad47cde586,train,baba_park,BABA,Brian,Stephen,"After Stephen and Brian visited the park, Stephen handed a folded map to",Brian,Stephen,8403,7970
+prompt_23d8483cf1b1d7f0,train,baba_park,BABA,Ann,Nicholas,"After Nicholas and Ann visited the park, Nicholas handed a folded map to",Ann,Nicholas,5506,20320
+prompt_292c562c18010634,train,baba_park,BABA,Henry,Robert,"After Robert and Henry visited the park, Robert handed a folded map to",Henry,Robert,8616,5199
+prompt_3ae500c0a93e3681,train,baba_park,BABA,Stephen,Edward,"After Edward and Stephen visited the park, Edward handed a folded map to",Stephen,Edward,7970,10443
+prompt_451c8197e0f05c87,train,baba_park,BABA,Henry,Stephen,"After Stephen and Henry visited the park, Stephen handed a folded map to",Henry,Stephen,8616,7970
+prompt_475fe32b8407c51a,train,baba_park,BABA,James,Kevin,"After Kevin and James visited the park, Kevin handed a folded map to",James,Kevin,3700,7939
+prompt_511ddbf5418078bd,train,baba_park,BABA,Nicholas,Henry,"After Henry and Nicholas visited the park, Henry handed a folded map to",Nicholas,Henry,20320,8616
+prompt_51aebd57a3bdc655,train,baba_park,BABA,Larry,Laura,"After Laura and Larry visited the park, Laura handed a folded map to",Larry,Laura,13633,16753
+prompt_57d932682dd9b02a,train,baba_park,BABA,Henry,Angela,"After Angela and Henry visited the park, Angela handed a folded map to",Henry,Angela,8616,17799
+prompt_58b37e8a753bf2eb,train,baba_park,BABA,Angela,Larry,"After Larry and Angela visited the park, Larry handed a folded map to",Angela,Larry,17799,13633
+prompt_5b6374c660288b19,train,baba_park,BABA,Angela,Janet,"After Janet and Angela visited the park, Janet handed a folded map to",Angela,Janet,17799,28111
+prompt_6f99d0d42fd37289,train,baba_park,BABA,Janet,George,"After George and Janet visited the park, George handed a folded map to",Janet,George,28111,4502
+prompt_768395ea04718590,train,baba_park,BABA,Ann,Edward,"After Edward and Ann visited the park, Edward handed a folded map to",Ann,Edward,5506,10443
+prompt_9f6da68aa8967bc1,train,baba_park,BABA,Ann,Angela,"After Angela and Ann visited the park, Angela handed a folded map to",Ann,Angela,5506,17799
+prompt_a3d11c97d716072c,train,baba_park,BABA,Henry,George,"After George and Henry visited the park, George handed a folded map to",Henry,George,8616,4502
+prompt_a840ca15459ae530,train,baba_park,BABA,Ann,Janet,"After Janet and Ann visited the park, Janet handed a folded map to",Ann,Janet,5506,28111
+prompt_c0cfdd73f7fb92df,train,baba_park,BABA,James,Angela,"After Angela and James visited the park, Angela handed a folded map to",James,Angela,3700,17799
+prompt_da5fdee9f4390f51,train,baba_park,BABA,Laura,Edward,"After Edward and Laura visited the park, Edward handed a folded map to",Laura,Edward,16753,10443
+prompt_f610b160f3a1739f,train,baba_park,BABA,Edward,Robert,"After Robert and Edward visited the park, Robert handed a folded map to",Edward,Robert,10443,5199
+prompt_fa4bf63f5cf8d52d,train,baba_park,BABA,Angela,Kevin,"After Kevin and Angela visited the park, Kevin handed a folded map to",Angela,Kevin,17799,7939
+prompt_fe5dd3ec8b9a326f,train,baba_park,BABA,Janet,Edward,"After Edward and Janet visited the park, Edward handed a folded map to",Janet,Edward,28111,10443
+prompt_00207f46b214298a,train,baba_store,BABA,George,Angela,"When Angela and George went to the store, Angela gave a bottle of milk to",George,Angela,4502,17799
+prompt_00fce069f419a397,train,baba_store,BABA,James,Edward,"When Edward and James went to the store, Edward gave a bottle of milk to",James,Edward,3700,10443
+prompt_0458e1741d5dd6d9,train,baba_store,BABA,Janet,Laura,"When Laura and Janet went to the store, Laura gave a bottle of milk to",Janet,Laura,28111,16753
+prompt_2e627607d58e0240,train,baba_store,BABA,Janet,Nicholas,"When Nicholas and Janet went to the store, Nicholas gave a bottle of milk to",Janet,Nicholas,28111,20320
+prompt_3af19f18342e341e,train,baba_store,BABA,Janet,Brian,"When Brian and Janet went to the store, Brian gave a bottle of milk to",Janet,Brian,28111,8403
+prompt_3c98864b4b471084,train,baba_store,BABA,Henry,Eric,"When Eric and Henry went to the store, Eric gave a bottle of milk to",Henry,Eric,8616,7651
+prompt_43883cd99c6e0cf3,train,baba_store,BABA,Nicholas,Edward,"When Edward and Nicholas went to the store, Edward gave a bottle of milk to",Nicholas,Edward,20320,10443
+prompt_4f5fef81d1bb8bd6,train,baba_store,BABA,George,Henry,"When Henry and George went to the store, Henry gave a bottle of milk to",George,Henry,4502,8616
+prompt_5db34d94c7fbeda7,train,baba_store,BABA,Laura,Kevin,"When Kevin and Laura went to the store, Kevin gave a bottle of milk to",Laura,Kevin,16753,7939
+prompt_7447a0355d2e611e,train,baba_store,BABA,Henry,Kevin,"When Kevin and Henry went to the store, Kevin gave a bottle of milk to",Henry,Kevin,8616,7939
+prompt_7c7dffdd9104dc7b,train,baba_store,BABA,Brian,Nicholas,"When Nicholas and Brian went to the store, Nicholas gave a bottle of milk to",Brian,Nicholas,8403,20320
+prompt_80f794fc19c6e187,train,baba_store,BABA,Bob,James,"When James and Bob went to the store, James gave a bottle of milk to",Bob,James,5811,3700
+prompt_815039d3fbe4ea71,train,baba_store,BABA,Ann,Angela,"When Angela and Ann went to the store, Angela gave a bottle of milk to",Ann,Angela,5506,17799
+prompt_8af5ee5dd861bc80,train,baba_store,BABA,Kevin,Janet,"When Janet and Kevin went to the store, Janet gave a bottle of milk to",Kevin,Janet,7939,28111
+prompt_a0b3d005379d3bd6,train,baba_store,BABA,Laura,James,"When James and Laura went to the store, James gave a bottle of milk to",Laura,James,16753,3700
+prompt_a6b0977808aab075,train,baba_store,BABA,Stephen,Edward,"When Edward and Stephen went to the store, Edward gave a bottle of milk to",Stephen,Edward,7970,10443
+prompt_b9e11cb109a9ceaf,train,baba_store,BABA,Henry,James,"When James and Henry went to the store, James gave a bottle of milk to",Henry,James,8616,3700
+prompt_c82dfacd5d4817b0,train,baba_store,BABA,Edward,Nicholas,"When Nicholas and Edward went to the store, Nicholas gave a bottle of milk to",Edward,Nicholas,10443,20320
+prompt_cac0e41d95402235,train,baba_store,BABA,Ann,Bob,"When Bob and Ann went to the store, Bob gave a bottle of milk to",Ann,Bob,5506,5811
+prompt_cde22754860480b4,train,baba_store,BABA,Brian,Ann,"When Ann and Brian went to the store, Ann gave a bottle of milk to",Brian,Ann,8403,5506
+prompt_d22f94403547e62f,train,baba_store,BABA,Henry,Laura,"When Laura and Henry went to the store, Laura gave a bottle of milk to",Henry,Laura,8616,16753
+prompt_e25909392bcf4bbc,train,baba_store,BABA,Bob,Nicholas,"When Nicholas and Bob went to the store, Nicholas gave a bottle of milk to",Bob,Nicholas,5811,20320
+prompt_ef51f99b001a28c1,train,baba_store,BABA,Edward,James,"When James and Edward went to the store, James gave a bottle of milk to",Edward,James,10443,3700
+prompt_fe372d9150e6c7b7,train,baba_store,BABA,Ann,Eric,"When Eric and Ann went to the store, Eric gave a bottle of milk to",Ann,Eric,5506,7651
+prompt_1d9445e5e3e812b1,validation,abba_meeting,ABBA,David,Grace,"Because David and Grace attended the meeting, Grace sent a short note to",David,Grace,3271,16156
+prompt_69c6cc282473e733,validation,abba_meeting,ABBA,Grace,David,"Because Grace and David attended the meeting, David sent a short note to",Grace,David,16156,3271
+prompt_71ad1b4bdaece2a0,validation,abba_meeting,ABBA,Jeff,Kate,"Because Jeff and Kate attended the meeting, Kate sent a short note to",Jeff,Kate,5502,16693
+prompt_7e135ddb1dd4b323,validation,abba_meeting,ABBA,Gloria,Frank,"Because Gloria and Frank attended the meeting, Frank sent a short note to",Gloria,Frank,38109,5278
+prompt_ac68974532ca6a7c,validation,abba_meeting,ABBA,David,Karen,"Because David and Karen attended the meeting, Karen sent a short note to",David,Karen,3271,18678
+prompt_eb42a940ca52b121,validation,abba_meeting,ABBA,Matthew,Samuel,"Because Matthew and Samuel attended the meeting, Samuel sent a short note to",Matthew,Samuel,9308,17100
+prompt_f19efd5e6636b186,validation,abba_meeting,ABBA,Jeff,Frank,"Because Jeff and Frank attended the meeting, Frank sent a short note to",Jeff,Frank,5502,5278
+prompt_f9daafa18211df25,validation,abba_meeting,ABBA,Samuel,Diana,"Because Samuel and Diana attended the meeting, Diana sent a short note to",Samuel,Diana,17100,25752
+prompt_021687fc5164641f,validation,abba_office,ABBA,Grace,Gary,"While Grace and Gary worked in the office, Gary passed a blue folder to",Grace,Gary,16156,10936
+prompt_0741d0b1fe6eb38f,validation,abba_office,ABBA,Kate,Jack,"While Kate and Jack worked in the office, Jack passed a blue folder to",Kate,Jack,16693,3619
+prompt_3c60c620ad13f4d9,validation,abba_office,ABBA,Samuel,Jack,"While Samuel and Jack worked in the office, Jack passed a blue folder to",Samuel,Jack,17100,3619
+prompt_41fa064fca716559,validation,abba_office,ABBA,Gloria,Frank,"While Gloria and Frank worked in the office, Frank passed a blue folder to",Gloria,Frank,38109,5278
+prompt_5293b98028388e7d,validation,abba_office,ABBA,Kate,Diana,"While Kate and Diana worked in the office, Diana passed a blue folder to",Kate,Diana,16693,25752
+prompt_548c6b634744a586,validation,abba_office,ABBA,Jack,William,"While Jack and William worked in the office, William passed a blue folder to",Jack,William,3619,3977
+prompt_a3c80a51acc5111f,validation,abba_office,ABBA,Dave,Grace,"While Dave and Grace worked in the office, Grace passed a blue folder to",Dave,Grace,9935,16156
+prompt_e7c25364fb87b492,validation,abba_office,ABBA,Deborah,Frank,"While Deborah and Frank worked in the office, Frank passed a blue folder to",Deborah,Frank,36976,5278
+prompt_05a34e1447f29d0e,validation,abba_park,ABBA,Gloria,Kate,"After Gloria and Kate visited the park, Kate handed a folded map to",Gloria,Kate,38109,16693
+prompt_334138e52c5d3473,validation,abba_park,ABBA,Jack,Betty,"After Jack and Betty visited the park, Betty handed a folded map to",Jack,Betty,3619,29504
+prompt_64acc954a3d8f136,validation,abba_park,ABBA,Gary,Samuel,"After Gary and Samuel visited the park, Samuel handed a folded map to",Gary,Samuel,10936,17100
+prompt_68fd66bfe60d24ee,validation,abba_park,ABBA,Betty,Jack,"After Betty and Jack visited the park, Jack handed a folded map to",Betty,Jack,29504,3619
+prompt_77b846ed5fa372b5,validation,abba_park,ABBA,David,Karen,"After David and Karen visited the park, Karen handed a folded map to",David,Karen,3271,18678
+prompt_cf3406fc688a54db,validation,abba_park,ABBA,Gary,Kate,"After Gary and Kate visited the park, Kate handed a folded map to",Gary,Kate,10936,16693
+prompt_e8e6631aa5b30cdd,validation,abba_park,ABBA,David,Gloria,"After David and Gloria visited the park, Gloria handed a folded map to",David,Gloria,3271,38109
+prompt_f038ae30c90979ee,validation,abba_park,ABBA,Diana,Jeff,"After Diana and Jeff visited the park, Jeff handed a folded map to",Diana,Jeff,25752,5502
+prompt_0648ff637cd842d3,validation,abba_store,ABBA,Betty,Dave,"When Betty and Dave went to the store, Dave gave a bottle of milk to",Betty,Dave,29504,9935
+prompt_0ff417a29a0aa6cb,validation,abba_store,ABBA,Jeff,Gary,"When Jeff and Gary went to the store, Gary gave a bottle of milk to",Jeff,Gary,5502,10936
+prompt_286bca3ebff49a34,validation,abba_store,ABBA,Betty,Grace,"When Betty and Grace went to the store, Grace gave a bottle of milk to",Betty,Grace,29504,16156
+prompt_45a19a50cbf1c33d,validation,abba_store,ABBA,Deborah,Grace,"When Deborah and Grace went to the store, Grace gave a bottle of milk to",Deborah,Grace,36976,16156
+prompt_540e257d2db052e8,validation,abba_store,ABBA,Karen,Jack,"When Karen and Jack went to the store, Jack gave a bottle of milk to",Karen,Jack,18678,3619
+prompt_6a518f2ccd9df22f,validation,abba_store,ABBA,Matthew,Dave,"When Matthew and Dave went to the store, Dave gave a bottle of milk to",Matthew,Dave,9308,9935
+prompt_9e042e9071a5d8ca,validation,abba_store,ABBA,Kate,Diana,"When Kate and Diana went to the store, Diana gave a bottle of milk to",Kate,Diana,16693,25752
+prompt_f77ff696337dd548,validation,abba_store,ABBA,Deborah,David,"When Deborah and David went to the store, David gave a bottle of milk to",Deborah,David,36976,3271
+prompt_0cfd4a0099dcfb94,validation,baba_meeting,BABA,Gary,Dave,"Because Dave and Gary attended the meeting, Dave sent a short note to",Gary,Dave,10936,9935
+prompt_73983a50174c420d,validation,baba_meeting,BABA,Jack,William,"Because William and Jack attended the meeting, William sent a short note to",Jack,William,3619,3977
+prompt_a9f64c983ae1b094,validation,baba_meeting,BABA,Dave,Jack,"Because Jack and Dave attended the meeting, Jack sent a short note to",Dave,Jack,9935,3619
+prompt_bd47e08f636a71ce,validation,baba_meeting,BABA,Jeff,Gary,"Because Gary and Jeff attended the meeting, Gary sent a short note to",Jeff,Gary,5502,10936
+prompt_e6b5e020ccefb61a,validation,baba_meeting,BABA,Grace,Gloria,"Because Gloria and Grace attended the meeting, Gloria sent a short note to",Grace,Gloria,16156,38109
+prompt_ede6c0543a9942ea,validation,baba_meeting,BABA,Matthew,Karen,"Because Karen and Matthew attended the meeting, Karen sent a short note to",Matthew,Karen,9308,18678
+prompt_f0fdeadcb0e2d4e7,validation,baba_meeting,BABA,Kate,David,"Because David and Kate attended the meeting, David sent a short note to",Kate,David,16693,3271
+prompt_ff7a049564d776a0,validation,baba_meeting,BABA,David,Gary,"Because Gary and David attended the meeting, Gary sent a short note to",David,Gary,3271,10936
+prompt_378be3f4f6edfd9d,validation,baba_office,BABA,Deborah,Betty,"While Betty and Deborah worked in the office, Betty passed a blue folder to",Deborah,Betty,36976,29504
+prompt_50988b5bacfbcd85,validation,baba_office,BABA,Samuel,Matthew,"While Matthew and Samuel worked in the office, Matthew passed a blue folder to",Samuel,Matthew,17100,9308
+prompt_5f991a80b99b18ff,validation,baba_office,BABA,Betty,David,"While David and Betty worked in the office, David passed a blue folder to",Betty,David,29504,3271
+prompt_99008e3870a682ed,validation,baba_office,BABA,Gloria,Samuel,"While Samuel and Gloria worked in the office, Samuel passed a blue folder to",Gloria,Samuel,38109,17100
+prompt_d0f3e263fa4c23f2,validation,baba_office,BABA,Gary,Jeff,"While Jeff and Gary worked in the office, Jeff passed a blue folder to",Gary,Jeff,10936,5502
+prompt_d7cd5ece05b36617,validation,baba_office,BABA,Grace,Diana,"While Diana and Grace worked in the office, Diana passed a blue folder to",Grace,Diana,16156,25752
+prompt_dcf52b71475effa0,validation,baba_office,BABA,Samuel,Diana,"While Diana and Samuel worked in the office, Diana passed a blue folder to",Samuel,Diana,17100,25752
+prompt_ed50d71dc432e99d,validation,baba_office,BABA,Matthew,Frank,"While Frank and Matthew worked in the office, Frank passed a blue folder to",Matthew,Frank,9308,5278
+prompt_093a126127df762e,validation,baba_park,BABA,Kate,Matthew,"After Matthew and Kate visited the park, Matthew handed a folded map to",Kate,Matthew,16693,9308
+prompt_270a4b4f0e33b97c,validation,baba_park,BABA,Karen,David,"After David and Karen visited the park, David handed a folded map to",Karen,David,18678,3271
+prompt_3e875eed010e1861,validation,baba_park,BABA,Grace,Samuel,"After Samuel and Grace visited the park, Samuel handed a folded map to",Grace,Samuel,16156,17100
+prompt_6167bd820aa3944f,validation,baba_park,BABA,Dave,David,"After David and Dave visited the park, David handed a folded map to",Dave,David,9935,3271
+prompt_ac92a4a8e740969c,validation,baba_park,BABA,Dave,Frank,"After Frank and Dave visited the park, Frank handed a folded map to",Dave,Frank,9935,5278
+prompt_bfc481a68f6091b9,validation,baba_park,BABA,Diana,Jeff,"After Jeff and Diana visited the park, Jeff handed a folded map to",Diana,Jeff,25752,5502
+prompt_c86447c60bc39a46,validation,baba_park,BABA,Frank,Karen,"After Karen and Frank visited the park, Karen handed a folded map to",Frank,Karen,5278,18678
+prompt_d542d74b99e0ac93,validation,baba_park,BABA,Karen,Betty,"After Betty and Karen visited the park, Betty handed a folded map to",Karen,Betty,18678,29504
+prompt_09316b2c473b9aff,validation,baba_store,BABA,Diana,Samuel,"When Samuel and Diana went to the store, Samuel gave a bottle of milk to",Diana,Samuel,25752,17100
+prompt_45790bf3cca4a60a,validation,baba_store,BABA,David,Jack,"When Jack and David went to the store, Jack gave a bottle of milk to",David,Jack,3271,3619
+prompt_817532b3e4ef6ebf,validation,baba_store,BABA,Jeff,Jack,"When Jack and Jeff went to the store, Jack gave a bottle of milk to",Jeff,Jack,5502,3619
+prompt_94d60bc10dd5e276,validation,baba_store,BABA,Karen,Grace,"When Grace and Karen went to the store, Grace gave a bottle of milk to",Karen,Grace,18678,16156
+prompt_c4e023c3df969e44,validation,baba_store,BABA,Gary,Karen,"When Karen and Gary went to the store, Karen gave a bottle of milk to",Gary,Karen,10936,18678
+prompt_d0b2241c9cfabf75,validation,baba_store,BABA,William,Gary,"When Gary and William went to the store, Gary gave a bottle of milk to",William,Gary,3977,10936
+prompt_db5a3ab148d295c8,validation,baba_store,BABA,Gary,Samuel,"When Samuel and Gary went to the store, Samuel gave a bottle of milk to",Gary,Samuel,10936,17100
+prompt_fa2a6eea43232f91,validation,baba_store,BABA,William,Diana,"When Diana and William went to the store, Diana gave a bottle of milk to",William,Diana,3977,25752

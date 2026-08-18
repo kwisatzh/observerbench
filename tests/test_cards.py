@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+# Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex
+
 import json
 from pathlib import Path
 
@@ -96,7 +98,7 @@ def test_threshold_changes_update_failure_modes(tmp_path: Path) -> None:
     divergent_failures = load_bundle(divergent_dir / "cards")["cards"][0]["failure_modes_detected"]
 
     assert clean_failures != divergent_failures
-    assert any("divergence_rate" in failure for failure in divergent_failures)
+    assert any("large_error_trajectory_rate" in failure for failure in divergent_failures)
     assert any("observer_bias_mae_path" in failure for failure in divergent_failures)
 
 

@@ -1,0 +1,20 @@
+{
+  "completed_new_effect_cells": 75776,
+  "completed_new_selected_masks": 148,
+  "noop_ablation_forward_passes": 0,
+  "reused_phase7_masks_remeasured": 0,
+  "shard_hashes": {
+    "shards/test/effects_0000_0016.csv": "0986bbf27f2021e5e0fa273fd032c030bae9a1cc4ec4a2d56cd00b0438f17a09",
+    "shards/test/effects_0016_0032.csv": "edbef8419b41cd6fe1089c0cc1aed9345073b03491b1818d583beda2f74e64af",
+    "shards/test/effects_0032_0048.csv": "970cbdc66d5404ffbb7b760ce4167472b4f7de302ab7784e8c41a95f42dac857",
+    "shards/test/effects_0048_0064.csv": "f0c239d661d8cb25afd4dc5808b68c6e903c185fb3c2e25b89e719ec027bf8ab",
+    "shards/test/effects_0064_0080.csv": "1c4ad25f227a512b072e6de334b695fd36f5c5f136685fe631c6c4eea144b1f0",
+    "shards/test/effects_0080_0096.csv": "fe348c68e66af2873da724335bc987d40a74c2b9dd86281f528dc53cb49fbf71",
+    "shards/test/effects_0096_0112.csv": "6153a06c0290831ba96fd919ea5ff2e77fa57aed1e9dfb6372696161fa4b2386",
+    "shards/test/effects_0112_0128.csv": "6969fef496d2e0fb26283a873390ec91e9fe42fcd4f12e17e655213b3bbdde28",
+    "shards/test/effects_0128_0144.csv": "68fc8e73a921a05374eb217f3f09ad1ec5c57611e4eeba625a161ba7c77c4add",
+    "shards/test/effects_0144_0148.csv": "8af38a479875bf63f2f41d48e061c564143b174f59aeac2ffb62458cc7839fbe"
+  },
+  "status": "complete",
+  "unselected_candidate_masks_measured": 0
+}

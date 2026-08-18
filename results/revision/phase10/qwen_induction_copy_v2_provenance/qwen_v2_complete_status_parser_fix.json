@@ -1,0 +1,34 @@
+{
+  "artifact_archive": "/content/qwen_copy_v2_artifacts_after_measure_collateral.tar.gz",
+  "artifact_archive_sha256": "5e896a2416698f7c5de371226dd70a64e936981be17378cac6c6dbe8184c7650",
+  "completed_stages": [
+    "prepare",
+    "eligibility",
+    "discover",
+    "confirm",
+    "freeze-design",
+    "measure-calibration",
+    "freeze-observers",
+    "measure-locked-test",
+    "evaluate",
+    "measure-collateral"
+  ],
+  "next_stage": null,
+  "outcome": "stage_complete",
+  "stage": "measure-collateral",
+  "stage_record": {
+    "artifact_hashes": {
+      "work/collateral/collateral_by_frozen_action.csv": "51b22000c162b1e0e6f2376ed8a30290c4a6d4d6d4dacb8049432896613dbb61",
+      "work/collateral/collateral_shift_summary.csv": "9fdb8e24b1d10f8a6bb42254eb3513f15cda50e1430c9f16c553b837a960ef76",
+      "work/collateral/collateral_shifts_raw.csv": "efe2f4240b31dcbc4ef44528f86d9e94ba4b5dc657d67f9383dc06fcbae0b1bc",
+      "work/collateral/matched_non_induction_controls.csv": "2671fe460de3e6d9735e0d61b431da8ab68b7102117e4d2350ecbeb438d46e24",
+      "work/collateral/summary.json": "3c0bed06e4c1112039bb94c097eeed86d526946e84ade797bad1a9b1c75faffe",
+      "work/runtime/measure-collateral.json": "4bb6a17c0e24ba061b7ac38e513a5e1aecee2f03e8eb91cb75c893606be0c6c6"
+    },
+    "stage_input_identity_sha256": "e568ac9ec3f6958390fd35285260adb21c91c43716b952f69114b0c9f596a4e5",
+    "status": "complete"
+  },
+  "subprocess_returncode": 0,
+  "terminal_status": null,
+  "valid": true
+}

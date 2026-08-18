@@ -1,0 +1,60 @@
+\section{Limitations and next steps}
+\label{sec:limitations}
+
+The paper makes bounded claims:
+
+\begin{itemize}
+  \item \textbf{Control.} \emph{Scope:} The exact results assume affine
+  readouts, one fixed direction, proportional control, and no clipping. The
+  nonlinear test reruns a learned Transformer block, but the model is small and
+  its latent features are supervised; the 29.0\% gain belongs to the matched
+  estimator--direction pair, not the estimator alone. \emph{Next test:} extend
+  the comparison to token-level control in larger models with independently
+  usable edit directions.
+
+  \item \textbf{Pretrained-model interventions.} \emph{Scope:} The GPT-2 and
+  Qwen studies use pinned models, selected head sets, fixed ablations, and narrow
+  prompt distributions. The IOI confirmation is pilot-informed and locally
+  sealed rather than independently preregistered. The Qwen task keeps only
+  eligible prompts; full-vocabulary top-1 accuracy on unfiltered prompts is
+  24.45\%, and the direct-loss observer ties the natural-mean observer at the
+  largest target.
+  \emph{Next test:} use more models, unseen prompt templates, and independently
+  fixed candidate sets and targets.
+
+  \item \textbf{Authorization safety.} \emph{Scope:} The inert task asks Qwen
+  directly for an authorization verdict, so it cannot establish a uniquely
+  hidden safety state or test harmful execution, deception, or adaptive attacks.
+  Its held-out failure also shows that one global threshold can hide poor
+  calibration between groups. \emph{Next test:} remove the explicit verdict
+  question and provide calibration data for every intended deployment group
+  while keeping the model, budgets, and evaluator fixed.
+
+  \item \textbf{APPS backdoors.} \emph{Scope:} The study uses stored working
+  backdoors rather than attacks adapted to each monitor. One model supplies all
+  learned representations, the text baseline is simple, and the prevalence
+  sweep keeps the dataset-family mix fixed. \emph{Next test:} freeze generated
+  attack trajectories and training budgets, then add adaptive evasion, stronger
+  code monitors, and a deployment-level shutdown action.
+
+  \item \textbf{Artifact.} \emph{Scope:} The release provides checked control,
+  finite-effect, and safety interfaces, but it is not yet a general task
+  ecosystem. \emph{Next test:} add literature baselines, another safety
+  environment with adaptive attacks, and a stable end-to-end reproduction path.
+\end{itemize}
+
+\section{Conclusion}
+
+ObserverBench asks a simple question: is an estimate good enough for the action
+chosen from it? An observer need not reproduce every detail of a model. It must
+preserve the information that the available action, decision rule, and loss
+actually use.
+
+The experiments show why this distinction matters. A better effect predictor
+can choose no better intervention when it predicts the wrong quantity. A
+perfect classifier can spend a safety budget poorly when it ignores consequence
+or calibration between groups. A simple output signal can also make an internal
+probe unnecessary. ObserverBench records these choices in versioned tasks and
+applies the same fixed policy to every submission; it does not rank observers in
+the abstract. Before trusting an observer, state what it may read, freeze the
+action rule and budget, and score the outcome the action actually produces.

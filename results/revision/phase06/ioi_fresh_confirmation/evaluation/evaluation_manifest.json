@@ -1,0 +1,62 @@
+{
+  "adaptation": {
+    "confirmatory_actions_reselected": false,
+    "gates_changed": false,
+    "observers_refit": false,
+    "post_outcome_descriptive_oracle_computed": true,
+    "rows_filtered": false,
+    "targets_changed": false
+  },
+  "artifact_hashes": {
+    "best_fixed_oracle.csv": "5af546c0e3936e42a2ecb32cdd6e30a7f86aed4ea134d5d26884b918679fef67",
+    "candidate_actual_risk.csv": "06d5a1fc6a831d175f4c3b119bcc50e8e53b258bfda73d4010f9bb47778a8150",
+    "clean_task_validity.csv": "3aed5fff1dcc71709e45a28628430e831794b5ae90b616c92e7b9127a36825a8",
+    "decision_quality.csv": "b7c77f4f757b5dba754dea00b14e749e6fe3f817ac132261497118354c99da7f",
+    "fixed_action_prompt_losses.csv.gz": "bf5c116cf6c0cfeb4528b9f79595633a84352959d7d4757f9c65423141f5e75f",
+    "hypothesis_audit.json": "0c3844c1fde73e21d4da5a49385494e00744836c3c43b8a46538776f47de382e",
+    "leave_one_pair.csv": "b72679059310407e1fa1190050e8c0869e6cbb282bdb3c6a8bace5bccbe67ee8",
+    "leave_one_template.csv": "f3eebfb6e86f2aed5beaf91884f9309378a6f851df533ed42046b9433fb89707",
+    "natural_mean_estimand_metrics.csv": "6e731217b89b8497c2a0f2ff707a692f42791b81fb19af0484e126c4b3a1379f",
+    "observer_summary.csv": "5feb15bc357bdf9ca4ed936420e5f197d37e7843ca8ae85df72f66dcffd0eab1",
+    "pool_signs.csv": "2e2025014ff641209f5f1ab771dc85d335feac894fb2564a181d8c04b1d818d6",
+    "prediction_metrics.csv": "6c5310954c74172f35429ad8e6da85770c187b539fa41b0dfeeef630753ff50c",
+    "prespecified_contrasts.csv": "d5d932ada991cc2abdfb1107fff4daf8fe4ec49512e4c52e876d1f95f57917af",
+    "result_digest.json": "5bc2ad607762e7fca66f4ed8e9e1babe14a66487664886eb27e2a0481908ac2c"
+  },
+  "bootstrap": {
+    "axes": [
+      "unordered_test_name_pair_clusters",
+      "candidate_pools"
+    ],
+    "primary_targets_retained_together": true,
+    "repeats": 5000,
+    "seed": 2606201
+  },
+  "calibration_manifest_sha256": "54a606bbd008f1f135f60b3da5119cb6b716801598a59de9c726b13dc82655d3",
+  "counts": {
+    "candidate_effect_cells": 786432,
+    "candidate_masks": 1536,
+    "fixed_action_prompt_loss_rows": 1179648,
+    "test_prompts": 512
+  },
+  "design_manifest_sha256": "68d6220ef3f4b96993940a42711f97dacc6b7356e9a15df7424e1e174e40df2a",
+  "prediction_action_manifest_sha256": "f0e16559df6f7043ca5ce2147406c1e9bf4810d0baad2918c7526b01f1c88c86",
+  "protocol_sha256": "b6d44ac16c88a48c738416a18abb205771598ae713f7d44bf0dfdc73f3dff099",
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.1",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.14.2",
+    "source_dirty": true,
+    "source_revision": "0cec2c4ef17d9c3b0ef3fea8fdf15347ee4e28cb"
+  },
+  "schema": "observerbench.ioi_phase06_evaluation.v1",
+  "scientific_status": "pilot_informed_prospective_fresh_template_name_mask_confirmation",
+  "status": "phase6_prespecified_evaluation_complete",
+  "test_manifest_schema": "observerbench.ioi_phase06_test_measurement_run.v1",
+  "test_manifest_sha256": "ac966ad57bfef9a78331e4db46816e7aec74fcea04bab24dd2b1ff00c2d6d8e2"
+}

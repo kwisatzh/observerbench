@@ -1,0 +1,17 @@
+{
+  "additive_minus_quadratic_mae": 0.08063208552025722,
+  "causal_confirmation": "passed",
+  "mean_actual_target_loss_by_selector": {
+    "direct_risk": 0.8697730322256328,
+    "exact_noop": 1.7268613737542182,
+    "natural_mean": 0.9547575874853086,
+    "transformed_mean": 0.9952614590305776
+  },
+  "primary_prediction_budget": 128,
+  "primary_prediction_ci_lower": 0.02518653000579953,
+  "primary_prediction_ci_upper": 0.10117039912490536,
+  "primary_prediction_contrast": "additive_mae_minus_quadratic_mae",
+  "primary_prediction_estimate": 0.08063208552025722,
+  "primary_quadratic_better": true,
+  "status": "complete_locked_evaluation"
+}

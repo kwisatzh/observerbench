@@ -1,0 +1,4 @@
+aggregation,reference,comparator,contrast_comparator_minus_reference,ci_lower,ci_upper,direct_risk_better,n_targets,n_action_pools,n_prompt_clusters,bootstrap_repeats
+equal_weight_across_targets,direct_risk,natural_mean,0.084984555259675673,0.053486431554915725,0.11825224499788427,True,3,16,128,5000
+equal_weight_across_targets,direct_risk,transformed_mean,0.12548842680494468,0.082929141349521035,0.17300776251751271,True,3,16,128,5000
+equal_weight_across_targets,direct_risk,exact_noop,0.85708834152858537,0.80536688323968575,0.90778395384687349,True,3,16,128,5000

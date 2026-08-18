@@ -1,0 +1,3 @@
+comparison_id,candidate,reference,target,pair_clusters,candidate_pools,reference_mean_loss,candidate_mean_loss,absolute_loss_reduction,relative_loss_reduction,q025,q975,bootstrap_repeats
+H1a_estimand,direct_risk_head_pair_quadratic,natural_mean_effect_head_pair_quadratic,1.0,32,48,1.092759578100716,0.8906227769330144,0.2021368011677017,0.18497829277234798,0.11496571685759895,0.29256013182554524,5000
+H1b_intervention_value,direct_risk_head_pair_quadratic,exact_noop,1.0,32,48,1.0,0.8906227769330144,0.10937722306698561,0.10937722306698561,0.01246399262114816,0.1955910766065547,5000

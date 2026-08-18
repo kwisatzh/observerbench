@@ -1,0 +1,92 @@
+\section{Ctl-1: one-shot collateral geometry}
+
+Ctl-1 is the smallest test in the paper. The activation state is
+\[
+h=[x_1,x_2,x_1x_2].
+\]
+The target readout is
+\[
+z=\beta_1x_1+\beta_2x_2+\gamma x_1x_2,
+\]
+with default $(\beta_1,\beta_2,\gamma)=(0.35,0.25,1.15)$. The nuisance
+readout is
+\[
+n(w)=(1-w)[0.90,-0.25,0]+w[0,0,1].
+\]
+The first-order estimator uses only $x_1$ and $x_2$. The lifted estimator
+also uses $x_1x_2$. If $\widetilde d$ is a raw direction, the original
+fixture scales it so that
+\[
+d=\frac{g_0}{\nabla z(h_0)^\top\widetilde d}\widetilde d,
+\qquad
+\nabla z(h_0)^\top d=g_0.
+\]
+The one-shot controller applies
+\[
+h^+=h_0+ud,
+\qquad
+u=K(y^\star-\widehat z_0),
+\]
+and collateral is
+\[
+C=\left|n(w)^\top(h^+-h_0)\right|.
+\]
+
+This construction is a coordinate-level intervention. After the update, its
+third coordinate need not equal the product of its first two coordinates.
+Calling the third coordinate an ``interaction'' does not make the post-edit
+state nonlinear. The primary result is therefore an omitted-coordinate
+geometry result: a readout that cannot use one coordinate directs the edit
+through the coordinates it can see.
+
+\subsection{Null and interaction sweeps}
+
+Setting $\gamma=0$ removes the omitted interaction coordinate from the target.
+Across ten seeds, first-order and lifted arms then agree: target MSE is $0.0690$
+for both, and collateral is $0.7318$ and $0.7317$, respectively. The task
+does not reward the lifted estimator when the target is first order.
+
+With the nuisance in the main-effect subspace, increasing $\gamma$ makes the
+first-order arm more collateral-heavy. At $\gamma=0.5$, it obtains $98.0\%$
+of the lifted arm's target improvement while paying about $2.1\times$ the
+collateral. At larger interaction strengths, the target errors also separate,
+so the moderate point states the collateral result more cleanly.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.92\linewidth]{figure_01_ctl1_analytic_interaction_sweep.png}
+  \caption{Analytic Ctl-1 interaction sweep. The useful regime is where the
+  first-order arm remains target-competitive but already pays more collateral.}
+  \label{fig:ctl1-interaction}
+\end{figure}
+
+Moving the nuisance readout changes which direction pays the cost. Ratios above
+one mean the first-order direction moves more collateral; ratios below one mean
+the lifted direction does. The crossover in Figure~\ref{fig:ctl1-nuisance}
+shows that collateral follows direction--readout overlap, not the observer name.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.92\linewidth]{figure_02_ctl1_analytic_nuisance_sweep.png}
+  \caption{Analytic nuisance placement. The collateral burden crosses over as
+  the nuisance moves from the main-effect coordinates toward the omitted
+  coordinate.}
+  \label{fig:ctl1-nuisance}
+\end{figure}
+
+\subsection{Base-coordinate robustness check}
+
+We also edit the base coordinates and recompute the product exactly. For a
+two-dimensional direction $q$,
+\[
+(x_1^+,x_2^+)=(x_1,x_2)+uq,
+\qquad
+h^+=[x_1^+,x_2^+,x_1^+x_2^+].
+\]
+At seed 0, the baseline target MSE is $0.718$. The lifted arm reduces it to
+$0.490$, while the first-order arm increases it to $1.259$. The result does
+not depend on freeing the third coordinate.
+
+This check is still continuous. About $88\%$ of edited examples leave the
+binary unit square in both arms. It therefore tests local mechanism geometry,
+not a realizable token intervention.

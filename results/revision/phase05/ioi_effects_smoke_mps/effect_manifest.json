@@ -1,0 +1,61 @@
+{
+  "analysis_guard": "Fit artifacts must be frozen from train-prompt calibration rows before validation or test candidate effects are loaded.",
+  "artifacts": {
+    "results/revision/phase05/ioi_effects_smoke_mps/clean_scores_test.csv": "5ce80ff3e41df426554045f65957c1efbb82c864c8f55e38149dfc5934e7213b",
+    "results/revision/phase05/ioi_effects_smoke_mps/clean_scores_train.csv": "69bb8288c1e2ba05dae0d99faaec08eafcee09c82c405703c0a917b667b0bf14",
+    "results/revision/phase05/ioi_effects_smoke_mps/clean_scores_validation.csv": "98f35c0a2a40e47923658142fd97a1ea0b9112245103b5510387e25582c2e166",
+    "results/revision/phase05/ioi_effects_smoke_mps/shards/test/effects_0000_0016.csv": "03369e9dcf7b16777222b2dc9a4ffaa95e9c442c1f6c193da5db31209ae5d1cf",
+    "results/revision/phase05/ioi_effects_smoke_mps/shards/train/effects_0000_0016.csv": "eb4a9b575fb043cb731a0999348a892872793188f50fea05b58da5f128b09f32",
+    "results/revision/phase05/ioi_effects_smoke_mps/shards/validation/effects_0000_0016.csv": "8e236f13935c2acd0daedb28ac57239b626f440d021e812f8e758e102aea8a17",
+    "results/revision/phase05/ioi_effects_smoke_mps/template_head_means.npz": "9c00b9891f1d744ea4934c28e6b9e1ed4c2df3f70f1acaa5a654aad7c846b881"
+  },
+  "config": {
+    "device": "mps",
+    "mask_shard_size": 16,
+    "max_masks": 16,
+    "max_outcome_prompts_per_split": 4,
+    "max_reference_prompts_per_template": 4,
+    "model_name": "gpt2-small",
+    "outcome_splits": [
+      "train",
+      "validation",
+      "test"
+    ],
+    "pair_batch_size": 128,
+    "reference_batch_size": 64,
+    "reference_split": "reference",
+    "seed": 25051
+  },
+  "counts": {
+    "effect_cells": 192,
+    "masks": 16,
+    "outcome_prompts": 12,
+    "reference_prompts": 32,
+    "shards": 3
+  },
+  "design_manifest_sha256": "5f9aedda456048378d318537b4099bf28d09991fd40a18004f71d82075075922",
+  "design_schema": "observerbench.ioi_phase5_design_manifest.v1",
+  "model": {
+    "d_head": 64,
+    "device": "mps",
+    "dtype": "torch.float32",
+    "n_heads": 12,
+    "n_layers": 12,
+    "requested_name": "gpt2-small",
+    "resolved_name": "gpt2"
+  },
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.4.6",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.11.14",
+    "source_dirty": true,
+    "source_revision": "0cec2c4ef17d9c3b0ef3fea8fdf15347ee4e28cb"
+  },
+  "schema": "observerbench.ioi_effect_run.v1",
+  "status": "complete_smoke_not_for_claims"
+}

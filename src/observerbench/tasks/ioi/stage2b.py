@@ -1,4 +1,7 @@
-"""IOI Stage 2b random head-subset diagnostic smoke runner."""
+"""IOI Stage 2b random head-subset diagnostic smoke runner.
+
+Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex
+"""
 
 from __future__ import annotations
 

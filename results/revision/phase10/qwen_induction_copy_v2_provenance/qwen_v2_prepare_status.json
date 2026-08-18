@@ -1,0 +1,25 @@
+{
+  "artifact_archive": "/content/qwen_copy_v2_artifacts_after_prepare.tar.gz",
+  "artifact_archive_sha256": "0e04773ea665eea2110ae84b4eb1e7384b65541dfb488fe0ff754666b28e46d7",
+  "completed_stages": [
+    "prepare"
+  ],
+  "intervention_paths_absent": true,
+  "outcome": "prepare_complete",
+  "stage": "prepare",
+  "stage_record": {
+    "artifact_hashes": {
+      "candidate_design/candidate_manifest.json": "e16bfeb3061fc0db72fce8e29aaea44ad0988d08104aba5c95c326dcd9970e50",
+      "candidate_design/copy_v1_token_banks.json": "f599a958e310fdf9cedd52f92c77555cfd57b58fc117536781c21101f5786c91",
+      "candidate_design/copy_v1_token_exclusion.json": "ce61e71c3939cfaffc1fd4d883766896c91830f269045a729e02588914008acb",
+      "candidate_design/prompts_all.csv": "4b1a4dac9099da9c6a586b8517dd1ee3347f57edd1b292c78b7591de02ebb31a",
+      "candidate_design/token_banks.json": "078dc1fe1c8d9790b5d61645a7511f3af00775c82e5349c657074d308893182e",
+      "work/runtime/prepare.json": "08738776e54d4c5fdd76d9d95f4025ac542a2f6d57179a2d09e35b604c6d2791"
+    },
+    "stage_input_identity_sha256": "50e4573b5446a392c07288a1c48b767013590bf57b8fd48f83b07f0955f84a84",
+    "status": "complete"
+  },
+  "subprocess_returncode": 0,
+  "terminal_status": null,
+  "valid": true
+}

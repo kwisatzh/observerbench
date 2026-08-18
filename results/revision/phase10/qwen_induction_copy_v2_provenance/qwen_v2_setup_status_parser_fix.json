@@ -1,0 +1,9 @@
+{
+  "archive_sha256": "2b33a82b1abe0a50d26750f23e50de6efc7edd1dc7100f7a956dcb1dbe39af95",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "gpu_memory_gib": 39.4935302734375,
+  "observerbench_import": "/content/ObserverBench/src/observerbench/__init__.py",
+  "ok": true,
+  "sealed_source_files": 35,
+  "torch": "2.11.0+cu128"
+}

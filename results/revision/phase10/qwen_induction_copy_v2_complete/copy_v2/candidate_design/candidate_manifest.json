@@ -1,0 +1,33 @@
+{
+  "access_audit": {
+    "attention_scores_loaded": false,
+    "candidate_effect_cells": 0,
+    "intervention_forward_passes": 0,
+    "intervention_metadata_loaded": false,
+    "intervention_outcomes_loaded": false,
+    "model_forward_passes": 0
+  },
+  "artifact_hashes": {
+    "copy_v1_token_banks.json": "f599a958e310fdf9cedd52f92c77555cfd57b58fc117536781c21101f5786c91",
+    "copy_v1_token_exclusion.json": "ce61e71c3939cfaffc1fd4d883766896c91830f269045a729e02588914008acb",
+    "prompts_all.csv": "4b1a4dac9099da9c6a586b8517dd1ee3347f57edd1b292c78b7591de02ebb31a",
+    "token_banks.json": "078dc1fe1c8d9790b5d61645a7511f3af00775c82e5349c657074d308893182e"
+  },
+  "config_sha256": "d55b416eda85087da7ec4ef9e1249333c954e2576fb8749719f8bb7d7be55f4f",
+  "copy_v1_excluded_token_count": 24576,
+  "data_version": "copy-v2",
+  "prompt_count": 3072,
+  "reservoir_counts_per_family": {
+    "calibration": 128,
+    "discovery": 64,
+    "head_fit": 128,
+    "head_test": 128,
+    "locked_test": 256,
+    "reference": 64
+  },
+  "reservoir_multiplier": 2,
+  "schema": "observerbench.qwen_induction.copy_v2.candidate_reservoir.v1",
+  "scientific_claim_allowed": true,
+  "sequence_design_sha256": "d62573e0cea6d7e57a67fe1a41297c695ca958ba9e8b9d6dae1a441c63141b72",
+  "status": "candidate_reservoir_frozen_before_clean_scoring"
+}

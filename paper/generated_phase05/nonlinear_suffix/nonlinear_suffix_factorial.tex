@@ -1,0 +1,21 @@
+\begin{table}[H]
+\centering
+\scriptsize
+\begin{tabular}{@{}rllrrrrr@{}}
+\toprule
+$\gamma$ & Estimate & Direction & ISE & $g_E\!\leq\!0$ & $|p|\!\geq\!1$ & Would clip & Beyond clean max \\
+\midrule
+1.15 & FO & FO & 2.632 & 0/12 & 0/12 & 0/192 & 0/192 \\
+1.15 & FO & Lifted & 2.381 & 10/12 & 10/12 & 30/192 & 56/192 \\
+1.15 & Lifted & FO & 3.666 & 10/12 & 10/12 & 56/192 & 96/192 \\
+1.15 & Lifted & Lifted & 1.870 & 0/12 & 0/12 & 0/192 & 0/192 \\
+\addlinespace
+0 & FO & FO & 1.693 & 0/12 & 0/12 & 0/192 & 0/192 \\
+0 & FO & Lifted & 1.659 & 0/12 & 0/12 & 0/192 & 0/192 \\
+0 & Lifted & FO & 1.693 & 0/12 & 0/12 & 0/192 & 0/192 \\
+0 & Lifted & Lifted & 1.662 & 0/12 & 0/12 & 0/192 & 0/192 \\
+\bottomrule
+\end{tabular}
+\caption{Secondary nonlinear-suffix estimator--direction factorial. Counts for $g_E$ and $p$ use 12 seed-level means; the last two columns use 192 rollout conditions per cell. The crossed arms at $\gamma=1.15$ fail loop-conditioning and clean-archetype scale diagnostics, so they do not identify an estimator-only advantage. The clean maximum is a scale check, not a manifold boundary.}
+\label{tab:nonlinear-suffix-factorial}
+\end{table}

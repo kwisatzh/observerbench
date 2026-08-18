@@ -1,0 +1,24 @@
+{
+  "schema": "observerbench.nonlinear_suffix_protocol.v1",
+  "status": "frozen_before_new_outcomes",
+  "fixture": "two_layer_tiny_transformer",
+  "intervention_site": "block0_readout_position_residual",
+  "rerun_suffix": ["block1", "final_layer_norm", "target_head"],
+  "plants": ["nonlinear_suffix", "baseline_jvp_affine_shadow"],
+  "loop_steps": 15,
+  "controller_gain": 0.35,
+  "max_action": 1.0,
+  "seeds": [0, 1, 2, 3, 4, 5],
+  "omitted_response_grid": [-1.0, -0.5, 0.0, 0.5, 1.0],
+  "certificate_features": [
+    "signed_initial_bias",
+    "symmetric_finite_response_omitted_gain_ratio"
+  ],
+  "comparators": ["clean_probe_error", "local_observer_pole"],
+  "primary_outcome": "integrated_squared_tracking_error",
+  "success": {
+    "cross_validated_error_reduction_min": 0.20,
+    "must_beat_each_comparator": true,
+    "ranking_consistent_across_seeds": true
+  }
+}

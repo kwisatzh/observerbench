@@ -1,0 +1,50 @@
+{
+  "config_sha256": "ec2835be61a85c6f963cab901c1de17f512e9fa08d5983c79bd14874000bdb77",
+  "plant_audits": [],
+  "producer_source_hashes": {
+    "pyproject.toml": "9115540a3233107e12cd1317c24c82caeaeefd8221e363a595ac802ad1240a5b",
+    "scripts/run_qwen_induction_phase09.py": "cfea527b7b867f16a478562ffc9a3426eeae9738f73608806735427a4b1f8cd8",
+    "src/observerbench/__init__.py": "b8a6d790b05b5458b268353c3bbc9570bd47cb7a51faadb4cdeed39a94cb6993",
+    "src/observerbench/control.py": "978d0d19229d2342eadc20cf0b368de3e686711994fefc892c7fd6f3c33d09d2",
+    "src/observerbench/core.py": "69334fa4fd8f36367c2bab709931a85bd82b585c34f9cb6d82625354c97c33b4",
+    "src/observerbench/effect_prediction.py": "38670e17e470a96259edce697130c748c6f3751b788bd9010583856def229537",
+    "src/observerbench/metrics.py": "11dcebff6669084b5b53ce22a6a7711ec1cc849355cb556770dae37e9ef3515e",
+    "src/observerbench/observers.py": "b0e63a52f7cddb990385a4182412f53a0370f429a9b15cff22df69d2e9fea3be",
+    "src/observerbench/provenance.py": "8683bca7bac91de5037765983a566720c732b8308534a5b366c6f2f4162d8403",
+    "src/observerbench/tasks/__init__.py": "ad8b9a8707f121dd61da355e0cb96520ed44c116e5fd8cf939236cba3e9c0eec",
+    "src/observerbench/tasks/ctl1_adapter.py": "8b43f04493b50dd0566e8261127b347ffd8159642d3a93bed9cd8b6637678c29",
+    "src/observerbench/tasks/ctl1_analytic.py": "0b764ddf29166afba87ec01c103eb0a83af03ebc50b2cccbe864d97ba86ef773",
+    "src/observerbench/tasks/effect_registry.py": "7566d0f27746634622b3ae44424033dfc5c0eeadad0be1d639fc004f1be6ea7a",
+    "src/observerbench/tasks/ioi/__init__.py": "64d8f57b3c02cf53bb485c456be1cce0435ae6d175e21cd15b7e8cf931037d05",
+    "src/observerbench/tasks/ioi/effect_task.py": "c127942808be136edf1e8a5171bb8b3173ba5f551645b6fddd6d1adba04767d8",
+    "src/observerbench/tasks/ioi/heads.py": "915fbac6137d063b1d8ca5d52ace3486315c27b7d58908ae07d1fce620ded7ed",
+    "src/observerbench/tasks/ioi/stage2d.py": "70c3dc698f74835fbfc5baae55e3164a5c5653b33fd336bebe700f59bcb11f31",
+    "src/observerbench/tasks/qwen_induction/__init__.py": "29dc0a0a94ac9603442e3eb1606b583f9479c8c77a12441d5c650ced9ade01ae",
+    "src/observerbench/tasks/qwen_induction/analysis.py": "de50f7d8a1e17d2bdb06350aefaf7750356f79aaa51001016f14fb533caad726",
+    "src/observerbench/tasks/qwen_induction/artifacts.py": "58a10bd8b37c50cafdad15a6ee5b28fa9321a640b0627d72de531c21baa5bab8",
+    "src/observerbench/tasks/qwen_induction/collateral.py": "fb3bebf79a827e1af9dc38998e1d7bfc89ab97ccac010db336abfb0daccecdd7",
+    "src/observerbench/tasks/qwen_induction/design.py": "95161576c7bf627c966fdb62faca14a6ca3c2edac2b4be3754151abae9d262ff",
+    "src/observerbench/tasks/qwen_induction/effect_task.py": "f171081e9824f3a86090527757ddcb4a66e714324e1aef3929e6245a9de6f36e",
+    "src/observerbench/tasks/qwen_induction/plant.py": "86abd26eb8d98ce7699af9288fdcf9d328101a4ea2629577de29df044f028c68",
+    "src/observerbench/tasks/qwen_induction/runner.py": "f057cd2269e6d48bc3c1638bf4b4cbbf2a99af6b668c2aa6f42c7ef6565d04f8",
+    "src/observerbench/tasks/qwen_induction/selection.py": "f3a13b11c47db82d04c9774396ad5c11204afcd61d2ddfe4889d8b61b0d8f98f",
+    "src/observerbench/tasks/registry.py": "874cedbbab5591c258dafe894ceb3132bf93205072852655716d588851804c8a"
+  },
+  "runtime": {
+    "dependencies": {
+      "accelerate": "1.14.0",
+      "huggingface-hub": "1.23.0",
+      "matplotlib": "3.10.0",
+      "numpy": "2.0.2",
+      "pandas": "2.2.2",
+      "torch": "2.11.0+cu128",
+      "transformers": "5.14.1"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.12.13",
+    "source_dirty": null,
+    "source_revision": "unknown"
+  },
+  "schema": "observerbench.qwen_induction.stage_runtime.v1",
+  "stage": "prepare"
+}

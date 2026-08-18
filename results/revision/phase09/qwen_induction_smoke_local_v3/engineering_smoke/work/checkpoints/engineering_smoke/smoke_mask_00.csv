@@ -1,0 +1,9 @@
+prompt_id,family_id,cluster_id,mask_id,mask_bits,clean_margin,ablated_margin,drop_from_clean,clean_candidate_correct,ablated_candidate_correct,clean_top1_correct,ablated_top1_correct,clean_target_nll,ablated_target_nll
+qseq_f08f63cce7fc04e2,length_32_gap_8,qcluster_head_fit_0000,smoke_mask_00,00,10.041011810302734,10.041011810302734,0,True,True,False,False,4.0986247062683105,4.0986247062683105
+qseq_bba4a48735465e09,length_32_gap_8,qcluster_head_fit_0001,smoke_mask_00,00,5.2694802284240723,5.2694802284240723,0,True,True,False,False,5.9190082550048828,5.9190082550048828
+qseq_1015b6bfbc1b4b6a,length_32_gap_16,qcluster_head_fit_0000,smoke_mask_00,00,6.5764760971069336,6.5764760971069336,0,True,True,False,False,5.5904364585876465,5.5904364585876465
+qseq_fe346a0119520d07,length_32_gap_16,qcluster_head_fit_0001,smoke_mask_00,00,14.655128479003906,14.655128479003906,0,True,True,True,True,0.69791704416275024,0.69791704416275024
+qseq_bee9c76bad097f90,length_64_gap_8,qcluster_head_fit_0000,smoke_mask_00,00,5.0998706817626953,5.0998706817626953,0,True,True,False,False,6.5729546546936035,6.5729546546936035
+qseq_adedd3084305316c,length_64_gap_8,qcluster_head_fit_0001,smoke_mask_00,00,6.1424283981323242,6.1424283981323242,0,True,True,False,False,6.1127338409423828,6.1127338409423828
+qseq_047b3462ecb2f009,length_64_gap_16,qcluster_head_fit_0000,smoke_mask_00,00,2.1506714820861816,2.1506714820861816,0,True,True,False,False,8.5548591613769531,8.5548591613769531
+qseq_aea7553dc1176e16,length_64_gap_16,qcluster_head_fit_0001,smoke_mask_00,00,3.5323777198791504,3.5323777198791504,0,True,True,False,False,10.638307571411133,10.638307571411133

@@ -1,0 +1,4 @@
+contrast,reference,candidate,definition,n_bootstrap,mean,median,std,q05,q95,p_gt_0
+remove_PB_bin4,count_plus_all_minus_PB_bin4,count_plus_all_bin4,MAE(reference) - MAE(candidate),1000,0.008652845580593396,0.008682239812141751,0.0016666727142772896,0.005887866375325816,0.011360352709745374,1.0
+remove_PE_bin4,count_plus_all_minus_PE_bin4,count_plus_all_bin4,MAE(reference) - MAE(candidate),1000,0.07349150178485479,0.07349586827500904,0.0020518559545769023,0.07012916603445248,0.07680871831995166,1.0
+remove_BE_bin4,count_plus_all_minus_BE_bin4,count_plus_all_bin4,MAE(reference) - MAE(candidate),1000,-0.006156644619973542,-0.006145850639215508,0.00037093954018676536,-0.006769122235101832,-0.005528564476668431,0.0

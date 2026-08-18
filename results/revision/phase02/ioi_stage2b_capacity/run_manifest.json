@@ -1,0 +1,35 @@
+{
+  "analysis_schema": "observerbench.ioi.phase2.capacity.v1",
+  "bootstrap_interpretation": "prompt bootstrap conditional on fixed intervention masks and ten fixed repeated-CV partitions",
+  "config": {
+    "bootstrap_repeats": 1000,
+    "cv_repeats": 10,
+    "eval_nonclean_only": true,
+    "k_folds": 5,
+    "ridge": 1e-06,
+    "seed": 0,
+    "whole_group_pb_interaction": 1.055
+  },
+  "input_hashes": {
+    "results/revision/phase02/inputs/stage2b_mean_end/ioi_stage2b_head_records.csv": "828f5bc0c5762a82beb9c7898128a779c29cfac43e4cb8d0ecc2065a1da67c31",
+    "results/revision/phase02/inputs/stage2b_mean_end/ioi_stage2b_per_prompt_drops.csv": "aed9e7d410d108da875675485a39a30f77e4d8dd6c6a5d0fd41f8c134896cd3c",
+    "results/revision/phase02/inputs/stage2b_mean_end/ioi_stage2b_subset_design.csv": "29c4d7377b3897f9b8b2bd947694d2e676971df6d2e23adbfde67b1ec10e4d60"
+  },
+  "input_run": "results/revision/phase02/inputs/stage2b_mean_end",
+  "label": "Stage 2b anchored broad random design",
+  "n_heads": 13,
+  "n_prompts": 256,
+  "n_subsets": 160,
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.1",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.14.2",
+    "source_dirty": true,
+    "source_revision": "0cec2c4ef17d9c3b0ef3fea8fdf15347ee4e28cb"
+  }
+}

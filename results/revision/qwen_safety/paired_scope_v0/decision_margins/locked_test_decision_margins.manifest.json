@@ -1,0 +1,21 @@
+{
+  "bank": "locked_test",
+  "design_sha256": "5baad6930a5bb747ca527cbb5e12ddd130992f5262fb1705a5ac78a1b4084b90",
+  "margin_definition": "logit(block token) - logit(allow token)",
+  "margin_file": "locked_test_decision_margins.npz",
+  "margin_sha256": "c3c32bb8ad1d95d3e2732f7e9ca5e1481d7bba65256e8b2371c21f4acdc4b05e",
+  "model_runtime": {
+    "attention_implementation": "sdpa",
+    "model_id": "Qwen/Qwen2.5-7B-Instruct",
+    "n_kv_heads": 4,
+    "n_layers": 28,
+    "n_query_heads": 28,
+    "parameter_dtype": "bfloat16",
+    "quantized": false,
+    "requested_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "resolved_revision": "a09a35458c702b33eeacc393d103063234e8bc28"
+  },
+  "n_prompts": 768,
+  "schema": "observerbench.qwen_safety.decision_margins.v0",
+  "status": "post_outcome_secondary_extraction"
+}

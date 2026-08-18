@@ -1,0 +1,9 @@
+template_id,structure,template,template_hash
+abba_store,ABBA,"When {io} and {s} went to the store, {s} gave a bottle of milk to",49700e3f3697804568bdd084ed6a973c65ed8bd2fe2862f83d92ba6a779354ee
+abba_park,ABBA,"After {io} and {s} visited the park, {s} handed a folded map to",0c51f94dc5a02c786b3899e72a1433f1ec5ca97c265e92b5c1021c63e9f192e2
+abba_office,ABBA,"While {io} and {s} worked in the office, {s} passed a blue folder to",0a22a43fd864356c186cf9bc809c08d498a2bf24912cdad21cdd454126b8dea9
+abba_meeting,ABBA,"Because {io} and {s} attended the meeting, {s} sent a short note to",649163c5b2dd82e6319941d894e48079aa5e554129354c751c37a9bff4b748ac
+baba_store,BABA,"When {s} and {io} went to the store, {s} gave a bottle of milk to",31d81e43e53d1d61234915522be67dbf2a8b7bb79c40f55cb1352fc3f48e6457
+baba_park,BABA,"After {s} and {io} visited the park, {s} handed a folded map to",4f589f124e33bca5799ca1c46c46cb834b795a7e5a33b80cd6aa3343462bafb8
+baba_office,BABA,"While {s} and {io} worked in the office, {s} passed a blue folder to",f741aba5a3ee9ea425347866869851357df9e5ae0818a03658419016243e10ab
+baba_meeting,BABA,"Because {s} and {io} attended the meeting, {s} sent a short note to",726f6ba3e0f7e83c9607da843b5e6c92abf5676e90d33a404aee82c11d6e6467

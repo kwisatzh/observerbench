@@ -1,0 +1,97 @@
+{
+  "config_sha256": "5c3a44e3a758a11bcf8fa18e60abeceed43ef6f1e1a51ac21bc19304d6192a2d",
+  "plant_audits": [
+    {
+      "attention_implementation": "eager",
+      "device": "cpu",
+      "model_id": "Qwen/Qwen2.5-0.5B",
+      "n_kv_heads": 2,
+      "n_layers": 24,
+      "n_query_heads": 14,
+      "parameter_dtype": "float16",
+      "quantized": false,
+      "requested_revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+      "source_hashes": {
+        "pyproject.toml": "9115540a3233107e12cd1317c24c82caeaeefd8221e363a595ac802ad1240a5b",
+        "scripts/run_qwen_induction_phase09.py": "cfea527b7b867f16a478562ffc9a3426eeae9738f73608806735427a4b1f8cd8",
+        "src/observerbench/core.py": "69334fa4fd8f36367c2bab709931a85bd82b585c34f9cb6d82625354c97c33b4",
+        "src/observerbench/effect_prediction.py": "38670e17e470a96259edce697130c748c6f3751b788bd9010583856def229537",
+        "src/observerbench/provenance.py": "8683bca7bac91de5037765983a566720c732b8308534a5b366c6f2f4162d8403",
+        "src/observerbench/tasks/ioi/stage2d.py": "70c3dc698f74835fbfc5baae55e3164a5c5653b33fd336bebe700f59bcb11f31",
+        "src/observerbench/tasks/qwen_induction/__init__.py": "29dc0a0a94ac9603442e3eb1606b583f9479c8c77a12441d5c650ced9ade01ae",
+        "src/observerbench/tasks/qwen_induction/analysis.py": "de50f7d8a1e17d2bdb06350aefaf7750356f79aaa51001016f14fb533caad726",
+        "src/observerbench/tasks/qwen_induction/artifacts.py": "58a10bd8b37c50cafdad15a6ee5b28fa9321a640b0627d72de531c21baa5bab8",
+        "src/observerbench/tasks/qwen_induction/collateral.py": "fb3bebf79a827e1af9dc38998e1d7bfc89ab97ccac010db336abfb0daccecdd7",
+        "src/observerbench/tasks/qwen_induction/design.py": "95161576c7bf627c966fdb62faca14a6ca3c2edac2b4be3754151abae9d262ff",
+        "src/observerbench/tasks/qwen_induction/effect_task.py": "f171081e9824f3a86090527757ddcb4a66e714324e1aef3929e6245a9de6f36e",
+        "src/observerbench/tasks/qwen_induction/plant.py": "86abd26eb8d98ce7699af9288fdcf9d328101a4ea2629577de29df044f028c68",
+        "src/observerbench/tasks/qwen_induction/runner.py": "17be7d56c956785531c23de0314c4d662e324f27ad7b553f28087e7df81d60b5",
+        "src/observerbench/tasks/qwen_induction/selection.py": "f3a13b11c47db82d04c9774396ad5c11204afcd61d2ddfe4889d8b61b0d8f98f"
+      },
+      "torch_version": "2.13.0"
+    },
+    {
+      "attention_implementation": "sdpa",
+      "device": "cpu",
+      "model_id": "Qwen/Qwen2.5-0.5B",
+      "n_kv_heads": 2,
+      "n_layers": 24,
+      "n_query_heads": 14,
+      "parameter_dtype": "float16",
+      "quantized": false,
+      "requested_revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+      "source_hashes": {
+        "pyproject.toml": "9115540a3233107e12cd1317c24c82caeaeefd8221e363a595ac802ad1240a5b",
+        "scripts/run_qwen_induction_phase09.py": "cfea527b7b867f16a478562ffc9a3426eeae9738f73608806735427a4b1f8cd8",
+        "src/observerbench/core.py": "69334fa4fd8f36367c2bab709931a85bd82b585c34f9cb6d82625354c97c33b4",
+        "src/observerbench/effect_prediction.py": "38670e17e470a96259edce697130c748c6f3751b788bd9010583856def229537",
+        "src/observerbench/provenance.py": "8683bca7bac91de5037765983a566720c732b8308534a5b366c6f2f4162d8403",
+        "src/observerbench/tasks/ioi/stage2d.py": "70c3dc698f74835fbfc5baae55e3164a5c5653b33fd336bebe700f59bcb11f31",
+        "src/observerbench/tasks/qwen_induction/__init__.py": "29dc0a0a94ac9603442e3eb1606b583f9479c8c77a12441d5c650ced9ade01ae",
+        "src/observerbench/tasks/qwen_induction/analysis.py": "de50f7d8a1e17d2bdb06350aefaf7750356f79aaa51001016f14fb533caad726",
+        "src/observerbench/tasks/qwen_induction/artifacts.py": "58a10bd8b37c50cafdad15a6ee5b28fa9321a640b0627d72de531c21baa5bab8",
+        "src/observerbench/tasks/qwen_induction/collateral.py": "fb3bebf79a827e1af9dc38998e1d7bfc89ab97ccac010db336abfb0daccecdd7",
+        "src/observerbench/tasks/qwen_induction/design.py": "95161576c7bf627c966fdb62faca14a6ca3c2edac2b4be3754151abae9d262ff",
+        "src/observerbench/tasks/qwen_induction/effect_task.py": "f171081e9824f3a86090527757ddcb4a66e714324e1aef3929e6245a9de6f36e",
+        "src/observerbench/tasks/qwen_induction/plant.py": "86abd26eb8d98ce7699af9288fdcf9d328101a4ea2629577de29df044f028c68",
+        "src/observerbench/tasks/qwen_induction/runner.py": "17be7d56c956785531c23de0314c4d662e324f27ad7b553f28087e7df81d60b5",
+        "src/observerbench/tasks/qwen_induction/selection.py": "f3a13b11c47db82d04c9774396ad5c11204afcd61d2ddfe4889d8b61b0d8f98f"
+      },
+      "torch_version": "2.13.0"
+    }
+  ],
+  "producer_source_hashes": {
+    "pyproject.toml": "9115540a3233107e12cd1317c24c82caeaeefd8221e363a595ac802ad1240a5b",
+    "scripts/run_qwen_induction_phase09.py": "cfea527b7b867f16a478562ffc9a3426eeae9738f73608806735427a4b1f8cd8",
+    "src/observerbench/core.py": "69334fa4fd8f36367c2bab709931a85bd82b585c34f9cb6d82625354c97c33b4",
+    "src/observerbench/effect_prediction.py": "38670e17e470a96259edce697130c748c6f3751b788bd9010583856def229537",
+    "src/observerbench/provenance.py": "8683bca7bac91de5037765983a566720c732b8308534a5b366c6f2f4162d8403",
+    "src/observerbench/tasks/ioi/stage2d.py": "70c3dc698f74835fbfc5baae55e3164a5c5653b33fd336bebe700f59bcb11f31",
+    "src/observerbench/tasks/qwen_induction/__init__.py": "29dc0a0a94ac9603442e3eb1606b583f9479c8c77a12441d5c650ced9ade01ae",
+    "src/observerbench/tasks/qwen_induction/analysis.py": "de50f7d8a1e17d2bdb06350aefaf7750356f79aaa51001016f14fb533caad726",
+    "src/observerbench/tasks/qwen_induction/artifacts.py": "58a10bd8b37c50cafdad15a6ee5b28fa9321a640b0627d72de531c21baa5bab8",
+    "src/observerbench/tasks/qwen_induction/collateral.py": "fb3bebf79a827e1af9dc38998e1d7bfc89ab97ccac010db336abfb0daccecdd7",
+    "src/observerbench/tasks/qwen_induction/design.py": "95161576c7bf627c966fdb62faca14a6ca3c2edac2b4be3754151abae9d262ff",
+    "src/observerbench/tasks/qwen_induction/effect_task.py": "f171081e9824f3a86090527757ddcb4a66e714324e1aef3929e6245a9de6f36e",
+    "src/observerbench/tasks/qwen_induction/plant.py": "86abd26eb8d98ce7699af9288fdcf9d328101a4ea2629577de29df044f028c68",
+    "src/observerbench/tasks/qwen_induction/runner.py": "17be7d56c956785531c23de0314c4d662e324f27ad7b553f28087e7df81d60b5",
+    "src/observerbench/tasks/qwen_induction/selection.py": "f3a13b11c47db82d04c9774396ad5c11204afcd61d2ddfe4889d8b61b0d8f98f"
+  },
+  "runtime": {
+    "dependencies": {
+      "accelerate": "1.14.0",
+      "huggingface-hub": "1.24.0",
+      "matplotlib": "3.11.1",
+      "numpy": "2.4.6",
+      "pandas": "3.0.5",
+      "torch": "2.13.0",
+      "transformers": "5.14.1"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.11.14",
+    "source_dirty": true,
+    "source_revision": "0cec2c4ef17d9c3b0ef3fea8fdf15347ee4e28cb"
+  },
+  "schema": "observerbench.qwen_induction.stage_runtime.v1",
+  "stage": "engineering-smoke"
+}

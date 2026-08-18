@@ -1,0 +1,10 @@
+selector,target,design_rank,n_columns,train_calibration_mae,candidate_negative_prediction_fraction_before_noop_override,selected_action_count,selected_noop_count,selected_raw_negative_count,selected_raw_negative_fraction
+direct_risk_head_pair_quadratic,0.5,92,92,0.0926804650190408,0.0027777777777777,48,12,4,0.08333333333333333
+natural_mean_effect_head_pair_quadratic,0.5,92,92,0.07355751589913,0.0,48,0,0,0.0
+transformed_mean_head_pair_quadratic,0.5,92,92,0.1442737044939775,0.0902777777777777,48,0,44,0.9166666666666666
+direct_risk_head_pair_quadratic,1.0,92,92,0.0724488775191052,0.0,48,0,0,0.0
+natural_mean_effect_head_pair_quadratic,1.0,92,92,0.07355751589913,0.0,48,0,0,0.0
+transformed_mean_head_pair_quadratic,1.0,92,92,0.1021302851685362,0.0722222222222222,48,0,44,0.9166666666666666
+direct_risk_head_pair_quadratic,1.5,92,92,0.0643205097249947,0.0,48,0,0,0.0
+natural_mean_effect_head_pair_quadratic,1.5,92,92,0.07355751589913,0.0,48,0,0,0.0
+transformed_mean_head_pair_quadratic,1.5,92,92,0.073823340270859,0.0118055555555555,48,0,16,0.3333333333333333

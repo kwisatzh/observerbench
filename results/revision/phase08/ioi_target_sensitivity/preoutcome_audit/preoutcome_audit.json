@@ -1,0 +1,53 @@
+{
+  "downstream_source_hashes": {
+    "scripts/audit_ioi_phase08_preoutcome.py": "d4fcf3c357371a57cce6f873b25f24bf62e2be440d37c90ce1d05f7d67f27f31",
+    "scripts/evaluate_ioi_phase08_sensitivity.py": "3e89a15dcca05f06019ae2c9bcc3a518e04c25937fc459d0dde1615d981c37b7",
+    "scripts/freeze_ioi_phase08_sensitivity.py": "b74a59988daa37110957384fd94753053f46057af988cb0a89f4b5cdf6da2b97",
+    "scripts/run_ioi_phase08_selected_measurement.py": "3683c378e8b6aceb1528d8a748b5d3a7c132c667c6bf9596ab2e595ef90e2f0f",
+    "src/observerbench/core.py": "69334fa4fd8f36367c2bab709931a85bd82b585c34f9cb6d82625354c97c33b4",
+    "src/observerbench/provenance.py": "8683bca7bac91de5037765983a566720c732b8308534a5b366c6f2f4162d8403",
+    "src/observerbench/tasks/ioi/phase5_analysis.py": "29be3f52165c6524eb57cf52f8700732ed4bb74d9268b15c3f978fe910c41ae4",
+    "src/observerbench/tasks/ioi/phase5_design.py": "2667d6d705ef43ce0fb87f34852064e82198626a60f25c0ed4fbd55d3f6d3ceb",
+    "src/observerbench/tasks/ioi/phase5_effects.py": "f0853181a0110b75da53a2b620414354b467445b07a00b920e15fd2f28713c62",
+    "src/observerbench/tasks/ioi/phase6_risk.py": "687547b127bfcabe8425bbe4d609e873e0bdabb1f83924f8c727211907c3d01e",
+    "src/observerbench/tasks/ioi/phase7_confirmation.py": "072d421a3016d35a428486d33359ab9437c1aeb8fb8d1e3b1772243a897cd7e4",
+    "src/observerbench/tasks/ioi/phase7_evaluation.py": "b0b24800b228094fc8eb2ee72ae3d5ba8530ce4812b3bc490978296b98d25df7",
+    "src/observerbench/tasks/ioi/phase7_freeze_audit.py": "a423d2e4494840c3c9e0fadfb5ddc00adfd20dd6e226e5d51e112a075869bd18",
+    "src/observerbench/tasks/ioi/phase7_measurement.py": "26f6e573b22d591c789b395741cb16e1f180e3a278a8855597f5033dcbca6acc",
+    "src/observerbench/tasks/ioi/phase8_evaluation.py": "03160bd09e81a197987ac4645df4175284ce473be58ed4a107d8397b3445f95f",
+    "src/observerbench/tasks/ioi/phase8_measurement.py": "a1c8bb13c5db4d994c4224533cdf877bea663b2c78ac02f5bc8ba8b353c5cb7e",
+    "src/observerbench/tasks/ioi/phase8_sensitivity.py": "841b519eea872c6c8b94ff2408cd7be4dd6b4e8e60eb04f534e15b4728010c15",
+    "src/observerbench/tasks/ioi/stage2d.py": "70c3dc698f74835fbfc5baae55e3164a5c5653b33fd336bebe700f59bcb11f31"
+  },
+  "freeze_manifest_sha256": "3792abb1d1e674d27d5d9742244a87efd54a59eb24c21879b7b380c609bd4bad",
+  "frozen_counts": {
+    "candidate_prediction_rows": 13392,
+    "exact_noop_baseline_action_rows": 144,
+    "fitted_selector_noop_selections": 12,
+    "fixed_actions": 576,
+    "new_effect_cells_to_measure": 75776,
+    "new_selected_masks_to_measure": 148,
+    "reused_phase7_measured_masks": 89,
+    "selected_unique_nonnoop_masks": 237,
+    "total_selected_noop_action_rows": 156
+  },
+  "maximum_numeric_recomputation_difference": 4.440892098500626e-16,
+  "new_outcome_values_loaded": false,
+  "protocol_sha256": "d22614d2deecf3818e0765a2851a8bd38151ed7c9ecedef7e619810fea537508",
+  "recomputed_all_predictions_actions_and_unions": true,
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.1",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.14.2",
+    "source_dirty": true,
+    "source_revision": "0cec2c4ef17d9c3b0ef3fea8fdf15347ee4e28cb"
+  },
+  "schema": "observerbench.ioi_phase08_preoutcome_audit.v1",
+  "scientific_status": "post_review_post_confirmatory_target_sensitivity",
+  "status": "deterministic_recomputation_passed_new_outcomes_unopened"
+}

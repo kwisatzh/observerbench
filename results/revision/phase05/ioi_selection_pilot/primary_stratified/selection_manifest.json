@@ -1,0 +1,66 @@
+{
+  "config": {
+    "head_cost_penalty": 0.02,
+    "mask_folds": 5,
+    "measurement_budgets": [
+      20,
+      40,
+      80,
+      160
+    ],
+    "models": [
+      "additive_head",
+      "count_additive",
+      "count_plus_PE_bin4",
+      "count_plus_all_bin4"
+    ],
+    "prompt_fit_fraction": 0.5,
+    "repetitions": 30,
+    "ridge": 1e-06,
+    "seed": 19000,
+    "target_tolerance": 0.25,
+    "targets": [
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      1.5,
+      1.75,
+      2.0
+    ]
+  },
+  "input": {
+    "hashes": {
+      "external/ioi_stage2c_head_records.csv": "828f5bc0c5762a82beb9c7898128a779c29cfac43e4cb8d0ecc2065a1da67c31",
+      "external/ioi_stage2c_per_prompt_drops.csv": "77d21af30fb6840a54b114645833bdff851c28de8c9baca985a28a06dfea7d32",
+      "external/ioi_stage2c_subset_design.csv": "7aefa21bba51137afe9718e693d8daad713eaf4375d828c7a2011eee1f530816"
+    },
+    "n_masks": 240,
+    "n_nonclean_masks": 239,
+    "n_prompts": 256,
+    "prefix": "ioi_stage2c",
+    "source": "results/frozen/ioi/stage2c_primary_stratified_mean_end"
+  },
+  "label": "existing Stage 2c primary-stratified masks",
+  "outputs": {
+    "external/selection_contrasts.csv": "2c3536461b405c5abc2657d481d8e9ebbf3a484499dab02728c9a2b9444b44e0",
+    "external/selection_decisions.csv": "b7b4c3c08ea339b9a82d13f2cfff8a1e17068230af6e0c239ac75d6aeaf30cc3",
+    "external/selection_paired_repetitions.csv": "4d92059fe5262a58643d672769424d62a71c4eb299be9e097c2dee04aaaeb6bd",
+    "external/selection_summary.csv": "bbab0a9cc65d59df5b9d538348c016cb7139853dfb6ffc1e5e83d807229f9947"
+  },
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.1",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.14.2",
+    "source_dirty": true,
+    "source_revision": "0cec2c4ef17d9c3b0ef3fea8fdf15347ee4e28cb"
+  },
+  "schema": "observerbench.ioi_selection_run.v1",
+  "status": "exploratory_existing_outcomes"
+}

@@ -1,0 +1,8 @@
+comparison_id,claim_role,status,candidate,reference,reference_mean_loss,candidate_mean_loss,absolute_loss_reduction,relative_loss_reduction_fraction,ci95_low,ci95_high,bootstrap_repeats,heldout_mean_effect_mae,heldout_mean_effect_r2,heldout_mean_effect_rank_correlation,overall_clean_accuracy,worst_template_accuracy
+H1_primary_estimand,primary,pass,"Direct risk, quadratic basis","Natural mean, quadratic basis",1.0757814324557937,0.8325709196312042,0.2432105128245894,0.22607799826902428,0.11385469850793016,0.40237179996935696,5000,,,,,
+H2_secondary_vs_additive,secondary_structure,fail,"Direct risk, quadratic basis",Additive direct risk,0.858623386816665,0.8325709196312042,0.026052467185460653,0.030342135545655048,-0.025486295092559876,0.07640456896770047,5000,,,,,
+H2_secondary_vs_count,secondary_structure,fail,"Direct risk, quadratic basis",Count-additive direct risk,0.863129189965548,0.8325709196312042,0.030558270334343735,0.03540405154825488,-0.021157178251451116,0.078829896710522,5000,,,,,
+Jensen_parameter_count_sensitivity,prespecified_sensitivity,pass,"Direct risk, quadratic basis",Target-specific transformed-mean score,1.0766507619409822,0.8325709196312042,0.24407984230977794,0.22670289283941217,0.11912255681357542,0.39854511026981826,5000,,,,,
+postoutcome_no_op_audit,postoutcome_limitation,limitation,No action,"Direct risk, quadratic basis",0.8325709196312042,0.75,0.0825709196312042,,,,0,,,,,
+natural_mean_estimand_diagnostic,descriptive_non_gating,descriptive,"Natural mean, quadratic basis",Held-out candidate mean effect,,,,,,,0,0.12849992265111734,0.8442086655989596,0.9378843706488591,,
+clean_task_validity,interpretation_gate,fail,Frozen Phase-6 test prompts,Prespecified clean-task thresholds,,,,,,,0,,,,0.8671875,0.578125

@@ -1,4 +1,7 @@
-"""Configuration loading for ObserverBench task YAML files."""
+"""Configuration loading for ObserverBench task YAML files.
+
+Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex
+"""
 
 from __future__ import annotations
 

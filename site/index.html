@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ObserverBench tests whether an internal estimate is good enough for the action it will guide.">
+  <title>ObserverBench — test observers through action</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="assets/site.js" defer></script>
+</head>
+<body data-page="home" data-site-root=".">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="ObserverBench home">
+      <span class="brand-mark">OB</span>
+      <span>ObserverBench</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a aria-current="page" href="index.html">Overview</a>
+      <a href="leaderboards/">Leaderboards</a>
+      <a href="submit/">Submit</a>
+      <a href="https://github.com/kwisatzh/observerbench">GitHub</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">A task-relative observer workbench</p>
+        <h1>Does your estimate improve the action that matters?</h1>
+        <p class="lede">
+          ObserverBench compares internal-state estimates under a fixed task,
+          intervention rule, budget, and loss. It reports both how well an
+          observer predicts and what happens when a controller acts on it.
+        </p>
+        <div class="button-row">
+          <a class="button primary" href="leaderboards/">Explore checked results</a>
+          <a class="button secondary" href="submit/">Evaluate an observer</a>
+        </div>
+      </div>
+      <aside class="scorecard-preview" aria-label="Example scorecard">
+        <div class="preview-head">
+          <span>Example result</span>
+          <span class="badge checked">schema valid</span>
+        </div>
+        <dl>
+          <div><dt>Downstream loss</dt><dd>2.16</dd></div>
+          <div><dt>Prediction AUROC</dt><dd>0.954</dd></div>
+          <div><dt>Compared with</dt><dd>7 baselines</dd></div>
+          <div><dt>Access</dt><dd>white-box</dd></div>
+        </dl>
+        <p class="preview-note">Illustrative values from the checked Qwen safety panel.</p>
+      </aside>
+    </section>
+
+    <section class="section compact" aria-labelledby="answer-heading">
+      <p class="eyebrow">The short answer</p>
+      <h2 id="answer-heading">You do not need to inspect every routine submission.</h2>
+      <div class="answer-grid">
+        <div class="answer-card automatic">
+          <h3>Automatic</h3>
+          <ul class="check-list">
+            <li>Validate a prediction table and ObserverCard</li>
+            <li>Score against evaluator-held targets</li>
+            <li>Return a redacted scorecard</li>
+            <li>Compare with the correct checked panel</li>
+            <li>Publish mechanically verified scores as community-evaluated results</li>
+          </ul>
+        </div>
+        <div class="answer-card review">
+          <h3>Needs review</h3>
+          <ul>
+            <li>A new task, controller, budget, or loss</li>
+            <li>Uploaded executable code</li>
+            <li>An access claim the system cannot verify</li>
+            <li>A duplicate identity, security flag, or appeal</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section tinted" aria-labelledby="journey-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">One clear path</p>
+          <h2 id="journey-heading">From observer to evidence</h2>
+        </div>
+        <p>Most visitors should get a useful answer without a GPU or a conversation with the maintainers.</p>
+      </div>
+      <ol class="steps">
+        <li><span>1</span><div><h3>Choose a task</h3><p>The task fixes what can be observed, what action follows, and what counts as loss.</p></div></li>
+        <li><span>2</span><div><h3>Run or upload</h3><p>Use frozen measurements, a Colab runner, or upload one risk or effect score per query.</p></div></li>
+        <li><span>3</span><div><h3>Pass validation</h3><p>The evaluator checks IDs, schema, provenance, access fields, and target separation.</p></div></li>
+        <li><span>4</span><div><h3>Receive a scorecard</h3><p>See prediction quality, action loss, uncertainty, cost, and failure slices together.</p></div></li>
+        <li><span>5</span><div><h3>Compare fairly</h3><p>Get a position only among results using the same task version and comparison track.</p></div></li>
+      </ol>
+    </section>
+
+    <section class="section" aria-labelledby="outcomes-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Tangible outcomes</p>
+          <h2 id="outcomes-heading">What a visitor takes away</h2>
+        </div>
+      </div>
+      <div class="outcome-grid">
+        <article><span class="outcome-number">01</span><h3>A direct answer</h3><p>Did this observer beat no action and the relevant existing methods on downstream loss?</p></article>
+        <article><span class="outcome-number">02</span><h3>A fair comparison</h3><p>Where does it sit among observers with the same information, budget, controller, and target?</p></article>
+        <article><span class="outcome-number">03</span><h3>A failure map</h3><p>Which targets, prompt families, action budgets, or operating conditions make it fail?</p></article>
+        <article><span class="outcome-number">04</span><h3>A durable artifact</h3><p>A downloadable scorecard, provenance hashes, and a result page that another researcher can reproduce.</p></article>
+      </div>
+    </section>
+
+    <section class="section task-section" aria-labelledby="tasks-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Task catalog</p>
+          <h2 id="tasks-heading">Start with the question you need answered</h2>
+        </div>
+        <a class="text-link" href="leaderboards/">View all checked rows →</a>
+      </div>
+      <div class="task-grid">
+        <article class="task-card featured">
+          <div class="task-top"><span class="badge live">checked panel</span><span>Safety</span></div>
+          <h3>Authorization triage</h3>
+          <p>Rank requests by expected policy loss, then measure realized violations and clean utility under a fixed action budget.</p>
+          <p class="task-meta">Qwen 2.5 7B · checked prediction panel · sealed targets</p>
+          <p><a class="text-link" href="task-packs/safety/safety-interlock-qwen2-5-7b-instruct/paired-scope-v1/safety_task.json">Download the public task pack →</a></p>
+        </article>
+        <article class="task-card featured">
+          <div class="task-top"><span class="badge live">checked panel</span><span>AI control</span></div>
+          <h3>Verified-backdoor monitoring</h3>
+          <p>Compare monitors by which working backdoors escape a fixed audit budget, not AUROC alone.</p>
+          <p class="task-meta">ControlArena APPS · open adoption panel · three audit budgets</p>
+        </article>
+        <article class="task-card">
+          <div class="task-top"><span class="badge available">evaluator ready</span><span>Mechanisms</span></div>
+          <h3>Finite-effect prediction</h3>
+          <p>Predict held-out intervention responses and test whether the map selects a better downstream action.</p>
+          <p class="task-meta">GPT-2 IOI and Qwen induction · frozen-table path</p>
+        </article>
+        <article class="task-card">
+          <div class="task-top"><span class="badge available">local runner</span><span>Control</span></div>
+          <h3>Closed-loop observer tests</h3>
+          <p>Compose an estimator and actuation direction under a fixed controller, transformer, and intervention protocol.</p>
+          <p class="task-meta">Analytic and learned tasks · implementation path</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section rule-section" aria-labelledby="ranking-heading">
+      <div>
+        <p class="eyebrow">Ranking rule</p>
+        <h2 id="ranking-heading">No global “best observer.”</h2>
+      </div>
+      <p>
+        A score is task-relative. ObserverBench can return an official rank
+        only when the task version, observation boundary, action budget,
+        controller, and loss match. Cross-track results remain visible as
+        comparisons, and evaluator oracles remain unranked reference bounds.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>ObserverBench</strong><p>Test estimates through the action they will guide.</p></div>
+    <div class="footer-links"><a href="leaderboards/">Leaderboards</a><a href="submit/">Submit</a><a href="https://github.com/kwisatzh/observerbench">Source</a></div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,104 @@
+{
+  "accessed_outcome_rows": "Phase-5 train/calibration only",
+  "artifact_hashes": {
+    "candidate_predictions.csv": "974517a284598a8ef8433c063d943cd04afba2f0c3a752856615d53e14491335",
+    "fit_diagnostics.csv": "8a658122c5f8f24bdb2c80044ab812ec55a5372056fe52e6811237bc8d4cd248",
+    "fixed_actions.csv": "7d961bb46fdea953c1efaa8772c9dc84e774545d85e66b7e48c44873886ce1fd",
+    "observer_coefficients.csv": "98c0a4996630b71704f58696b4004fc48a811018811647d5f105e55a2d0118d9",
+    "selected_measurement_masks.csv": "7f843bc5c2649ca2e84a52dccb6a7fc12330fbeab586186e4ad766517b9869eb"
+  },
+  "basis_columns": 92,
+  "clean_pretest_gate": {
+    "checks": {
+      "eight_templates_retained": true,
+      "every_template_accuracy": true,
+      "every_template_positive_mean_clean_ld": true,
+      "exact_prompt_count": true,
+      "overall_accuracy": true
+    },
+    "failure_rule": "Stop the experiment. Do not fit or freeze Phase-7 actions and do not measure any Phase-7 candidate effect. The failed clean-task pretest is the result. No prompt, pair, template, or name may be replaced.",
+    "passed": true,
+    "thresholds": {
+      "every_template_accuracy_min": 0.9,
+      "every_template_mean_clean_ld_strictly_positive": true,
+      "overall_accuracy_min": 0.95
+    }
+  },
+  "clean_pretest_passed": true,
+  "counts": {
+    "analytic_noop_action_rows": 48,
+    "candidate_action_rows": 1488,
+    "fixed_actions": 144,
+    "phase5_train_calibration_cells": 30720,
+    "selected_unique_nonnoop_masks": 89
+  },
+  "design_id": "ioi_phase07_design_baf743a2e322334c",
+  "design_manifest_sha256": "9355d800e5f2b3824f084b7b3624d6df58fddd17801daaa16bab91fbe8482695",
+  "next_allowed_stage": "After a separate seal validation, measure only selected_measurement_masks.csv on every frozen test prompt. Do not measure any unselected candidate.",
+  "phase5_design_manifest_sha256": "5f9aedda456048378d318537b4099bf28d09991fd40a18004f71d82075075922",
+  "phase5_effect_manifest_sha256": "fb3e807ea52d27dd7da58d49e2b6fa4a9d4c425bdb8e9a999cf240bdcb1ff80f",
+  "phase5_train_shard_hashes": {
+    "shards/train/effects_0000_0016.csv": "f08f5e28e5fa513c4cef7d897a3bfe56edfc052aeeedf59e118ec3f51abaec12",
+    "shards/train/effects_0016_0032.csv": "f79aeac723c4bfd34018926b85c0aee1812703ca72cf35d3b3567047b5f5681d",
+    "shards/train/effects_0032_0048.csv": "80d784e65b549c6a76510bf0e5675c0486940d6f7b5d775416eaeb3bcfe130ea",
+    "shards/train/effects_0048_0064.csv": "a6189109ca6791e09a9f79b76ac12e9b568b73050b7c1fd6db93b57141b3af5a",
+    "shards/train/effects_0064_0080.csv": "664cb7b99453433e079c2ef6cf30253ae134e65dda9b4af6162d86a9bcb1c4fc",
+    "shards/train/effects_0080_0096.csv": "298fa0a48ca8ff000538d4cb0350457b77b5dcc80c2e26078fc3ecbedada7b3b",
+    "shards/train/effects_0096_0112.csv": "31a952e52d381d1a1e28796295bf1d2d28d8d7b5780370c22a6d7cc255ce4132",
+    "shards/train/effects_0112_0128.csv": "712dfd6aa327c8d24dd35250082191ae7df2646def7ad4eba1f1112f73b547de",
+    "shards/train/effects_0128_0144.csv": "1579bc07ad00d56ee660293d9e20c9e321095be79147915f742cea66bd48450c",
+    "shards/train/effects_0144_0160.csv": "017f69ac943ac5172f976aaec4a7eca50fca2da4e37d61be840cd6d24c0aabf9",
+    "shards/train/effects_0160_0176.csv": "2dd85da3a90b3dc5689071be67dca9791b98e73911ee936fb797e192a4bcd45d",
+    "shards/train/effects_0176_0192.csv": "fe470a8c9ddf6a1a9c3b5b94897256474882011433bb61e3447151d2f5c14449",
+    "shards/train/effects_0192_0208.csv": "1608c6ce80f86a799ff4331450c3052affba526901b552abfdc2d81ea871d84c",
+    "shards/train/effects_0208_0224.csv": "2300a3ad8d04df82b726d856743ddcbe5086d48db33bf8dd8219a8f00d83cb54",
+    "shards/train/effects_0224_0240.csv": "3a881ff14858d4a007dfd6bad303cbb0e16faa86f33d75ca8244f7a60ba2aea4",
+    "shards/train/effects_0240_0256.csv": "d3d31663778ef16a4824ccf73dd9a317d1d474d0208be2ccdcda6e6631f3ffa2",
+    "shards/train/effects_0256_0272.csv": "ac4d29df4c574eee5054724613062b4fa9dcaa2295b23ee12a8addda18e1c047",
+    "shards/train/effects_0272_0288.csv": "8837ec093298d9cf02e6a9cdffcb6a780e084bce3433ecbf419242756efad22d",
+    "shards/train/effects_0288_0304.csv": "032a9bda70b673f5952f3bfec9f7771f346bf62abdc2657b690c784fa1e3a305",
+    "shards/train/effects_0304_0320.csv": "b5b4857c3878fe6b0fa8ca966a9bce1075534917ac5b42770d9b1c1d6e7ea93b",
+    "shards/train/effects_0320_0336.csv": "bce16a1bd3765438ec07f1308d01dbc6020470a01a221f612fc38faca62865ad",
+    "shards/train/effects_0336_0352.csv": "3640dd1f0585be2e07f2400a19e92a7783e499f36b2401bd5f8cf3f874d905da",
+    "shards/train/effects_0352_0368.csv": "dc766c49c23f58ee6648e5b243f11ef20110b0be8e9f71c1ec49088f0c9d8abe",
+    "shards/train/effects_0368_0384.csv": "f2e0027f5becd31a862fc361085c5a5858597fec629148ee371bb3a438e47adb",
+    "shards/train/effects_0384_0400.csv": "29fc6ea7f50312dccecf2faa82d1be310c86062aefe9169ec547833cab217062",
+    "shards/train/effects_0400_0416.csv": "6ac48632a85f0095eca52c80aa32407a0b7d447c8d6939c890414e607fc415b3",
+    "shards/train/effects_0416_0432.csv": "e46a0f0d843a4835bdfcebd84dfcce25a3931ea3ca8d44925dfb2a7b39a43560",
+    "shards/train/effects_0432_0448.csv": "555f11df4c211d3ce2a7b677edd7ad5481d290dab92e11fe6660696ff38a0411",
+    "shards/train/effects_0448_0464.csv": "87d970f991311b36fe95cb96e85d4eb4eb9a4db4b4e4b735bb2c40ea705ef771",
+    "shards/train/effects_0464_0480.csv": "d0f60c874214b44daf815cf3cfd09c40ea26c2bbfea2db1753048a3c0b1c8aeb"
+  },
+  "phase5_validation_or_test_rows_loaded": false,
+  "phase7_candidate_mask_forward_passes": 0,
+  "phase7_candidate_outcomes_loaded": false,
+  "pretest_manifest_sha256": "e5100b8aa1ba98c9ad34e49ba44bc4e85b450a21943a4d72b01d05a9cdffe855",
+  "protocol_sha256": "852d05da70ba13e870baf797906a190325d3eb82cbf1452c75983383e683e0f2",
+  "ridge": 1e-06,
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.1",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.14.2",
+    "source_dirty": true,
+    "source_revision": "0cec2c4ef17d9c3b0ef3fea8fdf15347ee4e28cb"
+  },
+  "schema": "observerbench.ioi_phase07_prediction_action_freeze.v1",
+  "scientific_status": "pilot_informed_outcome_sealed_canonical_template_confirmation",
+  "source_effect_manifest_model": {
+    "d_head": 64,
+    "device": "mps",
+    "dtype": "torch.float32",
+    "n_heads": 12,
+    "n_layers": 12,
+    "requested_name": "gpt2-small",
+    "requested_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "resolved_name": "gpt2"
+  },
+  "status": "actions_frozen_candidate_outcomes_unopened",
+  "target": 1.0
+}

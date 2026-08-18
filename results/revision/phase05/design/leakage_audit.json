@@ -1,0 +1,37 @@
+{
+  "all_gates_pass": true,
+  "counts": {
+    "calibration_masks": 160,
+    "candidate_masks": 320,
+    "candidate_pools": 10,
+    "legacy_masks": 371,
+    "names": 64,
+    "prompts": 1024,
+    "templates": 8
+  },
+  "gates": {
+    "calibration_anchor_prefix": true,
+    "calibration_candidate_disjoint": true,
+    "calibration_count": true,
+    "candidate_count": true,
+    "candidate_head_count_balance": true,
+    "candidate_legacy_masks_excluded": true,
+    "candidate_pool_sizes": true,
+    "candidate_stratum_balance": true,
+    "eight_literal_templates": true,
+    "full_rank_at_primary_budget": true,
+    "name_banks_pairwise_disjoint": true,
+    "nested_budget_prefixes": true,
+    "nonclean_candidate_masks": true,
+    "outcome_prompt_count": true,
+    "prompt_count": true,
+    "prompt_names_respect_split": true,
+    "prompt_split_counts": true,
+    "reference_prompt_count": true,
+    "template_counts_per_split": true,
+    "unique_masks": true,
+    "unique_prompt_ids": true,
+    "variable_calibration_legacy_masks_excluded": true
+  },
+  "schema": "observerbench.ioi_phase5_design_audit.v1"
+}

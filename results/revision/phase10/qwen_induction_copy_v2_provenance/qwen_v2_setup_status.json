@@ -1,0 +1,6 @@
+{
+  "error": "No module named 'observerbench'",
+  "error_type": "ModuleNotFoundError",
+  "ok": false,
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/ipykernel_992/1247024014.py\", line 80, in <cell line: 0>\n    from observerbench.tasks.qwen_induction.copy_v2_runner import CopyV2Runner\nModuleNotFoundError: No module named 'observerbench'\n"
+}

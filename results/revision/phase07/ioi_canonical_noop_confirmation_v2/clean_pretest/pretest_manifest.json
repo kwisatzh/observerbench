@@ -1,0 +1,67 @@
+{
+  "accessed_prompt_splits": [
+    "test"
+  ],
+  "artifact_hashes": {
+    "clean_scores_test.csv": "fc64b8a5c458b8b565619543953e0703c38d93d929b7574e85d7d8b7d17a8d2d",
+    "clean_task_validity.csv": "b4bbd616a93503183d1c2f59b753207c154342f222ffc96eed87f33fd0ad7d58"
+  },
+  "candidate_effect_cells": 0,
+  "candidate_mask_forward_passes": 0,
+  "candidate_mask_metadata_loaded": false,
+  "candidate_outcomes_authorized": true,
+  "clean_reference": {
+    "candidate_outcome_values_read": false,
+    "source_bound_by_v1_measurement_spec": true,
+    "source_clean_scores_sha256": "fc64b8a5c458b8b565619543953e0703c38d93d929b7574e85d7d8b7d17a8d2d",
+    "source_pretest_manifest_sha256": "e5100b8aa1ba98c9ad34e49ba44bc4e85b450a21943a4d72b01d05a9cdffe855",
+    "status": "rebound_from_v1_clean_only_pretest_that_predates_aborted_shard"
+  },
+  "config": {
+    "batch_size": 64,
+    "device": "mps",
+    "model_name": "gpt2-small",
+    "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "seed": 27071
+  },
+  "counts": {
+    "candidate_mask_forward_passes": 0,
+    "clean_prompt_forward_passes": 0,
+    "reused_frozen_clean_scores": 512
+  },
+  "design_id": "ioi_phase07_design_f7c5a0ec88a44fd3",
+  "design_manifest_sha256": "3dfa6352524c66b6b57794ec9ed2c89a900afd7df3d9879cd7f21cb0686feee5",
+  "gate": {
+    "checks": {
+      "eight_templates_retained": true,
+      "every_template_accuracy": true,
+      "every_template_positive_mean_clean_ld": true,
+      "exact_prompt_count": true,
+      "overall_accuracy": true
+    },
+    "failure_rule": "Stop the experiment. Do not fit or freeze Phase-7 actions and do not measure any Phase-7 candidate effect. The failed clean-task pretest is the result. No prompt, pair, template, or name may be replaced.",
+    "passed": true,
+    "thresholds": {
+      "every_template_accuracy_min": 0.9,
+      "every_template_mean_clean_ld_strictly_positive": true,
+      "overall_accuracy_min": 0.95
+    }
+  },
+  "next_allowed_stage": "Fit and freeze Phase-7 v2 actions from Phase-5 train/calibration only.",
+  "protocol_sha256": "198a1d30a61e9463863a7597becc7973c7f7a2ee8a915962d12b6612e194befb",
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.1",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.14.2",
+    "source_dirty": true,
+    "source_revision": "0cec2c4ef17d9c3b0ef3fea8fdf15347ee4e28cb"
+  },
+  "schema": "observerbench.ioi_phase07_clean_pretest.v1",
+  "scientific_status": "pilot_informed_outcome_sealed_canonical_template_confirmation",
+  "status": "clean_pretest_passed_candidate_outcomes_unopened"
+}

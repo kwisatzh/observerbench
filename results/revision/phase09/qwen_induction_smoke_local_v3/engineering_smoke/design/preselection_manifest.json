@@ -1,0 +1,26 @@
+{
+  "artifact_hashes": {
+    "prompts.csv": "c9bb3dc17c30632b2a36ca6fdf142abf3f154cbfabb10d21ed0ac2ebf3d9c9de",
+    "prompts_all.csv": "43fd4568371fc10852e7d519da819d8d79a25ccc1ac9d3325babf000a81cbe2d",
+    "token_banks.json": "4c0a6f12092a0d8360c035c898ee4424e8beb4ef51361d9d38db9b57e6204b3a"
+  },
+  "config_sha256": "5c3a44e3a758a11bcf8fa18e60abeceed43ef6f1e1a51ac21bc19304d6192a2d",
+  "mask_design_included": false,
+  "model": {
+    "requested_name": "Qwen/Qwen2.5-0.5B",
+    "requested_revision": "060db6499f32faf8b98477b0a26969ef7d8b9987"
+  },
+  "prompt_counts": {
+    "calibration": 8,
+    "discovery": 8,
+    "head_fit": 8,
+    "head_test": 8,
+    "locked_test": 8,
+    "reference": 8
+  },
+  "schema": "observerbench.qwen_induction_preselection.v1",
+  "scientific_outcomes_included": false,
+  "selected_heads_included": false,
+  "sequence_design_sha256": "21ff9d382273d109c4042dad0c927dba0675ec8c2e840fcca233d762a6421bc7",
+  "status": "prepared_before_model_outcomes"
+}

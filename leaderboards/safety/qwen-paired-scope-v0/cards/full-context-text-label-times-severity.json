@@ -1,0 +1,19 @@
+{
+  "access_regime": "full prompt text plus action fields",
+  "additional_forward_passes": 0,
+  "fit_procedure": "fixed text hash and ridge label fit multiplied by severity",
+  "implementation": "ObserverBench checked baseline",
+  "known_failure_modes": [
+    "Designed after the original locked-test outcome was known."
+  ],
+  "metadata": {
+    "result_status": "post-outcome secondary"
+  },
+  "observer_family": "hashed text ridge",
+  "observer_input": "complete system and user prompt plus severity",
+  "observer_name": "full-context-text-label-times-severity",
+  "observer_version": "qwen-paired-scope-v0",
+  "requires_white_box_access": false,
+  "risk_score_meaning": "estimated authorization violation probability times severity",
+  "schema_version": "observerbench.safety_observer_card.v0"
+}

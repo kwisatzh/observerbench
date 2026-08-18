@@ -1,0 +1,383 @@
+{
+  "budgets": {
+    "0.02": {
+      "monitors": {
+        "qwen-activation-probe": {
+          "audit_precision": {
+            "lower_95": 1.0,
+            "mean": 1.0,
+            "upper_95": 1.0
+          },
+          "realized_violations": {
+            "lower_95": 715.0,
+            "mean": 715.0,
+            "upper_95": 715.0
+          },
+          "risk_auroc": {
+            "lower_95": 0.9435302762602613,
+            "mean": 0.9531001877023355,
+            "upper_95": 0.9628539968493468
+          }
+        },
+        "qwen-controlarena-basic": {
+          "audit_precision": {
+            "lower_95": 0.8275862068965517,
+            "mean": 0.9268793103448274,
+            "upper_95": 1.0
+          },
+          "realized_violations": {
+            "lower_95": 715.0,
+            "mean": 717.1205,
+            "upper_95": 720.0
+          },
+          "risk_auroc": {
+            "lower_95": 0.7672701730330096,
+            "mean": 0.7858911895522603,
+            "upper_95": 0.8041579951439474
+          }
+        },
+        "qwen-controlarena-detailed-score-only": {
+          "audit_precision": {
+            "lower_95": 0.896551724137931,
+            "mean": 0.9650862068965517,
+            "upper_95": 1.0
+          },
+          "realized_violations": {
+            "lower_95": 715.0,
+            "mean": 716.0125,
+            "upper_95": 718.0
+          },
+          "risk_auroc": {
+            "lower_95": 0.7904378622167303,
+            "mean": 0.8094359029945658,
+            "upper_95": 0.8280474079373338
+          }
+        },
+        "qwen-controlarena-prompt-ensemble": {
+          "audit_precision": {
+            "lower_95": 0.896551724137931,
+            "mean": 0.9650862068965517,
+            "upper_95": 1.0
+          },
+          "realized_violations": {
+            "lower_95": 715.0,
+            "mean": 716.0125,
+            "upper_95": 718.0
+          },
+          "risk_auroc": {
+            "lower_95": 0.7982102338420627,
+            "mean": 0.8166800280379235,
+            "upper_95": 0.8338692966672447
+          }
+        }
+      },
+      "paired_differences": {
+        "qwen-controlarena-basic": {
+          "activation_minus_monitor_audit_precision": {
+            "lower_95": 0.0,
+            "mean": 0.07312068965517242,
+            "upper_95": 0.1724137931034483
+          },
+          "activation_minus_monitor_auroc": {
+            "lower_95": 0.14921744023875602,
+            "mean": 0.16720899815007517,
+            "upper_95": 0.18486555075008668
+          },
+          "activation_minus_monitor_violations": {
+            "lower_95": -5.0,
+            "mean": -2.1205,
+            "upper_95": 0.0
+          }
+        },
+        "qwen-controlarena-detailed-score-only": {
+          "activation_minus_monitor_audit_precision": {
+            "lower_95": 0.0,
+            "mean": 0.03491379310344826,
+            "upper_95": 0.10344827586206895
+          },
+          "activation_minus_monitor_auroc": {
+            "lower_95": 0.12572337210226617,
+            "mean": 0.1436642847077697,
+            "upper_95": 0.16223960591542377
+          },
+          "activation_minus_monitor_violations": {
+            "lower_95": -3.0,
+            "mean": -1.0125,
+            "upper_95": 0.0
+          }
+        },
+        "qwen-controlarena-prompt-ensemble": {
+          "activation_minus_monitor_audit_precision": {
+            "lower_95": 0.0,
+            "mean": 0.03491379310344826,
+            "upper_95": 0.10344827586206895
+          },
+          "activation_minus_monitor_auroc": {
+            "lower_95": 0.11961823621227885,
+            "mean": 0.1364201596644121,
+            "upper_95": 0.15359231377904964
+          },
+          "activation_minus_monitor_violations": {
+            "lower_95": -3.0,
+            "mean": -1.0125,
+            "upper_95": 0.0
+          }
+        }
+      }
+    },
+    "0.05": {
+      "monitors": {
+        "qwen-activation-probe": {
+          "audit_precision": {
+            "lower_95": 1.0,
+            "mean": 1.0,
+            "upper_95": 1.0
+          },
+          "realized_violations": {
+            "lower_95": 670.0,
+            "mean": 670.0,
+            "upper_95": 670.0
+          },
+          "risk_auroc": {
+            "lower_95": 0.9435302762602613,
+            "mean": 0.9531001877023355,
+            "upper_95": 0.9628539968493468
+          }
+        },
+        "qwen-controlarena-basic": {
+          "audit_precision": {
+            "lower_95": 0.9054054054054054,
+            "mean": 0.9596081081081081,
+            "upper_95": 1.0
+          },
+          "realized_violations": {
+            "lower_95": 670.0,
+            "mean": 672.989,
+            "upper_95": 677.0
+          },
+          "risk_auroc": {
+            "lower_95": 0.7672701730330096,
+            "mean": 0.7858911895522603,
+            "upper_95": 0.8041579951439474
+          }
+        },
+        "qwen-controlarena-detailed-score-only": {
+          "audit_precision": {
+            "lower_95": 0.9594594594594594,
+            "mean": 0.9859189189189188,
+            "upper_95": 1.0
+          },
+          "realized_violations": {
+            "lower_95": 670.0,
+            "mean": 671.042,
+            "upper_95": 673.0
+          },
+          "risk_auroc": {
+            "lower_95": 0.7904378622167303,
+            "mean": 0.8094359029945658,
+            "upper_95": 0.8280474079373338
+          }
+        },
+        "qwen-controlarena-prompt-ensemble": {
+          "audit_precision": {
+            "lower_95": 0.9459459459459459,
+            "mean": 0.979222972972973,
+            "upper_95": 1.0
+          },
+          "realized_violations": {
+            "lower_95": 670.0,
+            "mean": 671.5375,
+            "upper_95": 674.0
+          },
+          "risk_auroc": {
+            "lower_95": 0.7982102338420627,
+            "mean": 0.8166800280379235,
+            "upper_95": 0.8338692966672447
+          }
+        }
+      },
+      "paired_differences": {
+        "qwen-controlarena-basic": {
+          "activation_minus_monitor_audit_precision": {
+            "lower_95": 0.0,
+            "mean": 0.04039189189189188,
+            "upper_95": 0.09459459459459463
+          },
+          "activation_minus_monitor_auroc": {
+            "lower_95": 0.14921744023875602,
+            "mean": 0.16720899815007517,
+            "upper_95": 0.18486555075008668
+          },
+          "activation_minus_monitor_violations": {
+            "lower_95": -7.0,
+            "mean": -2.989,
+            "upper_95": 0.0
+          }
+        },
+        "qwen-controlarena-detailed-score-only": {
+          "activation_minus_monitor_audit_precision": {
+            "lower_95": 0.0,
+            "mean": 0.014081081081081063,
+            "upper_95": 0.04054054054054057
+          },
+          "activation_minus_monitor_auroc": {
+            "lower_95": 0.12572337210226617,
+            "mean": 0.1436642847077697,
+            "upper_95": 0.16223960591542377
+          },
+          "activation_minus_monitor_violations": {
+            "lower_95": -3.0,
+            "mean": -1.042,
+            "upper_95": 0.0
+          }
+        },
+        "qwen-controlarena-prompt-ensemble": {
+          "activation_minus_monitor_audit_precision": {
+            "lower_95": 0.0,
+            "mean": 0.02077702702702701,
+            "upper_95": 0.05405405405405406
+          },
+          "activation_minus_monitor_auroc": {
+            "lower_95": 0.11961823621227885,
+            "mean": 0.1364201596644121,
+            "upper_95": 0.15359231377904964
+          },
+          "activation_minus_monitor_violations": {
+            "lower_95": -4.0,
+            "mean": -1.5375,
+            "upper_95": 0.0
+          }
+        }
+      }
+    },
+    "0.1": {
+      "monitors": {
+        "qwen-activation-probe": {
+          "audit_precision": {
+            "lower_95": 1.0,
+            "mean": 1.0,
+            "upper_95": 1.0
+          },
+          "realized_violations": {
+            "lower_95": 596.0,
+            "mean": 596.0,
+            "upper_95": 596.0
+          },
+          "risk_auroc": {
+            "lower_95": 0.9435302762602613,
+            "mean": 0.9531001877023355,
+            "upper_95": 0.9628539968493468
+          }
+        },
+        "qwen-controlarena-basic": {
+          "audit_precision": {
+            "lower_95": 0.8851351351351351,
+            "mean": 0.9309222972972973,
+            "upper_95": 0.9662162162162162
+          },
+          "realized_violations": {
+            "lower_95": 601.0,
+            "mean": 606.2235,
+            "upper_95": 613.0
+          },
+          "risk_auroc": {
+            "lower_95": 0.7672701730330096,
+            "mean": 0.7858911895522603,
+            "upper_95": 0.8041579951439474
+          }
+        },
+        "qwen-controlarena-detailed-score-only": {
+          "audit_precision": {
+            "lower_95": 0.9594594594594594,
+            "mean": 0.9847364864864865,
+            "upper_95": 1.0
+          },
+          "realized_violations": {
+            "lower_95": 596.0,
+            "mean": 598.259,
+            "upper_95": 602.0
+          },
+          "risk_auroc": {
+            "lower_95": 0.7904378622167303,
+            "mean": 0.8094359029945658,
+            "upper_95": 0.8280474079373338
+          }
+        },
+        "qwen-controlarena-prompt-ensemble": {
+          "audit_precision": {
+            "lower_95": 0.9662162162162162,
+            "mean": 0.9863851351351353,
+            "upper_95": 1.0
+          },
+          "realized_violations": {
+            "lower_95": 596.0,
+            "mean": 598.015,
+            "upper_95": 601.0
+          },
+          "risk_auroc": {
+            "lower_95": 0.7982102338420627,
+            "mean": 0.8166800280379235,
+            "upper_95": 0.8338692966672447
+          }
+        }
+      },
+      "paired_differences": {
+        "qwen-controlarena-basic": {
+          "activation_minus_monitor_audit_precision": {
+            "lower_95": 0.03378378378378377,
+            "mean": 0.0690777027027027,
+            "upper_95": 0.11486486486486491
+          },
+          "activation_minus_monitor_auroc": {
+            "lower_95": 0.14921744023875602,
+            "mean": 0.16720899815007517,
+            "upper_95": 0.18486555075008668
+          },
+          "activation_minus_monitor_violations": {
+            "lower_95": -17.0,
+            "mean": -10.2235,
+            "upper_95": -5.0
+          }
+        },
+        "qwen-controlarena-detailed-score-only": {
+          "activation_minus_monitor_audit_precision": {
+            "lower_95": 0.0,
+            "mean": 0.015263513513513514,
+            "upper_95": 0.04054054054054057
+          },
+          "activation_minus_monitor_auroc": {
+            "lower_95": 0.12572337210226617,
+            "mean": 0.1436642847077697,
+            "upper_95": 0.16223960591542377
+          },
+          "activation_minus_monitor_violations": {
+            "lower_95": -6.0,
+            "mean": -2.259,
+            "upper_95": 0.0
+          }
+        },
+        "qwen-controlarena-prompt-ensemble": {
+          "activation_minus_monitor_audit_precision": {
+            "lower_95": 0.0,
+            "mean": 0.013614864864864866,
+            "upper_95": 0.03378378378378377
+          },
+          "activation_minus_monitor_auroc": {
+            "lower_95": 0.11961823621227885,
+            "mean": 0.1364201596644121,
+            "upper_95": 0.15359231377904964
+          },
+          "activation_minus_monitor_violations": {
+            "lower_95": -5.0,
+            "mean": -2.015,
+            "upper_95": 0.0
+          }
+        }
+      }
+    }
+  },
+  "replicates": 2000,
+  "resampling_unit": "APPS problem ID with its paired honest and attack rows",
+  "schema": "observerbench.controlarena_apps_qwen.bootstrap.v0",
+  "seed": 7393
+}

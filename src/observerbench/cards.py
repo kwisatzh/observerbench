@@ -1,13 +1,18 @@
 from __future__ import annotations
+
+# Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex
+
 import json
 import math
 from pathlib import Path
 from typing import Any, Dict, Iterable, List
 import pandas as pd
 from .core import ObserverCard, ObserverResult
+from .provenance import file_sha256, portable_artifact_path, runtime_provenance
 
 
-CARD_SCHEMA_VERSION = "observerbench.observer_card_bundle.v1"
+REPO_ROOT = Path(__file__).resolve().parents[2]
+CARD_SCHEMA_VERSION = "observerbench.observer_card_bundle.v2"
 
 CARD_REQUIRED_FIELDS = {
     "task_name",
@@ -24,6 +29,8 @@ CARD_REQUIRED_FIELDS = {
     "recommendation",
     "known_scope_limits",
     "commands_to_reproduce",
+    "result_status",
+    "reproducibility_provenance",
 }
 
 OBSERVER_CARD_BUNDLE_SCHEMA = {
@@ -40,6 +47,9 @@ CTL2_THRESHOLDS = {
     "divergence_rate_mse_growth_max": 0.05,
     "target_error_worsened_rate_max": 0.25,
     "observer_bias_mae_path_max": 0.5,
+    "direction_norm_ratio_vs_unprojected_max": 5.0,
+    "mean_nearest_clean_residual_normalized_path_max": 1.0,
+    "control_clip_fraction_max": 0.25,
 }
 
 IOI_THRESHOLDS = {
@@ -52,6 +62,18 @@ IOI_THRESHOLDS = {
 
 def infer_failure_modes(metrics: Dict[str, float]) -> List[str]:
     failures: List[str] = []
+    if metrics.get("observer_direction_sign_compatible") is False:
+        failures.append("Estimator and direction have non-positive observer self-gain for the configured positive controller gain.")
+    if metrics.get("final_target_mse", 0.0) > metrics.get("initial_target_mse", float("inf")):
+        failures.append("Final target error exceeds initial target error over the tested rollout.")
+    if metrics.get("direction_off_support_fraction", 0.0) > 0.25:
+        failures.append("More than 25% of the actuation direction lies outside the affine span of the clean residual states.")
+    if metrics.get("control_clip_fraction", 0.0) > 0.25:
+        failures.append("More than 25% of control commands are clipped; local gain diagnostics do not describe those steps.")
+    if metrics.get("direction_norm_ratio_vs_unprojected", 1.0) > 5.0:
+        failures.append("Affine-span projection amplifies direction norm by more than 5x; treat it as ill-conditioned.")
+    if metrics.get("mean_nearest_clean_residual_normalized_path", 0.0) > 1.0:
+        failures.append("The trajectory stays farther than one clean-support RMS radius from the nearest observed residual on average.")
     if metrics.get("observer_r2", 1.0) < 0.8:
         failures.append("Observer has weak held-out predictive fidelity for the target estimand.")
     if metrics.get("control_target_mse", 0.0) > metrics.get("baseline_target_mse", float("inf")):
@@ -73,6 +95,10 @@ def infer_failure_modes(metrics: Dict[str, float]) -> List[str]:
 
 
 def infer_recommendation(metrics: Dict[str, float], failures: List[str]) -> str:
+    if "observer_self_gain" in metrics:
+        if failures:
+            return "Do not recommend this estimator--direction pair for control under the tested rollout; inspect the listed gain, support, and tracking failures."
+        return "This estimator--direction pair improves tracking in the tested additive residual loop; compare fixed-direction factorial contrasts before attributing the result to estimation alone."
     target_frac = metrics.get("target_improvement_fraction_vs_best", 1.0)
     collateral_ratio = metrics.get("collateral_ratio_vs_best", 1.0)
     target_mse_ratio = metrics.get("target_mse_ratio_vs_best", 1.0)
@@ -236,12 +262,12 @@ def _task_defaults(task_name: str) -> dict[str, str | list[str]]:
         },
         "trained_ctl2": {
             "model_or_substrate": "tiny trained transformer residual stream",
-            "access_regime": "white-box residual representation with iterative edited-state readout",
-            "observer_family": "linear/oracle observers over learned residual features",
-            "estimand": "closed-loop control-relevant target state in the residual stream",
-            "measurement_design": "repeat observer measurement on the current edited residual state, apply clipped proportional control, and update residual state",
-            "validation_target": "integrated target tracking error, cumulative collateral, observer bias, and divergence along the closed loop",
-            "known_scope_limits": ["Ctl-2 reproduction task only.", "Quick runs are smoke tests and do not replace frozen paper outputs."],
+            "access_regime": "white-box final-residual representation with additive residual updates",
+            "observer_family": "independently composed affine estimators and residual-space directions",
+            "estimand": "target-head state along an additive final-residual intervention trajectory",
+            "measurement_design": "cross estimators and directions, use affine-span projection only as a diagnostic, and apply clipped proportional control",
+            "validation_target": "paired target error, fitted nuisance-probe movement, self-gain, clipping, and distance from the four clean residual states",
+            "known_scope_limits": ["Additive final-residual loop, not a rerun transformer plant.", "The target is the model target head; collateral is a fitted nuisance probe.", "Affine-span membership is not an on-manifold guarantee.", "Quick runs are smoke tests and do not replace checked revision outputs."],
         },
         "ioi_stage1": {
             "model_or_substrate": "GPT-2-small IOI head-ablation diagnostic",
@@ -258,8 +284,8 @@ def _task_defaults(task_name: str) -> dict[str, str | list[str]]:
             "observer_family": "random head-subset predictive models",
             "estimand": "subset drop in IOI logit difference",
             "measurement_design": "fit subset-level predictors on random head subsets",
-            "validation_target": "whether additive head terms are sufficient in the random-subset regime",
-            "known_scope_limits": ["Known-answer IOI diagnostic.", "Random subset regime should not be overread as primary-stratified behavior."],
+            "validation_target": "held-out subset prediction against per-head and count-additive baselines with capacity-matched pair blocks",
+            "known_scope_limits": ["Known-answer IOI diagnostic.", "The anchored broad-random mask design includes forced whole-group anchors and should not be read as primary-stratified behavior."],
         },
         "ioi_stage2c": {
             "model_or_substrate": "GPT-2-small IOI primary-stratified outputs",
@@ -267,8 +293,8 @@ def _task_defaults(task_name: str) -> dict[str, str | list[str]]:
             "observer_family": "primary-stratified head-subset predictive models",
             "estimand": "subset drop in IOI logit difference",
             "measurement_design": "fit predictors on primary-stratified head subsets",
-            "validation_target": "whether interaction/count terms matter under primary-stratified sampling",
-            "known_scope_limits": ["Known-answer IOI diagnostic.", "Does not introduce new IOI task claims."],
+            "validation_target": "held-out subset prediction under primary-stratified masks with equal-rank pair blocks",
+            "known_scope_limits": ["Known-answer IOI diagnostic.", "The result is conditional on fixed prompt templates, masks, cross-validation splits, and interaction bases."],
         },
         "ioi_stage2d": {
             "model_or_substrate": "GPT-2-small IOI Stage 2c postprocess outputs",
@@ -306,17 +332,30 @@ def _thresholds_for(task_name: str) -> dict[str, Any]:
 def failure_modes_from_metrics(task_name: str, metrics: dict[str, Any], thresholds: dict[str, Any]) -> list[str]:
     failures: list[str] = []
     if task_name == "trained_ctl2":
-        if (metrics.get("divergence_rate") or 0.0) > thresholds["divergence_rate_max"]:
-            failures.append(f"divergence_rate exceeds threshold {thresholds['divergence_rate_max']}.")
+        if metrics.get("observer_direction_sign_compatible") is False:
+            failures.append("observer_self_gain is non-positive for the configured controller sign.")
+        if (metrics.get("large_error_trajectory_rate", metrics.get("divergence_rate", 0.0)) or 0.0) > thresholds["divergence_rate_max"]:
+            failures.append(f"large_error_trajectory_rate exceeds threshold {thresholds['divergence_rate_max']}.")
         if (metrics.get("divergence_rate_mse_growth") or 0.0) > thresholds["divergence_rate_mse_growth_max"]:
             failures.append(f"divergence_rate_mse_growth exceeds threshold {thresholds['divergence_rate_mse_growth_max']}.")
         if (metrics.get("target_error_worsened_rate") or 0.0) > thresholds["target_error_worsened_rate_max"]:
             failures.append(f"target_error_worsened_rate exceeds threshold {thresholds['target_error_worsened_rate_max']}.")
         if (metrics.get("observer_bias_mae_path") or 0.0) > thresholds["observer_bias_mae_path_max"]:
             failures.append(f"observer_bias_mae_path exceeds threshold {thresholds['observer_bias_mae_path_max']}.")
-        if (metrics.get("ise_ratio_vs_lifted") or 0.0) > thresholds["integrated_squared_error_ratio_vs_reference_max"]:
+        if (metrics.get("direction_norm_ratio_vs_unprojected") or 0.0) > thresholds["direction_norm_ratio_vs_unprojected_max"]:
+            failures.append("Affine-span projection is ill-conditioned by the direction-norm threshold.")
+        if (metrics.get("mean_nearest_clean_residual_normalized_path") or 0.0) > thresholds["mean_nearest_clean_residual_normalized_path_max"]:
+            failures.append("Trajectory is too far from the observed clean residual states.")
+        if (metrics.get("control_clip_fraction") or 0.0) > thresholds["control_clip_fraction_max"]:
+            failures.append("Control clipping is too frequent for the unsaturated local-gain diagnostic.")
+        ratio = metrics.get("ise_ratio_vs_lifted_diagonal_same_condition", metrics.get("ise_ratio_vs_lifted", 0.0))
+        if (ratio or 0.0) > thresholds["integrated_squared_error_ratio_vs_reference_max"]:
             failures.append("integrated_squared_error ratio is worse than the reference threshold.")
-        if (metrics.get("cumulative_collateral_ratio_vs_lifted") or 0.0) > thresholds["cumulative_collateral_ratio_vs_reference_max"]:
+        collateral_ratio = metrics.get(
+            "collateral_ratio_vs_lifted_diagonal_same_condition",
+            metrics.get("cumulative_collateral_ratio_vs_lifted", 0.0),
+        )
+        if (collateral_ratio or 0.0) > thresholds["cumulative_collateral_ratio_vs_reference_max"]:
             failures.append("cumulative_collateral_abs ratio is worse than the reference threshold.")
         return failures
 
@@ -341,16 +380,16 @@ def failure_modes_from_metrics(task_name: str, metrics: dict[str, Any], threshol
 
 def recommendation_from_metrics(task_name: str, metrics: dict[str, Any], failures: list[str]) -> str:
     if task_name == "trained_ctl2":
-        if any("divergence_rate" in failure or "target_error_worsened_rate" in failure for failure in failures):
-            return "Not recommended for closed-loop use under this configuration; divergence or target-worsening metrics exceed thresholds."
+        if any("large_error_trajectory_rate" in failure or "target_error_worsened_rate" in failure for failure in failures):
+            return "Not recommended for control under this tested rollout; large-error or target-worsening flags exceed thresholds."
         if failures:
-            return "Use with caution; closed-loop target tracking may be acceptable, but collateral or observer-bias thresholds were exceeded."
-        return "Recommended as stable under this Ctl-2 configuration; closed-loop divergence and observer-bias metrics are within thresholds."
+            return "Use with caution; the tested additive residual loop exceeds a gain, tracking, collateral, or observer-bias threshold."
+        return "Tracking metrics are within thresholds for this tested additive residual loop; this is not a general stability claim."
 
     if task_name == "ioi_stage2b":
-        return "Random subset regime: additive terms are often sufficient; treat interaction wins as weak unless paired deltas clearly beat additive baselines."
+        return "Under anchored broad-random masks, use capacity-matched interactions when held-out prediction matters; per-head additivity remains a strong baseline, not a sufficiency result."
     if task_name == "ioi_stage2c":
-        return "Primary-stratified regime: interaction/count terms matter; compare against additive baselines before calling a model successful."
+        return "Under primary-stratified masks, use the capacity-matched interaction family for held-out prediction and report add-one and leave-one-out pair contrasts together."
     if task_name == "ioi_stage2d":
         if bool(metrics.get("is_dominant_single_pair", False)):
             return "Stage 2d: this is the dominant single-pair interaction by paired Delta MAE; the paper fixture identifies P x E as dominant while P x B is smaller."
@@ -375,15 +414,39 @@ def _primary_metrics(task_name: str, row: pd.Series) -> dict[str, Any]:
     if task_name == "trained_ctl2":
         wanted = [
             "integrated_squared_error",
+            "final_target_mse",
             "cumulative_collateral_abs",
-            "divergence_rate",
-            "divergence_rate_mse_growth",
+            "large_error_trajectory_rate",
             "target_error_worsened_rate",
             "observer_bias_mae_path",
-            "ise_ratio_vs_lifted",
-            "cumulative_collateral_ratio_vs_lifted",
+            "observer_self_gain",
+            "observer_error_pole_unsaturated",
+            "observer_direction_sign_compatible",
+            "locally_convergent_unsaturated",
+            "response_calibration_scale",
+            "direction_off_support_fraction",
+            "mean_residual_off_support_l2_path",
+            "direction_norm_ratio_vs_unprojected",
+            "mean_nearest_clean_residual_normalized_path",
+            "outside_clean_convex_hull_step_fraction",
+            "mean_convex_hull_extrapolation_mass_path",
+            "control_clip_fraction",
+            "ise_ratio_vs_lifted_diagonal_same_condition",
+            "collateral_ratio_vs_lifted_diagonal_same_condition",
         ]
-        return {key: metrics.get(key) for key in wanted if key in metrics}
+        out = {key: metrics.get(key) for key in wanted if key in metrics}
+        if "large_error_trajectory_rate" not in out and "divergence_rate" in metrics:
+            out["large_error_trajectory_rate"] = metrics["divergence_rate"]
+        if "ise_ratio_vs_lifted_diagonal_same_condition" not in out and "ise_ratio_vs_lifted" in metrics:
+            out["ise_ratio_vs_lifted_diagonal_same_condition"] = metrics["ise_ratio_vs_lifted"]
+        if (
+            "collateral_ratio_vs_lifted_diagonal_same_condition" not in out
+            and "cumulative_collateral_ratio_vs_lifted" in metrics
+        ):
+            out["collateral_ratio_vs_lifted_diagonal_same_condition"] = metrics[
+                "cumulative_collateral_ratio_vs_lifted"
+            ]
+        return out
     if task_name == "ioi_stage2d":
         wanted = [
             "mae_mean",
@@ -438,11 +501,34 @@ def _enrich_stage2d(df: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
+def _result_status(path: Path) -> str:
+    parts = set(path.resolve().parts)
+    if "frozen" in parts:
+        return "frozen"
+    if "revision" in parts:
+        return "checked_revision"
+    return "local_run"
+
+
+def _provenance_for_csv(csv_path: Path) -> dict[str, Any]:
+    runtime = runtime_provenance(REPO_ROOT)
+    return {
+        "source_files": {
+            portable_artifact_path(csv_path, REPO_ROOT): file_sha256(csv_path),
+        },
+        "source_revision": runtime["source_revision"],
+        "package_version": runtime["package_version"],
+    }
+
+
 def _cards_from_dataframe(df: pd.DataFrame, task_name: str, results_path: Path, outdir: Path) -> list[dict[str, Any]]:
     if task_name == "ioi_stage2d":
         df = _enrich_stage2d(df)
     defaults = _task_defaults(task_name)
     thresholds = _thresholds_for(task_name)
+    csv_path = _first_existing_result_csv(results_path)
+    portable_results = portable_artifact_path(results_path, REPO_ROOT)
+    provenance = _provenance_for_csv(csv_path)
     cards: list[dict[str, Any]] = []
     for _, row in df.iterrows():
         observer_name = str(row.get("observer", row.get("model", "task_summary")))
@@ -464,8 +550,10 @@ def _cards_from_dataframe(df: pd.DataFrame, task_name: str, results_path: Path, 
             "recommendation": recommendation,
             "known_scope_limits": list(defaults["known_scope_limits"]),
             "commands_to_reproduce": [
-                f"observerbench make-card --results {results_path} --outdir {outdir}",
+                f"observerbench make-card --results {portable_results} --outdir <output-directory>",
             ],
+            "result_status": _result_status(results_path),
+            "reproducibility_provenance": provenance,
         }
         validate_observer_card(card)
         cards.append(card)
@@ -475,9 +563,27 @@ def _cards_from_dataframe(df: pd.DataFrame, task_name: str, results_path: Path, 
 def load_cards_from_results(results: str | Path, outdir: str | Path) -> list[dict[str, Any]]:
     results_path = Path(results)
     out_path = Path(outdir)
+    if results_path.is_dir() and all(
+        (results_path / name).exists()
+        for name in (
+            "model_comparison.csv",
+            "capacity_audit.csv",
+            "add_one_vs_additive_head.csv",
+            "add_one_vs_count_additive.csv",
+            "leave_one_out_contrasts.csv",
+        )
+    ):
+        from .paper_cards import ioi_capacity_card
+
+        return [ioi_capacity_card(results_path)]
+    if results_path.is_dir() and (results_path / "ctl2_phase01_audit.json").exists():
+        from .paper_cards import ctl2_revision_card
+
+        return [ctl2_revision_card(results_path / "ctl2_phase01_audit.json")]
     csv_path = _first_existing_result_csv(results_path)
-    task_name = _task_name_from_csv(csv_path)
     df = pd.read_csv(csv_path)
+    task_names = df["task_name"].dropna().unique() if "task_name" in df else []
+    task_name = str(task_names[0]) if len(task_names) == 1 else _task_name_from_csv(csv_path)
     return _cards_from_dataframe(df, task_name, results_path, out_path)
 
 
@@ -502,6 +608,10 @@ def validate_observer_card(card: dict[str, Any]) -> None:
         raise ValueError("ObserverCard primary_metrics must be an object")
     if not isinstance(card["thresholds"], dict):
         raise ValueError("ObserverCard thresholds must be an object")
+    if card["result_status"] not in {"frozen", "checked_revision", "fresh_rerun", "local_run"}:
+        raise ValueError("ObserverCard result_status is unknown")
+    if not isinstance(card["reproducibility_provenance"], dict):
+        raise ValueError("ObserverCard reproducibility_provenance must be an object")
     for key in ["failure_modes_detected", "known_scope_limits", "commands_to_reproduce"]:
         if not isinstance(card[key], list) or not all(isinstance(item, str) for item in card[key]):
             raise ValueError(f"ObserverCard field {key} must be a list of strings")
@@ -535,6 +645,7 @@ def observer_cards_to_markdown(cards: list[dict[str, Any]]) -> str:
                 f"**Estimand.** {card['estimand']}",
                 f"**Measurement design.** {card['measurement_design']}",
                 f"**Validation target.** {card['validation_target']}",
+                f"**Result status.** {card['result_status']}",
                 "",
                 "### Primary Metrics",
             ]
@@ -553,17 +664,24 @@ def observer_cards_to_markdown(cards: list[dict[str, Any]]) -> str:
         lines.extend(f"- {limit}" for limit in card["known_scope_limits"])
         lines.extend(["", "### Commands to reproduce"])
         lines.extend(f"- `{command}`" for command in card["commands_to_reproduce"])
+        lines.extend(["", "### Reproducibility provenance"])
+        for key, value in card["reproducibility_provenance"].items():
+            lines.append(f"- `{key}`: {value}")
         lines.append("")
     return "\n".join(lines)
 
 
-def write_observer_card_bundle(results: str | Path, outdir: str | Path) -> tuple[Path, Path]:
+def write_observer_card_bundle_from_cards(
+    cards: list[dict[str, Any]],
+    outdir: str | Path,
+    *,
+    source_results: str | list[str],
+) -> tuple[Path, Path]:
     out = Path(outdir)
     out.mkdir(parents=True, exist_ok=True)
-    cards = load_cards_from_results(results, out)
     bundle = {
         "schema_version": CARD_SCHEMA_VERSION,
-        "source_results": str(results),
+        "source_results": source_results,
         "cards": cards,
     }
     validate_observer_card_bundle(bundle)
@@ -572,3 +690,14 @@ def write_observer_card_bundle(results: str | Path, outdir: str | Path) -> tuple
     json_path.write_text(json.dumps(bundle, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     md_path.write_text(observer_cards_to_markdown(cards), encoding="utf-8")
     return json_path, md_path
+
+
+def write_observer_card_bundle(results: str | Path, outdir: str | Path) -> tuple[Path, Path]:
+    results_path = Path(results)
+    out = Path(outdir)
+    cards = load_cards_from_results(results_path, out)
+    return write_observer_card_bundle_from_cards(
+        cards,
+        out,
+        source_results=portable_artifact_path(results_path, REPO_ROOT),
+    )

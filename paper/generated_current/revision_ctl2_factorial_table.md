@@ -1,0 +1,10 @@
+| gamma | fixed_direction | mean_fo_minus_lifted_ise | seed_min | seed_max | positive_seeds | n_seeds |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0.5 | first_order | 5.35 | 0.0134 | 24.3 | 6 | 6 |
+| 0.5 | lifted_interaction | 7.63 | 2.79 | 21.2 | 6 | 6 |
+| 1 | first_order | 43 | 9.09 | 78.2 | 6 | 6 |
+| 1 | lifted_interaction | 36.1 | 14.9 | 65.5 | 6 | 6 |
+| 1.15 | first_order | 60.7 | 11.7 | 133 | 6 | 6 |
+| 1.15 | lifted_interaction | 50 | 19 | 102 | 6 | 6 |
+| 1.5 | first_order | 95.7 | 15.8 | 211 | 6 | 6 |
+| 1.5 | lifted_interaction | 77.1 | 25 | 176 | 6 | 6 |

@@ -1,0 +1,68 @@
+{
+  "accessed_mask_banks": [
+    "calibration"
+  ],
+  "accessed_prompt_splits": [
+    "reference",
+    "train"
+  ],
+  "artifacts": {
+    "clean_scores_train.csv": "87220d9baff19c2272e5c08dc2ea5704156c51bf703df912c94463b1df49be67",
+    "shards/train/effects_0000_0016.csv": "cc76e57d297e75da7fbf046562c935eadb34c5a9b12fcb7d74c83709dd74cdad",
+    "shards/train/effects_0016_0032.csv": "87bafa05a1e21ab5412f6bf32b049e657af3cc3f294e3aa67f1cb32d60790ebe",
+    "shards/train/effects_0032_0048.csv": "8cdf12bb374a2054c127dafedbda57c3feb5770bca8877884bbb8e9c1baf965a",
+    "shards/train/effects_0048_0064.csv": "15b4d3a388e12fee93edf7f3cc31b22793a80d3f5817ab12e2e953d4cc6edeff",
+    "shards/train/effects_0064_0080.csv": "bce5a6b37cbb8bb7b4fb37f8c62665802afeb386d9a85f4f278a427d32f51557",
+    "shards/train/effects_0080_0096.csv": "d8184dc824fde5e1532e05ed25df54ce538c5220f4bb4e8d39ef234dd1eaf327",
+    "shards/train/effects_0096_0112.csv": "f0e211ec70a62cd504395baff59a4cc0b3e25c029f5aa5e9a8fe3028536a93c1",
+    "shards/train/effects_0112_0128.csv": "b1ec6cefb3ffb1291c4e8f15ac2f6a1bcf7d050e6156f7705361a4898736bf66",
+    "shards/train/effects_0128_0144.csv": "83832c11e2aa3c92d40ab788f3735281e7dae6b1f8093a55fcee2c1a2d99f120",
+    "shards/train/effects_0144_0160.csv": "b58a127ecdd8e4fd1d5f0f80bae8881ea1463510498f9c6ec2d6e71ad4da65e2",
+    "template_head_means.npz": "f1695fa1308c3a58a3016b679bdaa44859dc950f7f00816a47f388384355478b"
+  },
+  "candidate_mask_forward_passes": 0,
+  "config": {
+    "device": "mps",
+    "mask_shard_size": 16,
+    "model_name": "gpt2-small",
+    "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "pair_batch_size": 128,
+    "reference_batch_size": 64,
+    "seed": 26062
+  },
+  "counts": {
+    "calibration_masks": 160,
+    "reference_prompts": 512,
+    "shards": 10,
+    "train_calibration_effect_cells": 30720,
+    "train_prompts": 192
+  },
+  "design_id": "ioi_phase06_design_2044e2b9b97cb658",
+  "design_manifest_sha256": "68d6220ef3f4b96993940a42711f97dacc6b7356e9a15df7424e1e174e40df2a",
+  "model": {
+    "d_head": 64,
+    "device": "mps",
+    "dtype": "torch.float32",
+    "n_heads": 12,
+    "n_layers": 12,
+    "requested_name": "gpt2-small",
+    "requested_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "resolved_name": "gpt2"
+  },
+  "next_allowed_stage": "Fit frozen observers and hash predictions and fixed actions. No test-prompt or candidate-mask forward pass is allowed before that seal exists.",
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.4.6",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.11.14",
+    "source_dirty": true,
+    "source_revision": "0cec2c4ef17d9c3b0ef3fea8fdf15347ee4e28cb"
+  },
+  "schema": "observerbench.ioi_phase06_calibration_run.v1",
+  "status": "phase6_train_calibration_complete_test_unopened",
+  "test_prompt_forward_passes": 0
+}

@@ -1,0 +1,98 @@
+\section{Robustness checks and protocol provenance}
+\label{app:earlier-diagnostics}
+
+This appendix retains checks that directly qualify the main results. Superseded
+control fixtures and development history that support no live claim are kept
+with the artifact rather than in the paper.
+
+\subsection{Nonlinear estimator--direction robustness}
+
+The nonlinear-suffix experiment recorded all four combinations of first-order
+and lifted estimators and directions. The crossed arms fail the self-gain, pole,
+action-scale, and activation-scale checks. They therefore do not form usable
+control loops and cannot identify an estimator-only advantage.
+
+\input{../generated_phase05/nonlinear_suffix/nonlinear_suffix_factorial}
+
+\subsection{IOI interaction robustness}
+
+An exploratory IOI analysis had ranked the $P\times E$ interaction block above
+other equally sized pairwise bases. The frozen comparison repeats the test with
+new prompts, masks, splits, pools, and a fixed action. There, $P\times E$ and
+all-pairs tie. The supported conclusion is that pair features help, not that one
+pair is uniquely strongest.
+
+Table~\ref{tab:ioi-budget-appendix} reports the new prediction curve. At budget
+20, the richer models have more coefficients than measurements, so that row is
+descriptive rather than a sample-efficiency result.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}rrrrr@{}}
+\toprule
+Budget & Per-head & Count & $P\!\times\!E$ & All pairs \\
+\midrule
+20  & 0.846 & 1.579 & 1.333 & 0.795 \\
+40  & 0.675 & 0.732 & 0.544 & 0.559 \\
+80  & 0.496 & 0.482 & 0.406 & 0.412 \\
+160 & 0.486 & 0.473 & 0.394 & 0.395 \\
+\bottomrule
+\end{tabular}
+\caption{Fresh held-out IOI mean-effect MAE by nested measurement budget.}
+\label{tab:ioi-budget-appendix}
+\end{table}
+
+\subsection{Protocol provenance}
+
+\begin{itemize}
+  \item \textbf{IOI target sensitivity.} The first measurement copy was set
+  aside before inspection because its source seal omitted the head-mapping file.
+  After expanding the seal, we independently recomputed the frozen predictions
+  and actions and repeated the 148-mask measurement. The two copies are
+  byte-identical; only the second enters the analysis.
+  \item \textbf{Qwen Copy-v2.} Copy-v1 stopped at 92.97\% candidate accuracy,
+  below its frozen 95\% gate, before attention or intervention outcomes were
+  computed. Copy-v2 used fresh tokens and prompts without changing that failed
+  threshold. Its first process later stopped on a CSV round-trip check; after
+  the reader was corrected, the clean-score hash and all 1,536 prompt IDs
+  reproduced exactly before a fresh process generated the locked results in
+  Section~\ref{sec:qwen-induction}.
+\end{itemize}
+
+\subsection{Authorization tail-loss selection}
+
+Selecting the activation observer by tail loss chooses the same layer and ridge
+setting as selecting it by mean loss. Its tail loss differs from action-only by
+0.039, with paired 95\% interval $[-1.013,1.156]$. We therefore retain the mean
+activation gain but do not claim a tail-loss gain over action-only.
+
+\subsection{Qwen action loss by target}
+
+The main Qwen result gives equal weight to three targets.
+Table~\ref{tab:qwen-per-target} shows the individual comparisons. Direct loss
+beats transformed mean and no-op at every target. It beats natural mean at the
+first two targets and ties it within uncertainty at the largest, so the
+aggregate result is not a win in every cell.
+
+\begin{table}[H]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Target & Direct loss & Gain vs. natural mean & Gain vs. transformed mean & Gain vs. no action \\
+\midrule
+$0.25s$ & 0.609 & +12.0\% [0.034, 0.141] & +14.8\% [0.035, 0.188] & +29.4\% [0.205, 0.300] \\
+$0.50s$ & 0.842 & +17.6\% [0.108, 0.256] & +18.7\% [0.117, 0.283] & +51.3\% [0.824, 0.942] \\
+$0.75s$ & 1.158 & \textbf{$-$0.7\% [-0.038, 0.021]} & +6.3\% [0.022, 0.146] & +55.3\% [1.331, 1.530] \\
+Equal-target mean & 0.870 & +8.9\% [0.053, 0.118] & +12.6\% [0.083, 0.173] & +49.6\% [0.805, 0.908] \\
+\bottomrule
+\end{tabular}
+\caption{Qwen Copy-v2 action loss by target, where $s=3.454$ is the confirmed
+full-panel mean effect. Each gain cell gives the relative loss change and, in
+brackets, a 95\% four-family-prompt-cluster-by-pool bootstrap interval for the
+absolute comparator-minus-direct difference. The negative natural-mean point
+estimate at $0.75s$ is retained.}
+\label{tab:qwen-per-target}
+\end{table}

@@ -1,0 +1,39 @@
+{
+  "config": {
+    "device": "mps",
+    "mask_shard_size": 16,
+    "model_name": "gpt2-small",
+    "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "pair_batch_size": 128,
+    "seed": 27071
+  },
+  "counts": {
+    "effect_cells": 45568,
+    "mask_shards": 6,
+    "noop_ablation_forward_passes": 0,
+    "selected_unique_nonnoop_masks": 89,
+    "test_prompts": 512,
+    "unselected_candidate_masks_measured": 0
+  },
+  "design_id": "ioi_phase07_design_baf743a2e322334c",
+  "forbidden_operations": {
+    "filter_prompts": true,
+    "measure_unselected_masks": true,
+    "refit_observers": true,
+    "reselect_actions": true
+  },
+  "schema": "observerbench.ioi_phase07_selected_measurement_spec.v1",
+  "scientific_status": "pilot_informed_outcome_sealed_canonical_template_confirmation",
+  "selected_mask_order_sha256": "3dc56d5acbe579cfc7b0ba13a7eff3156dd967028dd2b5ce4a2ae5adb2b0df7f",
+  "source_hashes": {
+    "clean_scores_test": "fc64b8a5c458b8b565619543953e0703c38d93d929b7574e85d7d8b7d17a8d2d",
+    "design_manifest": "9355d800e5f2b3824f084b7b3624d6df58fddd17801daaa16bab91fbe8482695",
+    "measurement_source": "fc2fc662b99810f48083631e2b68303b50d8c8a363cbb86adaa2b08f434dc4aa",
+    "prediction_action_manifest": "217ec6cbc059b8105cff35a8286923a33a952369b591f91ab3657ab301d2f7f2",
+    "pretest_manifest": "e5100b8aa1ba98c9ad34e49ba44bc4e85b450a21943a4d72b01d05a9cdffe855",
+    "protocol": "852d05da70ba13e870baf797906a190325d3eb82cbf1452c75983383e683e0f2",
+    "selected_measurement_masks": "7f843bc5c2649ca2e84a52dccb6a7fc12330fbeab586186e4ad766517b9869eb",
+    "template_head_means": "42b36bd7d846c36f8abda56df2d517954458eb005a2fc93082d0c0875e9da566"
+  },
+  "status": "sealed_before_candidate_outcomes"
+}

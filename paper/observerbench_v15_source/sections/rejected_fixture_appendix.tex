@@ -1,0 +1,23 @@
+\section{Why a lexical safety fixture was rejected}
+\label{app:rejected-cyber}
+
+An earlier fixture tried to distinguish unsafe actionable assistance from benign
+discussion of the same security topic. A TF--IDF baseline and a linear
+activation observer both solved its small split, even with one topic family held
+out. Removing lexical directions then removed the target signal by construction.
+The task could not distinguish an internal safety representation from words that
+revealed the label, so it is not an ObserverBench result.
+
+The failure produced three design rules used by the authorization study:
+
+\begin{enumerate}
+  \item Test a text baseline before interpreting activations.
+  \item Hold the requested action fixed and change only the authorization
+  context.
+  \item Compare with the exact policy rule when one exists.
+\end{enumerate}
+
+The later text and output controls add a fourth rule: if the prompt asks directly
+for a safety verdict, an activation probe alone cannot establish a uniquely
+hidden safety state. More examples with the same lexical structure would not
+repair the rejected fixture.

@@ -1,0 +1,9 @@
+gamma,estimator,direction_provider,condition_count,seed_count,mean_ise,mean_observer_gain,nonpositive_observer_gain_seed_count,unstable_observer_pole_seed_count,would_clip_condition_count,mean_would_clip_step_fraction,max_abs_action,displacement_exceeds_clean_pairwise_max_condition_count,displacement_exceeds_clean_pairwise_max_fraction
+0.0,first_order,first_order,192,12,1.6931669739865098,0.8499999999999998,0,0,0,0.0,0.1767116395928312,0,0.0
+0.0,first_order,lifted_interaction,192,12,1.6586343004494006,0.8434883931204009,0,0,0,0.0,0.1767116395928312,0,0.0
+0.0,lifted_interaction,first_order,192,12,1.6931078667201565,0.8506620354334354,0,0,0,0.0,0.1750000624447227,0,0.0
+0.0,lifted_interaction,lifted_interaction,192,12,1.6618723972005391,0.85,0,0,0,0.0,0.1750000624447227,0,0.0
+1.15,first_order,first_order,192,12,2.632115250684045,0.8499999999999998,0,0,0,0.0,0.3537373934018666,0,0.0
+1.15,first_order,lifted_interaction,192,12,2.38102305805519,-0.1859518947853599,10,10,30,0.06527777777777778,13.97497723215528,56,0.2916666666666667
+1.15,lifted_interaction,first_order,192,12,3.6659655588616222,-0.2901330367317086,10,10,56,0.15277777777777776,148.72856070882676,96,0.5
+1.15,lifted_interaction,lifted_interaction,192,12,1.8699360041962396,0.85,0,0,0,0.0,0.1750001915983125,0,0.0

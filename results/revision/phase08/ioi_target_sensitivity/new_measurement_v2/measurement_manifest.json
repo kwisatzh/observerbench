@@ -1,0 +1,66 @@
+{
+  "accessed_mask_bank": "frozen Phase-8 new selected-mask set difference only",
+  "accessed_prompt_splits": [
+    "test"
+  ],
+  "artifact_hashes": {
+    "measurement_progress.json": "9ff94e1bffa7855a8ab4a3562cd07071fcf9c7e77bc20822692e8f6702ea5206",
+    "measurement_run_spec.json": "d475855cbb71fc7342775e9858fdd9abbc68c1357acd4bee8d07e2978d34dcc9",
+    "shards/test/effects_0000_0016.csv": "0986bbf27f2021e5e0fa273fd032c030bae9a1cc4ec4a2d56cd00b0438f17a09",
+    "shards/test/effects_0016_0032.csv": "edbef8419b41cd6fe1089c0cc1aed9345073b03491b1818d583beda2f74e64af",
+    "shards/test/effects_0032_0048.csv": "970cbdc66d5404ffbb7b760ce4167472b4f7de302ab7784e8c41a95f42dac857",
+    "shards/test/effects_0048_0064.csv": "f0c239d661d8cb25afd4dc5808b68c6e903c185fb3c2e25b89e719ec027bf8ab",
+    "shards/test/effects_0064_0080.csv": "1c4ad25f227a512b072e6de334b695fd36f5c5f136685fe631c6c4eea144b1f0",
+    "shards/test/effects_0080_0096.csv": "fe348c68e66af2873da724335bc987d40a74c2b9dd86281f528dc53cb49fbf71",
+    "shards/test/effects_0096_0112.csv": "6153a06c0290831ba96fd919ea5ff2e77fa57aed1e9dfb6372696161fa4b2386",
+    "shards/test/effects_0112_0128.csv": "6969fef496d2e0fb26283a873390ec91e9fe42fcd4f12e17e655213b3bbdde28",
+    "shards/test/effects_0128_0144.csv": "68fc8e73a921a05374eb217f3f09ad1ec5c57611e4eeba625a161ba7c77c4add",
+    "shards/test/effects_0144_0148.csv": "8af38a479875bf63f2f41d48e061c564143b174f59aeac2ffb62458cc7839fbe"
+  },
+  "counts": {
+    "mask_shards": 10,
+    "new_effect_cells": 75776,
+    "new_selected_unique_nonnoop_masks": 148,
+    "noop_ablation_forward_passes": 0,
+    "reused_phase7_masks_remeasured": 0,
+    "test_prompts": 512,
+    "unselected_candidate_masks_measured": 0
+  },
+  "design_id": "ioi_phase07_design_f7c5a0ec88a44fd3",
+  "fixed_actions": 576,
+  "measurement_spec_sha256": "d475855cbb71fc7342775e9858fdd9abbc68c1357acd4bee8d07e2978d34dcc9",
+  "next_allowed_stage": "Combine with hash-verified Phase-7 rows and evaluate all frozen targets and selectors.",
+  "noop_ablation_forward_passes": 0,
+  "reused_phase7_masks_remeasured": 0,
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.4.6",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.11.14",
+    "source_dirty": true,
+    "source_revision": "0cec2c4ef17d9c3b0ef3fea8fdf15347ee4e28cb"
+  },
+  "schema": "observerbench.ioi_phase08_selected_measurement.v1",
+  "scientific_status": "post_review_post_confirmatory_target_sensitivity",
+  "source_hashes": {
+    "clean_scores_test": "fc64b8a5c458b8b565619543953e0703c38d93d929b7574e85d7d8b7d17a8d2d",
+    "evaluation_source": "03160bd09e81a197987ac4645df4175284ce473be58ed4a107d8397b3445f95f",
+    "measurement_source": "a1c8bb13c5db4d994c4224533cdf877bea663b2c78ac02f5bc8ba8b353c5cb7e",
+    "phase7_design_manifest": "3dfa6352524c66b6b57794ec9ed2c89a900afd7df3d9879cd7f21cb0686feee5",
+    "phase7_freeze_manifest": "fce0b027f232841653d5b7f24f3254243a71d3fbd282cc9c468c4781eab334e5",
+    "phase7_measurement_manifest": "6681b04b114b4aba1129edf9d73e5197426213130ae44b21333c859a2bed7a9e",
+    "phase7_pretest_manifest": "7c148b1137460fa7d4674f97f3984ce8a39068cd1dbe394852fed2f9141ae2a2",
+    "phase7_selected_masks": "7f843bc5c2649ca2e84a52dccb6a7fc12330fbeab586186e4ad766517b9869eb",
+    "phase8_freeze_manifest": "3792abb1d1e674d27d5d9742244a87efd54a59eb24c21879b7b380c609bd4bad",
+    "phase8_new_measurement_masks": "667bb263d4e25f3d4bdcf3b3f877797bee0bfc0270a673987f9069422dfd2032",
+    "phase8_preoutcome_audit": "a95c8b2b065704e4dc654f17799acb062170b101c7590142d9744155e1ad0f13",
+    "protocol": "d22614d2deecf3818e0765a2851a8bd38151ed7c9ecedef7e619810fea537508",
+    "template_head_means": "42b36bd7d846c36f8abda56df2d517954458eb005a2fc93082d0c0875e9da566"
+  },
+  "status": "all_frozen_new_selected_mask_outcomes_measured",
+  "unselected_candidate_masks_measured": 0
+}

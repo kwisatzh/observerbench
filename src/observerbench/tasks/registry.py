@@ -49,6 +49,12 @@ TASKS: dict[str, TaskSpec] = {
         config="configs/trained_ctl2.yaml",
         status="migrated",
     ),
+    "safety_interlock_analytic": TaskSpec(
+        name="safety_interlock_analytic",
+        summary="Inert paired-scope authorization interlock with exact policy labels.",
+        config="configs/safety_interlock_analytic.yaml",
+        status="migrated",
+    ),
     "ioi_stage1": TaskSpec(
         name="ioi_stage1",
         summary="IOI Stage 1 whole-group self-repair diagnostic.",
@@ -123,6 +129,24 @@ def _run_trained_ctl2(config: dict[str, Any], outdir: Path) -> Any:
     return run_trained_transformer_ctl2(cfg, outdir)
 
 
+def _run_safety_interlock(config: dict[str, Any], outdir: Path) -> Any:
+    from observerbench.tasks.safety_interlock import (
+        SafetyInterlockConfig,
+        run_safety_interlock,
+    )
+
+    cfg = SafetyInterlockConfig(**_dataclass_kwargs(config, SafetyInterlockConfig))
+    if config.get("quick", False):
+        cfg = SafetyInterlockConfig(
+            **{
+                **asdict(cfg),
+                "n_train_pairs": min(cfg.n_train_pairs, 64),
+                "n_test_pairs": min(cfg.n_test_pairs, 128),
+            }
+        )
+    return run_safety_interlock(cfg, outdir)
+
+
 def _run_ioi_stage1(config: dict[str, Any], outdir: Path) -> Any:
     from observerbench.tasks.ioi.stage1 import IOIStage1Config, run_ioi_stage1
 
@@ -155,6 +179,7 @@ RUNNERS: dict[str, Callable[[dict[str, Any], Path], Any]] = {
     "ctl1_analytic": _run_ctl1_analytic,
     "trained_ctl1": _run_trained_ctl1,
     "trained_ctl2": _run_trained_ctl2,
+    "safety_interlock_analytic": _run_safety_interlock,
     "ioi_stage1": _run_ioi_stage1,
     "ioi_stage2b": _run_ioi_stage2b,
     "ioi_stage2c": _run_ioi_stage2c,

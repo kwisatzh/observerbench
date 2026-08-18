@@ -1,0 +1,102 @@
+\section{A simple control certificate remains predictive in a Transformer}
+\label{sec:nonlinear-suffix}
+
+Equation~\ref{eq:certificate} is exact for an affine system. A Transformer is
+nonlinear. Our first experiment asks whether the same three sources of
+error---remaining reported error, starting mismatch, and response mismatch---
+remain useful when every edit passes through learned Transformer layers. We
+begin with a small model whose target we can verify exactly, following the
+controlled ``wind-tunnel'' approach of \cite{agarwal2025bayesian}.
+
+We train a two-block Transformer on sequences with two binary features, $x_1$
+and $x_2$, and target
+\[
+y=0.35x_1+0.25x_2+\gamma x_1x_2+\epsilon.
+\]
+The product $x_1x_2$ matters only when both features are present. A first-order
+observer reads $x_1$ and $x_2$ separately, so it cannot represent this joint
+condition. A lifted observer adds the pairwise feature $x_1x_2$. We edit the
+residual after block 0 and rerun block 1, the final layer normalization, and the
+target head. The edit therefore passes through the learned nonlinear suffix;
+we do not replace that suffix with a linear approximation.
+
+We run two tests with 12 independently trained models per target family:
+
+\begin{itemize}
+  \item \textbf{Does the certificate predict failure?} We fix the observer
+  response at $g_E=0.85$ and vary the response mismatch $\rho$, initial bias,
+  and target offset. Small positive and negative edits measure the actual target
+  response $g_T$. We then ask whether Equation~\ref{eq:certificate} predicts
+  which rollouts miss the target and by how much.
+
+  \item \textbf{Does the interaction coordinate improve control?} We compare
+  the natural first-order and pairwise estimator--direction pairs. We use
+  $\gamma=1.15$ when the target contains the interaction and $\gamma=0$ as the
+  additive control.
+\end{itemize}
+
+Each rollout uses 15 steps with $K=0.35$. The primary outcome is integrated
+squared tracking error: the squared target error summed across the trajectory.
+It distinguishes a controller that approaches the target smoothly from one
+that makes large intermediate errors. Clipping and threshold crossings are
+secondary diagnostics; none of the main matched-pair comparisons or controlled
+sweeps clips. Uncertainty is measured across the 12 independently trained
+models, not across the many conditions within each model.
+
+We also check edit size. Every natural comparison and 99.2\% of controlled
+conditions move no farther than the largest distance among the four clean task
+archetypes. The edits therefore have a familiar scale, although four
+archetypes cannot prove that edited states remain on the full activation
+manifold.
+
+The suffix is measurably nonlinear. At the largest offsets, its mean deviation
+from the affine prediction is 16.1\% of output movement, and the certificate
+residual is 20.2\% of mean absolute final error. We therefore ask whether the
+affine quantities remain predictive, not whether the Transformer is linear.
+
+They remain predictive. The main checks agree:
+
+\begin{itemize}
+  \item The raw certificate correlates $0.952$ with actual final error and gets
+  the sign right in 96.0\% of conditions.
+  \item Its residual MAE is 16.5\% of mean absolute actual error.
+  \item After fitting only an intercept and slope on the other 11 seeds, its
+  leave-one-seed-out MAE is $0.063$, compared with $0.302$ for bias alone and
+  $0.367$ for the observer pole alone. It wins on every held-out seed.
+\end{itemize}
+
+The edits stay within the scale of clean residual variation and do not clip, so
+the three certificate terms capture most of the error over this operating
+range. This does not show that the suffix or its activation manifold is locally
+linear.
+
+\input{../generated_phase05/nonlinear_suffix/nonlinear_suffix_summary}
+
+The direct control comparison gives the same message. The pairwise model
+reduces integrated squared error by 29.0\% when the target contains the
+``both features present'' term, with improvement in 11 of 12 independently
+trained models. It gives no reliable advantage for the additive target. The
+exact losses and intervals are reported in Table~\ref{tab:phase5-nonlinear-suffix}.
+
+This result concerns the estimator and edit direction together. The mismatched
+estimator--direction pairs are unstable in 10 of 12 interactional models and
+also fail the action- and activation-scale checks. We therefore do not use them
+to rank the estimators alone. Appendix
+Table~\ref{tab:nonlinear-suffix-factorial} reports all four cells, including
+their self-response and convergence factor $p$.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.98\linewidth]{nonlinear_suffix_certificate_and_control.png}
+  \caption{Learned nonlinear-suffix experiment. The certificate combines
+  starting mismatch, convergence factor, and response mismatch (left). The
+  pairwise estimator--direction pair reduces control error for the
+  interactional target but not for the additive target (right). Intervals
+  resample 12 independently trained models.}
+  \label{fig:nonlinear-suffix}
+\end{figure}
+
+The study provides a bridge to pretrained models: a simple control-error
+certificate can remain useful after nonlinear computation when edit scale and
+loop stability are checked. It does not establish token-level or large-model
+control.

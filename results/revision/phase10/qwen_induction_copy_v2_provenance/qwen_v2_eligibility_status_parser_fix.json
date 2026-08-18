@@ -1,0 +1,36 @@
+{
+  "artifact_archive": "/content/qwen_copy_v2_artifacts_after_eligibility.tar.gz",
+  "artifact_archive_sha256": "e525101ac393c179d98bcc9b9b71bc3d5869396c7a76f99afd8021da0edd33e1",
+  "completed_stages": [
+    "prepare",
+    "eligibility"
+  ],
+  "intervention_paths_absent": true,
+  "outcome": "eligibility_passed",
+  "stage": "eligibility",
+  "stage_record": {
+    "artifact_hashes": {
+      "design/eligibility/candidate_decisions.csv": "957bc2814a4438f2d62dc9f9e5bb06d07b6efe49bb0b54ebff165e988b710a6f",
+      "design/eligibility/coverage.csv": "c06b1bc6bdf5ecd601e7ae7cfb0a9b7ec786fa86614d71dbff4877e174d37730",
+      "design/eligibility/eligibility_manifest.json": "3cbd52e1b964e570012e71fb0a5379af3c8afb940f402cac4e0c46bd77b163fe",
+      "design/eligibility/selected_prompt_ids.csv": "ef0862251a462eed7dee02ee8af8356865e580922499e2aa7d7f7fac1a2d6aee",
+      "design/preselection_manifest.json": "168502f0b4a94f3f3ce0e01d59462e2db1f0352b14d35a9d3edcd87140215b68",
+      "design/prompts.csv": "02beb94be4b57a4af68f4dde97404fda6af07105f7cb42b3b9a2665f683b1321",
+      "design/prompts_all.csv": "50b44ea7fee388d957c79af9213bd53b25c99c08c9209b9933cce87d4f473e09",
+      "design/token_banks.json": "078dc1fe1c8d9790b5d61645a7511f3af00775c82e5349c657074d308893182e",
+      "work/clean_scoring/candidate_scores_eager_discovery.csv": "93c4e6149139af3a532d7690113e1942ebe58f8179fbcb3ea1634cf12195fe5b",
+      "work/clean_scoring/candidate_scores_sdpa.csv": "5f1f1d36eb81dc9a1ca052bc1ba6f9acf1e0a47aeb4ae5a4b61ea5d71cdfe186",
+      "work/eligibility/candidate_decisions.csv": "957bc2814a4438f2d62dc9f9e5bb06d07b6efe49bb0b54ebff165e988b710a6f",
+      "work/eligibility/coverage.csv": "c06b1bc6bdf5ecd601e7ae7cfb0a9b7ec786fa86614d71dbff4877e174d37730",
+      "work/eligibility/coverage_diagnostics.json": "0579ad8a23d3189d6a4b386cbdf7b43d8d4a280746ef30fabd015597a12ba44b",
+      "work/eligibility/eligibility_manifest.json": "3cbd52e1b964e570012e71fb0a5379af3c8afb940f402cac4e0c46bd77b163fe",
+      "work/eligibility/selected_prompt_ids.csv": "ef0862251a462eed7dee02ee8af8356865e580922499e2aa7d7f7fac1a2d6aee",
+      "work/runtime/eligibility.json": "db8be7a60a7ca99ffcfe27affabbce754da9f600081123e0f4eb657cd88732d8"
+    },
+    "stage_input_identity_sha256": "f1e4e0c484506a8d87e7b32c7ca15cad85c7dbb87da68a3fca443f256bf9d945",
+    "status": "complete"
+  },
+  "subprocess_returncode": 0,
+  "terminal_status": null,
+  "valid": true
+}

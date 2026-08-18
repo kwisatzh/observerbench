@@ -1,0 +1,16 @@
+{
+  "bank": "discovery",
+  "failures": [
+    "overall_candidate_accuracy"
+  ],
+  "family_accuracy": {
+    "length_32_gap_16": 0.9375,
+    "length_32_gap_8": 0.90625,
+    "length_64_gap_16": 0.90625,
+    "length_64_gap_8": 0.96875
+  },
+  "median_candidate_margin": 6.015551567077637,
+  "overall_candidate_accuracy": 0.9296875,
+  "passed": false,
+  "worst_family_candidate_accuracy": 0.90625
+}

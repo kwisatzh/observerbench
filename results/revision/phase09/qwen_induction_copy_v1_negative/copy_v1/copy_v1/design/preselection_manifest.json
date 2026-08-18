@@ -1,0 +1,26 @@
+{
+  "artifact_hashes": {
+    "prompts.csv": "020ed513602ab497b5e864faea771dc552e915d09a5f39790fba4fc8132975f8",
+    "prompts_all.csv": "860715745084001c988c61570f5a2a5ce1cd7c83429c6f52507d7ccc72bf8666",
+    "token_banks.json": "f599a958e310fdf9cedd52f92c77555cfd57b58fc117536781c21101f5786c91"
+  },
+  "config_sha256": "ec2835be61a85c6f963cab901c1de17f512e9fa08d5983c79bd14874000bdb77",
+  "mask_design_included": false,
+  "model": {
+    "requested_name": "Qwen/Qwen2.5-7B",
+    "requested_revision": "d149729398750b98c0af14eb82c78cfe92750796"
+  },
+  "prompt_counts": {
+    "calibration": 256,
+    "discovery": 128,
+    "head_fit": 256,
+    "head_test": 256,
+    "locked_test": 512,
+    "reference": 128
+  },
+  "schema": "observerbench.qwen_induction_preselection.v1",
+  "scientific_outcomes_included": false,
+  "selected_heads_included": false,
+  "sequence_design_sha256": "ae3536ebefc6b9f2aac1c89542424c180b367fb009af1a75f30e88738484b0fd",
+  "status": "prepared_before_model_outcomes"
+}

@@ -1,0 +1,37 @@
+{
+  "all_checks_pass": true,
+  "code_hashes": {
+    "scripts/build_phase04_artifact.py": "dc7a4c2867f1266eff4676f635d7d43fe12497c4110c9d755d5e8c96b1207882",
+    "scripts/reproduce_paper_fast.py": "cba67b81f6ee7889e817fba64b14cdead776b7a747147b6b68392969102ec074",
+    "src/observerbench/cards.py": "dda25fcb00bf3b1373113a4f40bc97025b2a40a443d6569d8b17fe8216aa756c",
+    "src/observerbench/paper_cards.py": "d192d2039bd619516aa6a0d542bf6e215bd4591f648d38be1c1806e6e5da5b18"
+  },
+  "commands_to_reproduce": [
+    "python scripts/build_phase04_artifact.py",
+    "python scripts/reproduce_paper_fast.py"
+  ],
+  "contains_private_local_path": false,
+  "input_hashes": {
+    "results/revision/phase02/ioi_phase02_claim_audit.json": "be5c8ae49c6ef6d89a247263e223f598dd6b1095d267216c5a91ea7d13234272",
+    "results/revision/phase02/ioi_stage2b_capacity/add_one_vs_additive_head.csv": "355ea8aef080c3e5bd68421709eee2016113621b4bf29833b5c82ae348c3c318",
+    "results/revision/phase02/ioi_stage2b_capacity/add_one_vs_count_additive.csv": "de7ad9c5f40209ca11488569132842af04ee8056dc2b5e51b3c8cc79254c03c2",
+    "results/revision/phase02/ioi_stage2b_capacity/capacity_audit.csv": "7e1efbf2fc6d7371fe9da7e5df55270c08304d14b235a4b2d1b960efda32a1e4",
+    "results/revision/phase02/ioi_stage2b_capacity/leave_one_out_contrasts.csv": "5b726a581bf16cfff65c9a24af732b326d9e71803e25855d569f0079f328c7f3",
+    "results/revision/phase02/ioi_stage2b_capacity/model_comparison.csv": "6458a69b98b9e631e6e7f75d06c8262c46b0cfc0f28e517547f89053bd80a322",
+    "results/revision/phase02/ioi_stage2c_capacity/add_one_vs_additive_head.csv": "499f1085b1316807d1475be76aab9b8b75be533a906b955fdcd91da5da03514b",
+    "results/revision/phase02/ioi_stage2c_capacity/add_one_vs_count_additive.csv": "35a7c6af3744db8d35793a921858207881872d580a4329277963d33db9ce7695",
+    "results/revision/phase02/ioi_stage2c_capacity/capacity_audit.csv": "6859a7517ed59fd74f21da25e1b1c22fb28b75a20d09de1fa0c601c1abfd4481",
+    "results/revision/phase02/ioi_stage2c_capacity/leave_one_out_contrasts.csv": "a9418d4cae7c3d22e5bb8cc8ad3a0e77d14934a280354381594be244def5a469",
+    "results/revision/phase02/ioi_stage2c_capacity/model_comparison.csv": "4a5d048bf3edd6bdabcea801e8aa25492b47c6c43d0cfa69634e85b37501bb19",
+    "results/revision/phase04/ctl2_multiseed_sweep_current/phase01_sweep_results.csv": "a900f52ba2e1d92171b1c25a54bf05be24e1ff4b530a5ff9e4e255c909011cf4",
+    "results/revision/phase04/ctl2_phase04_audit.json": "b58dd09efd4bbc48c82cc6c29d8e117eaecce5ea2fa91e42a629a7b47c16a347"
+  },
+  "output_hashes": {
+    "results/revision/phase04/PHASE04_INTEGRATION_AUDIT.md": "cbf03eed323a6fba43872c8da11b6205c0f7b34580787406e34ebea8ae34bc49",
+    "results/revision/phase04/observer_cards/observer_card.json": "947ecc622ee00493d3fbe02db53f43db2f9783c1ff60ed34e8edabb17574043f",
+    "results/revision/phase04/observer_cards/observer_card.md": "62de57554c82c921d3462a0bd61dc30fc761e79a7811f5c54b5aec5ee671d062",
+    "results/revision/phase04/phase04_claim_audit.json": "add8b6dc32de78a898cc918f3b05426e672b6ef576fb8694adea77b545eb0071"
+  },
+  "result_status": "checked_revision",
+  "schema": "observerbench.phase04.artifact.v1"
+}

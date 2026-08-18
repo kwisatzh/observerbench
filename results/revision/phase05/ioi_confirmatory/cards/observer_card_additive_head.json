@@ -1,0 +1,21 @@
+{
+  "access_regime": "forward measurements",
+  "fit_procedure": "ridge regression on the frozen mask-feature basis",
+  "implementation": "observerbench.tasks.ioi.phase5_analysis",
+  "known_failure_modes": [
+    "Predictions depend on the frozen mask distribution and ablation basis."
+  ],
+  "measurement_basis": "additive_head",
+  "metadata": {
+    "measurement_budgets": [
+      20,
+      40,
+      80,
+      160
+    ]
+  },
+  "observer_family": "finite head-subset effect predictor",
+  "observer_name": "additive_head",
+  "observer_version": "1.0",
+  "schema_version": "observerbench.effect_observer_card.v0"
+}

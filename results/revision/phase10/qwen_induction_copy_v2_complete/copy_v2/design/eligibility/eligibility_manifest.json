@@ -1,0 +1,55 @@
+{
+  "access_audit": {
+    "attention_scores_loaded": false,
+    "candidate_effect_cells": 0,
+    "clean_score_rows_consumed": 3072,
+    "intervention_forward_passes": 0,
+    "intervention_metadata_loaded": false,
+    "intervention_outcomes_loaded": false
+  },
+  "artifact_hashes": {
+    "candidate_decisions.csv": "957bc2814a4438f2d62dc9f9e5bb06d07b6efe49bb0b54ebff165e988b710a6f",
+    "coverage.csv": "c06b1bc6bdf5ecd601e7ae7cfb0a9b7ec786fa86614d71dbff4877e174d37730",
+    "selected_prompt_ids.csv": "ef0862251a462eed7dee02ee8af8356865e580922499e2aa7d7f7fac1a2d6aee"
+  },
+  "counts": {
+    "candidate_rows": 3072,
+    "eligible_rows": 2612,
+    "selected_rows": 1536
+  },
+  "gates": {
+    "every_bank_family_coverage": true,
+    "every_family_pooled_coverage": true,
+    "exact_fill": true,
+    "overall_coverage": true
+  },
+  "input_hashes": {
+    "candidate_table_sha256": "245e270ead01f96323943c5b4d707269ed4ff3df0acb5cf96dfb5a0e65d0e9d6",
+    "clean_scores_sha256": "a8fc853c524deee01a3a07fde2e055642dd5b1e2f57e2b8d7c607e1c0c1245d2"
+  },
+  "next_allowed_stage": "freeze selected prompt IDs before head discovery",
+  "passed": true,
+  "protocol": {
+    "candidate_margin_minimum": 1.3862943611198906,
+    "coverage_minima": {
+      "bank_family": 0.7,
+      "family_pooled": 0.75,
+      "overall": 0.8
+    },
+    "eligibility_rule": "candidate_correct AND candidate_margin >= ln(4) AND discovery eager/SDPA prediction agreement AND finite candidate logits and target NLL",
+    "required_counts_per_family": {
+      "calibration": 64,
+      "discovery": 32,
+      "head_fit": 64,
+      "head_test": 64,
+      "locked_test": 128,
+      "reference": 32
+    },
+    "reservoir_assignment": "preassigned_disjoint_bank_by_family",
+    "reservoir_multiplier": 2,
+    "selection_rule": "ascending_sha256_of_selection_seed_colon_prompt_id_then_prompt_id",
+    "selection_seed": 12119
+  },
+  "schema": "observerbench.qwen_induction.copy_v2.clean_eligibility.v1",
+  "status": "passed_clean_eligibility_prompts_frozen"
+}

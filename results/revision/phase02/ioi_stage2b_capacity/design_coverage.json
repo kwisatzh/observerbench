@@ -1,0 +1,9 @@
+{
+  "design": "anchored broad random masks",
+  "full_pb_corner_count": 2,
+  "full_pb_corner_note": "PB and PBE are forced whole-group anchors",
+  "high_pb_coverage_count": 9,
+  "mean_normalized_pb_exposure": 0.15435010482180292,
+  "median_normalized_pb_exposure": 0.08333333333333333,
+  "n_nonclean_subsets": 159
+}

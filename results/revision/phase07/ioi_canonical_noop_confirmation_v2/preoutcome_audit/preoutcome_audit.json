@@ -1,0 +1,73 @@
+{
+  "all_checks_pass": true,
+  "counts": {
+    "candidate_predictions": 2976,
+    "coefficients": 184,
+    "fixed_actions": 144,
+    "phase5_candidate_mask_outcome_rows_read": 0,
+    "phase5_train_calibration_cells_read": 30720,
+    "phase5_train_calibration_shards_read": 10,
+    "phase5_validation_or_test_outcome_rows_read": 0,
+    "phase7_candidate_outcome_rows_read": 0,
+    "selected_unique_nonnoop_masks": 89
+  },
+  "independent_recomputation": {
+    "actions_max_abs_error": 9.71445146547012e-17,
+    "coefficients_max_abs_error": 2.220446049250313e-16,
+    "predictions_max_abs_error": 4.440892098500626e-16,
+    "selected_union_max_abs_error": 0.0
+  },
+  "input_hashes": {
+    "design_manifest": "3dfa6352524c66b6b57794ec9ed2c89a900afd7df3d9879cd7f21cb0686feee5",
+    "prediction_action_manifest": "fce0b027f232841653d5b7f24f3254243a71d3fbd282cc9c468c4781eab334e5",
+    "pretest_manifest": "7c148b1137460fa7d4674f97f3984ce8a39068cd1dbe394852fed2f9141ae2a2",
+    "protocol": "198a1d30a61e9463863a7597becc7973c7f7a2ee8a915962d12b6612e194befb",
+    "selected_measurement_masks": "7f843bc5c2649ca2e84a52dccb6a7fc12330fbeab586186e4ad766517b9869eb",
+    "template_head_means": "42b36bd7d846c36f8abda56df2d517954458eb005a2fc93082d0c0875e9da566"
+  },
+  "next_allowed_stage": "Measure only the frozen v2 selected non-noop union.",
+  "phase5_train_calibration_shard_hashes": {
+    "shards/train/effects_0000_0016.csv": "f08f5e28e5fa513c4cef7d897a3bfe56edfc052aeeedf59e118ec3f51abaec12",
+    "shards/train/effects_0016_0032.csv": "f79aeac723c4bfd34018926b85c0aee1812703ca72cf35d3b3567047b5f5681d",
+    "shards/train/effects_0032_0048.csv": "80d784e65b549c6a76510bf0e5675c0486940d6f7b5d775416eaeb3bcfe130ea",
+    "shards/train/effects_0048_0064.csv": "a6189109ca6791e09a9f79b76ac12e9b568b73050b7c1fd6db93b57141b3af5a",
+    "shards/train/effects_0064_0080.csv": "664cb7b99453433e079c2ef6cf30253ae134e65dda9b4af6162d86a9bcb1c4fc",
+    "shards/train/effects_0080_0096.csv": "298fa0a48ca8ff000538d4cb0350457b77b5dcc80c2e26078fc3ecbedada7b3b",
+    "shards/train/effects_0096_0112.csv": "31a952e52d381d1a1e28796295bf1d2d28d8d7b5780370c22a6d7cc255ce4132",
+    "shards/train/effects_0112_0128.csv": "712dfd6aa327c8d24dd35250082191ae7df2646def7ad4eba1f1112f73b547de",
+    "shards/train/effects_0128_0144.csv": "1579bc07ad00d56ee660293d9e20c9e321095be79147915f742cea66bd48450c",
+    "shards/train/effects_0144_0160.csv": "017f69ac943ac5172f976aaec4a7eca50fca2da4e37d61be840cd6d24c0aabf9"
+  },
+  "protocol_schema": "observerbench.ioi_phase07_canonical_noop_confirmation.v2",
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.1",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.14.2",
+    "source_dirty": true,
+    "source_revision": "0cec2c4ef17d9c3b0ef3fea8fdf15347ee4e28cb"
+  },
+  "schema": "observerbench.ioi_phase07_preoutcome_audit.v1",
+  "scientific_status": "pilot_informed_outcome_sealed_canonical_template_confirmation",
+  "source_code_hashes": {
+    "scripts/evaluate_ioi_phase07_confirmation.py": "52e64b09cb8870948a1074596453707765649ba3441e1b479cb6a97b9b7197b0",
+    "scripts/run_ioi_phase07_selected_measurement.py": "7ffdc0e79ddf1ac16e35a70886515e0c8cabb96627c98eaff77505ccb8b137ec",
+    "src/observerbench/tasks/ioi/phase5_analysis.py": "29be3f52165c6524eb57cf52f8700732ed4bb74d9268b15c3f978fe910c41ae4",
+    "src/observerbench/tasks/ioi/phase5_effects.py": "f0853181a0110b75da53a2b620414354b467445b07a00b920e15fd2f28713c62",
+    "src/observerbench/tasks/ioi/phase6_risk.py": "687547b127bfcabe8425bbe4d609e873e0bdabb1f83924f8c727211907c3d01e",
+    "src/observerbench/tasks/ioi/phase7_confirmation.py": "072d421a3016d35a428486d33359ab9437c1aeb8fb8d1e3b1772243a897cd7e4",
+    "src/observerbench/tasks/ioi/phase7_evaluation.py": "b0b24800b228094fc8eb2ee72ae3d5ba8530ce4812b3bc490978296b98d25df7",
+    "src/observerbench/tasks/ioi/phase7_freeze_audit.py": "a423d2e4494840c3c9e0fadfb5ddc00adfd20dd6e226e5d51e112a075869bd18",
+    "src/observerbench/tasks/ioi/phase7_measurement.py": "26f6e573b22d591c789b395741cb16e1f180e3a278a8855597f5033dcbca6acc",
+    "src/observerbench/tasks/ioi/phase7_pretest.py": "afc7908e3d8a94c238a728a70fb53cabc76defeea7e4d85fee79f55f816dcf21",
+    "src/observerbench/tasks/ioi/stage2d.py": "70c3dc698f74835fbfc5baae55e3164a5c5653b33fd336bebe700f59bcb11f31"
+  },
+  "status": "independent_recomputation_passed_v2_outcomes_unopened",
+  "v1_candidate_outcome_values_read": false,
+  "v1_partial_evidence_verified_by_hash_only": true,
+  "v2_candidate_outcome_values_read": false
+}

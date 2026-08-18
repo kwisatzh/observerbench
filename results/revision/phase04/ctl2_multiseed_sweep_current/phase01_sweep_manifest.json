@@ -1,0 +1,42 @@
+{
+  "arm_design": "factorial_2x2",
+  "base_config": "configs/revision/trained_ctl2_phase01_default_v3.yaml",
+  "base_config_sha256": "d21d7fb906ff7dfbb892d62c810d3742f387f384e355775643db84d9b3014999",
+  "calibration_modes": [
+    "none",
+    "response_gain"
+  ],
+  "created_utc": "2026-07-26T15:21:27.165908+00:00",
+  "direction_support_mode": "both",
+  "gammas": [
+    0.0,
+    0.5,
+    1.0,
+    1.15,
+    1.5
+  ],
+  "n_runs": 30,
+  "per_example_rows_are_not_independent": true,
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.1",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.14.2",
+    "source_dirty": true,
+    "source_revision": "0cec2c4ef17d9c3b0ef3fea8fdf15347ee4e28cb"
+  },
+  "schema": "observerbench.ctl2.phase01_sweep.v0",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "uncertainty_unit": "training seed"
+}

@@ -1,0 +1,11 @@
+{
+  "action_scope": "unique_masks_selected_by_frozen_actions_plus_analytic_noop",
+  "affects_primary_gate": false,
+  "analytic_noop_exact_zero": true,
+  "control_schema": "observerbench.qwen_induction.matched_non_induction.v1",
+  "kl_direction": "clean_to_intervened",
+  "n_controls": 512,
+  "n_unique_action_masks": 88,
+  "prompt_bank": "locked_test",
+  "status": "complete_secondary_diagnostic"
+}

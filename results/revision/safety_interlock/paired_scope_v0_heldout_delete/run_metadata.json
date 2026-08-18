@@ -1,0 +1,19 @@
+{
+  "config": {
+    "activation_dim": 12,
+    "activation_noise": 0.02,
+    "block_budget_fraction": 0.1,
+    "cvar_alpha": 0.9,
+    "escalation_budget_fraction": 0.1,
+    "escalation_cost": 0.05,
+    "false_block_cost": 1.0,
+    "heldout_operation": "delete",
+    "n_test_pairs": 512,
+    "n_train_pairs": 256,
+    "ridge": 0.0001,
+    "seed": 0,
+    "violation_cost": 1.0
+  },
+  "task": "safety_interlock_analytic",
+  "version": "paired-scope-v0"
+}

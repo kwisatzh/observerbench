@@ -1,0 +1,13 @@
+target,selector,mean_target_loss,mean_finite_effect,selected_noop_fraction,mean_selected_head_count
+0.5,direct_risk_head_pair_quadratic,0.731124513122874,0.4625770878046751,0.25,4.6875
+0.5,exact_noop,0.5,0.0,1.0,0.0
+0.5,natural_mean_effect_head_pair_quadratic,1.0352206105211128,0.46614452595046413,0.0,6.458333333333333
+0.5,transformed_mean_head_pair_quadratic,0.9232284441047037,0.6872463955854377,0.0,6.375
+1.0,direct_risk_head_pair_quadratic,0.8906227769330144,0.683923326122264,0.0,6.5
+1.0,exact_noop,1.0,0.0,1.0,0.0
+1.0,natural_mean_effect_head_pair_quadratic,1.092759578100716,0.7708828156270707,0.0,6.854166666666667
+1.0,transformed_mean_head_pair_quadratic,1.0588377003829617,0.8653893190785311,0.0,6.833333333333333
+1.5,direct_risk_head_pair_quadratic,1.0704367071739398,0.8017351097854165,0.0,6.666666666666667
+1.5,exact_noop,1.5,0.0,1.0,0.0
+1.5,natural_mean_effect_head_pair_quadratic,1.1983789706913133,1.1822882146031286,0.0,7.4375
+1.5,transformed_mean_head_pair_quadratic,1.180473820170543,1.1732365242787637,0.0,7.520833333333333

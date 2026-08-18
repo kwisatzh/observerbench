@@ -1,0 +1,9 @@
+model,n_columns,design_rank,rank_added_vs_count_additive,n_subsets
+count_additive,23,21,0,160
+count_plus_PB_bin4,27,25,4,160
+count_plus_PE_bin4,27,25,4,160
+count_plus_BE_bin4,27,25,4,160
+count_plus_all_bin4,35,33,12,160
+count_plus_PB_poly4,27,25,4,160
+count_plus_PE_poly4,27,25,4,160
+count_plus_BE_poly4,27,25,4,160

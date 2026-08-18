@@ -1,0 +1,137 @@
+{
+  "schema": "observerbench.ioi_phase07_canonical_noop_confirmation.v2",
+  "status": "pilot_informed_outcome_sealed_canonical_template_confirmation",
+  "disclosure": "Phase 7 was designed after Phase-5 and Phase-6 outcomes were known. Phase-5 outcomes supply the training/calibration data and the transparent target choice. A v1 selected-only measurement was aborted after one 8,192-cell shard was written; no candidate-effect value or evaluation result from that shard was inspected. A pre-outcome code audit then found an inaccurate sentence in the target rationale and provenance checks that needed enforcement. This v2 protocol corrects those issues, uses a new result root, and leaves all v2 candidate effects sealed until the design, clean-task reference, observer fits, fixed actions, independent recomputation audit, and measurement and evaluation source hashes have been frozen and validated.",
+  "v1_aborted_attempt": {
+    "status": "aborted_after_one_selected_only_shard",
+    "reason": "A pre-outcome audit found that the v1 target rationale incorrectly called t=1.0 the largest pilot margin over no-op, and that the source and exact-union checks needed stronger enforcement.",
+    "v1_protocol_sha256": "852d05da70ba13e870baf797906a190325d3eb82cbf1452c75983383e683e0f2",
+    "partial_effect_cells": 8192,
+    "partial_selected_masks": 16,
+    "candidate_outcome_values_inspected": false,
+    "evaluation_run": false,
+    "preservation_rule": "Keep the v1 protocol, measurement spec, progress record, and partial shard unchanged as audit evidence. Never resume or use the v1 partial shard for a scientific result.",
+    "artifact_hashes": {
+      "results/revision/phase07/ioi_canonical_noop_confirmation/selected_measurement/measurement_run_spec.json": "23426bd642f760b431495d285ed9393d5032525730701baf8a2fa50532409a51",
+      "results/revision/phase07/ioi_canonical_noop_confirmation/selected_measurement/measurement_progress.json": "77ce34f5426a680d3acfd4bc91cfebad8bb38dd8a49b1af1f2fd3fe665a5b8bc",
+      "results/revision/phase07/ioi_canonical_noop_confirmation/selected_measurement/shards/test/effects_0000_0016.csv": "b14e7319940a5a71c73b2e83164105ade23a9f01e9e713ab09841d723303cc5e"
+    }
+  },
+  "model": "gpt2-small",
+  "huggingface_model": "gpt2",
+  "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+  "intervention": "final-position Phase-5-template-conditioned mean ablation",
+  "templates": "The eight literal canonical Phase-5 templates, unchanged.",
+  "test_name_source": "The 64 frozen Phase-6 test names and token ids. Phase 7 constructs a new outcome-free perfect matching and combines those names with the Phase-5 templates, so every test prompt string is absent from both Phase 5 and Phase 6.",
+  "test_unordered_pair_cluster_count": 32,
+  "test_prompts_per_pair_cluster": 16,
+  "test_prompt_count": 512,
+  "pairing_rule": "Sort the 64 names by the Phase-7 SHA-256 key, split them into equal halves, and choose the smallest cyclic offset whose 32 unordered edges do not occur in the Phase-6 test matching. Use both orientations of each pair under every canonical template. This rule uses no model outcome.",
+  "training_source": "The complete 192-prompt by 160-calibration-mask Phase-5 train table. The v2 freezer reads only the ten train/calibration shards. No Phase-5 candidate-mask, validation, or test outcome is loaded into an observer fit.",
+  "measurement_budget": 160,
+  "ridge": 1e-06,
+  "target": 1.0,
+  "target_choice": {
+    "status": "pilot_informed_and_not_independently_preregistered",
+    "rule": "Choose target 1.0 because it is the only screened target among 0.5, 1.0, and 1.5 with favorable pilot point estimates against both required references. At 0.5, direct risk beats the same-basis mean-effect plug-in but loses to exact no-op. At 1.5, it beats exact no-op but loses to the same-basis mean-effect plug-in. At 1.0, it beats the mean-effect plug-in by 0.0831 absolute loss and exact no-op by 0.1774.",
+    "phase5_same_basis_mean_minus_direct_absolute_loss": {
+      "0.5": 0.0752935843542218,
+      "1.0": 0.083058575540781,
+      "1.5": -0.0145097061991691
+    },
+    "phase5_target_1_losses": {
+      "same_basis_mean_effect_plugin": 0.905613336339593,
+      "direct_risk": 0.822554760798812,
+      "exact_noop": 1.0
+    }
+  },
+  "observer_basis": "intercept, 13 head indicators, and all 78 distinct head-pair products (92 columns)",
+  "observers": [
+    "direct_risk_head_pair_quadratic",
+    "natural_mean_effect_head_pair_quadratic",
+    "exact_noop"
+  ],
+  "candidate_pool_count": 48,
+  "fresh_nonnoop_masks_per_pool": 30,
+  "candidate_pool_size_including_noop": 31,
+  "candidate_head_counts": [5, 6, 7, 8, 9],
+  "fresh_masks_per_stratum_by_head_count": {
+    "5": 3,
+    "6": 4,
+    "7": 4,
+    "8": 3,
+    "9": 1
+  },
+  "candidate_strata": [
+    "broad:n_P<=1",
+    "primary_heavy:n_P>=2"
+  ],
+  "mask_exclusion_rule": "Every non-noop Phase-7 action mask is unique and absent from all Phase-5 masks, all Phase-6 candidate masks, and both recorded legacy mask files. The all-zero action appears once in every pool and is the only repeated bit string.",
+  "noop_rule": "The no-op finite effect is exactly zero by definition, so its target loss is exactly |0-1|=1 in fitting, selection, and evaluation. It requires no ablation forward pass.",
+  "selection_rule": "Within each pool, freeze the lexicographic minimum of (predicted expected absolute loss, number of ablated heads, action_id). Replace the no-op prediction with its exact loss of 1.0 for both fitted observers. The exact-noop baseline always selects no-op.",
+  "clean_pretest": {
+    "must_run_before_observer_freeze": true,
+    "candidate_masks_accessed": false,
+    "overall_IO_vs_subject_pairwise_accuracy_min": 0.95,
+    "every_template_IO_vs_subject_pairwise_accuracy_min": 0.90,
+    "every_template_mean_clean_logit_difference_strictly_positive": true,
+    "failure_rule": "Stop the experiment. Do not fit or freeze Phase-7 actions and do not measure any Phase-7 candidate effect. The failed clean-task pretest is the result. No prompt, pair, template, or name may be replaced."
+  },
+  "primary_hypotheses": {
+    "H1a_estimand": {
+      "candidate": "direct_risk_head_pair_quadratic",
+      "reference": "natural_mean_effect_head_pair_quadratic",
+      "minimum_relative_loss_reduction": 0.05,
+      "paired_pair_cluster_by_pool_interval_lower_bound_strictly_positive": true
+    },
+    "H1b_intervention_value": {
+      "candidate": "direct_risk_head_pair_quadratic",
+      "reference": "exact_noop",
+      "minimum_relative_loss_reduction": 0.05,
+      "paired_pair_cluster_by_pool_interval_lower_bound_strictly_positive": true
+    },
+    "joint_success_rule": "Primary success requires both H1a and H1b. Neither comparison can rescue the other. H1b concerns target-tracking loss at t=1.0, not broad task utility or safety."
+  },
+  "bootstrap": {
+    "repeats": 5000,
+    "seed": 2707101,
+    "axes": [
+      "32 unordered test-name-pair clusters",
+      "48 candidate pools"
+    ],
+    "algorithm": "Form one paired reference-minus-direct-risk loss difference for each pair-cluster by pool cell by equally averaging both name orientations and all eight templates. In each draw, independently sample 32 pair clusters and 48 pools with replacement, retain their Cartesian cell matrix, and take the unweighted mean.",
+    "quantiles": [0.025, 0.975]
+  },
+  "measurement_scope_after_all_seals_pass": "Measure only the union of non-noop masks selected by the two fitted observers. The exact-noop outcomes are analytic. Do not measure unselected candidate masks.",
+  "access_sequence": [
+    "Freeze and hash this v2 protocol, the canonical templates, fresh name pairing, 512 new test prompts, inherited calibration bank, and 48 action pools in a new v2 result root.",
+    "Rebind and revalidate the unchanged v1 clean-only scores, which were measured before the aborted v1 candidate shard. Stop if any clean gate fails.",
+    "Using only the ten sealed Phase-5 train/calibration shards, fit both 92-column observers; set no-op loss exactly; freeze all actions and the selected non-noop measurement union; hash every artifact.",
+    "Run a separate pre-outcome auditor that independently recomputes coefficients, predictions, actions, and the selected-mask union, and freezes the current measurement and evaluation source hashes.",
+    "Only after the v2 audit passes, measure the exact selected non-noop union on all 512 v2 prompts and apply the frozen joint success rule."
+  ],
+  "forbidden_after_protocol_freeze": [
+    "change the target, thresholds, names, pairs, prompts, masks, pools, ridge, basis, or selection rule",
+    "fit on Phase-5 candidate-mask, validation, test, or any Phase-7 outcome",
+    "replace a prompt or action after the clean pretest",
+    "measure an unselected Phase-7 candidate mask",
+    "resume or analyze the aborted v1 partial shard",
+    "report only the favorable primary comparison"
+  ],
+  "pilot_and_source_hashes": {
+    "results/revision/phase06/ioi_risk_exploratory/paired_contrasts.csv": "dea9e07c52c252c736f17fcb78aa0670fbab46bdf55c046218e3d89fbdf6623a",
+    "results/revision/phase06/ioi_risk_exploratory/result_digest.json": "896bcd4a19b1c9665a15936396d454e21d3d07b00c83eec56a79bbc89a422b78",
+    "results/revision/phase05/design/design_manifest.json": "5f9aedda456048378d318537b4099bf28d09991fd40a18004f71d82075075922",
+    "results/revision/phase05/ioi_effects/effect_manifest.json": "fb3e807ea52d27dd7da58d49e2b6fa4a9d4c425bdb8e9a999cf240bdcb1ff80f",
+    "results/revision/phase05/ioi_effects/template_head_means.npz": "42b36bd7d846c36f8abda56df2d517954458eb005a2fc93082d0c0875e9da566",
+    "results/revision/phase06/ioi_fresh_confirmation/design/names.csv": "33a89ba5ffcfabe26a55dc34335a7eb97ee397ea40279fb0fb8200da8536f019",
+    "results/revision/phase06/ioi_fresh_confirmation/design/pair_clusters.csv": "2d97c65897d3855f3e3dde7218a67d55a642ccdd46883464d06e0b51233a19cb",
+    "results/revision/phase06/ioi_fresh_confirmation/design/prompts.csv": "627c9c25f550e2b74cb0ea7f61ce93601ec0d894113e151fda8ea837a94f6c6e",
+    "results/revision/phase06/ioi_fresh_confirmation/design/candidate_masks.csv": "1e921f79ae34a472183a318b97e25765cb86467ed4fd49924bdc34a9d937b3d0"
+  },
+  "legacy_mask_exclusions": {
+    "results/revision/phase02/inputs/stage2b_mean_end/ioi_stage2b_subset_design.csv": "29c4d7377b3897f9b8b2bd947694d2e676971df6d2e23adbfde67b1ec10e4d60",
+    "results/frozen/ioi/stage2c_primary_stratified_mean_end/ioi_stage2c_subset_design.csv": "7aefa21bba51137afe9718e693d8daad713eaf4375d828c7a2011eee1f530816"
+  },
+  "seed": 27071
+}

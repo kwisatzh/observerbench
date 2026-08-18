@@ -1,0 +1,91 @@
+{
+  "config": {
+    "bootstrap_repeats": 2000,
+    "budgets": [
+      20,
+      40,
+      80,
+      160
+    ],
+    "head_cost_penalty": 0.02,
+    "models": [
+      "additive_head",
+      "count_additive",
+      "count_plus_PE_bin4",
+      "count_plus_all_bin4"
+    ],
+    "paired_interval_excludes_zero": true,
+    "regret_reduction_fraction_min": 0.15,
+    "requires_cost_aware_direction": true,
+    "requires_size_matched_direction": true,
+    "ridge": 1e-06,
+    "seed": 25051,
+    "target_tolerance": 0.25,
+    "targets": [
+      0.5,
+      1.0,
+      1.5
+    ],
+    "within_tolerance_improvement_min": 0.05
+  },
+  "config_sha256": "8b42180fb848b5673501f5e3d29ba478b49976a4824c3a98e009dff75b52b7e8",
+  "design_id": "ioi_phase05_design_37dff29fb2338e1f",
+  "design_manifest_sha256": "5f9aedda456048378d318537b4099bf28d09991fd40a18004f71d82075075922",
+  "design_schema": "observerbench.ioi_phase5_design_manifest.v1",
+  "frozen_prediction": {
+    "relative_path": "candidate_predictions.csv",
+    "rows": 5440,
+    "sha256": "b9853631d45fa45cc56ecef9afac4000cb359ffd76c923a05363f64e567ff4d6"
+  },
+  "outputs": {
+    "candidate_predictions.csv": "b9853631d45fa45cc56ecef9afac4000cb359ffd76c923a05363f64e567ff4d6",
+    "fit_rank_diagnostics.csv": "3e61f2cb513db7b20f6accd04e7fa02e5552f6a11bd7b1ddcc0db686ea1361f8",
+    "observer_coefficients.csv": "a96352259c448221db506eefb08e223c24b3a8a7a4a01b9dd9916a8e2de438f7"
+  },
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.1",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.14.2",
+    "source_dirty": true,
+    "source_revision": "0cec2c4ef17d9c3b0ef3fea8fdf15347ee4e28cb"
+  },
+  "schema": "observerbench.ioi_phase5_fit.v2",
+  "status": "fit_frozen_before_validation_test",
+  "train_effect_sources": {
+    "shards/train/effects_0000_0016.csv": "f08f5e28e5fa513c4cef7d897a3bfe56edfc052aeeedf59e118ec3f51abaec12",
+    "shards/train/effects_0016_0032.csv": "f79aeac723c4bfd34018926b85c0aee1812703ca72cf35d3b3567047b5f5681d",
+    "shards/train/effects_0032_0048.csv": "80d784e65b549c6a76510bf0e5675c0486940d6f7b5d775416eaeb3bcfe130ea",
+    "shards/train/effects_0048_0064.csv": "a6189109ca6791e09a9f79b76ac12e9b568b73050b7c1fd6db93b57141b3af5a",
+    "shards/train/effects_0064_0080.csv": "664cb7b99453433e079c2ef6cf30253ae134e65dda9b4af6162d86a9bcb1c4fc",
+    "shards/train/effects_0080_0096.csv": "298fa0a48ca8ff000538d4cb0350457b77b5dcc80c2e26078fc3ecbedada7b3b",
+    "shards/train/effects_0096_0112.csv": "31a952e52d381d1a1e28796295bf1d2d28d8d7b5780370c22a6d7cc255ce4132",
+    "shards/train/effects_0112_0128.csv": "712dfd6aa327c8d24dd35250082191ae7df2646def7ad4eba1f1112f73b547de",
+    "shards/train/effects_0128_0144.csv": "1579bc07ad00d56ee660293d9e20c9e321095be79147915f742cea66bd48450c",
+    "shards/train/effects_0144_0160.csv": "017f69ac943ac5172f976aaec4a7eca50fca2da4e37d61be840cd6d24c0aabf9",
+    "shards/train/effects_0160_0176.csv": "2dd85da3a90b3dc5689071be67dca9791b98e73911ee936fb797e192a4bcd45d",
+    "shards/train/effects_0176_0192.csv": "fe470a8c9ddf6a1a9c3b5b94897256474882011433bb61e3447151d2f5c14449",
+    "shards/train/effects_0192_0208.csv": "1608c6ce80f86a799ff4331450c3052affba526901b552abfdc2d81ea871d84c",
+    "shards/train/effects_0208_0224.csv": "2300a3ad8d04df82b726d856743ddcbe5086d48db33bf8dd8219a8f00d83cb54",
+    "shards/train/effects_0224_0240.csv": "3a881ff14858d4a007dfd6bad303cbb0e16faa86f33d75ca8244f7a60ba2aea4",
+    "shards/train/effects_0240_0256.csv": "d3d31663778ef16a4824ccf73dd9a317d1d474d0208be2ccdcda6e6631f3ffa2",
+    "shards/train/effects_0256_0272.csv": "ac4d29df4c574eee5054724613062b4fa9dcaa2295b23ee12a8addda18e1c047",
+    "shards/train/effects_0272_0288.csv": "8837ec093298d9cf02e6a9cdffcb6a780e084bce3433ecbf419242756efad22d",
+    "shards/train/effects_0288_0304.csv": "032a9bda70b673f5952f3bfec9f7771f346bf62abdc2657b690c784fa1e3a305",
+    "shards/train/effects_0304_0320.csv": "b5b4857c3878fe6b0fa8ca966a9bce1075534917ac5b42770d9b1c1d6e7ea93b",
+    "shards/train/effects_0320_0336.csv": "bce16a1bd3765438ec07f1308d01dbc6020470a01a221f612fc38faca62865ad",
+    "shards/train/effects_0336_0352.csv": "3640dd1f0585be2e07f2400a19e92a7783e499f36b2401bd5f8cf3f874d905da",
+    "shards/train/effects_0352_0368.csv": "dc766c49c23f58ee6648e5b243f11ef20110b0be8e9f71c1ec49088f0c9d8abe",
+    "shards/train/effects_0368_0384.csv": "f2e0027f5becd31a862fc361085c5a5858597fec629148ee371bb3a438e47adb",
+    "shards/train/effects_0384_0400.csv": "29fc6ea7f50312dccecf2faa82d1be310c86062aefe9169ec547833cab217062",
+    "shards/train/effects_0400_0416.csv": "6ac48632a85f0095eca52c80aa32407a0b7d447c8d6939c890414e607fc415b3",
+    "shards/train/effects_0416_0432.csv": "e46a0f0d843a4835bdfcebd84dfcce25a3931ea3ca8d44925dfb2a7b39a43560",
+    "shards/train/effects_0432_0448.csv": "555f11df4c211d3ce2a7b677edd7ad5481d290dab92e11fe6660696ff38a0411",
+    "shards/train/effects_0448_0464.csv": "87d970f991311b36fe95cb96e85d4eb4eb9a4db4b4e4b735bb2c40ea705ef771",
+    "shards/train/effects_0464_0480.csv": "d0f60c874214b44daf815cf3cfd09c40ea26c2bbfea2db1753048a3c0b1c8aeb"
+  }
+}

@@ -1,0 +1,14 @@
+| stage | analysis | pair | mae_reduction_mean | q05 | q95 |
+| --- | --- | --- | --- | --- | --- |
+| stage2b | add_one_vs_count | PB | 0.00355 | 0.00283 | 0.00433 |
+| stage2b | add_one_vs_count | PE | 0.0598 | 0.0567 | 0.0629 |
+| stage2b | add_one_vs_count | BE | -0.00193 | -0.00258 | -0.00128 |
+| stage2b | leave_one_out | PB | 0.00865 | 0.00589 | 0.0114 |
+| stage2b | leave_one_out | PE | 0.0735 | 0.0701 | 0.0768 |
+| stage2b | leave_one_out | BE | -0.00616 | -0.00677 | -0.00553 |
+| stage2c | add_one_vs_count | PB | 0.000188 | -0.00106 | 0.00141 |
+| stage2c | add_one_vs_count | PE | 0.123 | 0.117 | 0.13 |
+| stage2c | add_one_vs_count | BE | -0.000381 | -0.00133 | 0.000576 |
+| stage2c | leave_one_out | PB | 0.00964 | 0.00811 | 0.011 |
+| stage2c | leave_one_out | PE | 0.133 | 0.126 | 0.141 |
+| stage2c | leave_one_out | BE | 0.00216 | 0.00102 | 0.00357 |

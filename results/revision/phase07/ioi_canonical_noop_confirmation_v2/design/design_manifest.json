@@ -1,0 +1,36 @@
+{
+  "all_design_gates_pass": true,
+  "artifact_hashes": {
+    "calibration_masks.csv": "e18eed47e08dee9289af8ff95db3377f5a40c35818657f3caaa9714ad8f88c00",
+    "candidate_actions.csv": "b0418278fe7abb13c592f98760492a9e19da295a5b9c24c0037eeeb697796f4f",
+    "design_audit.json": "276bb48f064df9fa79b222a34fe7ee801554b7adda6cc2dff9fd970590281b92",
+    "names.csv": "9c402c3602bcd54fa72935d094698f19fc957c7bc945e8ab84e9612102e697b9",
+    "pair_clusters.csv": "4403cefb67421636aa1e82d516e455544fc159052f41bcfe1fbc006e4c861036",
+    "prompts.csv": "00055bf874c8ce6941fcd73f532a11768ec24b6ae6dd833f2436bf423e054124",
+    "templates.csv": "aa2bd9dfdbabdaae78d671db51e93767b6ef75e3a0b447254cafecf9f98bc035"
+  },
+  "candidate_effect_forward_passes": 0,
+  "contains_model_outcomes": false,
+  "design_id": "ioi_phase07_design_f7c5a0ec88a44fd3",
+  "next_allowed_stage": "Run the clean-only pretest. Do not fit Phase-7 observers and do not measure a Phase-7 candidate effect unless every clean gate passes.",
+  "protocol_sha256": "198a1d30a61e9463863a7597becc7973c7f7a2ee8a915962d12b6612e194befb",
+  "schema": "observerbench.ioi_phase07_design.v1",
+  "scientific_status": "pilot_informed_outcome_sealed_canonical_template_confirmation",
+  "source_hashes": {
+    "results/frozen/ioi/stage2c_primary_stratified_mean_end/ioi_stage2c_subset_design.csv": "7aefa21bba51137afe9718e693d8daad713eaf4375d828c7a2011eee1f530816",
+    "results/revision/phase02/inputs/stage2b_mean_end/ioi_stage2b_subset_design.csv": "29c4d7377b3897f9b8b2bd947694d2e676971df6d2e23adbfde67b1ec10e4d60",
+    "results/revision/phase05/design/design_manifest.json": "5f9aedda456048378d318537b4099bf28d09991fd40a18004f71d82075075922",
+    "results/revision/phase05/ioi_effects/effect_manifest.json": "fb3e807ea52d27dd7da58d49e2b6fa4a9d4c425bdb8e9a999cf240bdcb1ff80f",
+    "results/revision/phase05/ioi_effects/template_head_means.npz": "42b36bd7d846c36f8abda56df2d517954458eb005a2fc93082d0c0875e9da566",
+    "results/revision/phase06/ioi_fresh_confirmation/design/candidate_masks.csv": "1e921f79ae34a472183a318b97e25765cb86467ed4fd49924bdc34a9d937b3d0",
+    "results/revision/phase06/ioi_fresh_confirmation/design/names.csv": "33a89ba5ffcfabe26a55dc34335a7eb97ee397ea40279fb0fb8200da8536f019",
+    "results/revision/phase06/ioi_fresh_confirmation/design/pair_clusters.csv": "2d97c65897d3855f3e3dde7218a67d55a642ccdd46883464d06e0b51233a19cb",
+    "results/revision/phase06/ioi_fresh_confirmation/design/prompts.csv": "627c9c25f550e2b74cb0ea7f61ce93601ec0d894113e151fda8ea837a94f6c6e",
+    "results/revision/phase06/ioi_risk_exploratory/paired_contrasts.csv": "dea9e07c52c252c736f17fcb78aa0670fbab46bdf55c046218e3d89fbdf6623a",
+    "results/revision/phase06/ioi_risk_exploratory/result_digest.json": "896bcd4a19b1c9665a15936396d454e21d3d07b00c83eec56a79bbc89a422b78",
+    "results/revision/phase07/ioi_canonical_noop_confirmation/selected_measurement/measurement_progress.json": "77ce34f5426a680d3acfd4bc91cfebad8bb38dd8a49b1af1f2fd3fe665a5b8bc",
+    "results/revision/phase07/ioi_canonical_noop_confirmation/selected_measurement/measurement_run_spec.json": "23426bd642f760b431495d285ed9393d5032525730701baf8a2fa50532409a51",
+    "results/revision/phase07/ioi_canonical_noop_confirmation/selected_measurement/shards/test/effects_0000_0016.csv": "b14e7319940a5a71c73b2e83164105ade23a9f01e9e713ab09841d723303cc5e"
+  },
+  "status": "outcome_free_design_frozen"
+}

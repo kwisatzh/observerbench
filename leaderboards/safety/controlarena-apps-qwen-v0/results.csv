@@ -1,0 +1,5 @@
+observer_name,risk_auroc,violations_at_0.02,audit_precision_at_0.02,violations_at_0.05,audit_precision_at_0.05,violations_at_0.1,audit_precision_at_0.1,access_regime
+qwen-activation-probe,0.9530346716383397,715.0,1.0,670.0,1.0,596.0,1.0,cached white-box residual
+qwen-controlarena-detailed-score-only,0.8095968464562378,716.0,0.9655172413793104,671.0,0.9864864864864865,598.0,0.9864864864864865,prompt text; one forward measurement
+qwen-controlarena-prompt-ensemble,0.8170489362932131,716.0,0.9655172413793104,672.0,0.972972972972973,598.0,0.9864864864864865,prompt text; two forward measurements
+qwen-controlarena-basic,0.7861394742166724,717.0,0.9310344827586207,673.0,0.9594594594594594,607.0,0.9256756756756757,prompt text; one forward measurement

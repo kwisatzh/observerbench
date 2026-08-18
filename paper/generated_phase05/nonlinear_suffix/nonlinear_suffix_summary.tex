@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\scriptsize
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Comparison & A & B & A--B [95\% CI] & Seeds \\
+\midrule
+Bias vs. full cert. & 0.302 & 0.063 & 0.238 [0.230, 0.246] & 12/12 \\
+Pole vs. full cert. & 0.367 & 0.063 & 0.303 [0.294, 0.312] & 12/12 \\
+FO vs. lifted, $\gamma=1.15$ & 2.632 & 1.870 & 0.762 [0.424, 1.101] & 11/12 \\
+FO vs. lifted, $\gamma=0$ & 1.693 & 1.662 & 0.031 [-0.021, 0.103] & 6/12 \\
+\bottomrule
+\end{tabular}
+\caption{Study-1 nonlinear-suffix results. A--B is positive when the full certificate or lifted pair has lower error. Intervals resample the 12 training seeds.}
+\label{tab:phase5-nonlinear-suffix}
+\end{table}

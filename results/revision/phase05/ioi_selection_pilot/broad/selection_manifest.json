@@ -1,0 +1,66 @@
+{
+  "config": {
+    "head_cost_penalty": 0.02,
+    "mask_folds": 5,
+    "measurement_budgets": [
+      20,
+      40,
+      80,
+      120
+    ],
+    "models": [
+      "additive_head",
+      "count_additive",
+      "count_plus_PE_bin4",
+      "count_plus_all_bin4"
+    ],
+    "prompt_fit_fraction": 0.5,
+    "repetitions": 30,
+    "ridge": 1e-06,
+    "seed": 19000,
+    "target_tolerance": 0.25,
+    "targets": [
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      1.5,
+      1.75,
+      2.0
+    ]
+  },
+  "input": {
+    "hashes": {
+      "external/ioi_stage2b_head_records.csv": "828f5bc0c5762a82beb9c7898128a779c29cfac43e4cb8d0ecc2065a1da67c31",
+      "external/ioi_stage2b_per_prompt_drops.csv": "aed9e7d410d108da875675485a39a30f77e4d8dd6c6a5d0fd41f8c134896cd3c",
+      "external/ioi_stage2b_subset_design.csv": "29c4d7377b3897f9b8b2bd947694d2e676971df6d2e23adbfde67b1ec10e4d60"
+    },
+    "n_masks": 160,
+    "n_nonclean_masks": 159,
+    "n_prompts": 256,
+    "prefix": "ioi_stage2b",
+    "source": "results/revision/phase02/inputs/stage2b_mean_end"
+  },
+  "label": "existing Stage 2b anchored broad masks",
+  "outputs": {
+    "external/selection_contrasts.csv": "cbc6963d02f3aea1bd60da9d5c82ee0dbb6c8d111bb68b01b89ab875f5e4cd5a",
+    "external/selection_decisions.csv": "71d284d4f7fff382cb0248e96f249488c97c2db7edd692659a3ce9c1111cfd09",
+    "external/selection_paired_repetitions.csv": "620b80b1b866bb9ac3b5432fb6279a01bed395138beb6c09c894eab14c778417",
+    "external/selection_summary.csv": "c000cba216117c1cccd3a9fb5aad475f5f58654c3aa5fc6d55dcb8ebcbb4bbbe"
+  },
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.1",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.14.2",
+    "source_dirty": true,
+    "source_revision": "0cec2c4ef17d9c3b0ef3fea8fdf15347ee4e28cb"
+  },
+  "schema": "observerbench.ioi_selection_run.v1",
+  "status": "exploratory_existing_outcomes"
+}

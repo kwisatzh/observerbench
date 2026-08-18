@@ -1,0 +1,4 @@
+selector,mean_target_loss,mean_finite_effect,selected_noop_fraction,mean_selected_head_count
+direct_risk_head_pair_quadratic,0.8906227769330144,0.683923326122264,0.0,6.5
+exact_noop,1.0,0.0,1.0,0.0
+natural_mean_effect_head_pair_quadratic,1.092759578100716,0.7708828156270707,0.0,6.854166666666667

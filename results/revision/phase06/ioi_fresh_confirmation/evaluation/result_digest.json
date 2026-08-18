@@ -1,0 +1,87 @@
+{
+  "all_candidate_outcomes_used": true,
+  "claim_classification": {
+    "H1_primary_estimand": {
+      "alone_defines_primary_success": true,
+      "checks": {
+        "paired_cluster_interval_lower_strictly_positive": true,
+        "relative_loss_reduction_at_least_frozen_threshold": true,
+        "target_0.5_nonnegative": true,
+        "target_1_nonnegative": true
+      },
+      "passed": true,
+      "q025": 0.11385469850793016,
+      "q975": 0.40237179996935696,
+      "relative_reduction_fraction": 0.22607799826902428
+    },
+    "H2_secondary_structure": {
+      "cannot_rescue_failed_H1": true,
+      "comparisons": {
+        "H2_secondary_vs_additive": {
+          "checks": {
+            "paired_cluster_interval_lower_strictly_positive": false,
+            "relative_loss_reduction_at_least_frozen_threshold": false,
+            "target_0.5_nonnegative": true,
+            "target_1_nonnegative": true
+          },
+          "passed": false,
+          "q025": -0.025486295092559876,
+          "q975": 0.07640456896770047,
+          "relative_reduction_fraction": 0.030342135545655048
+        },
+        "H2_secondary_vs_count": {
+          "checks": {
+            "paired_cluster_interval_lower_strictly_positive": false,
+            "relative_loss_reduction_at_least_frozen_threshold": false,
+            "target_0.5_nonnegative": true,
+            "target_1_nonnegative": true
+          },
+          "passed": false,
+          "q025": -0.021157178251451116,
+          "q975": 0.078829896710522,
+          "relative_reduction_fraction": 0.03540405154825488
+        }
+      },
+      "passed": false
+    },
+    "Jensen_parameter_count_sensitivity": {
+      "checks": {
+        "paired_cluster_interval_lower_strictly_positive": true,
+        "pooled_point_direction_nonnegative": true
+      },
+      "passed": true,
+      "per_primary_target_directions_reported_not_gated": {
+        "target_0.5_nonnegative": true,
+        "target_1_nonnegative": true
+      },
+      "q025": 0.11912255681357542,
+      "q975": 0.39854511026981826,
+      "qualifies_H1_only": true
+    },
+    "clean_failure_never_changes_H1_or_H2": true,
+    "clean_task_validity": {
+      "checks": {
+        "every_template_accuracy": false,
+        "every_template_positive_mean_clean_ld": true,
+        "no_rows_filtered": true,
+        "overall_accuracy": false
+      },
+      "failure_does_not_change_h1_or_h2": true,
+      "ioi_mechanism_or_fresh_template_generalization_language_allowed": false,
+      "passed": false
+    },
+    "ioi_language_allowed": false,
+    "licensed_claims": [
+      "The direct-risk estimand improves fixed-action selection over the natural mean-effect plug-in observer using the same quadratic basis.",
+      "The direct-risk result survives the target-specific parameter-count sensitivity against the Jensen-score control."
+    ],
+    "result_calibration": "mixed",
+    "scientific_status": "pilot_informed_prospective_fresh_template_name_mask_confirmation"
+  },
+  "no_confirmatory_fit_action_reselection_or_filtering": true,
+  "post_outcome_best_fixed_oracle_is_descriptive_non_gating": true,
+  "primary_target_policy": "target_loss",
+  "scientific_status": "pilot_informed_prospective_fresh_template_name_mask_confirmation",
+  "secondary_cost_policy_cannot_rescue_primary": true,
+  "stress_target_is_not_a_primary_gate": true
+}

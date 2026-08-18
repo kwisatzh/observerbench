@@ -1,0 +1,151 @@
+\section{IOI: a real pretrained-circuit test}
+
+The control tasks isolate a mechanism, but they do not test the workbench on a
+pretrained model. We use the indirect-object-identification (IOI) circuit in
+GPT-2-small for this purpose. The point is not to rediscover IOI. The point is
+to test observer selection on a mechanism the field already recognizes.
+
+Let $P$ denote the published primary Name Mover group
+$(9.9,9.6,10.0)$, $B$ the Backup Name Mover group
+$(9.0,9.7,10.1,10.2,10.6,10.10,11.2,11.9)$, and $E$ the Negative Name
+Mover group $(10.7,11.10)$. The metric is
+\[
+LD=\operatorname{logit}(IO)-\operatorname{logit}(S),
+\]
+and the effect of ablating a set $S$ is the positive drop
+\[
+\Delta(S)=LD_{\mathrm{clean}}-LD_{\mathrm{ablate}(S)}.
+\]
+We use template-conditioned mean ablation at the final prediction position.
+Reference prompts keep the IOI template and change the names, reducing the
+prompt-specific name signal while retaining average IOI-distribution behavior.
+
+\subsection{Stage 1: reproduce conditional self-repair}
+
+The whole-group diagnostic gives
+\[
+\Delta(P)=0.463,
+\qquad
+\Delta(B)=0.350,
+\qquad
+\Delta(P+B)=1.869.
+\]
+A singleton-additive observer predicts $0.813$. The missing term is
+\[
+I_{PB}=\Delta(P+B)-\Delta(P)-\Delta(B)=1.055,
+\]
+which is $56\%$ of the joint effect. Equivalently, the backup effect grows
+from $0.350$ with primary Name Movers intact to $1.406$ when primary Name
+Movers are ablated, a $4.0\times$ amplification. This reproduces a known
+self-repair diagnostic; it is not a new circuit claim.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.86\linewidth]{ioi_stage1_self_repair.png}
+  \caption{Stage 1 IOI diagnostic. The joint primary-plus-backup effect is
+  substantially larger than the singleton-additive prediction.}
+  \label{fig:ioi-stage1}
+\end{figure}
+
+\subsection{Stage 2a: whole-group subsets are diagnostic only}
+
+The three-group Boolean cube has only eight conditions. With $s_g\in\{0,1\}$
+indicating whether group $g$ is ablated and $\Delta(\varnothing)=0$, its
+saturated decomposition is
+\[
+\Delta(s)=\sum_g m_gs_g+\sum_{g<g'}I_{gg'}s_gs_{g'}
++I_{PBE}s_Ps_Bs_E.
+\]
+The three main effects, three pair effects, and one triple effect use every
+nonempty condition. A pairwise group model leaves only the triple term as a
+residual degree of freedom. We therefore keep whole-group ablation as a
+diagnostic and do not call it held-out prediction.
+
+\subsection{Stage 2b: random head subsets give a useful null}
+
+Stage 2b samples 160 random subsets over the 13 published heads and evaluates
+held-out prediction. Per-head additive prediction is already strong: bootstrap
+MAE is about $0.339$ and $R^2\approx0.739$. Adding only a $P\times B$
+group-occupancy term is essentially identical. Adding all group-occupancy terms
+weakly improves the point estimate, but the intervals overlap.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.92\linewidth]{ioi_stage2b_random_subsets.png}
+  \caption{Stage 2b random head subsets. The cheap per-head additive observer
+  explains most of the variance under broad random interventions.}
+  \label{fig:ioi-stage2b}
+\end{figure}
+
+This null matters. The conditional whole-group effect exists, but broad random
+subsets rarely emphasize the corner at which all primary and backup heads are
+removed. A richer observer should not be recommended merely because the
+diagnostic mechanism is real.
+
+\subsection{Stage 2c: primary-stratified subsets}
+
+The self-repair hypothesis concerns interventions that remove primary Name
+Movers. Stage 2c therefore samples 240 head subsets stratified by primary-group
+coverage. Let $h_i(S)$ indicate whether head $i$ is ablated and let
+$(n_P,n_B,n_E)$ be the group counts. The original models were
+\begin{align*}
+\Delta(S)&=\alpha+\sum_i\beta_i h_i(S) &&\text{(additive head)},\\
+\Delta(S)&=\alpha+\sum_i\beta_i h_i(S)
+ +f_P(n_P)+f_B(n_B)+f_E(n_E) &&\text{(count additive)},\\
+\Delta(S)&=\text{count additive}
+ +\gamma_{PB}\frac{n_P}{|P|}\frac{n_B}{|B|}
+ +\gamma_{PE}\frac{n_P}{|P|}\frac{n_E}{|E|}
+ +\gamma_{BE}\frac{n_B}{|B|}\frac{n_E}{|E|}.
+\end{align*}
+The all-pairs model reaches MAE $0.229$ and $R^2=0.907$, versus MAE
+$0.386$ for the count-additive control and $0.383$ for the per-head additive
+baseline. Interactions therefore improve prediction under this intervention
+distribution.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.92\linewidth]{ioi_stage2c_primary_stratified.png}
+  \caption{Stage 2c primary-stratified subsets. The original all-pairs model
+  improves held-out prediction when the intervention design targets primary
+  coverage.}
+  \label{fig:ioi-stage2c}
+\end{figure}
+
+\subsection{Stage 2d: provisional single-product decomposition}
+
+Adding one normalized product at a time gives the current decomposition in
+Table~\ref{tab:ioi-old-decomp}. The $P\times E$ product carries most of the
+single-pair improvement. Direct whole-group M\"obius terms point in the same
+direction: $I_{PB}=1.055$, $I_{PE}=1.848$, $I_{BE}=0.420$, and
+$I_{PBE}=0.340$.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Model & MAE & $R^2$ & $\Delta$ vs. add. & $\Delta$ vs. count \\
+\midrule
+Additive head & 0.383 & 0.762 & -- & 0.003 \\
+Count additive & 0.386 & 0.757 & -0.003 & -- \\
+Count $+P\times B$ & 0.376 & 0.777 & 0.007 & 0.010 \\
+Count $+P\times E$ & 0.256 & 0.887 & 0.127 & 0.130 \\
+Count $+B\times E$ & 0.383 & 0.763 & 0.000 & 0.003 \\
+Count + all pairs & 0.229 & 0.907 & 0.154 & 0.157 \\
+\bottomrule
+\end{tabular}
+\caption{Original Stage 2d decomposition on primary-stratified subsets. Each
+single pair has one normalized-product parameter. Phase 2 rechecks this ranking
+with capacity-matched pair bases and leave-one-pair-out contrasts.}
+\label{tab:ioi-old-decomp}
+\end{table}
+
+The current table does not yet settle the pair ranking. The backup group has
+eight heads and can exhibit threshold-like redundancy, whereas the negative
+group has only two heads and is nearly binary. One product parameter may fit
+the latter structure better than the former. The appropriate conclusion at the
+Phase 0--1 checkpoint is therefore limited: cross-group structure improves
+prediction under primary-stratified interventions, and the original
+single-product basis assigns most of that gain to $P\times E$. A fair pair
+comparison requires matched capacity, leave-one-pair-out analysis, uncertainty
+on direct group effects, and a design-power calculation.

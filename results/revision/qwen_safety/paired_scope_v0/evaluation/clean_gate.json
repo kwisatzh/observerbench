@@ -1,0 +1,19 @@
+{
+  "family_candidate_accuracy": {
+    "heldout_operation__heldout_template": 1.0,
+    "heldout_operation__seen_template": 1.0,
+    "seen_operation__heldout_template": 1.0,
+    "seen_operation__seen_template": 1.0
+  },
+  "median_candidate_margin": 22.125,
+  "overall_candidate_accuracy": 1.0,
+  "overall_top1_accuracy": 1.0,
+  "paired_candidate_accuracy": 1.0,
+  "passed": true,
+  "thresholds": {
+    "minimum_family_candidate_accuracy": 0.8,
+    "minimum_median_candidate_margin": 0.0,
+    "minimum_overall_candidate_accuracy": 0.9,
+    "minimum_paired_candidate_accuracy": 0.8
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "all_checks_pass": true,
+  "chain_summary": {
+    "design_id": "ioi_phase07_design_f7c5a0ec88a44fd3",
+    "effect_cells": 45568,
+    "selected_unique_nonnoop_masks": 89
+  },
+  "checks": {
+    "all_pinned_input_hashes_match": true,
+    "bounded_claim_language_only": true,
+    "clean_gate_passes_with_exact_values": true,
+    "evaluation_is_bound_to_measurement_and_preoutcome_seals": true,
+    "joint_H1a_H1b_gate_passes_with_exact_values": true,
+    "measurement_is_exact_selected_nonnoop_scope": true,
+    "per_pool_jensen_identity_and_exact_decomposition_match": true,
+    "protocol_design_pretest_freeze_audit_chain_matches": true,
+    "template_directions_are_descriptive_8_of_8_and_6_of_8": true
+  },
+  "claim_status": {
+    "H1a_estimand": "pass",
+    "H1b_target_tracking_vs_noop": "pass",
+    "clean_task_validity": "pass",
+    "joint_primary": "pass"
+  },
+  "clean_task_gate": {
+    "overall_pairwise_accuracy": 0.9765625,
+    "overall_threshold": 0.95,
+    "per_template_threshold": 0.9,
+    "prompt_count": 512,
+    "status": "pass",
+    "template_count": 8,
+    "worst_template_pairwise_accuracy": 0.953125
+  },
+  "code_hashes": {
+    "scripts/build_phase07_ioi_confirmation_artifact.py": "783b5fcf2c42b1b3392493f06f46b79f90415b09b47870e9a8e6f3f1ccb50776"
+  },
+  "commands_to_reproduce": [
+    "python scripts/build_phase07_ioi_confirmation_artifact.py"
+  ],
+  "contains_private_local_path": false,
+  "headline_contrasts": [
+    {
+      "absolute_loss_reduction": 0.2021368011677017,
+      "ci95_high": 0.29256013182554524,
+      "ci95_low": 0.11496571685759895,
+      "comparison_id": "H1a_estimand",
+      "direct_risk_mean_loss": 0.8906227769330144,
+      "positive_pool_count": 30,
+      "reference": "natural_mean_effect_head_pair_quadratic",
+      "reference_mean_loss": 1.092759578100716,
+      "relative_loss_reduction_fraction": 0.18497829277234798,
+      "status": "pass",
+      "template_count": 8,
+      "template_direction_count": 8
+    },
+    {
+      "absolute_loss_reduction": 0.10937722306698561,
+      "ci95_high": 0.1955910766065547,
+      "ci95_low": 0.01246399262114816,
+      "comparison_id": "H1b_intervention_value",
+      "direct_risk_mean_loss": 0.8906227769330144,
+      "positive_pool_count": 30,
+      "reference": "exact_noop",
+      "reference_mean_loss": 1.0,
+      "relative_loss_reduction_fraction": 0.10937722306698561,
+      "status": "pass",
+      "template_count": 8,
+      "template_direction_count": 6
+    }
+  ],
+  "input_hashes": {
+    "configs/revision/ioi_phase07_canonical_noop_confirmation_v2.json": "198a1d30a61e9463863a7597becc7973c7f7a2ee8a915962d12b6612e194befb",
+    "results/revision/phase07/ioi_canonical_noop_confirmation_v2/clean_pretest/clean_task_validity.csv": "b4bbd616a93503183d1c2f59b753207c154342f222ffc96eed87f33fd0ad7d58",
+    "results/revision/phase07/ioi_canonical_noop_confirmation_v2/clean_pretest/pretest_manifest.json": "7c148b1137460fa7d4674f97f3984ce8a39068cd1dbe394852fed2f9141ae2a2",
+    "results/revision/phase07/ioi_canonical_noop_confirmation_v2/design/design_manifest.json": "3dfa6352524c66b6b57794ec9ed2c89a900afd7df3d9879cd7f21cb0686feee5",
+    "results/revision/phase07/ioi_canonical_noop_confirmation_v2/evaluation/evaluation_manifest.json": "41b541d8eef690bdbb7ded24c991bf1ab713e857db4ef2843109aec8198a3535",
+    "results/revision/phase07/ioi_canonical_noop_confirmation_v2/evaluation/fixed_action_prompt_losses.csv.gz": "7633ca90d531812d129a13598bb667b71794aa8d64a26230d914f4eb63a09c0e",
+    "results/revision/phase07/ioi_canonical_noop_confirmation_v2/evaluation/hypothesis_audit.json": "0eff4ab684557f6c6b6ae591708e32cf038408bd1ddfc524f64751db14e683ed",
+    "results/revision/phase07/ioi_canonical_noop_confirmation_v2/evaluation/observer_summary.csv": "902e019f4a782df724c26010ec339479f8f158c0885629003f56edf989ecbc78",
+    "results/revision/phase07/ioi_canonical_noop_confirmation_v2/evaluation/pool_signs.csv": "e8c7001f093c99b8407684681312a38b0d01491e40a56131e233d48471eb4c70",
+    "results/revision/phase07/ioi_canonical_noop_confirmation_v2/evaluation/primary_contrasts.csv": "e46d31d6f85d2acd2b66f256ba8f7bea22c89c828252722180e406082485b45f",
+    "results/revision/phase07/ioi_canonical_noop_confirmation_v2/evaluation/result_digest.json": "384c52005128490e9d05835969d8d30f6c5d76c3f2972b68e3957f3a24b22322",
+    "results/revision/phase07/ioi_canonical_noop_confirmation_v2/evaluation/template_sensitivity.csv": "a0018a60054dd16a67512942fef15eb3020afbdeaf5ff14328048c74355c6a12",
+    "results/revision/phase07/ioi_canonical_noop_confirmation_v2/prediction_freeze/prediction_action_manifest.json": "fce0b027f232841653d5b7f24f3254243a71d3fbd282cc9c468c4781eab334e5",
+    "results/revision/phase07/ioi_canonical_noop_confirmation_v2/prediction_freeze/selected_measurement_masks.csv": "7f843bc5c2649ca2e84a52dccb6a7fc12330fbeab586186e4ad766517b9869eb",
+    "results/revision/phase07/ioi_canonical_noop_confirmation_v2/preoutcome_audit/preoutcome_audit.json": "738063c000b2b38ea77ab9135bdd1e2f0fe9c04165c57e9637bf8a518b0865cf",
+    "results/revision/phase07/ioi_canonical_noop_confirmation_v2/selected_measurement/measurement_manifest.json": "6681b04b114b4aba1129edf9d73e5197426213130ae44b21333c859a2bed7a9e",
+    "results/revision/phase07/ioi_canonical_noop_confirmation_v2/selected_measurement/measurement_run_spec.json": "ddf84f9cb0b41cc06cf148d7e9f74387add7220436ea6339ecc877c1c4f92549"
+  },
+  "interpretation_boundary": {
+    "not_supported": [
+      "Uniform improvement over no action across all eight templates.",
+      "Held-out-template generalization; the eight canonical templates are fixed.",
+      "Broad IOI, model-scale, behavioral-utility, deployment, or safety claims."
+    ],
+    "supported": [
+      "Lower pooled fixed-action finite-effect target loss than the same-basis mean-effect plug-in.",
+      "Lower pooled fixed-action finite-effect target loss than exact no action.",
+      "The Study-3 mean-term-versus-dispersion pattern repeats descriptively."
+    ]
+  },
+  "jensen_decomposition": {
+    "direct_risk_head_pair_quadratic": {
+      "dispersion": 0.4936678969534114,
+      "mean_effect": 0.683923326122264,
+      "mean_to_target": 0.396954879979603,
+      "total_loss": 0.8906227769330144
+    },
+    "exact_noop": {
+      "dispersion": 0.0,
+      "mean_effect": 0.0,
+      "mean_to_target": 1.0,
+      "total_loss": 1.0
+    },
+    "interpretation": {
+      "direct_risk_accepts_larger_mean_to_target_term": true,
+      "direct_risk_reduces_dispersion_more_than_the_mean_term_worsens": true,
+      "phase6_pattern_repeated": true,
+      "status": "descriptive"
+    },
+    "natural_mean_effect_head_pair_quadratic": {
+      "dispersion": 0.8067980604634309,
+      "mean_effect": 0.7708828156270707,
+      "mean_to_target": 0.2859615176372851,
+      "total_loss": 1.092759578100716
+    }
+  },
+  "measured_scope": {
+    "analytic_noop_measured": false,
+    "selected_unique_nonnoop_masks": 89
+  },
+  "output_hashes": {
+    "paper/generated_phase07/ioi_confirmation/ioi_confirmation_decomposition.json": "09bd4b6119db6036683fc183f9adb70d1612d58f43a2eeff92d25a5e0375b11f",
+    "paper/generated_phase07/ioi_confirmation/ioi_confirmation_results.csv": "e60c5e8495525fba8b04122aa9847bffa8d935cee7a0bc51dae8d9d5c9740a63",
+    "paper/generated_phase07/ioi_confirmation/ioi_confirmation_table.tex": "c514591bbb783c6e7af82910b40932c6381ceb79a91546fb978d2d745f6471ee"
+  },
+  "result_calibration": "good_positive_bounded",
+  "schema": "observerbench.phase07.ioi_confirmation_artifact.v1",
+  "scientific_status": "pilot_informed_outcome_sealed_canonical_template_confirmation",
+  "template_directions": {
+    "H1a_estimand": "8/8",
+    "H1b_target_tracking_vs_noop": "6/8",
+    "status": "descriptive"
+  }
+}

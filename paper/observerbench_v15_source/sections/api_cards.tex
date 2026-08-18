@@ -1,0 +1,80 @@
+\section{How to add and evaluate an observer}
+\label{sec:artifact}
+
+ObserverBench uses the same four-step workflow for every submission:
+
+\begin{enumerate}[leftmargin=1.4em,itemsep=0.25em,topsep=0.3em]
+  \item \textbf{Choose a fixed task.} Its TaskCard states what is predicted,
+  what the observer may read, which actions are allowed, how actions are chosen,
+  which data are held out, and how success is scored.
+  \item \textbf{Describe and submit the observer.} Its ObserverCard records the
+  features it uses, its access, fitting procedure, implementation, and known
+  failures. The method may be submitted as code or as a table of predictions.
+  \item \textbf{Run the common evaluator.} The task applies the same held-out
+  split, action rule, and budget to every observer. The observer cannot replace
+  the controller or reveal the test targets.
+  \item \textbf{Report both levels of performance.} The result separates
+  prediction or ranking quality from the loss caused by the chosen action. It
+  also records what information and extra model calls the observer required.
+\end{enumerate}
+
+The public release will turn each completed evaluation into a task-specific
+scorecard and compare it with the bundled baseline results. A leaderboard
+position is meaningful only among results that use the same task version,
+information boundary, action rule, and budget. ObserverBench therefore does
+not combine unlike settings into one overall rank.
+
+The release supports three task types:
+
+\begin{itemize}
+  \item \textbf{Control} separates the state estimator, edit direction,
+  controller, and task. A submission can replace the estimator or direction
+  while the model, starting states, controller settings, and metrics remain
+  fixed. The analytic control task provides the tested external adapter.
+  \item \textbf{Finite-effect prediction} provides fixed measurements and asks
+  for the effects of held-out interventions. The task owns the measurement
+  budget, split, targets, action rule, and metrics. A table submission does not
+  need the original model.
+  \item \textbf{Safety triage} asks for one risk score per held-out request or
+  trajectory. The evaluator converts scores into allow, block, escalate, or
+  audit actions under fixed budgets and reports realized violations, tail loss,
+  false interventions, and clean utility.
+\end{itemize}
+
+The versioned interfaces are \texttt{observerbench.api.v0},
+\texttt{observerbench.effect\_prediction.v0}, and
+\texttt{observerbench.safety\_protocol.v0}. Public safety-task packs describe
+the threat model, actions, loss, budgets, training measurements, and held-out
+queries. They omit the held-out answers, which the evaluator stores separately
+and links to the public task by hash. This lets researchers add data-only safety
+tasks without changing the workbench.
+
+The bundled GPT-2 IOI and Qwen induction-copy registries show the finite-effect
+workflow at several measurement budgets. Both expose frozen tables, check the
+declared model and split, and use separate prompts for measurements and held-out
+targets. Outside predictors therefore need neither model inference nor the
+original experiment code; per-head or additive ridge observers provide the
+baselines.
+
+\subsection{A four-step check for safety monitors}
+
+Before interpreting an internal safety signal, ObserverBench asks:
+
+\begin{enumerate}[leftmargin=1.4em,itemsep=0.2em,topsep=0.25em]
+  \item \textbf{Does the model output already suffice?} Read the relevant output
+  distribution rather than one sampled answer. If it is adequate, stop.
+  \item \textbf{Does the input already suffice?} Train a text or input-feature
+  baseline with the same supervision. If it matches the internal probe, an
+  activation-specific explanation is unnecessary.
+  \item \textbf{Does the signal remain without a request for a verdict?} Measure
+  the same examples in a neutral context to separate input processing from a
+  signal created or reshaped by the monitoring prompt.
+  \item \textbf{Does it work under the intended policy?} Test frozen scores at
+  the attack rate, intervention budget, deployment groups, and loss the
+  controller will face.
+\end{enumerate}
+
+These checks locate where useful information becomes available. They do not by
+themselves establish deception, intent, or hidden knowledge. Their purpose is a
+fair comparison: every observer receives the same task and faces the same action
+rule.

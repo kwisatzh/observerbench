@@ -1,0 +1,160 @@
+{
+  "schema": "observerbench.paper_reproduction_fast.v1",
+  "frozen_dir": "results/frozen",
+  "revision_dir": "results/revision",
+  "outdir": "paper/generated_current",
+  "selection": "current_paper",
+  "current_default_ids": [
+    "figure_01",
+    "figure_02",
+    "figure_03",
+    "figure_04",
+    "figure_08",
+    "revision_ctl2_factorial",
+    "revision_ctl2_calibration",
+    "revision_ctl2_table",
+    "revision_ioi_stage2b",
+    "revision_ioi_stage2c",
+    "revision_ioi_mobius",
+    "revision_ioi_table",
+    "revision_observer_cards"
+  ],
+  "generated": [
+    {
+      "result_id": "figure_01",
+      "paths": [
+        "figure_01_ctl1_analytic_interaction_sweep.png"
+      ],
+      "sha256": {
+        "figure_01_ctl1_analytic_interaction_sweep.png": "0f26069f80c3b52cbc48b337fb774f5e86ac79343b861c599f65ba7fd8207a7b"
+      }
+    },
+    {
+      "result_id": "figure_02",
+      "paths": [
+        "figure_02_ctl1_analytic_nuisance_sweep.png"
+      ],
+      "sha256": {
+        "figure_02_ctl1_analytic_nuisance_sweep.png": "88a4297f9e0f72aeb7193a158c028d83e19264c737fa83319c279638a4741f0b"
+      }
+    },
+    {
+      "result_id": "figure_03",
+      "paths": [
+        "figure_03_trained_ctl1_interaction_sweep.png"
+      ],
+      "sha256": {
+        "figure_03_trained_ctl1_interaction_sweep.png": "45d03485b5f97b872b5230b2cdb8bbc8387a9ea3037d8826161d7edc82fda093"
+      }
+    },
+    {
+      "result_id": "figure_04",
+      "paths": [
+        "figure_04_trained_ctl1_nuisance_sweep.png"
+      ],
+      "sha256": {
+        "figure_04_trained_ctl1_nuisance_sweep.png": "a9f50f007b0bb79e84956612307321160b267f4fceb92ec2248cc011d207f75b"
+      }
+    },
+    {
+      "result_id": "figure_08",
+      "paths": [
+        "figure_08_ioi_stage1_self_repair.png"
+      ],
+      "sha256": {
+        "figure_08_ioi_stage1_self_repair.png": "9b7cd76a0470d86a1d778ba98b996bdb3c330c54b03f60b744f17b8622ee5fca"
+      }
+    },
+    {
+      "result_id": "revision_ctl2_factorial",
+      "paths": [
+        "revision_ctl2_factorial_ise_by_gamma.png"
+      ],
+      "sha256": {
+        "revision_ctl2_factorial_ise_by_gamma.png": "1b6bb69937e8e9de4d413d03d6c829d09d25212f9bc966759224225b3c916dfe"
+      }
+    },
+    {
+      "result_id": "revision_ctl2_calibration",
+      "paths": [
+        "revision_ctl2_response_calibration_by_gamma.png"
+      ],
+      "sha256": {
+        "revision_ctl2_response_calibration_by_gamma.png": "c00cccf0b7c5bbaf27ec2a53e104b9da0faac9e8e9c30fe487b9c838d6802fe5"
+      }
+    },
+    {
+      "result_id": "revision_ctl2_table",
+      "paths": [
+        "revision_ctl2_factorial_table.csv",
+        "revision_ctl2_factorial_table.md",
+        "revision_ctl2_factorial_table.tex"
+      ],
+      "sha256": {
+        "revision_ctl2_factorial_table.csv": "1ef5d3c9a4f169d19e47502f824e1a0b8479ee820f9811e9df92fb85cd947ba2",
+        "revision_ctl2_factorial_table.md": "df60a0d210879fd9f74142ac9940c846b141fb095ba64354922f4c3794d85b82",
+        "revision_ctl2_factorial_table.tex": "6d15e84f030d230ebc03d754706dab9019282013106e8c784685e7ce94485a37"
+      }
+    },
+    {
+      "result_id": "revision_ioi_stage2b",
+      "paths": [
+        "revision_ioi_stage2b_capacity_matched.png"
+      ],
+      "sha256": {
+        "revision_ioi_stage2b_capacity_matched.png": "114190f64133b86ff362fbc6239e5389211cfb7a0ab38e88159dacc75538aea3"
+      }
+    },
+    {
+      "result_id": "revision_ioi_stage2c",
+      "paths": [
+        "revision_ioi_stage2c_capacity_matched.png"
+      ],
+      "sha256": {
+        "revision_ioi_stage2c_capacity_matched.png": "513f72a694a4e4862c6cd79cf4abd12e1d53f98e13d754188fe1d2838ff3f14a"
+      }
+    },
+    {
+      "result_id": "revision_ioi_mobius",
+      "paths": [
+        "revision_ioi_mobius_intervals.png"
+      ],
+      "sha256": {
+        "revision_ioi_mobius_intervals.png": "0d9a3a6383cf51a480fda644e35fd4ad5f9ec16e94c43fd5166df5b424493098"
+      }
+    },
+    {
+      "result_id": "revision_ioi_table",
+      "paths": [
+        "revision_ioi_capacity_contrasts.csv",
+        "revision_ioi_capacity_contrasts.md",
+        "revision_ioi_capacity_contrasts.tex",
+        "revision_ioi_mobius_intervals.csv",
+        "revision_ioi_mobius_intervals.md"
+      ],
+      "sha256": {
+        "revision_ioi_capacity_contrasts.csv": "f05b868f21ea249e750411a9f6114db9ba71e6c87c9e8b4d6a2ddd27e800c2e6",
+        "revision_ioi_capacity_contrasts.md": "5d8ad4403efc1924c3bd9be9c24a6fb543720f03cb6decdb0257b26e02dfcbd3",
+        "revision_ioi_capacity_contrasts.tex": "9a08d79925a8c67018eb53229c7cd2d2a62d41bc7298c2afadadda39eb447087",
+        "revision_ioi_mobius_intervals.csv": "b8de879700ce373590a77ad926b9e430d60afd4d85f5d0088014305cdf3475eb",
+        "revision_ioi_mobius_intervals.md": "c50f4ba6c9650457f39228a95c4560ba1c30a0ea2838ce4aaffc1da34a202924"
+      }
+    },
+    {
+      "result_id": "revision_observer_cards",
+      "paths": [
+        "observer_cards/observer_card.json",
+        "observer_cards/observer_card.md",
+        "observer_cards/ctl2_observer_card.tex"
+      ],
+      "sha256": {
+        "observer_cards/observer_card.json": "947ecc622ee00493d3fbe02db53f43db2f9783c1ff60ed34e8edabb17574043f",
+        "observer_cards/observer_card.md": "62de57554c82c921d3462a0bd61dc30fc761e79a7811f5c54b5aec5ee671d062",
+        "observer_cards/ctl2_observer_card.tex": "b920ae0e557cd9bd0e092eb65b3bc8239ee77c7c94e632fce5d0c15a9806197c"
+      }
+    }
+  ],
+  "cpu_only": true,
+  "downloads_models": false,
+  "trains_models": false
+}

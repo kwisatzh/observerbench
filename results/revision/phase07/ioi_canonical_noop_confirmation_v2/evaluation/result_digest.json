@@ -1,0 +1,70 @@
+{
+  "clean_pretest_passed_before_candidate_measurement": true,
+  "joint_primary": {
+    "comparisons": {
+      "H1a_estimand": {
+        "absolute_loss_reduction": 0.2021368011677017,
+        "checks": {
+          "paired_cluster_pool_interval_lower_strictly_positive": true,
+          "relative_reduction_at_least_five_percent": true
+        },
+        "passed": true,
+        "q025": 0.11496571685759895,
+        "q975": 0.29256013182554524,
+        "relative_loss_reduction": 0.18497829277234798
+      },
+      "H1b_intervention_value": {
+        "absolute_loss_reduction": 0.10937722306698561,
+        "checks": {
+          "paired_cluster_pool_interval_lower_strictly_positive": true,
+          "relative_reduction_at_least_five_percent": true
+        },
+        "passed": true,
+        "q025": 0.01246399262114816,
+        "q975": 0.1955910766065547,
+        "relative_loss_reduction": 0.10937722306698561
+      }
+    },
+    "joint_primary_passed": true,
+    "joint_success_rule": "Primary success requires both H1a and H1b. Neither comparison can rescue the other. H1b concerns target-tracking loss at t=1.0, not broad task utility or safety.",
+    "licensed_claim": "On these eight validated canonical templates and new prompt strings, the direct-risk observer selected fixed interventions with lower finite-effect target loss than both the same-basis mean-effect plug-in observer and exact no-op at the pilot-informed target t=1.0."
+  },
+  "noop_ablation_forward_passes": 0,
+  "primary_contrasts": [
+    {
+      "absolute_loss_reduction": 0.2021368011677017,
+      "bootstrap_repeats": 5000,
+      "candidate": "direct_risk_head_pair_quadratic",
+      "candidate_mean_loss": 0.8906227769330144,
+      "candidate_pools": 48,
+      "comparison_id": "H1a_estimand",
+      "pair_clusters": 32,
+      "q025": 0.11496571685759895,
+      "q975": 0.29256013182554524,
+      "reference": "natural_mean_effect_head_pair_quadratic",
+      "reference_mean_loss": 1.092759578100716,
+      "relative_loss_reduction": 0.18497829277234798,
+      "target": 1.0
+    },
+    {
+      "absolute_loss_reduction": 0.10937722306698561,
+      "bootstrap_repeats": 5000,
+      "candidate": "direct_risk_head_pair_quadratic",
+      "candidate_mean_loss": 0.8906227769330144,
+      "candidate_pools": 48,
+      "comparison_id": "H1b_intervention_value",
+      "pair_clusters": 32,
+      "q025": 0.01246399262114816,
+      "q975": 0.1955910766065547,
+      "reference": "exact_noop",
+      "reference_mean_loss": 1.0,
+      "relative_loss_reduction": 0.10937722306698561,
+      "target": 1.0
+    }
+  ],
+  "scientific_status": "pilot_informed_outcome_sealed_canonical_template_confirmation",
+  "selected_unique_nonnoop_masks_measured": 89,
+  "target": 1.0,
+  "target_is_pilot_informed": true,
+  "unselected_candidate_masks_measured": 0
+}

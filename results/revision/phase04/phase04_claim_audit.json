@@ -1,0 +1,23 @@
+{
+  "all_checks_pass": true,
+  "checks": {
+    "checked_cards_cover_ctl2_and_both_ioi_designs": true,
+    "checked_cards_have_no_unknown_task": true,
+    "ctl2_card_pins_48_of_48_seed_level_contrasts": true,
+    "ctl2_gain_match_is_unclipped_but_target_worsens": true,
+    "ctl2_gamma_zero_factorial_null_within_1e_5": true,
+    "ctl2_nonzero_fixed_direction_effects_are_6_of_6": true,
+    "ctl2_phase01_audit_passes": true,
+    "ioi_phase02_audit_passes": true,
+    "ioi_stage2b_all_pairs_add_twelve_ranks": true,
+    "ioi_stage2b_all_pairs_beats_both_baselines": true,
+    "ioi_stage2b_single_pairs_add_four_ranks": true,
+    "ioi_stage2c_all_pairs_add_twelve_ranks": true,
+    "ioi_stage2c_all_pairs_beats_both_baselines": true,
+    "ioi_stage2c_single_pairs_add_four_ranks": true,
+    "stage2b_card_retracts_additive_sufficiency": true,
+    "stage2c_card_records_conditional_pb": true
+  },
+  "claim": "Checked Ctl-2 factorial, null, gain, rank, and IOI model-comparison results agree with the Phase-4 cards and current manuscript claims.",
+  "schema": "observerbench.phase04.integration_audit.v1"
+}

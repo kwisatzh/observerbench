@@ -1,0 +1,13 @@
+target_scope,reference,positive_pool_count,zero_pool_count,negative_pool_count,diagnostic_only
+target_0.5,natural_mean_effect_head_pair_quadratic,35,5,8,True
+target_1,natural_mean_effect_head_pair_quadratic,30,7,11,True
+target_1.5,natural_mean_effect_head_pair_quadratic,31,3,14,True
+all_three_equal_weight,natural_mean_effect_head_pair_quadratic,40,0,8,True
+target_0.5,transformed_mean_head_pair_quadratic,21,22,5,True
+target_1,transformed_mean_head_pair_quadratic,29,14,5,True
+target_1.5,transformed_mean_head_pair_quadratic,27,11,10,True
+all_three_equal_weight,transformed_mean_head_pair_quadratic,39,3,6,True
+target_0.5,exact_noop,0,12,36,True
+target_1,exact_noop,30,0,18,True
+target_1.5,exact_noop,48,0,0,True
+all_three_equal_weight,exact_noop,36,0,12,True

@@ -1,0 +1,41 @@
+\section{Related work}
+
+\paragraph{Interventions, steering, and interpretability benchmarks.}
+Activation addition and representation engineering edit internal activations,
+while feedback steering and local optimal-control methods place those edits in a
+controller
+\cite{turner2023activation,zou2023representation,nguyen2025feedback,skifstad2026local}.
+Activation and attribution patching estimate component effects; AtP* provides a
+local approximation; causal abstraction tests assigned causal roles; and pyvene
+executes model interventions
+\cite{syed2024attribution,kramar2024atp,geiger2024alignments,wu2024pyvene}.
+Interactions between mediators can hide or inflate patching effects
+\cite{vaidyanathan2026curse}. MIB, AxBench, and InterpBench instead benchmark
+circuit localization, concept detection and steering, or recovery of known
+structure \cite{mueller2025mib,wu2025axbench,gupta2024interpbench}. Mechanistic
+tomography treats measurements as a way to recover a mechanism or effect map
+\cite{erramilli2026tomography}; ObserverBench starts with such an estimate and
+asks whether it supports a declared intervention or controller.
+
+\paragraph{Decisions and AI control.}
+Decision-focused learning evaluates a predictor through the downstream decision
+rather than assuming that lower prediction error is enough
+\cite{donti2017task,elmachtoub2022smart}. The same distinction motivates calls
+to judge interpretability by the actions it enables \cite{orgad2026actionable}.
+AI control asks whether a protocol can remain safe when an untrusted model may
+try to evade it, and ControlArena provides reusable environments, policies,
+monitors, and protocol-level evaluation
+\cite{greenblatt2024aicontrol,inglis2025controlarena}. ObserverBench focuses on
+the estimate inside the protocol: what it predicts, what it can read, which
+actions it can affect, and the loss produced by those actions.
+
+\paragraph{Borrowed testbeds.}
+The IOI circuit supplies known structure rather than a new mechanism claim
+\cite{wang2023ioi}. Conditional backup, Hydra-style self-repair, copy
+suppression, and prompt-dependent self-repair are already documented
+\cite{mcgrath2023hydra,mcdougall2023copy,rushing2024selfrepair}. Induction heads
+support the repeated-key continuation used in the Qwen task
+\cite{olsson2022induction}, and Qwen2.5-7B supplies a second model surface
+\cite{qwen2024qwen25}. We use these systems to define interventions, then judge
+observers on fresh held-out masks and prompts rather than claim a new IOI or
+induction mechanism.

@@ -1,0 +1,39 @@
+\section{Trained Ctl-1: learned residual geometry}
+
+The analytic task fixes the mechanism by construction. We next ask whether the
+same geometry appears in a learned residual space. We train a small Transformer
+on sequences with two latent predicates and an interactional target. We extract
+the final residual representation, fit probes for $x_1$, $x_2$, and
+$x_1x_2$, and build first-order and lifted estimator--direction pairs.
+Directions are normalized to the same initial target-head gain.
+
+This experiment is a sanity check. The auxiliary feature heads are supervised,
+so the experiment shows that the geometry survives in a learned residual
+representation; it does not show that a Transformer discovers the interaction
+without supervision.
+
+The null again behaves correctly. At $\gamma=0$, first-order and lifted pairs
+match on target control and collateral. As $\gamma$ grows, first order remains
+useful for the target but tends to pay more collateral at the default nuisance
+placement. The numerical separation is smaller and more variable than in the
+analytic task. Some collateral ratios are denominator-sensitive because lifted
+collateral is close to zero, so we use the sweeps as geometry diagnostics rather
+than as headline effect sizes.
+
+\begin{figure}[t]
+  \centering
+  \begin{subfigure}[t]{0.49\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figure_03_trained_ctl1_interaction_sweep.png}
+    \caption{Interaction strength.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.49\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figure_04_trained_ctl1_nuisance_sweep.png}
+    \caption{Nuisance placement.}
+  \end{subfigure}
+  \caption{Trained Ctl-1. The learned task preserves the qualitative geometry,
+  while the intervals expose denominator sensitivity and training variation.}
+  \label{fig:trained-ctl1}
+\end{figure}

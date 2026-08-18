@@ -1,0 +1,81 @@
+\section{Introduction}
+
+Interpretability has moved from reading models to writing them. A
+residual-stream direction is not only an explanation; it can serve as an
+actuator. Activation steering and representation engineering make this
+explicit, and recent methods cast steering as feedback or model-based control
+\cite{turner2023activation,zou2023representation,nguyen2025feedback,skifstad2026local}.
+This raises a basic systems question. A feedback loop has a controller and an
+observer. The controller acts on a state estimate. If the estimate is a proxy
+for the intended state, the loop can regulate the wrong quantity even when its
+commands remain bounded.
+
+ObserverBench makes this concern measurable. Its control task separates the
+estimator from the direction along which the controller acts. We can therefore
+hold a direction fixed and change only the estimate, or hold the estimate fixed
+and change only the direction. The resulting factorial comparison answers a
+question that the original diagonal comparison could not: whether an observed
+difference comes from state-estimation error, direction geometry, or their
+interaction.
+
+We then ask the same measurement question on a real pretrained circuit. IOI is
+useful because its Name Mover, Backup Name Mover, and Negative Name Mover groups
+have been studied in detail \cite{wang2023ioi,mcgrath2023hydra,mcdougall2023copy,rushing2024selfrepair}.
+We use those groups as borrowed structure, not as a new circuit discovery.
+Whole-group ablation checks that the known conditional effect is visible.
+Head-level subsets then ask whether an observer predicts held-out
+interventions. This order matters: reproducing a familiar diagnostic does not
+show that the same interaction controls prediction under a new intervention
+distribution.
+
+The artifact follows the same separation. Its public contract has four small
+parts: a state estimator, an actuation-direction provider, a controller, and a
+task runner. The task registry says which bundled fixtures accept an outside
+observer. At v0, the analytic Ctl-1 task is the tested extension point. This is
+enough to make the abstraction executable and falsifiable. It is not yet a
+claim that every task supports arbitrary plugins.
+
+\paragraph{What ObserverBench does.}
+ObserverBench specifies an observer evaluation as a controlled measurement
+experiment. The task records the target quantity, access regime, measurement
+design, intervention geometry, intervention distribution, and validation
+target. The validation target may be one-shot target error, collateral
+movement, held-out intervention prediction, or closed-loop tracking error. The
+output is an ObserverCard that says what the observer estimated, what it was
+tested against, where it failed, and whether the cheap observer was sufficient.
+
+\paragraph{What ObserverBench does not do.}
+ObserverBench v0 is not a general benchmark platform, a replacement for
+circuit discovery, or an adversarial oversight benchmark. It does not claim
+that interaction-aware observers are always better. Several results are useful
+nulls. The goal is to locate the regime in which an observer is adequate, not
+to make the more complex method win.
+
+\paragraph{Main findings.}
+The results are as follows.
+
+\begin{itemize}
+  \item In Ctl-2, estimator and direction effects are separated. At every
+  nonzero interaction strength, first-order integrated squared error exceeds
+  lifted error in all six training seeds with either direction fixed.
+  Direction geometry modulates the error. Scalar response calibration repairs
+  the dynamic mismatch in the affine plant, but it leaves initial bias and can
+  be ill-conditioned.
+
+  \item In analytic and trained Ctl-1, a first-order observer can move the
+  target while also moving a nuisance variable. In the analytic task, the
+  result survives a base-coordinate edit that recomputes the interaction
+  exactly, although the continuous edit remains a local robustness check rather
+  than a realizable token intervention.
+
+  \item In GPT-2-small IOI, random head subsets make the additive observer a
+  strong baseline, while primary-stratified subsets expose cross-group
+  structure. The current single-product analysis points to the Name
+  Mover--Negative Name Mover pair; the capacity-matched re-analysis is treated
+  as a separate experimental phase.
+
+  \item ObserverBench exposes a versioned composition contract, deterministic
+  task registry, strict result schema, and one tested external-observer adapter.
+  This addresses reuse without presenting the current research code as a
+  mature plugin ecosystem.
+\end{itemize}

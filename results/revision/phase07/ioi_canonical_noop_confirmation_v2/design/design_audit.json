@@ -1,0 +1,37 @@
+{
+  "all_gates_pass": true,
+  "counts": {
+    "action_pools": 48,
+    "calibration_masks": 160,
+    "candidate_action_rows": 1488,
+    "fresh_nonnoop_masks": 1440,
+    "names": 64,
+    "no_op_rows": 48,
+    "pair_clusters": 32,
+    "templates": 8,
+    "test_prompts": 512
+  },
+  "gates": {
+    "action_pool_count_and_size": true,
+    "all_prompt_strings_new": true,
+    "both_orientations": true,
+    "each_name_in_one_pair": true,
+    "fresh_pair_matching": true,
+    "literal_phase5_templates": true,
+    "no_outcome_columns": true,
+    "nonnoop_ids_and_bits_unique": true,
+    "nonnoop_masks_fresh": true,
+    "one_noop_per_pool": true,
+    "only_noop_bits_repeat": true,
+    "pair_balance": true,
+    "phase6_test_name_bank_reused_exactly": true,
+    "prespecified_nonnoop_cells": true,
+    "prompt_ids_unique": true,
+    "prompt_strings_unique": true,
+    "template_balance": true,
+    "test_prompt_count": true,
+    "thirty_fresh_masks_per_pool": true
+  },
+  "schema": "observerbench.ioi_phase07_design_audit.v1",
+  "status": "outcome_free_design_frozen"
+}

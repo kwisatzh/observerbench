@@ -1,3 +1,8 @@
+"""Tests for the original IOI diagnostic fixtures.
+
+Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex
+"""
+
 from __future__ import annotations
 
 from pathlib import Path

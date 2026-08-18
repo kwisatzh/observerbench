@@ -1,0 +1,41 @@
+{
+  "all_gates_pass": true,
+  "counts": {
+    "calibration_masks": 160,
+    "candidate_masks": 1536,
+    "candidate_pools": 48,
+    "names": 92,
+    "pair_clusters": 32,
+    "prompts": 1216,
+    "reference_prompts": 512,
+    "templates": 8,
+    "test_prompts": 512,
+    "train_prompts": 192
+  },
+  "gates": {
+    "calibration_is_exact_ordered_phase5_bank": true,
+    "candidate_count": true,
+    "candidate_head_count_cells": true,
+    "candidate_masks_fresh": true,
+    "candidate_masks_unique": true,
+    "candidate_pool_sizes": true,
+    "candidate_strata_balanced": true,
+    "eight_new_balanced_templates": true,
+    "name_banks_disjoint": true,
+    "name_split_counts": true,
+    "name_tokens_unique": true,
+    "names_disjoint_phase5": true,
+    "no_outcome_columns": true,
+    "prompt_ids_and_text_unique": true,
+    "prompt_names_respect_splits": true,
+    "prompt_split_counts": true,
+    "quadratic_calibration_rank_92": true,
+    "sixteen_test_prompts_per_pair": true,
+    "test_names_belong_to_one_pair": true,
+    "test_pair_cluster_count": true,
+    "test_pair_edges_unique": true,
+    "test_pair_roles_balanced": true
+  },
+  "schema": "observerbench.ioi_phase06_design_audit.v1",
+  "status": "frozen_before_phase6_forward_passes"
+}

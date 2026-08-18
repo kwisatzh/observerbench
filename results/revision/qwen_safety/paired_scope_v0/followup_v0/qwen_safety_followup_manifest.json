@@ -1,0 +1,13 @@
+{
+  "contrast_table_file": "qwen_safety_followup_contrasts.csv",
+  "contrast_table_sha256": "9d008aa2909c12d17842428678967996a8f7b3013e091f4ec6fbe7e2f7339208",
+  "metric_table_file": "qwen_safety_followup_results.csv",
+  "metric_table_sha256": "6a4bbc3f879d7b3b2990f70f58d4f4deebfd5021b5c142dd7b97353714879487",
+  "results_file": "qwen_safety_followup_results.json",
+  "results_sha256": "529fb214af54f4f6a5b245052a436d5b99b7a07999b99596bb42b876fdc605e6",
+  "schema": "observerbench.qwen_safety.followup.v0",
+  "stratum_allocation_file": "qwen_safety_followup_stratum_allocations.csv",
+  "stratum_allocation_sha256": "d9197f4b12867ecc63b57d1cbcbaa38d14e21d2821e30acfc628814998160d97",
+  "stratum_table_file": "qwen_safety_followup_stratum_aurocs.csv",
+  "stratum_table_sha256": "02355406bb55ea00f2250f7a2de379493d32abeeb96a34b1543fd8f722327604"
+}

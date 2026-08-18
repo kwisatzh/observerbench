@@ -4,6 +4,8 @@
 Expensive tasks are opt-in. By default this script refuses any selected command
 that trains a model or may require TransformerLens/GPT-2. Passing
 --yes-run-expensive acknowledges those costs.
+
+Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex
 """
 
 from __future__ import annotations

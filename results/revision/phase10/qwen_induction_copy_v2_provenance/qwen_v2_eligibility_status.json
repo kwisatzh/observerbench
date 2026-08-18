@@ -1,0 +1,14 @@
+{
+  "artifact_archive": "/content/qwen_copy_v2_artifacts_after_eligibility.tar.gz",
+  "artifact_archive_sha256": "c1fd906a58f20feb3b69b4558b805cfd71559bbff7df4f3d13f7f22b04ba46b7",
+  "completed_stages": [
+    "prepare"
+  ],
+  "intervention_paths_absent": true,
+  "outcome": "eligibility_infrastructure_or_implementation_failure",
+  "stage": "eligibility",
+  "stage_record": {},
+  "subprocess_returncode": 1,
+  "terminal_status": null,
+  "valid": false
+}

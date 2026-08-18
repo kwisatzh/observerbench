@@ -1,0 +1,28 @@
+\section{A deployment-facing pilot: the cyber observer gate}
+
+We also built a small observer-only fixture motivated by cyber-safety control.
+The intended target was unsafe actionable assistance rather than security
+topic. The nuisance labels were benign IT and defensive security. Matched
+triples placed the same topic in each category, and the proposed evaluation
+compared a text TF--IDF baseline, a linear activation observer, a
+nuisance-residualized observer, a lifted observer, and a small MLP.
+
+The fixture fails before it reaches representation analysis. With 15 test
+examples in each class, the TF--IDF baseline has AUROC $1.0$, recalls all 15
+unsafe examples, and makes no false positives on the 30 benign or defensive
+examples. A linear activation observer also reaches AUROC $1.0$. The prompt
+states intent in words, so the label is lexically exposed. The result cannot
+establish that the residual stream contains a deployable unsafe-actionability
+state.
+
+The nuisance-residualized arm recalls $11/15$ unsafe examples and produces
+false positives on $7/15$ benign-IT and $12/15$ defensive-security examples.
+On this fixture, those counts do not diagnose residualization. Removing lexical
+directions from a lexically determined target predictably removes target signal.
+The measurement design confounds the target with stated intent before any
+internal observer is tested.
+
+This pilot is retained in the Phase 0--1 checkpoint to document the failed
+fixture. It is not part of the main evidence. The final manuscript moves it to
+an appendix and treats a contextual-authorization dataset, policy/rules
+baselines, and cross-context holdouts as future work.

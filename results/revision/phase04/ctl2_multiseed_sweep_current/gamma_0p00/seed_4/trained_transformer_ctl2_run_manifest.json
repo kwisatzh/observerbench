@@ -1,0 +1,24 @@
+{
+  "config_sha256": "4c8b763c046fb41317767baa91311318d60a9d114f08d11cd65c943c34220ebd",
+  "created_utc": "2026-07-26T15:19:35.732882+00:00",
+  "result_sha256": "0fa69e513e6d3876e53382a346a11180907b635363aabc649d86ce6c6a89f972",
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.1",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.14.2",
+    "source_dirty": true,
+    "source_revision": "0cec2c4ef17d9c3b0ef3fea8fdf15347ee4e28cb"
+  },
+  "schema": "observerbench.run_manifest.v0",
+  "source_sha256": {
+    "src/observerbench/control.py": "0b9c116b8380dc67d97e8e03edb6ab3cb3313f7a40752cf9987645b814620d3e",
+    "src/observerbench/tasks/trained_ctl1.py": "9772c616e47a6fea58b9938e0bd7e6a88062eff147f0fe1334c828e20dced2ad",
+    "src/observerbench/tasks/trained_ctl2.py": "69d676d721d8f5c8dc6193bf8b32c75dfd916baa7d2ee3dbc0816280b3558e0c"
+  },
+  "train_info_sha256": "4052e26666a0d6ad3de1e867d4161137bfd0c99e80659c39f94981470b4bdacc"
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "observerbench.ioi_selection_protocol.v1",
+  "status": "frozen_before_new_outcomes",
+  "model": "gpt2-small",
+  "ablation": "template_conditioned_mean",
+  "position": "final_token",
+  "prompt_count_min": 512,
+  "prompt_structures": ["ABBA", "BABA"],
+  "surface_template_count_min": 4,
+  "disjoint_fit_eval_names": true,
+  "new_nonclean_mask_count": 320,
+  "candidate_pool_count": 10,
+  "candidate_pool_size": 32,
+  "require_disjoint_existing_masks": true,
+  "targets": [0.5, 1.0, 1.5],
+  "measurement_budgets": [20, 40, 80, 160],
+  "primary_budget": 160,
+  "ridge": 1e-6,
+  "models": [
+    "additive_head",
+    "count_additive",
+    "count_plus_PE_bin4",
+    "count_plus_all_bin4"
+  ],
+  "primary_metric": "oracle_regret",
+  "secondary_metrics": [
+    "absolute_target_error",
+    "within_0.25",
+    "selected_head_count",
+    "cost_aware_loss"
+  ],
+  "head_cost_penalty": 0.02,
+  "bootstrap_repeats": 2000,
+  "bootstrap_axes": ["evaluation_prompts", "candidate_pools"],
+  "success": {
+    "regret_reduction_fraction_min": 0.15,
+    "paired_interval_excludes_zero": true,
+    "within_tolerance_improvement_min": 0.05,
+    "requires_size_matched_direction": true,
+    "requires_cost_aware_direction": true
+  },
+  "seed": 25051
+}

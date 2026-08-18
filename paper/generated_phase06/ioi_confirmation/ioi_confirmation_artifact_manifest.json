@@ -1,0 +1,153 @@
+{
+  "all_checks_pass": true,
+  "checks": {
+    "H1_exact_values_match_audit_and_contrasts": true,
+    "H2_exact_values_match_audit_and_contrasts": true,
+    "Jensen_sensitivity_exact_values_match_audit_and_contrasts": true,
+    "bounded_claim_language_only": true,
+    "clean_task_gate_exact_values_match_audit_and_table": true,
+    "frozen_input_hashes_match": true,
+    "natural_mean_estimand_diagnostic_matches": true,
+    "no_op_loss_is_exact_and_candidate_family_excluded_it": true,
+    "selected_action_decomposition_recomputes_exactly": true
+  },
+  "claim_status": {
+    "H1_primary_estimand": "pass",
+    "H2_secondary_structure": "fail",
+    "Jensen_parameter_count_sensitivity": "pass",
+    "clean_task_validity": "fail"
+  },
+  "clean_task_gate": {
+    "every_template_accuracy_threshold": 0.75,
+    "every_template_mean_clean_logit_difference_positive": true,
+    "overall_accuracy": 0.8671875,
+    "overall_accuracy_threshold": 0.9,
+    "rows_filtered": false,
+    "status": "fail",
+    "worst_template": "p6_baba_museum",
+    "worst_template_accuracy": 0.578125
+  },
+  "code_hashes": {
+    "scripts/build_phase06_ioi_confirmation_artifact.py": "51ed772f00087d74b65d1bc465166adcca21c5b0ba86cd9fc8ddeee98bd36d1c"
+  },
+  "commands_to_reproduce": [
+    "python scripts/build_phase06_ioi_confirmation_artifact.py"
+  ],
+  "contains_private_local_path": false,
+  "headline_contrasts": [
+    {
+      "absolute_loss_reduction": 0.2432105128245894,
+      "bootstrap_repeats": 5000,
+      "candidate": "Direct risk, quadratic basis",
+      "candidate_mean_loss": 0.8325709196312042,
+      "ci95_high": 0.40237179996935696,
+      "ci95_low": 0.11385469850793016,
+      "claim_role": "primary",
+      "comparison_id": "H1_primary_estimand",
+      "reference": "Natural mean, quadratic basis",
+      "reference_mean_loss": 1.0757814324557937,
+      "relative_loss_reduction_fraction": 0.22607799826902428,
+      "status": "pass"
+    },
+    {
+      "absolute_loss_reduction": 0.026052467185460653,
+      "bootstrap_repeats": 5000,
+      "candidate": "Direct risk, quadratic basis",
+      "candidate_mean_loss": 0.8325709196312042,
+      "ci95_high": 0.07640456896770047,
+      "ci95_low": -0.025486295092559876,
+      "claim_role": "secondary_structure",
+      "comparison_id": "H2_secondary_vs_additive",
+      "reference": "Additive direct risk",
+      "reference_mean_loss": 0.858623386816665,
+      "relative_loss_reduction_fraction": 0.030342135545655048,
+      "status": "fail"
+    },
+    {
+      "absolute_loss_reduction": 0.030558270334343735,
+      "bootstrap_repeats": 5000,
+      "candidate": "Direct risk, quadratic basis",
+      "candidate_mean_loss": 0.8325709196312042,
+      "ci95_high": 0.078829896710522,
+      "ci95_low": -0.021157178251451116,
+      "claim_role": "secondary_structure",
+      "comparison_id": "H2_secondary_vs_count",
+      "reference": "Count-additive direct risk",
+      "reference_mean_loss": 0.863129189965548,
+      "relative_loss_reduction_fraction": 0.03540405154825488,
+      "status": "fail"
+    },
+    {
+      "absolute_loss_reduction": 0.24407984230977794,
+      "bootstrap_repeats": 5000,
+      "candidate": "Direct risk, quadratic basis",
+      "candidate_mean_loss": 0.8325709196312042,
+      "ci95_high": 0.39854511026981826,
+      "ci95_low": 0.11912255681357542,
+      "claim_role": "prespecified_sensitivity",
+      "comparison_id": "Jensen_parameter_count_sensitivity",
+      "reference": "Target-specific transformed-mean score",
+      "reference_mean_loss": 1.0766507619409822,
+      "relative_loss_reduction_fraction": 0.22670289283941217,
+      "status": "pass"
+    }
+  ],
+  "input_hashes": {
+    "configs/revision/ioi_phase06_fresh_confirmation_v1.json": "b6d44ac16c88a48c738416a18abb205771598ae713f7d44bf0dfdc73f3dff099",
+    "results/revision/phase06/ioi_fresh_confirmation/evaluation/candidate_actual_risk.csv": "06d5a1fc6a831d175f4c3b119bcc50e8e53b258bfda73d4010f9bb47778a8150",
+    "results/revision/phase06/ioi_fresh_confirmation/evaluation/clean_task_validity.csv": "3aed5fff1dcc71709e45a28628430e831794b5ae90b616c92e7b9127a36825a8",
+    "results/revision/phase06/ioi_fresh_confirmation/evaluation/decision_quality.csv": "b7c77f4f757b5dba754dea00b14e749e6fe3f817ac132261497118354c99da7f",
+    "results/revision/phase06/ioi_fresh_confirmation/evaluation/hypothesis_audit.json": "0c3844c1fde73e21d4da5a49385494e00744836c3c43b8a46538776f47de382e",
+    "results/revision/phase06/ioi_fresh_confirmation/evaluation/natural_mean_estimand_metrics.csv": "6e731217b89b8497c2a0f2ff707a692f42791b81fb19af0484e126c4b3a1379f",
+    "results/revision/phase06/ioi_fresh_confirmation/evaluation/prespecified_contrasts.csv": "d5d932ada991cc2abdfb1107fff4daf8fe4ec49512e4c52e876d1f95f57917af"
+  },
+  "interpretation_boundary": {
+    "not_supported": [
+      "H2's interaction-aware risk-basis claim.",
+      "IOI-mechanism or fresh-template-generalization claims.",
+      "An absolute control-efficacy claim against a no-op action."
+    ],
+    "supported": [
+      "H1 passes for fixed-action selection among the frozen nonempty candidate masks.",
+      "The H1 result passes the target-specific transformed-mean parameter-count sensitivity."
+    ]
+  },
+  "natural_mean_estimand_diagnostic": {
+    "heldout_mean_effect_mae": 0.12849992265111734,
+    "heldout_mean_effect_r2": 0.8442086655989596,
+    "heldout_mean_effect_rank_correlation": 0.9378843706488591,
+    "heldout_mean_effect_rmse": 0.1607022884733953,
+    "model": "Natural mean, quadratic basis",
+    "status": "descriptive_non_gating"
+  },
+  "no_op_audit": {
+    "direct_risk_mean_loss": 0.8325709196312042,
+    "direct_risk_minus_no_op": 0.0825709196312042,
+    "included_in_frozen_candidate_family": false,
+    "mean_loss": 0.75,
+    "primary_targets": [
+      0.5,
+      1.0
+    ],
+    "status": "postoutcome_limitation_not_a_frozen_comparison"
+  },
+  "output_hashes": {
+    "paper/generated_phase06/ioi_confirmation/ioi_confirmation_results.csv": "2a5828ef92beb7413c68869249e8ab73a82fa0642945f0904caf0b28218f18e6",
+    "paper/generated_phase06/ioi_confirmation/ioi_confirmation_table.tex": "966bdb1fd86aadd3e020b69fa6935e010541e099f84a9636af29b95163ee81c8"
+  },
+  "result_calibration": "mixed",
+  "schema": "observerbench.phase06.ioi_confirmation_artifact.v1",
+  "scientific_status": "pilot_informed_prospective_fresh_template_name_mask_confirmation",
+  "selected_action_decomposition": {
+    "direct_risk": {
+      "dispersion": 0.282664362321763,
+      "mean_to_target": 0.5499065573094413,
+      "total_loss": 0.8325709196312042
+    },
+    "natural_mean_effect": {
+      "dispersion": 0.6425116389291361,
+      "mean_to_target": 0.43326979352665757,
+      "total_loss": 1.0757814324557937
+    }
+  }
+}

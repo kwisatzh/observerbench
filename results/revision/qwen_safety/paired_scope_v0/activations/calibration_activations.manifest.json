@@ -1,0 +1,32 @@
+{
+  "cache_file": "calibration_activations.npz",
+  "cache_schema": "observerbench.qwen_safety.activation_cache.v0",
+  "cache_sha256": "1ebef97cf23d154f6d2c1259eae1eb3cc0657fa64285c66d634106facdcf78cb",
+  "hidden_size": 3584,
+  "layer_indices": [
+    4,
+    8,
+    12,
+    16,
+    20,
+    24,
+    28
+  ],
+  "metadata": {
+    "allow_token_id": 16,
+    "bank": "calibration",
+    "block_token_id": 15,
+    "design_sha256": "5baad6930a5bb747ca527cbb5e12ddd130992f5262fb1705a5ac78a1b4084b90",
+    "model": {
+      "attention_implementation": "sdpa",
+      "dtype": "bfloat16",
+      "expected_kv_heads": 4,
+      "expected_layers": 28,
+      "expected_query_heads": 28,
+      "id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "a09a35458c702b33eeacc393d103063234e8bc28"
+    }
+  },
+  "n_prompts": 384,
+  "schema": "observerbench.qwen_safety.cache_manifest.v0"
+}

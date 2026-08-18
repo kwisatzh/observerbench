@@ -1,0 +1,26 @@
+[
+  {
+    "arm_id": "est-first_order__dir-first_order__support-unprojected__cal-none__controller-gain_matched",
+    "reason": "est-first_order__dir-first_order__support-unprojected__cal-none__controller-gain_matched: observer self-gain -0.273594 is non-positive"
+  },
+  {
+    "arm_id": "est-first_order__dir-lifted_interaction__support-unprojected__cal-none__controller-gain_matched",
+    "reason": "est-first_order__dir-lifted_interaction__support-unprojected__cal-none__controller-gain_matched: observer self-gain -0.211479 is non-positive"
+  },
+  {
+    "arm_id": "est-first_order__dir-oracle_target__support-unprojected__cal-none__controller-gain_matched",
+    "reason": "est-first_order__dir-oracle_target__support-unprojected__cal-none__controller-gain_matched: observer self-gain -0.166253 is non-positive"
+  },
+  {
+    "arm_id": "est-first_order__dir-first_order__support-projected__cal-none__controller-gain_matched",
+    "reason": "est-first_order__dir-first_order__support-projected__cal-none__controller-gain_matched: observer self-gain -0.804227 is non-positive"
+  },
+  {
+    "arm_id": "est-first_order__dir-lifted_interaction__support-projected__cal-none__controller-gain_matched",
+    "reason": "est-first_order__dir-lifted_interaction__support-projected__cal-none__controller-gain_matched: observer self-gain -0.578858 is non-positive"
+  },
+  {
+    "arm_id": "est-first_order__dir-oracle_target__support-projected__cal-none__controller-gain_matched",
+    "reason": "est-first_order__dir-oracle_target__support-projected__cal-none__controller-gain_matched: observer self-gain -0.577662 is non-positive"
+  }
+]
