@@ -5,6 +5,11 @@ release repository is published)*
 
 ObserverBench is a research artifact for evaluating observers in control-oriented interpretability.
 
+It is the evaluation companion to [Mechanistic Tomography](https://arxiv.org/abs/2608.19338):
+that framework designs measurements for recovering internal quantities and
+intervention effects, while ObserverBench tests whether a proposed estimate is
+adequate for a declared action.
+
 The central question is not whether a richer observer can be made to win. The question is when an observer is good enough to support intervention, and when a cheap or misspecified observer stays target-useful while silently changing collateral state, prediction error, or feedback behavior.
 
 This repository is the v0 reproduction/workbench for the ObserverBench paper. It is not a finished universal benchmark or a plugin platform.
