@@ -1,80 +1,103 @@
-\section{How to add and evaluate an observer}
+\section{How ObserverBench evaluates an observer}
 \label{sec:artifact}
 
-ObserverBench uses the same four-step workflow for every submission:
+What does it mean to compare two observers fairly? The comparison must keep
+the decision problem fixed. Otherwise, a lower loss could come from a better
+observer, a more capable controller, an easier set of actions, or a different
+test distribution. ObserverBench makes these choices part of the task rather
+than leaving them to each experiment.
 
-\begin{enumerate}[leftmargin=1.4em,itemsep=0.25em,topsep=0.3em]
-  \item \textbf{Choose a fixed task.} Its TaskCard states what is predicted,
-  what the observer may read, which actions are allowed, how actions are chosen,
-  which data are held out, and how success is scored.
-  \item \textbf{Describe and submit the observer.} Its ObserverCard records the
-  features it uses, its access, fitting procedure, implementation, and known
-  failures. The method may be submitted as code or as a table of predictions.
-  \item \textbf{Run the common evaluator.} The task applies the same held-out
-  split, action rule, and budget to every observer. The observer cannot replace
-  the controller or reveal the test targets.
-  \item \textbf{Report both levels of performance.} The result separates
-  prediction or ranking quality from the loss caused by the chosen action. It
-  also records what information and extra model calls the observer required.
+Each evaluation uses a \textbf{TaskCard}, an \textbf{ObserverCard}, and a
+\textbf{result scorecard} in four steps:
+
+\begin{enumerate}[leftmargin=1.4em,itemsep=0.2em,topsep=0.3em]
+  \item \textbf{Choose a task.} The TaskCard defines the decision problem using
+  the five choices above and fixes the training measurements, held-out cases,
+  budgets, and clean-performance checks. These do not change when observers
+  are compared.
+  \item \textbf{Submit an observer.} Any method may be used if it respects the
+  task's information boundary. The ObserverCard records what the observer
+  reads, how it was fit or calibrated, what model access it requires, and any
+  known failure conditions. For a control task, it also declares whether the
+  submission replaces the state estimate, the edit direction, or both.
+  \item \textbf{Run the common evaluator.} Every observer receives the same
+  held-out cases and faces the same controller, actions, budgets, and loss.
+  \item \textbf{Compare both outcomes.} The result scorecard reports prediction
+  quality, downstream action loss, and the access or measurement cost of
+  obtaining the estimate. These quantities remain separate: a method that
+  predicts better does not automatically act better.
 \end{enumerate}
 
-The public release will turn each completed evaluation into a task-specific
-scorecard and compare it with the bundled baseline results. A leaderboard
-position is meaningful only among results that use the same task version,
-information boundary, action rule, and budget. ObserverBench therefore does
-not combine unlike settings into one overall rank.
+There are two ways to cross the observer--evaluator boundary. A local
+implementation can fit and run a method that needs model inference or internal
+activations. A public submission can instead provide a table of predictions or
+scores for the task's released cases. The second route lets a researcher test
+an observer without installing the original model or experiment stack. In both
+routes, the task---not the observer---applies the held-out targets, controller,
+and loss.
 
-The release supports three task types:
+The three operational modes share this contract but ask different questions
+(Table~\ref{tab:operational-modes}).
 
-\begin{itemize}
-  \item \textbf{Control} separates the state estimator, edit direction,
-  controller, and task. A submission can replace the estimator or direction
-  while the model, starting states, controller settings, and metrics remain
-  fixed. The analytic control task provides the tested external adapter.
-  \item \textbf{Finite-effect prediction} provides fixed measurements and asks
-  for the effects of held-out interventions. The task owns the measurement
-  budget, split, targets, action rule, and metrics. A table submission does not
-  need the original model.
-  \item \textbf{Safety triage} asks for one risk score per held-out request or
-  trajectory. The evaluator converts scores into allow, block, escalate, or
-  audit actions under fixed budgets and reports realized violations, tail loss,
-  false interventions, and clean utility.
+\begin{table}[H]
+\centering
+\small
+\caption{ObserverBench operational modes. Each row defines a complete,
+task-relative comparison; results are compared only within the same task and
+version.}
+\label{tab:operational-modes}
+\begin{tabular}{@{}L{0.14\linewidth}L{0.23\linewidth}L{0.31\linewidth}L{0.23\linewidth}@{}}
+\toprule
+\textbf{Mode} & \textbf{Observer supplies} & \textbf{Evaluator fixes} &
+\textbf{Main outputs} \\
+\midrule
+Closed-loop control & A state estimate, an edit direction, or a declared pair
+& Model, starting states, allowed edits, controller, horizon, and loss
+& Estimation error, trajectory error, and collateral movement \\
+\addlinespace
+Effect prediction & Predicted effects or losses for held-out interventions
+& Calibration measurements, held-out interventions, action rule, and loss
+& Prediction error and selected-action loss \\
+\addlinespace
+Safety triage & One risk or consequence score per request or trajectory
+& Test cases, prevalence, action policy, capacity budget, and consequence loss
+& Caught and missed harm, false interventions, and clean utility \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A leaderboard is therefore task-specific. Results are comparable only when
+they use the same task version, information boundary, held-out split, action
+rule, and budget. ObserverBench does not collapse unlike settings into a
+single overall rank. Instead, each scorecard shows which observer is better
+for one declared use.
+
+Four rules keep each comparison meaningful:
+
+\begin{itemize}[leftmargin=1.5em,itemsep=0.2em,topsep=0.3em]
+  \item \textbf{Hold the rest of the decision system fixed.} Change the state
+  estimate or edit direction while keeping the model, controller, action
+  family, starting cases, and loss unchanged. If both estimate and direction
+  change, evaluate them as a pair.
+
+  \item \textbf{Separate construction from evaluation.} Fix targets, splits,
+  and interventions before measuring held-out performance. Check first that
+  the unedited model succeeds on the base task and required groups; we call
+  this the \emph{clean stop gate}.
+
+  \item \textbf{Make the comparison observable.} The measurement design must
+  actually exercise the effects being compared. For example, an interaction
+  cannot be assessed if the relevant component combination is almost never
+  measured. Repeated control should report error across the trajectory rather
+  than only a threshold crossing.
+
+  \item \textbf{Evaluate the quantity used to choose the action.} Mean-effect
+  prediction, prompt-level intervention loss, and consequence-weighted safety
+  risk are different targets. The task should score the one the controller
+  actually uses.
 \end{itemize}
 
-The versioned interfaces are \texttt{observerbench.api.v0},
-\texttt{observerbench.effect\_prediction.v0}, and
-\texttt{observerbench.safety\_protocol.v0}. Public safety-task packs describe
-the threat model, actions, loss, budgets, training measurements, and held-out
-queries. They omit the held-out answers, which the evaluator stores separately
-and links to the public task by hash. This lets researchers add data-only safety
-tasks without changing the workbench.
-
-The bundled GPT-2 IOI and Qwen induction-copy registries show the finite-effect
-workflow at several measurement budgets. Both expose frozen tables, check the
-declared model and split, and use separate prompts for measurements and held-out
-targets. Outside predictors therefore need neither model inference nor the
-original experiment code; per-head or additive ridge observers provide the
-baselines.
-
-\subsection{A four-step check for safety monitors}
-
-Before interpreting an internal safety signal, ObserverBench asks:
-
-\begin{enumerate}[leftmargin=1.4em,itemsep=0.2em,topsep=0.25em]
-  \item \textbf{Does the model output already suffice?} Read the relevant output
-  distribution rather than one sampled answer. If it is adequate, stop.
-  \item \textbf{Does the input already suffice?} Train a text or input-feature
-  baseline with the same supervision. If it matches the internal probe, an
-  activation-specific explanation is unnecessary.
-  \item \textbf{Does the signal remain without a request for a verdict?} Measure
-  the same examples in a neutral context to separate input processing from a
-  signal created or reshaped by the monitoring prompt.
-  \item \textbf{Does it work under the intended policy?} Test frozen scores at
-  the attack rate, intervention budget, deployment groups, and loss the
-  controller will face.
-\end{enumerate}
-
-These checks locate where useful information becomes available. They do not by
-themselves establish deception, intent, or hidden knowledge. Their purpose is a
-fair comparison: every observer receives the same task and faces the same action
-rule.
+This contract tells us how to compare observers, but it leaves a prior
+question unanswered: what must an observer preserve for its estimate to be
+adequate for control? Section~\ref{sec:design} answers that question by
+restricting accuracy to the states that the allowed interventions can reach.

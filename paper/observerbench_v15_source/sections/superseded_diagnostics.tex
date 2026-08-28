@@ -50,14 +50,15 @@ Budget & Per-head & Count & $P\!\times\!E$ & All pairs \\
   aside before inspection because its source seal omitted the head-mapping file.
   After expanding the seal, we independently recomputed the frozen predictions
   and actions and repeated the 148-mask measurement. The two copies are
-  byte-identical; only the second enters the analysis.
+  identical at the byte level; only the second enters the analysis. Under the frozen
+  raw-score rule, the transformed-mean control selects negative predicted
+  losses in 44, 44, and 16 pools across the three targets, while direct loss
+  does so in 4, 0, and 0. We retain those scores rather than clip them after
+  observing the outcomes.
   \item \textbf{Qwen Copy-v2.} Copy-v1 stopped at 92.97\% candidate accuracy,
   below its frozen 95\% gate, before attention or intervention outcomes were
-  computed. Copy-v2 used fresh tokens and prompts without changing that failed
-  threshold. Its first process later stopped on a CSV round-trip check; after
-  the reader was corrected, the clean-score hash and all 1,536 prompt IDs
-  reproduced exactly before a fresh process generated the locked results in
-  Section~\ref{sec:qwen-induction}.
+  computed. Copy-v2 used fresh tokens and prompts under the same gate before
+  generating the locked results in Section~\ref{sec:qwen-induction}.
 \end{itemize}
 
 \subsection{Authorization tail-loss selection}

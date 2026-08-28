@@ -1,5 +1,46 @@
-\section{Safety observers under fixed intervention budgets}
+\section{Safety triage: scores must guide scarce interventions}
 \label{sec:safety}
+
+When the controller cannot inspect every request, a safety observer must do
+more than separate safe cases from unsafe ones. It must rank the cases that
+matter most, using the information available at deployment, so that a limited
+intervention budget prevents as much harm as possible. The two tasks in this
+section make that requirement explicit.
+
+\begin{table}[H]
+\centering
+\scriptsize
+\caption{Task contracts for the two safety-triage studies. Each contract fixes
+what the observer predicts, what it may read, which action the controller can
+take, and how the resulting decision is scored.}
+\label{tab:safety-contracts}
+\begin{tabular}{@{}L{0.18\textwidth}L{0.37\textwidth}L{0.37\textwidth}@{}}
+\toprule
+Task dimension & Authorization interlock & APPS backdoor audit \\
+\midrule
+Target & Authorization risk, including the consequence of the requested
+operation & Whether a submitted program contains a verified working backdoor \\
+Information boundary & Declared action fields and, depending on the observer,
+prompt text, Qwen output scores, or one residual activation & Programming
+problem and submitted code, read through prompt scores, text features, or one
+Qwen residual activation \\
+Action space & Allow, block, or escalate a request & Audit a submission or
+leave it unaudited \\
+Decision rule and loss & Rank by the observer score; block the top 10\%,
+escalate the next 10\%, and charge for missed risk and unnecessary intervention
+& Rank by suspicion; audit the top-scoring submissions and count verified
+backdoors that escape \\
+Operating regime & Held-out permission pairs across seen and unseen operations
+and prompt formats, under fixed block and escalation budgets & Held-out APPS
+problem IDs, fixed audit budgets, and prevalence checks from rare to balanced
+attacks \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The contracts use the same five fields but test different weaknesses. The
+authorization task gives exact labels and costs, which lets us isolate whether a
+statistically accurate observer allocates its budget well. We begin there.
 
 \subsection{A perfect classifier can allocate a safety budget poorly}
 
@@ -9,7 +50,7 @@ problem is that this file is outside the granted scope. A controller may allow,
 block, or escalate the request. When blocks and reviews are limited, it must
 rank requests by the harm they could cause.
 
-We turn this example into an inert paired task:
+We turn this example into a non-executing paired task:
 
 \begin{itemize}
   \item \textbf{Same action, different permission.} Each pair requests the same
@@ -118,26 +159,21 @@ cutoff. Scores should be compared within panels, not across them.}
 \label{fig:qwen-safety-calibration}
 \end{figure}
 
-Recalibration by visible operation and format may repair this failure, but this
-split cannot test that repair because calibration contains neither held-out
-case. A valid follow-up needs fresh prompts and calibration coverage of
-every intended deployment group.
+This failure separates three requirements: the observer must classify the
+violation, rank it by consequence, and calibrate its scores across deployment
+groups. Recalibration by visible operation and format may repair the last
+failure, but this split cannot test that repair because calibration contains
+neither held-out case. A valid follow-up needs fresh prompts and calibration
+coverage of every intended deployment group.
 
-The task therefore requires an observer to:
-
-\begin{itemize}
-  \item classify the violation;
-  \item rank it by consequence; and
-  \item calibrate scores across deployment groups.
-\end{itemize}
-
-It does not test harmful execution, deception, adaptive attacks, or open-ended
-deployment.
+The controlled task shows why consequence and cross-group calibration matter.
+Does the same task-relative evaluation change which monitor we prefer on an
+externally recognized safety benchmark? We next turn to APPS.
 
 \subsection{Activations can rank verified APPS backdoors without a verdict prompt}
 \label{sec:safety-apps}
 
-The authorization task is controlled but constructed. We therefore use
+To answer that question, we use
 ControlArena's APPS setting, an existing AI-control task with ordinary code
 solutions and verified working backdoors
 \cite{greenblatt2024aicontrol,inglis2025controlarena}. A monitor reads the
@@ -203,11 +239,11 @@ Three findings matter:
   the score-distribution observer, with 95\% intervals $[0.018,0.034]$,
   $[0.098,0.125]$, and $[0.131,0.167]$.
   \item \textbf{The balanced panel hides action differences.} Neutral and
-  verdict-adjacent activations both reach the exact-label audit ceiling at 2\%,
+  verdict-adjacent activations both reach the maximum possible caught-backdoor count at 2\%,
   5\%, and 10\%. At 10\%, neutral activation leaves 596 attacks unaudited versus
   607 for the basic prompt, a paired difference of $-11$ with 95\% interval
   $[-17,-5]$. The sample does not resolve its smaller gains over the stronger
-  controls because attacks make up half the panel and fill the small audit queue.
+  controls because attacks make up 50\% of the panel and fill the small audit queue.
   \item \textbf{The tested controls narrow, but do not settle, the explanation.}
   Reading all ten output probabilities raises AUROC from 0.786 to 0.830, so
   sampling or averaging the declared score tokens does not explain the activation
@@ -231,9 +267,31 @@ populations. Rare attacks expose differences hidden by the balanced panel.}
 \label{fig:apps-prevalence}
 \end{figure}
 
-AUROC and audit loss agree broadly for this frozen mixture, but that need not
-hold when score scales or the mix of attacks changes; Appendix~\ref{app:apps-diagnostics}
-checks this issue by APPS family and input length. This is an external monitor
-test, not a deployment claim: the attacks are stored rather than adapted to each
-monitor, all learned representations come from one model, and a stronger code
-monitor may beat the tested text baseline.
+Appendix~\ref{app:apps-diagnostics} checks whether pooled performance hides
+allocation differences by APPS family and input length. This is an external
+monitor test, not a deployment claim.
+
+\subsection{Four checks before claiming that an internal safety signal helps}
+
+The two studies suggest a reusable sequence. Before interpreting an internal
+safety signal, ObserverBench asks:
+
+\begin{enumerate}[leftmargin=1.4em,itemsep=0.2em,topsep=0.25em]
+  \item \textbf{Does the model output already suffice?} Read the relevant output
+  distribution rather than one sampled answer. If it is adequate, stop.
+  \item \textbf{Does the input already suffice?} Train a text or input-feature
+  baseline with the same supervision. If it matches the internal probe, an
+  activation-specific explanation is unnecessary.
+  \item \textbf{Does the signal remain without a request for a verdict?} Measure
+  the same examples in a neutral context to separate input processing from a
+  signal created or reshaped by the monitoring prompt.
+  \item \textbf{Does it work under the intended policy?} Test frozen scores at
+  the attack rate, intervention budget, deployment groups, and loss the
+  controller will face.
+\end{enumerate}
+
+These checks locate where useful information becomes available. They do not by
+themselves establish deception, intent, or hidden knowledge. How does this
+task-relative contract relate to existing interpretability benchmarks,
+decision-focused learning, and AI-control evaluations? The next section places
+ObserverBench among those lines of work.

@@ -1,20 +1,13 @@
 % Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex
 
-\section{The same pattern appears in a bounded Qwen2.5-7B task}
+\subsection{Qwen2.5-7B: the pattern transfers to a larger model}
 \label{sec:qwen-induction}
 
-The GPT-2 results may depend on one small model and one published circuit. We
-therefore repeat two questions on the base Qwen2.5-7B model
-\cite{qwen2024qwen25}:
-
-\begin{itemize}
-  \item Do pair terms improve prediction of held-out ablations?
-  \item Does an observer trained on action loss choose a better action?
-\end{itemize}
-
-An induction-copy task gives us an exact behavioral target and a different set
-of heads to intervene on \cite{olsson2022induction}. The result will apply only
-to prompts that the unedited model already solves with a clear margin.
+We test that transfer on the base Qwen2.5-7B model
+\cite{qwen2024qwen25} using an induction-copy task with an exact behavioral
+target and a different set of heads to intervene on
+\cite{olsson2022induction}. The result applies only to prompts that the
+unedited model already solves with a clear margin.
 
 Each prompt first contains three key--value pairs and later repeats one key.
 For example, after ``A red, B blue, C green, ... B'', the desired continuation
@@ -37,7 +30,7 @@ A positive $Y_i(m)$ means that ablating those heads weakens the target relative
 to the two alternatives. Four prompt families combine sequence lengths 32 and
 64 with repeat gaps 8 and 16.
 
-\subsection{Define eligible prompts before discovering heads}
+\subsubsection{Define eligible prompts before discovering heads}
 
 Copy-v1 required 95\% baseline accuracy among the three candidates. Qwen reached
 92.97\%, so the run stopped before any attention or intervention result was
@@ -61,7 +54,7 @@ distinguishes the planted value from the two distractors, which heads support
 that distinction, and how well can we predict their intervention effects? It
 does not test unconstrained generation.
 
-\subsection{Held-out interventions confirm the eight-head panel}
+\subsubsection{Held-out interventions confirm the eight-head panel}
 
 Attention can suggest heads, but only an intervention shows that they affect
 the output. We therefore use four frozen steps:
@@ -81,13 +74,13 @@ the output. We therefore use four frozen steps:
 Each selected head receives a low-induction control from the same layer and
 grouped-query-attention key--value group. Controls are matched using attention
 specificity and output-norm distance, not causal outcomes. On 256 separate
-confirmation prompts, mean-replacing the selected heads lowers the candidate
-margin by $3.454$ on average. Matched controls lower it by only $0.170$. The
-paired difference is $3.284$, with 95\% interval $[3.053,3.520]$. A frozen
-zero-ablation check gives the same ordering. In short, attention nominates the
-heads; held-out interventions justify using them in the benchmark.
+confirmation prompts, the selected heads lower the candidate margin much more
+than matched controls, with the paired interval excluding zero; a frozen
+zero-ablation check gives the same ordering. Table~\ref{tab:qwen-copy-v2}
+reports the estimates. Thus the held-out intervention results, not the attention
+scores by themselves, justify including the panel in the benchmark.
 
-\subsection{Pair terms and direct loss improve held-out performance}
+\subsubsection{Pair terms and direct loss improve held-out performance}
 
 Only after confirmation passes do we freeze all $2^8=256$ combinations of the
 eight heads. One mask might remove heads 1 and 3; another might remove 2, 4,
@@ -99,15 +92,15 @@ every mask is tested at every sequence-length and repeat-gap condition.
 The additive observer assumes that removing heads 1 and 3 has the sum of their
 separate effects. The pairwise observer, a quadratic model for these binary
 masks, adds all 28 head pairs and can represent a head whose effect changes
-after another head is removed. With 128 measurements, pairwise MAE on held-out
-masks is $0.040$, compared with $0.121$ for the additive observer. The
-improvement is $0.081$, with interval $[0.025,0.101]$. The same direction holds
-at every smaller nested budget. The pairwise fit with only 16 measurements has
-more coefficients than measurements and is therefore descriptive.
+after another head is removed. At the primary budget of 128 measurements, the
+pairwise model improves held-out-mask MAE over the additive observer, with the
+paired interval excluding zero (Table~\ref{tab:qwen-copy-v2}). The pairwise
+model also improves MAE at every smaller nested budget; the 16-measurement fit
+has more coefficients than measurements and is therefore descriptive.
 
 Every action selector uses the same 37-column pairwise basis, the same three
 targets, and the same 16 frozen action pools. Each pool contains eight nonempty
-masks and the exact do-nothing action, or no-op. The observers differ only in
+masks and the exact no-op. The observers differ only in
 what they predict:
 
 \begin{itemize}
@@ -151,8 +144,8 @@ Action loss & Natural mean & $0.955$ & Direct loss $0.870$
   & $0.857\ [0.805,0.908]$ \\
 \bottomrule
 \end{tabular}
-\caption{Qwen2.5-7B Copy-v2 results. Causal entries report mean candidate-
-margin drop on 256 confirmation prompts. Prediction entries report MAE on 128
+\caption{Qwen2.5-7B Copy-v2 results. Causal entries report mean
+candidate-margin drop on 256 confirmation prompts. Prediction entries report MAE on 128
 held-out masks; positive improvement is additive minus pairwise MAE. Action
 entries average absolute target loss over three targets and 16 pools; positive
 improvement is comparator loss minus direct loss. Intervals use 5,000 paired
@@ -170,21 +163,20 @@ natural mean tie within uncertainty: natural minus direct loss is $-0.008$,
 with interval $[-0.038,0.021]$. Appendix
 Table~\ref{tab:qwen-per-target} reports each target separately.
 
-As a secondary check, we apply the frozen actions to 512 matched continuations
-that do not require induction. Mean clean-to-intervened KL is $0.0115$ for
-direct loss, $0.0157$ for natural mean, and $0.0160$ for transformed mean. We
-see no extra collateral cost for direct loss in this task. This diagnostic is
-not a general safety result.
+On 512 matched non-induction continuations, a secondary check finds no larger
+clean-to-intervened KL for direct loss than for the natural-mean and
+transformed-mean controls ($0.0115$ versus $0.0157$ and $0.0160$); this is not a
+general safety result.
 
-Within this bounded task, Qwen shows the same two patterns:
+Across GPT-2 and this bounded Qwen task, pair terms improve held-out effect
+prediction and observers trained on realized loss choose lower-loss
+interventions in their frozen aggregates; the Qwen result, however, remains
+limited to one pinned model, the eligible prompts, the confirmed eight-head
+panel, and the declared masks and neither identifies a complete induction
+circuit nor establishes general in-context learning.
 
-\begin{itemize}
-  \item Pair terms predict held-out combinations better than an additive
-  model.
-  \item An observer trained on realized loss chooses lower-loss actions in the
-  frozen aggregate.
-\end{itemize}
-
-The result applies to one pinned model, the eligible prompts, the
-confirmed eight-head panel, and the declared masks. It does not identify a
-complete induction circuit or establish general in-context learning.
+These studies choose model interventions from predicted effects. What changes
+when the action is instead a scarce safety response and different mistakes
+carry different consequences? The next operational mode keeps the same
+task-relative contract but evaluates observers under fixed intervention
+budgets.

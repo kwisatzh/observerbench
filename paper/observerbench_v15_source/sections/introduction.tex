@@ -1,120 +1,121 @@
 \section{Introduction}
 
-Interpretability is increasingly used not only to explain models but also to
-change what they do. An estimate of a model's internal state may guide an
-activation edit, decide which components to disable, determine whether a tool
-call is allowed, or rank requests for a limited audit budget. Activation
-steering and model-based control make this use explicit
+Interpretability methods are increasingly used to steer and govern model
+behavior rather than merely explain it. Internal estimates now guide concrete
+decisions: which activation-steering direction to apply, which attention heads
+to remove, whether to permit a risky tool call, or which requests receive a
+limited human-review budget. Activation engineering and feedback-control
+methods make these estimates part of an active control loop
 \cite{turner2023activation,zou2023representation,nguyen2025feedback,skifstad2026local}.
-Once an estimate helps choose an action, prediction quality is only part of the
-evaluation.
+Once an internal estimate is used to choose an action, statistical accuracy is
+not a complete evaluation metric. An estimate can perform well on average and
+still cause costly errors on individual prompts.
 
-We call a method that supplies such an estimate an \emph{observer}. We call the
-rule that turns the estimate into an action a \emph{controller}. An
-\emph{intervention} is the edit or decision that the controller is allowed to
-make. This paper asks a simple question: is the observer good enough for the
-action the controller must choose?
+To analyze these systems, we separate the control loop into three components: \textbf{Observer.} The method or probe that reads measurements and
+  estimates an internal state or intervention effect \textbf{Controller.} The decision rule that uses the estimate to
+  select an action and \textbf{Intervention.} The edit, ablation, or policy action that the
+  controller is allowed to execute. ObserverBench asks a central question: is a proposed observer adequate for the
+specific decision the controller must make?
 
-Three examples show why prediction and action must be tested separately.
+Standard prediction metrics do not by themselves show whether an internal
+estimate is useful for a decision
+\cite{donti2017task,elmachtoub2022smart,orgad2026actionable}. There are three failure
+modes that  illustrate why prediction accuracy and decision quality must be reported
+separately; (i)  \textbf{Consequence disregard.} In safety triage, an observer can
+  classify policy violations perfectly yet spend a limited review budget on
+  low-stakes violations, such as unauthorized reads, while allowing
+  higher-impact harms, such as unauthorized deletions, through
+  (Sec.~\ref{sec:safety}), (ii) \textbf{Dispersion blindness.} In model editing, an observer can
+  accurately predict the mean effect of ablating a circuit across a dataset
+  yet choose an edit whose effect varies widely across prompts, defeating
+  prompt-level control (Sec.~\ref{sec:ioi}), and finally (iii)  \textbf{Redundant signals.} An internal activation probe can achieve
+  high predictive accuracy while repeating information already visible in the
+  prompt or output logits. It then requires additional model access without
+  improving the downstream decision (Sec.~\ref{sec:safety}).
 
-\begin{itemize}
-  \item Two requests may both violate policy, but an unauthorized delete can
-  cause more harm than an unauthorized read. A classifier can label both
-  correctly and still use a limited block or review budget poorly.
-
-  \item An observer may correctly predict the average effect of disabling a
-  set of model components. The same edit may do nothing on some prompts and
-  overshoot on others, making it a poor choice for a prompt-level target.
-
-  \item A classifier built from an internal model state may appear informative
-  while repeating a signal already present in the prompt or output. It then
-  adds no useful information at the point where the decision is made.
-\end{itemize}
 
 We introduce \textbf{ObserverBench}\footnote{Public workbench and submission
-page: \url{https://kwisatzh.github.io/observerbench/} (release forthcoming).},
-a set of fixed, reusable tasks for making these distinctions measurable. Each
-task specifies the model, target,
-information available to the observer, allowed interventions, action rule,
-measurement budget, unseen test cases, and loss. The same rule is applied to
-every submitted observer. The evaluator reports both how accurately the
-observer predicts and how well the resulting actions perform.
+page: \url{https://kwisatzh.github.io/observerbench/}.},
+a set of fixed, reusable tasks that makes these operational distinctions
+measurable. Each task pins the model, information available to the observer,
+allowed interventions, controller, measurement budget, held-out test cases,
+and loss. Every observer faces the same controller and evaluation harness
+within a task. The evaluator reports two outcomes separately: how accurately
+the observer predicts its target and how much loss its chosen action incurs on
+held-out cases.
 
-ObserverBench addresses a different stage from mechanistic tomography. The
-mechanistic tomography framework develops measurement designs for recovering
-internal quantities and intervention effects; ObserverBench starts with a
-proposed estimate and asks whether it is adequate for a fixed intervention,
-control, or safety use \cite{erramilli2026tomography}.
+ObserverBench focuses on the operational stage of interpretability.
+Mechanistic tomography addresses the measurement problem: how to design probes
+and interventions that recover hidden internal mechanisms and effect maps.
+ObserverBench addresses the decision problem: whether a proposed estimate is
+adequate to guide a particular intervention, control loop, or safety policy
+\cite{erramilli2026tomography}.
 
-An ObserverBench result is defined by five choices:
+An evaluation in ObserverBench is defined by five explicit choices:
 
 \begin{itemize}
-  \item \textbf{What does the observer estimate?} A model feature, the average
-  effect of an edit, and the cost of an action on one prompt are different
-  targets.
+  \item \textbf{Target.} What must the observer estimate: an internal state,
+  the average effect of an intervention, or the loss of one action on one
+  prompt?
 
-  \item \textbf{What information may it use?} Prompt text, internal model
-  states, and output scores provide different information and have different
-  costs.
+  \item \textbf{Information boundary.} What may the observer read: prompt
+  text, internal activations, output scores, or some combination of them?
 
-  \item \textbf{What actions are allowed?} An error may not matter if it lies
-  outside the part of model behavior that the allowed edits can affect.
+  \item \textbf{Action space.} Which interventions may the controller apply,
+  such as a specified activation shift or one mask from a fixed set of
+  ablations?
 
-  \item \textbf{How is the action chosen and scored?} The same estimate can be
-  useful under one decision rule or loss and poor under another.
+  \item \textbf{Decision rule and loss.} How does the controller turn an
+  estimate into an action, and which downstream errors incur a cost?
 
-  \item \textbf{Where will it be used?} Prompt families, attack frequency, and
-  intervention budgets can change which observer performs best.
+  \item \textbf{Operating regime.} Which prompts, intervention budgets, and
+  attack frequencies will the evaluator use?
 \end{itemize}
 
-These choices make the result task-relative. An observer can differ from the
-target in ways that never affect an allowed action. A method can predict an
-average edit more accurately without choosing a better prompt-level edit. A
-safety score can rank policy labels correctly while ignoring the different
-consequences of those labels. System boundaries matter as well: recent cyber
-evaluations show that tools, permissions, external state, and side channels
-can affect what a prompt-level score means
+These choices make observer adequacy task-relative. Permissions, tool
+interfaces, budgets, and attack rates are therefore part of the evaluation,
+not background details. Recent security incidents during model evaluation
+illustrate why system boundaries and side channels must also be stated
+explicitly
 \cite{openai2026securityincident,huggingface2026securityincident}.
 
-\paragraph{Three evaluation modes.}
-The current release applies this idea in three settings:
+ObserverBench instantiates these choices in three standardized operational
+modes---closed-loop control, effect prediction, and safety triage---summarized
+in Sec.~\ref{sec:artifact}.
 
-\begin{itemize}
-  \item \textbf{Control.} The task fixes the model, starting states,
-  controller, interventions, and loss. A comparison changes the state
-  estimator or edit direction while keeping the rest of the loop fixed.
-
-  \item \textbf{Effect prediction.} The task provides fixed measurements and
-  unseen interventions. A submission predicts their effects; the evaluator
-  then applies a fixed action rule and reports prediction error and action
-  loss separately.
-
-  \item \textbf{Safety triage.} A submission provides one risk score per
-  request or trajectory. The evaluator turns those scores into allow, block,
-  escalate, or audit decisions under a fixed budget and measures both missed
-  harm and unnecessary intervention.
-\end{itemize}
-
+\Needspace{11\baselineskip}
 \paragraph{Contributions.}
 
 \begin{itemize}[itemsep=0.2em,topsep=0.3em]
-  \item \textbf{A workbench researchers can extend.} A researcher submits an
-  observer as code or a prediction table. A fixed task reports both prediction
-  quality and the cost of the resulting actions.
+  \item \textbf{An extensible evaluation workbench.} Researchers can implement
+  an observer against a small local interface or submit a prediction table to
+  a fixed task. Task and observer cards record what the evaluator fixes and
+  what the method may use. Each result reports both prediction quality and the
+  cost of the resulting actions (Sec.~\ref{sec:artifact}).
 
   \item \textbf{A formal adequacy test for control.} For linear readouts with
-  an offset, two
-  observers need to agree only at the starting point and along directions the
-  allowed edits can reach. A fixed-step formula separates errors in the
-  starting value, response to an edit, and changes the observer cannot see.
+  an offset, an observer needs to match the target only at the starting point
+  and along directions the allowed interventions can reach. An exact
+  finite-horizon identity then separates residual reported error,
+  starting-state mismatch, and target--observer response mismatch along the
+  edit direction (Sec.~\ref{sec:design}, Eq.~\ref{eq:certificate}).
 
-  \item \textbf{Evidence that prediction and action can disagree.} On
-  GPT-2-small and Qwen2.5-7B, pairwise terms improve unseen effect prediction
-  without always improving the fixed action, while direct-loss observers
-  lower downstream loss.
+  \item \textbf{An empirical separation of prediction and action.} Pairwise
+  models improve held-out effect prediction on GPT-2-small and Qwen2.5-7B, but
+  better mean prediction does not reliably improve the chosen GPT-2 action.
+  Relative to the same-feature mean observer, direct-loss training reduces
+  action loss by 18.5\% in the clean GPT-2 confirmation and by 8.9\% in the
+  Qwen aggregate
+  (Secs.~\ref{sec:phase7-confirmation} and~\ref{sec:qwen-induction})
+  \cite{wang2023ioi,olsson2022induction,qwen2024qwen25}.
 
-  \item \textbf{Safety scores tested as decisions.} The safety tasks compare
-  observers under fixed block, review, or audit budgets. Correct label ranking
-  can still spend that budget poorly, and realistic attack rates can separate
-  methods that a balanced test makes appear tied.
+  \item \textbf{Decision-grounded safety evaluation.} In the authorization
+  task, a label observer with AUROC 1.000 allocates a fixed intervention budget
+  poorly when it ignores consequence. In the ControlArena APPS task, balanced
+  evaluation hides differences that appear in the low-prevalence sweep,
+  including the quantified 1\% case (Sec.~\ref{sec:safety})
+  \cite{greenblatt2024aicontrol,inglis2025controlarena}.
 \end{itemize}
+
+The next question is operational: what exactly does ObserverBench fix, what
+may a researcher submit, and what does the evaluator return?

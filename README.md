@@ -1,7 +1,8 @@
 # ObserverBench
 
-**Public site:** <https://kwisatzh.github.io/observerbench/> *(enabled when the
-release repository is published)*
+**Public site:** <https://kwisatzh.github.io/observerbench/>
+
+**Archived release:** <https://doi.org/10.5281/zenodo.22136091>
 
 ObserverBench is a research artifact for evaluating observers in control-oriented interpretability.
 
@@ -10,7 +11,10 @@ that framework designs measurements for recovering internal quantities and
 intervention effects, while ObserverBench tests whether a proposed estimate is
 adequate for a declared action.
 
-The central question is not whether a richer observer can be made to win. The question is when an observer is good enough to support intervention, and when a cheap or misspecified observer stays target-useful while silently changing collateral state, prediction error, or feedback behavior.
+ObserverBench asks when an observer is adequate for an intervention. A more
+complex observer is not automatically better: a simpler or misspecified
+observer may still serve the target task while changing collateral state,
+prediction error, or feedback behavior.
 
 This repository is the v0 reproduction/workbench for the ObserverBench paper. It is not a finished universal benchmark or a plugin platform.
 
@@ -27,14 +31,14 @@ An ObserverBench task fixes:
 
 The estimator and actuation direction are separate experimental factors. A
 fixed-direction comparison changes only the estimator; a factorial comparison
-varies both factors deliberately and reports their effects separately.
+varies both factors and reports each effect separately.
 
 The v0 repo includes the paper tasks:
 
 - Ctl-1 analytic collateral geometry.
 - Trained-transformer Ctl-1 one-shot observer geometry.
 - Trained-transformer Ctl-2 closed-loop observer-control.
-- An inert paired-scope safety interlock with exact evaluator-owned policy
+- A non-executing paired-scope safety interlock with exact evaluator-owned policy
   labels and fixed allow/block/escalate budgets, plus a sealed
   Qwen2.5-7B-Instruct run using the same protocol. The best activation observer
   lowers aggregate protocol loss by 32.1% relative to the strongest action-only
@@ -45,17 +49,21 @@ The v0 repo includes the paper tasks:
   verdict-adjacent probe, 0.868 for supervised text, and 0.830 for a supervised
   observer over the prompted score distribution. It matches the exact-label
   oracle's audit loss on the balanced panel; a checked prevalence sweep shows
-  how that ceiling breaks when attacks are rare. The portable score table ships
-  with the repo.
+  that the tie with the oracle disappears when attacks are rare. The portable
+  score table ships with the repo.
 - IOI known-circuit diagnostics on GPT-2-small outputs:
   Stage 1 whole-group self-repair, Stage 2b anchored broad-random head subsets,
   Stage 2c primary-stratified subsets, and capacity-matched pair analyses.
-- A prospective Qwen2.5-7B induction-copy task with exact next-token labels and
-  an exhaustive eight-head intervention cube. Its code and table adapter are
-  present; no Qwen scientific outcome is claimed until the causal gate and
-  locked run finish.
+- A prospectively frozen Qwen2.5-7B induction-copy task with exact next-token
+  labels and an exhaustive eight-head intervention cube. On 128 held-out masks,
+  pairwise effect prediction lowers MAE from 0.121 to 0.040. Direct-loss
+  observers lower aggregate action loss by 8.9% against same-feature
+  natural-mean observers and by 49.6% against exact no-op. The claim is bounded
+  to eligible prompts, the confirmed panel, and the declared mask pools.
 
-The repo reproduces the paper figures, generates ObserverCards, exposes a minimal CLI for the current tasks, and provides a small Python contract for externally supplied observers.
+The repo includes commands to regenerate the paper figures and ObserverCards.
+It also provides a minimal CLI for the current tasks and a small Python
+contract for external observers.
 
 The public site builds from the checked leaderboard JSON in this repository.
 Routine public jobs use a structured GitHub issue: the submitter links an
@@ -68,10 +76,11 @@ requests, and flagged submissions. See `docs/PUBLIC_SUBMISSION_WORKFLOW.md` and
 The first automatic task is the blinded Qwen authorization pack at
 `task-packs/safety/safety-interlock-qwen2-5-7b-instruct/paired-scope-v1/`.
 It provides 1,152 labeled fit/calibration measurements and 768 target-free
-queries. The evaluator holds the matching targets and returns aggregate
-prediction and action metrics. The APPS panel remains visible for comparison,
-but its public examples are matchable to the labelled upstream dataset and are
-therefore described as an open adoption panel rather than a sealed test.
+queries. The matching targets remain evaluator-only; the evaluator returns
+aggregate prediction and action metrics. The APPS panel remains visible for
+comparison, but its public examples are matchable to the labelled upstream
+dataset and are therefore described as an open adoption panel rather than a
+sealed test.
 
 The external contract has four checked extension paths. `ctl1_analytic` accepts
 an outside state estimator and direction provider. The inference-free
@@ -85,11 +94,11 @@ runtime. The trained control
 tasks remain reproduction tasks. The v0 contract does not cover arbitrary
 model attachment, bring-your-own-model workflows, or dynamic plugins.
 
-For safety monitors, the artifact implements a four-step identification ladder:
-check the richest output distribution, match supervision with a surface
-baseline, remove the monitoring request, and evaluate frozen scores at the
-intended prevalence, budget, strata, and loss. The ladder is a protocol for
-locating useful information; it is not by itself evidence of deception or
+For safety monitors, the artifact uses four checks: inspect the richest output
+distribution, compare it with a surface baseline under matched supervision,
+remove the monitoring request, and evaluate frozen scores at the intended
+prevalence, budget, strata, and loss. Together, these checks show where useful
+information is available. They do not by themselves establish deception or
 hidden knowledge.
 
 ## Why Observers Matter For Control
@@ -148,8 +157,8 @@ observerbench run safety_interlock_analytic \
   --outdir runs/safety_interlock
 ```
 
-The task holds the requested action fixed within each matched pair while the
-granted scope changes. It reports classification AUROC, realized protocol loss,
+Within each matched pair, the requested action is fixed while the granted scope
+changes. The task reports classification AUROC, realized protocol loss,
 tail loss, severity-weighted misses, clean utility, and escalation cost. The
 safety-track contract and claim boundary are documented in
 `docs/SAFETY_TRACK.md`.
@@ -267,7 +276,8 @@ Full reruns are separate from fast reproduction:
 python scripts/reproduce_paper_full.py
 ```
 
-By default, the full script refuses expensive runs. Anything that trains a model or may require TransformerLens/GPT-2 needs an explicit acknowledgement:
+By default, the full script will not start expensive runs. Model training and
+runs that may require TransformerLens/GPT-2 require explicit acknowledgement:
 
 ```bash
 python scripts/reproduce_paper_full.py --yes-run-expensive
@@ -345,7 +355,9 @@ observer_card.json
 observer_card.md
 ```
 
-Recommendations are metric-derived. They are not stamped from observer names. For example, the same observer name with opposite metrics should receive different recommendations, and different observer names with identical metrics should receive the same recommendation.
+Recommendations are computed from metrics, not observer names. The same name
+with different metrics can receive different recommendations, while different
+names with identical metrics receive the same recommendation.
 
 The checked paper bundle is under
 `results/revision/phase04/observer_cards/`. It contains aggregate cards for
@@ -376,10 +388,9 @@ generic evaluator writes separate TaskCard and ObserverCard metadata, so an
 observer cannot silently redefine the benchmark split or estimand.
 
 The checked Phase-5 IOI tables provide the first built-in finite-effect task at
-20, 40, 80, and 160 masks. The prospective Qwen induction-copy adapter adds
-16, 40, 64, and 128-mask versions over a complete 256-mask universe. The Qwen
-task becomes a scientific artifact only after its preregistered causal gate and
-locked measurements pass; the registry code does not imply that result.
+20, 40, 80, and 160 masks. The frozen Qwen induction-copy adapter adds 16, 40,
+64, and 128-mask versions over a complete 256-mask universe. Its checked
+artifacts come from the sealed Copy-v2 run described in the paper.
 `finite_effect_task_ids()` lists exact `name@version` identifiers, and
 `load_finite_effect_task(...)` verifies the task-specific manifests and hashes.
 Both loaders return prompt-averaged measurements and held-out targets without
@@ -425,21 +436,20 @@ Legacy script entry points under `scripts/` are kept as wrappers or reproduction
 
 The documented public names and signatures in `docs/API_CONTRACT.md` are the v0 stability boundary. Individual paper-task configuration fields and scientific fixtures are versioned separately.
 
-### Prospective Qwen induction producer
+### Qwen induction reproduction
 
-The Qwen producer is staged so that locked outcomes cannot be measured before
-predictions and actions are frozen. The full config and producer-source
-manifest are both frozen; the production
-runner rejects a config or source bundle that differs from either seal. Record
-a private commit or tag before the A100 run. Install the optional runtime
-dependencies:
+The checked release includes the completed Copy-v2 run. The producer keeps
+locked outcomes unavailable until predictions and actions are frozen. The full
+configuration and producer-source manifest are sealed, and the runner rejects
+a configuration or source bundle that differs from either seal. Install the
+optional runtime dependencies:
 
 ```bash
 pip install -e '.[qwen]'
 ```
 
-Run the 0.5B engineering check with the smoke config. It tests the real Qwen
-hooks and artifact path but cannot support a paper claim:
+The 0.5B smoke configuration checks the Qwen hooks and artifact path but does
+not reproduce a paper claim:
 
 ```bash
 python scripts/run_qwen_induction_phase09.py \
@@ -449,7 +459,8 @@ python scripts/run_qwen_induction_phase09.py \
   --resume
 ```
 
-The scientific 7B run uses the frozen config and this exact stage order:
+The scientific 7B reproduction uses the frozen config and this exact stage
+order:
 `prepare`, `discover`, `confirm`, `freeze-design`, `measure-calibration`,
 `freeze-observers`, `measure-locked-test`, `evaluate`, and `measure-collateral`.
 The collateral stage measures only masks already selected by the sealed actions
@@ -497,6 +508,18 @@ CI runs the default suite only. It must not download GPT-2 or train models.
 
 ## Citation
 
-For the private draft, cite the ObserverBench paper version associated with
-the local checkout and record the commit hash internally. The arXiv v1
-manuscript does not include a repository URL.
+Please cite the archived software release:
+
+```bibtex
+@software{erramilli2026observerbench,
+  author  = {Vijay Erramilli},
+  title   = {ObserverBench: Testing Mechanistic Estimates for Intervention and Control},
+  year    = {2026},
+  version = {0.1.0},
+  doi     = {10.5281/zenodo.22136091},
+  url     = {https://doi.org/10.5281/zenodo.22136091}
+}
+```
+
+The conceptual framework is described in
+[Mechanistic Tomography](https://arxiv.org/abs/2608.19338).

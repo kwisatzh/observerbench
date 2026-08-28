@@ -1,0 +1,38 @@
+{
+  "title": "ObserverBench: Testing Mechanistic Estimates for Intervention and Control",
+  "description": "ObserverBench is a versioned benchmark and reproduction artifact for testing whether an internal estimator is adequate for the intervention, control, or safety decision it directs. Each task fixes the model, information available to the observer, allowed actions, controller, held-out cases, and downstream loss. The evaluator reports estimation quality separately from the loss incurred by the resulting actions. The release includes closed-loop control tasks, finite-effect prediction on GPT-2-small and Qwen2.5-7B, safety triage under fixed intervention budgets, task-pack and submission interfaces, checked reference results, paper source, and reproduction scripts. ObserverBench complements Mechanistic Tomography, which addresses measurement design; ObserverBench tests whether a resulting estimate is adequate for its declared use.",
+  "creators": [
+    {
+      "name": "Erramilli, Vijay"
+    }
+  ],
+  "upload_type": "software",
+  "publication_date": "2026-08-27",
+  "version": "0.1.0",
+  "license": "MIT",
+  "keywords": [
+    "mechanistic interpretability",
+    "observer evaluation",
+    "mechanistic tomography",
+    "activation steering",
+    "causal intervention",
+    "closed-loop control",
+    "effect prediction",
+    "AI safety",
+    "safety monitoring",
+    "benchmark",
+    "reproducibility"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://arxiv.org/abs/2608.19338",
+      "relation": "references",
+      "scheme": "url"
+    },
+    {
+      "identifier": "10.5281/zenodo.21797578",
+      "relation": "references",
+      "scheme": "doi"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+\section{Effect prediction: better estimates need not choose better actions}
+\label{sec:effect-prediction}
+
+Many interpretability studies use an observer once, to choose one intervention
+from a fixed set. ObserverBench tests whether better prediction of held-out
+effects also produces a better choice. It fixes the measurements, candidate
+actions, decision rule, and held-out loss, then reports prediction error and
+the loss caused by the selected action separately.
+
+We test this effect-prediction contract on GPT-2-small and Qwen2.5-7B. The two
+tasks use different behaviors and head sets, but keep the same distinction
+between estimating an effect and using that estimate to act.
+
+\begin{table}[H]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}L{0.17\linewidth}L{0.38\linewidth}L{0.38\linewidth}@{}}
+\toprule
+Task dimension & GPT-2-small IOI & Qwen2.5-7B copy \\
+\midrule
+Target & A mask's mean margin drop, or its prompt-level absolute target loss
+& A mask's mean candidate-margin drop, or its prompt-level absolute target
+loss \\
+Information boundary & Frozen calibration effects and declared head or group
+features & Frozen calibration effects and declared features for a confirmed
+eight-head panel \\
+Action space & One candidate head-ablation mask; exact no-op is included in
+the confirmation & One of eight nonempty head-ablation masks or exact no-op in
+each pool \\
+Decision rule and loss & Choose the predicted closest-mean or lowest-loss
+mask; score held-out absolute target error & Choose the predicted closest-mean
+or lowest-loss mask; score held-out absolute target error \\
+Operating regime & Held-out IOI prompts and previously unseen masks & Eligible
+held-out induction-copy prompts across four sequence conditions and unseen
+masks \\
+\bottomrule
+\end{tabular}
+\caption{Task contracts for the two effect-prediction studies. Each observer
+receives the same calibration information within a task and faces the same
+candidate actions and held-out loss.}
+\label{tab:effect-prediction-contracts}
+\end{table}
+
+\input{sections/ioi}
+\input{sections/qwen_induction}

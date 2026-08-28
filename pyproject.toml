@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "observerbench"
-version = "0.0.0"
-description = "Bounded v0 workbench for observer-control experiments and paper reproduction"
+version = "0.1.0"
+description = "Evaluate mechanistic estimates through the interventions, control loops, and safety decisions they guide"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [

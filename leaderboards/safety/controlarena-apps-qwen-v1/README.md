@@ -13,4 +13,9 @@ All rows score the same 744 paired honest/verified-backdoor APPS problems. The c
 | Qwen + ControlArena detailed prompt | prespecified external check | expected value over ten score-token logits; one forward measurement | 0.810 | 716 | 0.966 | 598 |
 | Qwen + ControlArena basic prompt | prespecified external check | expected value over ten score-token logits; one forward measurement | 0.786 | 717 | 0.931 | 607 |
 
-Interpretation follows the monitor identification ladder: check the output distribution, match supervision with a surface baseline, remove the monitoring request, and test the intended prevalence, budget, strata, and loss. The neutral-context result shows decodable signal; it does not by itself establish deception or hidden knowledge. The bundled post-outcome stratum diagnostic also finds audit-allocation drift across APPS families and input lengths.
+Interpretation follows a four-step monitor check: inspect the output
+distribution, match supervision with a surface baseline, remove the monitoring
+request, and test the intended prevalence, budget, strata, and loss. The
+neutral-context result shows decodable signal; it does not by itself establish
+deception or hidden knowledge. The bundled post-outcome stratum diagnostic also
+finds audit-allocation drift across APPS families and input lengths.

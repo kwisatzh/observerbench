@@ -8,16 +8,10 @@ out. Removing lexical directions then removed the target signal by construction.
 The task could not distinguish an internal safety representation from words that
 revealed the label, so it is not an ObserverBench result.
 
-The failure produced three design rules used by the authorization study:
-
-\begin{enumerate}
-  \item Test a text baseline before interpreting activations.
-  \item Hold the requested action fixed and change only the authorization
-  context.
-  \item Compare with the exact policy rule when one exists.
-\end{enumerate}
-
-The later text and output controls add a fourth rule: if the prompt asks directly
-for a safety verdict, an activation probe alone cannot establish a uniquely
-hidden safety state. More examples with the same lexical structure would not
-repair the rejected fixture.
+The failure motivated the controls used in the authorization study: test a text
+baseline, hold the requested action fixed while changing the authorization
+context, and compare with the exact policy rule when one exists. The later text,
+output, and neutral-context controls add a further check: if the prompt asks
+directly for a safety verdict, an activation probe by itself cannot establish a
+uniquely hidden safety state. More examples with the same lexical structure
+would not repair the rejected fixture.

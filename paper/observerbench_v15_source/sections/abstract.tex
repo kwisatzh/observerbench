@@ -1,27 +1,33 @@
-Interpretability methods are increasingly used not only to explain models but
-also to change what they do. In each setting, an estimate guides an action,
-yet a prediction that is accurate on average can still lead to a poor choice.
-We present \textbf{ObserverBench}, an evaluation framework for testing whether
-an estimate is good enough for the intervention, control, or safety decision
-it will drive.
+Mechanistic interpretability is increasingly used to guide interventions, such
+as steering activations, removing circuits, or enforcing safety boundaries.
+But an internal estimate that is accurate on average can still lead to a poor
+decision when it is used to choose a specific action.
 
-ObserverBench fixes the model, available information, allowed actions,
-decision rule, unseen test cases, and loss. It reports both prediction quality
-and the cost of the resulting actions. Scores are specific to a declared use,
-not universal rankings.
+We present \textbf{ObserverBench}, a benchmark framework for testing whether
+an internal estimator---an observer---is adequate for the intervention,
+control, or safety task it directs. Each task fixes the model, information
+available to the observer, allowed actions, decision rule, unseen test cases,
+and loss. ObserverBench reports both estimation accuracy and downstream action
+performance. Its rankings are task-specific: observers are compared only
+under the same information and action constraints.
 
-For simple linear scores, our theory shows that two estimates need to agree
-only at the starting point and along directions the allowed edits can reach. A
-fixed-step formula separates three failures: a wrong starting value, a wrong
-response to the edit, and changes in the true target that the estimate does not
-see. In a learned Transformer suffix, the full formula predicts final error
-better than partial versions.
+Our theory and experiments show three ways these criteria can differ:
 
-On GPT-2-small IOI and a Qwen2.5-7B induction-copy task, observers that include
-pairwise effects improve prediction on unseen interventions without always
-improving the chosen action. Predicting action cost directly reduces loss in
-both tasks. In the safety tests, a score that perfectly ranks policy violations
-can still allocate a fixed budget worse than consequence-aware scores, and a
-balanced panel can hide differences that appear when attacks are rare. Across
-these settings, adequacy depends on available information, possible actions,
-the decision rule, loss, and the mix of cases encountered in use.
+\begin{itemize}[leftmargin=1.4em,itemsep=0.15em,topsep=0.25em]
+  \item \textbf{Task-relevant accuracy.} In a control loop, observer errors
+  matter at the starting point and along directions the allowed intervention
+  can reach.
+
+  \item \textbf{Prediction versus decision.} On circuit-intervention tasks in
+  GPT-2-small and Qwen2.5-7B, pairwise observers predict unseen intervention
+  effects more accurately without always choosing better actions. Observers
+  trained to predict action loss directly choose lower-loss actions.
+
+  \item \textbf{Consequence-aware safety.} Under fixed intervention budgets,
+  a score that perfectly separates policy violations can allocate actions
+  poorly when violations have different costs. Balanced safety panels can also
+  conceal differences that appear when attacks are rare.
+\end{itemize}
+
+ObserverBench provides a common way to evaluate interpretability methods
+through the actions they enable.

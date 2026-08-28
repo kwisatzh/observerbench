@@ -1,0 +1,45 @@
+\section{Artifact interfaces and sealed evaluation}
+\label{app:artifact-interfaces}
+
+The artifact exposes three versioned interfaces:
+
+\begin{itemize}[leftmargin=1.5em,itemsep=0.1em,topsep=0.2em]
+  \item \path{observerbench.api.v0} for control composition;
+  \item \path{observerbench.effect_prediction.v0} for held-out finite-effect
+  prediction; and
+  \item \path{observerbench.safety_protocol.v0} for safety triage.
+\end{itemize}
+
+Their machine-readable schemas, example submissions, and validation commands
+ship with the repository. The version identifiers prevent a result produced
+under one contract from being compared silently with a result produced under
+another.
+
+The task registry states which submission route each bundled task supports.
+In the current release, the analytic control task provides the checked
+external-observer adapter. Its benchmark wrapper constructs the controller and
+reuses the task's fixed generator, readouts, normalization, and metrics. A
+lower-level run may replace the controller, but the resulting score is marked
+non-comparable because it no longer represents the same decision problem.
+
+Public safety-task packs contain the threat model, allowed actions,
+consequence loss, operating budgets, training measurements, and held-out
+queries. They do not contain the held-out evaluator answers. The evaluator
+stores those targets separately and links them to the public pack by a
+cryptographic hash. A submission can therefore be checked against the declared
+task while the labels used for final scoring remain sealed. This layout also
+allows a researcher to add a data-only safety task without modifying the core
+workbench.
+
+The bundled GPT-2 IOI and Qwen induction-copy registries implement the same
+separation for finite-effect prediction. Each registry exposes frozen
+measurement tables at declared budgets, checks the model and split recorded by
+the task, and uses different prompts for calibration measurements and held-out
+targets. An outside observer can submit its predictions without loading the
+model or rerunning the intervention experiment. The registries include
+per-component and additive ridge observers as initial comparison rows.
+
+Runs use strict JSON and record
+the contract and result-schema versions, component classes and parameters,
+package and dependency versions, the source revision, configuration and result
+hashes, and observer provenance supplied by the submitter.

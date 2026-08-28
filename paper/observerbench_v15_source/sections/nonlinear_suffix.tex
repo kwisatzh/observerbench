@@ -1,4 +1,4 @@
-\section{A simple control certificate remains predictive in a Transformer}
+\subsection{A simple control certificate remains predictive in a Transformer}
 \label{sec:nonlinear-suffix}
 
 Equation~\ref{eq:certificate} is exact for an affine system. A Transformer is
@@ -7,6 +7,32 @@ error---remaining reported error, starting mismatch, and response mismatch---
 remain useful when every edit passes through learned Transformer layers. We
 begin with a small model whose target we can verify exactly, following the
 controlled ``wind-tunnel'' approach of \cite{agarwal2025bayesian}.
+
+\paragraph{Task contract.}
+This experiment instantiates the control mode as follows:
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}L{0.21\textwidth}L{0.71\textwidth}@{}}
+\toprule
+Dimension & Fixed contract \\
+\midrule
+Target & Scalar state readout and its error over a 15-step trajectory. \\
+Information boundary & The residual after the first Transformer block;
+first-order observers use the two individual features, while lifted observers
+also use their product. \\
+Action space & Repeated residual edits along the declared observer direction. \\
+Decision rule and loss & Proportional feedback with $K=0.35$; integrated
+squared tracking error is primary, with final error and clipping as diagnostics. \\
+Operating regime & Twelve independently trained two-block Transformers for
+additive and interactional targets, with edits checked against clean residual
+scale. \\
+\bottomrule
+\end{tabular}
+\caption{ObserverBench contract for the closed-loop control experiment.}
+\label{tab:control-task-contract}
+\end{table}
 
 We train a two-block Transformer on sequences with two binary features, $x_1$
 and $x_2$, and target
@@ -35,19 +61,13 @@ We run two tests with 12 independently trained models per target family:
   additive control.
 \end{itemize}
 
-Each rollout uses 15 steps with $K=0.35$. The primary outcome is integrated
-squared tracking error: the squared target error summed across the trajectory.
-It distinguishes a controller that approaches the target smoothly from one
-that makes large intermediate errors. Clipping and threshold crossings are
-secondary diagnostics; none of the main matched-pair comparisons or controlled
-sweeps clips. Uncertainty is measured across the 12 independently trained
-models, not across the many conditions within each model.
-
-We also check edit size. Every natural comparison and 99.2\% of controlled
+Integrated squared tracking error counts error across the full trajectory, not
+only at the final step, and uncertainty is measured across the 12 independently
+trained models, not across the many conditions within each model. None of the
+main comparisons clips. Every natural comparison and 99.2\% of controlled
 conditions move no farther than the largest distance among the four clean task
-archetypes. The edits therefore have a familiar scale, although four
-archetypes cannot prove that edited states remain on the full activation
-manifold.
+archetypes. The edits therefore have a familiar scale, although four archetypes
+cannot prove that edited states remain on the full activation manifold.
 
 The suffix is measurably nonlinear. At the largest offsets, its mean deviation
 from the affine prediction is 16.1\% of output movement, and the certificate
@@ -61,14 +81,13 @@ They remain predictive. The main checks agree:
   the sign right in 96.0\% of conditions.
   \item Its residual MAE is 16.5\% of mean absolute actual error.
   \item After fitting only an intercept and slope on the other 11 seeds, its
-  leave-one-seed-out MAE is $0.063$, compared with $0.302$ for bias alone and
-  $0.367$ for the observer pole alone. It wins on every held-out seed.
+  leave-one-seed-out MAE is $0.063$, compared with $0.302$ for the bias-only
+  model and $0.367$ for the observer-pole-only model. It wins on every held-out seed.
 \end{itemize}
 
-The edits stay within the scale of clean residual variation and do not clip, so
-the three certificate terms capture most of the error over this operating
-range. This does not show that the suffix or its activation manifold is locally
-linear.
+Across this checked operating range, the three certificate terms capture most
+of the error. This does not show that the suffix or its activation manifold is
+locally linear.
 
 \input{../generated_phase05/nonlinear_suffix/nonlinear_suffix_summary}
 
@@ -81,7 +100,7 @@ exact losses and intervals are reported in Table~\ref{tab:phase5-nonlinear-suffi
 This result concerns the estimator and edit direction together. The mismatched
 estimator--direction pairs are unstable in 10 of 12 interactional models and
 also fail the action- and activation-scale checks. We therefore do not use them
-to rank the estimators alone. Appendix
+to rank the estimators independently of direction. Appendix
 Table~\ref{tab:nonlinear-suffix-factorial} reports all four cells, including
 their self-response and convergence factor $p$.
 
@@ -96,7 +115,10 @@ their self-response and convergence factor $p$.
   \label{fig:nonlinear-suffix}
 \end{figure}
 
+\FloatBarrier
 The study provides a bridge to pretrained models: a simple control-error
 certificate can remain useful after nonlinear computation when edit scale and
 loop stability are checked. It does not establish token-level or large-model
-control.
+control. Closed-loop control evaluates an observer over a trajectory. What if
+the decision instead selects one static intervention from a fixed candidate
+set using predicted finite effects?

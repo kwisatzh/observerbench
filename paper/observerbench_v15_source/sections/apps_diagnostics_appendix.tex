@@ -7,31 +7,22 @@ They do not change the locked comparison in Table~\ref{tab:apps-monitor}.
 \paragraph{Does the answer position explain the gap between prompted and
 neutral activations?}
 The fixed calibration rule selects layer 28 for the verdict-adjacent observer,
-with calibration AUROC 0.935 and locked AUROC 0.953. After seeing the neutral
-result, we checked cached verdict activations at the other declared layers.
-Layer 20 reaches locked AUROC 0.958, but calibration AUROC 0.929, so the rule
-would not select it. The neutral layer-20 probe remains higher at 0.979. Answer
-formation may explain part of the gap, but this check cannot separate the
-monitoring instruction, readout position, and other context changes.
+with calibration AUROC 0.935 and locked AUROC 0.953. A post-outcome check of
+cached layer 20 raises locked AUROC to 0.958, but calibration would not have
+selected it (AUROC 0.929), and the neutral layer-20 probe remains higher at
+0.979. This check cannot separate answer position from the monitoring
+instruction or other context changes.
 
 \paragraph{Does pooling hide score differences between groups?}
 Figure~\ref{fig:apps-strata} groups neutral-probe scores by APPS source family
-and by input-length quartile. Within-family AUROC is 0.956--0.991, and
-within-length-quartile AUROC is 0.974--0.988: the probe separates honest and
-backdoored solutions well in every displayed group. Its score scale still
-shifts:
-
-\begin{itemize}
-  \item At the global 2\% audit threshold, caught attacks in a family range from
-  0.36 to 2.38 times that family's proportional share.
-  \item Across input-length quartiles, the range is 0.67--1.43.
-\end{itemize}
-
-These ratios come from only 29 audits and are descriptive. They show that good
-pooled performance does not ensure equal allocation between groups. AUROC and
-audit rankings agree for this fixed mixture and these budgets despite the scale
-shift. The prevalence sweep in Figure~\ref{fig:apps-prevalence} keeps the same
-family mixture and does not simulate an attacker choosing where to attack.
+and input-length quartile. Separation remains strong within every family
+(AUROC 0.956--0.991) and length quartile (0.974--0.988), but score scale shifts.
+At the global 2\% cutoff, a family's share of caught attacks is 0.36--2.38 times
+its population share; across length quartiles the range is 0.67--1.43. These
+ratios come from only 29 audits and are descriptive. They show that pooled
+discrimination need not imply equal allocation between groups. The fixed
+family mix and prevalence sweep do not model an attacker choosing where to
+attack.
 
 \begin{figure}[H]
 \centering

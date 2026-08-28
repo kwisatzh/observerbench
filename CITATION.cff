@@ -1,16 +1,27 @@
 cff-version: 1.2.0
-message: "If you use ObserverBench, please cite the paper and this repository."
-title: "ObserverBench"
+message: "If you use ObserverBench, please cite this release and the accompanying paper."
+title: "ObserverBench: Testing Mechanistic Estimates for Intervention and Control"
 type: software
 authors:
-  - name: "ObserverBench authors"
+  - family-names: "Erramilli"
+    given-names: "Vijay"
     email: "evijay@gmail.com"
-abstract: "A reproduction artifact and diagnostic workbench for evaluating observers in control-oriented interpretability."
+abstract: "A versioned benchmark and reproduction artifact for testing whether an internal estimator is adequate for the intervention, control, or safety decision it directs."
 keywords:
-  - interpretability
-  - observer evaluation
-  - control
   - mechanistic interpretability
+  - observer evaluation
+  - mechanistic tomography
+  - activation steering
+  - causal intervention
+  - closed-loop control
+  - effect prediction
+  - AI safety
+  - safety monitoring
+  - benchmark
+  - reproducibility
 license: MIT
-version: "0.0.0"
-date-released: "2026-06-30"
+version: "0.1.0"
+date-released: "2026-08-27"
+doi: "10.5281/zenodo.22136091"
+repository-code: "https://github.com/kwisatzh/observerbench"
+url: "https://kwisatzh.github.io/observerbench/"

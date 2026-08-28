@@ -6,17 +6,21 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
+\usepackage{array}
 \usepackage{graphicx}
 \usepackage{flafter}
 \usepackage{float}
+\usepackage{placeins}
 \usepackage{microtype}
 \usepackage{enumitem}
+\usepackage{needspace}
 \usepackage{subcaption}
 \usepackage[hidelinks]{hyperref}
 
 \graphicspath{{../generated_current/}{../generated_phase05/nonlinear_suffix/}{figures/}}
 \setlist[itemize]{leftmargin=1.5em,itemsep=0.35em,topsep=0.4em}
 \setlength{\emergencystretch}{2em}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \newtheorem{proposition}{Proposition}
 
 \title{ObserverBench: Testing Mechanistic Estimates for Intervention and Control\\[0.25em]
@@ -32,12 +36,11 @@
 \end{abstract}
 
 \input{sections/introduction}
+\input{sections/api_cards}
 \input{sections/design}
 \input{sections/nonlinear_suffix}
-\input{sections/ioi}
-\input{sections/qwen_induction}
+\input{sections/effect_prediction}
 \input{sections/safety_interlock}
-\input{sections/api_cards}
 \input{sections/related_alignment_phase01}
 \input{sections/limitations_conclusion}
 \clearpage
@@ -45,6 +48,7 @@
 
 \clearpage
 \appendix
+\input{sections/artifact_appendix}
 \input{sections/superseded_diagnostics}
 \input{sections/apps_diagnostics_appendix}
 \input{sections/rejected_fixture_appendix}

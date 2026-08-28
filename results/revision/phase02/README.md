@@ -21,9 +21,9 @@ ranks to the same count-additive baseline.
 - Inputs: 256 prompt-level effects for each intervention mask.
 - Designs: 160 anchored broad-random masks in Stage 2b and 240
   primary-stratified masks in Stage 2c.
-- Prediction: ten repeated five-fold subset cross-validations with identical
-  folds for every model.
-- Uncertainty: 1,000 joint prompt bootstrap draws. Intervention masks, folds,
+- Prediction: ten repeated five-way subset cross-validations with identical
+  splits for every model.
+- Uncertainty: 1,000 joint prompt bootstrap draws. Intervention masks, splits,
   prompt template, and the count-bin basis remain fixed, so the intervals are
   conditional on those choices.
 - Contrasts: add one pair block to the count-additive model, and remove one

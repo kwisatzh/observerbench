@@ -10,8 +10,9 @@ This is the public, target-free ObserverBench task pack.
 - `task.json` records the public schema, prompt format, and file hash.
 
 Identifiers and synthetic account/resource names are re-keyed for this release.
-Submit one finite `predicted_risk` for every held-out `query_id`. The evaluator
-holds the matching targets and reports aggregate prediction and action metrics.
+Submit one finite `predicted_risk` for every held-out `query_id`. The matching
+targets remain evaluator-only; the evaluator reports aggregate prediction and
+action metrics.
 
 The authorization rule itself is not secret: an exact symbolic checker remains
 the legitimate oracle reference. The seal prevents direct lookup from the

@@ -1,11 +1,14 @@
-\section{What an observer must preserve}
+\section{Closed-loop control: what an observer must preserve}
 \label{sec:design}
 
-An observer turns a model measurement into information that can guide an
-intervention. The distinction between the estimate and the intervention is
-important. An observer may correctly report how far the model is from a target
-while pointing the controller in an unhelpful direction; conversely, a useful
-direction can be paired with a poor estimate.
+Once the controlled model, initial states, allowed intervention rule,
+controller, and loss are fixed, only observer errors that affect reachable
+states can change the controlled trajectory. An observer turns a model
+measurement into information that can guide an intervention. The distinction
+between the estimate and the intervention is important. An observer may
+correctly report how far the model is from a target while pointing the
+controller in an unhelpful direction; conversely, a useful direction can be
+paired with a poor estimate.
 
 For model state $h$, let the observer estimate a quantity $\widehat z$ and let
 $d$ denote the proposed intervention direction:
@@ -18,12 +21,10 @@ The controller uses the estimate to choose an action magnitude,
 \[
 u=C(y^\star,\widehat z).
 \]
-The task fixes the controlled model, intervention rule, initial states,
-controller, and loss. This lets us change one part at a time. To test an
-estimator, we keep the direction fixed and change only $E$. To test a
-direction, we keep the estimate fixed and change only $D$. If both change, we
-can judge only the combined system.
+Within this fixed system, testing $E$ keeps $D$ fixed, testing $D$ keeps $E$
+fixed, and changing both identifies only the combined system.
 
+\Needspace{6\baselineskip}
 An observer need not be correct on every possible model state. It needs to be
 correct on the states that the allowed interventions can reach. To state this
 concretely, suppose an activation has three coordinates but the controller can
@@ -55,11 +56,7 @@ Define
 \qquad
 \delta_\beta=\beta_T-\beta_E.
 \]
-Then
-\[
-z(h)=\widehat z(h)\quad\text{for every }h\in\mathcal H_R
-\]
-if and only if
+Then $z(h)=\widehat z(h)$ for every $h\in\mathcal H_R$ if and only if
 \[
 \delta_0=0
 \qquad\text{and}\qquad
@@ -75,10 +72,8 @@ $\delta_0=0$ and $B^\top\delta_\beta=0$, which is equivalent to
 $P_{\mathcal U}\delta_\beta=0$.
 \end{proof}
 
-The proposition separates errors that can affect an action from errors that
-cannot. In the three-coordinate example, it ignores the coefficient error on
-the coordinate the controller cannot change. With one fixed direction $d$,
-adequacy reduces to $(\beta_T-\beta_E)^\top d=0$.
+With one fixed direction $d$, Proposition~\ref{prop:reachable} reduces adequacy
+to $(\beta_T-\beta_E)^\top d=0$.
 
 \subsection{Why a convergent observer can still miss the target}
 
@@ -129,6 +124,7 @@ Substitution gives the finite-horizon certificate
 e_T=p^T\widehat e_0-m_0-\rho(1-p^T)\widehat e_0.
 \end{equation}
 
+\Needspace{8\baselineskip}
 The equation separates three sources of error:
 
 \begin{itemize}
@@ -144,29 +140,3 @@ positive $K$, but this controls only the first term. For example, if $p^T$ is
 nearly zero and $m_0=0.2$, the observer reports success while the true target
 remains off by about $0.2$, even before response mismatch is counted. A
 convergent observer is not necessarily tracking the true target.
-
-\subsection{Rules for a fair observer comparison}
-
-These results give four practical rules:
-
-\begin{enumerate}[leftmargin=1.5em,itemsep=0.2em,topsep=0.3em]
-  \item \textbf{Fix the rest of the loop.} Hold the model, controller,
-  intervention family, starting-state distribution, and loss fixed while
-  comparing observers. If the estimator and direction both change, report a
-  result for the pair.
-
-  \item \textbf{Separate construction from evaluation.} Fix targets, masks,
-  and splits before measuring held-out effects. First check that the unedited
-  model performs the base task overall and in every required group. We call
-  this the \emph{clean stop gate}.
-
-  \item \textbf{Make the comparison measurable.} Check that the measurement
-  design can expose the terms being compared. An interaction cannot be judged
-  if it is almost never measured. For repeated control, record error across the
-  trajectory rather than only a threshold crossing.
-
-  \item \textbf{Train on the quantity used to choose the action.} Predicting an
-  average effect and choosing a mask with low prompt-level loss are different
-  tasks. Section~\ref{sec:ioi} tests both with the same interventions and the
-  exact do-nothing action, or no-op.
-\end{enumerate}

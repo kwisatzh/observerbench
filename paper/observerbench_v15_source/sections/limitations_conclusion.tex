@@ -7,8 +7,8 @@ The paper makes bounded claims:
   \item \textbf{Control.} \emph{Scope:} The exact results assume affine
   readouts, one fixed direction, proportional control, and no clipping. The
   nonlinear test reruns a learned Transformer block, but the model is small and
-  its latent features are supervised; the 29.0\% gain belongs to the matched
-  estimator--direction pair, not the estimator alone. \emph{Next test:} extend
+  its underlying binary features are known by construction; the 29.0\% gain belongs to the matched
+  estimator--direction pair, not the estimator by itself. \emph{Next test:} extend
   the comparison to token-level control in larger models with independently
   usable edit directions.
 
@@ -22,7 +22,7 @@ The paper makes bounded claims:
   \emph{Next test:} use more models, unseen prompt templates, and independently
   fixed candidate sets and targets.
 
-  \item \textbf{Authorization safety.} \emph{Scope:} The inert task asks Qwen
+  \item \textbf{Authorization safety.} \emph{Scope:} The non-executing task asks Qwen
   directly for an authorization verdict, so it cannot establish a uniquely
   hidden safety state or test harmful execution, deception, or adaptive attacks.
   Its held-out failure also shows that one global threshold can hide poor
@@ -37,24 +37,24 @@ The paper makes bounded claims:
   attack trajectories and training budgets, then add adaptive evasion, stronger
   code monitors, and a deployment-level shutdown action.
 
+  \Needspace{4\baselineskip}
   \item \textbf{Artifact.} \emph{Scope:} The release provides checked control,
   finite-effect, and safety interfaces, but it is not yet a general task
   ecosystem. \emph{Next test:} add literature baselines, another safety
   environment with adaptive attacks, and a stable end-to-end reproduction path.
 \end{itemize}
 
+\Needspace{12\baselineskip}
 \section{Conclusion}
 
 ObserverBench asks a simple question: is an estimate good enough for the action
-chosen from it? An observer need not reproduce every detail of a model. It must
-preserve the information that the available action, decision rule, and loss
-actually use.
-
-The experiments show why this distinction matters. A better effect predictor
-can choose no better intervention when it predicts the wrong quantity. A
-perfect classifier can spend a safety budget poorly when it ignores consequence
-or calibration between groups. A simple output signal can also make an internal
-probe unnecessary. ObserverBench records these choices in versioned tasks and
-applies the same fixed policy to every submission; it does not rank observers in
-the abstract. Before trusting an observer, state what it may read, freeze the
-action rule and budget, and score the outcome the action actually produces.
+chosen from it? The answer is task-relative. An observer need not reproduce
+every detail of a model; it must preserve the information that the available
+action, decision rule, and loss actually use. Across the three modes, the
+experiments show that a better mean-effect predictor need not choose a better
+intervention, a perfect classifier can allocate a safety budget poorly, and an
+accessible output signal can make an internal probe unnecessary. ObserverBench
+records these choices in versioned tasks and applies the same fixed policy to
+every submission rather than ranking observers in the abstract. Before trusting
+an observer, state what it may read, freeze the action rule and budget, and score
+the outcome the action actually produces.
