@@ -17,13 +17,23 @@ from scripts.build_phase08_ioi_sensitivity_artifact import build
 
 ROOT = Path(__file__).resolve().parents[1]
 RESULT_ROOT = ROOT / "results/revision/phase08/ioi_target_sensitivity"
+CHECKED_ARTIFACT = ROOT / "paper/generated_phase08/ioi_sensitivity"
 
 
 def test_build_checks_secondary_study_and_writes_bounded_artifacts(
     tmp_path: Path,
 ) -> None:
     outdir = tmp_path / "artifact"
-    manifest = build(repo_root=ROOT, result_root=RESULT_ROOT, outdir=outdir)
+    if (RESULT_ROOT / "evaluation_v2/fixed_action_prompt_losses.csv.gz").is_file():
+        manifest = build(repo_root=ROOT, result_root=RESULT_ROOT, outdir=outdir)
+        artifact_dir = outdir
+    else:
+        artifact_dir = CHECKED_ARTIFACT
+        manifest = json.loads(
+            (
+                artifact_dir / "ioi_target_sensitivity_artifact_manifest.json"
+            ).read_text(encoding="utf-8")
+        )
 
     assert manifest["all_checks_pass"] is True
     assert manifest["contains_private_local_path"] is False
@@ -82,16 +92,16 @@ def test_build_checks_secondary_study_and_writes_bounded_artifacts(
         "natural_mean_relative_gain_fraction"
     ] == pytest.approx(0.19065143951991775)
 
-    tex = (outdir / "ioi_target_sensitivity_table.tex").read_text(
+    tex = (artifact_dir / "ioi_target_sensitivity_table.tex").read_text(
         encoding="utf-8"
     )
-    assert "Post-confirmatory Study-4 target sensitivity" in tex
+    assert "Post-confirmatory target sensitivity" in tex
     assert "has no success gate" in tex
     assert "reference-minus-direct" in tex
     assert r"\textbf{$-$46.2\%" in tex
     assert "negative no-action result at $t=0.5$ is retained" in tex
 
-    with (outdir / "ioi_target_sensitivity_results.csv").open(
+    with (artifact_dir / "ioi_target_sensitivity_results.csv").open(
         newline="", encoding="utf-8"
     ) as handle:
         rows = list(csv.DictReader(handle))
@@ -99,7 +109,7 @@ def test_build_checks_secondary_study_and_writes_bounded_artifacts(
     assert rows[-1]["target_label"] == "Equal-target mean"
 
     persisted = json.loads(
-        (outdir / "ioi_target_sensitivity_artifact_manifest.json").read_text(
+        (artifact_dir / "ioi_target_sensitivity_artifact_manifest.json").read_text(
             encoding="utf-8"
         )
     )

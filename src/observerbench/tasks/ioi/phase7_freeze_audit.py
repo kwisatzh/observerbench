@@ -418,6 +418,12 @@ def validate_phase7_preoutcome_audit(
         or audit.get("all_checks_pass") is not True
     ):
         raise ValueError("Phase-7 v2 pre-outcome audit did not pass")
+    # Check the audited implementation before opening separately archived raw
+    # measurements.  This keeps source-integrity failures diagnostic even in a
+    # public checkout, where the large measurement shards are intentionally
+    # absent.
+    if audit.get("source_code_hashes") != phase7_source_hashes(repository_root):
+        raise ValueError("Phase-7 v2 audited source code changed")
     expected_inputs = {
         "protocol": file_sha256(protocol_path),
         "design_manifest": file_sha256(Path(design_dir) / "design_manifest.json"),
@@ -434,8 +440,6 @@ def validate_phase7_preoutcome_audit(
     }
     if audit.get("input_hashes") != expected_inputs:
         raise ValueError("Phase-7 v2 pre-outcome audit input changed")
-    if audit.get("source_code_hashes") != phase7_source_hashes(repository_root):
-        raise ValueError("Phase-7 v2 audited source code changed")
     if audit.get("v2_candidate_outcome_values_read") is not False:
         raise ValueError("Phase-7 v2 audit accessed a candidate outcome")
     verify_protocol_sources(protocol, repository_root)

@@ -19,13 +19,23 @@ ROOT = Path(__file__).resolve().parents[1]
 RESULT_ROOT = (
     ROOT / "results/revision/phase07/ioi_canonical_noop_confirmation_v2"
 )
+CHECKED_ARTIFACT = ROOT / "paper/generated_phase07/ioi_confirmation"
 
 
 def test_build_checks_frozen_values_and_writes_bounded_artifacts(
     tmp_path: Path,
 ) -> None:
     outdir = tmp_path / "artifact"
-    manifest = build(repo_root=ROOT, result_root=RESULT_ROOT, outdir=outdir)
+    if (RESULT_ROOT / "evaluation/fixed_action_prompt_losses.csv.gz").is_file():
+        manifest = build(repo_root=ROOT, result_root=RESULT_ROOT, outdir=outdir)
+        artifact_dir = outdir
+    else:
+        artifact_dir = CHECKED_ARTIFACT
+        manifest = json.loads(
+            (artifact_dir / "ioi_confirmation_artifact_manifest.json").read_text(
+                encoding="utf-8"
+            )
+        )
 
     assert manifest["all_checks_pass"] is True
     assert manifest["contains_private_local_path"] is False
@@ -89,14 +99,14 @@ def test_build_checks_frozen_values_and_writes_bounded_artifacts(
         "direct_risk_reduces_dispersion_more_than_the_mean_term_worsens": True,
     }
 
-    tex = (outdir / "ioi_confirmation_table.tex").read_text(encoding="utf-8")
+    tex = (artifact_dir / "ioi_confirmation_table.tex").read_text(encoding="utf-8")
     assert "8/8" in tex
     assert "6/8" in tex
     assert "Intervals are absolute loss reductions" in tex
     assert "clean IO-versus-subject gate passed" in tex
     assert "uniform" not in tex.lower()
 
-    with (outdir / "ioi_confirmation_results.csv").open(
+    with (artifact_dir / "ioi_confirmation_results.csv").open(
         newline="", encoding="utf-8"
     ) as handle:
         rows = list(csv.DictReader(handle))
@@ -104,7 +114,7 @@ def test_build_checks_frozen_values_and_writes_bounded_artifacts(
     assert [row["status"] for row in rows] == ["pass", "pass"]
 
     persisted = json.loads(
-        (outdir / "ioi_confirmation_artifact_manifest.json").read_text(
+        (artifact_dir / "ioi_confirmation_artifact_manifest.json").read_text(
             encoding="utf-8"
         )
     )

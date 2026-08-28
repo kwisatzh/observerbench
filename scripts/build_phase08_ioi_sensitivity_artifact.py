@@ -712,7 +712,7 @@ def _write_tex(rows: list[dict[str, Any]], path: Path) -> None:
             r"\bottomrule",
             r"\end{tabular}",
             (
-                r"\caption{Post-confirmatory Study-4 target sensitivity. This secondary "
+                r"\caption{Post-confirmatory target sensitivity. This secondary "
                 r"analysis was designed after the $t=1$ confirmation and has no success "
                 r"gate. Each gain cell reports the relative loss change and, in brackets, "
                 r"a 95\% paired bootstrap interval for the absolute reference-minus-direct "
