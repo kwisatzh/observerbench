@@ -1,13 +1,14 @@
 name: Observer evaluation job
-description: Submit an inert prediction table for automatic ObserverBench evaluation.
+description: Submit an inert prediction table for automatic ObserverBench preflight.
 title: "[observer job] "
 body:
   - type: markdown
     attributes:
       value: |
         This form requests a data-only evaluation. Do not attach executable code,
-        credentials, private model data, or evaluator targets. A routine job can
-        validate and score automatically; flagged jobs are quarantined for review.
+        credentials, private model data, or evaluator targets. Public automation
+        validates the job. Sealed scoring occurs only when the repository reports
+        that its separate evaluator is enabled.
 
   - type: dropdown
     id: task

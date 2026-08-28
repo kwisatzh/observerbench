@@ -17,6 +17,20 @@ build/
 dist/
 paper/**/tmp/
 
+# Sealed evaluator material never belongs in the public repository.
+private/
+private-evaluator/
+evaluator/
+secrets/
+**/evaluator_targets.json
+**/evaluator_targets.csv
+**/private_targets.json
+**/private_targets.csv
+**/id_map.json
+**/evaluator.key
+task-packs/**/private/
+task-packs/**/evaluator/
+
 # Internal revision notes are kept outside the release repository.
 SCIENTIFIC_REVISION*.md
 

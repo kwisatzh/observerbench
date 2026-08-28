@@ -1,4 +1,4 @@
-name: Automatic observer job
+name: Observer issue preflight
 
 on:
   issues:
@@ -13,11 +13,11 @@ jobs:
     if: startsWith(github.event.issue.title, '[observer job]')
     runs-on: ubuntu-latest
     steps:
-      - name: Check out trusted evaluator boundary
-        uses: actions/checkout@v4
+      - name: Check out trusted validator
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "3.11"
 
@@ -29,7 +29,7 @@ jobs:
             --output build/issue-submission
 
       - name: Upload the inert request bundle
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: observer-job-${{ github.event.issue.number }}
           path: build/issue-submission
@@ -57,7 +57,7 @@ jobs:
             --data "$payload"
 
       - name: Confirm automatic preflight
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
         with:
           script: |
             const enabled = process.env.SEALED_EVALUATOR_ENABLED === 'true';
@@ -75,7 +75,7 @@ jobs:
 
       - name: Explain a failed preflight
         if: failure()
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
         with:
           script: |
             await github.rest.issues.createComment({

@@ -33,4 +33,5 @@ def test_task_registry_contains_expected_task_names() -> None:
         "ioi_stage2b",
         "ioi_stage2c",
         "ioi_stage2d",
+        "safety_interlock_analytic",
     }

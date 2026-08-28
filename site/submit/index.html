@@ -24,12 +24,12 @@
     <section class="page-hero narrow">
       <p class="eyebrow">Submission path</p>
       <h1>Bring scores. Get a task-specific answer.</h1>
-      <p class="lede">The first hosted release evaluates prediction tables. Your method runs where you choose; the trusted evaluator applies the same controller and loss to every observer. Each task page states whether its targets are sealed or matchable to a public source.</p>
+      <p class="lede">The public repository accepts prediction tables. Your method runs where you choose, and automatic preflight checks the submission as data. Sealed scoring is separate and is not active at public launch.</p>
     </section>
 
     <section class="section launch-note" aria-labelledby="release-heading">
-      <span class="badge available">release staging</span>
-      <div><h2 id="release-heading">Automatic evaluation without arbitrary code execution</h2><p>GitHub Pages serves the public interface. The first automatic track is the blinded Qwen authorization task. APPS remains visible as an open adoption panel while its public query export is prepared. Code submissions remain local or Colab-based until a sandboxed runner is available.</p></div>
+      <span class="badge available">preflight live</span>
+      <div><h2 id="release-heading">Automatic checks without arbitrary code execution</h2><p>The first preflight-enabled track is the blinded Qwen authorization task. A passing preflight is not a benchmark score. The issue comment states whether the separately operated sealed evaluator is enabled. APPS remains visible as an open adoption panel while its public query export is prepared. Code submissions remain local or Colab-based until a sandboxed runner is available.</p></div>
     </section>
 
     <section class="section" aria-labelledby="choose-heading">
@@ -42,7 +42,7 @@
           <ul class="check-list">
             <li>Fast, inference-free evaluation</li>
             <li>Sealed held-out targets</li>
-            <li>Automatic scorecard and comparison</li>
+            <li>Automatic preflight; scorecard only when sealed scoring is enabled</li>
             <li>No submitted code executes</li>
           </ul>
           <div class="button-row"><a class="button primary" href="https://github.com/kwisatzh/observerbench/issues/new?template=observer-submission.yml">Start a submission</a><a class="button text" href="../task-packs/safety/safety-interlock-qwen2-5-7b-instruct/paired-scope-v1/safety_task.json">Task pack</a><a class="button text" href="../downloads/predictions.example.csv">Example CSV</a></div>
@@ -66,22 +66,22 @@
       <ol class="job-flow">
         <li><span>Submitted</span><p>The issue records a task version, comparison track, ObserverCard, and prediction artifact.</p></li>
         <li><span>Validated</span><p>Automation checks the schema, query IDs, finite scores, duplicates, declared access, and hashes.</p></li>
-        <li><span>Evaluated</span><p>A protected workflow joins scores with sealed targets and runs the fixed policy, budget, and loss.</p></li>
-        <li><span>Returned</span><p>The submitter receives metrics, uncertainty, baseline deltas, failure slices, and a job identifier.</p></li>
-        <li><span>Published</span><p>An eligible result becomes a permanent result page and a checked leaderboard row.</p></li>
+        <li><span>Evaluated</span><p>When enabled, a protected workflow joins scores with sealed targets and runs the fixed policy, budget, and loss.</p></li>
+        <li><span>Returned</span><p>A sealed evaluation returns metrics, uncertainty, baseline deltas, failure slices, and a job identifier.</p></li>
+        <li><span>Published</span><p>After approval, an eligible result becomes a permanent result page and a checked leaderboard row.</p></li>
       </ol>
     </section>
 
     <section class="section" aria-labelledby="review-heading">
-      <div class="section-heading"><div><p class="eyebrow">Maintainer workload</p><h2 id="review-heading">Routine jobs can pass without manual review.</h2></div><p>Review the exceptions, not every score.</p></div>
+      <div class="section-heading"><div><p class="eyebrow">Maintainer workload</p><h2 id="review-heading">Routine preflight needs no manual review.</h2></div><p>Sealed scoring and publication follow the status shown by the repository.</p></div>
       <div class="review-grid">
-        <article><h3>Return automatically when</h3><ul class="check-list"><li>The task and comparison track already exist</li><li>Only inert CSV and JSON data are submitted</li><li>All IDs, hashes, and scores validate, and an access tier is declared</li><li>The result identity is new and the workflow is reproducible</li></ul></article>
+        <article><h3>Pass preflight automatically when</h3><ul class="check-list"><li>The task and comparison track already exist</li><li>Only inert CSV and JSON data are submitted</li><li>All IDs, hashes, and scores validate, and an access tier is declared</li><li>The result identity is new and the workflow is reproducible</li></ul></article>
         <article><h3>Review only when</h3><ul><li>The submission adds or executes code</li><li>It changes the task, controller, budget, targets, or loss</li><li>The author requests an implementation-verified badge</li><li>There is a security warning, identity collision, or appeal</li></ul></article>
       </div>
     </section>
 
     <section class="section scorecard-output" aria-labelledby="receive-heading">
-      <div><p class="eyebrow">Returned artifact</p><h2 id="receive-heading">Every accepted job should produce the same core evidence.</h2></div>
+      <div><p class="eyebrow">Returned artifact</p><h2 id="receive-heading">A sealed evaluation produces the same core evidence for every observer.</h2></div>
       <ul>
         <li><strong>Primary action outcome:</strong> downstream loss or realized violations.</li>
         <li><strong>Prediction quality:</strong> AUROC, error, or task-specific held-out fit.</li>

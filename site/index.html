@@ -60,27 +60,28 @@
     </section>
 
     <section class="section compact" aria-labelledby="answer-heading">
-      <p class="eyebrow">The short answer</p>
-      <h2 id="answer-heading">You do not need to inspect every routine submission.</h2>
+      <p class="eyebrow">Release status</p>
+      <h2 id="answer-heading">The public repository automates preflight. Sealed scoring is a separate service.</h2>
       <div class="answer-grid">
         <div class="answer-card automatic">
-          <h3>Automatic</h3>
+          <h3>Automatic at launch</h3>
           <ul class="check-list">
             <li>Validate a prediction table and ObserverCard</li>
-            <li>Score against evaluator-held targets</li>
-            <li>Return a redacted scorecard</li>
-            <li>Compare with the correct checked panel</li>
-            <li>Publish mechanically verified scores as community-evaluated results</li>
+            <li>Require an immutable GitHub commit URL</li>
+            <li>Check schema, IDs, size, values, and declared access</li>
+            <li>Store a short-lived inert preflight artifact</li>
+            <li>Report pass or fail without executing contributor code</li>
           </ul>
         </div>
         <div class="answer-card review">
-          <h3>Needs review</h3>
+          <h3>Requires the sealed evaluator</h3>
           <ul>
-            <li>A new task, controller, budget, or loss</li>
-            <li>Uploaded executable code</li>
-            <li>An access claim the system cannot verify</li>
-            <li>A duplicate identity, security flag, or appeal</li>
+            <li>Join predictions to evaluator-held targets</li>
+            <li>Return a redacted scorecard</li>
+            <li>Compare with the matching checked panel</li>
+            <li>Approve a result for leaderboard publication</li>
           </ul>
+          <p>This service is not active at public launch. The issue comment will state if it is enabled later. A preflight pass alone is not a score or rank.</p>
         </div>
       </div>
     </section>
@@ -91,14 +92,14 @@
           <p class="eyebrow">One clear path</p>
           <h2 id="journey-heading">From observer to evidence</h2>
         </div>
-        <p>Most visitors should get a useful answer without a GPU or a conversation with the maintainers.</p>
+        <p>Visitors can prepare and validate a submission without a GPU or a conversation with the maintainers.</p>
       </div>
       <ol class="steps">
         <li><span>1</span><div><h3>Choose a task</h3><p>The task fixes what can be observed, what action follows, and what counts as loss.</p></div></li>
         <li><span>2</span><div><h3>Run or upload</h3><p>Use frozen measurements, a Colab runner, or upload one risk or effect score per query.</p></div></li>
-        <li><span>3</span><div><h3>Pass validation</h3><p>The evaluator checks IDs, schema, provenance, access fields, and target separation.</p></div></li>
-        <li><span>4</span><div><h3>Receive a scorecard</h3><p>See prediction quality, action loss, uncertainty, cost, and failure slices together.</p></div></li>
-        <li><span>5</span><div><h3>Compare fairly</h3><p>Get a position only among results using the same task version and comparison track.</p></div></li>
+        <li><span>3</span><div><h3>Pass preflight</h3><p>Public automation checks IDs, schema, provenance, access fields, and finite values.</p></div></li>
+        <li><span>4</span><div><h3>Receive a scorecard</h3><p>When sealed scoring is enabled, see prediction quality, action loss, uncertainty, cost, and failure slices together.</p></div></li>
+        <li><span>5</span><div><h3>Compare fairly</h3><p>An approved result gets a position only among rows using the same task version and comparison track.</p></div></li>
       </ol>
     </section>
 
@@ -140,7 +141,7 @@
           <p class="task-meta">ControlArena APPS · open adoption panel · three audit budgets</p>
         </article>
         <article class="task-card">
-          <div class="task-top"><span class="badge available">evaluator ready</span><span>Mechanisms</span></div>
+          <div class="task-top"><span class="badge available">local contract</span><span>Mechanisms</span></div>
           <h3>Finite-effect prediction</h3>
           <p>Predict held-out intervention responses and test whether the map selects a better downstream action.</p>
           <p class="task-meta">GPT-2 IOI and Qwen induction · frozen-table path</p>

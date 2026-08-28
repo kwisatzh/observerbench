@@ -2,8 +2,17 @@
 
 The public repository and GitHub Pages site are the visible half of
 ObserverBench. A separate private evaluator holds sealed targets. This keeps
-routine submissions automatic without giving untrusted code access to labels or
+routine preflight automatic without giving untrusted code access to labels or
 repository credentials.
+
+## Public-release status
+
+The public repository automatically performs data-only preflight. The sealed
+evaluator is a separate deployment and is inactive at public launch. It can be
+enabled after the repository variable `SEALED_EVALUATOR_ENABLED` is set to
+`true` and the evaluator settings below are present. With that switch off, a
+passing submission receives a preflight comment and artifact only. It has not
+been scored and is not eligible for a leaderboard rank.
 
 ## Routine path
 
@@ -17,7 +26,8 @@ repository credentials.
    to sealed targets, applies the frozen controller and budget, and emits a
    redacted scorecard.
 5. An approved result JSON updates the matching task leaderboard. GitHub Pages
-   rebuilds from checked result JSON.
+   rebuilds from checked result JSON. The initial public release does not
+   automate this publication step.
 
 The issue is a job record, not a request for line-by-line human review. A pull
 request remains available as a bulk or development path, but routine jobs do
@@ -45,15 +55,15 @@ public repository and out of public workflow artifacts.
 
 ## Human review
 
-Routine data-only evaluations need no manual approval. Add a moderation or
-verification step only for new scientific contracts, executable submissions,
-abuse flags, disputes, or an `implementation verified` badge. Rate limits and a
-provisional `community evaluated` status can protect the sealed test set without
-creating a review queue.
+Data-only preflight needs no manual approval. Once sealed scoring is enabled,
+add a moderation or verification step only for new scientific contracts,
+executable submissions, abuse flags, disputes, or an `implementation verified`
+badge. Rate limits and a provisional `community evaluated` status can protect
+the sealed test set without creating a review queue.
 
 ## Public task-pack integrity
 
-The first automatic hosted task is the new Qwen safety `paired-scope-v1` pack.
+The first preflight-enabled task is the Qwen safety `paired-scope-v1` pack.
 Its public query IDs and synthetic account/resource names are re-keyed; the
 source mapping and targets stay with the evaluator. This prevents the direct
 label leakage in the checked v0 identifiers.

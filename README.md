@@ -66,21 +66,25 @@ It also provides a minimal CLI for the current tasks and a small Python
 contract for external observers.
 
 The public site builds from the checked leaderboard JSON in this repository.
-Routine public jobs use a structured GitHub issue: the submitter links an
-immutable prediction table and supplies an ObserverCard, automatic preflight
-checks the files as data, and a private evaluator can score them against sealed
-targets. Maintainer review is reserved for new task contracts, executable-code
-requests, and flagged submissions. See `docs/PUBLIC_SUBMISSION_WORKFLOW.md` and
-`submissions/README.md`.
+A structured GitHub issue accepts an immutable prediction table and an
+ObserverCard. Public automation checks the submission as data and never runs
+contributor code.
 
-The first automatic task is the blinded Qwen authorization pack at
+**Release status.** Automatic preflight is active in the public repository.
+Sealed scoring is a separate service and is not active at public launch. It can
+be enabled later through the documented evaluator settings. Until then, a
+passing job receives a preflight result, not a benchmark score or leaderboard
+rank.
+See `docs/PUBLIC_SUBMISSION_WORKFLOW.md` and `submissions/README.md`.
+
+The first preflight-ready task is the blinded Qwen authorization pack at
 `task-packs/safety/safety-interlock-qwen2-5-7b-instruct/paired-scope-v1/`.
 It provides 1,152 labeled fit/calibration measurements and 768 target-free
-queries. The matching targets remain evaluator-only; the evaluator returns
-aggregate prediction and action metrics. The APPS panel remains visible for
-comparison, but its public examples are matchable to the labelled upstream
-dataset and are therefore described as an open adoption panel rather than a
-sealed test.
+queries. The matching targets remain evaluator-only; a configured evaluator
+can return aggregate prediction and action metrics. The APPS panel remains
+visible for comparison, but its public examples are matchable to the labelled
+upstream dataset and are therefore described as an open adoption panel rather
+than a sealed test.
 
 The external contract has four checked extension paths. `ctl1_analytic` accepts
 an outside state estimator and direction provider. The inference-free
@@ -459,18 +463,32 @@ python scripts/run_qwen_induction_phase09.py \
   --resume
 ```
 
-The scientific 7B reproduction uses the frozen config and this exact stage
-order:
+The scientific 7B reproduction uses
+`configs/revision/phase10/qwen2_5_7b_induction_copy_v2.json` with
+`scripts/run_qwen_induction_phase10.py` and this exact stage order:
 `prepare`, `discover`, `confirm`, `freeze-design`, `measure-calibration`,
 `freeze-observers`, `measure-locked-test`, `evaluate`, and `measure-collateral`.
 The collateral stage measures only masks already selected by the sealed actions
 on deterministic matched non-induction controls; it does not gate or alter the
 primary analysis. A failed clean, hook-parity, discovery, or confirmation gate
 stops the run. The Colab driver is
-`notebooks/qwen_induction_phase09_colab.ipynb`; it keeps all experiment logic in
+`notebooks/qwen_induction_copy_v2_colab.ipynb`; it keeps all experiment logic in
 the package and writes resumable artifacts to a user-selected Drive directory.
 Resume accepts only checkpoints produced by the same source, model, hardware,
 and dependency identity; use a fresh artifact root after an environment change.
+
+The preregistered source seal predates the public-release version change. To
+verify that sealed bundle byte for byte, check out its provenance tag before
+building the archive:
+
+```bash
+git checkout qwen-phase10-copy-v2-parser-fix-before-causal
+python scripts/build_qwen_phase10_source_archive.py \
+  --output /tmp/qwen-copy-v2-source.tar.gz
+```
+
+The tag is a frozen pre-outcome checkpoint. Do not move it to the release
+commit.
 
 ## Known Limitations
 
