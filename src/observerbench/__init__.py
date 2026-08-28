@@ -172,7 +172,7 @@ __all__ = [
     "write_safety_task_pack",
 ]
 
-__version__ = "0.0.0"
+__version__ = "0.1.0"
 
 
 def _ensure_matplotlib_cache() -> None:

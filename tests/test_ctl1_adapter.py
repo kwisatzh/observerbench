@@ -6,6 +6,7 @@ Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramil
 from __future__ import annotations
 
 from dataclasses import asdict
+from importlib.metadata import version
 import json
 from pathlib import Path
 
@@ -107,7 +108,7 @@ def test_outside_observer_runs_on_existing_ctl1_task_without_registration(tmp_pa
     saved_metadata = json.loads((tmp_path / "outside-observer" / "run_metadata.json").read_text())
     assert saved_result["observer"] == "outside-oracle"
     assert saved_metadata["schema"] == "observerbench.external_task_run.v0"
-    assert saved_metadata["package_version"] == "0.0.0"
+    assert saved_metadata["package_version"] == version("observerbench")
     assert saved_metadata["source_revision"]
 
 
