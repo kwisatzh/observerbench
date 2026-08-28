@@ -175,20 +175,20 @@ prompts, matching the paper's finite-effect prediction metric.
 only. It does not import TransformerLens, download a checkpoint, or run model
 inference. The inference scripts remain a separate reproduction path.
 
-The prospective Qwen2.5-7B induction-copy task exposes 16, 40, 64, and 128
+The frozen Qwen2.5-7B induction-copy task exposes 16, 40, 64, and 128
 measurements over eight frozen heads. Its `InductionMaskFeatures` record includes
 the eight-bit mask plus each head's layer, query-head index, and shared KV-group
 index. The 128 held-out masks are the exact complement of the 128-mask
 calibration bank, not a sampled subset. `QwenInductionAdditiveRidgeBaseline` and
 `qwen_induction_additive_baseline_card()` supply the first-order reference.
-The 128-measurement result is the preregistered primary additive-versus-quadratic
-comparison; smaller budgets form a secondary sample-efficiency curve.
+The 128-measurement result is the prospectively frozen primary
+additive-versus-quadratic comparison; smaller budgets form a secondary
+sample-efficiency curve.
 
 The Qwen loader remains inference-free. The separate producer owns tokenizer
 checks, head discovery, causal confirmation, mean ablation, and locked model
-measurement. Registering the table schema does not assert that those prospective
-scientific gates have passed; a loader succeeds only for a complete,
-hash-verified artifact.
+measurement. The checked Copy-v2 artifact passed those gates; the loader still
+accepts only a complete, hash-verified artifact.
 
 The CLI exposes the same closed registry and CSV boundary:
 

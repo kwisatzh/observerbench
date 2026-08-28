@@ -16,12 +16,13 @@
 
 ## Tests Run
 
-- `pytest -q`
-  - Result: `20 passed, 4 skipped`.
-  - The skipped tests are marked slow and are skipped by default.
-- `python scripts/reproduce_paper_fast.py`
-  - Result: passed.
-  - Regenerated all paper figures and paper tables from frozen outputs.
+- A clean archive of the release commit: `301 passed, 11 skipped`.
+  The skipped checks require expensive model runs or raw experiment bundles
+  that are archived separately; checked public artifacts remain covered.
+- Copy-v2 producer, registry, and CLI checks: `47 passed`.
+- Public submission, issue-form, and Pages checks: `12 passed`.
+- Static-site build: passed, including the private-file stop test.
+- Paper build: passed (`latexmk`, 25 pages), followed by rendered-page review.
 
 ## Grep Checks Run
 
@@ -50,12 +51,12 @@ The required release greps from the prompt were run after local cleanup.
 
 These are intentionally outside the default release/CI path.
 
-## Required Manual Checks Before Release
+## Manual Checks Completed
 
-- Confirm final bibliographic metadata and author names in `CITATION.cff`.
-- Confirm the selected license is intended for public release.
-- Confirm the public remote URL, if any, before adding it to citation metadata.
-- Review generated paper figures visually after any frozen-output refresh.
-- Confirm frozen outputs are approved for public distribution.
-- Confirm no additional private notes, local PDFs, model caches, or raw model weights are staged.
-- Confirm the release commit hash is recorded alongside the paper version.
+- Confirmed bibliographic metadata and author name in `CITATION.cff`.
+- Confirmed the MIT license and public remote URL.
+- Reviewed the final paper render after the release edits.
+- Confirmed that frozen public outputs are approved for distribution.
+- Confirmed that evaluator targets, keys, private mappings, model caches, and
+  model weights are absent from the tracked tree and history.
+- Recorded the release in Git and Zenodo.
