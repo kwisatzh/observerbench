@@ -18,6 +18,9 @@ CATALOG_SCHEMA = "observerbench.site_catalog.v0"
 ARCHIVED_PANELS = {"controlarena-apps-qwen-v0"}
 PUBLIC_TASK_PACK_FILES = {"README.md", "queries.jsonl", "safety_task.json", "task.json"}
 PRIVATE_NAME_TOKENS = {"private", "secret", "target", "id_map", "key"}
+FEATURED_PANEL_ORDER = {
+    "controlarena-apps-qwen3-5-9b-v0": 0,
+}
 
 
 def _slug(value: str) -> str:
@@ -68,22 +71,31 @@ def _title(task_id: str, panel: str) -> str:
     return task_id.replace("@", " · ").replace("-", " ").title()
 
 
-def _catalog_sort_key(item: dict[str, Any]) -> tuple[str, str, int]:
+def _catalog_sort_key(item: dict[str, Any]) -> tuple[int, str, str, int]:
+    featured_rank = FEATURED_PANEL_ORDER.get(
+        str(item["panel"]), len(FEATURED_PANEL_ORDER)
+    )
     effect_match = re.fullmatch(
         r"ioi-gpt2-small-finite-effects-b(\d+)", str(item["panel"])
     )
     if effect_match:
-        return item["track"], "GPT-2 IOI finite effects", int(effect_match.group(1))
+        return (
+            featured_rank,
+            item["track"],
+            "GPT-2 IOI finite effects",
+            int(effect_match.group(1)),
+        )
     qwen_match = re.fullmatch(
         r"induction-qwen2-5-7b-finite-effects-b(\d+)", str(item["panel"])
     )
     if qwen_match:
         return (
+            featured_rank,
             item["track"],
             "Qwen2.5-7B induction-copy finite effects",
             int(qwen_match.group(1)),
         )
-    return item["track"], item["title"], 0
+    return featured_rank, item["track"], item["title"], 0
 
 
 def _metric_directions(payload: dict[str, Any], rows: list[dict[str, Any]]) -> dict[str, str]:

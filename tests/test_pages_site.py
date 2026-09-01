@@ -136,6 +136,30 @@ class BuildSiteTest(unittest.TestCase):
             ],
         )
 
+    def test_qwen35_apps_is_the_featured_default_panel(self) -> None:
+        panels = [
+            {
+                "track": "observer",
+                "title": "GPT-2 IOI finite effects — 20 measurements",
+                "panel": "ioi-gpt2-small-finite-effects-b020",
+            },
+            {
+                "track": "safety",
+                "title": "Gemma-2-9B-it APPS verified-backdoor monitoring",
+                "panel": "controlarena-apps-gemma2-9b-it-v0",
+            },
+            {
+                "track": "safety",
+                "title": "Qwen3.5-9B APPS verified-backdoor monitoring",
+                "panel": "controlarena-apps-qwen3-5-9b-v0",
+            },
+        ]
+
+        ordered = sorted(panels, key=BUILD_SITE._catalog_sort_key)
+        self.assertEqual(
+            ordered[0]["panel"], "controlarena-apps-qwen3-5-9b-v0"
+        )
+
     def test_build_copies_site_and_creates_catalog(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             temp = Path(temporary)
