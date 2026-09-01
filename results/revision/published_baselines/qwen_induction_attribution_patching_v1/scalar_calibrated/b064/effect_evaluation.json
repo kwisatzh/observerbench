@@ -1,0 +1,16 @@
+{
+  "contract_version": "observerbench.effect_prediction.v0",
+  "measurement_budget": 64,
+  "metrics": {
+    "mae": 0.17068229162432882,
+    "max_absolute_error": 0.5009621102473156,
+    "mean_error": 0.04194219869076867,
+    "rmse": 0.20515963533152382
+  },
+  "n_queries": 128,
+  "observer_name": "qwen-induction-attribution-patching-scalar-calibrated",
+  "observer_version": "1.0.0",
+  "schema_version": "observerbench.effect_prediction_result.v0",
+  "task_name": "induction-qwen2-5-7b-finite-effects",
+  "task_version": "copy-v2-b064"
+}

@@ -1,0 +1,5 @@
+observer_name,access_regime,mae,rmse,result_status
+qwen-induction-quadratic-ridge,frozen forward intervention measurements,0.04486358182897918,0.05209418116602523,prespecified bundled baseline
+qwen-induction-additive-ridge,frozen forward intervention measurements,0.20214835989722957,0.22613466282835223,prespecified bundled baseline
+qwen-induction-attribution-patching-scalar-calibrated,white-box gradients plus frozen finite calibration measurements,0.1673059840700144,0.20616042916544447,post-outcome published-method baseline
+qwen-induction-attribution-patching-raw,white-box gradients over 256 public training prompts,0.5743869963520609,0.6854641358404205,post-outcome published-method baseline

@@ -1,0 +1,36 @@
+{
+  "access_regime": "white-box residual plus official Gemma Scope SAE encoder",
+  "additional_forward_passes": 1,
+  "fit_procedure": "ridge probe fit on 500 pairs; official SAE layer and ridge selected on 200 calibration pairs and refit on both splits",
+  "implementation": "scripts/run_controlarena_apps_gemma.py",
+  "known_failure_modes": [
+    "SAE features are task-relative measurements, not evidence of deception or intent."
+  ],
+  "metadata": {
+    "registration_scope": "local digest seal; not an independent timestamp",
+    "result_status": "prospectively frozen matched replication",
+    "selection": {
+      "average_l0": 47,
+      "feature_audit": {
+        "passed_activity_filter": 559,
+        "released_width": 16384,
+        "retained_nonconstant": 559
+      },
+      "layer": 20,
+      "ridge": 100.0,
+      "sae_file_sha256": "63337f10014d4c9096c51ecc372d1b61a8ef2642be2ca01a0d04ccd3dc0e6bf2",
+      "sae_filename": "layer_20/width_16k/average_l0_47/params.npz",
+      "sae_repository": "google/gemma-scope-9b-it-res",
+      "sae_revision": "e86af97a5b6fbbccca28ab654f2fda1b0768f770"
+    },
+    "source_summary_sha256": "d76189abd314ff2edb75fd778ee26007a2a8227316243110e02dc394c0e68909",
+    "task_id": "controlarena-apps-verified-backdoors@gemma-2-9b-it-v0"
+  },
+  "observer_family": "official SAE-feature ridge probe",
+  "observer_input": "official Gemma Scope JumpReLU features of the neutral residual",
+  "observer_name": "gemma-neutral-context-gemma-scope-sae-probe",
+  "observer_version": "gemma-2-9b-it-v0",
+  "requires_white_box_access": true,
+  "risk_score_meaning": "larger scores receive higher audit priority",
+  "schema_version": "observerbench.safety_observer_card.v0"
+}

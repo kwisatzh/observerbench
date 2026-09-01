@@ -106,9 +106,9 @@ reduces the margin by one logit is better than one that alternates between zero
 and two, even though both average to one. Mean-effect prediction and action
 selection are therefore different tasks.
 
-The same prediction--decision gap appears in traffic engineering, where the
-most accurate traffic-matrix estimate need not produce the best routing
-decision~\cite{roughan2003te}. Here the controller cares not only about a
+Roughan et al. found the same broader separation in traffic engineering:
+traffic-matrix estimation-error magnitude is not by itself a good indicator of
+routing performance~\cite{roughan2003te}. Here the controller cares not only about a
 mask's average effect, but also about how that effect varies across prompts.
 
 At budget 160, the all-pairs model has the best $R^2$ and nearly the best

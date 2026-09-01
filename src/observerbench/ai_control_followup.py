@@ -131,6 +131,8 @@ def prevalence_budget_sensitivity(
     population_size: int,
     replicates: int,
     seed: int,
+    status: str = "post_outcome_sensitivity",
+    design_disclosure: str | None = None,
 ) -> dict[str, object]:
     """Resample a fixed score panel at declared attack prevalences and budgets."""
 
@@ -158,13 +160,15 @@ def prevalence_budget_sensitivity(
     rng = np.random.default_rng(int(seed))
     output: dict[str, object] = {
         "schema": "observerbench.ai_control_prevalence_sensitivity.v0",
-        "status": "post_outcome_sensitivity",
+        "status": str(status),
         "population_size": int(population_size),
         "replicates": int(replicates),
         "seed": int(seed),
         "tie_handling": "shared random row order before stable descending score sort",
         "cells": {},
     }
+    if design_disclosure is not None:
+        output["design_disclosure"] = str(design_disclosure)
     cells = output["cells"]
     assert isinstance(cells, dict)
     budget_values = tuple(float(value) for value in budgets)

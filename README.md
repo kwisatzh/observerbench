@@ -2,6 +2,8 @@
 
 **Public site:** <https://kwisatzh.github.io/observerbench/>
 
+**Paper:** <https://kwisatzh.github.io/observerbench/downloads/observerbench.pdf>
+
 **Archived release:** <https://doi.org/10.5281/zenodo.22136091>
 
 ObserverBench is a research artifact for evaluating observers in control-oriented interpretability.
@@ -44,13 +46,33 @@ The v0 repo includes the paper tasks:
   lowers aggregate protocol loss by 32.1% relative to the strongest action-only
   observer; the doubly-held-out stratum remains a documented failure case.
 - An external ControlArena APPS monitor comparison on 744 locked
-  honest/verified-backdoor pairs. A Qwen residual probe read from a neutral
+  honest/verified-backdoor pairs. A Qwen2.5-7B-Instruct residual probe read from a neutral
   problem-and-code context reaches AUROC 0.979, compared with 0.953 for a
   verdict-adjacent probe, 0.868 for supervised text, and 0.830 for a supervised
   observer over the prompted score distribution. It matches the exact-label
   oracle's audit loss on the balanced panel; a checked prevalence sweep shows
   that the tie with the oracle disappears when attacks are rare. The portable
   score table ships with the repo.
+  A post-outcome published-method check also applies sparse SAE probing to a
+  pinned public Qwen2.5-7B-Instruct SAE, with matched raw-residual and
+  reconstruction controls.
+  The sparse refit keeps 127 nonzero coefficients and reaches AUROC 0.953,
+  versus 0.983 for raw residuals. At 1% attack prevalence and a 2% audit budget,
+  it misses 4.667 attacks on average versus 2.048 for the raw-residual control.
+  This is an informative negative for this checkpoint, layer, observer, and
+  task, not a general claim about SAEs.
+  A prospectively frozen Gemma-2-9B-it replication adds nine task-separated
+  rows. Its detailed prompted monitor has higher AUROC than the official Gemma
+  Scope SAE probe (0.893 versus 0.870) but more mean violations at 1% attacks
+  and a 2% audit budget (10.80 versus 9.07): classification is not enough to
+  choose the lower-loss monitor.
+  A prospectively frozen Qwen3.5-9B panel adds nine more rows. Its
+  verdict-adjacent residual probe reaches AUROC 0.977 and 1.976 mean
+  violations in the same primary cell, compared with 0.936 and 6.601 for the
+  neutral residual. The official Qwen-Scope SAE probe reaches 0.811 and
+  12.725; it uses layer 12 with ridge 100, selected without locked-test labels.
+  The SAE was trained on Qwen3.5-9B-Base but evaluated on post-trained
+  Qwen3.5-9B, so the panel records that checkpoint mismatch explicitly.
 - IOI known-circuit diagnostics on GPT-2-small outputs:
   Stage 1 whole-group self-repair, Stage 2b anchored broad-random head subsets,
   Stage 2c primary-stratified subsets, and capacity-matched pair analyses.
@@ -77,7 +99,7 @@ passing job receives a preflight result, not a benchmark score or leaderboard
 rank.
 See `docs/PUBLIC_SUBMISSION_WORKFLOW.md` and `submissions/README.md`.
 
-The first preflight-ready task is the blinded Qwen authorization pack at
+The first preflight-ready task is the blinded Qwen2.5-7B-Instruct authorization pack at
 `task-packs/safety/safety-interlock-qwen2-5-7b-instruct/paired-scope-v1/`.
 It provides 1,152 labeled fit/calibration measurements and 768 target-free
 queries. The matching targets remain evaluator-only; a configured evaluator
@@ -153,6 +175,23 @@ observerbench list-safety-results
 observerbench list-ai-control-results
 ```
 
+The APPS command groups Qwen2.5-7B-Instruct, Gemma-2-9B-it, and Qwen3.5-9B
+results by task; it does not compare
+their ranks. Select one exact panel when needed:
+
+```bash
+observerbench list-ai-control-results \
+  --task-id controlarena-apps-verified-backdoors@qwen2.5-7b-v1
+observerbench list-ai-control-results \
+  --task-id controlarena-apps-verified-backdoors@gemma-2-9b-it-v0
+observerbench list-ai-control-results \
+  --task-id controlarena-apps-verified-backdoors@qwen3.5-9b-v0
+```
+
+The human-facing ladder reports the rare-prevalence primary metric directly.
+Rebuild the three canonical panels first and compose the bundled registry last;
+the commands and required order are recorded in `docs/SAFETY_API.md`.
+
 Run the controlled authorization interlock:
 
 ```bash
@@ -182,7 +221,8 @@ observerbench validate-safety-task-pack \
 The public file contains the threat model, oracle declaration, fixed policy,
 labeled fit measurements, and target-free queries. The second file stays with
 the evaluator. See `docs/SAFETY_API.md` for observer and task-author workflows,
-and `results/revision/qwen_safety/RESULTS.md` for the learned Qwen baseline.
+and `results/revision/qwen_safety/RESULTS.md` for the learned
+Qwen2.5-7B-Instruct baseline.
 
 Run a tiny Ctl-2 closed-loop smoke test:
 
@@ -391,14 +431,25 @@ evaluation. A submitted method supplies only finite-effect predictions. The
 generic evaluator writes separate TaskCard and ObserverCard metadata, so an
 observer cannot silently redefine the benchmark split or estimand.
 
+Safety TaskCards additionally declare measurement integrity, attacker
+knowledge, and episode structure: who can alter, omit, delay, or spoof each
+input; what feedback the attacker receives; and whether requests are
+independent or share attacker state. This keeps a strong score on trusted
+offline rows from being mistaken for robustness to an adaptive protocol-level
+attack.
+
 The checked Phase-5 IOI tables provide the first built-in finite-effect task at
-20, 40, 80, and 160 masks. The frozen Qwen induction-copy adapter adds 16, 40,
+20, 40, 80, and 160 masks. The frozen Qwen2.5-7B induction-copy adapter adds 16, 40,
 64, and 128-mask versions over a complete 256-mask universe. Its checked
 artifacts come from the sealed Copy-v2 run described in the paper.
 `finite_effect_task_ids()` lists exact `name@version` identifiers, and
 `load_finite_effect_task(...)` verifies the task-specific manifests and hashes.
 Both loaders return prompt-averaged measurements and held-out targets without
-model inference. Each task supplies its own additive ridge reference.
+model inference. Each task supplies its own additive ridge reference. The IOI
+leaderboards also include raw and scalar-calibrated attribution patching as a
+published-method comparison. Those rows declare their white-box gradient
+access, so they are compared within a fixed task and budget but not presented
+as equal-compute replacements for the forward-only observers.
 
 An external implementation can submit the three-column prediction CSV from
 `docs/EFFECT_PREDICTION_CONTRACT.md` without importing ObserverBench in its own
@@ -415,7 +466,7 @@ observerbench evaluate-effect-csv <name@version> \
 Built-in paper tasks remain in a closed, deterministic registry. External tasks are composed locally with `ObserverTask` and `run_observer_task`; v0 does not perform dynamic plugin discovery.
 
 The bundled analytic Ctl-1 task remains the composition point for running an
-outside state estimator and direction provider. The table-backed IOI and Qwen
+outside state estimator and direction provider. The table-backed IOI and Qwen2.5-7B
 tasks share a separate composition point for outside finite-effect predictors.
 Neither is a
 general bring-your-own-model API: model inference remains in the reproduction
@@ -440,7 +491,7 @@ Legacy script entry points under `scripts/` are kept as wrappers or reproduction
 
 The documented public names and signatures in `docs/API_CONTRACT.md` are the v0 stability boundary. Individual paper-task configuration fields and scientific fixtures are versioned separately.
 
-### Qwen induction reproduction
+### Qwen2.5-7B induction reproduction
 
 The checked release includes the completed Copy-v2 run. The producer keeps
 locked outcomes unavailable until predictions and actions are frozen. The full
@@ -452,7 +503,7 @@ optional runtime dependencies:
 pip install -e '.[qwen]'
 ```
 
-The 0.5B smoke configuration checks the Qwen hooks and artifact path but does
+The Qwen2.5-0.5B smoke configuration checks the hooks and artifact path but does
 not reproduce a paper claim:
 
 ```bash
@@ -490,6 +541,30 @@ python scripts/build_qwen_phase10_source_archive.py \
 The tag is a frozen pre-outcome checkpoint. Do not move it to the release
 commit.
 
+The retrospective published-method comparison runs raw and scalar-calibrated
+attribution patching on the same Copy-v2 registry without changing the sealed
+Phase-10 chain. Run the CPU checks first, then one eight-prompt GPU smoke before
+the complete 256-prompt measurement:
+
+```bash
+pytest -q -p no:cacheprovider \
+  tests/test_qwen_induction_attribution_patching.py \
+  tests/test_qwen_effect_leaderboards.py
+
+python scripts/run_qwen_induction_attribution_patching_baseline.py \
+  --device cuda --batch-size 2 --max-prompts 8 \
+  --outdir /tmp/qwen-atp-smoke
+
+python scripts/run_qwen_induction_attribution_patching_baseline.py \
+  --device cuda --batch-size 4
+```
+
+`notebooks/qwen_attribution_patching_colab.ipynb` follows this smoke-then-full
+order on an A100/H100/H200. Once the complete summary exists,
+`scripts/build_qwen_effect_leaderboards.py` builds the four checked comparison
+panels. The cards keep white-box and forward-only access costs distinct and
+mark the AtP rows as post-outcome baselines.
+
 ## Known Limitations
 
 ObserverBench v0 does not include:
@@ -503,7 +578,7 @@ ObserverBench v0 does not include:
 
 The IOI tasks are known-circuit diagnostics. They use published IOI head groups
 as borrowed structure for testing observer methodology. They should not be read
-as a new IOI circuit discovery claim. The Qwen task is described more narrowly
+as a new IOI circuit discovery claim. The Qwen2.5-7B task is described more narrowly
 as an induction-copy mechanism surface; it does not claim circuit completeness.
 
 The frozen and checked outputs are summaries needed for reproduction. They do

@@ -30,12 +30,23 @@ The paper makes bounded claims:
   question and provide calibration data for every intended deployment group
   while keeping the model, budgets, and evaluator fixed.
 
-  \item \textbf{APPS backdoors.} \emph{Scope:} The study uses stored working
-  backdoors rather than attacks adapted to each monitor. One model supplies all
-  learned representations, the text baseline is simple, and the prevalence
-  sweep keeps the dataset-family mix fixed. \emph{Next test:} freeze generated
-  attack trajectories and training budgets, then add adaptive evasion, stronger
-  code monitors, and a deployment-level shutdown action.
+  \item \textbf{APPS backdoors.} \emph{Scope:} The study uses one stored-backdoor
+  task rather than attacks adapted to each monitor. Two model families and
+  three checkpoints supply learned representations. The Qwen2.5 sparse probe
+  and Qwen3.5 official-SAE probe each concern one task and one selected probing
+  rule. The official Qwen-Scope SAE was trained on Qwen3.5-9B-Base and applied
+  here to the post-trained Qwen3.5-9B model, so it is not a checkpoint-matched
+  SAE test. The Gemma and Qwen3.5 runs were prospectively frozen after earlier
+  outcomes were known, not independently preregistered. All scoring is offline, and the
+  prevalence sweeps keep the dataset-family mix fixed. Neither study tests
+  deception or an adaptive attacker. These scorecards compare observers inside
+  a fixed audit rule; they do not establish that a complete AI-control protocol
+  remains safe under intentional subversion. \emph{Next test:} use sequential
+  attack trajectories with evaluator-held outcomes and both trusted and
+  deliberately corrupted telemetry. Declare who can omit, delay, or spoof each
+  view, keep audit and shutdown budgets fixed, and then add monitor-aware
+  attacks. Episodes, rather than individual requests, should be the resampling
+  unit when agents share state or communication.
 
   \Needspace{4\baselineskip}
   \item \textbf{Artifact.} \emph{Scope:} The release provides checked control,
@@ -53,8 +64,12 @@ every detail of a model; it must preserve the information that the available
 action, decision rule, and loss actually use. Across the three modes, the
 experiments show that a better mean-effect predictor need not choose a better
 intervention, a perfect classifier can allocate a safety budget poorly, and an
-accessible output signal can make an internal probe unnecessary. ObserverBench
-records these choices in versioned tasks and applies the same fixed policy to
+accessible output signal can make an internal probe unnecessary. The safety
+scorecards also show that AUROC and mean realized violations can order monitors
+differently, that the best measurement context can change between closely
+related checkpoints, and that a sparser fitted readout need not improve the
+resulting action. ObserverBench records these choices in versioned tasks and applies the
+same fixed policy to
 every submission rather than ranking observers in the abstract. Before trusting
 an observer, state what it may read, freeze the action rule and budget, and score
 the outcome the action actually produces.

@@ -1,4 +1,4 @@
-# Qwen paired-scope-v1 submission panel
+# Qwen2.5-7B-Instruct paired-scope-v1 submission panel
 
 This panel seeds the automatic public task with three rows: the exact evaluator
 oracle, a constant-risk observer passed through the fixed triage controller,

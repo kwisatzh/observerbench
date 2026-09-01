@@ -1,0 +1,49 @@
+{
+  "head_effects": [
+    {
+      "component_index": 0,
+      "head_label": "L22H3",
+      "predicted_effect": 0.6368044211121742
+    },
+    {
+      "component_index": 1,
+      "head_label": "L22H4",
+      "predicted_effect": 0.5591544045382761
+    },
+    {
+      "component_index": 2,
+      "head_label": "L26H15",
+      "predicted_effect": 0.257021506804449
+    },
+    {
+      "component_index": 3,
+      "head_label": "L14H0",
+      "predicted_effect": 0.18226774752838537
+    },
+    {
+      "component_index": 4,
+      "head_label": "L14H6",
+      "predicted_effect": 0.1751694784106803
+    },
+    {
+      "component_index": 5,
+      "head_label": "L16H13",
+      "predicted_effect": 0.1266573910106672
+    },
+    {
+      "component_index": 6,
+      "head_label": "L17H18",
+      "predicted_effect": 0.06906312779028667
+    },
+    {
+      "component_index": 7,
+      "head_label": "L23H13",
+      "predicted_effect": 0.05715818606222456
+    }
+  ],
+  "intervention": "final-query family-conditioned mean replacement at query-head z before the attention output projection",
+  "model_revision": "d149729398750b98c0af14eb82c78cfe92750796",
+  "n_prompts": 256,
+  "prompt_split": "train",
+  "schema_version": "observerbench.qwen_induction_attribution_map.v1"
+}

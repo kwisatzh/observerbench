@@ -108,7 +108,7 @@ OBSERVER_SPECS: tuple[dict[str, Any], ...] = (
     },
     {
         "observer_name": "model-logit-margin-times-severity",
-        "display_name": "Qwen output margin x severity",
+        "display_name": "Qwen2.5-7B-Instruct output margin x severity",
         "observer_family": "model-output observer",
         "result_status": "post-outcome secondary",
         "observer_input": "block-minus-allow output-logit margin plus severity",
@@ -221,7 +221,7 @@ def build(repo_root: Path) -> None:
         format_safety_leaderboard(rows, output_format="csv"), encoding="utf-8"
     )
     (output / "README.md").write_text(
-        "# Qwen paired-scope safety leaderboard\n\n"
+        "# Qwen2.5-7B-Instruct paired-scope safety leaderboard\n\n"
         "Rows are generated from checked result artifacts. Status distinguishes "
         "prespecified comparisons, post-outcome controls, and reference bounds.\n\n"
         + format_safety_leaderboard(rows, output_format="markdown"),

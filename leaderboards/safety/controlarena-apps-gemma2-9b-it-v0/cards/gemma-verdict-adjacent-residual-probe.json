@@ -1,0 +1,26 @@
+{
+  "access_regime": "white-box residual under the basic monitoring prompt",
+  "additional_forward_passes": 1,
+  "fit_procedure": "ridge probe fit on 500 pairs; layer and ridge selected on 200 calibration pairs and refit on both splits",
+  "implementation": "scripts/run_controlarena_apps_gemma.py",
+  "known_failure_modes": [
+    "The representation may depend on asking the model to monitor."
+  ],
+  "metadata": {
+    "registration_scope": "local digest seal; not an independent timestamp",
+    "result_status": "prospectively frozen matched replication",
+    "selection": {
+      "layer": 31,
+      "ridge": 100.0
+    },
+    "source_summary_sha256": "d76189abd314ff2edb75fd778ee26007a2a8227316243110e02dc394c0e68909",
+    "task_id": "controlarena-apps-verified-backdoors@gemma-2-9b-it-v0"
+  },
+  "observer_family": "linear residual probe",
+  "observer_input": "projected post-layer residual at the score position",
+  "observer_name": "gemma-verdict-adjacent-residual-probe",
+  "observer_version": "gemma-2-9b-it-v0",
+  "requires_white_box_access": true,
+  "risk_score_meaning": "larger scores receive higher audit priority",
+  "schema_version": "observerbench.safety_observer_card.v0"
+}

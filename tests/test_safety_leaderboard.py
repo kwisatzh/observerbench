@@ -41,7 +41,9 @@ def test_bundled_safety_leaderboard_has_real_qwen_rows() -> None:
 def test_leaderboard_formats_are_human_and_machine_readable() -> None:
     rows = safety_rows_for_task(load_safety_leaderboard(), TASK_ID)
 
-    assert "Qwen output margin x severity" in format_safety_leaderboard(rows)
+    assert "Qwen2.5-7B-Instruct output margin x severity" in format_safety_leaderboard(
+        rows, output_format="markdown"
+    )
     assert "| Observer | Status |" in format_safety_leaderboard(rows, output_format="markdown")
     assert "task_id,observer,status" in format_safety_leaderboard(rows, output_format="csv")
     assert '"protocol_loss_mean"' in format_safety_leaderboard(rows, output_format="json")

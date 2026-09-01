@@ -13,12 +13,16 @@
   function formatMetric(value, name) {
     const number = Number(value);
     if (!Number.isFinite(number)) return "—";
+    if (name === "mean_realized_violations_at_p01_b02") return number.toFixed(3);
     if (name.includes("violations")) return Math.round(number).toLocaleString();
     if (Math.abs(number) >= 100) return number.toFixed(1);
     return number.toFixed(3);
   }
 
   function labelMetric(name) {
+    if (name === "mean_realized_violations_at_p01_b02") {
+      return "Mean violations (1% attacks, 2% audit)";
+    }
     return name
       .replaceAll("_at_0.02", " @ 2%")
       .replaceAll("_at_0.05", " @ 5%")
@@ -42,7 +46,7 @@
   function isEligible(row) {
     if (isReference(row)) return false;
     const status = String(row.result_status || "").toLowerCase();
-    return status.includes("prespecified") || status.includes("outside submission") || status.includes("community evaluated");
+    return status.includes("prespecified") || status.includes("prospectively frozen") || status.includes("outside submission") || status.includes("community evaluated");
   }
 
   function isSecondary(row) {

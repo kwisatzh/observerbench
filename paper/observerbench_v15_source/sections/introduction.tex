@@ -51,6 +51,12 @@ ObserverBench addresses the decision problem: whether a proposed estimate is
 adequate to guide a particular intervention, control loop, or safety policy
 \cite{erramilli2026tomography}.
 
+For safety tasks, ObserverBench freezes the audit policy and compares the
+monitor inside it. AI-control evaluations ask the complementary, harder
+question of whether the complete protocol remains safe when an adaptive model
+tries to subvert it \cite{greenblatt2024aicontrol}. A monitor that performs
+well here must still pass that end-to-end test.
+
 An evaluation in ObserverBench is defined by five explicit choices:
 
 \begin{itemize}
@@ -58,8 +64,9 @@ An evaluation in ObserverBench is defined by five explicit choices:
   the average effect of an intervention, or the loss of one action on one
   prompt?
 
-  \item \textbf{Information boundary.} What may the observer read: prompt
-  text, internal activations, output scores, or some combination of them?
+  \item \textbf{Information and integrity boundary.} What may the observer
+  read, and who can alter, omit, delay, or spoof those measurements? Examples
+  include prompt text, internal activations, output scores, and external logs.
 
   \item \textbf{Action space.} Which interventions may the controller apply,
   such as a specified activation shift or one mask from a fixed set of
@@ -68,16 +75,20 @@ An evaluation in ObserverBench is defined by five explicit choices:
   \item \textbf{Decision rule and loss.} How does the controller turn an
   estimate into an action, and which downstream errors incur a cost?
 
-  \item \textbf{Operating regime.} Which prompts, intervention budgets, and
-  attack frequencies will the evaluator use?
+  \item \textbf{Operating regime.} Which prompts, intervention budgets, attack
+  frequencies, episode horizons, and attacker assumptions will the evaluator
+  use?
 \end{itemize}
 
 These choices make observer adequacy task-relative. Permissions, tool
 interfaces, budgets, and attack rates are therefore part of the evaluation,
-not background details. Recent security incidents during model evaluation
-illustrate why system boundaries and side channels must also be stated
-explicitly
-\cite{openai2026securityincident,huggingface2026securityincident}.
+not background details. In the 2026 OpenAI--Hugging Face incident, agents used
+an unsanctioned communication channel, coordinated attempts to fool the
+evaluator, and successfully spoofed some tool calls. The case shows why an
+information boundary must cover side channels and evaluator-held evidence, not
+only prompts and activations
+\cite{openai2026securityincident,huggingface2026securityincident,
+greenblatt2026hfinvestigation}.
 
 ObserverBench instantiates these choices in three standardized operational
 modes---closed-loop control, effect prediction, and safety triage---summarized
@@ -100,21 +111,34 @@ in Sec.~\ref{sec:artifact}.
   starting-state mismatch, and target--observer response mismatch along the
   edit direction (Sec.~\ref{sec:design}, Eq.~\ref{eq:certificate}).
 
-  \item \textbf{An empirical separation of prediction and action.} Pairwise
+  \item \textbf{Prediction and compression are not decisions.} Pairwise
   models improve held-out effect prediction on GPT-2-small and Qwen2.5-7B, but
   better mean prediction does not reliably improve the chosen GPT-2 action.
   Relative to the same-feature mean observer, direct-loss training reduces
   action loss by 18.5\% in the clean GPT-2 confirmation and by 8.9\% in the
-  Qwen aggregate
-  (Secs.~\ref{sec:phase7-confirmation} and~\ref{sec:qwen-induction})
-  \cite{wang2023ioi,olsson2022induction,qwen2024qwen25}.
+  Qwen aggregate \cite{wang2023ioi,olsson2022induction,qwen2024qwen25}. In the
+  Qwen safety task, a sparse SAE readout uses 127
+  nonzero coefficients rather than 3,584, yet mean escaped attacks rise from
+  2.05 to 4.67: \emph{compression without a better decision}
+  (Secs.~\ref{sec:phase7-confirmation}, \ref{sec:qwen-induction}, and
+  \ref{sec:safety}) \cite{kantamneni2025saeprobes}. Roughan et al. found the same broader separation in
+  traffic engineering: traffic-matrix estimation-error magnitude is not by
+  itself a good indicator of routing performance \cite{roughan2003te}.
 
-  \item \textbf{Decision-grounded safety evaluation.} In the authorization
+  \item \textbf{Classification is not enough for safety.} In the authorization
   task, a label observer with AUROC 1.000 allocates a fixed intervention budget
-  poorly when it ignores consequence. In the ControlArena APPS task, balanced
-  evaluation hides differences that appear in the low-prevalence sweep,
-  including the quantified 1\% case (Sec.~\ref{sec:safety})
-  \cite{greenblatt2024aicontrol,inglis2025controlarena}.
+  poorly when it ignores consequence. On the external Gemma APPS task, the
+  detailed prompted monitor has higher AUROC than the official Gemma Scope SAE
+  probe (0.893 versus 0.870) but more mean realized violations (10.80 versus
+  9.07). Across matched Qwen2.5-7B, Gemma-2-9B-it, and prospectively frozen
+  Qwen3.5-9B tasks, residual observers lead on average, while the lowest-loss
+  context differs---and reverses between the two Qwen checkpoints. On Qwen3.5,
+  the official Qwen-Scope SAE probe also incurs more violations than the dense
+  residual from which its features are computed; the SAE was trained on the
+  base rather than the evaluated post-trained checkpoint
+  (Sec.~\ref{sec:safety})
+  \cite{greenblatt2024aicontrol,inglis2025controlarena,
+  gemmateam2024gemma2,lieberum2024gemmascope}.
 \end{itemize}
 
 The next question is operational: what exactly does ObserverBench fix, what

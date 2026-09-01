@@ -1,0 +1,82 @@
+[
+  {
+    "fitted_scalar_gain": 1.0,
+    "mae": 0.6624302038772278,
+    "max_absolute_error": 3.406550295882577,
+    "mean_error": -0.4652293730631868,
+    "measurement_budget": 20,
+    "n_queries": 320,
+    "observer": "ioi-attribution-patching-raw",
+    "rmse": 0.8898976968132895
+  },
+  {
+    "fitted_scalar_gain": 0.7969853757993842,
+    "mae": 0.6298085042174869,
+    "max_absolute_error": 3.0577125541216708,
+    "mean_error": -0.3352019481900019,
+    "measurement_budget": 20,
+    "n_queries": 320,
+    "observer": "ioi-attribution-patching-scalar-calibrated",
+    "rmse": 0.8271210407375266
+  },
+  {
+    "fitted_scalar_gain": 1.0,
+    "mae": 0.6624302038772278,
+    "max_absolute_error": 3.406550295882577,
+    "mean_error": -0.4652293730631868,
+    "measurement_budget": 40,
+    "n_queries": 320,
+    "observer": "ioi-attribution-patching-raw",
+    "rmse": 0.8898976968132895
+  },
+  {
+    "fitted_scalar_gain": 0.7393161520461626,
+    "mae": 0.6351218510766221,
+    "max_absolute_error": 2.958620176602607,
+    "mean_error": -0.2982657881050169,
+    "measurement_budget": 40,
+    "n_queries": 320,
+    "observer": "ioi-attribution-patching-scalar-calibrated",
+    "rmse": 0.8235160167981473
+  },
+  {
+    "fitted_scalar_gain": 1.0,
+    "mae": 0.6624302038772278,
+    "max_absolute_error": 3.406550295882577,
+    "mean_error": -0.4652293730631868,
+    "measurement_budget": 80,
+    "n_queries": 320,
+    "observer": "ioi-attribution-patching-raw",
+    "rmse": 0.8898976968132895
+  },
+  {
+    "fitted_scalar_gain": 0.8545275721168797,
+    "mae": 0.6323025422919175,
+    "max_absolute_error": 3.156586661828917,
+    "mean_error": -0.3720567493560377,
+    "measurement_budget": 80,
+    "n_queries": 320,
+    "observer": "ioi-attribution-patching-scalar-calibrated",
+    "rmse": 0.8372246185827883
+  },
+  {
+    "fitted_scalar_gain": 1.0,
+    "mae": 0.6624302038772278,
+    "max_absolute_error": 3.406550295882577,
+    "mean_error": -0.4652293730631868,
+    "measurement_budget": 160,
+    "n_queries": 320,
+    "observer": "ioi-attribution-patching-raw",
+    "rmse": 0.8898976968132895
+  },
+  {
+    "fitted_scalar_gain": 0.8475023448769522,
+    "mae": 0.6315642766701114,
+    "max_absolute_error": 3.1445152930032316,
+    "mean_error": -0.3675572104151678,
+    "measurement_budget": 160,
+    "n_queries": 320,
+    "observer": "ioi-attribution-patching-scalar-calibrated",
+    "rmse": 0.8356492689362269
+  }
+]

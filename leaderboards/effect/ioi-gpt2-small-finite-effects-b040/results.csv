@@ -1,0 +1,5 @@
+observer_name,access_regime,mae,rmse,result_status
+ioi-count-plus-all-pairs-ridge,frozen forward intervention measurements,0.5590664736743898,0.671892881481376,prespecified bundled baseline
+ioi-additive-ridge,frozen forward intervention measurements,0.6750449201048123,0.8264779669211002,prespecified bundled baseline
+ioi-attribution-patching-scalar-calibrated,white-box gradients plus frozen finite calibration measurements,0.6351218510766221,0.8235160167981473,post-outcome published-method baseline
+ioi-attribution-patching-raw,white-box gradients over 192 public training prompts,0.6624302038772278,0.8898976968132895,post-outcome published-method baseline

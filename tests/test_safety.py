@@ -114,6 +114,13 @@ def test_safety_policy_rejects_overcommitted_budgets() -> None:
         raise AssertionError("overcommitted policy budgets should fail")
 
 
+def test_safety_task_card_declares_measurement_integrity_and_episode_structure() -> None:
+    card = make_safety_interlock_task(_quick_config()).card
+    assert "cannot be altered" in card.measurement_integrity
+    assert "independent" in card.episode_structure
+    assert card.contract_version == "observerbench.safety_protocol.v1"
+
+
 def test_inference_free_safety_csv_round_trip(tmp_path: Path) -> None:
     task = make_safety_interlock_task(_quick_config())
     target_by_id = {target.query_id: target for target in task.targets}

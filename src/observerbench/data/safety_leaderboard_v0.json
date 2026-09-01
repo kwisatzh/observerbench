@@ -49,7 +49,7 @@
         "escalate": 76
       },
       "additional_forward_passes": 0,
-      "display_name": "Qwen output margin x severity",
+      "display_name": "Qwen2.5-7B-Instruct output margin x severity",
       "known_failure_modes": [
         "Only defined when the model is explicitly asked for a verdict."
       ],

@@ -108,8 +108,41 @@ def test_reader_rejects_non_boolean_label(tmp_path) -> None:
 
 def test_bundled_external_leaderboard_has_checked_rows() -> None:
     rows = load_ai_control_leaderboard()
-    assert len(rows) == 8
-    rendered = format_ai_control_leaderboard(rows)
-    assert "Qwen neutral-context activation probe" in rendered
-    assert "Qwen verdict-adjacent activation probe" in rendered
+    assert len(rows) == 29
+    rendered = format_ai_control_leaderboard(rows, output_format="markdown")
+    assert "controlarena-apps-verified-backdoors@qwen2.5-7b-v1" in rendered
+    assert "controlarena-apps-verified-backdoors@gemma-2-9b-it-v0" in rendered
+    assert "controlarena-apps-verified-backdoors@qwen3.5-9b-v0" in rendered
+    assert "Qwen2.5-7B-Instruct neutral-context activation probe" in rendered
+    assert "Qwen2.5-7B-Instruct verdict-adjacent activation probe" in rendered
+    assert "Qwen2.5-7B-Instruct published SAE sparse probe" in rendered
+    assert "Official Gemma Scope SAE probe" in rendered
+    assert "Qwen3.5-9B official Qwen-Scope SAE probe" in rendered
     assert "715" in rendered
+    assert "Mean violations (1% attacks, 2% audit)" in rendered
+    assert "4.667" in rendered
+    assert "9.070" in rendered
+
+    qwen = load_ai_control_leaderboard(
+        task_id="controlarena-apps-verified-backdoors@qwen2.5-7b-v1"
+    )
+    gemma = load_ai_control_leaderboard(
+        task_id="controlarena-apps-verified-backdoors@gemma-2-9b-it-v0"
+    )
+    qwen35 = load_ai_control_leaderboard(
+        task_id="controlarena-apps-verified-backdoors@qwen3.5-9b-v0"
+    )
+    assert len(qwen) == 11
+    assert len(gemma) == 9
+    assert len(qwen35) == 9
+    assert all("qwen2.5-7b-v1" in row["task_id"] for row in qwen)
+    assert all("gemma-2-9b-it-v0" in row["task_id"] for row in gemma)
+    assert all("qwen3.5-9b-v0" in row["task_id"] for row in qwen35)
+    assert "task_id,monitor,status" in format_ai_control_leaderboard(
+        rows, output_format="csv"
+    )
+
+
+def test_ai_control_task_filter_rejects_an_unknown_task() -> None:
+    with pytest.raises(KeyError, match="unknown AI-control task"):
+        load_ai_control_leaderboard(task_id="unknown@task")

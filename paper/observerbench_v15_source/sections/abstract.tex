@@ -21,12 +21,19 @@ Our theory and experiments show three ways these criteria can differ:
   \item \textbf{Prediction versus decision.} On circuit-intervention tasks in
   GPT-2-small and Qwen2.5-7B, pairwise observers predict unseen intervention
   effects more accurately without always choosing better actions. Observers
-  trained to predict action loss directly choose lower-loss actions.
+  trained to predict action loss directly choose lower-loss actions. On Qwen
+  APPS, a 127-coefficient SAE readout has higher mean audit loss than its
+  layer-matched 3,584-coordinate dense control: compression without a better
+  decision.
 
   \item \textbf{Consequence-aware safety.} Under fixed intervention budgets,
   a score that perfectly separates policy violations can allocate actions
-  poorly when violations have different costs. Balanced safety panels can also
-  conceal differences that appear when attacks are rare.
+  poorly when violations have different costs. On matched Qwen2.5-7B,
+  Gemma-2-9B-it, and prospectively frozen Qwen3.5-9B APPS tasks, residual access
+  leads on average, but the lowest-loss context changes---even between the two
+  Qwen checkpoints---and AUROC can rank monitors differently from deployment
+  loss. On Qwen3.5, an official Qwen-Scope SAE probe also trails its dense
+  source residual under a declared base-to-posttraining checkpoint mismatch.
 \end{itemize}
 
 ObserverBench provides a common way to evaluate interpretability methods

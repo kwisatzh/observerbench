@@ -16,10 +16,11 @@ Each evaluation uses a \textbf{TaskCard}, an \textbf{ObserverCard}, and a
   budgets, and clean-performance checks. These do not change when observers
   are compared.
   \item \textbf{Submit an observer.} Any method may be used if it respects the
-  task's information boundary. The ObserverCard records what the observer
-  reads, how it was fit or calibrated, what model access it requires, and any
-  known failure conditions. For a control task, it also declares whether the
-  submission replaces the state estimate, the edit direction, or both.
+  task's information and integrity boundary. The ObserverCard records what the
+  observer reads, where those measurements come from, how it was fit or
+  calibrated, what model access it requires, and any known failure conditions.
+  For a control task, it also declares whether the submission replaces the
+  state estimate, the edit direction, or both.
   \item \textbf{Run the common evaluator.} Every observer receives the same
   held-out cases and faces the same controller, actions, budgets, and loss.
   \item \textbf{Compare both outcomes.} The result scorecard reports prediction
@@ -67,7 +68,8 @@ Safety triage & One risk or consequence score per request or trajectory
 \end{table}
 
 A leaderboard is therefore task-specific. Results are comparable only when
-they use the same task version, information boundary, held-out split, action
+they use the same task version, information and integrity boundary, held-out
+split, action
 rule, and budget. ObserverBench does not collapse unlike settings into a
 single overall rank. Instead, each scorecard shows which observer is better
 for one declared use.

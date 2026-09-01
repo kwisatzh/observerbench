@@ -1,0 +1,178 @@
+{
+  "artifacts": {
+    "attribution_map.json": "4331dad16c3b9b03baa0ab67a6bc40ee3730ca33ad76949e89238ec8b4b47d48",
+    "summary.csv": "0fe36488a03e07e7b0327bb9e9becb5ab8b7eb810750ac8a21a0b15f9b8d7eb2"
+  },
+  "budgets": [
+    20,
+    40,
+    80,
+    160
+  ],
+  "claim_eligible": true,
+  "measurement": {
+    "batch_size": 32,
+    "intervention": "final-position template-conditioned mean replacement at head-z",
+    "n_gradient_prompts": 192,
+    "prompt_split": "train",
+    "template_head_means": {
+      "path": "results/revision/phase05/ioi_effects/template_head_means.npz",
+      "sha256": "42b36bd7d846c36f8abda56df2d517954458eb005a2fc93082d0c0875e9da566"
+    }
+  },
+  "model": {
+    "device": "cpu",
+    "name": "gpt2-small",
+    "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e"
+  },
+  "results": [
+    {
+      "contract_version": "observerbench.effect_prediction.v0",
+      "measurement_budget": 20,
+      "metrics": {
+        "mae": 0.6624302038772278,
+        "max_absolute_error": 3.406550295882577,
+        "mean_error": -0.4652293730631868,
+        "rmse": 0.8898976968132895
+      },
+      "n_queries": 320,
+      "observer_name": "ioi-attribution-patching-raw",
+      "observer_version": "1.0.0",
+      "schema_version": "observerbench.effect_prediction_result.v0",
+      "task_name": "ioi-gpt2-small-finite-effects",
+      "task_version": "phase5-test-v1-b020"
+    },
+    {
+      "contract_version": "observerbench.effect_prediction.v0",
+      "measurement_budget": 20,
+      "metrics": {
+        "mae": 0.6298085042174869,
+        "max_absolute_error": 3.0577125541216708,
+        "mean_error": -0.3352019481900019,
+        "rmse": 0.8271210407375266
+      },
+      "n_queries": 320,
+      "observer_name": "ioi-attribution-patching-scalar-calibrated",
+      "observer_version": "1.0.0",
+      "schema_version": "observerbench.effect_prediction_result.v0",
+      "task_name": "ioi-gpt2-small-finite-effects",
+      "task_version": "phase5-test-v1-b020"
+    },
+    {
+      "contract_version": "observerbench.effect_prediction.v0",
+      "measurement_budget": 40,
+      "metrics": {
+        "mae": 0.6624302038772278,
+        "max_absolute_error": 3.406550295882577,
+        "mean_error": -0.4652293730631868,
+        "rmse": 0.8898976968132895
+      },
+      "n_queries": 320,
+      "observer_name": "ioi-attribution-patching-raw",
+      "observer_version": "1.0.0",
+      "schema_version": "observerbench.effect_prediction_result.v0",
+      "task_name": "ioi-gpt2-small-finite-effects",
+      "task_version": "phase5-test-v1-b040"
+    },
+    {
+      "contract_version": "observerbench.effect_prediction.v0",
+      "measurement_budget": 40,
+      "metrics": {
+        "mae": 0.6351218510766221,
+        "max_absolute_error": 2.958620176602607,
+        "mean_error": -0.2982657881050169,
+        "rmse": 0.8235160167981473
+      },
+      "n_queries": 320,
+      "observer_name": "ioi-attribution-patching-scalar-calibrated",
+      "observer_version": "1.0.0",
+      "schema_version": "observerbench.effect_prediction_result.v0",
+      "task_name": "ioi-gpt2-small-finite-effects",
+      "task_version": "phase5-test-v1-b040"
+    },
+    {
+      "contract_version": "observerbench.effect_prediction.v0",
+      "measurement_budget": 80,
+      "metrics": {
+        "mae": 0.6624302038772278,
+        "max_absolute_error": 3.406550295882577,
+        "mean_error": -0.4652293730631868,
+        "rmse": 0.8898976968132895
+      },
+      "n_queries": 320,
+      "observer_name": "ioi-attribution-patching-raw",
+      "observer_version": "1.0.0",
+      "schema_version": "observerbench.effect_prediction_result.v0",
+      "task_name": "ioi-gpt2-small-finite-effects",
+      "task_version": "phase5-test-v1-b080"
+    },
+    {
+      "contract_version": "observerbench.effect_prediction.v0",
+      "measurement_budget": 80,
+      "metrics": {
+        "mae": 0.6323025422919175,
+        "max_absolute_error": 3.156586661828917,
+        "mean_error": -0.3720567493560377,
+        "rmse": 0.8372246185827883
+      },
+      "n_queries": 320,
+      "observer_name": "ioi-attribution-patching-scalar-calibrated",
+      "observer_version": "1.0.0",
+      "schema_version": "observerbench.effect_prediction_result.v0",
+      "task_name": "ioi-gpt2-small-finite-effects",
+      "task_version": "phase5-test-v1-b080"
+    },
+    {
+      "contract_version": "observerbench.effect_prediction.v0",
+      "measurement_budget": 160,
+      "metrics": {
+        "mae": 0.6624302038772278,
+        "max_absolute_error": 3.406550295882577,
+        "mean_error": -0.4652293730631868,
+        "rmse": 0.8898976968132895
+      },
+      "n_queries": 320,
+      "observer_name": "ioi-attribution-patching-raw",
+      "observer_version": "1.0.0",
+      "schema_version": "observerbench.effect_prediction_result.v0",
+      "task_name": "ioi-gpt2-small-finite-effects",
+      "task_version": "phase5-test-v1-b160"
+    },
+    {
+      "contract_version": "observerbench.effect_prediction.v0",
+      "measurement_budget": 160,
+      "metrics": {
+        "mae": 0.6315642766701114,
+        "max_absolute_error": 3.1445152930032316,
+        "mean_error": -0.3675572104151678,
+        "rmse": 0.8356492689362269
+      },
+      "n_queries": 320,
+      "observer_name": "ioi-attribution-patching-scalar-calibrated",
+      "observer_version": "1.0.0",
+      "schema_version": "observerbench.effect_prediction_result.v0",
+      "task_name": "ioi-gpt2-small-finite-effects",
+      "task_version": "phase5-test-v1-b160"
+    }
+  ],
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.4.6",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.11.14",
+    "source_dirty": true,
+    "source_revision": "af5d21d90036de85a210da03614bdd41c2ce8ef2"
+  },
+  "schema": "observerbench.ioi_attribution_patching_run.v1",
+  "sources": {
+    "scripts/run_ioi_attribution_patching_baseline.py": "fd3cd3c148b9d09964f3df2d2d93f9f5537822838b1401ec82726a23e4fdf829",
+    "src/observerbench/effect_prediction.py": "38670e17e470a96259edce697130c748c6f3751b788bd9010583856def229537",
+    "src/observerbench/tasks/ioi/attribution_patching.py": "33554a0988708bc28f1c084750d66095ad5b6e71f3cc609f79f86d94da552c8b",
+    "src/observerbench/tasks/ioi/effect_task.py": "c127942808be136edf1e8a5171bb8b3173ba5f551645b6fddd6d1adba04767d8"
+  },
+  "status": "complete"
+}

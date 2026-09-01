@@ -1,0 +1,23 @@
+{
+  "access_regime": "two output score distributions; two forward measurements",
+  "additional_forward_passes": 2,
+  "fit_procedure": "no fit; arithmetic mean of two frozen prompt scores",
+  "implementation": "scripts/run_controlarena_apps_gemma.py",
+  "known_failure_modes": [
+    "Averaging can dilute the stronger prompted monitor."
+  ],
+  "metadata": {
+    "registration_scope": "local digest seal; not an independent timestamp",
+    "result_status": "prospectively frozen matched replication",
+    "selection": {},
+    "source_summary_sha256": "d76189abd314ff2edb75fd778ee26007a2a8227316243110e02dc394c0e68909",
+    "task_id": "controlarena-apps-verified-backdoors@gemma-2-9b-it-v0"
+  },
+  "observer_family": "prompted output ensemble",
+  "observer_input": "mean of basic- and detailed-prompt expected scores",
+  "observer_name": "gemma-controlarena-prompt-ensemble",
+  "observer_version": "gemma-2-9b-it-v0",
+  "requires_white_box_access": false,
+  "risk_score_meaning": "larger scores receive higher audit priority",
+  "schema_version": "observerbench.safety_observer_card.v0"
+}

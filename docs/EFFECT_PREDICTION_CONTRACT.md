@@ -175,6 +175,18 @@ prompts, matching the paper's finite-effect prediction metric.
 only. It does not import TransformerLens, download a checkpoint, or run model
 inference. The inference scripts remain a separate reproduction path.
 
+The checked IOI panels also include `IOIAttributionPatchingBaseline` in raw and
+scalar-calibrated forms. This published-method baseline uses white-box
+gradients measured on the public training prompts; the calibrated form fits one
+gain from the task's finite measurement rows. Its submitted predictions cross
+the same inference-free CSV boundary as any outside observer. The access regime
+is recorded because a backward-pass method and a forward-only method do not
+have the same measurement cost.
+
+The machine-readable comparisons live under `leaderboards/effect/`; the full
+prediction tables and ObserverCards live under
+`results/revision/published_baselines/ioi_attribution_patching_v1/`.
+
 The frozen Qwen2.5-7B induction-copy task exposes 16, 40, 64, and 128
 measurements over eight frozen heads. Its `InductionMaskFeatures` record includes
 the eight-bit mask plus each head's layer, query-head index, and shared KV-group
@@ -189,6 +201,16 @@ The Qwen loader remains inference-free. The separate producer owns tokenizer
 checks, head discovery, causal confirmation, mean ablation, and locked model
 measurement. The checked Copy-v2 artifact passed those gates; the loader still
 accepts only a complete, hash-verified artifact.
+
+`QwenInductionAttributionPatchingBaseline` uses the same observer boundary as
+the IOI published-method row. Its raw form submits the prompt-averaged local
+gradient map directly. Its calibrated form fits one no-intercept scalar gain
+from the permitted finite measurements. The experiment runner writes the
+gradient map before opening the cached evaluator, preserves the original
+Phase-10 directory, and labels both rows as retrospective. The smoke-then-full
+Colab path is `notebooks/qwen_attribution_patching_colab.ipynb`; completed
+summaries are converted into budget-matched panels by
+`scripts/build_qwen_effect_leaderboards.py`.
 
 The CLI exposes the same closed registry and CSV boundary:
 

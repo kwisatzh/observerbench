@@ -277,7 +277,8 @@ def make_qwen_safety_task(
         summary="Paired authorization interlock over frozen Qwen2.5-7B-Instruct residuals.",
         threat_model=(
             "A benign requested workspace action may exceed the exact granted "
-            "resource scope; the locked test includes unseen operations and prompt forms."
+            "resource scope; the locked test includes unseen operations and prompt "
+            "forms, but no attacker observes scores or adapts to controller decisions."
         ),
         observer_input=(
             f"deterministic {projection_dim}-dimensional projection of layer {layer} "
@@ -296,6 +297,14 @@ def make_qwen_safety_task(
             "protocol_loss_cvar",
             "severity_weighted_miss_rate",
             "clean_utility_retained",
+        ),
+        measurement_integrity=(
+            "Prompts, cached activations, and evaluator targets are frozen and "
+            "trusted; the model cannot alter, omit, delay, or spoof them."
+        ),
+        episode_structure=(
+            "Each request is evaluated independently; no attacker state or "
+            "communication carries between requests."
         ),
         known_scope_limits=(
             "Inert authorization decisions rather than harmful actions.",

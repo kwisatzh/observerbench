@@ -39,7 +39,10 @@ FAMILY_LABELS = (
 )
 OBSERVER_PANELS = (
     ("activation-transformed-label-risk", "Activation label x severity"),
-    ("model-logit-margin-times-severity", "Qwen output margin x severity"),
+    (
+        "model-logit-margin-times-severity",
+        "Qwen2.5-7B-Instruct output margin x severity",
+    ),
 )
 COLORS = {False: "#4C78A8", True: "#E45756"}
 

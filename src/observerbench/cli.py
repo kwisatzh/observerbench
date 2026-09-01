@@ -86,8 +86,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     ai_control_results_parser = subparsers.add_parser(
         "list-ai-control-results",
-        help="List checked monitor outcomes on the external APPS task.",
+        help="List checked monitor outcomes within external APPS task panels.",
     )
+    ai_control_results_parser.add_argument("--task-id", default=None)
     ai_control_results_parser.add_argument(
         "--format", choices=("text", "json", "csv", "markdown"), default="text"
     )
@@ -232,8 +233,10 @@ def evaluate_ai_control(
     return 0
 
 
-def list_ai_control_results(*, output_format: str, leaderboard: Path | None) -> int:
-    rows = load_ai_control_leaderboard(leaderboard)
+def list_ai_control_results(
+    *, task_id: str | None, output_format: str, leaderboard: Path | None
+) -> int:
+    rows = load_ai_control_leaderboard(leaderboard, task_id=task_id)
     print(format_ai_control_leaderboard(rows, output_format=output_format), end="")
     return 0
 
@@ -405,6 +408,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
     if args.command == "list-ai-control-results":
         return list_ai_control_results(
+            task_id=args.task_id,
             output_format=args.format,
             leaderboard=args.leaderboard,
         )

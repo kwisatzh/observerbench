@@ -1,0 +1,78 @@
+{
+  "metric_direction": {
+    "mae": "lower",
+    "rmse": "lower"
+  },
+  "rows": [
+    {
+      "access_regime": "frozen forward intervention measurements",
+      "display_name": "All-pairs finite-effect ridge",
+      "measurement_budget": 40,
+      "metrics": {
+        "mae": 0.5590664736743898,
+        "rmse": 0.671892881481376
+      },
+      "observer_family": "interaction-aware finite-effect predictor",
+      "observer_name": "ioi-count-plus-all-pairs-ridge",
+      "requires_white_box_access": false,
+      "result_status": "prespecified bundled baseline",
+      "source_result": "results/revision/phase05/ioi_confirmatory/prediction_metrics.csv",
+      "source_sha256": "2532b04d7571ec5d3982d3936bcbbba68f91edb26ce6d1f6abe36fdd78b4643c",
+      "task_name": "ioi-gpt2-small-finite-effects",
+      "task_version": "phase5-test-v1-b040"
+    },
+    {
+      "access_regime": "frozen forward intervention measurements",
+      "display_name": "Additive finite-effect ridge",
+      "measurement_budget": 40,
+      "metrics": {
+        "mae": 0.6750449201048123,
+        "rmse": 0.8264779669211002
+      },
+      "observer_family": "first-order finite-effect predictor",
+      "observer_name": "ioi-additive-ridge",
+      "requires_white_box_access": false,
+      "result_status": "prespecified bundled baseline",
+      "source_result": "results/revision/phase05/ioi_confirmatory/prediction_metrics.csv",
+      "source_sha256": "2532b04d7571ec5d3982d3936bcbbba68f91edb26ce6d1f6abe36fdd78b4643c",
+      "task_name": "ioi-gpt2-small-finite-effects",
+      "task_version": "phase5-test-v1-b040"
+    },
+    {
+      "access_regime": "white-box gradients plus frozen finite calibration measurements",
+      "display_name": "Scalar-calibrated attribution patching",
+      "measurement_budget": 40,
+      "metrics": {
+        "mae": 0.6351218510766221,
+        "rmse": 0.8235160167981473
+      },
+      "observer_family": "published attribution-patching baseline",
+      "observer_name": "ioi-attribution-patching-scalar-calibrated",
+      "requires_white_box_access": true,
+      "result_status": "post-outcome published-method baseline",
+      "source_result": "results/revision/published_baselines/ioi_attribution_patching_v1/summary.csv",
+      "source_sha256": "0fe36488a03e07e7b0327bb9e9becb5ab8b7eb810750ac8a21a0b15f9b8d7eb2",
+      "task_name": "ioi-gpt2-small-finite-effects",
+      "task_version": "phase5-test-v1-b040"
+    },
+    {
+      "access_regime": "white-box gradients over 192 public training prompts",
+      "display_name": "Raw attribution patching",
+      "measurement_budget": 40,
+      "metrics": {
+        "mae": 0.6624302038772278,
+        "rmse": 0.8898976968132895
+      },
+      "observer_family": "published attribution-patching baseline",
+      "observer_name": "ioi-attribution-patching-raw",
+      "requires_white_box_access": true,
+      "result_status": "post-outcome published-method baseline",
+      "source_result": "results/revision/published_baselines/ioi_attribution_patching_v1/summary.csv",
+      "source_sha256": "0fe36488a03e07e7b0327bb9e9becb5ab8b7eb810750ac8a21a0b15f9b8d7eb2",
+      "task_name": "ioi-gpt2-small-finite-effects",
+      "task_version": "phase5-test-v1-b040"
+    }
+  ],
+  "schema_version": "observerbench.effect_leaderboard.v0",
+  "task_id": "ioi-gpt2-small-finite-effects@phase5-test-v1-b040"
+}

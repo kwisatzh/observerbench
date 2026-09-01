@@ -16,18 +16,23 @@ structure \cite{mueller2025mib,wu2025axbench,gupta2024interpbench}. Mechanistic
 tomography treats measurements as a way to recover a mechanism or effect map
 \cite{erramilli2026tomography}; ObserverBench starts with such an estimate and
 asks whether it supports a declared intervention or controller.
+Sparse probing asks whether SAE features support compact supervised predictors
+\cite{kantamneni2025saeprobes}. ObserverBench adds the operational question:
+does the sparser fitted readout improve the action chosen under a fixed policy?
 
 \paragraph{Decisions and AI control.}
 Decision-focused learning evaluates a predictor through the downstream decision
 rather than assuming that lower prediction error is enough
 \cite{donti2017task,elmachtoub2022smart}. The same distinction motivates calls
 to judge interpretability by the actions it enables \cite{orgad2026actionable}.
-AI control asks whether a protocol can remain safe when an untrusted model may
-try to evade it, and ControlArena provides reusable environments, policies,
-monitors, and protocol-level evaluation
-\cite{greenblatt2024aicontrol,inglis2025controlarena}. ObserverBench focuses on
-the estimate inside the protocol: what it predicts, what it can read, which
-actions it can affect, and the loss produced by those actions.
+AI control evaluates complete safety protocols against strategies chosen by an
+intentionally subversive model, while ControlArena supplies reusable
+environments, monitors, and protocol-level evaluation
+\cite{greenblatt2024aicontrol,inglis2025controlarena}. ObserverBench asks a
+complementary component-level question. It holds the controller, audit rule,
+action budget, and test cases fixed, then compares the observer scores used
+inside that decision problem. It evaluates monitor adequacy, not end-to-end
+robustness to subversion.
 
 \paragraph{Borrowed testbeds.}
 The IOI circuit supplies known structure rather than a new mechanism claim

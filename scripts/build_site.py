@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Build the static ObserverBench site from checked leaderboard JSON."""
 
+# Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex
+
 from __future__ import annotations
 
 import argparse
@@ -43,14 +45,45 @@ def _task_id(row: dict[str, Any], fallback: str) -> str:
 
 def _title(task_id: str, panel: str) -> str:
     known = {
-        "qwen-paired-scope-v0": "Qwen authorization triage",
-        "qwen-paired-scope-v1": "Qwen authorization triage — public v1",
-        "controlarena-apps-qwen-v1": "APPS verified-backdoor monitoring",
+        "qwen-paired-scope-v0": "Qwen2.5-7B-Instruct authorization triage",
+        "qwen-paired-scope-v1": "Qwen2.5-7B-Instruct authorization triage — public v1",
+        "controlarena-apps-qwen-v1": "Qwen2.5-7B-Instruct APPS verified-backdoor monitoring",
         "controlarena-apps-qwen-v0": "APPS monitoring — initial panel",
+        "controlarena-apps-gemma2-9b-it-v0": "Gemma-2-9B-it APPS verified-backdoor monitoring",
+        "controlarena-apps-qwen3-5-9b-v0": "Qwen3.5-9B APPS verified-backdoor monitoring",
     }
     if panel in known:
         return known[panel]
+    effect_match = re.fullmatch(r"ioi-gpt2-small-finite-effects-b(\d+)", panel)
+    if effect_match:
+        return f"GPT-2 IOI finite effects — {int(effect_match.group(1))} measurements"
+    qwen_match = re.fullmatch(
+        r"induction-qwen2-5-7b-finite-effects-b(\d+)", panel
+    )
+    if qwen_match:
+        return (
+            "Qwen2.5-7B induction-copy finite effects — "
+            f"{int(qwen_match.group(1))} measurements"
+        )
     return task_id.replace("@", " · ").replace("-", " ").title()
+
+
+def _catalog_sort_key(item: dict[str, Any]) -> tuple[str, str, int]:
+    effect_match = re.fullmatch(
+        r"ioi-gpt2-small-finite-effects-b(\d+)", str(item["panel"])
+    )
+    if effect_match:
+        return item["track"], "GPT-2 IOI finite effects", int(effect_match.group(1))
+    qwen_match = re.fullmatch(
+        r"induction-qwen2-5-7b-finite-effects-b(\d+)", str(item["panel"])
+    )
+    if qwen_match:
+        return (
+            item["track"],
+            "Qwen2.5-7B induction-copy finite effects",
+            int(qwen_match.group(1)),
+        )
+    return item["track"], item["title"], 0
 
 
 def _metric_directions(payload: dict[str, Any], rows: list[dict[str, Any]]) -> dict[str, str]:
@@ -68,6 +101,7 @@ def _metric_directions(payload: dict[str, Any], rows: list[dict[str, Any]]) -> d
 
 def _primary_metric(metrics: dict[str, str]) -> str:
     for candidate in (
+        "mean_realized_violations_at_p01_b02",
         "protocol_loss_mean",
         "violations_at_0.02",
         "closed_loop_loss",
@@ -138,7 +172,7 @@ def _copy_leaderboards(repo_root: Path, output: Path) -> list[dict[str, Any]]:
                 "source": str(path.relative_to(repo_root)),
             }
         )
-    return sorted(catalog, key=lambda item: (item["track"], item["title"]))
+    return sorted(catalog, key=_catalog_sort_key)
 
 
 def _copy_public_task_packs(repo_root: Path, output: Path) -> None:

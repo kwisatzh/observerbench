@@ -1,0 +1,100 @@
+{
+  "head_effects": [
+    {
+      "component_index": 0,
+      "head": 9,
+      "head_label": "P:9.9",
+      "layer": 9,
+      "predicted_effect": 0.8636548139620572
+    },
+    {
+      "component_index": 1,
+      "head": 6,
+      "head_label": "P:9.6",
+      "layer": 9,
+      "predicted_effect": -0.21725859747190648
+    },
+    {
+      "component_index": 2,
+      "head": 0,
+      "head_label": "P:10.0",
+      "layer": 10,
+      "predicted_effect": 0.4711287373211235
+    },
+    {
+      "component_index": 3,
+      "head": 0,
+      "head_label": "B:9.0",
+      "layer": 9,
+      "predicted_effect": -0.005485319213524538
+    },
+    {
+      "component_index": 4,
+      "head": 7,
+      "head_label": "B:9.7",
+      "layer": 9,
+      "predicted_effect": 0.258726170155569
+    },
+    {
+      "component_index": 5,
+      "head": 1,
+      "head_label": "B:10.1",
+      "layer": 10,
+      "predicted_effect": 0.09889644815848442
+    },
+    {
+      "component_index": 6,
+      "head": 2,
+      "head_label": "B:10.2",
+      "layer": 10,
+      "predicted_effect": -0.023005702629840624
+    },
+    {
+      "component_index": 7,
+      "head": 6,
+      "head_label": "B:10.6",
+      "layer": 10,
+      "predicted_effect": 0.30389564735620905
+    },
+    {
+      "component_index": 8,
+      "head": 10,
+      "head_label": "B:10.10",
+      "layer": 10,
+      "predicted_effect": 0.21164732779531428
+    },
+    {
+      "component_index": 9,
+      "head": 2,
+      "head_label": "B:11.2",
+      "layer": 11,
+      "predicted_effect": -0.4696836383470024
+    },
+    {
+      "component_index": 10,
+      "head": 9,
+      "head_label": "B:11.9",
+      "layer": 11,
+      "predicted_effect": 0.003296552548514834
+    },
+    {
+      "component_index": 11,
+      "head": 7,
+      "head_label": "E:10.7",
+      "layer": 10,
+      "predicted_effect": -1.364439839439001
+    },
+    {
+      "component_index": 12,
+      "head": 10,
+      "head_label": "E:11.10",
+      "layer": 11,
+      "predicted_effect": -1.1881430693125974
+    }
+  ],
+  "intervention": "final-position template-conditioned mean replacement at head-z",
+  "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+  "n_prompts": 192,
+  "prompt_split": "train",
+  "schema_version": "observerbench.ioi_attribution_map.v1"
+}

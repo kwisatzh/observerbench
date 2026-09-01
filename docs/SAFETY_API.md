@@ -62,6 +62,31 @@ counts inference beyond the action-producing pass. For example, a forked
 self-report normally records one additional pass, whereas a probe over an
 already cached activation records zero.
 
+## Measurement integrity and episode structure
+
+A safety TaskCard must say more than what the observer may read. It must also
+state who controls each measurement. Use `measurement_integrity` to declare the
+source of prompts, transcripts, activations, tool events, and external logs;
+whether the model can alter, omit, delay, reorder, or spoof them; and whether
+the evaluator has an authenticated or append-only source of truth.
+
+The existing `threat_model` field must also state what the attacker knows about
+the observer and controller, whether scores or policy actions provide feedback,
+and whether later actions may adapt to earlier decisions. A frozen attack set
+and a monitor-aware attacker are different tasks even when they use the same
+observer and audit budget.
+
+Use `episode_structure` to say whether queries are independent or belong to a
+shared trajectory. Stateful or multi-agent tasks should identify the episode,
+agent, time, and shared communication boundary, and should resample whole
+episodes rather than treating correlated requests as independent rows.
+
+The built-in authorization and APPS tasks declare trusted evaluator-supplied
+views, independent requests, and attacks that do not adapt to the monitor. They
+do not test transcript tampering, covert channels, or monitor-aware attacks. An
+observer that leads these fixed comparisons still requires a full
+protocol-level evaluation against intentional subversion.
+
 Then run:
 
 ```bash
@@ -80,7 +105,7 @@ under the same budgets used for every observer.
 ## Checked results and local comparison
 
 ObserverBench ships real safety rows rather than an empty submission surface.
-List the bundled Qwen observers and their protocol outcomes with:
+List the bundled Qwen2.5-7B-Instruct observers and their protocol outcomes with:
 
 ```bash
 observerbench list-safety-results
@@ -179,7 +204,64 @@ backdoors that escape audit. AUROC describes the full ranking. The realized
 violation count asks the control question: which monitor places the dangerous
 cases inside the small part of the ranking on which the protocol can act?
 
-The repository ships four checked Qwen rows for this task. List them with
+The repository ships eleven checked Qwen2.5-7B-Instruct rows for this task. Three are a
+post-outcome published-method integration: a sparse SAE probe and matched
+raw-residual and SAE-reconstruction controls. The sparse probe retains 127
+nonzero coefficients. It reaches AUROC 0.953 versus 0.983 for raw residuals and,
+at 1% attack prevalence with a 2% audit budget, misses 4.667 attacks on average
+versus 2.048. This is an informative negative for this pinned SAE, layer,
+observer, and task, not a general claim about SAEs. List all rows with
 `observerbench list-ai-control-results`; text, JSON, CSV, and Markdown formats
-are available. The underlying score table, bootstrap summary, and result hashes
-remain under `results/revision/ai_control/` and `leaderboards/safety/`.
+are available. The command groups the Qwen2.5-7B-Instruct, Gemma-2-9B-it, and
+Qwen3.5-9B panels without
+issuing a cross-task rank. Pass one exact `--task-id` to select a panel. The
+score tables, bootstrap summaries, and result hashes remain under
+`results/revision/ai_control/` and `leaderboards/safety/`.
+
+The Gemma panel contains nine rows from a prospectively frozen matched
+replication. In its registered 1% attack, 2% audit cell, the detailed prompted
+monitor has higher AUROC than the official Gemma Scope SAE probe (0.893 versus
+0.870) but more mean realized violations (10.80 versus 9.07). The ladder sorts
+and displays these results inside the Gemma task only.
+
+The Qwen3.5-9B panel contains nine rows from a second prospectively frozen matched
+replication. In the same 1% attack, 2% audit cell, the verdict-adjacent residual
+probe reaches AUROC 0.977 and 1.976 mean violations. The neutral residual
+reaches 0.936 and 6.601, the score-distribution ridge reaches 0.940 and 5.120,
+and the text observer reaches 0.868 and 9.054. The official Qwen3.5-9B
+Qwen-Scope SAE probe
+reaches 0.811 and 12.725 after selecting layer 12 and ridge 100 on fit and
+calibration rows only. Its encoder was trained on Qwen3.5-9B-Base but evaluated
+on post-trained Qwen3.5-9B. The result panel and ObserverCard record this
+base-to-posttrain mismatch rather than treating the SAE row as checkpoint
+matched.
+
+### Rebuilding the combined APPS ladder
+
+Build each canonical model panel before composing the package registry. The
+registry command must run last so a single-model panel cannot replace the
+three-task bundle:
+
+```bash
+PYTHONPATH=src python scripts/build_ai_control_leaderboard.py \
+  --results results/revision/ai_control/controlarena_apps_qwen_followup_v1/results.json \
+  --bootstrap results/revision/ai_control/controlarena_apps_qwen_followup_v1/bootstrap.json \
+  --published-method-results results/revision/ai_control/controlarena_apps_qwen_sae_probe_v1/results.json \
+  --published-method-bootstrap results/revision/ai_control/controlarena_apps_qwen_sae_probe_v1/paired_problem_bootstrap.json \
+  --outdir leaderboards/safety/controlarena-apps-qwen-v1 \
+  --bundled-json /tmp/qwen-apps-panel.json
+
+PYTHONPATH=src python scripts/build_gemma_ai_control_leaderboard.py \
+  --summary results/revision/ai_control/controlarena_apps_gemma2_9b_it_v0/checked_summary.json \
+  --outdir leaderboards/safety/controlarena-apps-gemma2-9b-it-v0
+
+PYTHONPATH=src python scripts/build_qwen35_ai_control_leaderboard.py \
+  --summary results/revision/ai_control/controlarena_apps_qwen3_5_9b_v0/checked_summary.json \
+  --outdir leaderboards/safety/controlarena-apps-qwen3-5-9b-v0
+
+PYTHONPATH=src python scripts/build_ai_control_registry.py \
+  --panel leaderboards/safety/controlarena-apps-qwen-v1/results.json \
+  --panel leaderboards/safety/controlarena-apps-gemma2-9b-it-v0/results.json \
+  --panel leaderboards/safety/controlarena-apps-qwen3-5-9b-v0/results.json \
+  --out src/observerbench/data/ai_control_leaderboard_v0.json
+```

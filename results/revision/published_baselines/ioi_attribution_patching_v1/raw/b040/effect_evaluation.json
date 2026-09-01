@@ -1,0 +1,16 @@
+{
+  "contract_version": "observerbench.effect_prediction.v0",
+  "measurement_budget": 40,
+  "metrics": {
+    "mae": 0.6624302038772278,
+    "max_absolute_error": 3.406550295882577,
+    "mean_error": -0.4652293730631868,
+    "rmse": 0.8898976968132895
+  },
+  "n_queries": 320,
+  "observer_name": "ioi-attribution-patching-raw",
+  "observer_version": "1.0.0",
+  "schema_version": "observerbench.effect_prediction_result.v0",
+  "task_name": "ioi-gpt2-small-finite-effects",
+  "task_version": "phase5-test-v1-b040"
+}

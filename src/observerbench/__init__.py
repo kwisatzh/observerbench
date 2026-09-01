@@ -31,6 +31,7 @@ from observerbench.ai_control_public import (
     join_public_ai_control_scores,
     read_private_ai_control_targets,
     read_public_ai_control_scores,
+    write_public_ai_control_scores,
 )
 from observerbench.core import (
     API_CONTRACT_VERSION,
@@ -167,6 +168,7 @@ __all__ = [
     "run_effect_prediction_task",
     "write_effect_predictions",
     "write_ai_control_scores",
+    "write_public_ai_control_scores",
     "write_safety_predictions",
     "validate_public_safety_task_pack",
     "write_safety_task_pack",

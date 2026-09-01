@@ -1,0 +1,39 @@
+\section{Qwen3.5 APPS replication protocol}
+\label{app:qwen35-apps}
+
+This replication keeps the APPS task fixed while changing the model. It uses
+the same 1,444 honest--backdoor pairs as the Qwen2.5 and Gemma studies, split by
+problem ID into 500 fit, 200 calibration, and 744 locked-test pairs. Both
+members of a pair remain in the same split. The prompts, score tokens,
+controller, audit budgets, resampling population, and realized-violation loss
+also remain fixed. Thinking is disabled for every Qwen3.5 view.
+
+The design was chosen after the Qwen2.5 and Gemma results were known. Before
+reading any Qwen3.5 monitor outcome, we pinned the model and official SAE
+revisions, declared the primary contrast, and sealed the source manifest. The
+primary contrast is neutral-residual minus verdict-adjacent-residual mean
+violations at 1\% attack prevalence and a 2\% audit budget. This is a local
+prospective seal, not an independent preregistration.
+
+The pinned model revision is
+\path{c202236235762e1c871ad0ccb60c8ee5ba337b9a}; the pinned SAE revision is
+\path{7bb2370d360e566b2d8acb8b3d15a0b2b88f52a8}. The source files and sealed
+manifest ship with the artifact, so the aggregate scorecard can be tied to the
+exact code and configuration used for the run without publishing per-example
+evaluator labels.
+
+We measure post-layer residuals at layers 12, 20, and 28. Fit data train each
+probe; calibration chooses the layer and ridge value; the locked test is read
+only after selection. One fit pair exceeds the 4,096-token limit and is
+excluded under the frozen rule. No calibration or locked-test pair reaches the
+limit. A compatibility-only smoke first checks prompt lengths, score tokens,
+residual shapes, and the three SAE files without fitting or ranking an
+observer.
+
+The official-feature control uses 65,536-wide TopK-50 Qwen-Scope SAEs at the
+same three layers. Calibration selects layer 12 and ridge 100. The SAEs were
+trained on Qwen3.5-9B-Base, whereas the dense residuals and outcomes come from
+post-trained Qwen3.5-9B. We declared this mismatch before the run. It makes the
+SAE row a test of a released feature family under transfer, not a
+checkpoint-matched comparison and not evidence that SAE features generally
+fail for safety monitoring.

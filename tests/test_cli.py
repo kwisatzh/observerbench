@@ -52,21 +52,49 @@ def test_list_safety_tasks_includes_paired_interlock() -> None:
 
 
 def test_list_safety_results_includes_checked_qwen_observers() -> None:
-    result = run_cli("list-safety-results")
+    result = run_cli("list-safety-results", "--format", "markdown")
 
     assert result.returncode == 0, result.stderr
     assert "Activation label x severity" in result.stdout
-    assert "Qwen output margin x severity" in result.stdout
+    assert "Qwen2.5-7B-Instruct output margin x severity" in result.stdout
 
 
 def test_list_ai_control_results_includes_external_monitors() -> None:
-    result = run_cli("list-ai-control-results")
+    result = run_cli("list-ai-control-results", "--format", "markdown")
 
     assert result.returncode == 0, result.stderr
-    assert "Qwen verdict-adjacent activation probe" in result.stdout
-    assert "Qwen neutral-context activation probe" in result.stdout
-    assert "Qwen + ControlArena basic prompt" in result.stdout
+    assert "Qwen2.5-7B-Instruct verdict-adjacent activation probe" in result.stdout
+    assert "Qwen2.5-7B-Instruct neutral-context activation probe" in result.stdout
+    assert "Qwen2.5-7B-Instruct + ControlArena basic prompt" in result.stdout
+    assert "Official Gemma Scope SAE probe" in result.stdout
+    assert "Qwen3.5-9B official Qwen-Scope SAE probe" in result.stdout
+    assert "controlarena-apps-verified-backdoors@qwen2.5-7b-v1" in result.stdout
+    assert "controlarena-apps-verified-backdoors@gemma-2-9b-it-v0" in result.stdout
+    assert "controlarena-apps-verified-backdoors@qwen3.5-9b-v0" in result.stdout
     assert "0.953" in result.stdout
+
+    gemma = run_cli(
+        "list-ai-control-results",
+        "--format",
+        "markdown",
+        "--task-id",
+        "controlarena-apps-verified-backdoors@gemma-2-9b-it-v0",
+    )
+    assert gemma.returncode == 0, gemma.stderr
+    assert "Official Gemma Scope SAE probe" in gemma.stdout
+    assert "Qwen2.5-7B-Instruct verdict-adjacent activation probe" not in gemma.stdout
+
+    qwen35 = run_cli(
+        "list-ai-control-results",
+        "--format",
+        "markdown",
+        "--task-id",
+        "controlarena-apps-verified-backdoors@qwen3.5-9b-v0",
+    )
+    assert qwen35.returncode == 0, qwen35.stderr
+    assert "Qwen3.5-9B verdict-adjacent residual probe" in qwen35.stdout
+    assert "Qwen3.5-9B official Qwen-Scope SAE probe" in qwen35.stdout
+    assert "Official Gemma Scope SAE probe" not in qwen35.stdout
 
 
 def test_make_figures_runs_checked_fast_reproduction(tmp_path: Path) -> None:

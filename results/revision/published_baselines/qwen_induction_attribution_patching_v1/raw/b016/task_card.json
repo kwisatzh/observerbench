@@ -1,0 +1,85 @@
+{
+  "access_regime": "cached forward-only finite intervention measurements",
+  "estimand": "mean drop from the clean correct-successor versus two-distractor logit margin over the held-out prompt distribution",
+  "evaluation_split": "qwen_induction_a80172ccd3034115:test",
+  "intervention_family": "binary subsets of eight frozen induction-copy heads, replaced by family-conditioned reference means at the final query head-z site",
+  "known_scope_limits": [
+    "The task uses one pinned Qwen2.5-7B base checkpoint and one synthetic copy distribution.",
+    "The eight heads were selected and causally validated on separate prompts; they are not claimed to be a complete ground-truth circuit.",
+    "Measurements and targets are prompt-averaged; this task evaluates effect prediction, not behavioral safety."
+  ],
+  "measurement_design": "first 16 masks in the frozen nested calibration order; each effect averages 256 train prompts",
+  "metadata": {
+    "data_version": "copy-v2",
+    "design_manifest_sha256": "f721ba756ecd7a91808c50e73d7e9792b2e81b2a8589e406af82b191534cf0a0",
+    "effect_manifest_sha256": "64553fa244cca2fe9673d67111fe7323bbe96a8ea7bfaf6402498ce22a4d57ae",
+    "effect_manifest_status": "complete_locked_test_outcomes",
+    "feature_schema": "observerbench.qwen_induction_mask_features.v1",
+    "hash_verification": true,
+    "head_indices": [
+      3,
+      4,
+      15,
+      0,
+      6,
+      13,
+      18,
+      13
+    ],
+    "head_kv_groups": [
+      0,
+      0,
+      2,
+      0,
+      0,
+      1,
+      2,
+      1
+    ],
+    "head_labels": [
+      "L22H3",
+      "L22H4",
+      "L26H15",
+      "L14H0",
+      "L14H6",
+      "L16H13",
+      "L17H18",
+      "L23H13"
+    ],
+    "head_layers": [
+      22,
+      22,
+      26,
+      14,
+      14,
+      16,
+      17,
+      23
+    ],
+    "measurement_budget": 16,
+    "measurement_unit": "distinct intervention mask",
+    "model_inference_included": false,
+    "model_revision": "d149729398750b98c0af14eb82c78cfe92750796",
+    "n_queries": 128,
+    "supported_measurement_budgets": [
+      16,
+      40,
+      64,
+      128
+    ],
+    "task_id": "induction-qwen2-5-7b-finite-effects@copy-v2-b016",
+    "underlying_test_effect_cells": 65536,
+    "underlying_train_effect_cells": 4096
+  },
+  "model_or_substrate": "Qwen/Qwen2.5-7B at pinned revision d149729398750b98c0af14eb82c78cfe92750796",
+  "primary_metrics": [
+    "mae",
+    "rmse"
+  ],
+  "schema_version": "observerbench.effect_task_card.v0",
+  "summary": "Predict the held-out mean finite change in an exact induction-copy candidate margin after mean replacement of a fixed subset of eight heads.",
+  "task_name": "induction-qwen2-5-7b-finite-effects",
+  "task_version": "copy-v2-b016",
+  "train_split": "qwen_induction_a80172ccd3034115:train",
+  "validation_target": "mean effects for 128 disjoint test masks, each averaged over 512 held-out prompts"
+}

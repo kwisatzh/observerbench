@@ -39,6 +39,14 @@ targets. An outside observer can submit its predictions without loading the
 model or rerunning the intervention experiment. The registries include
 per-component and additive ridge observers as initial comparison rows.
 
+The external APPS registry contains separate Qwen2.5-7B, Gemma-2-9B-it, and
+Qwen3.5-9B scorecards. Prompt, output, text, dense-residual, and SAE-feature
+observers are evaluated under the same audit contract within each model panel.
+The Qwen3.5 release includes the frozen source manifest and an aggregate
+checked summary containing the scorecard rows, paired contrasts, and official
+SAE selection. Per-example evaluator labels remain sealed. The registry does
+not issue a cross-model rank.
+
 Runs use strict JSON and record
 the contract and result-schema versions, component classes and parameters,
 package and dependency versions, the source revision, configuration and result

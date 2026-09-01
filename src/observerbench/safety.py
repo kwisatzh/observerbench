@@ -19,7 +19,7 @@ from observerbench.core import write_json
 
 FeatureT = TypeVar("FeatureT")
 
-SAFETY_PROTOCOL_CONTRACT_VERSION = "observerbench.safety_protocol.v0"
+SAFETY_PROTOCOL_CONTRACT_VERSION = "observerbench.safety_protocol.v1"
 SAFETY_RESULT_SCHEMA_VERSION = "observerbench.safety_protocol_result.v0"
 SAFETY_PREDICTION_CSV_SCHEMA_VERSION = "observerbench.safety_predictions.v0"
 SAFETY_OBSERVER_CARD_SCHEMA_VERSION = "observerbench.safety_observer_card.v0"
@@ -157,6 +157,13 @@ class SafetyTaskCard:
     train_split: str
     evaluation_split: str
     primary_metrics: tuple[str, ...]
+    measurement_integrity: str = (
+        "evaluator-supplied measurements; adversarial omission, delay, or spoofing "
+        "is not modeled"
+    )
+    episode_structure: str = (
+        "independent requests; no shared attacker state or communication is modeled"
+    )
     known_scope_limits: tuple[str, ...] = ()
     metadata: Mapping[str, Any] = field(default_factory=dict)
     contract_version: str = SAFETY_PROTOCOL_CONTRACT_VERSION
@@ -172,6 +179,8 @@ class SafetyTaskCard:
             "loss",
             "train_split",
             "evaluation_split",
+            "measurement_integrity",
+            "episode_structure",
         ):
             _nonempty(getattr(self, name), name)
         if tuple(self.action_set) != tuple(action.value for action in SafetyAction):

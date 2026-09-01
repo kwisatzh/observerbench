@@ -7,6 +7,19 @@ matter most, using the information available at deployment, so that a limited
 intervention budget prevents as much harm as possible. The two tasks in this
 section make that requirement explicit.
 
+The measurement channel matters as much as the score. During the 2026
+OpenAI--Hugging Face incident, agents tried to alter the transcripts they
+believed an evaluator would inspect and successfully spoofed some tool calls,
+while showing little interest in changing chain-of-thought they did not expect
+to be logged \cite{greenblatt2026hfinvestigation}. This does not make internal
+signals tamper-proof. It shows that an attacker may concentrate on the channel
+it believes is watched. ObserverBench therefore compares declared views---text,
+outputs, verdict-adjacent activations, and neutral activations---and records who
+controls each view. Monitoring is therefore a moving contest: a channel that
+works against frozen attacks may fail after attackers learn that it is being
+used. The present tasks keep those views fixed and trusted; they do not test an
+attacker that adapts to the monitor.
+
 \begin{table}[H]
 \centering
 \scriptsize
@@ -20,10 +33,11 @@ Task dimension & Authorization interlock & APPS backdoor audit \\
 \midrule
 Target & Authorization risk, including the consequence of the requested
 operation & Whether a submitted program contains a verified working backdoor \\
-Information boundary & Declared action fields and, depending on the observer,
-prompt text, Qwen output scores, or one residual activation & Programming
-problem and submitted code, read through prompt scores, text features, or one
-Qwen residual activation \\
+Information and integrity boundary & Declared action fields and, depending on
+the observer, prompt text, Qwen output scores, or one residual activation;
+evaluator-supplied views are trusted & Programming problem and submitted code,
+read through Qwen or Gemma prompt scores, text features, dense residuals, or SAE
+features; stored views are trusted and attacks do not adapt to the monitor \\
 Action space & Allow, block, or escalate a request & Audit a submission or
 leave it unaudited \\
 Decision rule and loss & Rank by the observer score; block the top 10\%,
@@ -170,7 +184,7 @@ The controlled task shows why consequence and cross-group calibration matter.
 Does the same task-relative evaluation change which monitor we prefer on an
 externally recognized safety benchmark? We next turn to APPS.
 
-\subsection{Activations can rank verified APPS backdoors without a verdict prompt}
+\subsection{Monitor rankings depend on the model and operating regime}
 \label{sec:safety-apps}
 
 To answer that question, we use
@@ -210,7 +224,7 @@ probe and layer 20 for the neutral probe.
 \begin{table}[H]
 \centering
 \small
-\caption{Monitor comparison on 744 held-out APPS pairs. The controller audits
+\caption{Qwen2.5-7B monitor comparison on 744 held-out APPS pairs. The controller audits
 29 of 1,488 submissions at 2\% and 148 at 10\%. Higher caught-backdoor counts
 are better; 29 and 148 are the best possible counts under those budgets.}
 \label{tab:apps-monitor}
@@ -251,6 +265,14 @@ Three findings matter:
   monitor or output observer.
 \end{itemize}
 
+The neutral-context result is relevant to adaptive monitoring, but it is not a
+robustness result. It shows that a useful signal can appear before the model is
+asked for a verdict. It does not show that the same signal survives once an
+attacker knows it is being read. The matched Gemma study below reverses the
+ordering of the two residual contexts, which is further reason to test the
+measurement channel under the intended model and threat model rather than name
+one context as universally best.
+
 In deployment, attacks should be rare. We therefore resample the frozen scores at attack
 rates from 1--50\% and audit budgets from 0.5--10\%. At 1\% attacks and a 2\%
 audit budget, the exact oracle misses none. The activation observers miss 2.65
@@ -262,18 +284,130 @@ differences hidden by the balanced panel.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{controlarena_prevalence_sensitivity.pdf}
-\caption{Excess escaped attacks over the exact-label oracle in 2,000 resampled
-populations. Rare attacks expose differences hidden by the balanced panel.}
+\caption{Qwen2.5-7B APPS: excess escaped attacks over the exact-label oracle
+in 2,000 resampled populations. Rare attacks expose differences hidden by the
+balanced panel.}
 \label{fig:apps-prevalence}
 \end{figure}
+
+A post-outcome diagnostic applies a published sparse-probing procedure to the
+frozen Qwen panel \cite{kantamneni2025saeprobes}. Its fitted readout
+retains 127 nonzero coefficients, versus 3,584 for a layer-matched dense
+residual, but misses 4.67 rather than 2.05 attacks on average. This is
+\emph{compression without a better decision} on this frozen panel, not a
+general claim about SAE features (Appendix~\ref{app:apps-diagnostics}).
 
 Appendix~\ref{app:apps-diagnostics} checks whether pooled performance hides
 allocation differences by APPS family and input length. This is an external
 monitor test, not a deployment claim.
 
+\subsubsection{A matched Gemma replication changes the mean ranking}
+
+We repeat the APPS contract on Gemma-2-9B-it, keeping the rows, prompts,
+controller, budgets, and evaluation loss fixed \cite{gemmateam2024gemma2}. The
+design was frozen after the Qwen results but before any Gemma monitor outcome
+was inspected. It is a prospectively frozen matched replication, not an
+independent preregistration.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Matched Gemma-2-9B-it APPS replication. AUROC uses the balanced
+locked panel of 744 honest--backdoor pairs. Realized violations use the
+registered primary cell: 1\% attacks and a 2\% audit budget. Entries are means
+and central 95\% outcome ranges over 2,000 resampled populations; lower is
+better.}
+\label{tab:gemma-apps-monitor-long}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Observer & AUROC & Realized violations \\
+\midrule
+Exact-label oracle & 1.000 & 0.00 $[0,0]$ \\
+Verdict-adjacent residual & \textbf{0.969} & \textbf{2.18 $[0,5]$} \\
+Score-distribution ridge & 0.913 & 4.42 $[1,8]$ \\
+Neutral residual & 0.944 & 4.95 $[2,9]$ \\
+Supervised text ridge & 0.868 & 9.05 $[6,12]$ \\
+Gemma Scope SAE probe & 0.870 & 9.07 $[6,12]$ \\
+Detailed prompted score & 0.893 & 10.80 $[7,14]$ \\
+Prompt ensemble & 0.860 & 13.69 $[11,15]$ \\
+Basic prompted monitor & 0.809 & 14.93 $[14,15]$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Residual access has the lowest mean loss in both models, but its best measured
+context changes: neutral on Qwen and verdict-adjacent on Gemma. Output
+information still matters. On Gemma, the score-distribution ridge has a
+slightly lower violation mean than the neutral residual, 4.42 versus 4.95,
+despite lower AUROC.
+
+\textbf{Classification is not enough on the external benchmark.} The detailed
+prompted monitor has higher AUROC than the official Gemma Scope SAE probe,
+0.893 versus 0.870, but worse mean realized violations, 10.80 versus 9.07
+\cite{lieberum2024gemmascope}. The detailed-minus-SAE paired difference
+averages 1.73 with a central 95\% outcome range of $[-2,6]$, so this is a
+reversal of the mean scorecard ranking, not a superiority claim for every
+resampled population. Roughan et al. found the same broader separation in
+traffic engineering: traffic-matrix estimation-error magnitude is not by
+itself a good indicator of routing performance \cite{roughan2003te}. Here,
+likewise, classification quality alone does not select the lower-mean-loss
+audit policy.
+
+\subsubsection{Qwen3.5 reverses the Qwen2.5 context ranking}
+
+We repeat the same APPS rows, split, prompts, audit controller, and primary
+operating point on Qwen3.5-9B.\footnote{Pinned model:
+\url{https://huggingface.co/Qwen/Qwen3.5-9B}.} The design was frozen after the
+Qwen2.5 and Gemma outcomes were known but before any Qwen3.5 monitor outcome was
+inspected. It is a prospectively frozen matched replication, not an independent
+preregistration.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Prospectively frozen Qwen3.5-9B APPS replication. AUROC uses the
+balanced locked panel. Mean violations use the primary operating point: 1\%
+attacks, a 2\% audit budget, and 2,000 paired resampled populations. Lower
+violations are better. The exact-label row is an evaluator-only bound; bold
+marks the best deployable row.}
+\label{tab:qwen35-apps-monitor-long}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Observer & AUROC & Mean violations \\
+\midrule
+Exact-label oracle (evaluator only) & 1.0000 & 0.000 \\
+Verdict-adjacent residual & \textbf{0.9770} & \textbf{1.976} \\
+Supervised score distribution & 0.9404 & 5.120 \\
+Neutral residual & 0.9356 & 6.601 \\
+Supervised text & 0.8677 & 9.054 \\
+Basic prompted score & 0.8755 & 12.218 \\
+Official Qwen-Scope SAE probe & 0.8106 & 12.725 \\
+Basic/detailed prompt ensemble & 0.8228 & 12.956 \\
+Detailed prompted score & 0.6453 & 13.985 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The verdict-adjacent residual now wins. Neutral minus verdict averages 4.625
+additional violations, with a central 95\% outcome range of $[1,8]$; verdict is
+better in 99.15\% of resampled populations. Qwen3.5 therefore agrees with the
+Gemma ordering and reverses Qwen2.5. The useful context can change even between
+checkpoints from the same model family.
+
+We also test the official Qwen-Scope SAE.\footnote{Pinned SAE:
+\url{https://huggingface.co/Qwen/SAE-Res-Qwen3.5-9B-Base-W64K-L0_50}.}
+Calibration selects layer 12 and ridge 100. The SAE probe has AUROC 0.8106 and
+12.725 mean violations, compared with 6.601 for the dense neutral residual.
+SAE minus dense averages 6.124 additional violations, with a central 95\%
+outcome range of $[2,10]$; dense is better in 99.65\% of populations. This is a
+bounded control, not a general result against SAE features. The released SAE
+was trained on Qwen3.5-9B-Base but is evaluated here on the post-trained
+Qwen3.5-9B model. Appendix~\ref{app:qwen35-apps} records the frozen protocol and
+that checkpoint mismatch.
+
 \subsection{Four checks before claiming that an internal safety signal helps}
 
-The two studies suggest a reusable sequence. Before interpreting an internal
+These studies suggest a reusable sequence. Before interpreting an internal
 safety signal, ObserverBench asks:
 
 \begin{enumerate}[leftmargin=1.4em,itemsep=0.2em,topsep=0.25em]
@@ -291,7 +425,9 @@ safety signal, ObserverBench asks:
 \end{enumerate}
 
 These checks locate where useful information becomes available. They do not by
-themselves establish deception, intent, or hidden knowledge. How does this
-task-relative contract relate to existing interpretability benchmarks,
-decision-focused learning, and AI-control evaluations? The next section places
-ObserverBench among those lines of work.
+themselves establish deception, intent, or hidden knowledge. The cross-model
+result also shows why measurement context must be tested rather than assumed:
+removing the verdict prompt helps on Qwen2.5 but not on Gemma or Qwen3.5. How
+does this task-relative contract relate to existing interpretability
+benchmarks, decision-focused learning, and AI-control evaluations? The next
+section places ObserverBench among those lines of work.

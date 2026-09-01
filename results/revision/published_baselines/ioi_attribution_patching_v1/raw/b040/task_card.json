@@ -1,0 +1,59 @@
+{
+  "access_regime": "cached forward-only finite intervention measurements",
+  "estimand": "mean drop from the clean IO-versus-subject logit difference over the held-out prompt distribution under a fixed multi-head mean ablation",
+  "evaluation_split": "ioi_phase05_design_37dff29fb2338e1f:test",
+  "intervention_family": "binary subsets of Name Movers, Backup Name Movers, and Negative Name Movers ablated at the final token",
+  "known_scope_limits": [
+    "The task uses one pinned GPT-2-small checkpoint and the documented IOI head groups.",
+    "Measurements and targets are prompt-averaged; the task does not expose prompt-level outcomes.",
+    "The task evaluates effect prediction, not mechanism discovery or behavioral safety."
+  ],
+  "measurement_design": "first 40 masks in the frozen nested calibration order; each observed effect averages 192 disjoint train prompts",
+  "metadata": {
+    "data_version": "phase5-test-v1",
+    "design_manifest_sha256": "5f9aedda456048378d318537b4099bf28d09991fd40a18004f71d82075075922",
+    "effect_manifest_sha256": "fb3e807ea52d27dd7da58d49e2b6fa4a9d4c425bdb8e9a999cf240bdcb1ff80f",
+    "feature_schema": "observerbench.ioi_mask_features.v1",
+    "hash_verification": true,
+    "head_order": [
+      "P:9.9",
+      "P:9.6",
+      "P:10.0",
+      "B:9.0",
+      "B:9.7",
+      "B:10.1",
+      "B:10.2",
+      "B:10.6",
+      "B:10.10",
+      "B:11.2",
+      "B:11.9",
+      "E:10.7",
+      "E:11.10"
+    ],
+    "measurement_budget": 40,
+    "measurement_unit": "distinct intervention mask",
+    "model_inference_included": false,
+    "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "n_queries": 320,
+    "supported_measurement_budgets": [
+      20,
+      40,
+      80,
+      160
+    ],
+    "task_id": "ioi-gpt2-small-finite-effects@phase5-test-v1-b040",
+    "underlying_test_effect_cells": 81920,
+    "underlying_train_effect_cells": 7680
+  },
+  "model_or_substrate": "GPT-2 small at pinned revision 607a30d783dfa663caf39e06633721c8d4cfcd7e",
+  "primary_metrics": [
+    "mae",
+    "rmse"
+  ],
+  "schema_version": "observerbench.effect_task_card.v0",
+  "summary": "Predict the held-out mean finite change in the IOI logit difference after template-conditioned mean ablation of a fixed subset of 13 documented heads.",
+  "task_name": "ioi-gpt2-small-finite-effects",
+  "task_version": "phase5-test-v1-b040",
+  "train_split": "ioi_phase05_design_37dff29fb2338e1f:train",
+  "validation_target": "mean effects for 320 held-out candidate masks, each averaged over 256 disjoint test prompts"
+}

@@ -116,6 +116,40 @@ def read_public_ai_control_scores(
     return tuple(rows)
 
 
+def write_public_ai_control_scores(
+    path: str | Path,
+    rows: Sequence[PublicAIControlScore],
+) -> None:
+    """Write a target-free AI-control submission table."""
+
+    if not rows:
+        raise ValueError("at least one public AI-control score is required")
+    identities: set[tuple[str, str]] = set()
+    output = Path(path)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with output.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=AI_CONTROL_PUBLIC_SCORE_COLUMNS)
+        writer.writeheader()
+        for row in rows:
+            public_row = PublicAIControlScore(
+                sample_id=row.sample_id,
+                monitor_name=row.monitor_name,
+                score=float(row.score),
+            )
+            identity = (public_row.monitor_name, public_row.sample_id)
+            if identity in identities:
+                raise ValueError("each monitor may score a sample only once")
+            identities.add(identity)
+            writer.writerow(
+                {
+                    "schema_version": AI_CONTROL_PUBLIC_SCORE_SCHEMA_VERSION,
+                    "sample_id": public_row.sample_id,
+                    "monitor_name": public_row.monitor_name,
+                    "score": repr(float(public_row.score)),
+                }
+            )
+
+
 def read_private_ai_control_targets(
     path: str | Path,
 ) -> tuple[PrivateAIControlTarget, ...]:
@@ -268,4 +302,5 @@ __all__ = [
     "join_public_ai_control_scores",
     "read_private_ai_control_targets",
     "read_public_ai_control_scores",
+    "write_public_ai_control_scores",
 ]

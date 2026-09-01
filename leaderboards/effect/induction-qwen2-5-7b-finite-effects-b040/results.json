@@ -1,0 +1,78 @@
+{
+  "metric_direction": {
+    "mae": "lower",
+    "rmse": "lower"
+  },
+  "rows": [
+    {
+      "access_regime": "frozen forward intervention measurements",
+      "display_name": "Quadratic finite-effect ridge",
+      "measurement_budget": 40,
+      "metrics": {
+        "mae": 0.04486358182897918,
+        "rmse": 0.05209418116602523
+      },
+      "observer_family": "interaction-aware finite-effect predictor",
+      "observer_name": "qwen-induction-quadratic-ridge",
+      "requires_white_box_access": false,
+      "result_status": "prespecified bundled baseline",
+      "source_result": "results/revision/phase10/qwen_induction_copy_v2_complete/copy_v2/work/evaluation/mean_effect_metrics.csv",
+      "source_sha256": "f5cec80f0359e8dfee12663a5bea4988dec4feb0c353dc9f77149728ef8cf186",
+      "task_name": "induction-qwen2-5-7b-finite-effects",
+      "task_version": "copy-v2-b040"
+    },
+    {
+      "access_regime": "frozen forward intervention measurements",
+      "display_name": "Additive finite-effect ridge",
+      "measurement_budget": 40,
+      "metrics": {
+        "mae": 0.20214835989722957,
+        "rmse": 0.22613466282835223
+      },
+      "observer_family": "first-order finite-effect predictor",
+      "observer_name": "qwen-induction-additive-ridge",
+      "requires_white_box_access": false,
+      "result_status": "prespecified bundled baseline",
+      "source_result": "results/revision/phase10/qwen_induction_copy_v2_complete/copy_v2/work/evaluation/mean_effect_metrics.csv",
+      "source_sha256": "f5cec80f0359e8dfee12663a5bea4988dec4feb0c353dc9f77149728ef8cf186",
+      "task_name": "induction-qwen2-5-7b-finite-effects",
+      "task_version": "copy-v2-b040"
+    },
+    {
+      "access_regime": "white-box gradients plus frozen finite calibration measurements",
+      "display_name": "Scalar-calibrated attribution patching",
+      "measurement_budget": 40,
+      "metrics": {
+        "mae": 0.1673059840700144,
+        "rmse": 0.20616042916544447
+      },
+      "observer_family": "published attribution-patching baseline",
+      "observer_name": "qwen-induction-attribution-patching-scalar-calibrated",
+      "requires_white_box_access": true,
+      "result_status": "post-outcome published-method baseline",
+      "source_result": "/content/qwen_atp_full/summary.csv",
+      "source_sha256": "4a0b88d3b1557bfe04ef10d1525f93d3e135b8b99978625881dd4854898879f0",
+      "task_name": "induction-qwen2-5-7b-finite-effects",
+      "task_version": "copy-v2-b040"
+    },
+    {
+      "access_regime": "white-box gradients over 256 public training prompts",
+      "display_name": "Raw attribution patching",
+      "measurement_budget": 40,
+      "metrics": {
+        "mae": 0.5743869963520609,
+        "rmse": 0.6854641358404205
+      },
+      "observer_family": "published attribution-patching baseline",
+      "observer_name": "qwen-induction-attribution-patching-raw",
+      "requires_white_box_access": true,
+      "result_status": "post-outcome published-method baseline",
+      "source_result": "/content/qwen_atp_full/summary.csv",
+      "source_sha256": "4a0b88d3b1557bfe04ef10d1525f93d3e135b8b99978625881dd4854898879f0",
+      "task_name": "induction-qwen2-5-7b-finite-effects",
+      "task_version": "copy-v2-b040"
+    }
+  ],
+  "schema_version": "observerbench.effect_leaderboard.v0",
+  "task_id": "induction-qwen2-5-7b-finite-effects@copy-v2-b040"
+}

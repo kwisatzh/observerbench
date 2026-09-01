@@ -190,7 +190,11 @@ def format_safety_leaderboard(
         return json.dumps(flat, indent=2, sort_keys=True) + "\n"
     if output_format == "csv":
         output = io.StringIO()
-        writer = csv.DictWriter(output, fieldnames=tuple(flat[0]))
+        writer = csv.DictWriter(
+            output,
+            fieldnames=tuple(flat[0]),
+            lineterminator="\n",
+        )
         writer.writeheader()
         writer.writerows(flat)
         return output.getvalue()

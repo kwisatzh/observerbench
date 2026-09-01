@@ -4,6 +4,43 @@
 These checks use frozen activations and scores after the main result was known.
 They do not change the locked comparison in Table~\ref{tab:apps-monitor}.
 
+\paragraph{Does a sparse-autoencoder basis improve the audit decision?}
+We apply the sparse-probing procedure of \cite{kantamneni2025saeprobes} to a
+pinned public BatchTopK SAE trained on Qwen2.5-7B-Instruct layer-19
+residuals.\footnote{\url{https://huggingface.co/andyrdt/saes-qwen2.5-7b-instruct}}
+Feature ranking uses only the fit split; feature count and regularization use
+only calibration; and the locked test is scored once. The dense residual and
+SAE reconstruction controls use the same layer-19 access, data splits, and
+calibration rule.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Post-outcome published-method integration on the frozen Qwen APPS
+panel. Mean violations use 2,000 resampled populations with 1\% attacks and a
+2\% audit budget. Lower is better.}
+\label{tab:qwen-sae-probe-long}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Observer & Nonzero coefficients & AUROC & Mean violations \\
+\midrule
+Dense residual logistic & 3,584 & \textbf{0.983} & \textbf{2.05} \\
+SAE sparse readout & 127 & 0.953 & 4.67 \\
+SAE reconstruction logistic & 3,584 & 0.954 & 4.79 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The sparse SAE readout uses fewer fitted coefficients, but it does not improve
+mean audit loss on this frozen panel. Dense minus sparse averages $-2.62$
+escaped attacks with a central 95\% outcome range of $[-6,0]$; the dense probe
+is worse in 1.25\% of draws. This is not explained only by long inputs: on the
+1,301 locked rows within the SAE's 1,024-token training length, its AUROC is
+0.956 versus 0.983 for the dense residual. The checkpoint is also off its
+training distribution here: observed mean $L_0$ is 115 rather than the reported
+240. The result concerns this checkpoint, layer, task, and probing rule; it is
+not a general claim that SAE features cannot support safety monitoring.
+
 \paragraph{Does the answer position explain the gap between prompted and
 neutral activations?}
 The fixed calibration rule selects layer 28 for the verdict-adjacent observer,

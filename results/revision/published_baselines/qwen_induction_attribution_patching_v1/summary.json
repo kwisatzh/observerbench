@@ -1,0 +1,82 @@
+[
+  {
+    "fitted_scalar_gain": 1.0,
+    "mae": 0.5743869963520609,
+    "max_absolute_error": 1.4841094277089724,
+    "mean_error": -0.5743869963520609,
+    "measurement_budget": 16,
+    "n_queries": 128,
+    "observer": "qwen-induction-attribution-patching-raw",
+    "rmse": 0.6854641358404205
+  },
+  {
+    "fitted_scalar_gain": 1.376675753416344,
+    "mae": 0.19328491382559718,
+    "max_absolute_error": 0.8037295229452304,
+    "mean_error": -0.1478608882312314,
+    "measurement_budget": 16,
+    "n_queries": 128,
+    "observer": "qwen-induction-attribution-patching-scalar-calibrated",
+    "rmse": 0.2860129753007786
+  },
+  {
+    "fitted_scalar_gain": 1.0,
+    "mae": 0.5743869963520609,
+    "max_absolute_error": 1.4841094277089724,
+    "mean_error": -0.5743869963520609,
+    "measurement_budget": 40,
+    "n_queries": 128,
+    "observer": "qwen-induction-attribution-patching-raw",
+    "rmse": 0.6854641358404205
+  },
+  {
+    "fitted_scalar_gain": 1.5247690217773218,
+    "mae": 0.1673059840700144,
+    "max_absolute_error": 0.5362323907042219,
+    "mean_error": 0.019831470037137634,
+    "measurement_budget": 40,
+    "n_queries": 128,
+    "observer": "qwen-induction-attribution-patching-scalar-calibrated",
+    "rmse": 0.20616042916544447
+  },
+  {
+    "fitted_scalar_gain": 1.0,
+    "mae": 0.5743869963520609,
+    "max_absolute_error": 1.4841094277089724,
+    "mean_error": -0.5743869963520609,
+    "measurement_budget": 64,
+    "n_queries": 128,
+    "observer": "qwen-induction-attribution-patching-raw",
+    "rmse": 0.6854641358404205
+  },
+  {
+    "fitted_scalar_gain": 1.5442955530156661,
+    "mae": 0.17068229162432882,
+    "max_absolute_error": 0.5009621102473156,
+    "mean_error": 0.04194219869076867,
+    "measurement_budget": 64,
+    "n_queries": 128,
+    "observer": "qwen-induction-attribution-patching-scalar-calibrated",
+    "rmse": 0.20515963533152382
+  },
+  {
+    "fitted_scalar_gain": 1.0,
+    "mae": 0.5743869963520609,
+    "max_absolute_error": 1.4841094277089724,
+    "mean_error": -0.5743869963520609,
+    "measurement_budget": 128,
+    "n_queries": 128,
+    "observer": "qwen-induction-attribution-patching-raw",
+    "rmse": 0.6854641358404205
+  },
+  {
+    "fitted_scalar_gain": 1.555509389961681,
+    "mae": 0.17267567899631175,
+    "max_absolute_error": 0.4807068396487524,
+    "mean_error": 0.054640107134051416,
+    "measurement_budget": 128,
+    "n_queries": 128,
+    "observer": "qwen-induction-attribution-patching-scalar-calibrated",
+    "rmse": 0.20580691844630555
+  }
+]

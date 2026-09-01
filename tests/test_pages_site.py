@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+# Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex
+
 import importlib.util
 import json
 from pathlib import Path
@@ -15,6 +17,125 @@ SPEC.loader.exec_module(BUILD_SITE)
 
 
 class BuildSiteTest(unittest.TestCase):
+    def test_public_paper_is_packaged_and_linked(self) -> None:
+        paper = ROOT / "site" / "downloads" / "observerbench.pdf"
+        self.assertGreater(paper.stat().st_size, 100_000)
+        self.assertIn(
+            'href="downloads/observerbench.pdf"',
+            (ROOT / "site" / "index.html").read_text(encoding="utf-8"),
+        )
+        for page in ("leaderboards", "submit"):
+            self.assertIn(
+                'href="../downloads/observerbench.pdf"',
+                (ROOT / "site" / page / "index.html").read_text(encoding="utf-8"),
+            )
+
+    def test_gemma_panel_title_and_primary_metric_are_explicit(self) -> None:
+        self.assertEqual(
+            BUILD_SITE._title(
+                "controlarena-apps-verified-backdoors@gemma-2-9b-it-v0",
+                "controlarena-apps-gemma2-9b-it-v0",
+            ),
+            "Gemma-2-9B-it APPS verified-backdoor monitoring",
+        )
+        self.assertEqual(
+            BUILD_SITE._primary_metric(
+                {
+                    "risk_auroc": "higher",
+                    "mean_realized_violations_at_p01_b02": "lower",
+                }
+            ),
+            "mean_realized_violations_at_p01_b02",
+        )
+
+        javascript = (ROOT / "site/assets/site.js").read_text(encoding="utf-8")
+        decimal_case = (
+            'if (name === "mean_realized_violations_at_p01_b02") '
+            'return number.toFixed(3);'
+        )
+        self.assertIn(decimal_case, javascript)
+        self.assertLess(
+            javascript.index(decimal_case),
+            javascript.index('if (name.includes("violations"))'),
+        )
+        self.assertIn('status.includes("prospectively frozen")', javascript)
+        self.assertEqual(
+            BUILD_SITE._title(
+                "controlarena-apps-verified-backdoors@qwen2.5-7b-v1",
+                "controlarena-apps-qwen-v1",
+            ),
+            "Qwen2.5-7B-Instruct APPS verified-backdoor monitoring",
+        )
+        self.assertEqual(
+            BUILD_SITE._title(
+                "safety-interlock-qwen2-5-7b-instruct@paired-scope-v0",
+                "qwen-paired-scope-v0",
+            ),
+            "Qwen2.5-7B-Instruct authorization triage",
+        )
+        self.assertEqual(
+            BUILD_SITE._title(
+                "controlarena-apps-verified-backdoors@qwen3.5-9b-v0",
+                "controlarena-apps-qwen3-5-9b-v0",
+            ),
+            "Qwen3.5-9B APPS verified-backdoor monitoring",
+        )
+
+    def test_effect_panel_title_states_measurement_budget(self) -> None:
+        self.assertEqual(
+            BUILD_SITE._title(
+                "ioi-gpt2-small-finite-effects@phase5-test-v1-b040",
+                "ioi-gpt2-small-finite-effects-b040",
+            ),
+            "GPT-2 IOI finite effects — 40 measurements",
+        )
+
+        panels = [
+            {
+                "track": "observer",
+                "title": f"GPT-2 IOI finite effects — {budget} measurements",
+                "panel": f"ioi-gpt2-small-finite-effects-b{budget:03d}",
+            }
+            for budget in (160, 20, 80, 40)
+        ]
+        self.assertEqual(
+            [item["panel"] for item in sorted(panels, key=BUILD_SITE._catalog_sort_key)],
+            [
+                "ioi-gpt2-small-finite-effects-b020",
+                "ioi-gpt2-small-finite-effects-b040",
+                "ioi-gpt2-small-finite-effects-b080",
+                "ioi-gpt2-small-finite-effects-b160",
+            ],
+        )
+
+        self.assertEqual(
+            BUILD_SITE._title(
+                "induction-qwen2-5-7b-finite-effects@copy-v2-b064",
+                "induction-qwen2-5-7b-finite-effects-b064",
+            ),
+            "Qwen2.5-7B induction-copy finite effects — 64 measurements",
+        )
+        qwen_panels = [
+            {
+                "track": "observer",
+                "title": f"Qwen finite effects — {budget}",
+                "panel": f"induction-qwen2-5-7b-finite-effects-b{budget:03d}",
+            }
+            for budget in (128, 16, 64, 40)
+        ]
+        self.assertEqual(
+            [
+                item["panel"]
+                for item in sorted(qwen_panels, key=BUILD_SITE._catalog_sort_key)
+            ],
+            [
+                "induction-qwen2-5-7b-finite-effects-b016",
+                "induction-qwen2-5-7b-finite-effects-b040",
+                "induction-qwen2-5-7b-finite-effects-b064",
+                "induction-qwen2-5-7b-finite-effects-b128",
+            ],
+        )
+
     def test_build_copies_site_and_creates_catalog(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             temp = Path(temporary)
@@ -46,6 +167,10 @@ class BuildSiteTest(unittest.TestCase):
             BUILD_SITE.build(repo, ROOT / "site", output)
 
             self.assertTrue((output / "index.html").is_file())
+            self.assertGreater(
+                (output / "downloads" / "observerbench.pdf").stat().st_size,
+                100_000,
+            )
             self.assertTrue(
                 (output / "task-packs" / "safety" / "example-v1" / "safety_task.json").is_file()
             )

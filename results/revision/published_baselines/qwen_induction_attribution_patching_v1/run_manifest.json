@@ -1,0 +1,196 @@
+{
+  "artifacts": {
+    "attribution_map.json": "0b5386f56efe8d4c2e1c8a73330760edd22c79e67d5b97578217b5074a3fef1f",
+    "summary.csv": "4a0b88d3b1557bfe04ef10d1525f93d3e135b8b99978625881dd4854898879f0"
+  },
+  "budgets": [
+    16,
+    40,
+    64,
+    128
+  ],
+  "claim_eligible": true,
+  "measurement": {
+    "autograd_scope": "frozen weights; suffix beginning at earliest selected layer",
+    "batch_size": 4,
+    "intervention": "final-query family-conditioned mean replacement at query-head z before the attention output projection",
+    "n_gradient_prompts": 256,
+    "prompt_split": "train",
+    "prompts": {
+      "path": "results/revision/phase10/qwen_induction_copy_v2_complete/copy_v2/design/prompts.csv",
+      "sha256": "02beb94be4b57a4af68f4dde97404fda6af07105f7cb42b3b9a2665f683b1321"
+    },
+    "reference_means": {
+      "path": "results/revision/phase10/qwen_induction_copy_v2_complete/copy_v2/work/confirmation/reference_selected_means.npz",
+      "sha256": "77ea4d49512069b0e625909d1848c2ec7ef3da67790ad0edfb27455aa1db48d5"
+    }
+  },
+  "model": {
+    "audit": {
+      "attention_implementation": "sdpa",
+      "model_id": "Qwen/Qwen2.5-7B",
+      "n_kv_heads": 4,
+      "n_layers": 28,
+      "n_query_heads": 28,
+      "parameter_dtype": "bfloat16",
+      "quantized": false,
+      "requested_revision": "d149729398750b98c0af14eb82c78cfe92750796",
+      "resolved_revision": "d149729398750b98c0af14eb82c78cfe92750796"
+    },
+    "device": "cuda",
+    "name": "Qwen/Qwen2.5-7B",
+    "revision": "d149729398750b98c0af14eb82c78cfe92750796"
+  },
+  "result_status": "post-outcome published-method baseline",
+  "results": [
+    {
+      "contract_version": "observerbench.effect_prediction.v0",
+      "measurement_budget": 16,
+      "metrics": {
+        "mae": 0.5743869963520609,
+        "max_absolute_error": 1.4841094277089724,
+        "mean_error": -0.5743869963520609,
+        "rmse": 0.6854641358404205
+      },
+      "n_queries": 128,
+      "observer_name": "qwen-induction-attribution-patching-raw",
+      "observer_version": "1.0.0",
+      "schema_version": "observerbench.effect_prediction_result.v0",
+      "task_name": "induction-qwen2-5-7b-finite-effects",
+      "task_version": "copy-v2-b016"
+    },
+    {
+      "contract_version": "observerbench.effect_prediction.v0",
+      "measurement_budget": 16,
+      "metrics": {
+        "mae": 0.19328491382559718,
+        "max_absolute_error": 0.8037295229452304,
+        "mean_error": -0.1478608882312314,
+        "rmse": 0.2860129753007786
+      },
+      "n_queries": 128,
+      "observer_name": "qwen-induction-attribution-patching-scalar-calibrated",
+      "observer_version": "1.0.0",
+      "schema_version": "observerbench.effect_prediction_result.v0",
+      "task_name": "induction-qwen2-5-7b-finite-effects",
+      "task_version": "copy-v2-b016"
+    },
+    {
+      "contract_version": "observerbench.effect_prediction.v0",
+      "measurement_budget": 40,
+      "metrics": {
+        "mae": 0.5743869963520609,
+        "max_absolute_error": 1.4841094277089724,
+        "mean_error": -0.5743869963520609,
+        "rmse": 0.6854641358404205
+      },
+      "n_queries": 128,
+      "observer_name": "qwen-induction-attribution-patching-raw",
+      "observer_version": "1.0.0",
+      "schema_version": "observerbench.effect_prediction_result.v0",
+      "task_name": "induction-qwen2-5-7b-finite-effects",
+      "task_version": "copy-v2-b040"
+    },
+    {
+      "contract_version": "observerbench.effect_prediction.v0",
+      "measurement_budget": 40,
+      "metrics": {
+        "mae": 0.1673059840700144,
+        "max_absolute_error": 0.5362323907042219,
+        "mean_error": 0.019831470037137634,
+        "rmse": 0.20616042916544447
+      },
+      "n_queries": 128,
+      "observer_name": "qwen-induction-attribution-patching-scalar-calibrated",
+      "observer_version": "1.0.0",
+      "schema_version": "observerbench.effect_prediction_result.v0",
+      "task_name": "induction-qwen2-5-7b-finite-effects",
+      "task_version": "copy-v2-b040"
+    },
+    {
+      "contract_version": "observerbench.effect_prediction.v0",
+      "measurement_budget": 64,
+      "metrics": {
+        "mae": 0.5743869963520609,
+        "max_absolute_error": 1.4841094277089724,
+        "mean_error": -0.5743869963520609,
+        "rmse": 0.6854641358404205
+      },
+      "n_queries": 128,
+      "observer_name": "qwen-induction-attribution-patching-raw",
+      "observer_version": "1.0.0",
+      "schema_version": "observerbench.effect_prediction_result.v0",
+      "task_name": "induction-qwen2-5-7b-finite-effects",
+      "task_version": "copy-v2-b064"
+    },
+    {
+      "contract_version": "observerbench.effect_prediction.v0",
+      "measurement_budget": 64,
+      "metrics": {
+        "mae": 0.17068229162432882,
+        "max_absolute_error": 0.5009621102473156,
+        "mean_error": 0.04194219869076867,
+        "rmse": 0.20515963533152382
+      },
+      "n_queries": 128,
+      "observer_name": "qwen-induction-attribution-patching-scalar-calibrated",
+      "observer_version": "1.0.0",
+      "schema_version": "observerbench.effect_prediction_result.v0",
+      "task_name": "induction-qwen2-5-7b-finite-effects",
+      "task_version": "copy-v2-b064"
+    },
+    {
+      "contract_version": "observerbench.effect_prediction.v0",
+      "measurement_budget": 128,
+      "metrics": {
+        "mae": 0.5743869963520609,
+        "max_absolute_error": 1.4841094277089724,
+        "mean_error": -0.5743869963520609,
+        "rmse": 0.6854641358404205
+      },
+      "n_queries": 128,
+      "observer_name": "qwen-induction-attribution-patching-raw",
+      "observer_version": "1.0.0",
+      "schema_version": "observerbench.effect_prediction_result.v0",
+      "task_name": "induction-qwen2-5-7b-finite-effects",
+      "task_version": "copy-v2-b128"
+    },
+    {
+      "contract_version": "observerbench.effect_prediction.v0",
+      "measurement_budget": 128,
+      "metrics": {
+        "mae": 0.17267567899631175,
+        "max_absolute_error": 0.4807068396487524,
+        "mean_error": 0.054640107134051416,
+        "rmse": 0.20580691844630555
+      },
+      "n_queries": 128,
+      "observer_name": "qwen-induction-attribution-patching-scalar-calibrated",
+      "observer_version": "1.0.0",
+      "schema_version": "observerbench.effect_prediction_result.v0",
+      "task_name": "induction-qwen2-5-7b-finite-effects",
+      "task_version": "copy-v2-b128"
+    }
+  ],
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.10.0",
+      "numpy": "2.0.2",
+      "pandas": "2.2.2",
+      "torch": "2.11.0+cu128"
+    },
+    "package_version": "0.1.0",
+    "python_version": "3.13.15",
+    "source_dirty": null,
+    "source_revision": "unknown"
+  },
+  "schema": "observerbench.qwen_induction_attribution_patching_run.v1",
+  "sources": {
+    "scripts/run_qwen_induction_attribution_patching_baseline.py": "8c0128d7d7f260b930dac9f8c229c25cd472e06a7404b67c9e9ecd19e0b4af00",
+    "src/observerbench/effect_prediction.py": "38670e17e470a96259edce697130c748c6f3751b788bd9010583856def229537",
+    "src/observerbench/tasks/qwen_induction/attribution_patching.py": "4a99dd2db84d03757a9b4ba5be1ad4e5549ae6a80362efc7a70a43fcf93dd32a",
+    "src/observerbench/tasks/qwen_induction/effect_task.py": "d763aa705552decf192799196c5ed4501b523ce8b402534e311acc9db5969c5b",
+    "src/observerbench/tasks/qwen_induction/plant.py": "28a7df3326670459667edb8b050aa4c7cdf796ee463523ab177a21e8dcdfb7b6"
+  },
+  "status": "complete"
+}

@@ -16,6 +16,11 @@ Safety is a first-class release claim only when all of the following are true:
 5. A no-action reference and an exact policy-engine reference are present.
 6. Text or action-only baselines are run before an activation result is accepted.
 7. Held-out attack families are evaluated before adaptive attacks are introduced.
+8. The TaskCard states who can alter, omit, delay, or spoof each measurement
+   and whether requests are independent or share episode-level attacker state.
+9. The threat model states what the attacker knows about the monitor, what
+   feedback it receives, and whether later attacks may adapt to earlier policy
+   decisions.
 
 ## Phase S0: protocol contract
 
@@ -23,6 +28,12 @@ Safety is a first-class release claim only when all of the following are true:
 measurements, held-out queries, evaluator-only targets, a task card, and a frozen
 triage policy. An outside observer supplies risk scores. The benchmark—not the
 observer—turns those scores into block, escalation, and allow decisions.
+
+The v1 TaskCard also declares measurement integrity and episode structure. A
+fixed offline task may state that its views are trusted and its requests are
+independent. A trajectory task must instead state which telemetry is
+authenticated, what an attacker can corrupt, and which rows belong to one
+shared episode.
 
 The primary quantities are mean protocol loss, tail protocol loss, severity-
 weighted missed risk, and clean utility retained. AUROC remains a diagnostic.
@@ -107,7 +118,7 @@ panel. The controller audits the highest-scoring 2 percent, matching the
 scarce-audit regime that motivates AI control. The primary outcome is therefore
 the number of verified working backdoors left unaudited; no new impact scale is
 needed. Five- and ten-percent budget sweeps are secondary diagnostics. The
-frozen Qwen study compares two ControlArena-derived prompt monitors, their
+frozen Qwen2.5-7B-Instruct study compares two ControlArena-derived prompt monitors, their
 ensemble, and a held-out residual-activation probe.
 
 The first external result triggered a bounded post-outcome control study. It
@@ -140,6 +151,40 @@ Relative to each group's share of attacks, the family allocation ratio spans
 0.36--2.38 and the length-quartile ratio spans 0.67--1.43. The pooled AUROC and
 audit-loss rankings agree empirically, but pooling does not remove score-scale
 drift. The rare-prevalence sensitivity also holds this family mixture fixed.
+
+A second post-outcome integration runs a published sparse SAE probing recipe on
+a pinned public Qwen2.5-7B-Instruct SAE and compares it with matched raw-residual and
+SAE-reconstruction logistic probes. The sparse refit retains 127 nonzero
+coefficients. It reaches AUROC 0.953 on the balanced locked panel, below the raw
+residual control at 0.983. At 1% attack prevalence and a 2% audit budget, it
+misses 4.667 attacks on average versus 2.048 for raw residuals. This result is
+compression of the fitted readout without a better mean audit decision. The
+SAE itself is overcomplete; this result is an informative negative for the
+declared checkpoint, layer, observer, and task, not a general conclusion about
+SAE observers.
+
+A matched Gemma-2-9B-it replication reuses the APPS rows, prompts, controller,
+budgets, and loss. Its design was frozen after the Qwen2.5-7B-Instruct outcomes but before any
+Gemma monitor outcome was inspected. At 1% attacks and a 2% audit budget, the
+verdict-adjacent residual probe misses 2.178 attacks on average, compared with
+4.947 for the neutral residual, 9.070 for the official Gemma Scope SAE probe,
+and 14.927 for the basic prompted monitor. This is a separate task panel: it
+shows that residual access transfers while the best prompt context changes.
+The detailed prompt also has higher AUROC than the Gemma Scope SAE probe
+(0.893 versus 0.870) but more mean violations (10.803 versus 9.070):
+classification is not enough to choose the lower-loss monitor. The SAE result
+remains specific to this model, layer, probe, and task.
+
+A prospectively frozen Qwen3.5-9B replication uses the same locked APPS pairs,
+controller, loss, and primary 1% attack / 2% audit cell. The verdict-adjacent
+residual probe reaches AUROC 0.977 and 1.976 mean realized violations. The
+neutral residual reaches 0.936 and 6.601, while the prompted score-distribution
+ridge reaches 0.940 and 5.120. The official Qwen-Scope SAE probe reaches 0.811
+and 12.725 after selecting layer 12 and ridge 100 on fit and calibration rows.
+That SAE was trained on Qwen3.5-9B-Base and applied to post-trained Qwen3.5-9B.
+The declared base-to-posttrain mismatch means this row is a useful control, not
+a checkpoint-matched SAE test. As with the earlier panels, all ranks stay
+inside this exact task and operating policy.
 
 ## Monitor identification ladder
 
@@ -175,8 +220,8 @@ claim of the current paper.
 
 ## Paper claim boundary
 
-The analytic task establishes the contract and consequence logic. The Qwen run
-adds evidence that a pretrained model contains state that improves aggregate
-safety control under a fixed action budget, while its doubly-held-out result
+The analytic task establishes the contract and consequence logic. The
+Qwen2.5-7B-Instruct, Gemma-2-9B-it, and Qwen3.5-9B runs show that internal state can improve safety
+decisions under a fixed action budget, while the Qwen2.5-7B-Instruct doubly-held-out result
 sets the present generalization boundary. Adaptive attacks and claims about
 open-ended deployment remain outside this release.
