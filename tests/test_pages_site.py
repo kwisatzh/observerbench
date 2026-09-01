@@ -24,11 +24,22 @@ class BuildSiteTest(unittest.TestCase):
             'href="downloads/observerbench.pdf"',
             (ROOT / "site" / "index.html").read_text(encoding="utf-8"),
         )
-        for page in ("leaderboards", "submit"):
+        for page in ("leaderboards", "runners", "submit"):
             self.assertIn(
                 'href="../downloads/observerbench.pdf"',
                 (ROOT / "site" / page / "index.html").read_text(encoding="utf-8"),
             )
+
+    def test_runner_page_is_linked_from_submission_path(self) -> None:
+        runner_page = ROOT / "site" / "runners" / "index.html"
+        self.assertTrue(runner_page.is_file())
+        runner_guide = (ROOT / "docs" / "RUNNERS.md").read_text(encoding="utf-8")
+        self.assertIn("Pick the boundary that matches your method", runner_guide)
+
+        submit = (ROOT / "site" / "submit" / "index.html").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn('href="../runners/">View runners</a>', submit)
 
     def test_gemma_panel_title_and_primary_metric_are_explicit(self) -> None:
         self.assertEqual(
@@ -191,6 +202,7 @@ class BuildSiteTest(unittest.TestCase):
             BUILD_SITE.build(repo, ROOT / "site", output)
 
             self.assertTrue((output / "index.html").is_file())
+            self.assertTrue((output / "runners" / "index.html").is_file())
             self.assertGreater(
                 (output / "downloads" / "observerbench.pdf").stat().st_size,
                 100_000,

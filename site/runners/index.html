@@ -1,0 +1,90 @@
+<!doctype html>
+<!-- Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Run an ObserverBench observer locally and turn its estimates into a task-specific result bundle.">
+  <title>Run an observer — ObserverBench</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+  <script src="../assets/site.js" defer></script>
+</head>
+<body data-page="runners" data-site-root="..">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="../"><span class="brand-mark">OB</span><span>ObserverBench</span></a>
+    <nav aria-label="Primary navigation">
+      <a href="../">Overview</a>
+      <a href="../leaderboards/">Leaderboards</a>
+      <a aria-current="page" href="./">Runners</a>
+      <a href="../submit/">Submit</a>
+      <a href="../downloads/observerbench.pdf">Paper</a>
+      <a href="https://github.com/kwisatzh/observerbench">GitHub</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="page-hero narrow">
+      <p class="eyebrow">Local execution</p>
+      <h1>Run your method where you already work.</h1>
+      <p class="lede">ObserverBench does not need your model weights or execute uploaded code. Run the observer locally, then hand the benchmark predictions and a short description of how they were produced.</p>
+      <div class="button-row"><a class="button primary" href="https://github.com/kwisatzh/observerbench/blob/main/docs/RUNNERS.md">Open the runner guide</a><a class="button secondary" href="../submit/">I already have scores</a></div>
+    </section>
+
+    <section class="section" aria-labelledby="choose-runner-heading">
+      <div class="section-heading">
+        <div><p class="eyebrow">Choose a boundary</p><h2 id="choose-runner-heading">What does your observer produce?</h2></div>
+        <p>The method can use activations, attribution, logits, SAE features, text, or another signal. The task-facing output stays small.</p>
+      </div>
+      <div class="task-grid">
+        <article class="task-card featured">
+          <div class="task-top"><span class="badge live">no runner needed</span><span>Scores</span></div>
+          <h3>I already have predictions</h3>
+          <p>Return one score for each frozen query and an ObserverCard describing the method and its access.</p>
+          <a class="text-link" href="../submit/">Prepare a submission →</a>
+        </article>
+        <article class="task-card">
+          <div class="task-top"><span class="badge available">inference-free</span><span>Effects</span></div>
+          <h3>I predict intervention effects</h3>
+          <p>Fit on permitted measurements, predict held-out interventions, and test both prediction error and the action chosen from the map.</p>
+          <a class="text-link" href="https://github.com/kwisatzh/observerbench/blob/main/docs/EFFECT_PREDICTION_CONTRACT.md">Open the effect runner →</a>
+        </article>
+        <article class="task-card">
+          <div class="task-top"><span class="badge available">local scores</span><span>Safety</span></div>
+          <h3>I have a safety monitor</h3>
+          <p>Supply risk scores. ObserverBench applies the same audit, block, or escalation budget and reports realized harm and clean utility.</p>
+          <a class="text-link" href="https://github.com/kwisatzh/observerbench/blob/main/docs/SAFETY_API.md">Open the safety runner →</a>
+        </article>
+        <article class="task-card">
+          <div class="task-top"><span class="badge available">Python contract</span><span>Control</span></div>
+          <h3>I have a state estimator</h3>
+          <p>Compose an estimator and actuation direction with a fixed controller, intervention rule, and control loss.</p>
+          <a class="text-link" href="https://github.com/kwisatzh/observerbench/blob/main/docs/API_CONTRACT.md#run-an-outside-observer-on-bundled-ctl-1">Open the control runner →</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section tinted" aria-labelledby="output-heading">
+      <div class="section-heading"><div><p class="eyebrow">Common output</p><h2 id="output-heading">Different methods leave the same evidence.</h2></div><p>This boundary makes comparisons possible without forcing every observer into one software stack.</p></div>
+      <div class="outcome-grid">
+        <article><span class="outcome-number">01</span><h3>Predictions</h3><p>Scores or estimates tied to fixed query IDs.</p></article>
+        <article><span class="outcome-number">02</span><h3>ObserverCard</h3><p>Access, fitting, cost, version, and known failures.</p></article>
+        <article><span class="outcome-number">03</span><h3>Task result</h3><p>Prediction quality and downstream action loss reported separately.</p></article>
+        <article><span class="outcome-number">04</span><h3>Reproducibility</h3><p>Task version and hashes needed to repeat the comparison.</p></article>
+      </div>
+    </section>
+
+    <section class="section launch-note" aria-labelledby="notebook-heading">
+      <span class="badge available">Colab</span>
+      <div><h2 id="notebook-heading">The notebooks reproduce named studies.</h2><p>The repository includes Qwen and Gemma notebooks for induction, attribution patching, SAE probes, and safety experiments. They are useful examples of model access and measurement hooks, but they are not one generic hosted runner. <a href="https://github.com/kwisatzh/observerbench/tree/main/notebooks">Browse the notebooks.</a></p></div>
+    </section>
+
+    <section class="section split-explainer" aria-labelledby="public-boundary-heading">
+      <div><p class="eyebrow">Public boundary</p><h2 id="public-boundary-heading">A local run is not automatically a public score.</h2></div>
+      <div><p>Automatic preflight currently accepts only the target-free Qwen2.5 paired-scope v1 prediction table. It checks data files and never executes contributor code. Sealed scoring is not active today, so a passing preflight is not yet a benchmark rank.</p><div class="button-row"><a class="button primary" href="../submit/">See the submission path</a><a class="button text" href="https://github.com/kwisatzh/observerbench/blob/main/docs/PUBLIC_SUBMISSION_WORKFLOW.md">Read the boundary</a></div></div>
+    </section>
+  </main>
+
+  <footer><div><strong>ObserverBench</strong><p>Bring an observer; leave with evidence.</p></div><div class="footer-links"><a href="../leaderboards/">Leaderboards</a><a href="./">Runners</a><a href="../submit/">Submit</a><a href="../downloads/observerbench.pdf">Paper</a><a href="https://github.com/kwisatzh/observerbench">Source</a></div></footer>
+</body>
+</html>
