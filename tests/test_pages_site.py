@@ -171,6 +171,21 @@ class BuildSiteTest(unittest.TestCase):
             ordered[0]["panel"], "controlarena-apps-qwen3-5-9b-v0"
         )
 
+    def test_homepage_catalog_features_current_model_results(self) -> None:
+        homepage = (ROOT / "site" / "index.html").read_text(encoding="utf-8")
+        catalog = homepage.split(
+            '<section class="section task-section"', 1
+        )[1].split("</section>", 1)[0]
+
+        for expected in (
+            "Qwen3.5-9B",
+            "Gemma-2-9B-it",
+            "Compression without a better decision.",
+            "lowers held-out MAE from 0.121 to 0.040",
+        ):
+            self.assertIn(expected, catalog)
+        self.assertNotIn("GPT-2", catalog)
+
     def test_build_copies_site_and_creates_catalog(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             temp = Path(temporary)

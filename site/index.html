@@ -125,37 +125,34 @@
       <div class="section-heading">
         <div>
           <p class="eyebrow">Task catalog</p>
-          <h2 id="tasks-heading">Start with the question you need answered</h2>
+          <h2 id="tasks-heading">Four checked questions from current models</h2>
         </div>
         <a class="text-link" href="leaderboards/">View all checked rows →</a>
       </div>
       <div class="task-grid">
         <article class="task-card featured">
-          <div class="task-top"><span class="badge live">checked panel</span><span>Safety</span></div>
-          <h3>Authorization triage</h3>
-          <p>Rank requests by expected policy loss, then measure realized violations and clean utility under a fixed action budget.</p>
-          <p class="task-meta">Qwen2.5-7B-Instruct · checked prediction panel · sealed targets</p>
-          <p><a class="text-link" href="task-packs/safety/safety-interlock-qwen2-5-7b-instruct/paired-scope-v1/safety_task.json">Download the public task pack →</a></p>
+          <div class="task-top"><span class="badge live">featured result</span><span>Safety · Qwen3.5-9B</span></div>
+          <h3>Which context gives the best monitor?</h3>
+          <p>On the frozen APPS task, the verdict-adjacent residual probe reaches AUROC 0.977 and 1.976 mean violations at 1% attacks and a 2% audit budget—the strongest deployable row.</p>
+          <p class="task-meta">ControlArena APPS · prospectively frozen matched replication</p>
         </article>
         <article class="task-card featured">
-          <div class="task-top"><span class="badge live">checked panel</span><span>AI control</span></div>
-          <h3>Verified-backdoor monitoring</h3>
-          <p>Compare monitors by escaped backdoors, not AUROC alone. The
-          Qwen2.5-7B-Instruct, Gemma-2-9B-it, and Qwen3.5-9B panels show classification without a
-          better decision, and SAE readouts without lower audit loss.</p>
-          <p class="task-meta">ControlArena APPS · Qwen2.5-7B-Instruct + Gemma-2-9B-it + Qwen3.5-9B · 29 checked rows</p>
+          <div class="task-top"><span class="badge live">ranking reversal</span><span>Safety · Gemma-2-9B-it</span></div>
+          <h3>Does higher AUROC make a safer decision?</h3>
+          <p>No. The detailed prompted monitor beats the official Gemma Scope SAE probe on AUROC (0.893 vs. 0.870) but produces more violations (10.80 vs. 9.07).</p>
+          <p class="task-meta">Same requests, audit budget, controller, and loss</p>
         </article>
         <article class="task-card">
-          <div class="task-top"><span class="badge available">local contract</span><span>Mechanisms</span></div>
-          <h3>Finite-effect prediction</h3>
-          <p>Predict held-out intervention responses and test whether the map selects a better downstream action.</p>
-          <p class="task-meta">GPT-2 IOI and Qwen2.5-7B induction · frozen-table path</p>
+          <div class="task-top"><span class="badge available">compression test</span><span>Safety · Qwen2.5-7B</span></div>
+          <h3>Does a sparse observer preserve the decision?</h3>
+          <p>The SAE readout uses 127 fitted coefficients instead of 3,584 residual coordinates, but mean violations rise from 2.05 to 4.67. Compression without a better decision.</p>
+          <p class="task-meta">Published SAE integration · 1% attacks · 2% audit</p>
         </article>
         <article class="task-card">
-          <div class="task-top"><span class="badge available">local runner</span><span>Control</span></div>
-          <h3>Closed-loop observer tests</h3>
-          <p>Compose an estimator and actuation direction under a fixed controller, transformer, and intervention protocol.</p>
-          <p class="task-meta">Analytic and learned tasks · implementation path</p>
+          <div class="task-top"><span class="badge available">interaction gain</span><span>Mechanisms · Qwen2.5-7B</span></div>
+          <h3>Do pair terms improve held-out effects?</h3>
+          <p>On the induction-copy task, an interaction-aware predictor lowers held-out MAE from 0.121 to 0.040 with the same 128-measurement budget.</p>
+          <p class="task-meta">Qwen2.5-7B-Instruct · frozen intervention table</p>
         </article>
       </div>
     </section>
