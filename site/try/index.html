@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Try an open ObserverBench safety task in your browser. Compare classification accuracy with realized decision loss.">
+  <title>Try ObserverBench — classification is not enough</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="playground.css">
+  <script src="playground.js" defer></script>
+</head>
+<body data-page="try" data-site-root="..">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="../" aria-label="ObserverBench home">
+      <span class="brand-mark">OB</span>
+      <span>ObserverBench</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="../">Overview</a>
+      <a aria-current="page" href="./">Try</a>
+      <a href="../leaderboards/">Leaderboards</a>
+      <a href="../runners/">Runners</a>
+      <a href="../submit/">Submit</a>
+      <a href="https://github.com/kwisatzh/observerbench">GitHub</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="page-hero narrow try-hero">
+      <p class="eyebrow">One minute · no login · no model download</p>
+      <h1>Can better classification make a worse safety decision?</h1>
+      <p class="lede">
+        You can audit only a few requests. Compare a monitor that predicts whether
+        a request violates policy with one that also considers what would happen
+        if the violation passed.
+      </p>
+      <div class="tutorial-status">
+        <span class="badge available">open tutorial</span>
+        <span>Public targets · runs entirely in this browser · not leaderboard eligible</span>
+      </div>
+    </section>
+
+    <section class="section compact playground" aria-labelledby="play-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Fixed decision contract</p>
+          <h2 id="play-heading">Spend the audit budget</h2>
+        </div>
+        <p>Both observers see the same requests. The controller audits the highest scores. Missed harm and unnecessary audits determine action loss.</p>
+      </div>
+
+      <div class="contract-strip" aria-label="Tutorial task contract">
+        <div><strong>Target</strong><span>Unauthorized action</span></div>
+        <div><strong>Action</strong><span>Audit or allow</span></div>
+        <div><strong>Controller</strong><span>Audit top scores</span></div>
+        <div><strong>Loss</strong><span>Missed severity + 0.25 per clean audit</span></div>
+      </div>
+
+      <div class="budget-control">
+        <label for="audit-budget">
+          Audit budget
+          <strong><span id="audit-budget-value">4</span> of 16 requests</strong>
+        </label>
+        <input id="audit-budget" type="range" min="1" max="8" value="4" step="1">
+      </div>
+
+      <div id="playground-error" class="error-box" hidden></div>
+      <div id="metric-cards" class="metric-cards" aria-live="polite"></div>
+      <p id="result-callout" class="result-callout" aria-live="polite"></p>
+
+      <div class="inspection-head">
+        <div>
+          <p class="eyebrow">What the controller did</p>
+          <h3>Inspect the selected requests</h3>
+        </div>
+        <label for="inspect-observer">Show ranking for
+          <select id="inspect-observer">
+            <option value="probability">Violation probability</option>
+            <option value="consequence" selected>Probability × severity</option>
+          </select>
+        </label>
+      </div>
+      <div class="request-list" id="request-list"></div>
+    </section>
+
+    <section class="section upload-section" aria-labelledby="own-heading">
+      <div class="split-explainer">
+        <div>
+          <p class="eyebrow">Try your own scores</p>
+          <h2 id="own-heading">One score per request</h2>
+        </div>
+        <div>
+          <p>
+            Download the template, fill the <code>predicted_risk</code> column,
+            and load it here. The file stays in your browser. We do not execute
+            contributed code.
+          </p>
+          <div class="button-row">
+            <button class="button secondary" type="button" id="download-template">Download CSV template</button>
+            <label class="button primary file-button" for="prediction-file">Load prediction CSV</label>
+            <input id="prediction-file" type="file" accept=".csv,text/csv" hidden>
+          </div>
+          <p class="upload-note" id="upload-note">Expected columns: <code>request_id,predicted_risk</code>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section next-step" aria-labelledby="next-heading">
+      <p class="eyebrow">From tutorial to benchmark</p>
+      <h2 id="next-heading">This example teaches the contract. Checked tasks test real observers.</h2>
+      <p>
+        The public tutorial reveals its labels so that feedback is immediate.
+        Official comparisons keep task versions and observation boundaries fixed;
+        sealed tasks keep evaluator targets separate.
+      </p>
+      <div class="button-row">
+        <a class="button primary" href="../leaderboards/">See checked model results</a>
+        <a class="button secondary" href="https://github.com/kwisatzh/observerbench/tree/main/practice/qwen_copy_v2_b040">Try 40 cached Qwen measurements</a>
+        <a class="button secondary" href="https://github.com/kwisatzh/observerbench#sixty-second-demo">Run <code>make demo</code></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>ObserverBench</strong><p>Test estimates through the action they will guide.</p></div>
+    <div class="footer-links"><a href="../">Overview</a><a href="../leaderboards/">Leaderboards</a><a href="../runners/">Runners</a><a href="../submit/">Submit</a><a href="https://github.com/kwisatzh/observerbench">Source</a></div>
+  </footer>
+</body>
+</html>

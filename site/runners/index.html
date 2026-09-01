@@ -15,6 +15,7 @@
     <a class="brand" href="../"><span class="brand-mark">OB</span><span>ObserverBench</span></a>
     <nav aria-label="Primary navigation">
       <a href="../">Overview</a>
+      <a href="../try/">Try</a>
       <a href="../leaderboards/">Leaderboards</a>
       <a aria-current="page" href="./">Runners</a>
       <a href="../submit/">Submit</a>
@@ -29,6 +30,21 @@
       <h1>Run your method where you already work.</h1>
       <p class="lede">ObserverBench does not need your model weights or execute uploaded code. Run the observer locally, then hand the benchmark predictions and a short description of how they were produced.</p>
       <div class="button-row"><a class="button primary" href="https://github.com/kwisatzh/observerbench/blob/main/docs/RUNNERS.md">Open the runner guide</a><a class="button secondary" href="../submit/">I already have scores</a></div>
+    </section>
+
+    <section class="section compact" aria-labelledby="practice-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">No model download</p>
+          <h2 id="practice-heading">Fit an observer on cached Qwen measurements</h2>
+        </div>
+        <p>The open Copy-v2 pack supplies 40 calibration interventions and 128 queries. It reports effect-prediction error and the loss of the action your predictions select.</p>
+      </div>
+      <div class="button-row">
+        <a class="button primary" href="https://github.com/kwisatzh/observerbench/tree/main/practice/qwen_copy_v2_b040">Open the Qwen2.5-7B practice task</a>
+        <a class="button secondary" href="../try/">Try the browser safety task</a>
+      </div>
+      <p class="preview-note">Both are open practice tasks with public targets. They provide immediate feedback and do not enter the sealed leaderboards.</p>
     </section>
 
     <section class="section" aria-labelledby="choose-runner-heading">
@@ -85,6 +101,6 @@
     </section>
   </main>
 
-  <footer><div><strong>ObserverBench</strong><p>Bring an observer; leave with evidence.</p></div><div class="footer-links"><a href="../leaderboards/">Leaderboards</a><a href="./">Runners</a><a href="../submit/">Submit</a><a href="../downloads/observerbench.pdf">Paper</a><a href="https://github.com/kwisatzh/observerbench">Source</a></div></footer>
+  <footer><div><strong>ObserverBench</strong><p>Bring an observer; leave with evidence.</p></div><div class="footer-links"><a href="../try/">Try</a><a href="../leaderboards/">Leaderboards</a><a href="./">Runners</a><a href="../submit/">Submit</a><a href="../downloads/observerbench.pdf">Paper</a><a href="https://github.com/kwisatzh/observerbench">Source</a></div></footer>
 </body>
 </html>

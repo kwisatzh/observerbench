@@ -1,0 +1,171 @@
+{
+  "action_contract": {
+    "candidate_set": "eight frozen masks in each of 16 pools plus analytic no-op",
+    "controller": "Choose the candidate minimizing |predicted_mean_effect - target|; the analytic no-op predicts effect 0 and loss target.",
+    "metrics": [
+      "mean_selected_action_loss",
+      "mean_oracle_action_loss",
+      "mean_regret",
+      "oracle_action_match_rate",
+      "noop_selection_rate"
+    ],
+    "no_op": {
+      "effect": 0.0,
+      "query_id": "analytic_noop",
+      "realized_loss": "target"
+    },
+    "realized_loss": "mean over held-out prompts of |prompt_effect - target|",
+    "targets": [
+      {
+        "fraction_of_confirmed_full_panel_effect": 0.25,
+        "value": 0.8634306868771091
+      },
+      {
+        "fraction_of_confirmed_full_panel_effect": 0.5,
+        "value": 1.7268613737542182
+      },
+      {
+        "fraction_of_confirmed_full_panel_effect": 0.75,
+        "value": 2.5902920606313273
+      }
+    ],
+    "tie_break": "predicted loss, then fewer heads, then query_id"
+  },
+  "feature_order": [
+    "h0",
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "h7"
+  ],
+  "files": {
+    "action_outcomes.csv": {
+      "rows": 432,
+      "sha256": "906cb3faa1129b26e69aa6123431b914d42dfe8cd46482876ee281e84d0ee8f1"
+    },
+    "calibration_measurements.csv": {
+      "rows": 40,
+      "sha256": "0bc61b231fd22bbd3cce7de84143260d85b474aeac344fcbfe301ab6d610c24f"
+    },
+    "queries.csv": {
+      "rows": 128,
+      "sha256": "8bac007e800b92e76f82b8892265103a307885e87e4974430873a12c1a6bb773"
+    },
+    "targets.csv": {
+      "rows": 128,
+      "sha256": "bfefd7370fbf38a59929dbc327f96198b8be2c450a9288b16c19033b238884e9"
+    }
+  },
+  "heads": [
+    {
+      "feature": "h0",
+      "head": 3,
+      "kv_group": 0,
+      "label": "L22H3",
+      "layer": 22
+    },
+    {
+      "feature": "h1",
+      "head": 4,
+      "kv_group": 0,
+      "label": "L22H4",
+      "layer": 22
+    },
+    {
+      "feature": "h2",
+      "head": 15,
+      "kv_group": 2,
+      "label": "L26H15",
+      "layer": 26
+    },
+    {
+      "feature": "h3",
+      "head": 0,
+      "kv_group": 0,
+      "label": "L14H0",
+      "layer": 14
+    },
+    {
+      "feature": "h4",
+      "head": 6,
+      "kv_group": 0,
+      "label": "L14H6",
+      "layer": 14
+    },
+    {
+      "feature": "h5",
+      "head": 13,
+      "kv_group": 1,
+      "label": "L16H13",
+      "layer": 16
+    },
+    {
+      "feature": "h6",
+      "head": 18,
+      "kv_group": 2,
+      "label": "L17H18",
+      "layer": 17
+    },
+    {
+      "feature": "h7",
+      "head": 13,
+      "kv_group": 1,
+      "label": "L23H13",
+      "layer": 23
+    }
+  ],
+  "leaderboard_eligible": false,
+  "measurement_budget": 40,
+  "model": {
+    "inference_required": false,
+    "name": "Qwen/Qwen2.5-7B",
+    "parameters": "7B",
+    "revision": "d149729398750b98c0af14eb82c78cfe92750796"
+  },
+  "n_calibration_measurements": 40,
+  "n_queries": 128,
+  "n_test_prompts_per_query": 512,
+  "n_train_prompts_per_measurement": 256,
+  "participation_class": "open_practice",
+  "prediction_contract": {
+    "input": "calibration_measurements.csv and queries.csv",
+    "prediction_metrics": [
+      "mae",
+      "rmse",
+      "mean_error",
+      "max_absolute_error"
+    ],
+    "submission_columns": [
+      "schema_version",
+      "query_id",
+      "predicted_effect"
+    ],
+    "submission_schema_version": "observerbench.effect_predictions.v0"
+  },
+  "purpose": "Fit an observer on 40 cached intervention measurements, predict 128 held-out mask effects, and test whether those predictions choose useful actions.",
+  "schema": "observerbench.open_practice_pack.v1",
+  "scope": [
+    "This is an open practice task with public targets, not a sealed leaderboard.",
+    "It uses one pinned Qwen2.5-7B base checkpoint and one synthetic copy distribution.",
+    "The fixed controller converts mean-effect predictions into actions; direct-risk observers require a richer submission contract."
+  ],
+  "sealed": false,
+  "source": {
+    "data_version": "copy-v2",
+    "design_id": "qwen_induction_a80172ccd3034115",
+    "sha256": {
+      "calibration_masks": "dd4ddcaf19bbe1c2d42d239bde235ab84cfe861a3f0fae2da7f708fb4b46b974",
+      "design_manifest": "f721ba756ecd7a91808c50e73d7e9792b2e81b2a8589e406af82b191534cf0a0",
+      "effect_manifest": "64553fa244cca2fe9673d67111fe7323bbe96a8ea7bfaf6402498ce22a4d57ae",
+      "test_effects": "5f487b48ec440ffa3d060c37e70eebddc4f00ceea844a40d9ee45ff7315bbfa0",
+      "test_masks": "e0e65c430943fb4a2260a00bc4f7c82b0b63cd29633ea311b408f64a1b6e70bd",
+      "train_effects": "0aeef307887e3e744b86b4b7534f0210e2bde47ca46d8b09324ce7ef6117d082"
+    },
+    "source_path": "results/revision/phase10/qwen_induction_copy_v2_complete/copy_v2"
+  },
+  "targets_public": true,
+  "task_id": "induction-qwen2-5-7b-finite-effects@copy-v2-b040"
+}

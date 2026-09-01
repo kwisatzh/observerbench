@@ -8,6 +8,11 @@ This separation lets activation probes, attribution methods, direct logit
 scores, SAE features, text baselines, and other methods face the same task,
 controller, and loss without giving the evaluator control of their runtime.
 
+For a model-free first run, use the
+[open Qwen2.5-7B practice pack](../practice/qwen_copy_v2_b040/). It fits an
+observer on 40 cached interventions and reports both effect-prediction error
+and selected-action loss.
+
 ## Start with a small CPU run
 
 Install the package from a source checkout:

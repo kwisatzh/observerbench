@@ -3,6 +3,7 @@
 **Test an internal estimate by the action it causes.**
 
 [Website](https://kwisatzh.github.io/observerbench/) ·
+[Try it](https://kwisatzh.github.io/observerbench/try/) ·
 [Leaderboards](https://kwisatzh.github.io/observerbench/leaderboards/) ·
 [Run an observer](https://kwisatzh.github.io/observerbench/runners/) ·
 [Submit predictions](https://kwisatzh.github.io/observerbench/submit/) ·
@@ -20,6 +21,33 @@ tomography asks how to measure a hidden internal quantity. ObserverBench asks
 whether the resulting estimate is good enough for the action we want to take.
 
 The current software release is `0.1.0`.
+
+## Sixty-second demo
+
+No package, model download, GPU, or API key is required:
+
+```bash
+git clone https://github.com/kwisatzh/observerbench.git
+cd observerbench
+make demo
+```
+
+The command runs two small, open examples:
+
+- A safety monitor with better classification AUROC spends its limited audit
+  budget on likely but low-impact violations and produces worse action loss.
+  Edit the short `score(row)` function in
+  [`demo/safety_tutorial.py`](demo/safety_tutorial.py), then run it again.
+- A nine-parameter observer learns from 40 cached Qwen2.5-7B interventions,
+  predicts 128 new effects, and is scored both on prediction error and on the
+  interventions it selects. Start with the
+  [Qwen practice task](practice/qwen_copy_v2_b040/README.md).
+
+Prefer a browser? Use the
+[open safety tutorial](https://kwisatzh.github.io/observerbench/try/). It runs
+locally in the page and accepts a CSV containing one score per request. Its
+targets are public for immediate feedback, so tutorial results are not eligible
+for the leaderboard.
 
 ## Why ObserverBench exists
 
@@ -76,6 +104,17 @@ Three findings summarize why the distinction matters:
 
 See the [live leaderboards](https://kwisatzh.github.io/observerbench/leaderboards/)
 for the checked rows, access boundaries, and task-specific metrics.
+
+## Open practice tasks
+
+Open practice tasks reveal their targets so that a new observer gets immediate
+feedback. They are useful for learning the contract and testing code, but their
+scores do not enter the sealed leaderboards.
+
+| Task | What you can change | What it reports |
+| --- | --- | --- |
+| [Safety tutorial](site/try/) | One risk score per request | AUROC, missed harm, clean audits, action loss |
+| [Qwen2.5-7B Copy-v2, budget 40](practice/qwen_copy_v2_b040/README.md) | Any predictor trained on 40 cached interventions | MAE, RMSE, selected-action loss, regret, gain over no-op |
 
 ## Choose a path
 
@@ -175,6 +214,7 @@ was fitted, its main metrics, its known failures, and the exact task version.
 | --- | --- |
 | [`src/observerbench/`](src/observerbench/) | Python package and task contracts |
 | [`leaderboards/`](leaderboards/) | Checked task-specific result panels |
+| [`practice/`](practice/) | Open tasks with public targets and immediate local scoring |
 | [`task-packs/`](task-packs/) | Public task definitions and target-free queries |
 | [`notebooks/`](notebooks/) | Colab reproductions for named studies |
 | [`paper/`](paper/) | Manuscript source and claim-to-artifact map |
