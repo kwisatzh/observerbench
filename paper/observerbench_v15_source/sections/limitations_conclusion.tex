@@ -34,9 +34,12 @@ The paper makes bounded claims:
   task rather than attacks adapted to each monitor. Two model families and
   three checkpoints supply learned representations. The Qwen2.5 sparse probe
   and Qwen3.5 official-SAE probe each concern one task and one selected probing
-  rule. The official Qwen-Scope SAE was trained on Qwen3.5-9B-Base and applied
-  here to the post-trained Qwen3.5-9B model, so it is not a checkpoint-matched
-  SAE test. The Gemma and Qwen3.5 runs were prospectively frozen after earlier
+  rule. Gemma provides the primary checkpoint-matched official-SAE comparison.
+  The Qwen2.5 comparison uses the same checkpoint but has a disclosed
+  activation-density mismatch. The official Qwen-Scope SAE was trained on
+  Qwen3.5-9B-Base and applied here to the post-trained Qwen3.5-9B model, making
+  that comparison an artifact-transfer stress test rather than a matched SAE
+  test. The Gemma and Qwen3.5 runs were prospectively frozen after earlier
   outcomes were known, not independently preregistered. All scoring is offline, and the
   prevalence sweeps keep the dataset-family mix fixed. Neither study tests
   deception or an adaptive attacker. These scorecards compare observers inside

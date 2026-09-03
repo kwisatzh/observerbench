@@ -1,11 +1,10 @@
 \section{How ObserverBench evaluates an observer}
 \label{sec:artifact}
 
-What does it mean to compare two observers fairly? The comparison must keep
-the decision problem fixed. Otherwise, a lower loss could come from a better
-observer, a more capable controller, an easier set of actions, or a different
-test distribution. ObserverBench makes these choices part of the task rather
-than leaving them to each experiment.
+A fair comparison keeps the decision problem fixed. Otherwise, lower loss
+could reflect a better observer, a more capable controller, easier actions, or
+a different test distribution. ObserverBench therefore treats these choices
+as part of the task.
 
 Each evaluation uses a \textbf{TaskCard}, an \textbf{ObserverCard}, and a
 \textbf{result scorecard} in four steps:
@@ -20,13 +19,13 @@ Each evaluation uses a \textbf{TaskCard}, an \textbf{ObserverCard}, and a
   observer reads, where those measurements come from, how it was fit or
   calibrated, what model access it requires, and any known failure conditions.
   For a control task, it also declares whether the submission replaces the
-  state estimate, the edit direction, or both.
+  state estimate, the edit direction, or both. If both change, the score applies
+  to the pair.
   \item \textbf{Run the common evaluator.} Every observer receives the same
   held-out cases and faces the same controller, actions, budgets, and loss.
-  \item \textbf{Compare both outcomes.} The result scorecard reports prediction
+  \item \textbf{Compare outcomes and cost.} The result scorecard reports prediction
   quality, downstream action loss, and the access or measurement cost of
-  obtaining the estimate. These quantities remain separate: a method that
-  predicts better does not automatically act better.
+  obtaining the estimate.
 \end{enumerate}
 
 There are two ways to cross the observer--evaluator boundary. A local
@@ -44,8 +43,7 @@ The three operational modes share this contract but ask different questions
 \centering
 \small
 \caption{ObserverBench operational modes. Each row defines a complete,
-task-relative comparison; results are compared only within the same task and
-version.}
+task-relative comparison.}
 \label{tab:operational-modes}
 \begin{tabular}{@{}L{0.14\linewidth}L{0.23\linewidth}L{0.31\linewidth}L{0.23\linewidth}@{}}
 \toprule
@@ -67,21 +65,14 @@ Safety triage & One risk or consequence score per request or trajectory
 \end{tabular}
 \end{table}
 
-A leaderboard is therefore task-specific. Results are comparable only when
-they use the same task version, information and integrity boundary, held-out
-split, action
-rule, and budget. ObserverBench does not collapse unlike settings into a
-single overall rank. Instead, each scorecard shows which observer is better
-for one declared use.
+ObserverBench does not collapse unlike modes or task versions into a single
+overall rank. Each scorecard identifies which observer is better for one
+declared use.
 
-Four rules keep each comparison meaningful:
+The workflow makes results comparable. Three additional rules keep each
+comparison meaningful:
 
 \begin{itemize}[leftmargin=1.5em,itemsep=0.2em,topsep=0.3em]
-  \item \textbf{Hold the rest of the decision system fixed.} Change the state
-  estimate or edit direction while keeping the model, controller, action
-  family, starting cases, and loss unchanged. If both estimate and direction
-  change, evaluate them as a pair.
-
   \item \textbf{Separate construction from evaluation.} Fix targets, splits,
   and interventions before measuring held-out performance. Check first that
   the unedited model succeeds on the base task and required groups; we call
@@ -96,7 +87,8 @@ Four rules keep each comparison meaningful:
   \item \textbf{Evaluate the quantity used to choose the action.} Mean-effect
   prediction, prompt-level intervention loss, and consequence-weighted safety
   risk are different targets. The task should score the one the controller
-  actually uses.
+  actually uses. When acting is optional, the action set should include exact
+  no-op so the evaluation can also ask whether any intervention is worthwhile.
 \end{itemize}
 
 This contract tells us how to compare observers, but it leaves a prior

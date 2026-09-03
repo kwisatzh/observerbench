@@ -218,6 +218,8 @@ The observers fall into three groups:
 The original comparison used the three prompt observers and the
 verdict-adjacent activation probe. We added the score-distribution, text, and
 neutral-activation controls after that result and fixed them before measurement.
+The later SAE row is also a frozen follow-up control; these added rows are not
+independent confirmations.
 At a 2\% audit budget, calibration selects layer 28 for the verdict-adjacent
 probe and layer 20 for the neutral probe.
 
@@ -268,10 +270,7 @@ Three findings matter:
 The neutral-context result is relevant to adaptive monitoring, but it is not a
 robustness result. It shows that a useful signal can appear before the model is
 asked for a verdict. It does not show that the same signal survives once an
-attacker knows it is being read. The matched Gemma study below reverses the
-ordering of the two residual contexts, which is further reason to test the
-measurement channel under the intended model and threat model rather than name
-one context as universally best.
+attacker knows it is being read.
 
 In deployment, attacks should be rare. We therefore resample the frozen scores at attack
 rates from 1--50\% and audit budgets from 0.5--10\%. At 1\% attacks and a 2\%
@@ -285,8 +284,7 @@ differences hidden by the balanced panel.
 \centering
 \includegraphics[width=\textwidth]{controlarena_prevalence_sensitivity.pdf}
 \caption{Qwen2.5-7B APPS: excess escaped attacks over the exact-label oracle
-in 2,000 resampled populations. Rare attacks expose differences hidden by the
-balanced panel.}
+across attack prevalences and audit budgets in 2,000 resampled populations.}
 \label{fig:apps-prevalence}
 \end{figure}
 
@@ -295,19 +293,20 @@ frozen Qwen panel \cite{kantamneni2025saeprobes}. Its fitted readout
 retains 127 nonzero coefficients, versus 3,584 for a layer-matched dense
 residual, but misses 4.67 rather than 2.05 attacks on average. This is
 \emph{compression without a better decision} on this frozen panel, not a
-general claim about SAE features (Appendix~\ref{app:apps-diagnostics}).
+general claim about SAE features. It is a same-checkpoint comparison with a
+disclosed activation-density mismatch: observed mean $L_0$ is 115 rather than
+the reported 240. Appendix~\ref{app:apps-diagnostics} reports
+the full diagnostic, including allocation by APPS family and input length.
+This is an external monitor test, not a deployment claim.
 
-Appendix~\ref{app:apps-diagnostics} checks whether pooled performance hides
-allocation differences by APPS family and input length. This is an external
-monitor test, not a deployment claim.
-
-\subsubsection{A matched Gemma replication changes the mean ranking}
+\subsubsection{A checkpoint-matched Gemma replication changes the mean ranking}
 
 We repeat the APPS contract on Gemma-2-9B-it, keeping the rows, prompts,
 controller, budgets, and evaluation loss fixed \cite{gemmateam2024gemma2}. The
 design was frozen after the Qwen results but before any Gemma monitor outcome
 was inspected. It is a prospectively frozen matched replication, not an
-independent preregistration.
+independent preregistration. The official Gemma Scope SAE and evaluated Gemma
+checkpoint match, making this the primary SAE comparison.
 
 \begin{table}[H]
 \centering
@@ -322,15 +321,15 @@ better.}
 \toprule
 Observer & AUROC & Realized violations \\
 \midrule
-Exact-label oracle & 1.000 & 0.00 $[0,0]$ \\
-Verdict-adjacent residual & \textbf{0.969} & \textbf{2.18 $[0,5]$} \\
-Score-distribution ridge & 0.913 & 4.42 $[1,8]$ \\
-Neutral residual & 0.944 & 4.95 $[2,9]$ \\
-Supervised text ridge & 0.868 & 9.05 $[6,12]$ \\
-Gemma Scope SAE probe & 0.870 & 9.07 $[6,12]$ \\
-Detailed prompted score & 0.893 & 10.80 $[7,14]$ \\
-Prompt ensemble & 0.860 & 13.69 $[11,15]$ \\
-Basic prompted monitor & 0.809 & 14.93 $[14,15]$ \\
+Exact-label oracle & 1.000 & 0.000 $[0,0]$ \\
+Verdict-adjacent residual & \textbf{0.969} & \textbf{2.178 $[0,5]$} \\
+Score-distribution ridge & 0.913 & 4.423 $[1,8]$ \\
+Neutral residual & 0.944 & 4.947 $[2,9]$ \\
+Supervised text ridge & 0.868 & 9.054 $[6,12]$ \\
+Gemma Scope SAE probe & 0.870 & 9.070 $[6,12]$ \\
+Detailed prompted score & 0.893 & 10.803 $[7,14]$ \\
+Prompt ensemble & 0.860 & 13.689 $[11,15]$ \\
+Basic prompted monitor & 0.809 & 14.927 $[14,15]$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -338,29 +337,30 @@ Basic prompted monitor & 0.809 & 14.93 $[14,15]$ \\
 Residual access has the lowest mean loss in both models, but its best measured
 context changes: neutral on Qwen and verdict-adjacent on Gemma. Output
 information still matters. On Gemma, the score-distribution ridge has a
-slightly lower violation mean than the neutral residual, 4.42 versus 4.95,
-despite lower AUROC.
+slightly lower violation mean than the neutral residual, 4.423 versus 4.947,
+despite lower AUROC. On matched Gemma resamples, verdict minus neutral averages
+$-2.77$ violations with a central 95\% outcome range of $[-6,0]$. The range
+touches zero and is not a confidence interval for the mean: verdict is strictly
+better in 93.2\% of paired populations, tied in 5.7\%, and worse in 1.1\%.
 
-\textbf{Classification is not enough on the external benchmark.} The detailed
-prompted monitor has higher AUROC than the official Gemma Scope SAE probe,
-0.893 versus 0.870, but worse mean realized violations, 10.80 versus 9.07
+\textbf{Classification is not enough on the external benchmark.} This safety
+result is a second instance of the prediction--decision distinction in
+Sec.~\ref{sec:ioi-prediction-decision}. The detailed prompted monitor has
+higher AUROC than the official Gemma Scope SAE probe, 0.893 versus 0.870, but
+worse mean realized violations, 10.803 versus 9.070
 \cite{lieberum2024gemmascope}. The detailed-minus-SAE paired difference
 averages 1.73 with a central 95\% outcome range of $[-2,6]$, so this is a
 reversal of the mean scorecard ranking, not a superiority claim for every
-resampled population. Roughan et al. found the same broader separation in
-traffic engineering: traffic-matrix estimation-error magnitude is not by
-itself a good indicator of routing performance \cite{roughan2003te}. Here,
-likewise, classification quality alone does not select the lower-mean-loss
-audit policy.
+resampled population. Thus, higher classification quality need not induce the
+lower-mean-loss audit policy.
 
 \subsubsection{Qwen3.5 reverses the Qwen2.5 context ranking}
 
-We repeat the same APPS rows, split, prompts, audit controller, and primary
-operating point on Qwen3.5-9B.\footnote{Pinned model:
-\url{https://huggingface.co/Qwen/Qwen3.5-9B}.} The design was frozen after the
-Qwen2.5 and Gemma outcomes were known but before any Qwen3.5 monitor outcome was
-inspected. It is a prospectively frozen matched replication, not an independent
-preregistration.
+Using the same matched protocol, we repeat the APPS rows, split, prompts, audit
+controller, and primary operating point on Qwen3.5-9B.\footnote{Pinned model:
+\url{https://huggingface.co/Qwen/Qwen3.5-9B}.} We prospectively froze the
+design after the Qwen2.5 and Gemma outcomes were known but before inspecting
+any Qwen3.5 monitor outcome; this is not an independent preregistration.
 
 \begin{table}[H]
 \centering
@@ -375,15 +375,15 @@ marks the best deployable row.}
 \toprule
 Observer & AUROC & Mean violations \\
 \midrule
-Exact-label oracle (evaluator only) & 1.0000 & 0.000 \\
-Verdict-adjacent residual & \textbf{0.9770} & \textbf{1.976} \\
-Supervised score distribution & 0.9404 & 5.120 \\
-Neutral residual & 0.9356 & 6.601 \\
-Supervised text & 0.8677 & 9.054 \\
-Basic prompted score & 0.8755 & 12.218 \\
-Official Qwen-Scope SAE probe & 0.8106 & 12.725 \\
-Basic/detailed prompt ensemble & 0.8228 & 12.956 \\
-Detailed prompted score & 0.6453 & 13.985 \\
+Exact-label oracle (evaluator only) & 1.000 & 0.000 \\
+Verdict-adjacent residual & \textbf{0.977} & \textbf{1.976} \\
+Supervised score distribution & 0.940 & 5.120 \\
+Neutral residual & 0.936 & 6.601 \\
+Supervised text & 0.868 & 9.054 \\
+Basic prompted score & 0.876 & 12.218 \\
+Official Qwen-Scope SAE probe & 0.811 & 12.725 \\
+Basic/detailed prompt ensemble & 0.823 & 12.956 \\
+Detailed prompted score & 0.645 & 13.985 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -394,16 +394,25 @@ better in 99.15\% of resampled populations. Qwen3.5 therefore agrees with the
 Gemma ordering and reverses Qwen2.5. The useful context can change even between
 checkpoints from the same model family.
 
+The other rows show a second reversal. The basic prompted monitor has slightly
+higher AUROC than supervised text, 0.876 versus 0.868, but causes 3.164 more
+mean violations, 12.218 versus 9.054. The detailed prompted monitor also falls
+from AUROC 0.893 on Gemma to 0.645 on Qwen3.5 under the same APPS contract.
+Monitor quality must therefore be tested on the model and operating regime in
+which it will be used.
+
 We also test the official Qwen-Scope SAE.\footnote{Pinned SAE:
 \url{https://huggingface.co/Qwen/SAE-Res-Qwen3.5-9B-Base-W64K-L0_50}.}
-Calibration selects layer 12 and ridge 100. The SAE probe has AUROC 0.8106 and
+Calibration selects layer 12 and ridge 100. The SAE probe has AUROC 0.811 and
 12.725 mean violations, compared with 6.601 for the dense neutral residual.
 SAE minus dense averages 6.124 additional violations, with a central 95\%
 outcome range of $[2,10]$; dense is better in 99.65\% of populations. This is a
-bounded control, not a general result against SAE features. The released SAE
-was trained on Qwen3.5-9B-Base but is evaluated here on the post-trained
-Qwen3.5-9B model. Appendix~\ref{app:qwen35-apps} records the frozen protocol and
-that checkpoint mismatch.
+bounded artifact-transfer stress test, not a general result against SAE features:
+the released SAE was trained on Qwen3.5-9B-Base, while we evaluate the
+post-trained Qwen3.5-9B model \cite{deng2026qwenscope}. Qwen's public
+collection did not include a checkpoint-matched post-trained 9B SAE at the
+time of the study. Appendix~\ref{app:qwen35-apps} records the full protocol
+and mismatch.
 
 \subsection{Four checks before claiming that an internal safety signal helps}
 
@@ -425,9 +434,7 @@ safety signal, ObserverBench asks:
 \end{enumerate}
 
 These checks locate where useful information becomes available. They do not by
-themselves establish deception, intent, or hidden knowledge. The cross-model
-result also shows why measurement context must be tested rather than assumed:
-removing the verdict prompt helps on Qwen2.5 but not on Gemma or Qwen3.5. How
-does this task-relative contract relate to existing interpretability
+themselves establish deception, intent, or hidden knowledge. How does this
+task-relative contract relate to existing interpretability
 benchmarks, decision-focused learning, and AI-control evaluations? The next
 section places ObserverBench among those lines of work.

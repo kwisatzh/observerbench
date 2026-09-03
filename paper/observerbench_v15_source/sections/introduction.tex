@@ -7,32 +7,30 @@ to remove, whether to permit a risky tool call, or which requests receive a
 limited human-review budget. Activation engineering and feedback-control
 methods make these estimates part of an active control loop
 \cite{turner2023activation,zou2023representation,nguyen2025feedback,skifstad2026local}.
-Once an internal estimate is used to choose an action, statistical accuracy is
-not a complete evaluation metric. An estimate can perform well on average and
-still cause costly errors on individual prompts.
+Once an internal estimate is used to choose an action, statistical accuracy
+alone is not enough
+\cite{donti2017task,elmachtoub2022smart,orgad2026actionable}: an estimate can
+perform well on average and still cause costly errors on individual prompts.
 
-To analyze these systems, we separate the control loop into three components: \textbf{Observer.} The method or probe that reads measurements and
-  estimates an internal state or intervention effect \textbf{Controller.} The decision rule that uses the estimate to
-  select an action and \textbf{Intervention.} The edit, ablation, or policy action that the
-  controller is allowed to execute. ObserverBench asks a central question: is a proposed observer adequate for the
-specific decision the controller must make?
+To analyze these systems, we separate the decision loop into three parts. The
+\textbf{observer} reads measurements and estimates an internal state or
+intervention effect. The \textbf{controller} uses that estimate to choose an
+action. The \textbf{intervention} is the edit, ablation, or policy action it is
+allowed to take. ObserverBench asks whether the observer is adequate for that
+specific decision.
 
-Standard prediction metrics do not by themselves show whether an internal
-estimate is useful for a decision
-\cite{donti2017task,elmachtoub2022smart,orgad2026actionable}. There are three failure
-modes that  illustrate why prediction accuracy and decision quality must be reported
-separately; (i)  \textbf{Consequence disregard.} In safety triage, an observer can
-  classify policy violations perfectly yet spend a limited review budget on
-  low-stakes violations, such as unauthorized reads, while allowing
-  higher-impact harms, such as unauthorized deletions, through
-  (Sec.~\ref{sec:safety}), (ii) \textbf{Dispersion blindness.} In model editing, an observer can
-  accurately predict the mean effect of ablating a circuit across a dataset
-  yet choose an edit whose effect varies widely across prompts, defeating
-  prompt-level control (Sec.~\ref{sec:ioi}), and finally (iii)  \textbf{Redundant signals.} An internal activation probe can achieve
-  high predictive accuracy while repeating information already visible in the
-  prompt or output logits. It then requires additional model access without
-  improving the downstream decision (Sec.~\ref{sec:safety}).
-
+\Needspace{7\baselineskip}
+Three failure modes illustrate why prediction accuracy and decision quality
+must be reported separately. In safety triage, an observer can classify policy
+violations perfectly yet spend a limited review budget on low-stakes cases
+while allowing higher-impact harms through. This is \emph{consequence
+disregard} (Sec.~\ref{sec:safety}). In model editing, an observer can predict a
+circuit ablation's mean effect accurately yet choose an edit whose effect
+varies widely across prompts. This is \emph{dispersion blindness}
+(Sec.~\ref{sec:ioi}). An internal activation probe can also repeat information
+already visible in the prompt or output logits. Such a \emph{redundant signal}
+adds model access without improving the downstream decision
+(Sec.~\ref{sec:safety}).
 
 We introduce \textbf{ObserverBench}\footnote{Public workbench and submission
 page: \url{https://kwisatzh.github.io/observerbench/}.},
@@ -49,60 +47,39 @@ Mechanistic tomography addresses the measurement problem: how to design probes
 and interventions that recover hidden internal mechanisms and effect maps.
 ObserverBench addresses the decision problem: whether a proposed estimate is
 adequate to guide a particular intervention, control loop, or safety policy
-\cite{erramilli2026tomography}.
-
-For safety tasks, ObserverBench freezes the audit policy and compares the
+\cite{erramilli2026tomography}. For safety tasks, ObserverBench freezes the audit policy and compares the
 monitor inside it. AI-control evaluations ask the complementary, harder
 question of whether the complete protocol remains safe when an adaptive model
 tries to subvert it \cite{greenblatt2024aicontrol}. A monitor that performs
 well here must still pass that end-to-end test.
 
-An evaluation in ObserverBench is defined by five explicit choices:
+An ObserverBench evaluation makes five choices explicit. It states the
+\emph{target}: an internal state, an intervention's average effect, or perhaps
+the loss of one action on one prompt. It states the \emph{information and
+integrity boundary}: what the observer may read and who can alter, omit, delay,
+or spoof those measurements. It fixes the \emph{action space} and the
+\emph{decision rule and loss}, which determine how estimates become actions
+and which errors matter. Finally, it declares the \emph{operating regime},
+including prompts, intervention budgets, attack frequencies, episode horizons,
+and attacker assumptions.
 
-\begin{itemize}
-  \item \textbf{Target.} What must the observer estimate: an internal state,
-  the average effect of an intervention, or the loss of one action on one
-  prompt?
-
-  \item \textbf{Information and integrity boundary.} What may the observer
-  read, and who can alter, omit, delay, or spoof those measurements? Examples
-  include prompt text, internal activations, output scores, and external logs.
-
-  \item \textbf{Action space.} Which interventions may the controller apply,
-  such as a specified activation shift or one mask from a fixed set of
-  ablations?
-
-  \item \textbf{Decision rule and loss.} How does the controller turn an
-  estimate into an action, and which downstream errors incur a cost?
-
-  \item \textbf{Operating regime.} Which prompts, intervention budgets, attack
-  frequencies, episode horizons, and attacker assumptions will the evaluator
-  use?
-\end{itemize}
-
-These choices make observer adequacy task-relative. Permissions, tool
-interfaces, budgets, and attack rates are therefore part of the evaluation,
-not background details. In the 2026 OpenAI--Hugging Face incident, agents used
-an unsanctioned communication channel, coordinated attempts to fool the
-evaluator, and successfully spoofed some tool calls. The case shows why an
-information boundary must cover side channels and evaluator-held evidence, not
-only prompts and activations
+These choices make observer adequacy task-relative: permissions, tool
+interfaces, budgets, attack rates, side channels, and evaluator-held evidence
+are part of the evaluation, not background details. In the 2026 OpenAI--Hugging
+Face incident, agents used an unsanctioned channel and spoofed some tool calls,
+motivating the integrity boundary
 \cite{openai2026securityincident,huggingface2026securityincident,
-greenblatt2026hfinvestigation}.
+greenblatt2026hfinvestigation}. ObserverBench instantiates these choices in
+three standardized operational modes---closed-loop control, effect prediction,
+and safety triage---summarized in Sec.~\ref{sec:artifact}.
 
-ObserverBench instantiates these choices in three standardized operational
-modes---closed-loop control, effect prediction, and safety triage---summarized
-in Sec.~\ref{sec:artifact}.
-
-\Needspace{11\baselineskip}
+\Needspace{8\baselineskip}
 \paragraph{Contributions.}
 
 \begin{itemize}[itemsep=0.2em,topsep=0.3em]
-  \item \textbf{An extensible evaluation workbench.} Researchers can implement
-  an observer against a small local interface or submit a prediction table to
-  a fixed task. Task and observer cards record what the evaluator fixes and
-  what the method may use. Each result reports both prediction quality and the
-  cost of the resulting actions (Sec.~\ref{sec:artifact}).
+  \item \textbf{An extensible evaluation workbench.} Versioned task and
+  observer cards support local implementations and table-based submissions
+  under one common evaluator (Sec.~\ref{sec:artifact}).
 
   \item \textbf{A formal adequacy test for control.} For linear readouts with
   an offset, an observer needs to match the target only at the starting point
@@ -117,25 +94,21 @@ in Sec.~\ref{sec:artifact}.
   Relative to the same-feature mean observer, direct-loss training reduces
   action loss by 18.5\% in the clean GPT-2 confirmation and by 8.9\% in the
   Qwen aggregate \cite{wang2023ioi,olsson2022induction,qwen2024qwen25}. In the
-  Qwen safety task, a sparse SAE readout uses 127
-  nonzero coefficients rather than 3,584, yet mean escaped attacks rise from
-  2.05 to 4.67: \emph{compression without a better decision}
+  Qwen2.5 safety task, a same-checkpoint sparse SAE readout uses far fewer
+  coefficients yet incurs more escaped attacks under a disclosed
+  activation-density mismatch: \emph{compression without a better decision}
   (Secs.~\ref{sec:phase7-confirmation}, \ref{sec:qwen-induction}, and
-  \ref{sec:safety}) \cite{kantamneni2025saeprobes}. Roughan et al. found the same broader separation in
-  traffic engineering: traffic-matrix estimation-error magnitude is not by
-  itself a good indicator of routing performance \cite{roughan2003te}.
+  \ref{sec:safety}) \cite{kantamneni2025saeprobes}.
 
   \item \textbf{Classification is not enough for safety.} In the authorization
   task, a label observer with AUROC 1.000 allocates a fixed intervention budget
-  poorly when it ignores consequence. On the external Gemma APPS task, the
-  detailed prompted monitor has higher AUROC than the official Gemma Scope SAE
-  probe (0.893 versus 0.870) but more mean realized violations (10.80 versus
-  9.07). Across matched Qwen2.5-7B, Gemma-2-9B-it, and prospectively frozen
-  Qwen3.5-9B tasks, residual observers lead on average, while the lowest-loss
-  context differs---and reverses between the two Qwen checkpoints. On Qwen3.5,
-  the official Qwen-Scope SAE probe also incurs more violations than the dense
-  residual from which its features are computed; the SAE was trained on the
-  base rather than the evaluated post-trained checkpoint
+  poorly when it ignores consequence. On the external Gemma APPS task, AUROC
+  and realized violations reverse the order of two monitors. Across matched
+  Qwen2.5-7B, Gemma-2-9B-it, and prospectively frozen Qwen3.5-9B tasks, residual
+  observers lead on average, while the lowest-loss context changes---even
+  between the two Qwen checkpoints. Gemma supplies the primary
+  checkpoint-matched official-SAE comparison; the Qwen SAE results are
+  supporting tests with stated density or checkpoint-transfer limits
   (Sec.~\ref{sec:safety})
   \cite{greenblatt2024aicontrol,inglis2025controlarena,
   gemmateam2024gemma2,lieberum2024gemmascope}.

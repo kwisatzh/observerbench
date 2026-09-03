@@ -90,6 +90,7 @@ more coefficients than the data can identify. That cell is therefore an
 underdetermined fit, not evidence about sample efficiency.
 
 \subsubsection{The better mean predictor does not choose a better action}
+\label{sec:ioi-prediction-decision}
 
 A mean-effect observer chooses
 \[
@@ -104,12 +105,13 @@ R_t(m)=\mathbb E_i\left[|Y_i(m)-t|\right].
 Two masks can have the same average and different losses. A mask that reliably
 reduces the margin by one logit is better than one that alternates between zero
 and two, even though both average to one. Mean-effect prediction and action
-selection are therefore different tasks.
-
-Roughan et al. found the same broader separation in traffic engineering:
-traffic-matrix estimation-error magnitude is not by itself a good indicator of
-routing performance~\cite{roughan2003te}. Here the controller cares not only about a
-mask's average effect, but also about how that effect varies across prompts.
+selection are therefore different tasks. This is an instance of a broader
+prediction--decision distinction: the error of an intermediate estimate need
+not determine the quality of the action chosen from it. Roughan et al.
+documented an analogous result in traffic engineering, where traffic-matrix
+estimation-error magnitude was not by itself a good indicator of routing
+performance~\cite{roughan2003te}. Here, mean-effect error omits a
+decision-relevant quantity: how a mask's effect varies across prompts.
 
 At budget 160, the all-pairs model has the best $R^2$ and nearly the best
 mean-effect MAE, yet its action-loss reductions are only 0.10\% and 2.34\%, with
@@ -274,14 +276,18 @@ Monte Carlo resampling.}
 Table~\ref{tab:phase8-ioi-sensitivity} shows that the direct-loss observer beats
 both mean-based controls at every target, with every paired interval excluding
 zero. No-op follows a simpler rule. Its effect is zero, so its loss is exactly
-$R_t(\varnothing)=t$. The no-op becomes harder to beat when the requested
-change is small: direct loss has higher loss than no-op at $t=0.5$ and beats it at $t=1$
-and $t=1.5$.
+$R_t(\varnothing)=t$. At $t=0.5$, the direct-loss observer's loss is 46.2\%
+higher than exact no-op, even though it beats both mean-based observers. It
+beats no-op at $t=1$ and $t=1.5$. This sign change is why exact no-op belongs
+in every action set: an observer can rank the available edits well even when
+no edit is warranted. We do not add a post-hoc noise-floor gate. Such a
+threshold or abstention rule would define a different controller and must be
+fixed before evaluation.
 
 \begin{samepage}
 Together, the IOI tests show that pairwise terms improve mean-effect prediction
-and direct-loss prediction improves fixed-action choice, while even a better
-chosen intervention can lose to no-op when the requested change is small.
+and direct-loss prediction improves fixed-action choice, while exact no-op
+tests whether any intervention is warranted.
 Because these claims are limited to GPT-2-small, the declared templates and
 masks, and the measured action losses, we next ask whether the first two
 patterns transfer to a larger model and a different intervention surface.

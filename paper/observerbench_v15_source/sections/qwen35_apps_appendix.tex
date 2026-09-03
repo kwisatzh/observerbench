@@ -33,7 +33,12 @@ observer.
 The official-feature control uses 65,536-wide TopK-50 Qwen-Scope SAEs at the
 same three layers. Calibration selects layer 12 and ridge 100. The SAEs were
 trained on Qwen3.5-9B-Base, whereas the dense residuals and outcomes come from
-post-trained Qwen3.5-9B. We declared this mismatch before the run. It makes the
-SAE row a test of a released feature family under transfer, not a
-checkpoint-matched comparison and not evidence that SAE features generally
-fail for safety monitoring.
+post-trained Qwen3.5-9B. At the time of the study, Qwen's official public
+collection listed only base-trained 9B Qwen3.5 SAEs, not a checkpoint-matched
+SAE for the post-trained model.\footnote{Official collection:
+\url{https://huggingface.co/collections/Qwen/qwen-scope}.} The
+Qwen-Scope card also states that using a base-model SAE to explore a
+post-trained checkpoint is often reasonable. We declared the mismatch before
+the run. The SAE row therefore tests a
+released feature family under transfer; it is not a checkpoint-matched
+comparison or evidence that SAE features generally fail for safety monitoring.

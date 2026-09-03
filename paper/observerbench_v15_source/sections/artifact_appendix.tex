@@ -39,6 +39,17 @@ targets. An outside observer can submit its predictions without loading the
 model or rerunning the intervention experiment. The registries include
 per-component and additive ridge observers as initial comparison rows.
 
+This is a data-only boundary, not a requirement to execute contributor code.
+For effect prediction, a submission supplies one row per held-out intervention
+with the fields \path{schema_version}, \path{query_id}, and
+\path{predicted_effect}, together with an ObserverCard that states the method
+and its access assumptions. The evaluator rejects missing, duplicate,
+unexpected, or non-finite predictions, joins accepted rows to sealed targets,
+and returns aggregate prediction and action metrics. Keeping submissions inert
+and targets private protects scoring labels and avoids running outside code.
+It does not make the underlying telemetry trustworthy, test adaptive evasion,
+or prevent repeated tuning to a public panel.
+
 The external APPS registry contains separate Qwen2.5-7B, Gemma-2-9B-it, and
 Qwen3.5-9B scorecards. Prompt, output, text, dense-residual, and SAE-feature
 observers are evaluated under the same audit contract within each model panel.
