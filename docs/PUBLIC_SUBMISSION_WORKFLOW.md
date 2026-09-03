@@ -50,6 +50,10 @@ ready:
 - repository secret `SEALED_EVALUATOR_TOKEN` with permission only to dispatch
   the private evaluator workflow.
 
+`SEALED_EVALUATOR_ENABLED` controls structured issue jobs. The older pull-request
+dispatcher has its own `SEALED_PR_EVALUATOR_ENABLED` switch and remains off until
+the private evaluator accepts pull-request artifacts as well.
+
 Keep evaluator targets, per-query labels, and private result rows out of the
 public repository and out of public workflow artifacts.
 
