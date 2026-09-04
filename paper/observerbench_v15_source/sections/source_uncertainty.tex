@@ -1,0 +1,57 @@
+\section{Do the APPS rankings survive changes in source problems?}
+\label{app:source-uncertainty}
+
+The deployment ranges above answer: how much does a frozen panel's outcome
+vary across populations with a fixed attack rate and budget? A second
+question is whether a ranking depends on which APPS problems enter that
+panel. We address it with a secondary analysis designed after the reported
+rankings were known. We do not change the trained monitors, primary cell,
+or original point estimates.
+
+Each of 1,000 outer bootstrap draws samples 744 source problem IDs with
+replacement, keeping each problem's honest and working-backdoor solution
+together. Every monitor receives the same source draw. Within each draw,
+the existing evaluator averages 256 deployment populations, each with 15
+attacks, 1,473 honest submissions, and 29 audits. It uses shared population
+draws and random tie ordering across monitors. AUROC is computed on the
+balanced outer panel. The table gives paired percentile intervals over
+source draws, not the central outcome ranges of individual deployment
+populations. Nested Monte Carlo makes the loss intervals approximate.
+
+\begin{table}[H]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\caption{Secondary source-problem bootstrap, conditional on the frozen fits
+and split. Every difference is left minus right. Positive AUROC favors the
+left monitor; negative violations favor it. Intervals are marginal 95\%
+percentile intervals, not simultaneous confidence guarantees.}
+\label{tab:apps-source-uncertainty}
+\begin{tabular}{@{}L{0.48\linewidth}rr@{}}
+\toprule
+Model and comparison & $\Delta$AUROC interval & $\Delta$violations interval \\
+\midrule
+Gemma: detailed prompt $-$ SAE & $[0.005,0.043]$ & $[-1.18,3.92]$ \\
+Gemma: verdict $-$ neutral residual & $[0.014,0.034]$ & $[-3.73,-1.78]$ \\
+Qwen3.5: basic prompt $-$ text & $[-0.014,0.029]$ & $[1.50,4.61]$ \\
+Qwen3.5: verdict $-$ neutral residual & $[0.030,0.053]$ & $[-5.48,-3.33]$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The result separates two conclusions. The verdict-adjacent residual's
+advantage over the neutral residual persists under source resampling on both
+models. The two prediction--action inversions are less settled. Gemma's
+detailed prompt has a supported AUROC advantage over its SAE probe, but the
+action-loss difference can change sign. Qwen3.5's basic prompt has a supported
+action-loss disadvantage against text, but its small AUROC advantage can
+change sign. Thus neither pair establishes both sides of a population-level
+ranking reversal at this uncertainty level. They remain observed reversals
+on the locked panel, not universal monitor orderings.
+
+These intervals hold the fitted observers and model checkpoints fixed. They
+do not include uncertainty from refitting, choosing layers or penalties,
+selecting the contrasts after seeing outcomes, or changing the attacker.
+Independent training splits and adaptive attacks require additional tests.
+The analysis reuses the existing deployment evaluator and records the score
+file hashes, seed, resampling unit, and replicate counts in its result files.

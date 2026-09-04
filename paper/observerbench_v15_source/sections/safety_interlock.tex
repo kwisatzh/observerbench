@@ -351,8 +351,10 @@ worse mean realized violations, 10.803 versus 9.070
 \cite{lieberum2024gemmascope}. The detailed-minus-SAE paired difference
 averages 1.73 with a central 95\% outcome range of $[-2,6]$, so this is a
 reversal of the mean scorecard ranking, not a superiority claim for every
-resampled population. Thus, higher classification quality need not induce the
-lower-mean-loss audit policy.
+resampled population. A secondary source-problem bootstrap supports the AUROC
+difference but gives a violation-difference interval of $[-1.18,3.92]$.
+The action ranking is therefore uncertain across source problems, even though
+the locked-panel point estimates reverse (Appendix~\ref{app:source-uncertainty}).
 
 \subsubsection{Qwen3.5 reverses the Qwen2.5 context ranking}
 
@@ -398,8 +400,15 @@ The other rows show a second reversal. The basic prompted monitor has slightly
 higher AUROC than supervised text, 0.876 versus 0.868, but causes 3.164 more
 mean violations, 12.218 versus 9.054. The detailed prompted monitor also falls
 from AUROC 0.893 on Gemma to 0.645 on Qwen3.5 under the same APPS contract.
-Monitor quality must therefore be tested on the model and operating regime in
-which it will be used.
+The source-problem bootstrap supports the basic prompt's action-loss
+disadvantage, with interval $[1.50,4.61]$, but not its small AUROC advantage,
+whose interval is $[-0.014,0.029]$. Thus neither of the two highlighted
+inversions establishes both sides of a population-level ranking reversal.
+In contrast, verdict-over-neutral action advantages remain supported on
+Gemma and Qwen3.5: intervals are $[-3.73,-1.78]$ and $[-5.48,-3.33]$.
+These secondary intervals condition on frozen fits and splits
+(Appendix~\ref{app:source-uncertainty}). The model-dependent context choice is
+better supported than a universal ordering of the prompted and feature monitors.
 
 We also test the official Qwen-Scope SAE.\footnote{Pinned SAE:
 \url{https://huggingface.co/Qwen/SAE-Res-Qwen3.5-9B-Base-W64K-L0_50}.}

@@ -45,7 +45,16 @@ with the fields \path{schema_version}, \path{query_id}, and
 \path{predicted_effect}, together with an ObserverCard that states the method
 and its access assumptions. The evaluator rejects missing, duplicate,
 unexpected, or non-finite predictions, joins accepted rows to sealed targets,
-and returns aggregate prediction and action metrics. Keeping submissions inert
+and returns aggregate prediction metrics. It does not yet select an action or
+return action loss for an arbitrary submitted table. The action-selection
+studies in this paper use the frozen IOI and Qwen experiment runners, which
+fit the mean-effect or direct-loss observer, apply the fixed candidate-pool
+selector, and score the selected masks on held-out prompts. Their action
+results should not be read as action results for the submitted AtP rows.
+The next extension must join these paths while preserving the declared
+estimand, target, candidate pools, no-op, and tie rule. It must return the
+selected action, action loss, and comparisons against no-op and named
+reference observers, not infer decision quality from MAE. Keeping submissions inert
 and targets private protects scoring labels and avoids running outside code.
 It does not make the underlying telemetry trustworthy, test adaptive evasion,
 or prevent repeated tuning to a public panel.

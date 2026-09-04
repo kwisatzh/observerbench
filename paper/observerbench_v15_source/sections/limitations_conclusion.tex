@@ -41,7 +41,11 @@ The paper makes bounded claims:
   that comparison an artifact-transfer stress test rather than a matched SAE
   test. The Gemma and Qwen3.5 runs were prospectively frozen after earlier
   outcomes were known, not independently preregistered. All scoring is offline, and the
-  prevalence sweeps keep the dataset-family mix fixed. Neither study tests
+  prevalence sweeps keep the dataset-family mix fixed. Secondary problem-level
+  bootstrap intervals support the verdict-over-neutral action comparisons,
+  but do not settle both sides of the highlighted AUROC--loss reversals. They
+  condition on the fitted monitors and do not measure refitting uncertainty.
+  Neither study tests
   deception or an adaptive attacker. These scorecards compare observers inside
   a fixed audit rule; they do not establish that a complete AI-control protocol
   remains safe under intentional subversion. \emph{Next test:} use sequential
@@ -54,8 +58,12 @@ The paper makes bounded claims:
   \Needspace{4\baselineskip}
   \item \textbf{Artifact.} \emph{Scope:} The release provides checked control,
   finite-effect, and safety interfaces, but it is not yet a general task
-  ecosystem. \emph{Next test:} add literature baselines, another safety
-  environment with adaptive attacks, and a stable end-to-end reproduction path.
+  ecosystem. The generic effect-table evaluator scores predictions; separate
+  task runners produce the paper's action-loss results. Readout coefficient
+  counts do not include SAE encoding or model inference.
+  \emph{Next test:} connect submitted effects to the frozen action selector,
+  return action loss against no-op and reference observers, run AtP through
+  that complete path, and measure end-to-end observer costs.
 \end{itemize}
 
 \Needspace{12\baselineskip}

@@ -1,0 +1,151 @@
+\section{What each experiment fits, freezes, and tests}
+\label{app:protocol-details}
+
+This section records the choices needed to interpret the comparisons. A
+configuration hash preserves an exact run; the descriptions below explain
+what that run measured. Revision prefixes below identify full pins in the run
+configurations. The experiments use different units of replication.
+We do not treat many conditions from one model, or many resamples from one
+dataset, as independent models or datasets.
+
+\subsection{Learned nonlinear control}
+
+The model has two Transformer blocks, width 32, four attention heads per block,
+and an MLP width of 96. Each of 12 seeds generates 3,000 training sequences of
+length four. The binary features have probability 0.35. The training target is
+$0.35x_1+0.25x_2+\gamma x_1x_2+\epsilon$, with noise standard deviation
+0.02 and $\gamma\in\{0,1.15\}$. Training uses 600 steps, batch size 256,
+AdamW learning rate $10^{-3}$, weight decay $10^{-4}$, and an auxiliary
+feature loss of weight 0.05.
+
+The observer reads the last-position residual after block 0. Ridge probes
+with penalty $10^{-4}$ decode $x_1$, $x_2$, and $x_1x_2$ from training
+residuals. A second ridge fit predicts the model's suffix output from either
+the two individual-feature estimates or all three estimates. Composing the
+fits gives an affine observer in residual space. The controller never receives
+the exact binary features at test time. The target used to score an edited
+state is the actual output after rerunning block 1, final normalization, and
+the target head, not a separately extrapolated target probe.
+
+Each rollout changes only that last-position residual and holds the other
+positions fixed. Proportional feedback uses $K=0.35$ for 15 steps without
+clipping. A symmetric probe of size $0.05$ at the starting state measures the
+true directional response $g_T$. The controlled diagnostic sets $g_E=0.85$
+and crosses five response mismatches ($-1.25,-0.75,0,0.75,1.25$), three
+initial biases ($-0.25,0,0.25$), and four relative target offsets
+($-0.5,-0.25,0.25,0.5$). It therefore uses target access both to construct
+controlled mismatches and to check the error decomposition.
+
+Natural directions are each observer gradient scaled to self-response 0.85.
+The crossed comparisons keep the estimate or direction fixed, but most crossed
+pairs fail the declared gain and movement checks. The 29.0\% reduction thus
+compares the two usable estimator--direction pairs. Integrated squared error
+sums squared true error from step 0 through step 15. The frozen diagnostic
+protocol names final tracking error as primary and ISE as secondary; the paper
+uses ISE to compare the natural trajectories, not to rename the diagnostic's
+registered primary outcome. Leave-one-seed-out calibration fits on 11 models
+and tests on the twelfth. Intervals use 5,000 seed-level bootstrap draws.
+
+\subsection{The clean GPT-2 action confirmation}
+
+The confirmation uses GPT-2-small revision
+\path{607a30d783df}.
+The intervention is template-conditioned mean ablation at the final token.
+Both observers receive the same 192 calibration prompts and 160 calibration
+masks. Their 92 features comprise an intercept, 13 head indicators, and all
+78 head-pair products. Both use ridge penalty $10^{-6}$. The mean observer
+fits the average logit-difference change. The direct-loss observer instead
+fits the average absolute deviation from the requested target, computed from
+the same per-prompt intervention responses. It receives a different training
+label, not additional measurements.
+
+Evaluation uses eight canonical templates and 32 fresh unordered name pairs,
+each in two orientations: 512 prompts. There are 48 candidate pools, each
+containing 30 new nonempty masks plus exact no-op. The nonempty masks have
+five to nine heads and were excluded from the earlier measured mask sets.
+Selection orders candidates by predicted loss, then head count, then action
+ID. For no-op, the predicted and actual losses are exactly $|t|$.
+The selected actions are frozen before measuring their held-out effects.
+Only the union of selected masks is measured on the new prompts; the study
+does not obtain a fresh oracle ranking of every candidate in every pool.
+
+The primary target $t=1$ was chosen after pilot results. The later target
+sweep is secondary. Intervals use 5,000 crossed bootstrap draws over 32
+name-pair clusters and 48 action pools, keeping both name orientations and
+all eight templates together within a cluster. They do not measure transfer
+to a new template family. The earlier 320-mask prediction experiment and its
+AtP submission rows are separate evaluations, not additional action-confirmation
+replicates.
+
+\subsection{Qwen induction-copy}
+
+The model is base Qwen2.5-7B, revision
+\path{d14972939875}, run in bfloat16 without
+quantization. Four prompt families cross lengths 32 and 64 with repeat gaps
+8 and 16. Reference, discovery, head-fit, head-confirmation, calibration,
+and locked-test banks use disjoint allocated token sets. Eligibility is
+decided from clean outputs before head interventions: the intended value
+must beat both distractors with candidate margin at least $\log 4$.
+The frozen sampling rule selects eligible prompts by a hash, not by ranking
+their margins. The resulting population supports candidate-margin claims,
+not unrestricted generation claims.
+
+Attention selects a shortlist of 32 heads. Finite ablations on a separate
+256-prompt head-fit bank choose eight, with at most two per layer and at least
+four layers. Another 256 prompts compare the selected panel with matched
+low-induction controls. Means from 128 reference prompts define the
+family-conditioned ablation at the final query position, before attention
+output projection. All 256 masks of the selected panel split into 128
+calibration and 128 test masks, evaluated on 256 calibration and 512 test
+prompts. The prediction budgets are 16, 40, 64, and 128 masks. Ridge penalties
+come from $\{10^{-6},10^{-4},10^{-2},10^{-1},1,10\}$ using five-fold
+mask-level cross-validation on the calibration measurements, not the locked
+outcomes.
+
+Each of 16 action pools contains eight held-out masks and no-op. Targets are
+one quarter, one half, and three quarters of the full-panel effect measured
+on the independent head-confirmation bank. The equal-weight aggregate across
+these targets is declared before the final analysis. Intervals use 5,000
+crossed resamples of prompt clusters and masks or action pools. Mean-effect
+and direct-loss fits use the same intervention responses; the latter changes
+the fitted label to the loss the action selector will minimize.
+
+\subsection{APPS monitor fitting and deployment scoring}
+
+All model panels use the same APPS-control dataset revision
+\path{29db28f76042}. A problem and its honest and
+working-backdoor solutions stay together: 500 problem pairs fit observers,
+200 select settings, and 744 form the locked test panel. The Gemma and
+Qwen3.5 replications retain that split and the same prompt forms and policy.
+The prompts either request a suspicion score or present the problem and code
+without asking for a verdict. Residual observers read the last non-padding
+position. Each model's layer choices and exact revisions are fixed in its
+configuration.
+
+In the Gemma and Qwen3.5 replications, dense residual fits use a fixed
+256-dimensional projection and ridge penalties
+$\{10^{-4},10^{-2},1,100\}$. Calibration selects layer and penalty by
+violation rate under a 2\% audit budget on the balanced calibration panel;
+the selected fit then uses fit plus calibration data only. The text control
+uses 2,048 deterministic hashed features. SAE features are standardized from
+fit data, with rare features removed according to the frozen rule. Gemma
+uses the official width-16k residual SAEs at layers 9, 20, and 31. Qwen3.5
+uses the released base-model SAE on the posttrained model. These are separate
+comparisons: checkpoint-matched feature evaluation and artifact transfer.
+
+The basic and detailed prompted monitors do not receive supervised fitting
+labels. Text, residual, supervised output-distribution, and SAE probes do.
+Their scorecards expose these information differences; the comparisons do
+not isolate internal access alone. The same-layer Qwen2.5 sparse/dense
+diagnostic has its own logistic-fit settings, reported with that experiment.
+A sparse readout still requires model inference and SAE encoding. We report
+its nonzero readout coefficients, not an end-to-end compute saving.
+
+Balanced-panel AUROC and rare-attack action loss answer different questions.
+The primary deployment cell draws 15 attacks and 1,473 honest solutions with
+replacement, then audits the 29 highest scores. A working backdoor not audited
+counts as one violation. All monitors see the same draw and the same random
+row order before stable score sorting, including for tied scores. The 2,000
+deployment draws describe how a frozen panel behaves at this prevalence and
+budget. Their central 95\% ranges describe population outcomes; they are not
+confidence intervals for mean performance on new source problems.

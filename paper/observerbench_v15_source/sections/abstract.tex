@@ -3,12 +3,13 @@ as steering activations, removing circuits, or enforcing safety boundaries.
 But an internal estimate that is accurate on average can still lead to a poor
 decision when it is used to choose a specific action.
 
-We present \textbf{ObserverBench}, a benchmark framework for testing whether
+We present \textbf{ObserverBench}, a workbench for testing whether
 an internal estimator---an observer---is adequate for the intervention,
 control, or safety task it directs. Each task fixes the model, information
 available to the observer, allowed actions, decision rule, unseen test cases,
-and loss. ObserverBench reports both estimation accuracy and downstream action
-performance. Its rankings are task-specific: observers are compared only
+and loss. The task experiments report both estimation accuracy and downstream
+action performance, with reusable runners and data-only submission interfaces.
+Rankings are task-specific: observers are compared only
 under the same information and action constraints.
 
 Our theory and experiments show three ways these criteria can differ:
@@ -25,7 +26,9 @@ Our theory and experiments show three ways these criteria can differ:
   Qwen APPS panel, a 127-coefficient SAE readout has higher mean audit loss
   than its layer-matched 3,584-coordinate dense control, under a disclosed
   activation-density mismatch (observed $L_0=115$ versus reported $240$):
-  compression without a better decision on that panel.
+  compression without a better decision on that panel. Here compression means
+  fewer readout coefficients, not lower total compute; this is separate from
+  the prediction--action ranking reversals.
 
   \item \textbf{Consequence-aware safety.} Under fixed intervention budgets,
   a score that perfectly separates policy violations can allocate actions

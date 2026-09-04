@@ -25,6 +25,11 @@ Decision-focused learning evaluates a predictor through the downstream decision
 rather than assuming that lower prediction error is enough
 \cite{donti2017task,elmachtoub2022smart}. The same distinction motivates calls
 to judge interpretability by the actions it enables \cite{orgad2026actionable}.
+ObserverBench does not claim that general distinction. It makes a different
+experimental choice: freeze the decision problem and compare interchangeable
+observers within it. The control conditions specify where errors matter for
+an actuator, while the empirical tests ask whether familiar prediction
+metrics select the same observer as the intended action loss.
 AI control evaluates complete safety protocols against strategies chosen by an
 intentionally subversive model, while ControlArena supplies reusable
 environments, monitors, and protocol-level evaluation

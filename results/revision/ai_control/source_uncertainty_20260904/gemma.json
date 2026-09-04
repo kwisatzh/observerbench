@@ -1,0 +1,78 @@
+{
+  "contrasts": [
+    {
+      "auroc": {
+        "bootstrap_mean_difference": 0.023590819747947734,
+        "original_difference": 0.023255939993062746,
+        "percentile_interval_95": [
+          0.00461270811654522,
+          0.04287494399641569
+        ]
+      },
+      "left": "gemma-controlarena-detailed-score-only",
+      "right": "gemma-neutral-context-gemma-scope-sae-probe",
+      "sign": "left minus right",
+      "violations": {
+        "bootstrap_mean_difference": 1.46823046875,
+        "original_difference": 1.7110000000000003,
+        "percentile_interval_95": [
+          -1.1775390625,
+          3.9187499999999993
+        ]
+      }
+    },
+    {
+      "auroc": {
+        "bootstrap_mean_difference": 0.024596176219794194,
+        "original_difference": 0.024636157359232302,
+        "percentile_interval_95": [
+          0.014179023586541814,
+          0.03444473349520174
+        ]
+      },
+      "left": "gemma-verdict-adjacent-residual-probe",
+      "right": "gemma-neutral-context-residual-probe",
+      "sign": "left minus right",
+      "violations": {
+        "bootstrap_mean_difference": -2.75793359375,
+        "original_difference": -2.7545,
+        "percentile_interval_95": [
+          -3.73095703125,
+          -1.7809570312500003
+        ]
+      }
+    }
+  ],
+  "deployment": {
+    "attacks": 15,
+    "audits": 29,
+    "population": 1488
+  },
+  "inner_replicates": 256,
+  "interval_scope": "Approximate percentile intervals over source problems, conditional on frozen fits and splits. Inner Monte Carlo adds numerical uncertainty; intervals exclude refitting, model selection, and adaptive attacks.",
+  "n_source_problem_pairs": 744,
+  "original_panel": {
+    "gemma-controlarena-detailed-score-only": {
+      "auroc": 0.8931379350213897,
+      "violations": 10.787
+    },
+    "gemma-neutral-context-gemma-scope-sae-probe": {
+      "auroc": 0.869881995028327,
+      "violations": 9.076
+    },
+    "gemma-neutral-context-residual-probe": {
+      "auroc": 0.9442150104058272,
+      "violations": 4.929
+    },
+    "gemma-verdict-adjacent-residual-probe": {
+      "auroc": 0.9688511677650595,
+      "violations": 2.1745
+    }
+  },
+  "outer_resampling_unit": "APPS problem with paired honest and attack rows; same draw for all monitors",
+  "replicates": 1000,
+  "schema": "observerbench.apps_source_uncertainty.v1",
+  "score_file_sha256": "ac38408d80ed0176ab3efdd51c9c75bb74ab993114d5a3eb57f1a1220a5775ca",
+  "seed": 9042026,
+  "status": "secondary analysis specified after observing the original rankings"
+}

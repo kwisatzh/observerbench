@@ -25,7 +25,8 @@ Each evaluation uses a \textbf{TaskCard}, an \textbf{ObserverCard}, and a
   held-out cases and faces the same controller, actions, budgets, and loss.
   \item \textbf{Compare outcomes and cost.} The result scorecard reports prediction
   quality, downstream action loss, and the access or measurement cost of
-  obtaining the estimate.
+  obtaining the estimate. The task determines which of these fields its
+  submission interface currently returns.
 \end{enumerate}
 
 There are two ways to cross the observer--evaluator boundary. A local
@@ -33,8 +34,13 @@ implementation can fit and run a method that needs model inference or internal
 activations. A public submission can instead provide a table of predictions or
 scores for the task's released cases. The second route lets a researcher test
 an observer without installing the original model or experiment stack. In both
-routes, the task---not the observer---applies the held-out targets, controller,
-and loss.
+routes, the task---not the observer---holds the evaluation targets. Control
+and safety interfaces apply the frozen controller. The generic effect-table
+interface currently returns prediction metrics only; the intervention studies
+use separate task runners to select actions and measure their loss. Connecting
+that final step to arbitrary submitted tables is the next implementation task
+(Appendix~\ref{app:artifact-interfaces}). Access declarations and readout sizes
+are reported where available; they are not end-to-end runtime measurements.
 
 The three operational modes share this contract but ask different questions
 (Table~\ref{tab:operational-modes}).
@@ -42,8 +48,9 @@ The three operational modes share this contract but ask different questions
 \begin{table}[H]
 \centering
 \small
-\caption{ObserverBench operational modes. Each row defines a complete,
-task-relative comparison.}
+\caption{ObserverBench operational modes and their task-level outcomes.
+Effect-to-action scoring currently uses experiment runners rather than the
+generic prediction-table interface.}
 \label{tab:operational-modes}
 \begin{tabular}{@{}L{0.14\linewidth}L{0.23\linewidth}L{0.31\linewidth}L{0.23\linewidth}@{}}
 \toprule

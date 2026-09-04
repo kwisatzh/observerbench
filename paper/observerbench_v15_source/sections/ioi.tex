@@ -151,6 +151,10 @@ variation hidden by the mean. Therefore
 \label{eq:dispersion}
 R_t(m)=|\mu(m)-t|+J_t(m).
 \end{equation}
+This is Jensen's inequality written for the task's absolute loss, not a new
+inequality. Here $J_t$ is not variance: it depends on the target and the
+response distribution. Estimating it need not be cheaper than estimating
+$R_t$ directly.
 The interaction-aware observers choose masks whose averages are closer to the
 target, but those masks vary more across prompts. The second effect cancels the
 first. Even perfect knowledge of each mask's test-set mean chooses the

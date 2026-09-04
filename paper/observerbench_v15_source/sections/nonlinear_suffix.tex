@@ -61,6 +61,13 @@ We run two tests with 12 independently trained models per target family:
   additive control.
 \end{itemize}
 
+The true target in these rollouts is the output of the rerun Transformer
+suffix, not a separate fitted linear probe. Measuring $g_T$ and checking final
+error therefore use target access. This validates a diagnostic under known
+ground truth; it does not give an observer a safety certificate when the true
+target is unavailable. Appendix~\ref{app:protocol-details} gives the training,
+probe, and rollout settings.
+
 Integrated squared tracking error counts error across the full trajectory, not
 only at the final step, and uncertainty is measured across the 12 independently
 trained models, not across the many conditions within each model. None of the

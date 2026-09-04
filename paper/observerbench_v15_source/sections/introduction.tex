@@ -38,7 +38,7 @@ a set of fixed, reusable tasks that makes these operational distinctions
 measurable. Each task pins the model, information available to the observer,
 allowed interventions, controller, measurement budget, held-out test cases,
 and loss. Every observer faces the same controller and evaluation harness
-within a task. The evaluator reports two outcomes separately: how accurately
+within a task. The task experiments report two outcomes separately: how accurately
 the observer predicts its target and how much loss its chosen action incurs on
 held-out cases.
 
@@ -52,6 +52,15 @@ monitor inside it. AI-control evaluations ask the complementary, harder
 question of whether the complete protocol remains safe when an adaptive model
 tries to subvert it \cite{greenblatt2024aicontrol}. A monitor that performs
 well here must still pass that end-to-end test.
+
+The general distinction between prediction and decision quality is established
+in decision-focused learning and in traffic engineering
+\cite{donti2017task,elmachtoub2022smart,roughan2003te}. Our contribution has
+three parts: a contract that freezes the decision problem and compares
+interchangeable observers within it; control conditions that identify where
+an observer must be correct; and empirical findings about intervention and
+safety decisions. These findings remain useful independently of the software.
+The workbench lets others test whether they persist with different observers.
 
 An ObserverBench evaluation makes five choices explicit. It states the
 \emph{target}: an internal state, an intervention's average effect, or perhaps
@@ -79,7 +88,9 @@ and safety triage---summarized in Sec.~\ref{sec:artifact}.
 \begin{itemize}[itemsep=0.2em,topsep=0.3em]
   \item \textbf{An extensible evaluation workbench.} Versioned task and
   observer cards support local implementations and table-based submissions
-  under one common evaluator (Sec.~\ref{sec:artifact}).
+  under declared task contracts. Control and safety interfaces score actions;
+  the generic effect-table interface scores prediction error, while separate
+  experiment runners evaluate the chosen intervention (Sec.~\ref{sec:artifact}).
 
   \item \textbf{A formal adequacy test for control.} For linear readouts with
   an offset, an observer needs to match the target only at the starting point
@@ -96,7 +107,9 @@ and safety triage---summarized in Sec.~\ref{sec:artifact}.
   Qwen aggregate \cite{wang2023ioi,olsson2022induction,qwen2024qwen25}. In the
   Qwen2.5 safety task, a same-checkpoint sparse SAE readout uses far fewer
   coefficients yet incurs more escaped attacks under a disclosed
-  activation-density mismatch: \emph{compression without a better decision}
+  activation-density mismatch: \emph{compression without a better decision}.
+  This is a readout-sparsity result, not a runtime saving or another reversal
+  between prediction and action rankings
   (Secs.~\ref{sec:phase7-confirmation}, \ref{sec:qwen-induction}, and
   \ref{sec:safety}) \cite{kantamneni2025saeprobes}.
 

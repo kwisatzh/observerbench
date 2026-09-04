@@ -28,8 +28,10 @@ fixed, and changing both identifies only the combined system.
 An observer need not be correct on every possible model state. It needs to be
 correct on the states that the allowed interventions can reach. To state this
 concretely, suppose an activation has three coordinates but the controller can
-move only the first two. A wrong coefficient on the third coordinate cannot
-affect this controller. A wrong coefficient on the first can.
+move only the first two. First calibrate the observer to agree with the target
+at the starting state. It then needs to predict changes along the first two
+coordinates; the third stays fixed. Without that initial calibration, a wrong
+coefficient on the unchanged coordinate can still bias every action.
 
 To state the same idea precisely, consider an affine---linear plus an
 offset---target and observer:
@@ -46,7 +48,8 @@ directions. From $h_0$, the controller can reach only
 \mathcal U=\operatorname{span}(B).
 \]
 The observer only has to match the target on this reachable set. With one fixed
-direction $d$, this means that its error along $d$ must be zero.
+direction $d$, this requires both a correct starting estimate and a correct
+response to movement along $d$.
 
 \begin{proposition}[Reachable-subspace adequacy]
 \label{prop:reachable}
@@ -72,8 +75,11 @@ $\delta_0=0$ and $B^\top\delta_\beta=0$, which is equivalent to
 $P_{\mathcal U}\delta_\beta=0$.
 \end{proof}
 
-With one fixed direction $d$, Proposition~\ref{prop:reachable} reduces adequacy
-to $(\beta_T-\beta_E)^\top d=0$.
+With one fixed direction $d$, Proposition~\ref{prop:reachable} requires
+$\delta_0=0$ and $(\beta_T-\beta_E)^\top d=0$.
+The algebra is standard affine feedback analysis. Its role here is to turn
+these two requirements into a concrete test of an observer, not to introduce
+a new general control theorem.
 
 \subsection{Why a convergent observer can still miss the target}
 
