@@ -58,12 +58,12 @@ The paper makes bounded claims:
   \Needspace{4\baselineskip}
   \item \textbf{Artifact.} \emph{Scope:} The release provides checked control,
   finite-effect, and safety interfaces, but it is not yet a general task
-  ecosystem. The generic effect-table evaluator scores predictions; separate
-  task runners produce the paper's action-loss results. Readout coefficient
+  ecosystem. The IOI decision replay connects submitted effect tables to
+  action choice and loss, including published AtP rows. It uses public stored
+  responses, not a sealed test or independent replication. Readout coefficient
   counts do not include SAE encoding or model inference.
-  \emph{Next test:} connect submitted effects to the frozen action selector,
-  return action loss against no-op and reference observers, run AtP through
-  that complete path, and measure end-to-end observer costs.
+  \emph{Next test:} extend this decision-scoring boundary to another task,
+  evaluate independently refit observers, and measure end-to-end observer costs.
 \end{itemize}
 
 \Needspace{12\baselineskip}

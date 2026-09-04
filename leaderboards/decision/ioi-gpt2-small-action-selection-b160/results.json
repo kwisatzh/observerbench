@@ -1,0 +1,111 @@
+{
+  "metric_direction": {
+    "action_loss": "lower",
+    "action_loss_t0.5": "lower",
+    "action_loss_t1.5": "lower",
+    "excess_loss_over_noop": "lower",
+    "mae": "lower"
+  },
+  "noop_loss_by_target": {
+    "0.5": 0.5,
+    "1.0": 1.0,
+    "1.5": 1.5
+  },
+  "participation_class": "open_replay",
+  "primary_target": 1.0,
+  "rows": [
+    {
+      "access_regime": "frozen forward intervention measurements",
+      "display_name": "Additive finite-effect ridge",
+      "measurement_budget": 160,
+      "metrics": {
+        "action_loss": 0.9716042436659336,
+        "action_loss_t0.5": 1.0532364122569562,
+        "action_loss_t1.5": 1.0239643312990665,
+        "excess_loss_over_noop": -0.028395756334066435,
+        "mae": 0.48595756725242917
+      },
+      "observer_family": "first-order finite-effect predictor",
+      "observer_name": "ioi-additive-ridge",
+      "requires_white_box_access": false,
+      "result_status": "decision-tested open replay; secondary analysis",
+      "source_result": "results/revision/ioi_decision_replay_v1/additive/decision_evaluation.json",
+      "source_sha256": "a75ed90f8e40f3c0ed9a04afd693953338c0f882104bf48dc46dc13667276ccb",
+      "task_id": "ioi-gpt2-small-action-selection@phase5-noop-v1-b160"
+    },
+    {
+      "access_regime": "frozen forward intervention measurements",
+      "display_name": "All-pairs finite-effect ridge",
+      "measurement_budget": 160,
+      "metrics": {
+        "action_loss": 1.0215677600353956,
+        "action_loss_t0.5": 1.0176696451380849,
+        "action_loss_t1.5": 1.0064963147044181,
+        "excess_loss_over_noop": 0.021567760035395622,
+        "mae": 0.39454780135474377
+      },
+      "observer_family": "interaction-aware finite-effect predictor",
+      "observer_name": "ioi-count-plus-all-pairs-ridge",
+      "requires_white_box_access": false,
+      "result_status": "decision-tested open replay; secondary analysis",
+      "source_result": "results/revision/ioi_decision_replay_v1/all_pairs/decision_evaluation.json",
+      "source_sha256": "2b72378e2f30ce61d6876640227b4e127fa9ce28202e3bebcbe468ca10166b09",
+      "task_id": "ioi-gpt2-small-action-selection@phase5-noop-v1-b160"
+    },
+    {
+      "access_regime": "white-box gradients plus frozen finite calibration measurements",
+      "display_name": "Scalar-calibrated attribution patching",
+      "measurement_budget": 160,
+      "metrics": {
+        "action_loss": 0.9995061671361327,
+        "action_loss_t0.5": 0.9722735788673162,
+        "action_loss_t1.5": 1.1143924120813609,
+        "excess_loss_over_noop": -0.0004938328638672829,
+        "mae": 0.6315642766701117
+      },
+      "observer_family": "published attribution-patching baseline",
+      "observer_name": "ioi-attribution-patching-scalar-calibrated",
+      "requires_white_box_access": true,
+      "result_status": "decision-tested open replay; secondary analysis",
+      "source_result": "results/revision/ioi_decision_replay_v1/atp_calibrated/decision_evaluation.json",
+      "source_sha256": "25e77f81403ee6d2d2185fa7cc22e1074d4cec38652377164461847f50f9f24a",
+      "task_id": "ioi-gpt2-small-action-selection@phase5-noop-v1-b160"
+    },
+    {
+      "access_regime": "white-box gradients over 192 public training prompts",
+      "display_name": "Raw attribution patching",
+      "measurement_budget": 160,
+      "metrics": {
+        "action_loss": 0.9464705429971219,
+        "action_loss_t0.5": 1.074557850509882,
+        "action_loss_t1.5": 1.092542002722621,
+        "excess_loss_over_noop": -0.053529457002878145,
+        "mae": 0.6624302038772271
+      },
+      "observer_family": "published attribution-patching baseline",
+      "observer_name": "ioi-attribution-patching-raw",
+      "requires_white_box_access": true,
+      "result_status": "decision-tested open replay; secondary analysis",
+      "source_result": "results/revision/ioi_decision_replay_v1/atp_raw/decision_evaluation.json",
+      "source_sha256": "3684a63c71524dad6de6736b071e109668d0ca59370aed60368d5640a749d596",
+      "task_id": "ioi-gpt2-small-action-selection@phase5-noop-v1-b160"
+    },
+    {
+      "access_regime": "none",
+      "display_name": "Exact no-op",
+      "measurement_budget": 0,
+      "metrics": {
+        "action_loss": 1.0,
+        "action_loss_t0.5": 0.5,
+        "action_loss_t1.5": 1.5,
+        "excess_loss_over_noop": 0.0
+      },
+      "observer_family": "Analytic action reference; no predictions or measurements required",
+      "observer_name": "analytic_noop",
+      "result_status": "reference; exact no-op",
+      "task_id": "ioi-gpt2-small-action-selection@phase5-noop-v1-b160"
+    }
+  ],
+  "schema_version": "observerbench.decision_leaderboard.v1",
+  "task_id": "ioi-gpt2-small-action-selection@phase5-noop-v1-b160"
+}

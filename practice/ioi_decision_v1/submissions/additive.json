@@ -1,0 +1,15 @@
+{
+  "access_regime": "frozen forward intervention measurements",
+  "fit_procedure": "frozen Phase 5 ridge fit on 160 train-prompt calibration masks",
+  "implementation": "observerbench.tasks.ioi.phase5_analysis.fit_phase5_observers",
+  "known_failure_modes": [],
+  "measurement_basis": "canonical 13-head IOI ablation panel",
+  "metadata": {
+    "prediction_estimand": "mean_finite_effect",
+    "prediction_task_id": "ioi-gpt2-small-finite-effects@phase5-test-v1-b160"
+  },
+  "observer_family": "first-order finite-effect predictor",
+  "observer_name": "ioi-additive-ridge",
+  "observer_version": "1.0.0",
+  "schema_version": "observerbench.effect_observer_card.v0"
+}

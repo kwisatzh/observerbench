@@ -89,8 +89,9 @@ and safety triage---summarized in Sec.~\ref{sec:artifact}.
   \item \textbf{An extensible evaluation workbench.} Versioned task and
   observer cards support local implementations and table-based submissions
   under declared task contracts. Control and safety interfaces score actions;
-  the generic effect-table interface scores prediction error, while separate
-  experiment runners evaluate the chosen intervention (Sec.~\ref{sec:artifact}).
+  the IOI decision replay also takes a submitted effect table through the
+  fixed action rule and returns loss against reference observers and no-op,
+  without loading the model (Sec.~\ref{sec:artifact}).
 
   \item \textbf{A formal adequacy test for control.} For linear readouts with
   an offset, an observer needs to match the target only at the starting point

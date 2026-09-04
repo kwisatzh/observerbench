@@ -1,0 +1,22 @@
+Observer: ioi-attribution-patching-raw
+Task: ioi-gpt2-small-action-selection@phase5-noop-v1-b160
+Open replay: not a sealed leaderboard submission.
+Prediction MAE: 0.6624
+Target 0.5: action loss 1.0746; no-op 0.5000; excess +0.5746
+  versus additive: +0.0213 [-0.2552, +0.2976] (negative favors submission)
+  versus all_pairs: +0.0569 [-0.1132, +0.2286] (negative favors submission)
+  versus atp_calibrated: +0.1023 [-0.0010, +0.2350] (negative favors submission)
+  versus atp_raw: +0.0000 [+0.0000, +0.0000] (negative favors submission)
+  versus analytic_noop: +0.5746 [+0.4096, +0.7455] (negative favors submission)
+Target 1: action loss 0.9465; no-op 1.0000; excess -0.0535
+  versus additive: -0.0251 [-0.2037, +0.1252] (negative favors submission)
+  versus all_pairs: -0.0751 [-0.2629, +0.1006] (negative favors submission)
+  versus atp_calibrated: -0.0530 [-0.2028, +0.0764] (negative favors submission)
+  versus atp_raw: +0.0000 [+0.0000, +0.0000] (negative favors submission)
+  versus analytic_noop: -0.0535 [-0.1349, +0.0356] (negative favors submission)
+Target 1.5: action loss 1.0925; no-op 1.5000; excess -0.4075
+  versus additive: +0.0686 [-0.0834, +0.2084] (negative favors submission)
+  versus all_pairs: +0.0860 [-0.0524, +0.2329] (negative favors submission)
+  versus atp_calibrated: -0.0219 [-0.0650, +0.0000] (negative favors submission)
+  versus atp_raw: +0.0000 [+0.0000, +0.0000] (negative favors submission)
+  versus analytic_noop: -0.4075 [-0.5226, -0.2751] (negative favors submission)

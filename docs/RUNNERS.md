@@ -43,6 +43,21 @@ observerbench run trained_ctl2 \
 
 ## Pick the boundary that matches your method
 
+### Score a published observer as a decision-maker
+
+The [IOI decision replay](../practice/ioi_decision_v1/README.md) connects the
+existing mean-effect CSV format to a frozen action rule. Start with:
+
+```bash
+python examples/ioi_decision_submission.py
+```
+
+It scores scalar-calibrated attribution patching and returns prediction error,
+selected masks, action loss, and paired comparisons with four reference
+observers and no-op. Supply `--predictions` and `--observer-card` to test your
+own method. Only NumPy, pandas, and Matplotlib are needed; no model is loaded.
+This is an open replay with public responses, not a sealed public submission.
+
 ### I already have scores
 
 You do not need a runner. Produce one score per frozen query and an
@@ -66,6 +81,9 @@ observerbench evaluate-effect-csv <name@version> \
 
 The full schema and Python `fit`/`predict` boundary are in
 [EFFECT_PREDICTION_CONTRACT.md](EFFECT_PREDICTION_CONTRACT.md).
+The generic command above returns prediction metrics. For the IOI action task,
+use `evaluate-ioi-decision-csv` with the task ID and pack in the
+[replay guide](../practice/ioi_decision_v1/README.md), or use the example above.
 
 ### I have a safety monitor
 

@@ -1,0 +1,20 @@
+{
+  "access_regime": "160 train-prompt finite calibration effects; white-box gradients declared separately",
+  "estimand": "mean_finite_effect",
+  "evaluation_split": "test",
+  "intervention_family": "template-conditioned final-token mean ablation",
+  "known_scope_limits": [],
+  "measurement_design": "160 calibration masks; 320 held-out candidate masks",
+  "metadata": {},
+  "model_or_substrate": "GPT-2-small (124M parameters)",
+  "primary_metrics": [
+    "mae",
+    "rmse"
+  ],
+  "schema_version": "observerbench.effect_task_card.v0",
+  "summary": "Frozen GPT-2-small IOI mean-effect prediction, paired with a separate action contract",
+  "task_name": "ioi-gpt2-small-finite-effects",
+  "task_version": "phase5-test-v1-b160",
+  "train_split": "train",
+  "validation_target": "mean response over 256 held-out prompts"
+}

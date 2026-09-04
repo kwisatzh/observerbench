@@ -48,6 +48,7 @@ def _task_id(row: dict[str, Any], fallback: str) -> str:
 
 def _title(task_id: str, panel: str) -> str:
     known = {
+        "ioi-gpt2-small-action-selection-b160": "GPT-2-small (124M) IOI — action loss at target 1 (open replay)",
         "qwen-paired-scope-v0": "Qwen2.5-7B-Instruct authorization triage",
         "qwen-paired-scope-v1": "Qwen2.5-7B-Instruct authorization triage — public v1",
         "controlarena-apps-qwen-v1": "Qwen2.5-7B-Instruct APPS verified-backdoor monitoring",
@@ -174,7 +175,7 @@ def _copy_leaderboards(repo_root: Path, output: Path) -> list[dict[str, Any]]:
                 "task_id": task_id,
                 "panel": panel,
                 "row_count": len(rows),
-                "status": "checked baseline panel",
+                "status": "open replay; not sealed" if payload.get("participation_class") == "open_replay" else "checked baseline panel",
                 "primary_metric": primary,
                 "metric_directions": directions,
                 "available_metrics": list(directions),

@@ -33,13 +33,13 @@
 
   function isReference(row) {
     const status = String(row.result_status || "").toLowerCase();
-    return status.includes("oracle") || status.includes("evaluator-only bound") || status.includes("reference bound");
+    return status.includes("oracle") || status.includes("evaluator-only bound") || status.includes("reference bound") || status.includes("exact no-op");
   }
 
   function statusClass(row) {
     if (isReference(row)) return "reference";
     const status = String(row.result_status || "").toLowerCase();
-    if (status.includes("post-outcome") || status.includes("bounded")) return "secondary";
+    if (status.includes("post-outcome") || status.includes("bounded") || status.includes("open replay")) return "secondary";
     return "checked";
   }
 

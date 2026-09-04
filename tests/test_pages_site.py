@@ -17,6 +17,17 @@ SPEC.loader.exec_module(BUILD_SITE)
 
 
 class BuildSiteTest(unittest.TestCase):
+    def test_ioi_decision_replay_is_a_separate_action_panel(self) -> None:
+        path = ROOT / "leaderboards/decision/ioi-gpt2-small-action-selection-b160/results.json"
+        payload = json.loads(path.read_text())
+        self.assertEqual(payload["participation_class"], "open_replay")
+        self.assertEqual(payload["primary_target"], 1.0)
+        self.assertEqual(BUILD_SITE._primary_metric(payload["metric_direction"]), "action_loss")
+        self.assertEqual(len(payload["rows"]), 5)
+        noop = next(row for row in payload["rows"] if row["observer_name"] == "analytic_noop")
+        self.assertEqual(noop["metrics"]["action_loss"], 1.0)
+        self.assertNotIn("mae", noop["metrics"])
+
     def test_public_paper_is_packaged_and_linked(self) -> None:
         paper = ROOT / "site" / "downloads" / "observerbench.pdf"
         self.assertGreater(paper.stat().st_size, 100_000)

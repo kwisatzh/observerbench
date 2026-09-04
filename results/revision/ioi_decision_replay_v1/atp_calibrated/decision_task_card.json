@@ -1,0 +1,105 @@
+{
+  "bootstrap_repeats": 2000,
+  "bootstrap_seed": 20260904,
+  "files": {
+    "calibration_measurements.csv": "59300a2eaaca33ca3b5dfb6d7cd0cd4a22617244986512fc325011f138dbcf8e",
+    "prompt_clusters.csv": "2be5ec173095dfbc1062b7a779815ce6363ea724bbc1cd18f9558cad553ea459",
+    "queries.csv": "156e4f3c2d6571206ce6f6403669ac857c3e351a9adfa77db7d4ac9ba22d64e0",
+    "responses.npz": "47cf27269f4df62da498d7e0fd4dafc70e638e6427a1085f1954308ddf60429d",
+    "submissions.json": "ad59d428e5f37914551b137bb9bcf6ef67202f1ae189cf39902b917e662b3eca",
+    "submissions/additive.csv": "da53e06abaa2ad6db54b3760f50d31bce7f42ffe607effb5443c9bd363a3af22",
+    "submissions/additive.json": "c595943812769a0eef35c05f62c61493026e6509f1c02f3e87a5ae286156553c",
+    "submissions/all_pairs.csv": "bd075b9f842aecfaf1b632c134879921a213ba259f9add03bd04b17d90424f12",
+    "submissions/all_pairs.json": "cf104eb898cd90ec509d1b253b0dfcc91d42696fda6f9996410fbd435a24aba7",
+    "submissions/atp_calibrated.csv": "1555e084c258e668d518f19b7db2a048d8e498e6960e4fac38a55f5714c86575",
+    "submissions/atp_calibrated.json": "7c330f6afd35b3d3e8c58276e34698b58d86f54b4f5b4d57626f8b9f6f6e0827",
+    "submissions/atp_raw.csv": "65b20085072b588a3e1bffabbdcd07fe5cb0abb0d1f11c2c1be17e907d125464",
+    "submissions/atp_raw.json": "f6121fcc780e821650b85b091c545e4983dedd1a7db7728afca78e37acd54a28"
+  },
+  "include_noop": true,
+  "information_boundary": "160 train-prompt finite calibration effects; white-box gradients declared separately",
+  "loss": "mean absolute distance from target, over held-out prompts and ten equally weighted action pools",
+  "model": "GPT-2-small (124M parameters)",
+  "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+  "n_prompts": 256,
+  "n_queries": 320,
+  "n_source_clusters": 107,
+  "participation_class": "open_replay",
+  "pool_sizes": {
+    "candidate_pool_00": 32,
+    "candidate_pool_01": 32,
+    "candidate_pool_02": 32,
+    "candidate_pool_03": 32,
+    "candidate_pool_04": 32,
+    "candidate_pool_05": 32,
+    "candidate_pool_06": 32,
+    "candidate_pool_07": 32,
+    "candidate_pool_08": 32,
+    "candidate_pool_09": 32
+  },
+  "prediction_task_id": "ioi-gpt2-small-finite-effects@phase5-test-v1-b160",
+  "primary_target": 1.0,
+  "references": {
+    "additive": {
+      "display_name": "Additive finite-effect ridge",
+      "predictions": "submissions/additive.csv"
+    },
+    "all_pairs": {
+      "display_name": "All-pairs finite-effect ridge",
+      "predictions": "submissions/all_pairs.csv"
+    },
+    "atp_calibrated": {
+      "display_name": "Scalar-calibrated attribution patching",
+      "predictions": "submissions/atp_calibrated.csv"
+    },
+    "atp_raw": {
+      "display_name": "Raw attribution patching",
+      "predictions": "submissions/atp_raw.csv"
+    }
+  },
+  "schema": "observerbench.ioi_decision_replay.v1",
+  "scope": "Secondary open replay of the original Phase 5 panel with exact no-op added. Not the later Phase 7 confirmation, not an independent replication, and not a sealed score. All three existing targets are reported; target 1 is the display target. No model inference or refitting occurs.",
+  "selector": "absolute_mean_error_then_head_count_then_mask_id",
+  "source_files": {
+    "results/revision/phase05/design/candidate_masks.csv": "a1be51ceab178828b6dd6308a89ac56be7e94f6259b3864974e3e5c8a23c37e1",
+    "results/revision/phase05/design/prompts.csv": "20ba51d8a0464f23949ebb4a27aa29658a7504da42c1fb1743f5aa194cf1c92b",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0000_0016.csv": "c4d88a0be0a359190d268a8d6fb6bc3629c12a1ae2e6ef52c175df9d47e581a5",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0016_0032.csv": "2f367071271283c59de8f0ed3efef5b1b247a27b28a6c794a77a192f7dea5b50",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0032_0048.csv": "eabd71223621cac75ba0ec53502e3afcdb4cce1a0feaa04720b82c0a84d04f6b",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0048_0064.csv": "94600f53f24b2ba9153cba7a2d4cdc31b032a2c0709f20b76faad4f7547c6659",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0064_0080.csv": "b0bc4820534ab5211eda4112a61697043583ff4a16394b826756c9e6b226c2ee",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0080_0096.csv": "c16e9f6f390cf778e8db0d14a1aebaee0c20701b1c362c37a804493b8425f4a6",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0096_0112.csv": "c3553114f2ba9bef62fb9a1702ec2ccdf522b4a33e597f9412ee716faf8bb003",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0112_0128.csv": "963104b23f36aac015688491e024fd90bce07cb207e262172e571b08a7eedd79",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0128_0144.csv": "1b722bcba852e9c6a114d42816767186c16021d193494e7a186e632194b41aba",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0144_0160.csv": "cfe36b8b83daff28090a8c05fb8b9d5519f1ab4e02facbb0cdb4799c09bb798a",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0160_0176.csv": "5f1612584a83288cb42bc904d261a391f0becdca607d3c2983c94d7807fb98b2",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0176_0192.csv": "2fb5510a3503ef02b079289677fed969e1fbbd22670e75572c9ffb0d136e6c3f",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0192_0208.csv": "2df5f67ff6fa9c0759015494a78d80bc519b4d77e102ec014bb5a59cb10313b1",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0208_0224.csv": "79d5d2e817f726ea224ad30bcc0196d282ec7feb7f019e325987c917c7ed70e8",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0224_0240.csv": "0546e439e825c2b6e07d01e5b7e25550a24bdaa9892431078749800795654a31",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0240_0256.csv": "295aadfa3c1802ec31ff37308de8ba5ecc8e4b644d30652452f72f10ad1a3660",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0256_0272.csv": "c2e8517f2f0f9781418eeadce92290cd8f6f701c6b3dc5a53e8905e741c90d1f",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0272_0288.csv": "dda1c555866080259e99c880f91ff424463e3fd82e531c507851fe0df2263638",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0288_0304.csv": "5c8169445a240e1de1d47b1f688242e0cf450cf2264c3c8e4113f047a22730d4",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0304_0320.csv": "97692acc90fd9c9730f3ae262446329d348b7fe5c85db0c4aca1d207dd1f92a1",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0320_0336.csv": "4b27311ff932210c9b536ec4f1a7e9b2d4593d8a19335ac7e51d61060f4793cc",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0336_0352.csv": "825f757df47480093468c6254c857a2aadce00da84576ab6c3371993ba7724c3",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0352_0368.csv": "0589b703a58f3a631488f3566042a4db77c27554cf02041a6696216d2ed81b68",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0368_0384.csv": "30e936c581d057eecd3ab846a6c17d0ad647d3786e601e5a045f57516339148a",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0384_0400.csv": "b9d4bded527ec0ea1d41687b3fe590c76c2ce17b1a07aa00fce0658647357f04",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0400_0416.csv": "02d5279418a39814172cc2300faa7237c159c25c9ee483bb039a8c37de9a5f7a",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0416_0432.csv": "969e5ec707d541312bb7993d0d6afcdc3ea70fa75f7452fe38b201e5d1dda1e9",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0432_0448.csv": "ad774461924fed7d2667be686ba5eff8714c364589555b580fcc217d44abe0b5",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0448_0464.csv": "c1729d80804a608bad880c181822b8967059bbfef4793605c3b22c21a4ced992",
+    "results/revision/phase05/ioi_effects/shards/test/effects_0464_0480.csv": "c29d4b44fb8a51c3307026d3f87953dd972306770fbb749904441e307b037db6",
+    "results/revision/phase05/ioi_fit/candidate_predictions.csv": "b9853631d45fa45cc56ecef9afac4000cb359ffd76c923a05363f64e567ff4d6"
+  },
+  "targets": [
+    0.5,
+    1.0,
+    1.5
+  ],
+  "task_id": "ioi-gpt2-small-action-selection@phase5-noop-v1-b160",
+  "uncertainty": "95% paired percentile intervals resampling unordered-name-pair clusters and candidate pools independently; frozen fits and selections, not independent refits"
+}

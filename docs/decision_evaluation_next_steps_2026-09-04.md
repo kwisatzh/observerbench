@@ -1,7 +1,7 @@
 # Decision evaluation: next steps
 
-Date: September 4, 2026. This is an implementation checklist, not a claim that
-the capabilities below are already available.
+Date: September 4, 2026. Checked items are implemented; unchecked items remain
+future work. The IOI replay is available now and does not require new inference.
 
 ## Make an outside submission a complete decision test
 
@@ -12,22 +12,22 @@ prompt/mask pairs). No additional model measurements are needed. Exact no-op
 has an analytic response of zero. A new decision-evaluation contract can add
 that baseline without rewriting the historical experiment or prediction task.
 
-- [ ] Connect one public effect-prediction task to the existing frozen
-  action-selection runners. The generic CSV evaluator currently reports
-  prediction errors; the paper's action-loss experiments use separate runners.
-- [ ] Declare the submitted quantity: mean effect or expected prompt-level
+- [x] Connect one public effect-prediction task to the existing frozen
+  action-selection rule. `evaluate-ioi-decision-csv` composes the existing IOI
+  selector and paired resampling with the effect-table boundary.
+- [x] Declare the submitted quantity: mean effect or expected prompt-level
   action loss. A mean prediction cannot be silently treated as a loss prediction.
   Start with the existing effect CSV and the frozen mean-selection rule; defer
   a separately typed loss-prediction route until that path works.
-- [ ] Freeze candidate pools, target, exact no-op, selection rule, and tie-breaking
+- [x] Freeze candidate pools, target, exact no-op, selection rule, and tie-breaking
   in the task version. Do not add a threshold after seeing evaluation outcomes.
-- [ ] Return selected action IDs, held-out action loss, excess loss over no-op,
+- [x] Return selected action IDs, held-out action loss, excess loss over no-op,
   differences from named reference observers, prediction metrics, and uncertainty.
-- [ ] Score one published observer (AtP) through that complete path. Preserve
+- [x] Score one published observer (AtP) through that complete path. Preserve
   its mean-effect estimand; label any fitted loss adapter separately.
-- [ ] Supply a CPU-only example: download the task, submit a table, and obtain
+- [x] Supply a CPU-only example: download the task, submit a table, and obtain
   a decision scorecard in one command. Test it from a clean installation.
-- [ ] Separate prediction-only and decision-tested rows on the website. Do not
+- [x] Separate prediction-only and decision-tested rows on the website. Do not
   rank methods from different targets, access boundaries, or task versions together.
 
 ## Make uncertainty and cost part of the returned score
@@ -40,7 +40,7 @@ that baseline without rewriting the historical experiment or prediction task.
 - [ ] Count the whole observer path: model inference, residual extraction,
   SAE encoding, readout, calibration measurements, time, and memory. A sparse
   readout coefficient count is not a runtime or total-compute measurement.
-- [ ] Add failure tests for missing/duplicate action IDs, target mismatch,
+- [x] Add failure tests for missing/duplicate action IDs, target mismatch,
   malformed values, no-op handling, fit/test separation, and tie handling.
 
 ## Extend scope only after the submission path is complete
@@ -68,6 +68,23 @@ that baseline without rewriting the historical experiment or prediction task.
 Finishing these checks would remove concrete objections. No checklist can
 guarantee a reviewer score; broader scientific evidence still requires the
 experiments listed above.
+
+### What the completed IOI path found
+
+The pack contains 320 masks, 256 held-out prompts, 107 name-pair clusters,
+ten pools, and exact no-op. Four existing observers use the same mean-based
+selection rule and report targets 0.5, 1, and 1.5. At target 1, scalar
+calibration improves AtP MAE from 0.662 to 0.632 but its action-loss point
+estimate rises from 0.947 to 0.999; the paired difference interval
+[-0.076, 0.203] includes zero. All four observers lose clearly to no-op at
+target 0.5 and beat it at 1.5. This is a useful decision score, not evidence
+for a stable new observer ranking.
+
+Run `python examples/ioi_decision_submission.py`. The example was checked
+in a fresh environment with only NumPy, pandas, and Matplotlib, without
+Torch, Transformers, or TransformerLens. The original measurement archives
+are unchanged. The task is a post-outcome open replay, not a second Phase 7
+confirmation or a sealed leaderboard route.
 
 ### What the new uncertainty check found
 

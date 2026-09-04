@@ -1,0 +1,6 @@
+observer_name,access_regime,result_status,mae,action_loss_t0.5,action_loss,excess_loss_over_noop,action_loss_t1.5
+ioi-additive-ridge,frozen forward intervention measurements,decision-tested open replay; secondary analysis,0.48595756725242917,1.0532364122569562,0.9716042436659336,-0.028395756334066435,1.0239643312990665
+ioi-count-plus-all-pairs-ridge,frozen forward intervention measurements,decision-tested open replay; secondary analysis,0.39454780135474377,1.0176696451380849,1.0215677600353956,0.021567760035395622,1.0064963147044181
+ioi-attribution-patching-scalar-calibrated,white-box gradients plus frozen finite calibration measurements,decision-tested open replay; secondary analysis,0.6315642766701117,0.9722735788673162,0.9995061671361327,-0.0004938328638672829,1.1143924120813609
+ioi-attribution-patching-raw,white-box gradients over 192 public training prompts,decision-tested open replay; secondary analysis,0.6624302038772271,1.074557850509882,0.9464705429971219,-0.053529457002878145,1.092542002722621
+analytic_noop,none,reference; exact no-op,,0.5,1.0,0.0,1.5

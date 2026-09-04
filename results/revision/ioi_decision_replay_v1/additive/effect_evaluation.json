@@ -1,0 +1,16 @@
+{
+  "contract_version": "observerbench.effect_prediction.v0",
+  "measurement_budget": 160,
+  "metrics": {
+    "mae": 0.48595756725242917,
+    "max_absolute_error": 2.1328651706971247,
+    "mean_error": -0.0402690387798924,
+    "rmse": 0.6038743338697319
+  },
+  "n_queries": 320,
+  "observer_name": "ioi-additive-ridge",
+  "observer_version": "1.0.0",
+  "schema_version": "observerbench.effect_prediction_result.v0",
+  "task_name": "ioi-gpt2-small-finite-effects",
+  "task_version": "phase5-test-v1-b160"
+}

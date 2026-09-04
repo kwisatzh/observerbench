@@ -51,6 +51,7 @@ def build_parser() -> argparse.ArgumentParser:
         "list-effect-tasks",
         help="List exact inference-free finite-effect task versions.",
     )
+    subparsers.add_parser("list-decision-tasks", help="List submission-table decision tasks.")
     subparsers.add_parser(
         "list-safety-tasks",
         help="List exact inference-free safety task versions.",
@@ -108,6 +109,16 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Check required files and schemas but skip SHA-256 verification.",
     )
+
+    decision_parser = subparsers.add_parser(
+        "evaluate-ioi-decision-csv",
+        help="Score an IOI mean-effect table through the frozen action rule (CPU-only open replay).",
+    )
+    decision_parser.add_argument("task_id")
+    decision_parser.add_argument("--pack-dir", required=True, type=Path)
+    decision_parser.add_argument("--predictions", required=True, type=Path)
+    decision_parser.add_argument("--observer-card", required=True, type=Path)
+    decision_parser.add_argument("--outdir", required=True, type=Path)
 
     safety_parser = subparsers.add_parser(
         "evaluate-safety-csv",
@@ -421,6 +432,20 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.outdir,
             verify_hashes=not args.no_verify_hashes,
         )
+    if args.command == "evaluate-ioi-decision-csv":
+        from observerbench.tasks.ioi.decision_submission import evaluate_ioi_decision_csv
+
+        evaluate_ioi_decision_csv(
+            args.task_id, pack_root=args.pack_dir, predictions_path=args.predictions,
+            observer_card_path=args.observer_card, outdir=args.outdir,
+        )
+        print((args.outdir / "scorecard.txt").read_text(), end="")
+        return 0
+    if args.command == "list-decision-tasks":
+        from observerbench.tasks.ioi.decision_submission import TASK_ID
+
+        print(f"{TASK_ID}\tGPT-2-small (124M); CPU-only open replay; mean-effect CSV to action loss")
+        return 0
     if args.command == "evaluate-safety-csv":
         return evaluate_safety_csv(
             args.task_id,

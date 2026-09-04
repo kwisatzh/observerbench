@@ -1,0 +1,68 @@
+\subsection{A submitted effect table now returns an action score}
+\label{app:ioi-decision-replay}
+
+An outside researcher should not have to infer decision quality from an MAE
+table. The IOI decision replay takes the existing effect CSV and ObserverCard,
+chooses actions using the submitted means, and returns their held-out losses.
+It uses only stored measurements, so neither GPT-2 nor the submitted observer
+implementation runs during scoring. The supplied example passes the published
+attribution-patching predictions through exactly this boundary.
+
+\paragraph{The frozen decision.}
+The task version is
+\path{ioi-gpt2-small-action-selection@phase5-noop-v1-b160}.
+It uses the original Phase 5 panel: 160 calibration masks averaged over
+192 training prompts, 320 candidate masks in ten pools, and all 81,920
+candidate responses on 256 held-out prompts. Each pool also includes exact
+no-op, whose response is analytically zero. For each of the existing targets
+$t\in\{0.5,1,1.5\}$, the selector minimizes predicted mean distance to the
+target, breaking ties by fewer heads and then mask ID. Selection never reads
+held-out responses. The same mask then applies to every test prompt in that
+pool. The score averages $|Y_i(m)-t|$ over prompts and pools.
+
+\paragraph{What the researcher receives.}
+The scorecard reports prediction MAE, selected masks, action loss at all three
+targets, excess loss over no-op, and paired comparisons with raw AtP,
+scalar-calibrated AtP, additive ridge, and all-pairs ridge. It also records
+task and prediction hashes, scoring-code hashes, and the software environment.
+Paired 95\% percentile intervals use 2,000 resamples of 107 unordered-name-pair
+clusters and ten pools, with seed 20260904. Every prompt in a sampled cluster
+stays together. Fits and selected actions stay fixed; these intervals do not
+describe uncertainty from refitting an observer.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Observer & Prediction MAE & $R_{0.5}$ & $R_1$ & $R_{1.5}$ \\
+\midrule
+Raw AtP & 0.662 & 1.075 & 0.947 & 1.093 \\
+Scalar-calibrated AtP & 0.632 & 0.972 & 0.999 & 1.114 \\
+Additive ridge & 0.486 & 1.053 & 0.972 & 1.024 \\
+All-pairs ridge & 0.395 & 1.018 & 1.022 & 1.006 \\
+Exact no-op & --- & 0.500 & 1.000 & 1.500 \\
+\bottomrule
+\end{tabular}
+\caption{The same submitted tables scored for prediction and action.
+Lower is better. AtP uses white-box gradients; the fitted ridge observers use
+finite forward measurements. Cached scoring does not imply equal construction
+cost. This secondary open replay is separate from the clean-task confirmation.}
+\label{tab:ioi-decision-replay}
+\end{table}
+
+The point estimates rank prediction and action differently, but do not
+establish a reliable observer ordering at $t=1$. For calibrated minus raw AtP,
+the action-loss difference is $0.053$, with interval $[-0.076,0.203]$.
+None of the four observers establishes a gain over no-op at that target.
+All four lose to no-op at $t=0.5$ and beat it at $t=1.5$ under their paired
+intervals. A researcher therefore leaves with a decision comparison,
+including evidence about whether to act, rather than only a prediction rank.
+
+\paragraph{Replay, not another confirmation.}
+This task was assembled after the original results were known and adds no new
+model measurements. The responses are public so users can obtain local scores;
+those scores are not sealed submissions. The original Phase 5 experiment and
+the later Phase 7 clean-task confirmation keep their own identities. Training
+on this replay's scoring responses would invalidate a held-out claim, even
+though the software could still compute a number.

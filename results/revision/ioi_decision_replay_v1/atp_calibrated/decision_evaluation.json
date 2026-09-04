@@ -1,0 +1,200 @@
+{
+  "access_regime": "white-box gradients on the public train prompts plus frozen finite calibration effects",
+  "by_target": [
+    {
+      "action_loss": 0.9722735788673162,
+      "action_loss_interval_95": [
+        0.8376864909717049,
+        1.1212385726388174
+      ],
+      "excess_loss_over_noop": 0.47227357886731625,
+      "noop_loss": 0.5,
+      "references": {
+        "additive": {
+          "action_loss": 1.0532364122569562,
+          "paired_interval_95": [
+            -0.3132754925072427,
+            0.1496246565807799
+          ],
+          "submission_minus_reference": -0.08096283338963986
+        },
+        "all_pairs": {
+          "action_loss": 1.0176696451380849,
+          "paired_interval_95": [
+            -0.21093576924011506,
+            0.11385045660019436
+          ],
+          "submission_minus_reference": -0.04539606627076864
+        },
+        "analytic_noop": {
+          "action_loss": 0.5,
+          "paired_interval_95": [
+            0.3376864909717049,
+            0.6212385726388174
+          ],
+          "submission_minus_reference": 0.47227357886731625
+        },
+        "atp_calibrated": {
+          "action_loss": 0.9722735788673162,
+          "paired_interval_95": [
+            0.0,
+            0.0
+          ],
+          "submission_minus_reference": 0.0
+        },
+        "atp_raw": {
+          "action_loss": 1.074557850509882,
+          "paired_interval_95": [
+            -0.23499626553562428,
+            0.0009865200892090694
+          ],
+          "submission_minus_reference": -0.10228427164256573
+        }
+      },
+      "selected_noop_pools": 0,
+      "target": 0.5
+    },
+    {
+      "action_loss": 0.9995061671361327,
+      "action_loss_interval_95": [
+        0.8733116028560001,
+        1.139100973643654
+      ],
+      "excess_loss_over_noop": -0.0004938328638672829,
+      "noop_loss": 1.0,
+      "references": {
+        "additive": {
+          "action_loss": 0.9716042436659336,
+          "paired_interval_95": [
+            -0.18996754552173922,
+            0.23438051585598993
+          ],
+          "submission_minus_reference": 0.027901923470199107
+        },
+        "all_pairs": {
+          "action_loss": 1.0215677600353956,
+          "paired_interval_95": [
+            -0.16188358209694487,
+            0.10048487830304201
+          ],
+          "submission_minus_reference": -0.022061592899262905
+        },
+        "analytic_noop": {
+          "action_loss": 1.0,
+          "paired_interval_95": [
+            -0.12668839714399985,
+            0.13910097364365387
+          ],
+          "submission_minus_reference": -0.0004938328638672829
+        },
+        "atp_calibrated": {
+          "action_loss": 0.9995061671361327,
+          "paired_interval_95": [
+            0.0,
+            0.0
+          ],
+          "submission_minus_reference": 0.0
+        },
+        "atp_raw": {
+          "action_loss": 0.9464705429971219,
+          "paired_interval_95": [
+            -0.07640641031272305,
+            0.2027697660525639
+          ],
+          "submission_minus_reference": 0.0530356241390109
+        }
+      },
+      "selected_noop_pools": 0,
+      "target": 1.0
+    },
+    {
+      "action_loss": 1.1143924120813609,
+      "action_loss_interval_95": [
+        0.9999223477410819,
+        1.2395794213850737
+      ],
+      "excess_loss_over_noop": -0.38560758791863914,
+      "noop_loss": 1.5,
+      "references": {
+        "additive": {
+          "action_loss": 1.0239643312990665,
+          "paired_interval_95": [
+            -0.05007058557638866,
+            0.22615536886314702
+          ],
+          "submission_minus_reference": 0.09042808078229428
+        },
+        "all_pairs": {
+          "action_loss": 1.0064963147044181,
+          "paired_interval_95": [
+            -0.01974972877709935,
+            0.24810105047154432
+          ],
+          "submission_minus_reference": 0.10789609737694264
+        },
+        "analytic_noop": {
+          "action_loss": 1.5,
+          "paired_interval_95": [
+            -0.5000776522589181,
+            -0.26042057861492635
+          ],
+          "submission_minus_reference": -0.3856075879186392
+        },
+        "atp_calibrated": {
+          "action_loss": 1.1143924120813609,
+          "paired_interval_95": [
+            0.0,
+            0.0
+          ],
+          "submission_minus_reference": 0.0
+        },
+        "atp_raw": {
+          "action_loss": 1.092542002722621,
+          "paired_interval_95": [
+            0.0,
+            0.06500665145705502
+          ],
+          "submission_minus_reference": 0.02185040935873985
+        }
+      },
+      "selected_noop_pools": 0,
+      "target": 1.5
+    }
+  ],
+  "observer_card_sha256": "7c330f6afd35b3d3e8c58276e34698b58d86f54b4f5b4d57626f8b9f6f6e0827",
+  "observer_name": "ioi-attribution-patching-scalar-calibrated",
+  "observer_version": "1.0.0",
+  "participation_class": "open_replay",
+  "prediction_metrics": {
+    "mae": 0.6315642766701117,
+    "max_absolute_error": 3.1445152930032316,
+    "mean_error": -0.3675572104151679,
+    "rmse": 0.8356492689362269
+  },
+  "prediction_sha256": "1555e084c258e668d518f19b7db2a048d8e498e6960e4fac38a55f5714c86575",
+  "prediction_task_id": "ioi-gpt2-small-finite-effects@phase5-test-v1-b160",
+  "primary_target": 1.0,
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.3.5",
+      "pandas": "2.2.3",
+      "torch": "unknown"
+    },
+    "package_version": "unknown",
+    "python_version": "3.12.14",
+    "source_dirty": true,
+    "source_revision": "6843f976e3c9e0d6832de49a827b51d183e4e027"
+  },
+  "schema_version": "observerbench.ioi_decision_result.v1",
+  "scope": "Secondary open replay of the original Phase 5 panel with exact no-op added. Not the later Phase 7 confirmation, not an independent replication, and not a sealed score. All three existing targets are reported; target 1 is the display target. No model inference or refitting occurs.",
+  "scorer_source_hashes": {
+    "src/observerbench/effect_prediction.py": "38670e17e470a96259edce697130c748c6f3751b788bd9010583856def229537",
+    "src/observerbench/tasks/ioi/decision_submission.py": "2a9d06353b423249f26edd0bb0788527a454165bfdd5d4009650f578289a4334",
+    "src/observerbench/tasks/ioi/phase5_analysis.py": "29be3f52165c6524eb57cf52f8700732ed4bb74d9268b15c3f978fe910c41ae4"
+  },
+  "sealed_score": false,
+  "task_card_sha256": "15bce194c8ff54daf66e1e4078ff61b514ecac0bdcbd39e2b19d943f75d52c93",
+  "task_id": "ioi-gpt2-small-action-selection@phase5-noop-v1-b160",
+  "uncertainty": "95% paired percentile intervals resampling unordered-name-pair clusters and candidate pools independently; frozen fits and selections, not independent refits"
+}

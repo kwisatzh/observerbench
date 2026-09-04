@@ -1,0 +1,23 @@
+{
+  "access_regime": "white-box gradients on the public train prompts plus frozen finite calibration effects",
+  "fit_procedure": "fit one no-intercept scalar gain to the task-supplied finite calibration effects",
+  "implementation": "observerbench.tasks.ioi.attribution_patching.IOIAttributionPatchingBaseline",
+  "known_failure_modes": [
+    "First-order additivity cannot represent interactions between ablated heads.",
+    "The local gradient may not predict a finite mean-replacement intervention.",
+    "The prompt-averaged map does not model prompt-level effect dispersion."
+  ],
+  "measurement_basis": "clean-state gradient dot (head-z minus template-conditioned reference mean), averaged over train prompts in the canonical 13-head IOI basis",
+  "metadata": {
+    "calibration_intercept": 0.0,
+    "effective_gradient_prompts": 192,
+    "fitted_scalar_gain": 0.8475023448769522,
+    "gradient_prompt_split": "train",
+    "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "scalar_calibrated": true
+  },
+  "observer_family": "scalar-calibrated attribution patching",
+  "observer_name": "ioi-attribution-patching-scalar-calibrated",
+  "observer_version": "1.0.0",
+  "schema_version": "observerbench.effect_observer_card.v0"
+}
