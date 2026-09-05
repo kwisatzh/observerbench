@@ -17,6 +17,20 @@ SPEC.loader.exec_module(BUILD_SITE)
 
 
 class BuildSiteTest(unittest.TestCase):
+    def test_every_page_has_one_shared_analytics_tag(self) -> None:
+        beacon = "https://static.cloudflareinsights.com/beacon.min.js"
+        token = '{"token": "babc4e7118744fa6a9f1a18fb87df2eb"}'
+        pages = sorted((ROOT / "site").rglob("*.html"))
+        self.assertTrue(pages)
+        for page in pages:
+            with self.subTest(page=page.relative_to(ROOT)):
+                html = page.read_text(encoding="utf-8")
+                self.assertEqual(html.count(beacon), 1)
+                self.assertEqual(html.count("data-cf-beacon="), 1)
+                self.assertIn(f'<script type="module" src="{beacon}"', html)
+                self.assertIn(f"data-cf-beacon='{token}'", html)
+                self.assertLess(html.index(beacon), html.index("</body>"))
+
     def test_integrity_practice_is_findable_and_scoped(self) -> None:
         home = (ROOT / "site/index.html").read_text(encoding="utf-8")
         runners = (ROOT / "site/runners/index.html").read_text(encoding="utf-8")
