@@ -48,6 +48,19 @@
       <p class="preview-note">The IOI replay returns chosen actions, loss, and paired comparisons with four observers and no-op. All practice tasks have public targets: they provide immediate feedback but do not enter sealed rankings.</p>
     </section>
 
+    <section class="section compact" id="integrity" aria-labelledby="integrity-heading">
+      <div class="section-heading">
+        <div><p class="eyebrow">CPU only · open practice</p><h2 id="integrity-heading">Buy evidence before choosing an action</h2></div>
+        <p>A report may hide a disallowed operation or misstate where an object came from. Spend a limited budget on trusted facts before a fixed controller allows, blocks, or escalates the request.</p>
+      </div>
+      <pre><code>python -m pip install -e .
+make demo-integrity
+make demo-relay</code></pre>
+      <p>Run these from the repository root. Edit the example's measurement-selection and risk-prediction functions to try your own observer. Each run compares it with four baselines and reports loss including inspection cost.</p>
+      <div class="button-row"><a class="button primary" href="https://github.com/kwisatzh/observerbench/blob/main/docs/evidence_integrity.md">Read the task and results</a><a class="button secondary" href="https://github.com/kwisatzh/observerbench/blob/main/examples/evidence_integrity_submission.py">Edit the observer example</a></div>
+      <p class="preview-note">The relay history is scripted and shares the first task's generator. It is not an independent replication or live multi-agent experiment. Public local targets make these practice scores ineligible for sealed rankings.</p>
+    </section>
+
     <section class="section" aria-labelledby="choose-runner-heading">
       <div class="section-heading">
         <div><p class="eyebrow">Choose a boundary</p><h2 id="choose-runner-heading">What does your observer produce?</h2></div>

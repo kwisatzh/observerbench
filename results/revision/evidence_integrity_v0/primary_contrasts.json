@@ -1,0 +1,22 @@
+[
+  {
+    "fraction_better": 1.0,
+    "mean_delta": -0.06205000000000001,
+    "n_independent_generated_seeds": 20,
+    "paired_seed_bootstrap_95": [
+      -0.0708,
+      -0.053849999999999995
+    ],
+    "variant": "pending-operation"
+  },
+  {
+    "fraction_better": 1.0,
+    "mean_delta": -0.06205000000000001,
+    "n_independent_generated_seeds": 20,
+    "paired_seed_bootstrap_95": [
+      -0.0708,
+      -0.053849999999999995
+    ],
+    "variant": "cross-agent-origin"
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "schema": "observerbench.evidence_integrity_study.v0",
+  "status": "locally_specified_before_running_this_study_not_independent_preregistration",
+  "date": "2026-09-04",
+  "variants": ["pending-operation", "cross-agent-origin"],
+  "seeds": [9100, 9101, 9102, 9103, 9104, 9105, 9106, 9107, 9108, 9109, 9110, 9111, 9112, 9113, 9114, 9115, 9116, 9117, 9118, 9119],
+  "fit_examples": 1000,
+  "test_examples": 1000,
+  "concealment_rates": [0.0, 0.5, 1.0],
+  "measurement_fractions": [0.0, 0.02, 0.05, 0.1, 0.25, 1.0],
+  "selectors": ["random", "periodic", "missing-first", "uncertainty-severity"],
+  "primary_concealment_rate": 1.0,
+  "primary_measurement_fraction": 0.1,
+  "primary_contrast": "uncertainty-severity minus random in total cost-adjusted loss",
+  "block_fraction": 0.02,
+  "escalate_fraction": 0.03,
+  "measurement_cost": 0.01,
+  "episode_dependence": "Independent scripted episodes; cross-agent traces are linked within an episode, not autonomous agents. The two variants share the same statistical generator and seed draws: they are semantic views of one test, not independent replications.",
+  "scope": "Inert protocol demonstration. Trusted observations are supplied by the evaluator-owned simulated broker. One-round measurement allocation precedes scoring. This does not test adaptive attackers, live infrastructure, or prove that a system would have prevented the Hugging Face incident. Publish all conditions regardless of direction."
+}

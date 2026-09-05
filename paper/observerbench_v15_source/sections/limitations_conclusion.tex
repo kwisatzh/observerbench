@@ -45,10 +45,13 @@ The paper makes bounded claims:
   bootstrap intervals support the verdict-over-neutral action comparisons,
   but do not settle both sides of the highlighted AUROC--loss reversals. They
   condition on the fitted monitors and do not measure refitting uncertainty.
-  Neither study tests
+  None of these APPS studies tests
   deception or an adaptive attacker. These scorecards compare observers inside
   a fixed audit rule; they do not establish that a complete AI-control protocol
-  remains safe under intentional subversion. \emph{Next test:} use sequential
+  remains safe under intentional subversion. A controlled extension now
+  tests scripted corruptible reports and budgeted trusted observations;
+  its relay interpretation shares the same generator
+  (Appendix~\ref{app:evidence-integrity}). \emph{Next test:} use sequential
   attack trajectories with evaluator-held outcomes and both trusted and
   deliberately corrupted telemetry. Declare who can omit, delay, or spoof each
   view, keep audit and shutdown budgets fixed, and then add monitor-aware

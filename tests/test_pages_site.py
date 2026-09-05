@@ -17,6 +17,16 @@ SPEC.loader.exec_module(BUILD_SITE)
 
 
 class BuildSiteTest(unittest.TestCase):
+    def test_integrity_practice_is_findable_and_scoped(self) -> None:
+        home = (ROOT / "site/index.html").read_text(encoding="utf-8")
+        runners = (ROOT / "site/runners/index.html").read_text(encoding="utf-8")
+        self.assertIn('href="runners/#integrity"', home)
+        self.assertIn('id="integrity"', runners)
+        self.assertIn("make demo-integrity", runners)
+        self.assertIn("make demo-relay", runners)
+        self.assertIn("not an independent replication", runners)
+        self.assertIn("workbench diagnostic, not a paper finding", home)
+
     def test_ioi_decision_replay_is_a_separate_action_panel(self) -> None:
         path = ROOT / "leaderboards/decision/ioi-gpt2-small-action-selection-b160/results.json"
         payload = json.loads(path.read_text())

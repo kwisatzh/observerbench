@@ -116,6 +116,13 @@ scores do not enter the sealed leaderboards.
 | [Safety tutorial](site/try/) | One risk score per request | AUROC, missed harm, clean audits, action loss |
 | [Qwen2.5-7B Copy-v2, budget 40](practice/qwen_copy_v2_b040/README.md) | Any predictor trained on 40 cached interventions | MAE, RMSE, selected-action loss, regret, gain over no-op |
 | [GPT-2-small IOI decision replay](practice/ioi_decision_v1/README.md) | A mean-effect prediction CSV; includes attribution patching | Chosen masks, action loss, paired comparisons with four observers and no-op |
+| [Evidence integrity and cross-agent origin](docs/evidence_integrity.md) | Which trusted observations to buy, then how to score pending operations | Missed severity, clean work retained, measurement cost, total loss |
+
+For an exploratory check, see the [cross-model reuse diagnostic](docs/monitor_transfer.md).
+It tests unchanged coefficients across different architectures, alongside a
+target-only learning curve; it does not demonstrate a benefit from transfer.
+Its aggregate results are available; the original per-example
+caches are not a public practice pack.
 
 To score a published method through the decision rule, run
 `python examples/ioi_decision_submission.py` after installing `numpy pandas

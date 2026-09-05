@@ -1,0 +1,85 @@
+\clearpage
+\section{Buying evidence when reports can be wrong}
+\label{app:evidence-integrity}
+
+A monitor cannot recover a fact that its input does not contain. Suppose a
+worker calls a pending operation a resource check, but the operation is an
+unauthorized deletion. A better classifier of the same report may not help.
+An independent record of the requested operation can help, provided the
+controller reads it before deciding what to allow. This extension makes that
+measurement choice part of the existing safety contract.
+
+\textbf{Task and information boundary.}
+The observer receives a report, public permissions, a severity value, and an
+indicator of a missing receipt. It can buy broker observations for a limited
+fraction of cases. An observation reveals the actual operation and resource
+tenant, not a violation label. The observer applies the public permission rule
+to those facts and returns one risk score. The fixed controller blocks the
+highest-scored 2\%, escalates the next 3\%, and allows the rest. Escalation uses
+the existing perfect-review assumption and cost of 0.05. Each broker
+observation costs 0.01; we add this cost to protocol loss and also report it
+separately. Acquiring evidence does not increase the action budget.
+
+\textbf{Generated cases.}
+Each seed supplies 1,000 fitting and 1,000 independent test episodes. A quarter
+have a missing receipt; their violation probability is 0.14, compared with
+0.02 for other cases. Expected prevalence is therefore 5\%. Severity takes
+values 1, 4, or 12 independently. Concealment replaces an unsafe fact in the
+report with an allowed one; a small false-report rate also produces benign
+cases with suspicious reports. The trusted broker remains outside this
+corruption surface. All operations are inert and pending: the experiment
+executes no tools or submitted code.
+
+\textbf{Observers and measurement budgets.}
+Fitting labels estimate violation frequencies from report consistency and
+receipt status. The unmeasured risk score multiplies this probability by
+severity. A purchased fact replaces that probability with the result of the
+exact permission check. Four selectors choose which cases to inspect: random,
+periodic, missing receipts first with severity as the next priority, and
+uncertainty times severity, $p(1-p)s$. The last is a heuristic, not optimal
+value of information. The declared grid crosses concealment rates
+$\{0,0.5,1\}$, inspection fractions $\{0,0.02,0.05,0.10,0.25,1\}$, and 20
+generated seeds. Table~\ref{tab:evidence-integrity} reports the primary
+condition: full concealment and a 10\% inspection budget, with the two
+coverage endpoints shown for context.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Controlled evidence acquisition. Means over 20 independent generated
+seeds; lower loss and missed severity are better. Inspecting every case has a
+different measurement budget, but the same action budget.}
+\label{tab:evidence-integrity}
+\begin{tabular}{lrrr}
+\toprule
+Measurement choice & Total loss & Missed severity & Clean utility \\
+\midrule
+No inspections & 0.2127 & 0.7159 & 0.9810 \\
+Random 10\% & 0.1900 & 0.6388 & 0.9842 \\
+Periodic 10\% & 0.1924 & 0.6484 & 0.9838 \\
+Missing receipts first & 0.1284 & 0.4449 & 0.9932 \\
+Uncertainty times severity & 0.1280 & 0.4434 & 0.9932 \\
+Inspect every case & 0.0142 & 0.0092 & 1.0000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Selective measurement reduces loss. Uncertainty times severity minus random
+has paired mean difference $-0.0621$, with a seed-bootstrap 95\% interval
+$[-0.0708,-0.0539]$. But the simple missing-receipt rule nearly ties it. The
+finding concerns access to useful evidence, not superiority of a new selector.
+Even full observation leaves some missed severity because the fixed action
+budget can be smaller than the realized unsafe population. Perfect information
+does not remove a capacity constraint.
+
+\textbf{A relay interpretation and its limit.}
+A second task follows an object from a reader to a relay. The relay's pending
+transfer is allowed only when the true origin matches the destination tenant;
+the free report can misstate that origin. Broker observations reveal origin
+facts. This variant deliberately uses the same statistical generator and seed
+draws, so its numbers are identical. It checks that the contract can express
+cross-agent provenance; it is not an independent replication or a live
+multi-agent experiment. Users can replace measurement selection and risk
+prediction independently. The generator and local targets are public, so this
+is an open practice task, not a sealed leaderboard or a security sandbox.
+Sequential acquisition and monitor-aware evasion remain separate experiments.

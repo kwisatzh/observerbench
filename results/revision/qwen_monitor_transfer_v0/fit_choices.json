@@ -1,0 +1,313 @@
+{
+  "refit-p128-s9120": {
+    "calibration_rows": 52,
+    "fitting_rows": 204,
+    "ridge": 0.0001,
+    "target_pairs": 128
+  },
+  "refit-p128-s9121": {
+    "calibration_rows": 52,
+    "fitting_rows": 204,
+    "ridge": 100.0,
+    "target_pairs": 128
+  },
+  "refit-p128-s9122": {
+    "calibration_rows": 52,
+    "fitting_rows": 204,
+    "ridge": 0.0001,
+    "target_pairs": 128
+  },
+  "refit-p128-s9123": {
+    "calibration_rows": 52,
+    "fitting_rows": 204,
+    "ridge": 100.0,
+    "target_pairs": 128
+  },
+  "refit-p128-s9124": {
+    "calibration_rows": 52,
+    "fitting_rows": 204,
+    "ridge": 0.0001,
+    "target_pairs": 128
+  },
+  "refit-p128-s9125": {
+    "calibration_rows": 52,
+    "fitting_rows": 204,
+    "ridge": 0.0001,
+    "target_pairs": 128
+  },
+  "refit-p128-s9126": {
+    "calibration_rows": 52,
+    "fitting_rows": 203,
+    "ridge": 100.0,
+    "target_pairs": 128
+  },
+  "refit-p128-s9127": {
+    "calibration_rows": 52,
+    "fitting_rows": 203,
+    "ridge": 100.0,
+    "target_pairs": 128
+  },
+  "refit-p128-s9128": {
+    "calibration_rows": 52,
+    "fitting_rows": 204,
+    "ridge": 100.0,
+    "target_pairs": 128
+  },
+  "refit-p128-s9129": {
+    "calibration_rows": 52,
+    "fitting_rows": 204,
+    "ridge": 100.0,
+    "target_pairs": 128
+  },
+  "refit-p32-s9120": {
+    "calibration_rows": 14,
+    "fitting_rows": 50,
+    "ridge": 100.0,
+    "target_pairs": 32
+  },
+  "refit-p32-s9121": {
+    "calibration_rows": 14,
+    "fitting_rows": 50,
+    "ridge": 0.0001,
+    "target_pairs": 32
+  },
+  "refit-p32-s9122": {
+    "calibration_rows": 14,
+    "fitting_rows": 50,
+    "ridge": 0.0001,
+    "target_pairs": 32
+  },
+  "refit-p32-s9123": {
+    "calibration_rows": 14,
+    "fitting_rows": 50,
+    "ridge": 1.0,
+    "target_pairs": 32
+  },
+  "refit-p32-s9124": {
+    "calibration_rows": 14,
+    "fitting_rows": 50,
+    "ridge": 0.0001,
+    "target_pairs": 32
+  },
+  "refit-p32-s9125": {
+    "calibration_rows": 14,
+    "fitting_rows": 50,
+    "ridge": 1.0,
+    "target_pairs": 32
+  },
+  "refit-p32-s9126": {
+    "calibration_rows": 14,
+    "fitting_rows": 50,
+    "ridge": 1.0,
+    "target_pairs": 32
+  },
+  "refit-p32-s9127": {
+    "calibration_rows": 13,
+    "fitting_rows": 50,
+    "ridge": 1.0,
+    "target_pairs": 32
+  },
+  "refit-p32-s9128": {
+    "calibration_rows": 14,
+    "fitting_rows": 50,
+    "ridge": 100.0,
+    "target_pairs": 32
+  },
+  "refit-p32-s9129": {
+    "calibration_rows": 14,
+    "fitting_rows": 50,
+    "ridge": 0.0001,
+    "target_pairs": 32
+  },
+  "refit-p512-s9120": {
+    "calibration_rows": 206,
+    "fitting_rows": 817,
+    "ridge": 0.0001,
+    "target_pairs": 512
+  },
+  "refit-p512-s9121": {
+    "calibration_rows": 206,
+    "fitting_rows": 818,
+    "ridge": 100.0,
+    "target_pairs": 512
+  },
+  "refit-p512-s9122": {
+    "calibration_rows": 205,
+    "fitting_rows": 818,
+    "ridge": 100.0,
+    "target_pairs": 512
+  },
+  "refit-p512-s9123": {
+    "calibration_rows": 206,
+    "fitting_rows": 817,
+    "ridge": 1.0,
+    "target_pairs": 512
+  },
+  "refit-p512-s9124": {
+    "calibration_rows": 206,
+    "fitting_rows": 817,
+    "ridge": 100.0,
+    "target_pairs": 512
+  },
+  "refit-p512-s9125": {
+    "calibration_rows": 205,
+    "fitting_rows": 818,
+    "ridge": 100.0,
+    "target_pairs": 512
+  },
+  "refit-p512-s9126": {
+    "calibration_rows": 206,
+    "fitting_rows": 817,
+    "ridge": 0.0001,
+    "target_pairs": 512
+  },
+  "refit-p512-s9127": {
+    "calibration_rows": 206,
+    "fitting_rows": 817,
+    "ridge": 0.0001,
+    "target_pairs": 512
+  },
+  "refit-p512-s9128": {
+    "calibration_rows": 206,
+    "fitting_rows": 817,
+    "ridge": 100.0,
+    "target_pairs": 512
+  },
+  "refit-p512-s9129": {
+    "calibration_rows": 206,
+    "fitting_rows": 817,
+    "ridge": 100.0,
+    "target_pairs": 512
+  },
+  "refit-p700-s9120": {
+    "calibration_rows": 280,
+    "fitting_rows": 1119,
+    "ridge": 0.0001,
+    "target_pairs": 700
+  },
+  "refit-p700-s9121": {
+    "calibration_rows": 279,
+    "fitting_rows": 1120,
+    "ridge": 100.0,
+    "target_pairs": 700
+  },
+  "refit-p700-s9122": {
+    "calibration_rows": 280,
+    "fitting_rows": 1119,
+    "ridge": 100.0,
+    "target_pairs": 700
+  },
+  "refit-p700-s9123": {
+    "calibration_rows": 280,
+    "fitting_rows": 1119,
+    "ridge": 100.0,
+    "target_pairs": 700
+  },
+  "refit-p700-s9124": {
+    "calibration_rows": 280,
+    "fitting_rows": 1119,
+    "ridge": 1.0,
+    "target_pairs": 700
+  },
+  "refit-p700-s9125": {
+    "calibration_rows": 280,
+    "fitting_rows": 1119,
+    "ridge": 0.0001,
+    "target_pairs": 700
+  },
+  "refit-p700-s9126": {
+    "calibration_rows": 280,
+    "fitting_rows": 1119,
+    "ridge": 100.0,
+    "target_pairs": 700
+  },
+  "refit-p700-s9127": {
+    "calibration_rows": 280,
+    "fitting_rows": 1119,
+    "ridge": 100.0,
+    "target_pairs": 700
+  },
+  "refit-p700-s9128": {
+    "calibration_rows": 280,
+    "fitting_rows": 1119,
+    "ridge": 0.0001,
+    "target_pairs": 700
+  },
+  "refit-p700-s9129": {
+    "calibration_rows": 280,
+    "fitting_rows": 1119,
+    "ridge": 100.0,
+    "target_pairs": 700
+  },
+  "refit-p8-s9120": {
+    "calibration_rows": 4,
+    "fitting_rows": 12,
+    "ridge": 1.0,
+    "target_pairs": 8
+  },
+  "refit-p8-s9121": {
+    "calibration_rows": 4,
+    "fitting_rows": 12,
+    "ridge": 1.0,
+    "target_pairs": 8
+  },
+  "refit-p8-s9122": {
+    "calibration_rows": 4,
+    "fitting_rows": 12,
+    "ridge": 0.0001,
+    "target_pairs": 8
+  },
+  "refit-p8-s9123": {
+    "calibration_rows": 4,
+    "fitting_rows": 12,
+    "ridge": 100.0,
+    "target_pairs": 8
+  },
+  "refit-p8-s9124": {
+    "calibration_rows": 4,
+    "fitting_rows": 12,
+    "ridge": 0.0001,
+    "target_pairs": 8
+  },
+  "refit-p8-s9125": {
+    "calibration_rows": 4,
+    "fitting_rows": 12,
+    "ridge": 1.0,
+    "target_pairs": 8
+  },
+  "refit-p8-s9126": {
+    "calibration_rows": 4,
+    "fitting_rows": 12,
+    "ridge": 0.0001,
+    "target_pairs": 8
+  },
+  "refit-p8-s9127": {
+    "calibration_rows": 4,
+    "fitting_rows": 12,
+    "ridge": 100.0,
+    "target_pairs": 8
+  },
+  "refit-p8-s9128": {
+    "calibration_rows": 4,
+    "fitting_rows": 12,
+    "ridge": 1.0,
+    "target_pairs": 8
+  },
+  "refit-p8-s9129": {
+    "calibration_rows": 4,
+    "fitting_rows": 12,
+    "ridge": 1.0,
+    "target_pairs": 8
+  },
+  "source-frozen": {
+    "ridge": 0.0001,
+    "target_pairs": 0
+  },
+  "target-native": {
+    "ridge": 100.0,
+    "target_pairs": 700
+  },
+  "target-raw-prompt": {
+    "target_pairs": 0
+  }
+}

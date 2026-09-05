@@ -1,0 +1,9 @@
+{
+  "status": "post_outcome_source_fit_diagnostic",
+  "description": "Apply the already-frozen source coefficients to the source cache's locked-test rows; no refitting or model selection.",
+  "source_model": "Qwen/Qwen2.5-7B-Instruct",
+  "source_auroc": 0.8302079720198867,
+  "transferred_auroc": 0.292803,
+  "source_cache_sha256": "f2a3d68d065fa25ef4baf3d646f8727077475eac1ea95d539f6c2375e8f56d86",
+  "computation": "scores = source_locked_features @ frozen_source_coef + frozen_source_intercept; budget_metrics(labels, scores, budget=0.02)"
+}
