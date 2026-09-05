@@ -19,4 +19,10 @@ This is a secondary **open replay** of the original Phase 5 panel, not the
 later Phase 7 confirmation and not a sealed score. Historical experiment
 results remain unchanged.
 
+A separate [training-split study](../../../results/revision/ioi_refit_sensitivity_20260904/)
+refits these methods 40 times. Pair terms improve prediction in every fit but
+worsen action loss at target 1 in 28 fits. These are repeated splits of one
+population, not 40 independent replications; they do not replace the fixed-fit
+intervals shown here.
+
 [Run your own table](../../../practice/ioi_decision_v1/README.md).

@@ -1,0 +1,53 @@
+{
+  "authorship": "Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex",
+  "date": "2026-09-04",
+  "decision_rule": "absolute_mean_error_then_head_count_then_mask_id; analytic no-op in every pool",
+  "measurement_budget": 160,
+  "methods": [
+    "additive",
+    "all_pairs",
+    "atp_raw",
+    "atp_calibrated"
+  ],
+  "report": [
+    "per-fit prediction MAE",
+    "per-fit action loss at every target",
+    "paired changes across methods",
+    "fraction of fits beating no-op",
+    "descriptive 5th-95th percentiles",
+    "fit plus selection wall time"
+  ],
+  "report_regardless_of_direction": true,
+  "ridge": 1e-06,
+  "schema": "observerbench.ioi_refit_sensitivity.v1",
+  "scope": "Training-split sensitivity on the existing Phase-5 data, not independent datasets or new confirmation. The historical clean-task gate failed. The 20 splits reuse the same training population; ranges are descriptive, not confidence intervals over independent experiments.",
+  "seeds": [
+    90400,
+    90401,
+    90402,
+    90403,
+    90404,
+    90405,
+    90406,
+    90407,
+    90408,
+    90409,
+    90410,
+    90411,
+    90412,
+    90413,
+    90414,
+    90415,
+    90416,
+    90417,
+    90418,
+    90419
+  ],
+  "split": "Split unordered name-pair training clusters into two disjoint halves for each seed. No prompt from a cluster occurs in both halves. Keep all calibration masks, candidate pools, held-out prompts and the controller fixed.",
+  "status": "post_outcome_followup_specified_before_refit_results",
+  "targets": [
+    0.5,
+    1.0,
+    1.5
+  ]
+}

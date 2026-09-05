@@ -211,6 +211,7 @@ def measure_ioi_attribution_map(
     prompt_split: str = "train",
     batch_size: int = 32,
     max_prompts: int | None = None,
+    per_prompt_effects_path: str | Path | None = None,
 ) -> IOIAttributionMap:
     """Measure a clean-state AtP map using the Phase-5 mean-ablation direction."""
 
@@ -244,6 +245,7 @@ def measure_ioi_attribution_map(
     layout = _hook_layout()
     hook_names = tuple(f"blocks.{layer}.attn.hook_z" for layer in layout)
     totals = np.zeros(len(records), dtype=np.float64)
+    per_prompt = np.empty((len(prompts), len(records)), dtype=np.float64)
     measured = 0
 
     for bucket in _length_buckets(token_rows):
@@ -277,7 +279,7 @@ def measure_ioi_attribution_map(
 
             batch_effects = torch.zeros(
                 (len(batch_indices), len(records)),
-                dtype=torch.float64,
+                dtype=model.W_E.dtype,
                 device=model.cfg.device,
             )
             for layer, (canonical_np, heads_np) in layout.items():
@@ -294,14 +296,23 @@ def measure_ioi_attribution_map(
                 clean = activation[:, -1].index_select(1, heads)
                 gradient = activation.grad[:, -1].index_select(1, heads)
                 reference = references.index_select(1, canonical)
-                effects = ((clean - reference) * gradient).sum(dim=-1).double()
+                effects = ((clean - reference) * gradient).sum(dim=-1)
                 batch_effects.index_copy_(1, canonical, effects)
-            totals += batch_effects.detach().cpu().numpy().sum(axis=0)
+            # MPS has no float64 device tensors; accumulate on the CPU.
+            values = batch_effects.detach().cpu().double().numpy()
+            per_prompt[batch_indices] = values
+            totals += values.sum(axis=0)
             measured += len(batch_indices)
             captured.clear()
 
     if measured != len(prompts):
         raise RuntimeError("attribution measurement did not cover every selected prompt")
+    if per_prompt_effects_path is not None:
+        path = Path(per_prompt_effects_path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        np.savez_compressed(path, effects=per_prompt,
+                            prompt_ids=prompts["prompt_id"].astype(str).to_numpy(dtype=str),
+                            model_revision=np.asarray(model_revision))
     return IOIAttributionMap(
         head_effects=tuple(float(value) for value in totals / measured),
         n_prompts=measured,

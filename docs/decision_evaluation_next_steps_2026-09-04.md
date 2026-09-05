@@ -35,11 +35,15 @@ that baseline without rewriting the historical experiment or prediction task.
 - [ ] Add paired source-problem bootstrap intervals to safety scorecards.
   Keep deployment outcome ranges separate; repeated simulated populations are
   not new independent APPS problems.
-- [ ] Test stability across independently refit observers and split seeds.
-  Fixed-score bootstrap intervals cannot answer that question.
+- [x] Test IOI sensitivity across 40 refitted training halves from 20 split
+  seeds. Name-pair groups stay together. This is reuse of one population,
+  not independent-dataset replication. Fixed-score bootstrap intervals and
+  descriptive refit ranges answer different questions.
 - [ ] Count the whole observer path: model inference, residual extraction,
   SAE encoding, readout, calibration measurements, time, and memory. A sparse
   readout coefficient count is not a runtime or total-compute measurement.
+  The focused Gemma A100 runner is prepared; do not claim measured GPU cost
+  until its completed report is available.
 - [x] Add failure tests for missing/duplicate action IDs, target mismatch,
   malformed values, no-op handling, fit/test separation, and tie handling.
 

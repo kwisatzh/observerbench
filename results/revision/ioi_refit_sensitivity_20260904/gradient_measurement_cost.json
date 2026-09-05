@@ -1,0 +1,21 @@
+{
+  "batch_size": 16,
+  "device": "mps",
+  "gradient_measurement_seconds": 2.3621324580162764,
+  "model_load_seconds": 1.3438090002164245,
+  "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+  "n_prompts": 192,
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.4.6",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.11.14",
+    "source_dirty": true,
+    "source_revision": "a930093e258567b30ab7fc8cd5edbf0b6385626c"
+  },
+  "scope": "Actual pinned-model gradient measurement; excludes acquisition of cached template means and finite calibration effects. Not full observer construction cost."
+}

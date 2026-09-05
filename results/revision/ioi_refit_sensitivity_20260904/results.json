@@ -1,0 +1,383 @@
+{
+  "comparisons": [
+    {
+      "contrast": "all_pairs minus additive",
+      "fraction_lower_loss": 0.85,
+      "fraction_lower_mae": 1.0,
+      "fraction_lower_mae_but_higher_loss": 0.15,
+      "loss_change_range_5_95": [
+        -0.1369971598684787,
+        0.02425190996378657
+      ],
+      "mean_loss_change": -0.06513164180796593,
+      "mean_mae_change": -0.08982069690599523,
+      "target": 0.5
+    },
+    {
+      "contrast": "atp_calibrated minus atp_raw",
+      "fraction_lower_loss": 0.775,
+      "fraction_lower_mae": 1.0,
+      "fraction_lower_mae_but_higher_loss": 0.225,
+      "loss_change_range_5_95": [
+        -0.1521428566239774,
+        0.0514879325404762
+      ],
+      "mean_loss_change": -0.05793269273824989,
+      "mean_mae_change": -0.033105877288763935,
+      "target": 0.5
+    },
+    {
+      "contrast": "all_pairs minus additive",
+      "fraction_lower_loss": 0.3,
+      "fraction_lower_mae": 1.0,
+      "fraction_lower_mae_but_higher_loss": 0.7,
+      "loss_change_range_5_95": [
+        -0.031037239581346493,
+        0.15407119065523156
+      ],
+      "mean_loss_change": 0.03789200140163301,
+      "mean_mae_change": -0.08982069690599523,
+      "target": 1.0
+    },
+    {
+      "contrast": "atp_calibrated minus atp_raw",
+      "fraction_lower_loss": 0.475,
+      "fraction_lower_mae": 1.0,
+      "fraction_lower_mae_but_higher_loss": 0.525,
+      "loss_change_range_5_95": [
+        -0.07532887040637429,
+        0.08868414780125018
+      ],
+      "mean_loss_change": 0.0062752981297671704,
+      "mean_mae_change": -0.033105877288763935,
+      "target": 1.0
+    },
+    {
+      "contrast": "all_pairs minus additive",
+      "fraction_lower_loss": 0.775,
+      "fraction_lower_mae": 1.0,
+      "fraction_lower_mae_but_higher_loss": 0.225,
+      "loss_change_range_5_95": [
+        -0.08201130439527331,
+        0.019081582911312542
+      ],
+      "mean_loss_change": -0.03167268696706742,
+      "mean_mae_change": -0.08982069690599523,
+      "target": 1.5
+    },
+    {
+      "contrast": "atp_calibrated minus atp_raw",
+      "fraction_lower_loss": 0.0,
+      "fraction_lower_mae": 1.0,
+      "fraction_lower_mae_but_higher_loss": 1.0,
+      "loss_change_range_5_95": [
+        0.013013761118054523,
+        0.07121568940579891
+      ],
+      "mean_loss_change": 0.048891269830055574,
+      "mean_mae_change": -0.033105877288763935,
+      "target": 1.5
+    }
+  ],
+  "full_fit": [
+    {
+      "action_loss": 1.0532364122569562,
+      "fit_id": "full",
+      "mae": 0.48595756725242917,
+      "observer": "additive",
+      "target": 0.5
+    },
+    {
+      "action_loss": 0.9716042436659336,
+      "fit_id": "full",
+      "mae": 0.48595756725242917,
+      "observer": "additive",
+      "target": 1.0
+    },
+    {
+      "action_loss": 1.0239643312990665,
+      "fit_id": "full",
+      "mae": 0.48595756725242917,
+      "observer": "additive",
+      "target": 1.5
+    },
+    {
+      "action_loss": 1.0176696451380849,
+      "fit_id": "full",
+      "mae": 0.39454780135474377,
+      "observer": "all_pairs",
+      "target": 0.5
+    },
+    {
+      "action_loss": 1.0215677600353956,
+      "fit_id": "full",
+      "mae": 0.39454780135474377,
+      "observer": "all_pairs",
+      "target": 1.0
+    },
+    {
+      "action_loss": 1.0064963147044181,
+      "fit_id": "full",
+      "mae": 0.39454780135474377,
+      "observer": "all_pairs",
+      "target": 1.5
+    },
+    {
+      "action_loss": 0.9722735788673162,
+      "fit_id": "full",
+      "mae": 0.6315641765432101,
+      "observer": "atp_calibrated",
+      "target": 0.5
+    },
+    {
+      "action_loss": 0.9995061671361327,
+      "fit_id": "full",
+      "mae": 0.6315641765432101,
+      "observer": "atp_calibrated",
+      "target": 1.0
+    },
+    {
+      "action_loss": 1.1143924120813609,
+      "fit_id": "full",
+      "mae": 0.6315641765432101,
+      "observer": "atp_calibrated",
+      "target": 1.5
+    },
+    {
+      "action_loss": 1.074557850509882,
+      "fit_id": "full",
+      "mae": 0.6624301549178806,
+      "observer": "atp_raw",
+      "target": 0.5
+    },
+    {
+      "action_loss": 0.9464705429971219,
+      "fit_id": "full",
+      "mae": 0.6624301549178806,
+      "observer": "atp_raw",
+      "target": 1.0
+    },
+    {
+      "action_loss": 1.092542002722621,
+      "fit_id": "full",
+      "mae": 0.6624301549178806,
+      "observer": "atp_raw",
+      "target": 1.5
+    }
+  ],
+  "gradient_sha256": "1bd560c8431a63730e63259dde21800b2f1df00b7f993df00c34d1ba0fd5295d",
+  "protocol_sha256": "50453daaba6a2344e2c5a8f751e4ce77f921e819c95dc1c651b1924ac38e8eb6",
+  "runtime": {
+    "dependencies": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.4.6",
+      "pandas": "3.0.5",
+      "torch": "2.13.0"
+    },
+    "package_version": "0.0.0",
+    "python_version": "3.11.14",
+    "source_dirty": true,
+    "source_revision": "a930093e258567b30ab7fc8cd5edbf0b6385626c"
+  },
+  "schema": "observerbench.ioi_refit_sensitivity.results.v1",
+  "scope": "Training-split sensitivity on the existing Phase-5 data, not independent datasets or new confirmation. The historical clean-task gate failed. The 20 splits reuse the same training population; ranges are descriptive, not confidence intervals over independent experiments.",
+  "source_hashes": {
+    "scripts/run_ioi_refit_sensitivity.py": "b8731b076464b5718bfbf682ed2d1fbadb820306fd63d13bce86ee1d3429146c",
+    "src/observerbench/tasks/ioi/attribution_patching.py": "cc89e9da7bac508940339e587a9e82d55fc63f8070dca7dbb97a85793f5e1761"
+  },
+  "summary": [
+    {
+      "action_loss_range_5_95": [
+        0.9639222536422313,
+        1.1048109164461493
+      ],
+      "fraction_beating_noop": 0.0,
+      "mae_range_5_95": [
+        0.4788611440078498,
+        0.5075789846507672
+      ],
+      "mean_action_loss": 1.0433603529026731,
+      "mean_mae": 0.49097305595540996,
+      "n_fits": 40,
+      "observer": "additive",
+      "target": 0.5
+    },
+    {
+      "action_loss_range_5_95": [
+        0.9201111652795225,
+        1.0491500018164515
+      ],
+      "fraction_beating_noop": 0.625,
+      "mae_range_5_95": [
+        0.4788611440078498,
+        0.5075789846507672
+      ],
+      "mean_action_loss": 0.9860898593999445,
+      "mean_mae": 0.49097305595540996,
+      "n_fits": 40,
+      "observer": "additive",
+      "target": 1.0
+    },
+    {
+      "action_loss_range_5_95": [
+        1.00593624971807,
+        1.0616343031078577
+      ],
+      "fraction_beating_noop": 1.0,
+      "mae_range_5_95": [
+        0.4788611440078498,
+        0.5075789846507672
+      ],
+      "mean_action_loss": 1.0343878083955498,
+      "mean_mae": 0.49097305595540996,
+      "n_fits": 40,
+      "observer": "additive",
+      "target": 1.5
+    },
+    {
+      "action_loss_range_5_95": [
+        0.9041601124219596,
+        1.0544264516327528
+      ],
+      "fraction_beating_noop": 0.0,
+      "mae_range_5_95": [
+        0.38864771021478517,
+        0.4142554871671691
+      ],
+      "mean_action_loss": 0.9782287110947072,
+      "mean_mae": 0.4011523590494147,
+      "n_fits": 40,
+      "observer": "all_pairs",
+      "target": 0.5
+    },
+    {
+      "action_loss_range_5_95": [
+        0.9623219222854823,
+        1.0931726617366075
+      ],
+      "fraction_beating_noop": 0.325,
+      "mae_range_5_95": [
+        0.38864771021478517,
+        0.4142554871671691
+      ],
+      "mean_action_loss": 1.0239818608015774,
+      "mean_mae": 0.4011523590494147,
+      "n_fits": 40,
+      "observer": "all_pairs",
+      "target": 1.0
+    },
+    {
+      "action_loss_range_5_95": [
+        0.9566261473670602,
+        1.0484353909641504
+      ],
+      "fraction_beating_noop": 1.0,
+      "mae_range_5_95": [
+        0.38864771021478517,
+        0.4142554871671691
+      ],
+      "mean_action_loss": 1.0027151214284822,
+      "mean_mae": 0.4011523590494147,
+      "n_fits": 40,
+      "observer": "all_pairs",
+      "target": 1.5
+    },
+    {
+      "action_loss_range_5_95": [
+        0.9080357285402715,
+        1.1094793714769184
+      ],
+      "fraction_beating_noop": 0.0,
+      "mae_range_5_95": [
+        0.6184280471003046,
+        0.6491457020652815
+      ],
+      "mean_action_loss": 0.9841872497834266,
+      "mean_mae": 0.6337539239640738,
+      "n_fits": 40,
+      "observer": "atp_calibrated",
+      "target": 0.5
+    },
+    {
+      "action_loss_range_5_95": [
+        0.9204327543638646,
+        0.9995061671361327
+      ],
+      "fraction_beating_noop": 0.975,
+      "mae_range_5_95": [
+        0.6184280471003046,
+        0.6491457020652815
+      ],
+      "mean_action_loss": 0.9588204623479395,
+      "mean_mae": 0.6337539239640738,
+      "n_fits": 40,
+      "observer": "atp_calibrated",
+      "target": 1.0
+    },
+    {
+      "action_loss_range_5_95": [
+        1.0757390193641185,
+        1.156926439423114
+      ],
+      "fraction_beating_noop": 1.0,
+      "mae_range_5_95": [
+        0.6184280471003046,
+        0.6491457020652815
+      ],
+      "mean_action_loss": 1.110766059104353,
+      "mean_mae": 0.6337539239640738,
+      "n_fits": 40,
+      "observer": "atp_calibrated",
+      "target": 1.5
+    },
+    {
+      "action_loss_range_5_95": [
+        0.9537026981264353,
+        1.1187839997746052
+      ],
+      "fraction_beating_noop": 0.0,
+      "mae_range_5_95": [
+        0.6402110950558815,
+        0.6967909204098521
+      ],
+      "mean_action_loss": 1.0421199425216767,
+      "mean_mae": 0.6668598012528377,
+      "n_fits": 40,
+      "observer": "atp_raw",
+      "target": 0.5
+    },
+    {
+      "action_loss_range_5_95": [
+        0.8999612893350423,
+        1.0221809318847954
+      ],
+      "fraction_beating_noop": 0.825,
+      "mae_range_5_95": [
+        0.6402110950558815,
+        0.6967909204098521
+      ],
+      "mean_action_loss": 0.9525451642181725,
+      "mean_mae": 0.6668598012528377,
+      "n_fits": 40,
+      "observer": "atp_raw",
+      "target": 1.0
+    },
+    {
+      "action_loss_range_5_95": [
+        1.0189514625817537,
+        1.1013786509633063
+      ],
+      "fraction_beating_noop": 1.0,
+      "mae_range_5_95": [
+        0.6402110950558815,
+        0.6967909204098521
+      ],
+      "mean_action_loss": 1.0618747892742977,
+      "mean_mae": 0.6668598012528377,
+      "n_fits": 40,
+      "observer": "atp_raw",
+      "target": 1.5
+    }
+  ],
+  "training_input_sha256": "aaeadd63d6e1ccceece6d0655a6e233fd855a509f23a87f5af989a7399896e11"
+}

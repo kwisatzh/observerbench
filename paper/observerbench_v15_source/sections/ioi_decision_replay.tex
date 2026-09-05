@@ -66,3 +66,60 @@ those scores are not sealed submissions. The original Phase 5 experiment and
 the later Phase 7 clean-task confirmation keep their own identities. Training
 on this replay's scoring responses would invalidate a held-out claim, even
 though the software could still compute a number.
+
+\subsection{Does refitting remove the prediction--action gap?}
+\label{app:ioi-refits}
+
+The intervals above hold each observer fixed. A different question is whether
+the result depends on which prompts fitted that observer. We split the
+original 192 training prompts by unordered name pair, so repeated appearances
+of a pair stay together. Each of 20 seeds divides those groups into two
+disjoint halves. We fit all four methods on each half, keeping the 160
+calibration masks, 320 test masks, action pools, targets, and controller fixed.
+The halves contain 89--103 prompts, each drawn from 48 name pairs. Fits and actions are saved before scoring
+against the original 256 held-out prompts.
+
+The additive and interaction models average finite responses over the chosen
+half. Raw AtP averages per-prompt gradients over that same half; calibrated
+AtP then fits its one gain to that half's finite responses. The ridge penalty
+stays at $10^{-6}$. We remeasure the per-prompt gradients on the pinned GPT-2
+checkpoint; averaging all training prompts reproduces the original AtP
+prediction metrics and selected actions. No held-out model measurements are
+repeated or used to choose a fit.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Change & Target & Mean $\Delta$MAE & Mean $\Delta R_t$ & Lower MAE, higher loss \\
+\midrule
+Additive to all-pairs & 0.5 & $-0.090$ & $-0.065$ & 6/40 \\
+                     & 1.0 & $-0.090$ & $+0.038$ & 28/40 \\
+                     & 1.5 & $-0.090$ & $-0.032$ & 9/40 \\
+Raw to calibrated AtP & 0.5 & $-0.033$ & $-0.058$ & 9/40 \\
+                      & 1.0 & $-0.033$ & $+0.006$ & 21/40 \\
+                      & 1.5 & $-0.033$ & $+0.049$ & 40/40 \\
+\bottomrule
+\end{tabular}
+\caption{Sensitivity to training splits on the existing IOI panel. Negative
+changes improve a metric. Both changes lower MAE in every fit; whether they
+improve the chosen action depends on the target. Counts describe these fits,
+not independent replications or a confidence level.}
+\label{tab:ioi-refits}
+\end{table}
+
+At $t=1$, the all-pairs minus additive loss change has a descriptive
+5th--95th percentile range of $[-0.031,0.154]$; calibrated minus raw AtP has
+range $[-0.075,0.089]$. These broad ranges reinforce the distinction between
+a consistent improvement in prediction and an unsettled action ranking.
+At $t=1.5$, calibration worsens AtP action loss in all 40 fits despite lowering
+MAE in each. Calibration is not intrinsically harmful: at $t=0.5$ it improves
+action loss in 31 of 40 fits. The intended target decides which comparison
+matters.
+
+This follow-up was specified after the original outcomes were known. Across
+seeds it reuses one training population and one test population, and the
+historical clean-task limitation still applies. It is a training-split
+sensitivity analysis, not 40 new datasets or a replacement for the later
+clean-task confirmation.

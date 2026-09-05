@@ -176,6 +176,14 @@ paired comparisons (Appendix~\ref{app:ioi-decision-replay}). This checks the
 submission-to-action path on stored data; it is not another independent
 experiment and does not change the historical results above.
 
+Does this distinction depend on one fitted observer? We repeat the fitting
+step on 20 splits of the training population, keeping each unordered name
+pair together and using both disjoint halves of each split. Pair terms lower
+prediction MAE in all 40 refits, but increase action loss at $t=1$ in 28.
+Scalar calibration also lowers AtP's MAE in every refit, while its effect on
+action loss depends on the target. This tests sensitivity to the fitting data,
+not transfer to new datasets; Appendix~\ref{app:ioi-refits} reports every target.
+
 \subsubsection{Predict the loss used to choose the action}
 \label{sec:phase6-estimand}
 
