@@ -1,0 +1,58 @@
+{
+  "rows": [
+    {
+      "max_gpu_allocated_gib": 17.60575532913208,
+      "max_seconds": 8.20665688500003,
+      "median_seconds": 8.206588487000317,
+      "min_seconds": 8.180548478999754,
+      "n_rows": 64,
+      "observer": "basic_prompt",
+      "repeat_seconds": [
+        8.180548478999754,
+        8.20665688500003,
+        8.206588487000317
+      ]
+    },
+    {
+      "max_gpu_allocated_gib": 17.590526580810547,
+      "max_seconds": 7.639562654000201,
+      "median_seconds": 7.630877491000319,
+      "min_seconds": 7.597301289999905,
+      "n_rows": 64,
+      "observer": "detailed_prompt",
+      "repeat_seconds": [
+        7.597301289999905,
+        7.639562654000201,
+        7.630877491000319
+      ]
+    },
+    {
+      "max_gpu_allocated_gib": 17.554777145385742,
+      "max_seconds": 5.996224719000111,
+      "median_seconds": 5.9828106460004165,
+      "min_seconds": 5.96468878099995,
+      "n_rows": 64,
+      "observer": "dense_neutral",
+      "repeat_seconds": [
+        5.96468878099995,
+        5.9828106460004165,
+        5.996224719000111
+      ]
+    },
+    {
+      "max_gpu_allocated_gib": 17.554777145385742,
+      "max_seconds": 6.043406415999925,
+      "median_seconds": 6.03787014100044,
+      "min_seconds": 6.020061901999725,
+      "n_rows": 64,
+      "observer": "sae_neutral",
+      "repeat_seconds": [
+        6.03787014100044,
+        6.020061901999725,
+        6.043406415999925
+      ]
+    }
+  ],
+  "schema": "observerbench.gemma_observer_cost.summary.v1",
+  "scope": "Sum stages within each repeat, then take the median. Warm times include tokenization, full model forward, extraction and any encoder/readout. Prompt rendering, cold loading and cached audit selection are reported separately. This is a post-outcome cost follow-up, not a new quality ranking."
+}

@@ -15,3 +15,11 @@ This is a separate task-relative panel for the prospectively frozen matched Gemm
 | Gemma + ControlArena basic prompt | prospectively frozen matched replication | 14.927 | [14.0, 15.0] | 0.809 | output score distribution; one forward measurement |
 
 The verdict-adjacent residual probe is the strongest deployable row under the frozen primary regime. The official Gemma Scope SAE probe beats the three prompted monitors, but not the residual or supervised score-distribution probes. This is a positive cross-model result and a task-relative ranking, not a general claim that one monitor family is best.
+
+## Separate cost follow-up
+
+The [A100 cost report](../../../results/revision/gemma_observer_costs_20260904/)
+measures acquisition, fitting, warm inference, and audit selection. For the
+same 64 examples, the neutral dense and SAE probes take 5.983 and 6.038 seconds;
+model inference dominates both. These are costs for one implementation, not
+a new accuracy ranking. The original scorecard and seal remain unchanged.

@@ -61,9 +61,14 @@ The paper makes bounded claims:
   ecosystem. The IOI decision replay connects submitted effect tables to
   action choice and loss, including published AtP rows. It uses public stored
   responses, not a sealed test or independent replication. Readout coefficient
-  counts do not include SAE encoding or model inference.
+  counts do not include SAE encoding or model inference. A Gemma follow-up
+  measures both costs on one A100 (Appendix~\ref{app:observer-costs}); it does
+  not establish costs across hardware or optimized implementations. The IOI
+  refit study reuses one training population rather than collecting independent
+  datasets (Appendix~\ref{app:ioi-refits}).
   \emph{Next test:} extend this decision-scoring boundary to another task,
-  evaluate independently refit observers, and measure end-to-end observer costs.
+  evaluate observers refit on new datasets, and extend cost measurements to
+  other tasks and implementations.
 \end{itemize}
 
 \Needspace{12\baselineskip}

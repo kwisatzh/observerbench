@@ -356,6 +356,11 @@ difference but gives a violation-difference interval of $[-1.18,3.92]$.
 The action ranking is therefore uncertain across source problems, even though
 the locked-panel point estimates reverse (Appendix~\ref{app:source-uncertainty}).
 
+Readout size also does not settle cost. In a separate A100 timing run, the
+neutral dense and SAE probes take 5.983 and 6.038 seconds for the same 64
+examples. Model inference dominates both paths; a sparse readout does not save
+that forward pass (Appendix~\ref{app:observer-costs}).
+
 \subsubsection{Qwen3.5 reverses the Qwen2.5 context ranking}
 
 Using the same matched protocol, we repeat the APPS rows, split, prompts, audit

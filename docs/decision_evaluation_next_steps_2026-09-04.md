@@ -39,11 +39,16 @@ that baseline without rewriting the historical experiment or prediction task.
   seeds. Name-pair groups stay together. This is reuse of one population,
   not independent-dataset replication. Fixed-score bootstrap intervals and
   descriptive refit ranges answer different questions.
-- [ ] Count the whole observer path: model inference, residual extraction,
+- [x] Measure one complete observer path: model inference, residual extraction,
   SAE encoding, readout, calibration measurements, time, and memory. A sparse
   readout coefficient count is not a runtime or total-compute measurement.
-  The focused Gemma A100 runner is prepared; do not claim measured GPU cost
-  until its completed report is available.
+  The Gemma A100 follow-up is complete. Dense and SAE warm paths take 5.983
+  and 6.038 seconds per 64 examples; model inference dominates. The report
+  separates cold loading, shared acquisition, fitting, encoding, readout and
+  cached audit selection. This is one implementation on one GPU.
+- [ ] Attach measured cost reports to submitted scorecards and extend cost
+  coverage to the other models and tasks. Access declarations alone are not
+  runtime measurements; the new reference report does not automate this yet.
 - [x] Add failure tests for missing/duplicate action IDs, target mismatch,
   malformed values, no-op handling, fit/test separation, and tie handling.
 
@@ -79,7 +84,7 @@ The pack contains 320 masks, 256 held-out prompts, 107 name-pair clusters,
 ten pools, and exact no-op. Four existing observers use the same mean-based
 selection rule and report targets 0.5, 1, and 1.5. At target 1, scalar
 calibration improves AtP MAE from 0.662 to 0.632 but its action-loss point
-estimate rises from 0.947 to 0.999; the paired difference interval
+estimate rises from 0.946 to 1.000; the paired difference interval
 [-0.076, 0.203] includes zero. All four observers lose clearly to no-op at
 target 0.5 and beat it at 1.5. This is a useful decision score, not evidence
 for a stable new observer ranking.

@@ -1,0 +1,14 @@
+{
+  "authorship": "Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramilli and Codex",
+  "batch_size": 2,
+  "context_limit": 4096,
+  "full_construction_repeats": 1,
+  "parent_config_sha256": "7238f993a247505b3ff1629ea5d488c01b000b76f9081e24e6e09df838c00f7e",
+  "readout_cost": "Construction uses published layer/ridge selection. Warm readouts compose sklearn Ridge with the same selected features, scaling and penalty; their scores must match the original implementation before timing. This avoids refitting for each request.",
+  "report_regardless_of_direction": true,
+  "schema": "observerbench.gemma_observer_cost.v1",
+  "scope": "Measures this implementation on this GPU, not optimal implementation cost or a new observer-quality ranking. Cold downloads/loading, full-population construction, warm held-out inference, and cached CPU fitting/selection are separate. Model pretraining and SAE pretraining are excluded. Full transformer forwards continue through the suffix; no early-exit optimization is claimed.",
+  "status": "post_outcome_cost_followup",
+  "warm_inference_repeats": 3,
+  "workload": "All original 500 fit and 200 calibration problem pairs; 32 locked problem pairs drawn with seed 904. All methods use identical rows. Original truncation rule retained."
+}

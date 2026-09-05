@@ -1,0 +1,61 @@
+\clearpage
+\section{Measuring the cost of constructing and using an observer}
+\label{app:observer-costs}
+
+A small fitted readout can still require an expensive measurement. To separate
+these costs, we rerun the Gemma-2-9B-it observers on one A100-SXM4-80GB with
+high host RAM. This post-outcome follow-up measures time and memory, not a new
+monitor ranking. It keeps the original checkpoint, prompts, candidate layers,
+ridge choices, and 500 fitting and 200 calibration problem pairs. A fixed
+32-pair held-out panel, drawn by problem identity with seed 904, supplies the
+64 examples used for repeated timing. The original context-limit rule excludes
+one fitting/calibration example and no held-out example.
+
+\paragraph{Construct the measurement before timing the readout.}
+Collecting neutral residuals at all three candidate layers for the 1,464
+examples takes 136.689 seconds. Dense layer/ridge selection and refitting take
+another 0.330 seconds. Starting from the same residual cache, official-SAE
+encoding, layer/ridge selection, and refitting take 11.702 seconds. Both probes
+select layer 20. Model download/loading takes 65.734 seconds, and the three SAE
+downloads take 15.385 seconds; we report these cold-start costs separately.
+Model and SAE pretraining are outside this accounting.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Warm Gemma cost for the same 64 examples, batch size 2. Times include
+tokenization, the full transformer forward, extraction, and any encoder and
+readout. We sum stages within a repeat and report the median and min--max over
+three rotated-order repeats. GPU memory includes model weights.}
+\label{tab:observer-costs}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Observer & Seconds & Min--max & GPU GiB \\
+\midrule
+Basic prompted score & 8.207 & 8.181--8.207 & 17.61 \\
+Detailed prompted score & 7.631 & 7.597--7.640 & 17.59 \\
+Neutral dense probe & 5.983 & 5.965--5.996 & 17.55 \\
+Neutral SAE probe & 6.038 & 6.020--6.043 & 17.55 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Most of the time goes into obtaining the signal.}
+The dense and SAE probes have nearly the same measured runtime
+(Table~\ref{tab:observer-costs}). SAE encoding adds about 0.056 seconds per
+64 examples, including weight transfer; the dense projection and readout take
+about 0.002 seconds. Choosing an audit from cached scores takes less than
+0.1 ms. A sparse readout therefore does not remove the model access that
+precedes it. This result supports measuring the whole path, not assuming a
+runtime saving from the number of coefficients.
+
+The comparison is implementation- and workload-specific. The prompted views
+are longer: median full-panel lengths are 984.5 tokens for basic, 917.5 for
+detailed, and 692.5 for neutral. We use bfloat16, SDPA attention, and a
+4,096-token cap. The forward pass continues through the suffix even when a
+probe reads an earlier layer; we do not claim an optimized early-exit cost.
+Prompt rendering takes 0.185 seconds for the full panel and is separate from
+warm timings. One construction run and three repeated uses do not establish
+a hardware-general speed ranking. The artifact records stage timings,
+software versions, source hashes, and GPU memory; CPU memory is a
+process-lifetime peak, not a per-stage measurement.

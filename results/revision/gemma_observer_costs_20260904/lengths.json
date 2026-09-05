@@ -1,0 +1,20 @@
+{
+  "basic": {
+    "max": 4096,
+    "median": 984.5,
+    "min": 434,
+    "total_unpadded_tokens": 1499159
+  },
+  "detailed": {
+    "max": 4096,
+    "median": 917.5,
+    "min": 367,
+    "total_unpadded_tokens": 1401138
+  },
+  "neutral": {
+    "max": 4096,
+    "median": 692.5,
+    "min": 161,
+    "total_unpadded_tokens": 1073335
+  }
+}
