@@ -22,6 +22,8 @@
       <a href="../leaderboards/">Leaderboards</a>
       <a href="../runners/">Runners</a>
       <a href="../submit/">Submit</a>
+      <a href="../downloads/observerbench.pdf">Paper</a>
+      <a href="https://doi.org/10.5281/zenodo.22136091">Release</a>
       <a href="https://github.com/kwisatzh/observerbench">GitHub</a>
     </nav>
   </header>
@@ -34,9 +36,13 @@
         ObserverBench tests whether methods that read an AI model's internal
         activity help us choose better actions—not just make better predictions.
       </p>
+      <div class="button-row">
+        <a class="button primary" href="#step-1">Follow the five steps</a>
+        <a class="button secondary" href="#play-heading">Jump to the comparison</a>
+      </div>
       <details class="explanation workbench-details">
         <summary>Explore the full workbench: real models, results, and tasks</summary>
-        <p>The full workbench includes experiments on GPT-2, Qwen2.5-7B-Instruct, Qwen3.5-9B, and Gemma, covering internal model edits and safety monitoring. You can inspect the results, run existing tasks, or test your own method. Some tasks use saved model measurements, so you can start without a GPU.</p>
+        <p>The full workbench includes experiments on GPT-2, Qwen2.5-7B (base and Instruct), Qwen3.5-9B, and Gemma, covering internal model edits and safety monitoring. You can inspect the results, run existing tasks, or test your own method. Some tasks use saved model measurements, so you can start without a GPU.</p>
         <div class="button-row">
           <a class="button primary" href="https://kwisatzh.github.io/observerbench/leaderboards/">See real-model results</a>
           <a class="button secondary" href="https://kwisatzh.github.io/observerbench/runners/">Run a benchmark task</a>
@@ -44,9 +50,6 @@
       </details>
       <p><strong>Why this matters.</strong> In the July 2026 Hugging Face incident, investigators found AI agents trying to mislead their evaluator, including successful small-scale tests that made activity records show a different command from the one actually run. The <a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/">METR and Redwood Research investigation</a> is one motivation for testing both monitoring methods and the evidence they rely on. ObserverBench's <a href="https://kwisatzh.github.io/observerbench/runners/#integrity">tests with deliberately altered records</a> examine a narrow part of that problem.</p>
       <p>To see the idea, follow one example: an AI assistant must investigate a failed backup without deleting protected files. What could we learn from its internal activity? And how would we test whether that information helps?</p>
-      <a class="text-link" href="#step-1">Follow the five steps below</a>
-      <span class="jump-separator" aria-hidden="true"> · </span>
-      <a class="text-link" href="#play-heading">Already familiar? Jump to the comparison</a>
     </section>
 
     <section class="section lesson-step" id="step-1" aria-labelledby="step-1-heading">
@@ -120,7 +123,7 @@
       <div class="observer-choice" aria-labelledby="choice-heading">
         <div class="lesson-copy">
           <h3 id="choice-heading">First, choose using a warning test</h3>
-          <p>Take one unauthorized operation and one permitted operation from the batch. Does the observer give the unauthorized one a higher score? The percentages below show how often each observer gets that ordering right across all such pairs.</p>
+          <p>Take one unauthorized operation and one permitted operation from the batch. Does the observer give the unauthorized one a higher score? The percentages below show how often each observer gets that ordering right across all such pairs. (Researchers call this test AUROC.)</p>
           <p>This percentage evaluates the observer across the batch; it is different from the warning score it gives a single operation. <strong>Based on this test, which observer would you use?</strong></p>
         </div>
         <div class="choice-cards">
@@ -152,6 +155,28 @@
 
       <div id="metric-cards" class="metric-cards" aria-live="polite"></div>
       <p class="help-text">Harm points add up the damage from unauthorized operations that go ahead. An unnecessary check spends one of your reviews on an operation that was permitted.</p>
+      <figure class="budget-chart" aria-labelledby="budget-chart-heading">
+        <figcaption>
+          <h3 id="budget-chart-heading">Review budget versus harm that gets through</h3>
+          <p>Lower is better. The highlighted points follow the review budget selected above.</p>
+        </figcaption>
+        <div class="budget-chart-legend" aria-label="Chart legend and selected outcomes">
+          <div class="budget-chart-key">
+            <span class="budget-chart-swatch observer-a" aria-hidden="true"></span>
+            <span><strong>Observer A</strong> · warning test <span id="chart-rate-a">—</span><br><span id="chart-harm-a">—</span> harm points at <span class="chart-review-count">—</span> reviews</span>
+          </div>
+          <div class="budget-chart-key">
+            <span class="budget-chart-swatch observer-b" aria-hidden="true"></span>
+            <span><strong>Observer B</strong> · warning test <span id="chart-rate-b">—</span><br><span id="chart-harm-b">—</span> harm points at <span class="chart-review-count">—</span> reviews</span>
+          </div>
+        </div>
+        <div id="budget-chart-frame">
+          <svg id="budget-chart" role="img" aria-labelledby="budget-chart-title budget-chart-description">
+            <title id="budget-chart-title">Harm that escapes review at each budget</title>
+            <desc id="budget-chart-description">Choose an observer to reveal both curves.</desc>
+          </svg>
+        </div>
+      </figure>
       <h3 id="takeaway-heading">What did the two tests tell us?</h3>
       <p id="result-callout" class="result-callout" aria-live="polite"></p>
       <p id="backup-callout" class="backup-callout" aria-live="polite"></p>
@@ -176,7 +201,7 @@
             </tbody>
           </table>
         </div>
-        <p>The warning test used a balanced set of honest and backdoored code. For the decision test, backdoors appeared in 1% of cases and both methods received a 2% review budget. The prompted monitor scored better on the warning test, yet the internal feature probe left fewer backdoors unreviewed on average. <a href="https://github.com/kwisatzh/observerbench/tree/main/leaderboards/safety/controlarena-apps-gemma2-9b-it-v0">Read the Gemma experiment and recorded results.</a></p>
+        <p>The warning test used a balanced set of honest and backdoored code. For the decision test, backdoors appeared in 1% of cases and both methods received a 2% review budget. On this recorded panel, the prompted monitor scored better on the warning test, yet the internal feature probe left fewer backdoors unreviewed on average. Resampling the source problems leaves the action ranking uncertain. <a href="https://github.com/kwisatzh/observerbench/tree/main/leaderboards/safety/controlarena-apps-gemma2-9b-it-v0">Read the Gemma experiment and recorded results.</a></p>
         <p><strong>The next research question:</strong> which internal measurements should we collect so that an observer gets the important decisions right—with less measurement effort? This connects ObserverBench's decision tests to <a href="https://kwisatzh.github.io/mechanistic-tomography/">mechanistic tomography's measurement design</a>.</p>
       </div>
 
@@ -233,6 +258,7 @@
             <input id="prediction-file" type="file" accept=".csv,text/csv" hidden>
           </div>
           <p class="upload-note" id="upload-note">Expected columns: <code>request_id,predicted_risk</code>.</p>
+          <p class="help-text">This is a simplified teaching file. A safety-interlock submission uses <code>schema_version,query_id,predicted_risk</code>, plus a separate ObserverCard describing the method. <a href="https://github.com/kwisatzh/observerbench/tree/main/submissions/templates/safety">See the submission templates.</a></p>
         </div>
       </div>
     </section>
@@ -245,10 +271,25 @@
         that task. ObserverBench lets you see what their measurements recover,
         what decisions their estimates produce, and what those decisions cost.
       </p>
-      <p>The safety studies compare internal readouts of Qwen2.5-7B-Instruct, Qwen3.5-9B, and Gemma while they review stored code. The intervention studies test estimates used to choose edits inside GPT-2 and Qwen2.5-7B-Instruct. You can start with saved measurements, reproduce an existing comparison, and then try your own observer.</p>
+      <p>The safety studies compare internal readouts of Qwen2.5-7B-Instruct, Qwen3.5-9B, and Gemma while they review stored code. The intervention studies test estimates used to choose edits inside GPT-2 and base Qwen2.5-7B. You can start with saved measurements, reproduce an existing comparison, and then try your own observer.</p>
+      <div class="terminal-session" aria-labelledby="real-task">
+        <h3 id="real-task">Run a real Qwen experiment on your computer</h3>
+        <p>The model measurements are already saved. The example fits an observer on 40 interventions, predicts 128 new effects, and uses those predictions to choose interventions. You need Git, Python 3, and make; no GPU, model download, or extra Python packages.</p>
+        <pre tabindex="0" aria-label="Commands to run the Qwen practice task"><code>git clone https://github.com/kwisatzh/observerbench.git
+cd observerbench
+make demo-qwen</code></pre>
+        <p>The scorer prints both prediction and decision results. Here is an excerpt from the supplied example:</p>
+        <pre tabindex="0" aria-label="Recorded output from the Qwen practice task"><code>Held-out effect prediction
+  MAE:  0.204854
+Downstream action (48 target/pool decisions, exact no-op included)
+  Mean realized loss: 0.943545
+  Mean regret:        0.085557</code></pre>
+        <p>MAE measures prediction error. Realized loss measures how far the chosen interventions miss their targets on individual prompts. Regret is the extra loss compared with the best candidate chosen using the recorded outcomes. Lower is better for all three.</p>
+        <p>Change the example observer or supply your own effect predictions, then score again. This open practice task has public answers and returns scores locally, without a maintainer review. The <a href="https://github.com/kwisatzh/observerbench/tree/main/practice/qwen_copy_v2_b040">task guide</a> explains the prediction format and fixes the model as Qwen2.5-7B base.</p>
+      </div>
       <div class="button-row">
         <a class="button primary" href="../leaderboards/">See experiments with real language models</a>
-        <a class="button secondary" href="https://github.com/kwisatzh/observerbench/tree/main/practice/qwen_copy_v2_b040">Try a saved Qwen2.5-7B-Instruct experiment without a GPU</a>
+        <a class="button secondary" href="https://github.com/kwisatzh/observerbench/tree/main/practice/qwen_copy_v2_b040">Get the Qwen2.5-7B base practice task</a>
         <a class="button secondary" href="https://github.com/kwisatzh/observerbench#sixty-second-demo">Run the examples on your computer</a>
       </div>
     </section>
@@ -256,7 +297,7 @@
 
   <footer>
     <div><strong>ObserverBench</strong><p>Test estimates through the action they will guide.</p></div>
-    <div class="footer-links"><a href="../">Overview</a><a href="../leaderboards/">Leaderboards</a><a href="../runners/">Runners</a><a href="../submit/">Submit</a><a href="https://github.com/kwisatzh/observerbench">Source</a></div>
+    <div class="footer-links"><a href="../">Overview</a><a href="../leaderboards/">Leaderboards</a><a href="../runners/">Runners</a><a href="../submit/">Submit</a><a href="../downloads/observerbench.pdf">Paper</a><a href="https://doi.org/10.5281/zenodo.22136091">Release</a><a href="https://github.com/kwisatzh/observerbench">Source</a></div>
   </footer>
   <!-- Cloudflare Web Analytics -->
   <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "babc4e7118744fa6a9f1a18fb87df2eb"}'></script>

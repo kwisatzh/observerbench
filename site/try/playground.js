@@ -23,6 +23,8 @@
   const outcomesHeading = document.getElementById("outcomes-heading");
   const choiceFeedback = document.getElementById("choice-feedback");
   const customScoreSection = document.getElementById("custom-score-section");
+  const budgetChart = document.getElementById("budget-chart");
+  const budgetChartFrame = document.getElementById("budget-chart-frame");
   const choiceButtons = {
     probability: document.getElementById("choose-a"),
     consequence: document.getElementById("choose-b"),
@@ -30,6 +32,7 @@
 
   let task;
   let customScores = null;
+  let chartWidth = 0;
 
   const observers = {
     probability: {
@@ -94,6 +97,54 @@
     metricCards.append(article);
   }
 
+  function renderBudgetChart(budget) {
+    if (!task || decisionOutcomes.hidden) return;
+    const width = Math.floor(budgetChartFrame.clientWidth);
+    if (width === 0) return;
+    chartWidth = width;
+    const first = Number(budgetInput.min);
+    const last = Number(budgetInput.max);
+    const budgets = Array.from({ length: last - first + 1 }, (_, i) => first + i);
+    const series = ["probability", "consequence"].map((key) => ({
+      key,
+      values: budgets.map((reviews) => ({ reviews, harm: evaluate(observers[key], reviews).missedHarm })),
+    }));
+    const maximum = Math.max(...series.flatMap((line) => line.values.map((point) => point.harm)));
+    const tickStep = Math.max(1, Math.ceil(maximum / 5));
+    const yMax = Math.max(tickStep, Math.ceil(maximum / tickStep) * tickStep);
+    const height = width < 480 ? 300 : 340;
+    const left = 44, right = width - 18, top = 40, bottom = height - 58;
+    const x = (reviews) => left + 8 + (reviews - first) * (right - left - 16) / Math.max(1, last - first);
+    const y = (harm) => bottom - 8 - (harm / yMax) * (bottom - top - 16);
+    const selected = series.map((line) => line.values.find((point) => point.reviews === budget));
+    const description = `At ${budget} reviews, Observer A lets ${selected[0].harm} harm points through and Observer B lets ${selected[1].harm} through. Lower is better. Their warning-test results stay at ${(100 * auroc(task.rows, observers.probability.score)).toFixed(0)}% and ${(100 * auroc(task.rows, observers.consequence.score)).toFixed(0)}%.`;
+    const ticks = Array.from({ length: yMax / tickStep + 1 }, (_, i) => i * tickStep);
+    budgetChart.setAttribute("viewBox", `0 0 ${width} ${height}`);
+    budgetChart.innerHTML = `
+      <title id="budget-chart-title">Harm that escapes review at each budget</title>
+      <desc id="budget-chart-description">${description}</desc>
+      <rect class="chart-selection-band" x="${x(budget) - 9}" y="${top}" width="18" height="${bottom - top}" />
+      ${ticks.map((tick) => `<line class="chart-grid" x1="${left}" x2="${right}" y1="${y(tick)}" y2="${y(tick)}" />
+        <text x="${left - 10}" y="${y(tick)}" text-anchor="end" dominant-baseline="middle">${tick}</text>`).join("")}
+      <line class="chart-selection-guide" x1="${x(budget)}" x2="${x(budget)}" y1="${top}" y2="${bottom}" />
+      ${series.map((line) => `<polyline class="chart-line series-${line.key}" data-series="${line.key}" points="${line.values.map((point) => `${x(point.reviews)},${y(point.harm)}`).join(" ")}" />`).join("")}
+      ${series.map((line) => line.values.map((point) => {
+        const selectedPoint = point.reviews === budget;
+        const attributes = `class="chart-point series-${line.key}" data-series="${line.key}" data-budget="${point.reviews}" data-harm="${point.harm}" data-selected="${selectedPoint}"`;
+        if (line.key === "probability") return `<circle ${attributes} cx="${x(point.reviews)}" cy="${y(point.harm)}" r="${selectedPoint ? 8 : 4}" />`;
+        const half = selectedPoint ? 4.5 : 3;
+        return `<rect ${attributes} x="${x(point.reviews) - half}" y="${y(point.harm) - half}" width="${2 * half}" height="${2 * half}" />`;
+      }).join("")).join("")}
+      ${budgets.map((reviews) => `<text x="${x(reviews)}" y="${bottom + 20}" text-anchor="middle">${reviews}</text>`).join("")}
+      <text x="${left}" y="20">Harm points that get through</text>
+      <text x="${(left + right) / 2}" y="${height - 6}" text-anchor="middle">Operations reviewed</text>`;
+    document.getElementById("chart-rate-a").textContent = `${(100 * auroc(task.rows, observers.probability.score)).toFixed(0)}%`;
+    document.getElementById("chart-rate-b").textContent = `${(100 * auroc(task.rows, observers.consequence.score)).toFixed(0)}%`;
+    document.getElementById("chart-harm-a").textContent = String(selected[0].harm);
+    document.getElementById("chart-harm-b").textContent = String(selected[1].harm);
+    document.querySelectorAll(".chart-review-count").forEach((node) => { node.textContent = String(budget); });
+  }
+
   function render() {
     const budget = Number(budgetInput.value);
     budgetValue.textContent = String(budget);
@@ -104,6 +155,7 @@
     Object.entries(observers).forEach(([key, observer]) => {
       addMetricCard(key, observer, results[key]);
     });
+    renderBudgetChart(budget);
 
     const probability = results.probability;
     const consequence = results.consequence;
@@ -250,6 +302,13 @@
 
   budgetInput.addEventListener("input", render);
   observerSelect.addEventListener("change", render);
+  if (typeof ResizeObserver !== "undefined") {
+    new ResizeObserver(() => {
+      if (Math.floor(budgetChartFrame.clientWidth) !== chartWidth) renderBudgetChart(Number(budgetInput.value));
+    }).observe(budgetChartFrame);
+  } else {
+    window.addEventListener("resize", () => renderBudgetChart(Number(budgetInput.value)));
+  }
 
   fetch(dataUrl, { cache: "no-store" })
     .then((response) => {

@@ -5,6 +5,8 @@ from __future__ import annotations
 import importlib.util
 import json
 from pathlib import Path
+import shutil
+import subprocess
 import tempfile
 import unittest
 
@@ -17,6 +19,17 @@ SPEC.loader.exec_module(BUILD_SITE)
 
 
 class BuildSiteTest(unittest.TestCase):
+    @unittest.skipUnless(shutil.which("node"), "Node is needed for the browser-script unit test")
+    def test_tutorial_budget_chart_matches_the_scorer(self) -> None:
+        subprocess.run(
+            [shutil.which("node"), str(ROOT / "tests/test_try_budget_chart.js")],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=15,
+        )
+
     def test_every_page_has_one_shared_analytics_tag(self) -> None:
         beacon = "https://static.cloudflareinsights.com/beacon.min.js"
         token = '{"token": "babc4e7118744fa6a9f1a18fb87df2eb"}'
@@ -215,11 +228,31 @@ class BuildSiteTest(unittest.TestCase):
         for expected in (
             "Qwen3.5-9B",
             "Gemma-2-9B-it",
-            "Compression without a better decision.",
+            "readout sparsity",
+            "Qwen2.5-7B base",
             "lowers held-out MAE from 0.121 to 0.040",
         ):
             self.assertIn(expected, catalog)
         self.assertNotIn("GPT-2", catalog)
+
+    def test_homepage_puts_results_and_local_scoring_before_sealed_submissions(self) -> None:
+        homepage = (ROOT / "site/index.html").read_text(encoding="utf-8")
+        self.assertLess(homepage.index('id="tasks-heading"'), homepage.index('id="journey-heading"'))
+        self.assertLess(homepage.index('id="journey-heading"'), homepage.index('id="answer-heading"'))
+        self.assertIn('href="try/#real-task"', homepage)
+        self.assertIn("A preflight pass alone is not a score or rank.", homepage)
+        self.assertNotIn("Instruct · frozen intervention table", homepage)
+
+    def test_try_page_connects_the_walkthrough_to_local_scoring(self) -> None:
+        page = (ROOT / "site/try/index.html").read_text(encoding="utf-8")
+        self.assertIn('href="#play-heading"', page)
+        self.assertLess(page.index('id="step-1"'), page.index('id="decision-outcomes"'))
+        self.assertIn('id="real-task"', page)
+        self.assertIn("make demo-qwen", page)
+        self.assertIn("Qwen2.5-7B base", page)
+        self.assertIn("schema_version,query_id,predicted_risk", page)
+        self.assertIn('href="../downloads/observerbench.pdf">Paper</a>', page)
+        self.assertIn("Resampling the source problems leaves the action ranking uncertain.", page)
 
     def test_build_copies_site_and_creates_catalog(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

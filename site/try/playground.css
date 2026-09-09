@@ -53,6 +53,25 @@ sup a { padding: .2rem; }
 .metric-grid span, .metric-grid strong { display: block; }
 .metric-grid span { color: var(--muted); font-size: .95rem; line-height: 1.4; }
 .metric-grid strong { margin-top: .5rem; font-size: 1.5rem; }
+.budget-chart { max-width: 900px; margin: 2rem 0; }
+.budget-chart h3 { font-size: 1.6rem; margin-bottom: .75rem; }
+.budget-chart figcaption p { color: var(--muted); margin-bottom: 1rem; }
+.budget-chart-legend { display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; margin-bottom: 1rem; font-size: 1rem; font-variant-numeric: tabular-nums; }
+.budget-chart-key { display: flex; align-items: baseline; gap: .65rem; }
+.budget-chart-swatch { display: inline-block; flex: 0 0 .75rem; height: .75rem; }
+.budget-chart-swatch.observer-a { background: var(--ink); border-radius: 50%; }
+.budget-chart-swatch.observer-b { background: var(--accent); }
+.budget-chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.budget-chart svg text { fill: var(--ink); font-family: inherit; font-size: 14px; }
+.budget-chart .chart-grid { stroke: var(--line); stroke-width: 1; }
+.budget-chart .chart-selection-band { fill: var(--blue-soft); }
+.budget-chart .chart-selection-guide { stroke: var(--muted); stroke-width: 1; }
+.budget-chart .chart-line { fill: none; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.budget-chart .series-probability { stroke: var(--ink); }
+.budget-chart .series-consequence { stroke: var(--accent); }
+.budget-chart .chart-line.series-consequence { stroke-dasharray: 7 5; }
+.budget-chart .chart-point { stroke-width: 2; fill: var(--surface); }
+.budget-chart .chart-point[data-selected="true"] { stroke-width: 3; }
 .result-callout { margin: 1rem 0; padding: 1rem 1.2rem; border-left: 4px solid var(--gold); background: #fff7e8; font-weight: 650; }
 .backup-callout { max-width: 950px; margin-bottom: 2rem; }
 .inspection-head { display: flex; align-items: end; justify-content: space-between; gap: 2rem; margin-bottom: 1rem; }
@@ -75,7 +94,7 @@ sup a { padding: .2rem; }
 .term-list dd { margin: .3rem 0 1rem; max-width: 900px; }
 #technical-results { padding-top: 1rem; border-top: 1px solid var(--line); }
 #observer-origin { padding-top: 1rem; border-top: 1px solid var(--line); font-size: .95rem; }
-.upload-section code { padding: .1rem .3rem; border-radius: 4px; background: #edf1ef; font-size: .95em; }
+.upload-section code { padding: .1rem .3rem; border-radius: 4px; background: #edf1ef; font-size: .95em; overflow-wrap: anywhere; }
 .upload-section, .next-step { padding-top: 2.5rem; padding-bottom: 2.5rem; }
 .upload-section h2, .next-step h2 { font-size: clamp(1.75rem, 3.2vw, 2.65rem); }
 .file-button { cursor: pointer; }
@@ -83,6 +102,11 @@ sup a { padding: .2rem; }
 .upload-note.success { color: var(--accent-dark); font-weight: 650; }
 .upload-note.failure { color: var(--danger); font-weight: 650; }
 .next-step > p:not(.eyebrow) { max-width: 780px; color: var(--muted); font-size: 1.075rem; }
+.terminal-session { max-width: 900px; margin: 2rem 0; }
+.terminal-session h3 { scroll-margin-top: 2rem; }
+.terminal-session pre { overflow-x: auto; padding: 1.25rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); font-size: .9375rem; line-height: 1.6; }
+.terminal-session pre code { font-size: inherit; }
+.terminal-session pre:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
 button.button { font: inherit; }
 summary:focus-visible, input:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
 
