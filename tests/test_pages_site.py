@@ -254,6 +254,21 @@ class BuildSiteTest(unittest.TestCase):
         self.assertIn('href="../downloads/observerbench.pdf">Paper</a>', page)
         self.assertIn("Resampling the source problems leaves the action ranking uncertain.", page)
 
+    def test_quick_start_is_shared_and_distinct_from_browser_walkthrough(self) -> None:
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn('<a id="sixty-second-demo"></a>', readme)
+        self.assertIn("make demo", readme)
+        self.assertIn("Qwen2.5-7B base", readme)
+        quick_start = 'href="https://github.com/kwisatzh/observerbench#sixty-second-demo"'
+        for path in ("index.html", "runners/index.html", "try/index.html"):
+            with self.subTest(page=path):
+                page = (ROOT / "site" / path).read_text(encoding="utf-8")
+                self.assertIn(quick_start + ">Run two examples—no GPU required</a>", page)
+        home = (ROOT / "site/index.html").read_text(encoding="utf-8")
+        self.assertIn('href="try/">Try the browser walkthrough</a>', home)
+        runners = (ROOT / "site/runners/index.html").read_text(encoding="utf-8")
+        self.assertLess(runners.index(quick_start), runners.index('id="practice-heading"'))
+
     def test_build_copies_site_and_creates_catalog(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             temp = Path(temporary)

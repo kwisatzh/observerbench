@@ -3,28 +3,28 @@
 **Test an internal estimate by the action it causes.**
 
 [Website](https://kwisatzh.github.io/observerbench/) ·
-[Try it](https://kwisatzh.github.io/observerbench/try/) ·
+[Browser walkthrough](https://kwisatzh.github.io/observerbench/try/) ·
 [Leaderboards](https://kwisatzh.github.io/observerbench/leaderboards/) ·
 [Run an observer](https://kwisatzh.github.io/observerbench/runners/) ·
 [Submit predictions](https://kwisatzh.github.io/observerbench/submit/) ·
 [Paper](https://kwisatzh.github.io/observerbench/downloads/observerbench.pdf) ·
 [Archived release](https://doi.org/10.5281/zenodo.22136091)
 
-ObserverBench evaluates an internal estimator—an **observer**—through the
-intervention, control loop, or safety decision it guides. It keeps the task,
-allowed actions, controller, and loss fixed, then asks what changes when the
-observer changes.
+An **observer** uses available measurements to estimate something we cannot
+read directly—for example, whether a model's proposed action is unsafe or what
+an edit inside the model will do. ObserverBench tests both the estimate and the
+decision made from it. The task and decision rule stay fixed, so different
+observers face the same test.
 
-This is the evaluation companion to
-[Mechanistic Tomography](https://arxiv.org/abs/2608.19338). Mechanistic
-tomography asks how to measure a hidden internal quantity. ObserverBench asks
-whether the resulting estimate is good enough for the action we want to take.
+[Mechanistic Tomography](https://arxiv.org/abs/2608.19338) asks how to measure a
+hidden internal quantity. ObserverBench asks whether that estimate helps us act.
 
-The current software release is `0.1.0`.
+<a id="sixty-second-demo"></a>
 
-## Sixty-second demo
+## Run two examples—no GPU required
 
-No package, model download, GPU, or API key is required:
+You need Git, Python 3, and make. No model download, extra Python packages, or
+API key is needed.
 
 ```bash
 git clone https://github.com/kwisatzh/observerbench.git
@@ -32,43 +32,36 @@ cd observerbench
 make demo
 ```
 
-The command runs two small, open examples:
+One command runs both examples and prints their scores:
 
-- A safety monitor with better classification AUROC spends its limited audit
-  budget on likely but low-impact violations and produces worse action loss.
-  Edit the short `score(row)` function in
-  [`demo/safety_tutorial.py`](demo/safety_tutorial.py), then run it again.
-- A nine-parameter observer learns from 40 cached Qwen2.5-7B interventions,
-  predicts 128 new effects, and is scored both on prediction error and on the
-  interventions it selects. Start with the
-  [Qwen practice task](practice/qwen_copy_v2_b040/README.md).
+- **Safety: which requests should we check?** In a made-up set of 16 requests,
+  only four can be checked. The observer that ranks violations better leaves
+  24 harm points unchecked; the other leaves 6. You get both its ranking score
+  (AUROC) and the harm its choices miss. Change `score(row)` in
+  [`demo/safety_tutorial.py`](demo/safety_tutorial.py) and rerun.
+- **Qwen: which internal edit should we choose?** Using saved measurements from
+  **Qwen2.5-7B base**, a small observer fits 40 interventions and predicts 128
+  more. The scorer reports prediction error, how far the selected edits miss
+  their targets, and a comparison with doing nothing. Change the observer in
+  the [Qwen practice task](practice/qwen_copy_v2_b040/README.md) and compare.
 
-Prefer a browser? Use the
-[open safety tutorial](https://kwisatzh.github.io/observerbench/try/). It runs
-locally in the page and accepts a CSV containing one score per request. Its
-targets are public for immediate feedback, so tutorial results are not eligible
-for the leaderboard.
+These examples score locally and show their answers: no upload or maintainer
+review is needed. Their practice scores do not enter the research rankings.
 
-## Why ObserverBench exists
+Prefer no setup? [Try the browser walkthrough](https://kwisatzh.github.io/observerbench/try/).
+Choose an observer, change the checking budget, and watch which decisions improve.
 
-A good prediction does not always produce a good decision.
+## Why test both predictions and decisions?
 
-Suppose a safety monitor ranks risky requests accurately. A controller can
-still spend its limited audit budget on minor violations and let more costly
-ones pass. In the same way, an observer can predict an intervention's average
-effect well but choose an edit that behaves poorly on individual prompts.
+ObserverBench reports:
 
-ObserverBench reports both sides:
+- **Prediction quality:** How well did the observer estimate or rank the target?
+- **Decision quality:** What happened when the decision rule used that estimate?
 
-- **Statistical quality:** Did the observer estimate or rank the target well?
-- **Decision quality:** What happened after a fixed controller used that
-  estimate?
+Neither number replaces the other. Results are compared within the same task
+version and information access—not in one global ranking.
 
-Neither number replaces the other.
-
-## What an ObserverBench task fixes
-
-Every task declares five things before observers are compared:
+To make the comparison fair, every task declares five things:
 
 1. **Target:** what the observer must estimate.
 2. **Information boundary:** what the observer is allowed to read.
@@ -78,68 +71,49 @@ Every task declares five things before observers are compared:
 5. **Deployment setting:** the prompt distribution, budget, prevalence, and
    other operating conditions.
 
-Results are ranked only inside the same task version and comparison track.
-ObserverBench does not issue a global rank across unlike tasks or access
-regimes.
-
 ## What is included
 
-| Mode | Main question | Checked examples |
-| --- | --- | --- |
-| Closed-loop control | Does observer error reach the feedback loop or move collateral state? | Analytic and learned control fixtures |
-| Effect prediction | Does the estimated effect map predict held-out interventions and choose a good action? | GPT-2 IOI and Qwen2.5-7B induction-copy panels |
-| Safety triage | Does a monitor use a fixed audit or intervention budget well? | Qwen2.5-7B-Instruct, Gemma-2-9B-it, and Qwen3.5-9B APPS panels |
+Tasks cover closed-loop control, choosing internal edits, and safety triage.
+Three findings illustrate what they test:
 
-Three findings summarize why the distinction matters:
+- **A better effect prediction need not choose a better edit.** On the GPT-2-small
+  and Qwen2.5-7B base tasks, predicting average effects more accurately does not
+  automatically improve the action. Observers fitted to predict action loss
+  choose better edits.
+- **Classification and safety outcomes can rank observers differently.** On the
+  recorded Gemma-2-9B-it panel, the detailed prompted monitor has higher AUROC
+  than the Gemma Scope sparse-autoencoder (SAE) probe (`0.893` vs. `0.870`), but
+  more mean missed violations (`10.80` vs. `9.07`). Resampling the source
+  problems leaves the action ranking uncertain.
+- **Where we read a model matters.** The best monitoring context changes across
+  Qwen2.5-7B-Instruct, Gemma-2-9B-it, and Qwen3.5-9B. Test the observer on the
+  model and operating setting where it will be used.
 
-- On GPT-2 and Qwen2.5, a model can predict mean intervention effects better
-  without choosing a better edit. Observers trained for the downstream loss
-  choose better actions.
-- On Gemma, a prompted monitor has higher AUROC than an official Gemma Scope
-  SAE probe (`0.893` versus `0.870`) but causes more mean realized violations
-  (`10.80` versus `9.07`). Classification is not enough.
-- The lowest-loss monitoring context changes across Qwen2.5, Gemma, and
-  Qwen3.5. A monitor must be tested on the model and operating setting where it
-  will be used.
-
-See the [live leaderboards](https://kwisatzh.github.io/observerbench/leaderboards/)
-for the checked rows, access boundaries, and task-specific metrics.
+The [leaderboards](https://kwisatzh.github.io/observerbench/leaderboards/) show
+the results and comparison conditions for each task.
 
 ## Open practice tasks
 
-Open practice tasks reveal their targets so that a new observer gets immediate
-feedback. They are useful for learning the contract and testing code, but their
-scores do not enter the sealed leaderboards.
+After the two examples, try another observer on one of these tasks. All return
+local feedback using public answers.
 
 | Task | What you can change | What it reports |
 | --- | --- | --- |
-| [Safety tutorial](site/try/) | One risk score per request | AUROC, missed harm, clean audits, action loss |
-| [Qwen2.5-7B Copy-v2, budget 40](practice/qwen_copy_v2_b040/README.md) | Any predictor trained on 40 cached interventions | MAE, RMSE, selected-action loss, regret, gain over no-op |
+| [Safety tutorial](https://kwisatzh.github.io/observerbench/try/) | One risk score per request | Ranking accuracy, missed harm, unnecessary checks, action loss |
+| [Qwen2.5-7B base Copy-v2](practice/qwen_copy_v2_b040/README.md) | A predictor fitted on 40 saved interventions | Prediction error, selected-action loss, regret, gain over no-op |
 | [GPT-2-small IOI decision replay](practice/ioi_decision_v1/README.md) | A mean-effect prediction CSV; includes attribution patching | Chosen masks, action loss, paired comparisons with four observers and no-op |
 | [Evidence integrity and cross-agent origin](docs/evidence_integrity.md) | Which trusted observations to buy, then how to score pending operations | Missed severity, clean work retained, measurement cost, total loss |
 
-For an exploratory check, see the [cross-model reuse diagnostic](docs/monitor_transfer.md).
-It tests unchanged coefficients across different architectures, alongside a
-target-only learning curve; it does not demonstrate a benefit from transfer.
-Its aggregate results are available; the original per-example
-caches are not a public practice pack.
+The separate [cross-model reuse diagnostic](docs/monitor_transfer.md) tests
+unchanged observer coefficients across architectures. It shows no transfer
+advantage; only aggregate results are public, not a runnable practice pack.
 
-To score a published method through the decision rule, run
-`python examples/ioi_decision_submission.py` after installing `numpy pandas
-matplotlib`. It needs no model download. [See the example and its limits](practice/ioi_decision_v1/README.md).
+## Try your own observer
 
-## Choose a path
-
-### Explore the evidence
-
-Open the [leaderboards](https://kwisatzh.github.io/observerbench/leaderboards/)
-and choose one task panel. The table ranks observers only within that panel.
-
-### Run an observer locally
-
-Keep your model, weights, and method in your own environment. ObserverBench
-reads only the resulting predictions and a description of how you produced
-them.
+Run your method locally. For effect and safety tasks, provide a prediction
+table and an **ObserverCard**: a short record of what your method could read,
+how you built it, its cost, and the task version. The control task also accepts
+a Python implementation.
 
 Start with the [runner guide](https://kwisatzh.github.io/observerbench/runners/)
 or jump to the relevant contract:
@@ -151,45 +125,37 @@ or jump to the relevant contract:
 | Safety risk monitor or score table | [Safety observer contract](docs/SAFETY_API.md) |
 | APPS or AI-control monitor | [External monitor comparison](docs/SAFETY_API.md#external-ai-control-monitor-comparison) |
 
-The notebooks under [`notebooks/`](notebooks/) reproduce specific checked
-studies. They are not generic hosted runners.
+For an existing-method example, run `python examples/ioi_decision_submission.py`
+after installing `numpy pandas matplotlib`. It scores attribution patching's
+saved predictions through the action-selection rule, without loading GPT-2.
+[See the IOI guide](practice/ioi_decision_v1/README.md).
 
-### Submit predictions
+## Submit predictions
 
-The public path accepts plain CSV and JSON files; it never executes contributor
-code. Automatic preflight checks the schema, query IDs, finite values,
-source link, and declared access.
+Public submissions use CSV and JSON files, not uploaded code. Automatic checks
+verify the file format, query IDs, finite values, source link, and declared
+access.
 
-In the current public release, automatic submission is enabled only for the blinded
-`paired-scope-v1` safety pack. Sealed scoring is not yet active, so a passing
-submission receives a preflight result—not a benchmark score or rank.
+This route currently supports only the blinded `paired-scope-v1` safety pack.
+**Sealed scoring is not active:** a passing submission receives a file-check
+result, not a score or rank. Use the open practice tasks for immediate scoring.
 
 - [Start a submission](https://github.com/kwisatzh/observerbench/issues/new?template=observer-submission.yml)
 - [Public submission workflow](docs/PUBLIC_SUBMISSION_WORKFLOW.md)
 - [Submission file contract](submissions/README.md)
 - [Blinded public task pack](task-packs/safety/safety-interlock-qwen2-5-7b-instruct/paired-scope-v1/)
 
-### Reproduce the paper
+<a id="quick-start"></a>
 
-Build the paper from the checked local artifacts:
+## Install the full workbench
 
-```bash
-make -C paper/observerbench_v15_source
-```
-
-This path does not download GPT-2 or Qwen and does not rerun model inference.
-The [reproduction map](paper/figure_map.md) links each claim to its checked
-artifact and, where available, the full scientific rerun.
-
-## Quick start
+The two examples above need no installation. For the full Python command-line
+tools, run these from your downloaded repository:
 
 ```bash
-git clone https://github.com/kwisatzh/observerbench.git
-cd observerbench
 python -m venv .venv
 source .venv/bin/activate
-python -m pip install -e '.[dev]'
-pytest -q
+python -m pip install -e .
 ```
 
 See what is available:
@@ -201,51 +167,46 @@ observerbench list-safety-tasks
 observerbench list-safety-results
 ```
 
-Run a small CPU task:
+Run a small CPU task and generate its ObserverCard:
 
 ```bash
 observerbench run safety_interlock_analytic \
   --config configs/safety_interlock_analytic.yaml \
   --outdir runs/safety-interlock
-```
-
-Generate an ObserverCard:
-
-```bash
 observerbench make-card \
   --results runs/safety-interlock \
   --outdir runs/safety-interlock/cards
 ```
 
-An ObserverCard records what the method could read, what it estimated, how it
-was fitted, its main metrics, its known failures, and the exact task version.
+## Reproduce the paper
+
+The [reproduction map](paper/figure_map.md) links claims to saved results and
+instructions for rerunning the experiments. The [notebooks](notebooks/) cover
+named studies; they are not generic hosted runners.
+
+To rebuild the paper from saved results, with LaTeX installed:
+
+```bash
+make -C paper/observerbench_v15_source
+```
+
+This rebuild does not download model weights or rerun model inference.
 
 ## Repository map
 
 | Path | Contents |
 | --- | --- |
 | [`src/observerbench/`](src/observerbench/) | Python package and task contracts |
-| [`leaderboards/`](leaderboards/) | Checked task-specific result panels |
-| [`practice/`](practice/) | Open tasks with public targets and immediate local scoring |
-| [`task-packs/`](task-packs/) | Public task definitions and target-free queries |
 | [`notebooks/`](notebooks/) | Colab reproductions for named studies |
 | [`paper/`](paper/) | Manuscript source and claim-to-artifact map |
 | [`docs/`](docs/) | Detailed contracts, registrations, and protocols |
-| [`submissions/`](submissions/) | Prediction and ObserverCard templates |
 
 ## Current boundaries
 
-ObserverBench currently provides fixed, versioned tasks. It does not provide:
-
-- hosted model inference or execution of uploaded code;
-- a general bring-your-own-model plugin system;
-- a universal rank across different tasks and information boundaries;
-- a complete safety evaluation against adaptive or monitor-aware attackers;
-- open-ended circuit discovery.
-
-The IOI panels use documented circuit groups as a controlled diagnostic. The
-Qwen induction-copy panel tests one confirmed intervention surface; it does not
-claim to describe the model's complete circuit.
+These are fixed tasks, not a hosted inference service or a general
+bring-your-own-model system. IOI uses documented circuit groups; the Qwen copy
+task tests a selected intervention surface, not the complete circuit. The
+safety tasks do not establish robustness against adaptive attackers.
 
 ## Credit
 
@@ -266,4 +227,4 @@ Experiments designed/concieved by Vijay Erramilli. Code written by Vijay Erramil
 
 ## License
 
-ObserverBench is released under the [Apache License 2.0](LICENSE).
+Software release `0.1.0` uses the [Apache License 2.0](LICENSE).
