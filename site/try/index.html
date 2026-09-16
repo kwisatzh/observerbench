@@ -78,7 +78,7 @@
       <h2 id="step-3-heading">What is an observer?</h2>
       <div class="lesson-copy">
         <p>We need a method that combines the available measurements into an estimate of the quantity we care about. For Model A, that quantity could be the chance that its proposed operation violates the user's instructions. We express this estimate as a <strong>warning score</strong>: a higher score means a higher estimated chance of a violation. The score gives us a prediction about the proposed action, based on the evidence we have collected.</p>
-        <p><strong>The method producing that score is the observer.</strong> We borrow the name from control theory, where an observer estimates a system's hidden state from available measurements.<sup><a href="#observer-origin" aria-label="Read the source for the term observer">1</a></sup></p>
+        <p><strong>The method producing that score is the observer.</strong> We borrow the name from control theory, where an observer estimates a system's hidden state from available measurements.<sup><a href="#observer-origin" aria-label="Read the source for the term observer">1</a></sup> A safety monitor is one kind of observer: we judge it not just by how well it spots problems, but by whether its warnings help us make better decisions.</p>
         <p>An observer can combine the measured responses to several interventions, apply a known mathematical relation, or use a fitted readout of internal activity. These are different ways to turn incomplete evidence into a usable estimate.</p>
         <details class="explanation">
           <summary>What kinds of observers do researchers build?</summary>
