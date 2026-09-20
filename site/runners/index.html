@@ -46,7 +46,7 @@
         <a class="button secondary" href="https://github.com/kwisatzh/observerbench/tree/main/practice/ioi_decision_v1">Score attribution patching or your own IOI table</a>
         <a class="button secondary" href="../try/">Try the browser safety task</a>
       </div>
-      <p class="preview-note">The IOI replay returns chosen actions, loss, and paired comparisons with four observers and no-op. All practice tasks have public targets: they provide immediate feedback but do not enter sealed rankings.</p>
+      <p class="preview-note">The IOI replay returns chosen actions, loss, and paired comparisons with four observers and no-op. All practice tasks have public targets: they provide immediate feedback but do not enter private-test rankings.</p>
     </section>
 
     <section class="section compact" id="integrity" aria-labelledby="integrity-heading">
@@ -59,7 +59,7 @@ make demo-integrity
 make demo-relay</code></pre>
       <p>Run these from the repository root. Edit the example's measurement-selection and risk-prediction functions to try your own observer. Each run compares it with four baselines and reports loss including inspection cost.</p>
       <div class="button-row"><a class="button primary" href="https://github.com/kwisatzh/observerbench/blob/main/docs/evidence_integrity.md">Read the task and results</a><a class="button secondary" href="https://github.com/kwisatzh/observerbench/blob/main/examples/evidence_integrity_submission.py">Edit the observer example</a></div>
-      <p class="preview-note">The relay history is scripted and shares the first task's generator. It is not an independent replication or live multi-agent experiment. Public local targets make these practice scores ineligible for sealed rankings.</p>
+      <p class="preview-note">The relay history is scripted and shares the first task's generator. It is not an independent replication or live multi-agent experiment. Public local targets make these practice scores ineligible for private-test rankings.</p>
     </section>
 
     <section class="section" aria-labelledby="choose-runner-heading">
@@ -83,13 +83,13 @@ make demo-relay</code></pre>
         <article class="task-card">
           <div class="task-top"><span class="badge available">local scores</span><span>Safety</span></div>
           <h3>I have a safety monitor</h3>
-          <p>Supply risk scores. ObserverBench applies the same audit, block, or escalation budget and reports realized harm and clean utility.</p>
+          <p>Supply risk scores. ObserverBench applies the same audit, block, or escalation budget and reports realized harm and utility on safe requests.</p>
           <a class="text-link" href="https://github.com/kwisatzh/observerbench/blob/main/docs/SAFETY_API.md">Open the safety runner →</a>
         </article>
         <article class="task-card">
           <div class="task-top"><span class="badge available">Python contract</span><span>Control</span></div>
           <h3>I have a state estimator</h3>
-          <p>Compose an estimator and actuation direction with a fixed controller, intervention rule, and control loss.</p>
+          <p>Compose an estimator and edit direction with a fixed controller, intervention rule, and control loss.</p>
           <a class="text-link" href="https://github.com/kwisatzh/observerbench/blob/main/docs/API_CONTRACT.md#run-an-outside-observer-on-bundled-ctl-1">Open the control runner →</a>
         </article>
       </div>
@@ -112,7 +112,7 @@ make demo-relay</code></pre>
 
     <section class="section split-explainer" aria-labelledby="public-boundary-heading">
       <div><p class="eyebrow">Public boundary</p><h2 id="public-boundary-heading">A local run is not automatically a public score.</h2></div>
-      <div><p>Automatic preflight currently accepts only the target-free Qwen2.5 paired-scope v1 prediction table. It checks data files and never executes contributor code. Sealed scoring is not active today, so a passing preflight is not yet a benchmark rank.</p><div class="button-row"><a class="button primary" href="../submit/">See the submission path</a><a class="button text" href="https://github.com/kwisatzh/observerbench/blob/main/docs/PUBLIC_SUBMISSION_WORKFLOW.md">Read the boundary</a></div></div>
+      <div><p>Automatic preflight currently accepts only the target-free Qwen2.5 paired-scope v1 prediction table. It checks data files and never executes contributor code. Private-test evaluation is not active today, so a passing preflight is not yet a benchmark rank.</p><div class="button-row"><a class="button primary" href="../submit/">See the submission path</a><a class="button text" href="https://github.com/kwisatzh/observerbench/blob/main/docs/PUBLIC_SUBMISSION_WORKFLOW.md">Read the boundary</a></div></div>
     </section>
   </main>
 

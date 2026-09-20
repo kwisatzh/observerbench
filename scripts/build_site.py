@@ -175,7 +175,7 @@ def _copy_leaderboards(repo_root: Path, output: Path) -> list[dict[str, Any]]:
                 "task_id": task_id,
                 "panel": panel,
                 "row_count": len(rows),
-                "status": "open replay; not sealed" if payload.get("participation_class") == "open_replay" else "checked baseline panel",
+                "status": "open replay; public test labels" if payload.get("participation_class") == "open_replay" else "checked baseline panel",
                 "primary_metric": primary,
                 "metric_directions": directions,
                 "available_metrics": list(directions),

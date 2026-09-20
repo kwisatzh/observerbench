@@ -10,6 +10,16 @@
     return element;
   }
 
+  // Translate displayed wording without changing stored labels or ranking rules.
+  function displayTerminology(value) {
+    return String(value)
+      .replaceAll("prospectively frozen matched replication", "pre-specified matched evaluation")
+      .replaceAll("prespecified", "pre-specified")
+      .replaceAll("bounded post-outcome control", "additional post-hoc control")
+      .replaceAll("post-outcome", "post-hoc")
+      .replaceAll("open replay; not sealed", "open replay; public test labels");
+  }
+
   function formatMetric(value, name) {
     const number = Number(value);
     if (!Number.isFinite(number)) return "—";
@@ -21,7 +31,7 @@
 
   function labelMetric(name) {
     if (name === "mean_realized_violations_at_p01_b02") {
-      return "Mean violations (1% attacks, 2% audit)";
+      return "Mean violations (1% attack rate, 2% audit budget)";
     }
     return name
       .replaceAll("_at_0.02", " @ 2%")
@@ -124,7 +134,7 @@
         ].forEach(([name, value]) => {
           const item = document.createElement("span");
           const strong = text(document.createElement("strong"), `${name}: `);
-          item.append(strong, document.createTextNode(value));
+          item.append(strong, document.createTextNode(displayTerminology(value)));
           summary.append(item);
         });
 
@@ -140,11 +150,11 @@
           const observer = document.createElement("td");
           observer.className = "observer-cell";
           const name = text(document.createElement("strong"), row.display_name || row.observer_name || "Unnamed observer");
-          const family = text(document.createElement("small"), row.observer_family || row.fit_procedure || "");
+          const family = text(document.createElement("small"), displayTerminology(row.observer_family || row.fit_procedure || ""));
           observer.append(name, family);
 
           const status = document.createElement("td");
-          const badge = text(document.createElement("span"), row.result_status || "unspecified");
+          const badge = text(document.createElement("span"), displayTerminology(row.result_status || "unspecified"));
           badge.className = `badge ${statusClass(row)}`;
           status.append(badge);
 

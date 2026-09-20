@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import importlib.util
 import json
+from html.parser import HTMLParser
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import tempfile
@@ -19,6 +21,57 @@ SPEC.loader.exec_module(BUILD_SITE)
 
 
 class BuildSiteTest(unittest.TestCase):
+    def test_visible_pages_use_ml_evaluation_terminology(self) -> None:
+        class VisibleText(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.parts = []
+
+            def handle_data(self, data):
+                self.parts.append(data)
+
+        flagged = re.compile(
+            r"\b(?:prereg\w*|prospectiv\w*|retrospectiv\w*|prevalence|"
+            r"sealed?|actuator|actuation|estimand|post-outcome|wind-tunnel)\b",
+            re.IGNORECASE,
+        )
+        for path in sorted((ROOT / "site").rglob("*.html")):
+            with self.subTest(page=path.relative_to(ROOT)):
+                parser = VisibleText()
+                parser.feed(path.read_text())
+                self.assertIsNone(flagged.search(" ".join(parser.parts)))
+
+    @unittest.skipUnless(shutil.which("node"), "Node is needed for display tests")
+    def test_display_terminology_preserves_result_eligibility(self) -> None:
+        script = r'''
+const fs = require("fs");
+const vm = require("vm");
+const assert = require("assert");
+const source = fs.readFileSync("site/assets/site.js", "utf8").replace(
+  'if (page === "leaderboards") setupLeaderboards();',
+  'globalThis.api = {displayTerminology, isEligible, statusClass};'
+);
+const context = {document: {body: {dataset: {}}}};
+vm.runInNewContext(source, context);
+const {displayTerminology, isEligible, statusClass} = context.api;
+for (const [stored, displayed, eligible, css] of [
+  ["prospectively frozen matched replication", "pre-specified matched evaluation", true, "checked"],
+  ["prespecified locked test", "pre-specified locked test", true, "checked"],
+  ["bounded post-outcome control", "additional post-hoc control", false, "secondary"],
+  ["post-outcome published-method baseline", "post-hoc published-method baseline", false, "secondary"],
+  ["oracle bound", "oracle bound", false, "reference"],
+]) {
+  const row = {result_status: stored};
+  assert.equal(displayTerminology(stored), displayed);
+  assert.equal(isEligible(row), eligible);
+  assert.equal(statusClass(row), css);
+  assert.equal(row.result_status, stored);
+}
+assert.equal(displayTerminology("open replay; not sealed"), "open replay; public test labels");
+'''
+        subprocess.run([shutil.which("node"), "-e", script], cwd=ROOT,
+                       check=True, capture_output=True, text=True, timeout=15)
+
     @unittest.skipUnless(shutil.which("node"), "Node is needed for the browser-script unit test")
     def test_tutorial_budget_chart_matches_the_scorer(self) -> None:
         subprocess.run(
