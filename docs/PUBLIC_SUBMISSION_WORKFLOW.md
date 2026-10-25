@@ -1,81 +1,64 @@
-# GitHub-native public evaluation
+# Local submission and offline evaluation
 
-The public repository and GitHub Pages site are the visible half of
-ObserverBench. A separate private evaluator holds sealed targets. This keeps
-routine preflight automatic without giving untrusted code access to labels or
-repository credentials.
+Nothing runs when an issue is opened, reopened, edited, or labelled. There is no
+hosted scoring service. CI and Pages builds are maintainer-dispatched only.
 
-## Public-release status
+## Submitters
 
-The public repository automatically performs data-only preflight. The sealed
-evaluator is a separate deployment and is inactive at public launch. It can be
-enabled after the repository variable `SEALED_EVALUATOR_ENABLED` is set to
-`true` and the evaluator settings below are present. With that switch off, a
-passing submission receives a preflight comment and artifact only. It has not
-been scored and is not eligible for a leaderboard rank.
+1. Run `python scripts/authorization_starter.py --output my-observer` on CPU,
+   or prepare your own predictions using the public task pack.
+2. Run `python scripts/score_authorization_validation.py my-observer/validation_predictions.csv`.
+   Report the entire validation scorecard and how hyperparameters were chosen.
+   Public validation scores are not test leaderboard scores.
+3. Attach a ZIP containing only `predictions.csv` (test IDs) and
+   `observer_card.json` to an issue, or link immutable copies. Include the task
+   version and validation scorecard. The maintainer computes hashes on receipt.
+4. The maintainer checks inert data locally, then scores test predictions offline
+   in monthly batches, scored within 30 days. Revisions count as new submissions.
+   Limit: at most three scored submissions per person and task per rolling
+   30 days; the maintainer checks the local log before scoring.
+   No per-example feedback is returned.
 
-## Routine path
+APPS submissions and the open-replay export are on hold pending comment-artifact
+review. Existing historical panels remain visible. Do not submit APPS jobs yet.
 
-1. A researcher opens the structured Observer evaluation job issue, links a
-   prediction table at an immutable GitHub commit, and pastes an ObserverCard.
-2. `issue-submission.yml` automatically downloads and checks the table as
-   untrusted data. It executes no contributor code.
-3. If the optional sealed evaluator is enabled, the checked request and its
-   SHA-256 digest are sent to the private evaluator automatically.
-4. The private evaluator reads only the allowed data files, joins prediction IDs
-   to sealed targets, applies the frozen controller and budget, and emits a
-   redacted scorecard.
-5. An approved result JSON updates the matching task leaderboard. GitHub Pages
-   rebuilds from checked result JSON. The initial public release does not
-   automate this publication step.
+## Maintainer: trusted checkout, no submitted code
 
-The issue is a job record, not a request for line-by-line human review. A pull
-request remains available as a bulk or development path, but routine jobs do
-not need one.
+Download the two files as ordinary files; inspect archive paths before extraction.
+Do not install or run a submitter's code. Record the issue, submitter, date,
+task, and input hashes in a local log; check the submission limit first.
+Compute SHA-256 hashes from the received files (for example,
+`shasum -a 256 predictions.csv observer_card.json`); submitters need not supply them.
+Keep protected targets, that log, and scoring outputs outside this checkout.
+The script rejects symlinks, oversized inputs, wrong schemas, duplicate or missing
+IDs, mismatched hashes, and targets not bound to the public task.
 
-## Trust boundary
+```sh
+python scripts/score_submission_offline.py \
+  --predictions /private/submission/predictions.csv --predictions-sha256 PREDICTION_SHA256 \
+  --card /private/submission/observer_card.json --card-sha256 CARD_SHA256 \
+  --task task-packs/safety/safety-interlock-qwen2-5-7b-instruct/paired-scope-v1/safety_task.json --task-sha256 TASK_SHA256 \
+  --targets /private/evaluation/targets.json --targets-sha256 APPROVED_TARGET_SHA256 \
+  --output /private/evaluation/draft-row.json
+```
 
-The public CI workflow may validate untrusted files but receives no target or
-publication secret. The private evaluator uses trusted code from its own default
-branch and never installs, imports, or executes content supplied by the
-researcher. It should fetch the prediction and card blobs by the exact commit
-SHA recorded by preflight, enforce the same size and schema limits again, and
-publish only aggregate or otherwise approved outputs.
+Use hashes from reviewed intake and the approved target manifest, not unchecked
+submission values. The target's internal public-task hash is also verified.
+The output is an aggregate draft, never an automatic leaderboard edit. Review
+access claims, validation report, limits, and draft before approving an addendum.
+No labels, private paths, or per-query outcomes are copied to the draft.
 
-Configure these public-repository settings when the evaluator repository is
-ready:
+## Preflight options
 
-- repository variable `SEALED_EVALUATOR_ENABLED=true`;
-- repository variable `SEALED_EVALUATOR_REPOSITORY=<owner>/<private-repo>`;
-- repository secret `SEALED_EVALUATOR_TOKEN` with permission only to dispatch
-  the private evaluator workflow.
+**Recommended and implemented: local only.** The offline script composes the
+existing validator and scorer. Standalone format checking also works:
+`python scripts/validate_public_submission.py --root submissions`, using the
+layout `safety/TASK/SUBMISSION/{predictions.csv,observer_card.json}`.
 
-`SEALED_EVALUATOR_ENABLED` controls structured issue jobs. The older pull-request
-dispatcher has its own `SEALED_PR_EVALUATOR_ENABLED` switch and remains off until
-the private evaluator accepts pull-request artifacts as well.
+**Alternative, not implemented:** a workflow could require `run-preflight` plus
+an explicit maintainer-permission check, trusted validator checkout, read-only
+contents permission, no secrets, and no submitted code. It still allocates an
+Actions runner for the label event and adds a billing and trust boundary.
+Local-only is simpler and matches the policy.
 
-Keep evaluator targets, per-query labels, and private result rows out of the
-public repository and out of public workflow artifacts.
-
-## Human review
-
-Data-only preflight needs no manual approval. Once sealed scoring is enabled,
-add a moderation or verification step only for new scientific contracts,
-executable submissions, abuse flags, disputes, or an `implementation verified`
-badge. Rate limits and a provisional `community evaluated` status can protect
-the sealed test set without creating a review queue.
-
-## Public task-pack integrity
-
-The first preflight-enabled task is the Qwen safety `paired-scope-v1` pack.
-Its public query IDs and synthetic account/resource names are re-keyed; the
-source mapping and targets stay with the evaluator. This prevents the direct
-label leakage in the checked v0 identifiers.
-
-The existing APPS reproduction table includes `eval_mode`, `backdoor_works`,
-and `family_id`. Public submissions omit all three, and the evaluator joins them
-privately. The exact question/code examples remain matchable to the public
-labelled upstream dataset, however, so this is an open adoption panel rather
-than a sealed generalization test. Its checked panel remains visible, but
-routine APPS jobs stay closed until the normalized public query export is
-available. The result page must preserve the open-panel label.
+There are no evaluator dispatch tokens or hosted-evaluator activation steps.

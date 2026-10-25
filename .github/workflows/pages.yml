@@ -1,15 +1,6 @@
 name: Publish ObserverBench site
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "site/**"
-      - "leaderboards/**"
-      - "task-packs/**"
-      - "scripts/build_site.py"
-      - "tests/test_pages_site.py"
-      - ".github/workflows/pages.yml"
   workflow_dispatch:
 
 permissions:

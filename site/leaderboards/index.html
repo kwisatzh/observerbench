@@ -6,7 +6,7 @@
   <meta name="description" content="Checked ObserverBench baseline panels and task-relative comparisons.">
   <title>Leaderboards — ObserverBench</title>
   <link rel="stylesheet" href="../assets/styles.css">
-  <script src="../assets/site.js" defer></script>
+  <script src="../assets/site.js?v=final-copy-20261024" defer></script>
 </head>
 <body data-page="leaderboards" data-site-root="..">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -16,7 +16,7 @@
       <a href="../">Overview</a>
       <a href="../try/">Try</a>
       <a aria-current="page" href="./">Leaderboards</a>
-      <a href="../runners/">Runners</a>
+      <a href="../runners/">Run</a>
       <a href="../submit/">Submit</a>
       <a href="../downloads/observerbench.pdf">Paper</a>
       <a href="https://github.com/kwisatzh/observerbench">GitHub</a>
@@ -25,25 +25,25 @@
 
   <main id="main">
     <section class="page-hero narrow">
-      <p class="eyebrow">Checked results</p>
-      <h1>Compare observers inside a declared task.</h1>
-      <p class="lede">The tables preserve access, provenance, and result status. They do not collapse unlike tasks into one headline number.</p>
+      <p class="eyebrow">Results</p>
+      <h1>Compare methods on the same task.</h1>
+      <p class="lede">Choose a task and compare prediction and decision results.</p>
     </section>
 
     <section class="section leaderboard-shell" aria-labelledby="table-heading">
       <div class="controls" aria-label="Leaderboard controls">
         <label>Task panel
-          <select id="task-select"><option>Loading checked panels…</option></select>
+          <select id="task-select"><option>Loading panels…</option></select>
         </label>
         <label>Metric
           <select id="metric-select"><option>Loading metrics…</option></select>
         </label>
         <label>Rows
           <select id="status-select">
-            <option value="all">All checked rows</option>
-            <option value="eligible">Pre-specified / rank-eligible rows</option>
-            <option value="secondary">Secondary analyses only</option>
-            <option value="reference">References and no-op only</option>
+            <option value="all">All</option>
+            <option value="eligible">Planned comparisons</option>
+            <option value="secondary">Added later</option>
+            <option value="reference">Oracle and do-nothing</option>
           </select>
         </label>
       </div>
@@ -52,26 +52,37 @@
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th scope="col">Order</th><th scope="col">Observer</th><th scope="col">Status</th><th scope="col">Access</th><th id="metric-heading" scope="col">Metric</th></tr>
+            <tr><th scope="col">Order</th><th scope="col">Method</th><th scope="col">Status</th><th scope="col">What it reads</th><th id="metric-heading" scope="col">Metric</th></tr>
           </thead>
-          <tbody id="leaderboard-body"><tr><td colspan="5">Loading checked results…</td></tr></tbody>
+          <tbody id="leaderboard-body"><tr><td colspan="5">Loading results…</td></tr></tbody>
         </table>
       </div>
-      <p class="table-note"><strong>Order is not automatically an official rank.</strong> Reference bounds receive no position. A submitted result receives a rank only within a track that fixes task version, access boundary, budget, controller, and loss.</p>
       <div id="leaderboard-error" class="error-box" hidden></div>
     </section>
 
     <section class="section split-explainer">
       <div><p class="eyebrow">Read two numbers</p><h2>Prediction quality and action quality answer different questions.</h2></div>
       <div>
-        <p><strong>Prediction metrics</strong> ask whether an observer ranks or estimates held-out cases accurately.</p>
-        <p><strong>Action metrics</strong> ask what happens after the fixed controller spends its limited intervention or audit budget on that ranking.</p>
+        <p><strong>Prediction metrics</strong> ask how accurately a method ranks or predicts test cases.</p>
+        <p><strong>Action metrics</strong> ask what happens after the decision rule uses its limited budget on that ranking.</p>
         <p>A method can improve one and lose on the other. ObserverBench reports both.</p>
       </div>
     </section>
+    <section class="section" id="about-results" aria-labelledby="about-heading">
+      <h2 id="about-heading">About these results</h2>
+      <ul>
+        <li>Practice tasks have public answers. Use them to learn and iterate; only hidden-test submissions go on the leaderboard.</li>
+        <li>Each table is one task. Only planned comparisons are numbered; rows added later and the oracle are shown for reference.</li>
+        <li>Most results come from one model and one setting. Where a difference is within resampling noise, the table says so.</li>
+        <li>In the safety tasks, a review is assumed to be correct and costs a fixed amount.</li>
+        <li>The scripted tasks (misleading reports, relay) are simulations, not live agents.</li>
+        <li>APPS submissions are paused while we review a cue in that dataset.</li>
+      </ul>
+      <p><a href="https://github.com/kwisatzh/observerbench/blob/main/docs/RESULT_QUALIFICATIONS_20261024.md">Full qualifications and records</a></p>
+    </section>
   </main>
 
-  <footer><div><strong>ObserverBench</strong><p>Task-relative evidence, not one universal score.</p></div><div class="footer-links"><a href="../">Overview</a><a href="../try/">Try</a><a href="../runners/">Runners</a><a href="../submit/">Submit</a><a href="../downloads/observerbench.pdf">Paper</a></div></footer>
+<footer><div><strong>ObserverBench</strong><p>Do better predictions lead to better decisions?</p></div><div class="footer-links"><a href="#about-results">About these results</a><a href="../">Overview</a><a href="../try/">Try</a><a href="../runners/">Run</a><a href="../submit/">Submit</a><a href="../downloads/observerbench.pdf">Paper</a></div></footer>
   <!-- Cloudflare Web Analytics -->
   <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "babc4e7118744fa6a9f1a18fb87df2eb"}'></script>
   <!-- End Cloudflare Web Analytics -->

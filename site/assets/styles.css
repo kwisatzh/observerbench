@@ -267,3 +267,11 @@ footer p { margin: .3rem 0 0; }
   html { scroll-behavior: auto; }
 }
 
+/* Submission steps contain commands and should read from top to bottom. */
+body[data-page="submit"] .steps { grid-template-columns: minmax(0, 1fr); }
+body[data-page="submit"] .steps li { min-width: 0; }
+body[data-page="submit"] .steps pre { overflow-x: auto; }
+body[data-page="runners"] .outcome-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 680px) {
+  body[data-page="runners"] .outcome-grid { grid-template-columns: minmax(0, 1fr); }
+}

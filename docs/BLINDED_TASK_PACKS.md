@@ -77,8 +77,8 @@ track, `safety_task.json` is the existing portable ObserverBench safety contract
 it contains labeled fit/calibration measurements and held-out queries without
 their consequences. `evaluator_targets.json` is accepted directly by
 `load_safety_task_pack` and stays private. The HMAC key and the entire `private/`
-directory belong in the private evaluator repository.
-Safety submissions use the hosted safety contract:
+directory belong in protected local storage, outside the public repository.
+Safety submissions use the offline safety contract:
 
 ```csv
 schema_version,query_id,predicted_risk

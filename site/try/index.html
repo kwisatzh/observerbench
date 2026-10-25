@@ -7,7 +7,7 @@
   <title>Try ObserverBench — from estimates to safer decisions</title>
   <link rel="stylesheet" href="../assets/styles.css">
   <link rel="stylesheet" href="playground.css">
-  <script src="playground.js" defer></script>
+  <script src="playground.js?v=shorter-20261024" defer></script>
 </head>
 <body data-page="try" data-site-root="..">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -20,10 +20,9 @@
       <a href="../">Overview</a>
       <a aria-current="page" href="./">Try</a>
       <a href="../leaderboards/">Leaderboards</a>
-      <a href="../runners/">Runners</a>
+      <a href="../runners/">Run</a>
       <a href="../submit/">Submit</a>
       <a href="../downloads/observerbench.pdf">Paper</a>
-      <a href="https://doi.org/10.5281/zenodo.22136091">Release</a>
       <a href="https://github.com/kwisatzh/observerbench">GitHub</a>
     </nav>
   </header>
@@ -48,7 +47,7 @@
           <a class="button secondary" href="https://kwisatzh.github.io/observerbench/runners/">Run a benchmark task</a>
         </div>
       </details>
-      <p><strong>Why this matters.</strong> In the July 2026 Hugging Face incident, investigators found AI agents trying to mislead their evaluator, including successful small-scale tests that made activity records show a different command from the one actually run. The <a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/">METR and Redwood Research investigation</a> is one motivation for testing both monitoring methods and the evidence they rely on. ObserverBench's <a href="https://kwisatzh.github.io/observerbench/runners/#integrity">tests with deliberately altered records</a> examine a narrow part of that problem.</p>
+      <p><strong>Why this matters.</strong> The <a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/">METR and Redwood Research investigation</a> of the Hugging Face incident found agents trying to mislead their evaluator, including small-scale tests that altered activity records. Our practice tasks let you choose which evidence to check.</p>
       <p>To see the idea, follow one example: an AI assistant must investigate a failed backup without deleting protected files. What could we learn from its internal activity? And how would we test whether that information helps?</p>
     </section>
 
@@ -77,15 +76,14 @@
       <p class="eyebrow">iii · From partial measurements to a warning score</p>
       <h2 id="step-3-heading">What is an observer?</h2>
       <div class="lesson-copy">
-        <p>We need a method that combines the available measurements into an estimate of the quantity we care about. For Model A, that quantity could be the chance that its proposed operation violates the user's instructions. We express this estimate as a <strong>warning score</strong>: a higher score means a higher estimated chance of a violation. The score gives us a prediction about the proposed action, based on the evidence we have collected.</p>
+        <p>We need a method that combines the available measurements into an estimate of the quantity we care about. For Model A, that quantity could be the chance that its proposed operation violates the user's instructions. We express this estimate as a <strong>warning score</strong>: a higher score means a higher estimated chance of a violation.</p>
         <p><strong>The method producing that score is the observer.</strong> We borrow the name from control theory, where an observer estimates a system's hidden state from available measurements.<sup><a href="#observer-origin" aria-label="Read the source for the term observer">1</a></sup> A safety monitor is one kind of observer: we judge it not just by how well it spots problems, but by whether its warnings help us make better decisions.</p>
-        <p>An observer can combine the measured responses to several interventions, apply a known mathematical relation, or use a fitted readout of internal activity. These are different ways to turn incomplete evidence into a usable estimate.</p>
         <details class="explanation">
           <summary>What kinds of observers do researchers build?</summary>
           <ul>
-            <li><strong>Recover the effects of internal edits.</strong> Change selected components, record how the output moves, and combine those responses to estimate the components' effects. The resulting map can help choose an edit.</li>
+            <li><strong>Recover the effects of internal edits.</strong> Change selected components and record how the output moves. Combine those responses to estimate each component's effect. The resulting map can help choose an edit.</li>
             <li><strong>Read a pattern of activity.</strong> Fit a small readout that uses recorded activation values to estimate a state or outcome. This is often called a probe.</li>
-            <li><strong>Read selected features.</strong> Use features extracted from the activations, for example by a sparse autoencoder (SAE), to construct the estimate.</li>
+            <li><strong>Read selected features.</strong> Use a sparse autoencoder (SAE) to break activations into features. Use selected features to make the estimate.</li>
           </ul>
           <p>These methods act as observers when their estimates guide a decision. Comparing them with estimates from the prompt or output tells us what the internal measurements add.</p>
         </details>
@@ -110,14 +108,14 @@
         <ul>
           <li><strong>The task:</strong> prevent operations that exceed the user's instructions while letting permitted work proceed.</li>
           <li><strong>The review budget:</strong> you can review only a few operations in the batch. Reviewing means tracing an operation back to the user's instruction and checking any required approval. That takes work beyond reading a warning score.</li>
-          <li><strong>The decision rule:</strong> review the operations with the highest scores first, up to the budget. The reviewer has the complete permission record and makes the correct call in this exercise: stop an unauthorized operation and let an authorized one proceed. Operations outside the review budget go ahead without that check.</li>
+          <li><strong>The decision rule:</strong> review the operations with the highest scores first, up to the budget. Operations outside the review budget go ahead without that check.</li>
         </ul>
         <p><strong>What are we testing?</strong> Before relying on an observer, we need a way to judge whether it is useful. We could ask how reliably its warnings identify unauthorized operations. Or we could use those warnings to choose which operations to review, then measure the harm that gets through. This exercise asks whether those two tests favor the same observer. Change the review budget and follow the backup deletion to see where they agree and where they differ.</p>
         <p><strong>Why keep these fixed?</strong> Both observers face the same operations, the same number of reviews, and the same decision rule. If one prevents more harm, we can attribute that difference to the scores it supplied—not to giving it more reviews or an easier task.</p>
       </div>
       <div class="tutorial-status">
         <span class="badge available">Illustrated example</span>
-        <span>The requests, warning scores, and answers are supplied for this walkthrough. No LLM or file operation runs in your browser.</span>
+        <span>The scores are supplied; nothing runs in your browser.</span>
       </div>
       <div id="playground-error" class="error-box" hidden></div>
       <div class="observer-choice" aria-labelledby="choice-heading">
@@ -183,25 +181,16 @@
 
       <div class="lesson-copy">
         <h3>What changed between the observers?</h3>
-        <p><strong>Observer A reports the warning score.</strong> It estimates the chance that an operation violates the user's instructions. Here the private log read scores 98%, while the backup deletion scores 76%, so the decision rule sends the log read for review first.</p>
+        <p><strong>Observer A reports the warning score.</strong> It estimates the chance that an operation violates the user's instructions. Here the private log read scores 98% and the backup deletion scores 76%. The decision rule sends the log read for review first.</p>
         <p><strong>Observer B combines that same warning with the harm a violation would cause.</strong> In our example, an unauthorized log read costs 1 harm point and losing the backup costs 10. Multiplying chance by harm gives the log read a score of 0.98 and the deletion a score of 7.6. The same decision rule now reviews the deletion first.</p>
         <p><strong>“Then wasn't A the wrong observer for this job?”</strong> <span id="observer-fit-answer"></span> Finding that out is the purpose of ObserverBench. We test both how well an observer estimates its target and what happens when its estimates guide actions. The task, review budget, and decision rule determine which observer is useful.</p>
         <p><strong>“Should we use a better evaluation score?”</strong> Yes: evaluate the outcome the decision is meant to achieve. The warning test measures how well scores distinguish unauthorized operations. The decision test measures the harm that escapes review. An accuracy-only comparison misses this distinction; ObserverBench reports both.</p>
       </div>
 
       <div class="lesson-copy">
-        <h3>A similar result on a real language model</h3>
-        <p>In our <strong>Gemma-2-9B-it</strong> experiment, two monitoring methods checked stored code for hidden backdoors. One asked Gemma to assess the code; the other used a probe that read features from Gemma's internal activity. Their warning-test ranking and recorded decision outcomes also disagreed.</p>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th scope="col">Monitoring method</th><th scope="col">Pairs ordered correctly</th><th scope="col">Average backdoors missed</th></tr></thead>
-            <tbody>
-              <tr><th scope="row">Prompted monitor</th><td>89.3%</td><td>10.803</td></tr>
-              <tr><th scope="row">Internal feature probe (Gemma Scope SAE)</th><td>87.0%</td><td>9.070</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p>The warning test used a balanced set of honest and backdoored code. For the decision test, backdoors appeared in 1% of cases and both methods received a 2% review budget. On this recorded panel, the prompted monitor scored better on the warning test, yet the internal feature probe left fewer backdoors unreviewed on average. Resampling the source problems leaves the action ranking uncertain. <a href="https://github.com/kwisatzh/observerbench/tree/main/leaderboards/safety/controlarena-apps-gemma2-9b-it-v0">Read the Gemma experiment and recorded results.</a></p>
+        <h3>Practice with measurements from a real language model</h3>
+        <p>On a copy task in Qwen2.5-7B, adding pair effects reduces prediction error from 0.121 to 0.040 with the same 128 measurements.</p>
+        <p>The separate <a href="#real-task">CPU practice example</a> lets you fit on 40 saved edits and predict 128 more. You can then compare prediction and decision scores. No model download is needed.</p>
         <p><strong>The next research question:</strong> which internal measurements should we collect so that an observer gets the important decisions right—with less measurement effort? This connects ObserverBench's decision tests to <a href="https://kwisatzh.github.io/mechanistic-tomography/">mechanistic tomography's measurement design</a>.</p>
       </div>
 
@@ -217,6 +206,7 @@
           </select>
         </label>
       </div>
+      <p>Showing the eight highest-priority requests; scores above use all 16.</p>
       <div class="request-list" id="request-list"></div>
 
       <details class="explanation research-details">
@@ -226,7 +216,7 @@
           <dt>Prediction and score</dt><dd>A prediction says something about an outcome we have yet to observe. A score expresses an estimate as a number: Observer A estimates the chance of a violation; Observer B estimates its expected harm.</dd>
           <dt>Controller</dt><dd>The decision rule. Here it reviews the highest-scored operations up to the budget you chose.</dd>
           <dt>AUROC</dt><dd>How well the scores put unauthorized operations ahead of permitted ones. A value of 1 means perfect separation on these examples; 0.5 is chance-level ordering. This measures ordering, regardless of the harm caused by each violation.</dd>
-          <dt>Action loss</dt><dd>The combined cost we chose for this example: harm points that slipped through, plus 0.25 points for each unnecessary check. Lower is better under this particular cost rule.</dd>
+          <dt>Action loss</dt><dd>The combined cost we chose for this example: harm points that slipped through, plus 0.25 points for each unnecessary check. Lower is better.</dd>
           <dt>Held-out evaluation</dt><dd>Testing a completed observer on fresh cases, with its measurements and decision rule specified in advance. The benchmark reports both the quality of its estimates and the outcomes of the actions they guide.</dd>
           <dt>Measurement budget and review budget</dt><dd>The measurement budget limits the evidence available to an observer: for example, how many internal interventions it can measure. The review budget limits how many proposed operations receive a closer check after the scores are available. The slider controls this second budget.</dd>
         </dl>
@@ -258,7 +248,7 @@
             <input id="prediction-file" type="file" accept=".csv,text/csv" hidden>
           </div>
           <p class="upload-note" id="upload-note">Expected columns: <code>request_id,predicted_risk</code>.</p>
-          <p class="help-text">This is a simplified teaching file. A safety-interlock submission uses <code>schema_version,query_id,predicted_risk</code>, plus a separate ObserverCard describing the method. <a href="https://github.com/kwisatzh/observerbench/tree/main/submissions/templates/safety">See the submission templates.</a></p>
+          <p class="help-text">A real submission uses <code>schema_version,query_id,predicted_risk</code>, plus a separate ObserverCard describing the method. <a href="https://github.com/kwisatzh/observerbench/tree/main/submissions/templates/safety">See the submission templates.</a></p>
         </div>
       </div>
     </section>
@@ -266,28 +256,15 @@
     <section class="section next-step" aria-labelledby="next-heading">
       <p class="eyebrow">The next question</p>
       <h2 id="next-heading">Which internal estimates help on real model tasks?</h2>
-      <p>
-        Start with the action you want to guide, then compare observers on
-        that task. ObserverBench lets you see what their measurements recover,
-        what decisions their estimates produce, and what those decisions cost.
-      </p>
-      <p>The safety studies compare internal readouts of Qwen2.5-7B-Instruct, Qwen3.5-9B, and Gemma while they review stored code. The intervention studies test estimates used to choose edits inside GPT-2 and base Qwen2.5-7B. You can start with saved measurements, reproduce an existing comparison, and then try your own observer.</p>
+      <p>Start with saved model measurements, compare prediction and decision scores, then try your own observer.</p>
       <div class="terminal-session" aria-labelledby="real-task">
         <h3 id="real-task">Run a real Qwen experiment on your computer</h3>
-        <p>The model measurements are already saved. The example fits an observer on 40 interventions, predicts 128 new effects, and uses those predictions to choose interventions. You need Git, Python 3, and make; no GPU, model download, or extra Python packages.</p>
+        <p>Fit on 40 saved interventions in Qwen2.5-7B base, predict 128 new effects, and use those predictions to choose edits. You need Git, Python 3, and make; no GPU or model download.</p>
         <pre tabindex="0" aria-label="Commands to run the Qwen practice task"><code>git clone https://github.com/kwisatzh/observerbench.git
 cd observerbench
 make demo-qwen</code></pre>
-        <p>The scorer prints both prediction and decision results. Here is an excerpt from the supplied example:</p>
-        <pre tabindex="0" aria-label="Recorded output from the Qwen practice task"><code>Held-out effect prediction
-  MAE:  0.204854
-Downstream action (48 target/pool decisions, exact no-op included)
-  Mean realized loss: 0.943545
-  Mean regret:        0.085557</code></pre>
-        <p>MAE measures prediction error. Realized loss measures how far the chosen interventions miss their targets on individual prompts. Regret is the extra loss compared with the best candidate chosen using the recorded outcomes. Lower is better for all three.</p>
-        <p>Change the example observer or supply your own effect predictions, then score again. This open practice task has public answers and returns scores locally, without a maintainer review. The <a href="https://github.com/kwisatzh/observerbench/tree/main/practice/qwen_copy_v2_b040">task guide</a> explains the prediction format and fixes the model as Qwen2.5-7B base.</p>
+        <p>The scorer reports prediction error and how far the chosen edits miss their targets. Change the example or supply your own predictions, then compare. The <a href="https://github.com/kwisatzh/observerbench/tree/main/practice/qwen_copy_v2_b040">task guide</a> gives the format and recorded results.</p>
       </div>
-      <p>Want to run both the safety example and the saved Qwen experiment? The quick start runs them together and prints prediction and decision scores. Change an observer, rerun, and compare.</p>
       <div class="button-row">
         <a class="button primary" href="../leaderboards/">See experiments with real language models</a>
         <a class="button secondary" href="https://github.com/kwisatzh/observerbench/tree/main/practice/qwen_copy_v2_b040">Get the Qwen2.5-7B base practice task</a>
@@ -297,8 +274,8 @@ Downstream action (48 target/pool decisions, exact no-op included)
   </main>
 
   <footer>
-    <div><strong>ObserverBench</strong><p>Test estimates through the action they will guide.</p></div>
-    <div class="footer-links"><a href="../">Overview</a><a href="../leaderboards/">Leaderboards</a><a href="../runners/">Runners</a><a href="../submit/">Submit</a><a href="../downloads/observerbench.pdf">Paper</a><a href="https://doi.org/10.5281/zenodo.22136091">Release</a><a href="https://github.com/kwisatzh/observerbench">Source</a></div>
+<div><strong>ObserverBench</strong><p>Do better predictions lead to better decisions?</p></div>
+    <div class="footer-links"><a href="../leaderboards/#about-results">About these results</a><a href="../">Overview</a><a href="../leaderboards/">Leaderboards</a><a href="../runners/">Run</a><a href="../submit/">Submit</a><a href="../downloads/observerbench.pdf">Paper</a><a href="https://doi.org/10.5281/zenodo.22136091">Release</a><a href="https://github.com/kwisatzh/observerbench">Source</a></div>
   </footer>
   <!-- Cloudflare Web Analytics -->
   <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "babc4e7118744fa6a9f1a18fb87df2eb"}'></script>

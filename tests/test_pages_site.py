@@ -104,8 +104,9 @@ assert.equal(displayTerminology("open replay; not sealed"), "open replay; public
         self.assertIn('id="integrity"', runners)
         self.assertIn("make demo-integrity", runners)
         self.assertIn("make demo-relay", runners)
-        self.assertIn("not an independent replication", runners)
-        self.assertIn("workbench diagnostic, not a paper finding", home)
+        qualifications = (ROOT / "docs/RESULT_QUALIFICATIONS_20261024.md").read_text()
+        self.assertIn("not an independent", qualifications)
+        self.assertIn("About these results", home)
 
     def test_ioi_decision_replay_is_a_separate_action_panel(self) -> None:
         path = ROOT / "leaderboards/decision/ioi-gpt2-small-action-selection-b160/results.json"
@@ -140,7 +141,7 @@ assert.equal(displayTerminology("open replay; not sealed"), "open replay; public
         submit = (ROOT / "site" / "submit" / "index.html").read_text(
             encoding="utf-8"
         )
-        self.assertIn('href="../runners/">View runners</a>', submit)
+        self.assertIn('href="../runners/">Run</a>', submit)
 
     def test_gemma_panel_title_and_primary_metric_are_explicit(self) -> None:
         self.assertEqual(
@@ -279,21 +280,23 @@ assert.equal(displayTerminology("open replay; not sealed"), "open replay; public
         )[1].split("</section>", 1)[0]
 
         for expected in (
-            "Qwen3.5-9B",
-            "Gemma-2-9B-it",
-            "readout sparsity",
+            "workspace request exceeds",
+            "Authorization",
             "Qwen2.5-7B base",
-            "lowers held-out MAE from 0.121 to 0.040",
+            "0.121 → 0.040",
         ):
             self.assertIn(expected, catalog)
         self.assertNotIn("GPT-2", catalog)
+        self.assertNotIn("APPS", catalog)
+        self.assertNotIn("Gemma", catalog)
 
     def test_homepage_puts_results_and_local_scoring_before_sealed_submissions(self) -> None:
         homepage = (ROOT / "site/index.html").read_text(encoding="utf-8")
         self.assertLess(homepage.index('id="tasks-heading"'), homepage.index('id="journey-heading"'))
         self.assertLess(homepage.index('id="journey-heading"'), homepage.index('id="answer-heading"'))
         self.assertIn('href="try/#real-task"', homepage)
-        self.assertIn("A preflight pass alone is not a score or rank.", homepage)
+        self.assertIn("About these results", homepage)
+        self.assertNotIn("Public submission checks are automatic", homepage)
         self.assertNotIn("Instruct · frozen intervention table", homepage)
 
     def test_try_page_connects_the_walkthrough_to_local_scoring(self) -> None:
@@ -305,7 +308,8 @@ assert.equal(displayTerminology("open replay; not sealed"), "open replay; public
         self.assertIn("Qwen2.5-7B base", page)
         self.assertIn("schema_version,query_id,predicted_risk", page)
         self.assertIn('href="../downloads/observerbench.pdf">Paper</a>', page)
-        self.assertIn("Resampling the source problems leaves the action ranking uncertain.", page)
+        self.assertIn("adding pair effects reduces prediction error", page)
+        self.assertNotIn("9.070", page)
 
     def test_quick_start_is_shared_and_distinct_from_browser_walkthrough(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")

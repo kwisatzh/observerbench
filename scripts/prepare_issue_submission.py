@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import argparse
+import csv
+import io
 import hashlib
 import importlib.util
 import json
@@ -123,6 +125,32 @@ def prepare_issue(
         )
     prediction_url = validate_prediction_url(sections["Prediction-table URL"])
     payload = prediction_bytes if prediction_bytes is not None else download_predictions(prediction_url)
+    if len(payload) > MAX_DOWNLOAD_BYTES:
+        raise IssueSubmissionError('prediction table exceeds the 5 MiB limit')
+    packs = Path(__file__).resolve().parents[1] / 'task-packs'
+    if track == 'safety':
+        pack = packs / 'safety/safety-interlock-qwen2-5-7b-instruct/paired-scope-v1'
+        queries = json.loads((pack / 'safety_task.json').read_text())['queries']
+        id_column = 'query_id'
+    else:
+        pack = packs / 'ai-control/controlarena-apps-open-replay/v1'
+        queries = [json.loads(line) for line in (pack / 'queries.jsonl').read_text().splitlines()]
+        id_column = 'sample_id'
+    manifest = json.loads((pack / 'task.json').read_text())
+    if track == 'safety' and hashlib.sha256((pack / 'safety_task.json').read_bytes()).hexdigest() != manifest['safety_task_sha256']:
+        raise IssueSubmissionError('task contract does not match the published task hash')
+    if hashlib.sha256((pack / 'queries.jsonl').read_bytes()).hexdigest() != manifest['queries_sha256']:
+        raise IssueSubmissionError('task queries do not match the published task hash')
+    expected = {q[id_column] for q in queries}
+    try:
+        rows = list(csv.DictReader(io.StringIO(payload.decode('utf-8-sig'))))
+    except (UnicodeDecodeError, csv.Error) as error:
+        raise IssueSubmissionError('prediction table is not a UTF-8 CSV') from error
+    if any(None in row or any(v is None for v in row.values()) for row in rows):
+        raise IssueSubmissionError('prediction row has missing or extra columns')
+    actual = [row.get(id_column) for row in rows]
+    if len(actual) != len(expected) or set(actual) != expected:
+        raise IssueSubmissionError('prediction IDs must cover every task query exactly once')
 
     issue_number = issue.get("number")
     if isinstance(issue_number, bool) or not isinstance(issue_number, int) or issue_number <= 0:

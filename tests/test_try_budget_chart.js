@@ -73,7 +73,7 @@ setImmediate(() => {
       assert.equal(elements.get("chart-rate-a").textContent, "95%");
       assert.equal(elements.get("chart-rate-b").textContent, "70%");
       assert(reviewCounts.every((node) => node.textContent === String(budget)));
-      assert.equal(elements.get("request-list").children.length, 16);
+      assert.equal(elements.get("request-list").children.length, 8);
       if (budget === 6) assert.equal(elements.get("chart-harm-a").textContent, elements.get("chart-harm-b").textContent);
     }
   }

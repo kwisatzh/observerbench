@@ -1,14 +1,17 @@
 name: Observer evaluation job
-description: Submit an inert prediction table for automatic ObserverBench preflight.
+description: Submit inert predictions for local maintainer checks and offline batch scoring.
 title: "[observer job] "
 body:
   - type: markdown
     attributes:
       value: |
         This form requests a data-only evaluation. Do not attach executable code,
-        credentials, private model data, or evaluator targets. Public automation
-        validates the job. Sealed scoring occurs only when the repository reports
-        that its separate evaluator is enabled.
+        credentials, private model data, or evaluator targets. Opening this issue
+        runs nothing. Monthly batches,
+        scored within 30 days, with three submissions per person per task per
+        30 days checked by hand. Attach predictions.csv and
+        observer_card.json in a ZIP, or provide links at a specific commit.
+        The maintainer computes file hashes on receipt.
 
   - type: dropdown
     id: task
@@ -28,11 +31,11 @@ body:
     validations:
       required: true
 
-  - type: input
+  - type: textarea
     id: predictions
     attributes:
       label: Prediction-table URL
-      description: Link to a public, immutable CSV file that follows the task schema.
+      description: Attach the ZIP here or link files at a specific commit.
       placeholder: https://raw.githubusercontent.com/.../predictions.csv
     validations:
       required: true
@@ -43,6 +46,14 @@ body:
       label: ObserverCard JSON
       description: Paste the complete card, including access and cost fields.
       render: json
+    validations:
+      required: true
+
+  - type: textarea
+    id: validation
+    attributes:
+      label: Public validation scorecard and tuning
+      description: Paste the complete CPU validation scorecard and describe any validation-based tuning.
     validations:
       required: true
 

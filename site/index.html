@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="ObserverBench tests whether an internal estimate is good enough for the action it will guide.">
-  <title>ObserverBench — test observers through action</title>
+  <title>ObserverBench — do better predictions lead to better decisions?</title>
   <link rel="stylesheet" href="assets/styles.css">
-  <script src="assets/site.js" defer></script>
+  <script src="assets/site.js?v=final-copy-20261024" defer></script>
 </head>
 <body data-page="home" data-site-root=".">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -19,10 +19,9 @@
       <a aria-current="page" href="index.html">Overview</a>
       <a href="try/">Try</a>
       <a href="leaderboards/">Leaderboards</a>
-      <a href="runners/">Runners</a>
+      <a href="runners/">Run</a>
       <a href="submit/">Submit</a>
       <a href="downloads/observerbench.pdf">Paper</a>
-      <a href="https://doi.org/10.5281/zenodo.22136091">Release</a>
       <a href="https://github.com/kwisatzh/observerbench">GitHub</a>
     </nav>
   </header>
@@ -30,21 +29,20 @@
   <main id="main">
     <section class="hero">
       <div class="hero-copy">
-        <p class="eyebrow">A task-relative observer workbench</p>
-        <h1>Does your estimate improve the action that matters?</h1>
+        <p class="eyebrow">A small benchmark for model monitors and effect estimates</p>
+        <h1>Does a better estimate lead to a better decision?</h1>
         <p class="lede">
-          ObserverBench compares internal-state estimates under a fixed task,
-          intervention rule, budget, and loss. It reports both how well an
-          observer predicts and what happens when a controller acts on it.
+          Many methods read a model's internals to predict a risk, a hidden state, or the effect of an edit.
+        </p>
+        <p class="lede">ObserverBench asks whether acting on those predictions leads to better decisions. Each task fixes the data, the budget, and the decision rule. You get two scores: one for prediction and one for the decisions it supports.
         </p>
         <p>
           <a class="text-link" href="https://arxiv.org/abs/2608.19338">Mechanistic Tomography</a>
-          develops the measurement framework; ObserverBench tests the resulting
-          estimate through action.
+          is about which measurements to take. ObserverBench tests whether the resulting estimates help.
         </p>
         <div class="button-row">
           <a class="button primary" href="try/">Try the browser walkthrough</a>
-          <a class="button secondary" href="leaderboards/">Explore checked results</a>
+          <a class="button secondary" href="leaderboards/">Explore results</a>
           <a class="button secondary" href="https://github.com/kwisatzh/observerbench#sixty-second-demo">Run two examples—no GPU required</a>
           <a class="button secondary" href="downloads/observerbench.pdf">Read the paper</a>
         </div>
@@ -52,15 +50,14 @@
       <aside class="scorecard-preview" aria-label="Example scorecard">
         <div class="preview-head">
           <span>Example result</span>
-          <span class="badge checked">schema valid</span>
         </div>
         <dl>
-          <div><dt>Downstream loss</dt><dd>2.16</dd></div>
-          <div><dt>Prediction AUROC</dt><dd>0.954</dd></div>
-          <div><dt>Compared with</dt><dd>7 baselines</dd></div>
-          <div><dt>Access</dt><dd>white-box</dd></div>
+          <div><dt>Average decision cost ↓</dt><dd>2.16</dd></div>
+          <div><dt>Ranking accuracy (AUROC)</dt><dd>0.954</dd></div>
+          <div><dt>Compared with</dt><dd>7 other methods</dd></div>
+          <div><dt>Reads</dt><dd>model internals</dd></div>
         </dl>
-        <p class="preview-note">Recorded example: activation label × severity on the Qwen2.5-7B-Instruct authorization task. <a href="https://github.com/kwisatzh/observerbench/tree/main/leaderboards/safety/qwen-paired-scope-v0">View the result.</a></p>
+        <p class="preview-note">Example: a method that reads internal activations and weighs how serious each request is, on the Qwen2.5-7B-Instruct authorization task. Lower cost is better. <a href="https://github.com/kwisatzh/observerbench/tree/main/leaderboards/safety/qwen-paired-scope-v0">View the result.</a></p>
       </aside>
     </section>
 
@@ -68,34 +65,22 @@
       <div class="section-heading">
         <div>
           <p class="eyebrow">Task catalog</p>
-          <h2 id="tasks-heading">Four checked questions from current models</h2>
+          <h2 id="tasks-heading">Questions you can explore</h2>
         </div>
-        <a class="text-link" href="leaderboards/">View all checked rows →</a>
+        <a class="text-link" href="leaderboards/">View all results →</a>
       </div>
       <div class="task-grid">
         <article class="task-card featured">
-          <div class="task-top"><span class="badge live">featured result</span><span>Safety · Qwen3.5-9B</span></div>
-          <h3>Which context gives the best monitor?</h3>
-          <p>Reading activations next to the verdict prompt gives 1.976 mean violations, versus 6.601 in neutral context. AUROC also improves, from 0.936 to 0.977. The action advantage persists when source problems are resampled.</p>
-          <p class="task-meta">ControlArena APPS · 1% attack rate · 2% audit budget</p>
-        </article>
-        <article class="task-card featured">
-          <div class="task-top"><span class="badge live">observed ranking</span><span>Safety · Gemma-2-9B-it</span></div>
-          <h3>Does higher AUROC make a safer decision?</h3>
-          <p>On the recorded panel, the detailed prompted monitor has higher AUROC than the Gemma Scope SAE probe (0.893 vs. 0.870), but more mean violations (10.80 vs. 9.07). The action ranking is uncertain when source problems are resampled.</p>
-          <p class="task-meta">Same requests, audit budget, controller, and loss</p>
+          <div class="task-top"><span>Authorization</span></div>
+          <h3>Does a risk score support a better decision?</h3>
+          <p>Score the risk that a workspace request exceeds the user's permission. We block the top 10%, review the next 10%, and score the harm and costs of those decisions.</p>
+          <p><a href="submit/">Try the CPU starter</a></p>
         </article>
         <article class="task-card">
-          <div class="task-top"><span class="badge available">readout sparsity</span><span>Safety · Qwen2.5-7B-Instruct</span></div>
-          <h3>Does a smaller readout preserve the decision?</h3>
-          <p>The SAE readout uses 127 fitted coefficients instead of 3,584 residual coordinates, but mean violations rise from 2.05 to 4.67. Prediction quality also falls. This measures readout sparsity, not a reduction in total compute.</p>
-          <p class="task-meta">Published SAE integration · 1% attack rate · 2% audit</p>
-        </article>
-        <article class="task-card">
-          <div class="task-top"><span class="badge available">interaction gain</span><span>Mechanisms · Qwen2.5-7B base</span></div>
-          <h3>Do pair terms improve held-out effects?</h3>
-          <p>On the induction-copy task, an interaction-aware predictor lowers held-out MAE from 0.121 to 0.040 with the same 128-measurement budget.</p>
-          <p class="task-meta">Qwen2.5-7B base · frozen intervention table</p>
+          <div class="task-top"><span>Mechanisms · Qwen2.5-7B base</span></div>
+          <h3>Does accounting for interactions help?</h3>
+          <p>On a copy task in Qwen2.5-7B, a predictor that includes pairs of components cuts its error by about two-thirds (0.121 → 0.040) with the same 128 measurements.</p>
+          <p class="task-meta">Qwen2.5-7B base · saved measurements</p>
         </article>
       </div>
     </section>
@@ -104,15 +89,15 @@
       <div class="section-heading">
         <div>
           <p class="eyebrow">Run and score locally</p>
-          <h2 id="journey-heading">A complete comparison you can run now</h2>
+          <h2 id="journey-heading">Try it on your computer</h2>
         </div>
-        <p>Open practice tasks return scores on your computer. You do not need a GPU, a submission review, or the private-test evaluator.</p>
+        <p>Practice tasks return scores on your computer. No GPU or submission review is needed.</p>
       </div>
       <ol class="steps">
         <li><span>1</span><div><h3>Choose an open task</h3><p>Start with saved Qwen2.5-7B copy measurements, or a safety practice task.</p></div></li>
-        <li><span>2</span><div><h3>Run the example</h3><p>The Qwen example fits an observer on 40 measurements and predicts 128 new intervention effects.</p></div></li>
-        <li><span>3</span><div><h3>Read both scores</h3><p>The local scorer reports prediction error and the loss from the interventions those predictions select.</p></div></li>
-        <li><span>4</span><div><h3>Try your observer</h3><p>Change the example or supply your own predictions in the task's CSV format, then score again.</p></div></li>
+        <li><span>2</span><div><h3>Run the example</h3><p>The Qwen example fits a method on 40 measurements and predicts the effects of 128 new edits.</p></div></li>
+        <li><span>3</span><div><h3>You get two scores</h3><p>How far off the predictions were, and how well the edits chosen from them worked.</p></div></li>
+        <li><span>4</span><div><h3>Try your method</h3><p>Change the example or supply your own predictions in the task's CSV format, then score again.</p></div></li>
         <li><span>5</span><div><h3>Compare on the same task</h3><p>Keep the data, actions, and decision rule fixed. Did your change improve prediction, action, or both?</p></div></li>
       </ol>
       <div class="button-row">
@@ -121,79 +106,28 @@
       </div>
     </section>
 
-    <section class="section" aria-labelledby="outcomes-heading">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">Tangible outcomes</p>
-          <h2 id="outcomes-heading">What a visitor takes away</h2>
-        </div>
-      </div>
-      <div class="outcome-grid">
-        <article><span class="outcome-number">01</span><h3>A direct answer</h3><p>Did this observer beat no action and the relevant existing methods on downstream loss?</p></article>
-        <article><span class="outcome-number">02</span><h3>A fair comparison</h3><p>Where does it sit among observers with the same information, budget, controller, and target?</p></article>
-        <article><span class="outcome-number">03</span><h3>A failure map</h3><p>Which targets, prompt families, action budgets, or operating conditions make it fail?</p></article>
-        <article><span class="outcome-number">04</span><h3>A reproducible record</h3><p>Save your predictions and score output with the task version and settings so another researcher can repeat the comparison.</p></article>
-      </div>
-    </section>
 
     <section class="section compact" aria-labelledby="integrity-heading">
       <div class="section-heading">
         <div><p class="eyebrow">New CPU practice tasks</p><h2 id="integrity-heading">What should a monitor inspect when reports can be wrong?</h2></div>
-        <p>Choose which trusted facts to buy, then compare missed harm, clean work retained, and measurement cost. No model download is needed.</p>
+        <p>Choose which facts to check before deciding, then see what slipped through and what it cost. No model download.</p>
       </div>
       <div class="button-row">
-        <a class="button primary" href="runners/#integrity">Try misleading reports or cross-agent provenance</a>
-        <a class="button secondary" href="https://github.com/kwisatzh/observerbench/blob/main/docs/monitor_transfer.md">Read the cross-model reuse diagnostic</a>
+        <a class="button primary" href="runners/#integrity">Try the misleading-reports task</a>
+        <a class="button secondary" href="https://github.com/kwisatzh/observerbench/blob/main/docs/monitor_transfer.md">See how the tasks compare across models</a>
       </div>
-      <p class="preview-note">These are open, scripted practice tasks, not private-test rankings or live-agent safety tests. The cross-model comparison is a workbench diagnostic, not a paper finding.</p>
     </section>
 
     <section class="section compact" aria-labelledby="answer-heading">
-      <p class="eyebrow">Submission and release status</p>
-      <h2 id="answer-heading">Private-test submissions are a separate path</h2>
-      <p>The open tasks above score locally. Submitting to a task with private evaluator targets uses the public checks and separate scoring service described here.</p>
-      <div class="answer-grid">
-        <div class="answer-card automatic">
-          <h3>Public submission checks are automatic</h3>
-          <ul class="check-list">
-            <li>Validate a prediction table and ObserverCard</li>
-            <li>Require an immutable GitHub commit URL</li>
-            <li>Check schema, IDs, size, values, and declared access</li>
-            <li>Store a short-lived inert preflight artifact</li>
-            <li>Report pass or fail without executing contributor code</li>
-          </ul>
-          <a class="text-link" href="submit/">Prepare a submission →</a>
-        </div>
-        <div class="answer-card review">
-          <h3>Requires the private-test evaluator</h3>
-          <ul>
-            <li>Join predictions to evaluator-held targets</li>
-            <li>Return a redacted scorecard</li>
-            <li>Compare with the matching checked panel</li>
-            <li>Approve a result for leaderboard publication</li>
-          </ul>
-          <p>This service is not active at public launch. The issue comment will state if it is enabled later. A preflight pass alone is not a score or rank.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section rule-section" aria-labelledby="ranking-heading">
-      <div>
-        <p class="eyebrow">Ranking rule</p>
-        <h2 id="ranking-heading">No global “best observer.”</h2>
-      </div>
-      <p>
-        A score is task-relative. ObserverBench can return an official rank
-        only when the task version, observation boundary, action budget,
-        controller, and loss match. Cross-track results remain visible as
-        comparisons, and evaluator oracles remain unranked reference bounds.
-      </p>
+      <h2 id="answer-heading">Submitting a result</h2>
+      <p>Score your method on the public validation set. Attach test predictions and a short description of your method (ObserverCard) to a GitHub issue. The maintainer scores submissions offline, in batches, and adds approved results to the leaderboard.</p>
+      <a class="text-link" href="submit/">How to submit →</a>
     </section>
   </main>
 
   <footer>
-    <div><strong>ObserverBench</strong><p>Test estimates through the action they will guide.</p></div>
-    <div class="footer-links"><a href="try/">Try</a><a href="leaderboards/">Leaderboards</a><a href="runners/">Runners</a><a href="submit/">Submit</a><a href="downloads/observerbench.pdf">ObserverBench paper</a><a href="https://doi.org/10.5281/zenodo.22136091">Archived release</a><a href="https://arxiv.org/abs/2608.19338">Framework paper</a><a href="https://github.com/kwisatzh/observerbench">Source</a></div>
+    <div><strong>ObserverBench</strong><p>Do better predictions lead to better decisions?</p></div>
+    <div class="footer-links"><a href="leaderboards/#about-results">About these results</a><a href="try/">Try</a><a href="leaderboards/">Leaderboards</a><a href="runners/">Run</a><a href="submit/">Submit</a><a href="downloads/observerbench.pdf">ObserverBench paper</a><a href="https://doi.org/10.5281/zenodo.22136091">Archived release</a><a href="https://arxiv.org/abs/2608.19338">Framework paper</a><a href="https://github.com/kwisatzh/observerbench">Source</a></div>
   </footer>
   <!-- Cloudflare Web Analytics -->
   <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "babc4e7118744fa6a9f1a18fb87df2eb"}'></script>

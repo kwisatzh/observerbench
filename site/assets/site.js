@@ -30,6 +30,8 @@
   }
 
   function labelMetric(name) {
+    if (name === "protocol_loss_mean") return "Average decision cost";
+    if (name === "risk_auroc") return "AUROC (ranking accuracy)";
     if (name === "mean_realized_violations_at_p01_b02") {
       return "Mean violations (1% attack rate, 2% audit budget)";
     }
@@ -49,7 +51,7 @@
   function statusClass(row) {
     if (isReference(row)) return "reference";
     const status = String(row.result_status || "").toLowerCase();
-    if (status.includes("post-outcome") || status.includes("bounded") || status.includes("open replay")) return "secondary";
+    if (status.includes("post-outcome") || status.includes("post-panel") || status.includes("bounded") || status.includes("open replay")) return "secondary";
     return "checked";
   }
 
@@ -61,6 +63,20 @@
 
   function isSecondary(row) {
     return !isReference(row) && !isEligible(row);
+  }
+
+  function statusLabel(row) {
+    if (isReference(row)) return /no-op|no-action|allow all/i.test(`${row.result_status} ${row.display_name} ${row.method}`) ? "do-nothing" : "oracle";
+    return isEligible(row) ? "planned" : "added later";
+  }
+
+  function eligibleOrders(rows) {
+    let order = 0;
+    return rows.map(row => isEligible(row) ? String(++order) : "—");
+  }
+
+  function shortPanelNote(note) {
+    return String(note || "").trim().split(/(?<=[.!?])\s+(?=[A-Z])/)[0];
   }
 
   async function loadJson(url) {
@@ -89,14 +105,20 @@
         option.textContent = `${panel.title} (${panel.row_count} rows)`;
         taskSelect.append(option);
       });
+      const defaultPanel = panels.findIndex(panel => panel.id === "qwen-paired-scope-v0");
+      taskSelect.value = String(defaultPanel >= 0 ? defaultPanel : Math.max(0, panels.findIndex(panel => !panel.task_id.includes("apps"))));
 
       let activeRows = [];
       let activePanel = null;
+      let panelNote = '';
+      let matchedControl = null;
 
       async function loadPanel() {
         activePanel = panels[Number(taskSelect.value)];
         const payload = await loadJson(`${root}/${activePanel.data_url}`);
         activeRows = payload.rows || [];
+        panelNote = payload.panel_note || '';
+        matchedControl = payload.matched_control || null;
         metricSelect.replaceChildren();
         activePanel.available_metrics.forEach((metric) => {
           const option = document.createElement("option");
@@ -129,8 +151,6 @@
         [
           ["Task", activePanel.task_id],
           ["Primary outcome", labelMetric(activePanel.primary_metric)],
-          ["Panel", activePanel.status],
-          ["Global rank", "never issued"],
         ].forEach(([name, value]) => {
           const item = document.createElement("span");
           const strong = text(document.createElement("strong"), `${name}: `);
@@ -139,13 +159,17 @@
         });
 
         tableBody.replaceChildren();
-        let eligibleOrder = 0;
-        rows.forEach((row) => {
-          const reference = isReference(row);
-          if (!reference) eligibleOrder += 1;
+        const note = shortPanelNote(panelNote || (matchedControl && matchedControl.summary));
+        const paragraph = text(document.createElement("p"), note ? `${note} ` : "View the measurements and method descriptions for this task. ");
+        const details = text(document.createElement("a"), "Details");
+        details.href = `${root}/${activePanel.data_url}`;
+        paragraph.append(details);
+        summary.append(paragraph);
+        const orders = eligibleOrders(rows);
+        rows.forEach((row, index) => {
           const tr = document.createElement("tr");
 
-          const order = text(document.createElement("td"), reference ? "—" : String(eligibleOrder));
+          const order = text(document.createElement("td"), orders[index]);
 
           const observer = document.createElement("td");
           observer.className = "observer-cell";
@@ -154,7 +178,8 @@
           observer.append(name, family);
 
           const status = document.createElement("td");
-          const badge = text(document.createElement("span"), displayTerminology(row.result_status || "unspecified"));
+          const badge = text(document.createElement("span"), statusLabel(row));
+          badge.title = [row.result_status || "unspecified", row.qualification, row.notes].filter(Boolean).join(" · ");
           badge.className = `badge ${statusClass(row)}`;
           status.append(badge);
 

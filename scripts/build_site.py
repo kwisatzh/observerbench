@@ -16,7 +16,7 @@ from typing import Any, Iterable
 
 CATALOG_SCHEMA = "observerbench.site_catalog.v0"
 ARCHIVED_PANELS = {"controlarena-apps-qwen-v0"}
-PUBLIC_TASK_PACK_FILES = {"README.md", "queries.jsonl", "safety_task.json", "task.json"}
+PUBLIC_TASK_PACK_FILES = {"README.md", "queries.jsonl", "safety_task.json", "task.json", "validation.json", "VALIDATION_20261024.md"}
 PRIVATE_NAME_TOKENS = {"private", "secret", "target", "id_map", "key"}
 FEATURED_PANEL_ORDER = {
     "controlarena-apps-qwen3-5-9b-v0": 0,
@@ -162,7 +162,20 @@ def _copy_leaderboards(repo_root: Path, output: Path) -> list[dict[str, Any]]:
 
         filename = f"{_slug(panel)}.json"
         destination = data_dir / filename
-        shutil.copy2(path, destination)
+        # Preserve frozen records; apply dated addenda only to the built site.
+        addendum_path = repo_root / 'leaderboards' / 'addenda' / f'{panel}.json'
+        if addendum_path.is_file():
+            addendum = json.loads(addendum_path.read_text())
+            import hashlib
+            if hashlib.sha256(path.read_bytes()).hexdigest() != addendum['original_panel_sha256']:
+                raise ValueError(f'Addendum source panel changed: {panel}')
+            payload['panel_note'] = addendum['panel_note']
+            payload['matched_control'] = addendum.get('matched_control')
+            payload['rows'] = rows + addendum.get('additional_rows', [])
+            rows = payload['rows']
+            destination.write_text(json.dumps(payload, indent=2, sort_keys=True) + '\n')
+        else:
+            shutil.copy2(path, destination)
         directions = _metric_directions(payload, rows)
         primary = _primary_metric(directions)
         statuses = sorted({str(row.get("result_status", "unspecified")) for row in rows})

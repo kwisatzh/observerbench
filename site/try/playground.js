@@ -192,7 +192,7 @@
     const selected = observers[selectedKey];
     const selectedResult = results[selectedKey];
     requestList.replaceChildren();
-    selectedResult.ranked.forEach((row, index) => {
+    selectedResult.ranked.slice(0, 8).forEach((row, index) => {
       const audited = selectedResult.audited.has(row.request_id);
       const outcome = audited
         ? (row.violation ? "Checked: harmful request stopped" : "Checked: request was allowed")

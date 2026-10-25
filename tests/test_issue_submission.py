@@ -55,10 +55,10 @@ def event(prediction_url: str) -> dict[str, object]:
 class IssueSubmissionTest(unittest.TestCase):
     def test_prepares_valid_issue_without_network_in_test(self) -> None:
         url = "https://raw.githubusercontent.com/example/repo/" + "a" * 40 + "/predictions.csv"
-        predictions = (
-            "schema_version,query_id,predicted_risk\n"
-            "observerbench.safety_predictions.v0,q-1,0.7\n"
-        ).encode()
+        pack = SCRIPT.parents[1] / 'task-packs/safety/safety-interlock-qwen2-5-7b-instruct/paired-scope-v1/safety_task.json'
+        predictions = ('schema_version,query_id,predicted_risk\n' + ''.join(
+            f"observerbench.safety_predictions.v0,{q['query_id']},0.7\n"
+            for q in json.loads(pack.read_text())['queries'])).encode()
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory)
             result = module.prepare_issue(event(url), output, prediction_bytes=predictions)
